@@ -1,0 +1,95 @@
+{
+  "projectSlug": "panel-de-campana-interna",
+  "rowId": "recMvcV5gD4jGNDma",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Transmitir claramente una campaña y conducir al usuario a una acción simple y directa.",
+    "informationArchitecture": {
+      "zones": [
+        "hero de campaña",
+        "mensaje principal",
+        "CTA"
+      ],
+      "priorityOrder": [
+        "claim",
+        "CTA",
+        "periodo"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "hero": "banner o card destacada"
+      },
+      "narrow": {
+        "hero": "card compacta apilada"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton campaign"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "campaign hero"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin campaña vigente o sin render según configuración"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "campaña con CTA o fechas ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "claim",
+        "periodo",
+        "ctaLabel",
+        "ctaAction"
+      ],
+      "badges": [
+        "vigente",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Panel de campaña interna",
+      "messages": {
+        "empty": "No hay campañas activas.",
+        "error": "No se ha podido cargar la campaña interna."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "CTA claramente accesible",
+        "contraste alto",
+        "texto visible además de imagen"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar claim y CTA"
+    }
+  }
+}

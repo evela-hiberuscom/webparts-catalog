@@ -1,0 +1,507 @@
+{
+  "rowId": "rec0FWy077HG4YE7v",
+  "name": "Reserva rápida",
+  "slug": "reserva-rapida",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "BookingResourcesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de recursos reservables"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "quick-booking",
+        "name": "Reserva rápida",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Ofrece accesos rápidos para reservar recursos como salas, puestos, parking o equipamiento, integrando enlaces, disponibilidad resumida y filtros simples.",
+        "productGoal": "Reducir fricción para reservar recursos frecuentes desde la intranet sin navegar por múltiples sistemas."
+      },
+      "problem": {
+        "business": "Los usuarios pierden tiempo buscando dónde reservar cada recurso.",
+        "operational": "La experiencia suele estar fragmentada entre herramientas distintas y sin un punto de entrada unificado."
+      },
+      "objectives": {
+        "primary": [
+          "Centralizar accesos de reserva por categoría",
+          "Mostrar recursos o tipos de recurso más usados",
+          "Ofrecer disponibilidad resumida cuando exista",
+          "Permitir acceso rápido a la acción de reserva"
+        ],
+        "secondary": [
+          "Filtrar por sede o categoría",
+          "Mostrar reglas básicas del recurso",
+          "Facilitar adopción de procesos corporativos"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "reservar rápido una sala o recurso",
+            "ver reglas básicas"
+          ]
+        },
+        {
+          "role": "Workplace/Facilities",
+          "needs": [
+            "dirigir a los flujos correctos",
+            "evitar confusión de canales"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Tarjetas de recurso o categoría",
+          "Enlaces de reserva",
+          "Disponibilidad resumida opcional",
+          "Filtros simples",
+          "Reglas o notas básicas"
+        ],
+        "out": [
+          "Motor de reservas propio",
+          "confirmación transaccional dentro de la web part",
+          "gestión avanzada de calendarios"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Reservar una sala",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir sistema correcto para parking",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar recursos por sede",
+          "actor": "Facilities"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar recursos o categorías configuradas."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir abrir el flujo de reserva correcto."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar disponibilidad resumida cuando la fuente lo soporte."
+        },
+        {
+          "id": "RF-04",
+          "text": "Filtrar por categoría o sede cuando exista el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy rápida y visualmente clara."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura/launcher en V1."
+        }
+      ],
+      "businessRules": [
+        "Si un recurso no tiene disponibilidad integrada, se sigue mostrando como launcher.",
+        "Si faltan reglas o notas, la tarjeta sigue siendo válida.",
+        "Los enlaces externos deben abrir de forma segura y explícita."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "showAvailability": {
+          "type": "boolean",
+          "default": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra recursos configurados.",
+        "Permite abrir reserva.",
+        "Filtra por categoría si procede.",
+        "Muestra disponibilidad resumida cuando exista."
+      ],
+      "edgeCases": [
+        "recurso sin link",
+        "recurso sin categoría",
+        "sin disponibilidad",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Funciona como launcher consistente",
+        "Incluye tests base de mapping y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir reservar un recurso habitual en el menor número de clics posible.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros",
+          "grid de recursos",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "recursos destacados",
+          "categorías frecuentes",
+          "disponibilidad resumida"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "2 columnas o lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "resource cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin recursos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards sin disponibilidad o datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "nombre",
+          "categoria",
+          "sede",
+          "disponibilidad",
+          "reglas",
+          "accionReservar"
+        ]
+      },
+      "copy": {
+        "title": "Reserva rápida",
+        "messages": {
+          "empty": "No hay recursos configurados.",
+          "error": "No se han podido cargar los recursos de reserva."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "acciones claras y accesibles",
+          "texto alternativo para iconos",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, disponibilidad y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "render cards",
+          "abrir enlace de reserva"
+        ],
+        "v1": [
+          "filtros",
+          "disponibilidad resumida",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y mapping"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer recursos de reserva"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards y filtros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear BookingResourcesRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Mapear disponibilidad y categorías"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear BookingCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-02",
+          "name": "Añadir filtros por categoría/sede"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "BookingResourcesList",
+          "type": "SharePointList",
+          "purpose": "catálogo de recursos reservables"
+        }
+      ],
+      "entities": {
+        "BookingResource": {
+          "id": "string",
+          "name": "string",
+          "category": "string|null",
+          "site": "string|null",
+          "bookingUrl": "string|null",
+          "availability": "string|null",
+          "rules": "string|null"
+        }
+      },
+      "mappings": {
+        "availability": "mapear a available|busy|unknown|null"
+      },
+      "validationRules": [
+        "name requerido",
+        "bookingUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "disponibilidad leída de fuente integrada",
+        "partial": "solo launcher sin disponibilidad"
+      },
+      "fallbacks": [
+        "sin bookingUrl => card parcial sin acción principal",
+        "sin disponibilidad => launcher simple"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "name": "Sala 2A",
+            "category": "Sala",
+            "site": "Barcelona",
+            "bookingUrl": "/sites/facilities/book/2A",
+            "availability": "available"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "con disponibilidad",
+          "sin disponibilidad",
+          "sin link",
+          "categorías mixtas",
+          "lista vacía"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "QuickBookingWebPart",
+        "pattern": "SPFx React + repository + filter mapper",
+        "components": [
+          "QuickBooking",
+          "BookingCard",
+          "BookingFilterBar"
+        ],
+        "services": [
+          "QuickBookingService"
+        ],
+        "repositories": [
+          "BookingResourcesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "showAvailability": "boolean",
+          "defaultCategory": "string|undefined"
+        },
+        "IBookingResource": {
+          "id": "string",
+          "name": "string",
+          "category": "string|null",
+          "site": "string|null",
+          "bookingUrl": "string|null",
+          "availability": "available|busy|unknown|null",
+          "rules": "string|null"
+        },
+        "IViewModel": {
+          "items": "IBookingResource[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer recursos",
+        "mapear disponibilidad y categorías",
+        "aplicar filtro por defecto",
+        "renderizar"
+      ],
+      "algorithms": {
+        "filter": "por categoría/sede cuando existan",
+        "sort": "destacados primero o por categoría/nombre"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "recurso sin bookingUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin disponibilidad",
+          "uiState": "ready partial"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "sanitizar bookingUrl",
+          "marcar enlaces externos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "booking_loaded",
+          "booking_partial",
+          "booking_error",
+          "booking_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "hasAvailability",
+          "categoryFilter"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "category filter",
+          "mapping"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Reserva de salas, puestos, parking o recursos.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

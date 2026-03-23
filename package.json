@@ -1,0 +1,16 @@
+{
+  "name": "paquete-webparts",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "sync:airtable": "node ./scripts/sync-airtable-catalog.mjs",
+    "bootstrap:contexts": "node ./scripts/bootstrap-project-contexts.mjs",
+    "orchestrate:foundation": "npm run sync:airtable && npm run bootstrap:contexts",
+    "scaffold:spfx": "node ./scripts/scaffold-spfx-project.mjs",
+    "prepare:spfx": "node ./scripts/prepare-spfx-project.mjs",
+    "record:issue": "node ./scripts/record-issue.mjs"
+  }
+}

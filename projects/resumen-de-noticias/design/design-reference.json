@@ -1,0 +1,94 @@
+{
+  "projectSlug": "resumen-de-noticias",
+  "rowId": "recmF28EPXUEOIwYm",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir al usuario captar el pulso informativo con muy poco tiempo y espacio.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista o tarjetas de noticias"
+      ],
+      "priorityOrder": [
+        "destacadas",
+        "más recientes"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "tarjetas horizontales o grid"
+      },
+      "narrow": {
+        "items": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton news cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "news summary"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin noticias"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "noticias con metadatos incompletos"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "title",
+        "summary",
+        "publishedAt",
+        "image",
+        "openAction"
+      ],
+      "badges": [
+        "destacada",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Resumen de noticias",
+      "messages": {
+        "empty": "No hay noticias disponibles.",
+        "error": "No se han podido cargar las noticias."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "tarjetas accesibles",
+        "fechas localizadas",
+        "imágenes decorativas con alt correcto"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, fecha y acción"
+    }
+  }
+}

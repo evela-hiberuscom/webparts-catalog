@@ -1,0 +1,34 @@
+{
+  "projectSlug": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+  "archetype": "launcher",
+  "rowId": "recH4dtMmWDWA8VzV",
+  "sources": [
+    {
+      "name": "SharePoint Library",
+      "type": "primary",
+      "api": "SharePoint REST API",
+      "purpose": "Metadatos de biblioteca e ItemCount"
+    },
+    {
+      "name": "Site Recycle Bin",
+      "type": "primary",
+      "api": "SharePoint REST API",
+      "purpose": "Conteo y tamaño agregado de elementos eliminados"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra ItemCount real de la biblioteca.",
+    "Muestra conteo de la papelera de primer nivel.",
+    "Muestra tamaño agregado cuando sea viable.",
+    "Informa partialData si faltan propiedades.",
+    "Permite refresco y abrir biblioteca/papelera.",
+    "Clasifica salud correctamente."
+  ],
+  "businessRules": [
+    "Si recycleBinItemCount >= warningThresholdItems, estado al menos warning.",
+    "Si recycleBinSizeMb >= warningThresholdSizeMb, estado al menos warning cuando el dato exista.",
+    "Si faltan tamaños pero hay conteos, precision=partial y la UI sigue operativa.",
+    "Si la biblioteca no existe, estado error.",
+    "Si libraryItemCount=0 y recycleBinItemCount>0, ratio puede ser null o tratarse como señal crítica según health evaluator."
+  ]
+}

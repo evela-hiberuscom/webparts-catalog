@@ -1,0 +1,253 @@
+{
+  "rowId": "recEiRlEs2Bz4GOGL",
+  "name": "Tarjeta de decisión rápida",
+  "slug": "tarjeta-de-decision-rapida",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 10,
+  "dependencies": [],
+  "provisioningNeeds": [],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases",
+      "dataSource"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "quick-decision-card",
+        "name": "Tarjeta de decisión rápida",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta una decisión puntual con pocas opciones y contexto mínimo para acelerar pequeñas validaciones o elecciones.",
+        "productGoal": "Resolver microdecisiones de forma rápida en la propia intranet."
+      },
+      "problem": {
+        "business": "A veces se necesitan pequeñas decisiones rápidas y el canal habitual resulta demasiado pesado.",
+        "operational": "Se necesita una pieza puntual y simple para escoger entre pocas opciones."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar una decisión activa",
+          "Permitir elegir una opción",
+          "Persistir o abrir la opción elegida"
+        ],
+        "secondary": [
+          "Servir para validaciones rápidas de equipo"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "resolver una pequeña decisión sin fricción"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Pregunta",
+          "2-4 opciones",
+          "submit o CTA por opción"
+        ],
+        "out": [
+          "workflow de aprobación completo"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar decisión y opciones."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir elegir una opción."
+        },
+        {
+          "id": "RF-03",
+          "text": "Gestionar success y error."
+        }
+      ],
+      "businessRules": [
+        "Debe elegirse una opción válida.",
+        "Si el modo es navigation, cada opción puede abrir un recurso en lugar de persistir una respuesta."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "StaticConfig",
+            "SharePointList",
+            "ApiEndpoint"
+          ],
+          "default": "StaticConfig"
+        },
+        "mode": {
+          "type": "enum",
+          "values": [
+            "submit",
+            "navigation"
+          ],
+          "default": "submit"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra la decisión activa.",
+        "Permite completar la acción asociada a una opción."
+      ],
+      "edgeCases": [
+        "sin opciones",
+        "doble click",
+        "error de submit"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Resuelve interacción básica correctamente"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Ayudar a tomar una pequeña decisión con una UI directa y sin sobrecarga.",
+      "informationArchitecture": {
+        "zones": [
+          "pregunta",
+          "opciones",
+          "feedback"
+        ],
+        "priorityOrder": [
+          "pregunta",
+          "opciones"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "card": "compacta"
+        },
+        "narrow": {
+          "card": "apilada"
+        }
+      },
+      "states": [
+        {
+          "id": "idle",
+          "ui": [
+            "question and options"
+          ]
+        },
+        {
+          "id": "success",
+          "ui": [
+            "confirmation"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "error and retry"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Tarjeta de decisión rápida"
+      },
+      "accessibility": {
+        "requirements": [
+          "botones accesibles",
+          "feedback claro"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "load decision",
+          "choose option",
+          "submit/navigate"
+        ],
+        "hardening": [
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Contenido"
+        },
+        {
+          "id": "EP-02",
+          "name": "Interacción"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Mostrar decisión"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Gestionar opción elegida"
+        }
+      ]
+    },
+    "dataJson": null,
+    "technicalJson": {
+      "architecture": {
+        "webPart": "QuickDecisionCardWebPart",
+        "pattern": "SPFx React + simple option action service",
+        "components": [
+          "QuickDecisionCard"
+        ],
+        "services": [
+          "QuickDecisionService"
+        ],
+        "repositories": [
+          "QuickDecisionRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "StaticConfig|SharePointList|ApiEndpoint",
+          "mode": "submit|navigation"
+        },
+        "IQuickDecision": {
+          "id": "string",
+          "question": "string",
+          "options": "{label:string;value:string;url?:string}[]"
+        }
+      },
+      "executionFlow": [
+        "load active decision",
+        "choose option",
+        "submit or navigate",
+        "show feedback"
+      ],
+      "testing": {
+        "unit": [
+          "option validation"
+        ],
+        "component": [
+          "idle/success/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa. Ayuda a elegir el flujo correcto según el caso del usuario.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

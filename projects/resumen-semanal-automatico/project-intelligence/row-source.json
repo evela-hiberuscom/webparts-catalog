@@ -1,0 +1,527 @@
+{
+  "rowId": "rec2f4QevJzBr8wye",
+  "name": "Resumen semanal automático",
+  "slug": "resumen-semanal-automatico",
+  "artifactType": "SPFxWebPart",
+  "archetype": "summary",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "News",
+      "type": "SharePointNews",
+      "purpose": "noticias semanales"
+    },
+    {
+      "name": "Milestones",
+      "type": "SharePointList",
+      "purpose": "hitos semanales"
+    },
+    {
+      "name": "Incidents",
+      "type": "SharePointList",
+      "purpose": "incidencias destacadas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "automatic-weekly-summary",
+        "name": "Resumen semanal automático",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Resume noticias, hitos, incidencias o tareas destacadas de una semana en una tarjeta o bloque compacto.",
+        "productGoal": "Reducir la sobrecarga informativa ofreciendo una síntesis semanal legible y útil."
+      },
+      "problem": {
+        "business": "La información diaria se dispersa y cuesta quedarse con lo realmente importante de la semana.",
+        "operational": "Los equipos necesitan una pieza que resuma señales clave sin revisar múltiples componentes por separado."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar resumen semanal de elementos relevantes",
+          "Combinar señales de varias fuentes cuando existan",
+          "Permitir abrir detalle de elementos destacados"
+        ],
+        "secondary": [
+          "Servir como digest reusable en portada o páginas de área",
+          "Mostrar fecha de periodo resumido"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender rápidamente lo más importante de la semana"
+          ]
+        },
+        {
+          "role": "Lead/Comms",
+          "needs": [
+            "visibilizar resumen ejecutivo semanal"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Resumen de una semana",
+          "Bloques destacados o lista corta de highlights",
+          "Periodo temporal visible",
+          "Acción abrir detalle de un highlight"
+        ],
+        "out": [
+          "resumen generativo libre en V1",
+          "redacción automática avanzada sin fuente estructurada"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Leer highlights semanales",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir un highlight concreto",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar highlights de la semana actual o del periodo configurado."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, tipo y fecha cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle de cada highlight cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Combinar varias fuentes si están configuradas."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser compacto y de lectura rápida."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe manejar datos heterogéneos con normalización simple."
+        }
+      ],
+      "businessRules": [
+        "Solo se incluyen elementos dentro del rango temporal configurado.",
+        "Los highlights se ordenan por prioridad de origen o fecha descendente.",
+        "Si falta URL, el highlight sigue siendo informativo."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "News",
+            "Milestones",
+            "Incidents",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "periodMode": {
+          "type": "enum",
+          "values": [
+            "currentWeek",
+            "previousWeek",
+            "customRange"
+          ],
+          "default": "currentWeek"
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 6,
+          "min": 1,
+          "max": 20
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra highlights semanales del periodo correcto.",
+        "Combina fuentes configuradas sin romper la UI.",
+        "Permite abrir elementos válidos.",
+        "Ordena de forma consistente."
+      ],
+      "edgeCases": [
+        "fuentes heterogéneas parciales",
+        "sin URL",
+        "sin fecha",
+        "periodo sin resultados"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza resumen semanal correctamente",
+        "Incluye tests base de rango temporal y normalización"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir leer en menos de un minuto qué ha sido importante esta semana.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera con periodo",
+          "lista de highlights",
+          "acciones opcionales"
+        ],
+        "priorityOrder": [
+          "más relevantes",
+          "más recientes"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista o cards compactas"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton highlights"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header with period",
+            "highlight list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin highlights en el periodo"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "highlights parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "tipo",
+          "fecha",
+          "openAction"
+        ],
+        "badges": [
+          "highlight",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Resumen semanal automático",
+        "messages": {
+          "empty": "No hay highlights para este periodo.",
+          "error": "No se ha podido construir el resumen semanal."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "lista accesible",
+          "periodo legible",
+          "acciones claras"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, tipo y fecha"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolver rango semanal",
+          "leer highlights",
+          "render resumen"
+        ],
+        "v1": [
+          "fuentes múltiples",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Rango temporal y orígenes"
+        },
+        {
+          "id": "EP-02",
+          "name": "Normalización y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver periodo y leer fuentes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Normalizar a highlights y ordenar"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar resumen semanal"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear WeeklyRangeResolver y repositorios"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar normalización multi-fuente"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear WeeklyHighlightItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "News",
+          "type": "SharePointNews",
+          "purpose": "noticias semanales"
+        },
+        {
+          "name": "Milestones",
+          "type": "SharePointList",
+          "purpose": "hitos semanales"
+        },
+        {
+          "name": "Incidents",
+          "type": "SharePointList",
+          "purpose": "incidencias destacadas"
+        }
+      ],
+      "entities": {
+        "WeeklyHighlight": {
+          "id": "string",
+          "title": "string",
+          "highlightType": "string|null",
+          "date": "string|null",
+          "openUrl": "string|null",
+          "priority": "number|null"
+        }
+      },
+      "mappings": {
+        "highlightType": "normalizado según origen",
+        "date": "datetime or null",
+        "priority": "number or null"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "highlight con título, fecha y origen claro",
+        "partial": "faltan URL, fecha o tipo"
+      },
+      "fallbacks": [
+        "sin date => exclusión o final de lista según política",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Nueva política de gastos",
+            "highlightType": "News",
+            "date": "2026-03-21T10:00:00Z",
+            "openUrl": "/sites/finance/news/gastos"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "single-source week",
+          "multi-source week",
+          "sin URL",
+          "sin fecha",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "AutomaticWeeklySummaryWebPart",
+        "pattern": "SPFx React + multi-source aggregator + date range filter",
+        "components": [
+          "AutomaticWeeklySummary",
+          "WeeklyHighlightItem"
+        ],
+        "services": [
+          "WeeklySummaryAggregationService",
+          "WeeklyRangeResolver"
+        ],
+        "repositories": [
+          "SummarySourceRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'News'|'Milestones'|'Incidents'|'JsonUrl')[]",
+          "periodMode": "currentWeek|previousWeek|customRange",
+          "maxItems": "number"
+        },
+        "IWeeklyHighlight": {
+          "id": "string",
+          "title": "string",
+          "highlightType": "string|null",
+          "date": "string|null",
+          "openUrl": "string|null",
+          "priority": "number|null"
+        },
+        "IViewModel": {
+          "items": "IWeeklyHighlight[]",
+          "periodLabel": "string",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver rango temporal",
+        "leer fuentes configuradas",
+        "normalizar elementos a highlights",
+        "filtrar por periodo",
+        "ordenar y limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "range": "currentWeek/previousWeek/customRange resolver en timezone local",
+        "sort": "priority desc/null-last + date desc"
+      },
+      "performance": {
+        "cache": "por periodo y origen",
+        "retry": "1-2 reintentos por origen"
+      },
+      "errorMatrix": [
+        {
+          "condition": "una fuente falla",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin date",
+          "uiState": "partialData o exclusión según política"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "weekly_summary_loaded",
+          "weekly_summary_partial",
+          "weekly_summary_error",
+          "weekly_summary_item_opened"
+        ],
+        "properties": [
+          "sourceCount",
+          "itemCount",
+          "periodMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "range resolver",
+          "normalization",
+          "sort/limit"
+        ],
+        "component": [
+          "summary render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa/Datos. Resume noticias, hitos, incidencias y tareas destacadas.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

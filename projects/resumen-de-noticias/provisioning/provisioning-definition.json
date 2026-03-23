@@ -1,0 +1,22 @@
+{
+  "projectSlug": "resumen-de-noticias",
+  "archetype": "summary",
+  "rowId": "recmF28EPXUEOIwYm",
+  "sources": [
+    {
+      "name": "SharePointNews",
+      "type": "SharePointNews",
+      "purpose": "noticias publicadas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra noticias configuradas.",
+    "Permite abrir noticia.",
+    "Ordena por fecha/destacado."
+  ],
+  "businessRules": [
+    "Las noticias destacadas pueden mostrarse primero.",
+    "Si falta imagen, la noticia sigue siendo válida.",
+    "Si falta resumen, mostrar solo titular y fecha."
+  ]
+}

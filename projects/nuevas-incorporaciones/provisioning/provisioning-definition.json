@@ -1,0 +1,28 @@
+{
+  "projectSlug": "nuevas-incorporaciones",
+  "archetype": "general",
+  "rowId": "recpU1LZQmFswP606",
+  "sources": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "personas nuevas"
+    },
+    {
+      "name": "JoinersList",
+      "type": "SharePointList",
+      "purpose": "curated list de incorporaciones"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra nuevas incorporaciones dentro del periodo.",
+    "Permite abrir perfil cuando existe.",
+    "Respeta maxItems y daysBack.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Solo se muestran incorporaciones dentro del rango configurado.",
+    "Si falta foto, usar avatar por defecto.",
+    "Si falta perfil, la tarjeta sigue siendo informativa."
+  ]
+}

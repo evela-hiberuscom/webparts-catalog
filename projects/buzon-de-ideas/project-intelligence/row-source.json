@@ -1,0 +1,437 @@
+{
+  "rowId": "rec606dhNoZcBWUIG",
+  "name": "Buzón de ideas",
+  "slug": "buzon-de-ideas",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 4,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "IdeasList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "almacenar ideas"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "ideas-mailbox",
+        "name": "Buzón de ideas",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Recoge ideas o propuestas breves desde la intranet mediante un formulario ligero y una experiencia de baja fricción.",
+        "productGoal": "Facilitar la captura continua de ideas sin obligar al usuario a entrar en herramientas complejas."
+      },
+      "problem": {
+        "business": "Muchas ideas se pierden porque proponer algo exige demasiado esfuerzo o no está claro dónde hacerlo.",
+        "operational": "Los owners de innovación o mejora continua necesitan un punto visible y simple de captura."
+      },
+      "objectives": {
+        "primary": [
+          "Permitir enviar ideas rápidas",
+          "Recoger título, descripción corta y categoría",
+          "Confirmar el envío correctamente"
+        ],
+        "secondary": [
+          "Permitir modo anónimo si la política lo permite",
+          "Servir como bloque reusable de mejora continua"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "proponer una idea en menos de 1 minuto"
+          ]
+        },
+        {
+          "role": "Innovación/People",
+          "needs": [
+            "recoger propuestas de forma ordenada"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Formulario ligero",
+          "Validación básica",
+          "Envío a lista o endpoint",
+          "Mensaje de éxito/error"
+        ],
+        "out": [
+          "workflow completo de evaluación",
+          "votación o debate en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar formulario con título y descripción mínima."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir categoría opcional."
+        },
+        {
+          "id": "RF-03",
+          "text": "Enviar la idea al origen configurado."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar estados loading, success, validationError y submitError."
+        }
+      ],
+      "businessRules": [
+        "El título es obligatorio.",
+        "Si allowAnonymous=false, registrar al usuario autenticado cuando el origen lo soporte.",
+        "No se debe perder el texto del usuario si el envío falla temporalmente."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "ApiEndpoint",
+            "JsonBridge"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "allowAnonymous": {
+          "type": "boolean",
+          "default": false
+        },
+        "showCategory": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Permite enviar ideas válidas.",
+        "Valida campos obligatorios.",
+        "Muestra confirmación clara tras el envío."
+      ],
+      "edgeCases": [
+        "formulario vacío",
+        "error de red",
+        "categoría ausente",
+        "doble submit"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Envía datos correctamente",
+        "Incluye tests base de validación y submit"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Hacer que proponer una idea resulte fácil, rápida y nada intimidante.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "formulario",
+          "feedback"
+        ],
+        "priorityOrder": [
+          "titulo",
+          "descripcion",
+          "submit"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "form": "card simple"
+        },
+        "narrow": {
+          "form": "una columna"
+        }
+      },
+      "states": [
+        {
+          "id": "idle",
+          "ui": [
+            "form ready"
+          ]
+        },
+        {
+          "id": "submitting",
+          "ui": [
+            "disabled form",
+            "progress"
+          ]
+        },
+        {
+          "id": "success",
+          "ui": [
+            "success message",
+            "reset option"
+          ]
+        },
+        {
+          "id": "validationError",
+          "ui": [
+            "inline validation"
+          ]
+        },
+        {
+          "id": "submitError",
+          "ui": [
+            "error message",
+            "retry"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "title",
+          "description",
+          "category",
+          "submit"
+        ]
+      },
+      "copy": {
+        "title": "Buzón de ideas",
+        "messages": {
+          "success": "Tu idea se ha enviado correctamente.",
+          "error": "No se ha podido enviar la idea."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "labels visibles",
+          "errores asociados a campos",
+          "submit accesible"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "campos apilados"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "render form",
+          "validate",
+          "submit"
+        ],
+        "v1": [
+          "anonymous toggle",
+          "telemetry"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Formulario y validación"
+        },
+        {
+          "id": "EP-02",
+          "name": "Persistencia"
+        },
+        {
+          "id": "EP-03",
+          "name": "Feedback y calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Capturar idea"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Enviar idea al origen"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Gestionar estados y pruebas"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear IdeaForm y validación"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear IdeasRepository y submit service"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Implementar success/error/retry"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "IdeasList",
+          "type": "SharePointList|ApiEndpoint",
+          "purpose": "almacenar ideas"
+        }
+      ],
+      "entities": {
+        "Idea": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "category": "string|null",
+          "submittedBy": "string|null",
+          "createdAt": "string|null"
+        }
+      },
+      "mappings": {
+        "submittedBy": "usuario actual o null"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "payload enviado correctamente",
+        "partial": "faltan category o submittedBy"
+      },
+      "fallbacks": [
+        "sin categoría => general",
+        "sin submittedBy => anonymous/null si permitido"
+      ],
+      "exampleOutput": {
+        "payload": {
+          "title": "Añadir filtro por área",
+          "description": "Ayudaría en la home de RRHH",
+          "category": "UX"
+        }
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "valid submit",
+          "missing title",
+          "network error",
+          "anonymous submit"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "IdeasMailboxWebPart",
+        "pattern": "SPFx React + submit service + validation",
+        "components": [
+          "IdeasMailbox",
+          "IdeaForm"
+        ],
+        "services": [
+          "IdeaSubmissionService",
+          "IdeaValidationService"
+        ],
+        "repositories": [
+          "IdeasRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|ApiEndpoint|JsonBridge",
+          "listTitleOrUrl": "string",
+          "allowAnonymous": "boolean",
+          "showCategory": "boolean"
+        },
+        "IIdeaInput": {
+          "title": "string",
+          "description": "string|null",
+          "category": "string|null",
+          "submittedBy": "string|null"
+        },
+        "IViewModel": {
+          "status": "idle|submitting|success|validationError|submitError",
+          "errors": "Record<string,string>"
+        }
+      },
+      "executionFlow": [
+        "render form",
+        "validate input",
+        "submit to origin",
+        "show success or error",
+        "allow retry/reset"
+      ],
+      "algorithms": {
+        "validation": "title required + length constraints configurable or sensible defaults"
+      },
+      "performance": {
+        "submit": "single request with duplicate-submit guard"
+      },
+      "errorMatrix": [
+        {
+          "condition": "missing title",
+          "uiState": "validationError"
+        },
+        {
+          "condition": "network failure",
+          "uiState": "submitError"
+        }
+      ],
+      "security": {
+        "mode": "writeLight",
+        "rules": [
+          "sanitize user input",
+          "avoid duplicate submit",
+          "respect allowAnonymous config"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "idea_submit_started",
+          "idea_submit_succeeded",
+          "idea_submit_failed"
+        ],
+        "properties": [
+          "hasCategory",
+          "allowAnonymous"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "validation",
+          "payload mapping"
+        ],
+        "component": [
+          "form states",
+          "success/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Participación. Formulario simple para sugerencias de mejora.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

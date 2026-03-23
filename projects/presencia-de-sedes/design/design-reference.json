@@ -1,0 +1,95 @@
+{
+  "projectSlug": "presencia-de-sedes",
+  "rowId": "recfBMkZlV28UNzAb",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Dar una respuesta muy rápida a si una sede está operativa y qué detalles básicos debo conocer antes de ir o contactar.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "destacado opcional",
+        "grid de sedes"
+      ],
+      "priorityOrder": [
+        "highlightSite",
+        "abierto/cerrado",
+        "horario",
+        "recepción/notas"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3 columnas"
+      },
+      "narrow": {
+        "cards": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton site cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "site cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin sedes configuradas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con horarios o notas ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "nombreSede",
+        "estado",
+        "horario",
+        "recepcion",
+        "aforo",
+        "notas",
+        "mapa/detalle"
+      ]
+    },
+    "copy": {
+      "title": "Presencia de sedes",
+      "messages": {
+        "empty": "No hay sedes configuradas.",
+        "error": "No se ha podido cargar la información de sedes."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "estado con texto y color",
+        "links accesibles",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, estado y horario"
+    }
+  }
+}

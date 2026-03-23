@@ -1,0 +1,22 @@
+{
+  "projectSlug": "buzon-de-ideas",
+  "archetype": "general",
+  "rowId": "rec606dhNoZcBWUIG",
+  "sources": [
+    {
+      "name": "IdeasList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "almacenar ideas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Permite enviar ideas válidas.",
+    "Valida campos obligatorios.",
+    "Muestra confirmación clara tras el envío."
+  ],
+  "businessRules": [
+    "El título es obligatorio.",
+    "Si allowAnonymous=false, registrar al usuario autenticado cuando el origen lo soporte.",
+    "No se debe perder el texto del usuario si el envío falla temporalmente."
+  ]
+}

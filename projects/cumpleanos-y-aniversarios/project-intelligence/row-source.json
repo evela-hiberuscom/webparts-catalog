@@ -1,0 +1,495 @@
+{
+  "rowId": "recr2Cr1lD1C3JA6O",
+  "name": "Cumpleaños y aniversarios",
+  "slug": "cumpleanos-y-aniversarios",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 5,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "PeopleCelebrations",
+      "type": "Directory|SharePointList",
+      "purpose": "cumpleaños y aniversarios"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "birthdays-and-anniversaries",
+        "name": "Cumpleaños y aniversarios",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Destaca cumpleaños y aniversarios laborales próximos o del día para reforzar cercanía y reconocimiento informal.",
+        "productGoal": "Añadir una capa humana y social a la intranet mediante recordatorios positivos y oportunos."
+      },
+      "problem": {
+        "business": "Los hitos personales suelen pasar desapercibidos en equipos grandes o distribuidos.",
+        "operational": "Las áreas quieren una pieza simple para reforzar cultura y cercanía sin esfuerzo manual constante."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar cumpleaños y aniversarios próximos",
+          "Destacar los del día",
+          "Permitir ver nombre, foto y tipo de hito"
+        ],
+        "secondary": [
+          "Filtrar por tipo de celebración",
+          "Servir como bloque cultural ligero"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "conocer celebraciones del equipo o área"
+          ]
+        },
+        {
+          "role": "People/Comms",
+          "needs": [
+            "reforzar cercanía y cultura de equipo"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Nombre/foto",
+          "Tipo de hito",
+          "Fecha",
+          "Días restantes o marcador de hoy"
+        ],
+        "out": [
+          "automatización de felicitaciones",
+          "datos personales sensibles fuera del alcance previsto"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver cumpleaños de hoy",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ver próximos aniversarios",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar celebraciones dentro de una ventana temporal configurable o fija."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar nombre, foto y tipo de hito cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Destacar celebraciones del día."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser ligero, amable y no invasivo."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe manejar datos parciales con cuidado."
+        }
+      ],
+      "businessRules": [
+        "Hoy tiene prioridad visual máxima.",
+        "Si falta foto, usar avatar por defecto.",
+        "Si falta fecha válida, excluir la entrada o marcarla parcial según política."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Directory",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "showBirthdays": {
+          "type": "boolean",
+          "default": true
+        },
+        "showAnniversaries": {
+          "type": "boolean",
+          "default": true
+        },
+        "daysAhead": {
+          "type": "number",
+          "default": 14,
+          "min": 1,
+          "max": 90
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra celebraciones en ventana temporal.",
+        "Destaca las de hoy.",
+        "Respeta tipos configurados.",
+        "Funciona con foto o datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "persona sin foto",
+        "fecha ausente",
+        "cumpleaños y aniversario el mismo día",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza celebraciones correctamente",
+        "Incluye tests base de ventana temporal y clasificación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Crear un momento visual positivo y fácil de consumir para celebrar hitos personales cercanos.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "hitos de hoy",
+          "próximos"
+        ],
+        "priorityOrder": [
+          "hoy",
+          "próximos más cercanos"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "cards o lista amable"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton celebration items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "today section",
+            "upcoming section"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin celebraciones próximas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "celebraciones con datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "avatar",
+          "nombre",
+          "tipo",
+          "fechaLabel",
+          "daysRemaining"
+        ],
+        "badges": [
+          "hoy",
+          "cumpleaños",
+          "aniversario",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Cumpleaños y aniversarios",
+        "messages": {
+          "empty": "No hay celebraciones próximas.",
+          "error": "No se han podido cargar las celebraciones."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "texto visible además de color",
+          "fechas comprensibles",
+          "cards accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, tipo y marcador de hoy"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer celebraciones",
+          "filtrar por ventana",
+          "render lista"
+        ],
+        "v1": [
+          "toggle birthdays/anniversaries",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y clasificación temporal"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de celebraciones"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y clasificar celebraciones"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards/lista de celebraciones"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear PeopleCelebrationsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar CelebrationWindowResolver"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear CelebrationCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "PeopleCelebrations",
+          "type": "Directory|SharePointList",
+          "purpose": "cumpleaños y aniversarios"
+        }
+      ],
+      "entities": {
+        "Celebration": {
+          "id": "string",
+          "displayName": "string",
+          "photoUrl": "string|null",
+          "celebrationType": "string|null",
+          "date": "string|null"
+        }
+      },
+      "mappings": {
+        "celebrationType": "birthday|anniversary|unknown",
+        "isToday": "derivado por fecha"
+      },
+      "validationRules": [
+        "displayName requerido",
+        "date recomendada"
+      ],
+      "accuracyPolicy": {
+        "exact": "nombre, tipo y fecha presentes",
+        "partial": "faltan foto o fecha o tipo"
+      },
+      "fallbacks": [
+        "sin foto => avatar por defecto",
+        "sin fecha => exclusión o partial",
+        "sin tipo => unknown"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "displayName": "Sofía Martín",
+            "celebrationType": "birthday",
+            "date": "2026-03-21",
+            "isToday": true
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "today birthday",
+          "upcoming anniversary",
+          "no photo",
+          "no date",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "BirthdaysAndAnniversariesWebPart",
+        "pattern": "SPFx React + celebration classifier",
+        "components": [
+          "BirthdaysAndAnniversaries",
+          "CelebrationCard"
+        ],
+        "services": [
+          "CelebrationService",
+          "CelebrationWindowResolver"
+        ],
+        "repositories": [
+          "PeopleCelebrationsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Directory'|'SharePointList'|'JsonUrl')[]",
+          "listTitleOrUrl": "string|undefined",
+          "showBirthdays": "boolean",
+          "showAnniversaries": "boolean",
+          "daysAhead": "number"
+        },
+        "ICelebrationItem": {
+          "id": "string",
+          "displayName": "string",
+          "photoUrl": "string|null",
+          "celebrationType": "birthday|anniversary|unknown",
+          "date": "string|null",
+          "isToday": "boolean",
+          "daysRemaining": "number|null"
+        },
+        "IViewModel": {
+          "items": "ICelebrationItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer datos de celebraciones",
+        "normalizar fechas y tipo",
+        "filtrar por ventana temporal y flags",
+        "clasificar hoy/próximos",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "window": "0..daysAhead desde hoy",
+        "sort": "isToday desc + daysRemaining asc"
+      },
+      "performance": {
+        "cache": "por origen y ventana",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin date",
+          "uiState": "partialData o exclusión"
+        },
+        {
+          "condition": "sin photoUrl",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "limitar campos personales al mínimo necesario"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "celebrations_loaded",
+          "celebrations_partial",
+          "celebrations_error"
+        ],
+        "properties": [
+          "itemCount",
+          "todayCount",
+          "daysAhead",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "window filter",
+          "today detection",
+          "daysRemaining sort"
+        ],
+        "component": [
+          "celebration render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas. Recordatorio de cumpleaños y antigüedad en la empresa.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

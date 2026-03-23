@@ -1,0 +1,289 @@
+{
+  "rowId": "receRlZjmbo737FTQ",
+  "name": "Pregunta destacada",
+  "slug": "pregunta-destacada",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 9,
+  "dependencies": [],
+  "provisioningNeeds": [],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases",
+      "dataSource"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "featured-question",
+        "name": "Pregunta destacada",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Destaca una única pregunta o reflexión relevante para atraer interacción o foco editorial.",
+        "productGoal": "Crear un punto de atención simple y humano dentro de la página."
+      },
+      "problem": {
+        "business": "A veces una única pregunta bien elegida genera más atención que un bloque grande de contenido.",
+        "operational": "Comms o facilitación necesitan una pieza editorial mínima y flexible."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar una pregunta destacada",
+          "Permitir CTA asociado si existe",
+          "Servir como pieza ligera de engagement"
+        ],
+        "secondary": [
+          "Variar la pregunta por periodo",
+          "Alinear con campañas o participación"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "pararse a pensar o interactuar con un CTA"
+          ]
+        },
+        {
+          "role": "Comms",
+          "needs": [
+            "poner foco en una sola cuestión"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Pregunta",
+          "subtitle opcional",
+          "CTA opcional"
+        ],
+        "out": [
+          "foro o debate completo"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar una pregunta activa."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar CTA opcional."
+        },
+        {
+          "id": "RF-03",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Si no hay CTA, la pieza sigue siendo editorial.",
+        "Si hay varias preguntas activas, elegir por prioridad o fecha."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "StaticConfig",
+            "JsonUrl"
+          ],
+          "default": "StaticConfig"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra una pregunta destacada correctamente.",
+        "Permite abrir CTA cuando existe."
+      ],
+      "edgeCases": [
+        "sin pregunta",
+        "sin CTA",
+        "múltiples preguntas activas"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza pieza editorial correctamente"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Crear una pausa breve en la página que dirija la atención a una sola pregunta.",
+      "informationArchitecture": {
+        "zones": [
+          "pregunta",
+          "subtexto",
+          "CTA"
+        ],
+        "priorityOrder": [
+          "pregunta",
+          "CTA"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "hero": "card editorial"
+        },
+        "narrow": {
+          "hero": "compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton prompt"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "featured question hero"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin render o placeholder discreto"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "pregunta sin CTA"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Pregunta destacada"
+      },
+      "accessibility": {
+        "requirements": [
+          "CTA accesible",
+          "contraste adecuado"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "load question",
+          "render hero"
+        ],
+        "v1": [
+          "CTA",
+          "telemetry"
+        ],
+        "hardening": [
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Contenido"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver pregunta activa"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Renderizar hero editorial"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear FeaturedQuestionRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear hero UI"
+        }
+      ]
+    },
+    "dataJson": null,
+    "technicalJson": {
+      "architecture": {
+        "webPart": "FeaturedQuestionWebPart",
+        "pattern": "SPFx React + simple content resolver",
+        "components": [
+          "FeaturedQuestion"
+        ],
+        "services": [
+          "FeaturedQuestionService"
+        ],
+        "repositories": [
+          "FeaturedQuestionRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|StaticConfig|JsonUrl",
+          "listTitleOrUrl": "string|undefined"
+        },
+        "IFeaturedQuestion": {
+          "id": "string",
+          "question": "string",
+          "subtitle": "string|null",
+          "ctaUrl": "string|null"
+        }
+      },
+      "executionFlow": [
+        "load active question",
+        "resolve priority",
+        "render"
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitize ctaUrl"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "active selection"
+        ],
+        "component": [
+          "render ready/empty"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Participación. Pregunta rotatoria para engagement o feedback continuo.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

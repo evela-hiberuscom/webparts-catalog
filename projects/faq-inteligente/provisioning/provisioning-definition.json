@@ -1,0 +1,23 @@
+{
+  "projectSlug": "faq-inteligente",
+  "archetype": "knowledge",
+  "rowId": "recKLSpIPYfJdlGsd",
+  "sources": [
+    {
+      "name": "FaqList",
+      "type": "SharePointList",
+      "purpose": "catálogo de preguntas frecuentes"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra FAQs configuradas.",
+    "Permite buscar y filtrar.",
+    "Expande y contrae respuestas.",
+    "Abre enlaces cuando existan."
+  ],
+  "businessRules": [
+    "Si una FAQ no tiene categoría, va a General.",
+    "Si falta enlace relacionado, la FAQ sigue siendo válida.",
+    "Las FAQs marcadas como destacadas pueden priorizarse visualmente."
+  ]
+}

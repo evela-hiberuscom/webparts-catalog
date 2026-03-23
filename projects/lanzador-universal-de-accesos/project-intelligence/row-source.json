@@ -1,0 +1,529 @@
+{
+  "rowId": "recfiHUjaapUToQEr",
+  "name": "Lanzador universal de accesos",
+  "slug": "lanzador-universal-de-accesos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "LauncherLinksList",
+      "type": "SharePointList",
+      "purpose": "catálogo de accesos corporativos"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "universal-app-launcher",
+        "name": "Lanzador universal de accesos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra un grid configurable de accesos a apps, sites, formularios y utilidades corporativas.",
+        "productGoal": "Reducir fricción para llegar a herramientas y recursos frecuentes desde una única pieza reusable."
+      },
+      "problem": {
+        "business": "Las intranets suelen dispersar accesos en menús, páginas y enlaces inconexos.",
+        "operational": "Los usuarios pierden tiempo buscando herramientas de uso común o acaban usando marcadores locales inconsistentes."
+      },
+      "objectives": {
+        "primary": [
+          "Centralizar accesos frecuentes en un grid simple",
+          "Mostrar icono, título y categoría",
+          "Permitir apertura rápida y segura",
+          "Ordenar por prioridad o grupo"
+        ],
+        "secondary": [
+          "Soportar audience targeting si el origen lo permite",
+          "Filtrar por categoría",
+          "Mostrar destacados"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "abrir herramientas frecuentes rápidamente"
+          ]
+        },
+        {
+          "role": "Owner de intranet",
+          "needs": [
+            "mantener un catálogo de accesos consistente"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de accesos",
+          "Grid/lista de enlaces",
+          "Filtros por categoría",
+          "Orden por prioridad",
+          "Audience targeting opcional"
+        ],
+        "out": [
+          "Buscador universal avanzado",
+          "gestión de favoritos personales en V1",
+          "telemetría de navegación avanzada"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Abrir app corporativa",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Filtrar accesos por categoría",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Mostrar accesos destacados",
+          "actor": "Owner intranet"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar accesos configurados con título, icono y enlace."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir filtrar por categoría cuando exista."
+        },
+        {
+          "id": "RF-03",
+          "text": "Ordenar por prioridad o destacado cuando exista el dato."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir accesos internos o externos de forma segura."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Muy visual y ligero para portada o dashboard."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo launcher en V1."
+        }
+      ],
+      "businessRules": [
+        "Los accesos sin URL no deben mostrarse como accionables.",
+        "Si falta categoría, el acceso va a General.",
+        "Si existe prioridad, determina el orden inicial.",
+        "Los destacados pueden priorizarse visualmente."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 24,
+          "min": 1,
+          "max": 100
+        },
+        "openInNewTab": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra accesos configurados.",
+        "Permite abrir el enlace correcto.",
+        "Filtra por categoría cuando exista.",
+        "Ordena por prioridad/destacado cuando corresponda."
+      ],
+      "edgeCases": [
+        "acceso sin icono",
+        "sin categoría",
+        "sin URL",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza grid/lista correctamente",
+        "Incluye tests base de mapping, filtros y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir encontrar y lanzar una herramienta corporativa en uno o dos clics.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros opcionales",
+          "grid de accesos"
+        ],
+        "priorityOrder": [
+          "destacados",
+          "prioritarios",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 4-6 columnas"
+        },
+        "narrow": {
+          "cards": "grid 2 columnas o lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton launch cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "launch grid"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin accesos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "icono",
+          "titulo",
+          "categoria",
+          "descripcionBreve",
+          "openAction"
+        ],
+        "badges": [
+          "destacado",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Lanzador universal de accesos",
+        "messages": {
+          "empty": "No hay accesos configurados.",
+          "error": "No se han podido cargar los accesos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards/links accesibles",
+          "texto visible además de iconos",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar icono, título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer catálogo",
+          "render grid",
+          "abrir enlace"
+        ],
+        "v1": [
+          "filtros",
+          "destacados",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer accesos desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Normalizar y ordenar accesos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar grid y filtros"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear LaunchRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar sort y filtro"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear LaunchCard y filter bar"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "LauncherLinksList",
+          "type": "SharePointList",
+          "purpose": "catálogo de accesos corporativos"
+        }
+      ],
+      "entities": {
+        "LaunchItem": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "description": "string|null",
+          "icon": "string|null",
+          "priority": "number|null",
+          "featured": "boolean|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "priority": "number or null",
+        "featured": "boolean default false",
+        "category": "string o General"
+      },
+      "validationRules": [
+        "title requerido",
+        "openUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "enlace y metadatos básicos presentes",
+        "partial": "faltan icono, categoría o URL"
+      },
+      "fallbacks": [
+        "sin categoría => General",
+        "sin icono => icono por defecto",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Portal RRHH",
+            "category": "RRHH",
+            "icon": "People",
+            "priority": 1,
+            "featured": true,
+            "openUrl": "/sites/hr"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "featured link",
+          "sin prioridad",
+          "sin icono",
+          "sin url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "UniversalLauncherWebPart",
+        "pattern": "SPFx React + repository + priority/category filter",
+        "components": [
+          "UniversalLauncher",
+          "LaunchCard",
+          "LaunchFilterBar"
+        ],
+        "services": [
+          "LaunchCatalogService"
+        ],
+        "repositories": [
+          "LaunchRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number",
+          "openInNewTab": "boolean"
+        },
+        "ILaunchItem": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "description": "string|null",
+          "icon": "string|null",
+          "priority": "number|null",
+          "featured": "boolean",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "ILaunchItem[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer catálogo de accesos",
+        "normalizar categoría/prioridad/icono",
+        "ordenar",
+        "aplicar filtro",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "featured desc + priority asc/null-last + title asc",
+        "filter": "por categoría cuando exista"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin icono",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "sanitizar openUrl",
+          "marcar enlaces externos",
+          "respetar openInNewTab configurado"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "launcher_loaded",
+          "launcher_partial",
+          "launcher_error",
+          "launcher_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "priority sort",
+          "category filter",
+          "mapping"
+        ],
+        "component": [
+          "render grid",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación. Grid de enlaces a apps, sites, formularios y herramientas internas con iconos y categorías.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

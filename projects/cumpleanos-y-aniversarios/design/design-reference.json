@@ -1,0 +1,98 @@
+{
+  "projectSlug": "cumpleanos-y-aniversarios",
+  "rowId": "recr2Cr1lD1C3JA6O",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Crear un momento visual positivo y fácil de consumir para celebrar hitos personales cercanos.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "hitos de hoy",
+        "próximos"
+      ],
+      "priorityOrder": [
+        "hoy",
+        "próximos más cercanos"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "cards o lista amable"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton celebration items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "today section",
+          "upcoming section"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin celebraciones próximas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "celebraciones con datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "avatar",
+        "nombre",
+        "tipo",
+        "fechaLabel",
+        "daysRemaining"
+      ],
+      "badges": [
+        "hoy",
+        "cumpleaños",
+        "aniversario",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Cumpleaños y aniversarios",
+      "messages": {
+        "empty": "No hay celebraciones próximas.",
+        "error": "No se han podido cargar las celebraciones."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "texto visible además de color",
+        "fechas comprensibles",
+        "cards accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, tipo y marcador de hoy"
+    }
+  }
+}

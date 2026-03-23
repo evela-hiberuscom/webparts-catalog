@@ -1,0 +1,23 @@
+{
+  "projectSlug": "favoritos-personales",
+  "archetype": "launcher",
+  "rowId": "recZLMapqZ0LFq7Y2",
+  "sources": [
+    {
+      "name": "FavoritesList",
+      "type": "SharePointList",
+      "purpose": "favoritos personales"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra favoritos del usuario actual.",
+    "Permite abrir cada favorito válido.",
+    "Ordena de forma consistente.",
+    "Gestiona empty correctamente."
+  ],
+  "businessRules": [
+    "Los favoritos sin URL deben mostrarse como parciales o excluirse según política.",
+    "Si el usuario no tiene favoritos, el estado empty debe ser claro.",
+    "Si no existe orden explícito, ordenar alfabéticamente por título."
+  ]
+}

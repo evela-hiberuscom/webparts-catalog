@@ -1,0 +1,539 @@
+{
+  "rowId": "recZIpIIKZAzgI1GU",
+  "name": "Agenda del equipo",
+  "slug": "agenda-del-equipo",
+  "artifactType": "SPFxWebPart",
+  "archetype": "summary",
+  "waveNumber": 12,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Calendar",
+      "type": "Calendar/API",
+      "purpose": "agenda del equipo"
+    },
+    {
+      "name": "AgendaList",
+      "type": "SharePointList",
+      "purpose": "agenda compartida"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "team-agenda",
+        "name": "Agenda del equipo",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra reuniones, demos, eventos o hitos próximos del equipo en una vista compacta y contextual.",
+        "productGoal": "Ayudar a que el equipo tenga visibilidad rápida de su agenda compartida sin abrir el calendario completo."
+      },
+      "problem": {
+        "business": "La actividad del equipo se fragmenta entre calendarios, chats y reuniones, y se pierde visibilidad de lo próximo.",
+        "operational": "Los miembros del equipo no siempre saben qué reuniones, demos o hitos son inminentes."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar próximos eventos del equipo",
+          "Permitir abrir el evento o calendario",
+          "Ordenar por fecha y hora",
+          "Distinguir hoy, mañana y próximos días"
+        ],
+        "secondary": [
+          "Filtrar por tipo de evento",
+          "Mostrar ubicación o enlace de reunión",
+          "Servir como bloque de portada de equipo"
+        ]
+      },
+      "users": [
+        {
+          "role": "Miembro del equipo",
+          "needs": [
+            "ver qué viene a continuación"
+          ]
+        },
+        {
+          "role": "Team lead",
+          "needs": [
+            "dar visibilidad a agenda compartida"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Eventos próximos",
+          "Fecha y hora",
+          "Tipo/etiqueta",
+          "Ubicación o link de reunión",
+          "Acción abrir detalle"
+        ],
+        "out": [
+          "edición de eventos",
+          "gestión avanzada del calendario",
+          "reserva o RSVP dentro de la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver reuniones de hoy",
+          "actor": "Miembro del equipo"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle de una demo",
+          "actor": "Miembro del equipo"
+        },
+        {
+          "id": "CU-03",
+          "name": "Visualizar agenda próxima del área",
+          "actor": "Lead"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar eventos próximos del equipo ordenados por fecha/hora ascendente."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, fecha/hora y ubicación o enlace cuando exista."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir el detalle del evento."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por tipo o categoría cuando exista el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga ligera y apta para páginas de equipo."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tratar correctamente zona horaria y formato local."
+        }
+      ],
+      "businessRules": [
+        "Los eventos pasados no se muestran salvo configuración específica.",
+        "Los eventos de hoy pueden destacarse visualmente.",
+        "Si un evento no tiene enlace o ubicación, sigue siendo válido.",
+        "Los eventos sin fecha válida deben excluirse o degradarse a partial según política."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Calendar",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 8,
+          "min": 1,
+          "max": 30
+        },
+        "showPast": {
+          "type": "boolean",
+          "default": false
+        },
+        "defaultTypeFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra próximos eventos correctamente ordenados.",
+        "Permite abrir el detalle del evento.",
+        "Respeta maxItems y filtros.",
+        "Funciona con metadatos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "evento sin fecha válida",
+        "sin enlace de reunión",
+        "sin ubicación",
+        "lista vacía",
+        "evento multiday"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza agenda correctamente",
+        "Incluye tests base de ordenación temporal y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir entender en segundos qué reuniones o hitos compartidos vienen ahora y qué acción tomar.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "agenda/lista temporal",
+          "filtros opcionales"
+        ],
+        "priorityOrder": [
+          "hoy",
+          "mañana",
+          "próximos"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista rica o timeline compacta"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton agenda items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "agenda items"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin próximos eventos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items con metadatos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "fechaHora",
+          "tipo",
+          "ubicacionOrJoin",
+          "openAction"
+        ],
+        "badges": [
+          "hoy",
+          "mañana",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Agenda del equipo",
+        "messages": {
+          "empty": "No hay próximos eventos del equipo.",
+          "error": "No se ha podido cargar la agenda del equipo."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "fechas y horas legibles",
+          "lista accesible",
+          "acciones claras"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, fecha y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer eventos",
+          "ordenar temporalmente",
+          "render agenda"
+        ],
+        "v1": [
+          "filtros por tipo",
+          "grouping hoy/mañana",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización temporal"
+        },
+        {
+          "id": "EP-02",
+          "name": "Agrupación y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer agenda desde origen"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Agrupar y filtrar eventos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista temporal"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de agenda"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar grouping y filtros"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear AgendaItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Calendar",
+          "type": "Calendar/API",
+          "purpose": "agenda del equipo"
+        },
+        {
+          "name": "AgendaList",
+          "type": "SharePointList",
+          "purpose": "agenda compartida"
+        }
+      ],
+      "entities": {
+        "AgendaItem": {
+          "id": "string",
+          "title": "string",
+          "startsAt": "string|null",
+          "endsAt": "string|null",
+          "eventType": "string|null",
+          "location": "string|null",
+          "joinUrl": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "group": "derivado por startsAt y now"
+      },
+      "validationRules": [
+        "title requerido",
+        "startsAt recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "título y fecha válidos",
+        "partial": "faltan type, location, joinUrl u openUrl"
+      },
+      "fallbacks": [
+        "sin startsAt => exclusión o partial según política",
+        "sin joinUrl/openUrl => item informativo",
+        "sin type => unknown"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Demo sprint",
+            "startsAt": "2026-03-22T09:00:00Z",
+            "eventType": "Demo",
+            "joinUrl": "https://teams...",
+            "group": "tomorrow"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "today item",
+          "tomorrow item",
+          "upcoming item",
+          "sin fecha",
+          "multiday"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "TeamAgendaWebPart",
+        "pattern": "SPFx React + repository + temporal grouping",
+        "components": [
+          "TeamAgenda",
+          "AgendaItem",
+          "AgendaFilters"
+        ],
+        "services": [
+          "TeamAgendaService",
+          "AgendaGroupingService"
+        ],
+        "repositories": [
+          "CalendarRepository",
+          "AgendaListRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Calendar'|'SharePointList'|'JsonUrl')[]",
+          "listTitleOrUrl": "string|undefined",
+          "maxItems": "number",
+          "showPast": "boolean",
+          "defaultTypeFilter": "string|undefined"
+        },
+        "IAgendaItem": {
+          "id": "string",
+          "title": "string",
+          "startsAt": "string|null",
+          "endsAt": "string|null",
+          "eventType": "string|null",
+          "location": "string|null",
+          "joinUrl": "string|null",
+          "openUrl": "string|null",
+          "group": "today|tomorrow|upcoming|past|unknown"
+        },
+        "IViewModel": {
+          "items": "IAgendaItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer eventos desde orígenes",
+        "normalizar fechas y metadatos",
+        "filtrar pasados si procede",
+        "agrupar temporalmente",
+        "ordenar y limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "grouping": "today/tomorrow/upcoming según startsAt y now",
+        "sort": "startsAt asc with invalid/null excluded or partial according to policy"
+      },
+      "performance": {
+        "cache": "por origen y rango temporal",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin startsAt",
+          "uiState": "partialData o exclusión"
+        },
+        {
+          "condition": "sin openUrl/joinUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar enlaces",
+          "no exponer detalles de calendario no previstos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "team_agenda_loaded",
+          "team_agenda_partial",
+          "team_agenda_error",
+          "team_agenda_item_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "todayCount",
+          "typeFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "temporal grouping",
+          "date sort",
+          "type filter"
+        ],
+        "component": [
+          "agenda render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Datos/Productividad. Vista compacta de reuniones, demos o hitos próximos.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

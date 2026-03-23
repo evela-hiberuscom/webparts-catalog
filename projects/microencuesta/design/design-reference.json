@@ -1,0 +1,78 @@
+{
+  "projectSlug": "microencuesta",
+  "rowId": "recSZap19q7CuUs5R",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir responder una pregunta en pocos segundos y seguir con el flujo normal de la página.",
+    "informationArchitecture": {
+      "zones": [
+        "pregunta",
+        "opciones",
+        "submit",
+        "feedback"
+      ],
+      "priorityOrder": [
+        "pregunta",
+        "opciones",
+        "submit"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "poll": "card compacta"
+      },
+      "narrow": {
+        "poll": "vertical simple"
+      }
+    },
+    "states": [
+      {
+        "id": "idle",
+        "ui": [
+          "question and options"
+        ]
+      },
+      {
+        "id": "submitting",
+        "ui": [
+          "disabled options",
+          "progress"
+        ]
+      },
+      {
+        "id": "success",
+        "ui": [
+          "success state"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "error and retry"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Microencuesta",
+      "messages": {
+        "success": "Respuesta registrada.",
+        "error": "No se ha podido registrar la respuesta."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "radios accesibles",
+        "labels claros",
+        "feedback visible"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "opciones apiladas"
+    }
+  }
+}

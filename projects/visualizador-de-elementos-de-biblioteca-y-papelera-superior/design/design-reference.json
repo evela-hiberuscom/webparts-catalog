@@ -1,0 +1,143 @@
+{
+  "projectSlug": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+  "rowId": "recH4dtMmWDWA8VzV",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Ofrecer una tarjeta operativa muy rápida de leer para comparar contenido activo vs eliminado en el sitio.",
+    "informationArchitecture": {
+      "zones": [
+        "Cabecera",
+        "KPIs comparativos",
+        "Badge de salud",
+        "Acciones"
+      ],
+      "priorityOrder": [
+        "conteo papelera",
+        "conteo biblioteca",
+        "tamaño papelera",
+        "ratio"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "header": "compacto",
+        "kpis": "4-5 tarjetas en grid",
+        "actions": "alineadas al final"
+      },
+      "narrow": {
+        "header": "apilado",
+        "kpis": "verticales",
+        "actions": "compactas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton cards",
+          "mensaje de carga"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "title",
+          "health badge",
+          "kpi biblioteca",
+          "kpi papelera",
+          "kpi tamaño",
+          "kpi ratio",
+          "acciones"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "estado sin residuos o sin datos útiles"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "warning message",
+          "KPIs con tamaño ausente o incompleto"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "acción refrescar"
+        ]
+      }
+    ],
+    "kpiCards": [
+      {
+        "id": "libraryItemCount",
+        "label": "Elementos biblioteca"
+      },
+      {
+        "id": "recycleBinItemCount",
+        "label": "Elementos papelera"
+      },
+      {
+        "id": "recycleBinSize",
+        "label": "Tamaño papelera"
+      },
+      {
+        "id": "ratio",
+        "label": "Ratio papelera/biblioteca"
+      },
+      {
+        "id": "lastUpdated",
+        "label": "Última actualización"
+      }
+    ],
+    "visualSemantics": {
+      "ok": {
+        "intent": "success"
+      },
+      "warning": {
+        "intent": "warning"
+      },
+      "critical": {
+        "intent": "danger"
+      },
+      "partial": {
+        "intent": "neutral-warning"
+      }
+    },
+    "copy": {
+      "title": "Visualizador de elementos de biblioteca y papelera superior",
+      "messages": {
+        "empty": "No hay datos relevantes para mostrar.",
+        "partial": "El resultado no es completo. Algunas métricas pueden no estar disponibles.",
+        "error": "No se ha podido cargar el diagnóstico del sitio."
+      }
+    },
+    "interactions": [
+      "Refrescar datos",
+      "Abrir biblioteca",
+      "Abrir papelera del sitio"
+    ],
+    "accessibility": {
+      "requirements": [
+        "ARIA labels",
+        "Contraste AA",
+        "No depender solo del color"
+      ]
+    },
+    "responsive": {
+      "breakpoints": [
+        "narrow section",
+        "standard",
+        "full width"
+      ]
+    }
+  }
+}

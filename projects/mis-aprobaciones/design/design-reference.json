@@ -1,0 +1,102 @@
+{
+  "projectSlug": "mis-aprobaciones",
+  "rowId": "reckRsMhPOJPL7QqX",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir al usuario saber de un vistazo qué aprobaciones bloquean procesos y requieren atención inmediata.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "resumen",
+        "lista de aprobaciones"
+      ],
+      "priorityOrder": [
+        "vencidas",
+        "pendientes de hoy",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "summary": "mini KPIs",
+        "list": "lista rica"
+      },
+      "narrow": {
+        "summary": "compacto",
+        "list": "simple vertical"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton list"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "summary",
+          "approval list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin aprobaciones"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner discreto",
+          "lista parcial"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "solicitante",
+        "origen",
+        "dueDate",
+        "estado",
+        "openAction"
+      ],
+      "badges": [
+        "overdue",
+        "today",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mis aprobaciones",
+      "messages": {
+        "empty": "No tienes aprobaciones pendientes visibles.",
+        "error": "No se han podido cargar tus aprobaciones."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "lista navegable",
+        "badges con texto",
+        "fechas localizadas"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, origen y dueDate"
+    }
+  }
+}

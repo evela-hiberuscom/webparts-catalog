@@ -1,0 +1,581 @@
+{
+  "rowId": "rec4IT47Qufu125ug",
+  "name": "Estado de servicios internos",
+  "slug": "estado-de-servicios-internos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "analytics",
+  "waveNumber": 2,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "ServiceStatusList",
+      "type": "SharePointList",
+      "purpose": "estado consolidado de servicios"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "internal-services-status",
+        "name": "Estado de servicios internos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra el estado operativo de servicios internos mediante semáforos, criticidad y enlaces de detalle.",
+        "productGoal": "Centralizar el estado visible de servicios críticos en una tarjeta o panel compacto apto para intranet técnica y soporte."
+      },
+      "problem": {
+        "business": "Los usuarios pierden tiempo averiguando si un fallo es general o local.",
+        "operational": "Soporte necesita una vista única y actualizada del estado de servicios internos."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar estado actual por servicio",
+          "Destacar degradaciones o caídas",
+          "Permitir acceso rápido a detalle o runbook",
+          "Soportar refresco manual y automático"
+        ],
+        "secondary": [
+          "Mostrar última actualización",
+          "Ordenar por criticidad",
+          "Marcar estados stale"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber si un servicio está caído",
+            "evitar abrir tickets duplicados"
+          ]
+        },
+        {
+          "role": "SupportM365",
+          "needs": [
+            "publicar estado consolidado",
+            "refrescar rápido",
+            "abrir runbooks"
+          ]
+        },
+        {
+          "role": "Operaciones",
+          "needs": [
+            "mostrar criticidad e impacto",
+            "agrupar servicios por dominio"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado configurable de servicios",
+          "Estados ok/warning/critical/maintenance/unknown",
+          "Última actualización",
+          "Descripción corta",
+          "Acciones abrir detalle",
+          "Auto refresh opcional"
+        ],
+        "out": [
+          "Monitorización activa desde el navegador",
+          "acciones de remediación",
+          "alertas push"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consulta rápida",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Panel de soporte",
+          "actor": "SupportM365"
+        },
+        {
+          "id": "CU-03",
+          "name": "Mantenimiento programado visible",
+          "actor": "Operaciones"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar una lista configurable de servicios con estado actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Soportar estados ok, warning, critical, maintenance y unknown."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar nombre, descripción, criticidad y última actualización."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir refresh manual y auto refresh configurable."
+        },
+        {
+          "id": "RF-05",
+          "text": "Permitir abrir un enlace de detalle por servicio."
+        },
+        {
+          "id": "RF-06",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida apta para dashboards."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Tolerar datos parciales por servicio."
+        },
+        {
+          "id": "RNF-03",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Si updatedAt supera un umbral configurable, el servicio pasa a stale/unknown visual.",
+        "Si faltan campos no críticos, el servicio sigue renderizando con unknown o partialData.",
+        "Maintenance prevalece visualmente sobre ok y warning."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "autoRefreshSeconds": {
+          "type": "number",
+          "default": 300,
+          "min": 0
+        },
+        "showOnlyCritical": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra servicios configurados con estado correcto.",
+        "Permite refresh manual.",
+        "Marca stale cuando corresponde.",
+        "Abre enlace de detalle cuando existe."
+      ],
+      "edgeCases": [
+        "servicio sin timestamp",
+        "servicio sin link",
+        "lista vacía",
+        "datos incompletos",
+        "origen inaccesible"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Gestiona empty/loading/error/partial",
+        "Incluye tests de mapping y stale logic",
+        "README técnico mínimo"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir saber en segundos si un servicio interno está OK, degradado o caído.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros opcionales",
+          "grid de tarjetas",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "critical",
+          "warning",
+          "maintenance",
+          "ok",
+          "unknown"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "lista vertical compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "service cards",
+            "refresh"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin servicios"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner de datos parciales",
+            "cards"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro",
+            "reintentar"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "nombre",
+          "estado",
+          "criticidad",
+          "descripcion",
+          "ultimaActualizacion",
+          "accionDetalle"
+        ],
+        "badges": [
+          "ok",
+          "warning",
+          "critical",
+          "maintenance",
+          "unknown",
+          "stale"
+        ]
+      },
+      "copy": {
+        "title": "Estado de servicios internos",
+        "messages": {
+          "empty": "No hay servicios configurados.",
+          "error": "No se ha podido cargar el estado de servicios.",
+          "partial": "Algunos servicios no tienen datos completos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "texto + color para el estado",
+          "ARIA labels en refresh y enlaces",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "apilar tarjetas y truncar descripción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "render tarjetas",
+          "refresh manual"
+        ],
+        "v1": [
+          "auto refresh",
+          "stale logic",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "JSON source opcional"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Base y origen de datos"
+        },
+        {
+          "id": "EP-02",
+          "name": "Modelado y evaluación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver origen SharePoint List"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mapear servicio y calcular stale"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar tarjetas de servicio"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y telemetría"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear ServiceStatusRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear mapper y stale evaluator"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ServiceStatusCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Añadir refresh manual/auto"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-04",
+          "name": "Unit tests y component tests"
+        }
+      ],
+      "dependencies": [
+        {
+          "from": "US-01",
+          "to": "US-02",
+          "type": "blocks"
+        },
+        {
+          "from": "US-02",
+          "to": "US-03",
+          "type": "blocks"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "ServiceStatusList",
+          "type": "SharePointList",
+          "purpose": "estado consolidado de servicios"
+        }
+      ],
+      "entities": {
+        "ServiceStatus": {
+          "id": "string",
+          "name": "string",
+          "status": "string",
+          "criticality": "string",
+          "summary": "string",
+          "updatedAt": "string|null",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "status": "mapear valor de origen a ok|warning|critical|maintenance|unknown",
+        "updatedAt": "parse datetime ISO"
+      },
+      "validationRules": [
+        "name requerido",
+        "status requerido",
+        "updatedAt opcional",
+        "detailUrl opcional"
+      ],
+      "accuracyPolicy": {
+        "exact": "estado leído directamente de la fuente",
+        "partial": "faltan campos no críticos"
+      },
+      "fallbacks": [
+        "status no reconocido => unknown",
+        "updatedAt ausente => partialData"
+      ],
+      "exampleOutput": {
+        "services": [
+          {
+            "name": "VPN",
+            "status": "warning",
+            "criticality": "high",
+            "summary": "Degradación intermitente",
+            "updatedAt": "2026-03-21T09:30:00Z",
+            "detailUrl": "/sites/it/status/vpn"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "ok",
+          "critical",
+          "maintenance",
+          "unknown",
+          "stale",
+          "lista vacía"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "InternalServicesStatusWebPart",
+        "pattern": "SPFx React + repository + mapper + evaluator",
+        "components": [
+          "InternalServicesStatus",
+          "ServiceStatusCard",
+          "StatusLegend",
+          "RefreshActions"
+        ],
+        "services": [
+          "InternalServicesStatusService",
+          "ServiceStatusMapper",
+          "StalenessEvaluator"
+        ],
+        "repositories": [
+          "ServiceStatusRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "autoRefreshSeconds": "number",
+          "showOnlyCritical": "boolean"
+        },
+        "IServiceStatus": {
+          "id": "string",
+          "name": "string",
+          "status": "ok|warning|critical|maintenance|unknown",
+          "criticality": "low|medium|high",
+          "summary": "string",
+          "updatedAt": "string|null",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "services": "IServiceStatus[]",
+          "hasPartialData": "boolean",
+          "lastUpdated": "string|null"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen de datos",
+        "leer registros",
+        "mapear a IServiceStatus",
+        "calcular stale",
+        "renderizar"
+      ],
+      "algorithms": {
+        "stale": "si now-updatedAt supera staleThresholdMinutes => badge stale/unknown",
+        "sort": "critical > warning > maintenance > ok > unknown"
+      },
+      "performance": {
+        "cache": "en memoria por origen",
+        "retry": "1-2 reintentos",
+        "autoRefresh": "timer con cleanup en unmount"
+      },
+      "errorMatrix": [
+        {
+          "condition": "lista no existe",
+          "uiState": "error"
+        },
+        {
+          "condition": "servicio sin updatedAt",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "json inválido",
+          "uiState": "error"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar URLs",
+          "no ejecutar contenido remoto",
+          "mensajes seguros"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "services_loaded",
+          "services_partial",
+          "services_error",
+          "services_refresh"
+        ],
+        "properties": [
+          "sourceType",
+          "serviceCount",
+          "criticalCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "stale evaluator",
+          "sort order",
+          "mapper"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ],
+        "integration": [
+          "sharepoint list flow"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Semáforo de VPN, ERP, CRM, red, impresión, intranet u otros servicios.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

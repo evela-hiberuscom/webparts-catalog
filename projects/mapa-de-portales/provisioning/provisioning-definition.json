@@ -1,0 +1,23 @@
+{
+  "projectSlug": "mapa-de-portales",
+  "archetype": "general",
+  "rowId": "recw0vit4QRbwI96D",
+  "sources": [
+    {
+      "name": "PortalMapList",
+      "type": "SharePointList",
+      "purpose": "estructura de hubs/sites/áreas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra estructura de portales configurada.",
+    "Permite abrir nodos válidos.",
+    "Representa niveles o grupos correctamente.",
+    "Funciona con datos parciales."
+  ],
+  "businessRules": [
+    "Si un nodo no tiene padre conocido, puede mostrarse como raíz o no clasificado.",
+    "Si falta URL, el nodo sigue siendo informativo pero no accionable.",
+    "Los hubs o nodos destacados pueden ir primero."
+  ]
+}

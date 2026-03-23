@@ -1,0 +1,98 @@
+{
+  "projectSlug": "mis-documentos-utiles",
+  "rowId": "rec7KUlg0cJxKr35x",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir acceder a documentos frecuentes con el menor esfuerzo cognitivo posible.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros opcionales",
+        "lista o grid de documentos"
+      ],
+      "priorityOrder": [
+        "destacados",
+        "actualizados recientemente",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "grid o lista rica"
+      },
+      "narrow": {
+        "items": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton documents"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "documents list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin documentos útiles"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "lista con metadatos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "categoria",
+        "updatedAt",
+        "owner",
+        "openAction"
+      ],
+      "badges": [
+        "destacado",
+        "frecuente",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mis documentos útiles",
+      "messages": {
+        "empty": "No hay documentos útiles visibles.",
+        "error": "No se han podido cargar tus documentos útiles."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "enlaces accesibles",
+        "texto visible para badges",
+        "fechas localizadas"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción"
+    }
+  }
+}

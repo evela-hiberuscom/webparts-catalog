@@ -1,0 +1,28 @@
+{
+  "projectSlug": "conoce-al-equipo",
+  "archetype": "general",
+  "rowId": "recDe4Jh2iLvXpfIB",
+  "sources": [
+    {
+      "name": "TeamMembersList",
+      "type": "SharePointList",
+      "purpose": "presentación de miembros del equipo"
+    },
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "datos básicos de perfil"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra miembros del equipo configurados.",
+    "Permite abrir perfil/contacto cuando existe.",
+    "Ordena según configuración.",
+    "Funciona con metadatos parciales."
+  ],
+  "businessRules": [
+    "Si falta foto, mostrar avatar por defecto o iniciales.",
+    "Si falta bio, el miembro sigue siendo válido.",
+    "Si falta enlace de perfil/contacto, la tarjeta sigue siendo informativa."
+  ]
+}

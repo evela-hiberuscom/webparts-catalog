@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mis-accesos-recientes-client-side-solution",
+    "id": "b7a2a334-f319-4540-abbb-559c576f85ba",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mis-accesos-recientes description"
+      },
+      "longDescription": {
+        "default": "mis-accesos-recientes description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mis-accesos-recientes Feature",
+        "description": "The feature that activates elements of the mis-accesos-recientes solution.",
+        "id": "9e5c2e40-ab40-48c5-aed2-5ad487a15a73",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mis-accesos-recientes.sppkg"
+  }
+}

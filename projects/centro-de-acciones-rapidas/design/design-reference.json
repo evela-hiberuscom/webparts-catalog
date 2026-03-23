@@ -1,0 +1,97 @@
+{
+  "projectSlug": "centro-de-acciones-rapidas",
+  "rowId": "recAqLibyGniOU3P7",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir lanzar acciones corporativas frecuentes con una interfaz clara y de baja fricción.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros opcionales",
+        "grid de acciones"
+      ],
+      "priorityOrder": [
+        "acciones prioritarias",
+        "categorías frecuentes",
+        "descripción breve"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 4 columnas"
+      },
+      "narrow": {
+        "cards": "grid 2 columnas o lista"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton action cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "action cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin acciones"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con metadatos incompletos"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "icono",
+        "titulo",
+        "descripcion",
+        "categoria",
+        "accionAbrir"
+      ],
+      "badges": [
+        "prioritaria",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Centro de acciones rápidas",
+      "messages": {
+        "empty": "No hay acciones configuradas.",
+        "error": "No se han podido cargar las acciones rápidas."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "botones/links claramente accesibles",
+        "texto visible además de icono",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar icono, título y acción"
+    }
+  }
+}

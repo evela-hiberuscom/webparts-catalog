@@ -1,0 +1,34 @@
+{
+  "projectSlug": "mis-tareas-y-pendientes",
+  "archetype": "general",
+  "rowId": "recaaTsZcFG27SukW",
+  "sources": [
+    {
+      "name": "Planner",
+      "type": "Connector/API",
+      "purpose": "tareas planificadas"
+    },
+    {
+      "name": "ToDo",
+      "type": "Connector/API",
+      "purpose": "tareas personales"
+    },
+    {
+      "name": "SharePointTasksList",
+      "type": "SharePointList",
+      "purpose": "tareas locales"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra tareas agregadas correctamente.",
+    "Marca vencidas cuando procede.",
+    "Permite abrir el origen.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Tareas completadas se ocultan por defecto salvo configuración contraria.",
+    "Tarea vencida si dueDate < now y no completed.",
+    "Si faltan fechas, la tarea sigue visible pero sin clasificación temporal estricta.",
+    "Las tareas se agrupan lógicamente por vencida, hoy, próxima, sin fecha cuando el dato exista."
+  ]
+}

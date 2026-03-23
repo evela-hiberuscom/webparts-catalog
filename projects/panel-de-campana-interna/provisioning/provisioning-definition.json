@@ -1,0 +1,23 @@
+{
+  "projectSlug": "panel-de-campana-interna",
+  "archetype": "general",
+  "rowId": "recMvcV5gD4jGNDma",
+  "sources": [
+    {
+      "name": "CampaignsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de campañas internas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra campaña vigente o prioritaria correctamente.",
+    "Permite abrir CTA cuando exista.",
+    "Respeta vigencia y modo de rotación.",
+    "Funciona con metadatos parciales."
+  ],
+  "businessRules": [
+    "Solo se muestra la campaña activa o la de mayor prioridad entre las vigentes según política.",
+    "Si falta CTA URL, la campaña sigue siendo informativa pero no accionable.",
+    "Las campañas expiradas no se muestran salvo configuración específica."
+  ]
+}

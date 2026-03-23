@@ -1,0 +1,23 @@
+{
+  "projectSlug": "estado-de-servicios-internos",
+  "archetype": "analytics",
+  "rowId": "rec4IT47Qufu125ug",
+  "sources": [
+    {
+      "name": "ServiceStatusList",
+      "type": "SharePointList",
+      "purpose": "estado consolidado de servicios"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra servicios configurados con estado correcto.",
+    "Permite refresh manual.",
+    "Marca stale cuando corresponde.",
+    "Abre enlace de detalle cuando existe."
+  ],
+  "businessRules": [
+    "Si updatedAt supera un umbral configurable, el servicio pasa a stale/unknown visual.",
+    "Si faltan campos no críticos, el servicio sigue renderizando con unknown o partialData.",
+    "Maintenance prevalece visualmente sobre ok y warning."
+  ]
+}

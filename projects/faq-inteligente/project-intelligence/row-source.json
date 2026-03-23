@@ -1,0 +1,524 @@
+{
+  "rowId": "recKLSpIPYfJdlGsd",
+  "name": "FAQ inteligente",
+  "slug": "faq-inteligente",
+  "artifactType": "SPFxWebPart",
+  "archetype": "knowledge",
+  "waveNumber": 11,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "FaqList",
+      "type": "SharePointList",
+      "purpose": "catálogo de preguntas frecuentes"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "smart-faq",
+        "name": "FAQ inteligente",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta preguntas frecuentes por tema, categoría o audiencia, con buscador ligero y respuestas accionables.",
+        "productGoal": "Reducir dudas repetidas y facilitar autoservicio dentro de la intranet."
+      },
+      "problem": {
+        "business": "Las preguntas frecuentes se repiten y consumen tiempo de soporte.",
+        "operational": "La información suele estar dispersa o poco encontrable."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar FAQs por categoría o búsqueda",
+          "Permitir expandir respuestas rápidamente",
+          "Enlazar a recursos o procesos relacionados"
+        ],
+        "secondary": [
+          "Soportar audiencias",
+          "Medir preguntas vistas",
+          "Destacar FAQs críticas"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "resolver dudas comunes rápido"
+          ]
+        },
+        {
+          "role": "Soporte/Backoffice",
+          "needs": [
+            "disminuir preguntas repetidas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de FAQs",
+          "Categorías",
+          "Buscador simple",
+          "Expand/collapse",
+          "Enlaces relacionados"
+        ],
+        "out": [
+          "búsqueda semántica compleja",
+          "chat conversacional integrado",
+          "edición desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Buscar una duda rápida",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Explorar FAQs por categoría",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir recurso relacionado",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar FAQs configuradas con pregunta y respuesta."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir filtrado por categoría y búsqueda simple."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir expandir/contraer respuestas."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir enlaces relacionados."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy fácil de leer y navegar."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Carga ligera apta para páginas generales."
+        }
+      ],
+      "businessRules": [
+        "Si una FAQ no tiene categoría, va a General.",
+        "Si falta enlace relacionado, la FAQ sigue siendo válida.",
+        "Las FAQs marcadas como destacadas pueden priorizarse visualmente."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "enableSearch": {
+          "type": "boolean",
+          "default": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 50,
+          "min": 1,
+          "max": 200
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra FAQs configuradas.",
+        "Permite buscar y filtrar.",
+        "Expande y contrae respuestas.",
+        "Abre enlaces cuando existan."
+      ],
+      "edgeCases": [
+        "faq sin categoría",
+        "faq sin enlace",
+        "respuesta muy larga",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza FAQs con búsqueda y filtros",
+        "Incluye tests base de filtrado y expand/collapse"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir encontrar y leer una respuesta frecuente en pocos segundos sin abandonar la página.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "buscador",
+          "categorías",
+          "lista acordeón"
+        ],
+        "priorityOrder": [
+          "destacadas",
+          "coincidencias de búsqueda",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "list": "acordeón con buscador superior"
+        },
+        "narrow": {
+          "list": "acordeón compacto"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton faq items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "search",
+            "filters",
+            "accordion"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin FAQs"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items con datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "pregunta",
+          "respuesta",
+          "categoria",
+          "relatedLink"
+        ],
+        "badges": [
+          "destacada",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "FAQ inteligente",
+        "messages": {
+          "empty": "No hay preguntas frecuentes configuradas.",
+          "error": "No se han podido cargar las FAQs."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "acordeón accesible por teclado",
+          "roles aria correctos",
+          "texto visible en estados"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar pregunta y expandir respuesta bajo demanda"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer FAQs",
+          "render acordeón",
+          "filtro por categoría"
+        ],
+        "v1": [
+          "buscador",
+          "featured items",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Búsqueda y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI acordeón"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer FAQs desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Aplicar búsqueda y filtros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Renderizar acordeón accesible"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear FaqRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar búsqueda y filtros"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear FaqAccordionItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "FaqList",
+          "type": "SharePointList",
+          "purpose": "catálogo de preguntas frecuentes"
+        }
+      ],
+      "entities": {
+        "Faq": {
+          "id": "string",
+          "question": "string",
+          "answer": "string|null",
+          "category": "string|null",
+          "relatedUrl": "string|null",
+          "featured": "boolean|null"
+        }
+      },
+      "mappings": {
+        "category": "string o General",
+        "featured": "boolean default false"
+      },
+      "validationRules": [
+        "question requerida",
+        "answer recomendada"
+      ],
+      "accuracyPolicy": {
+        "exact": "pregunta, respuesta y categoría presentes",
+        "partial": "falta answer, category o relatedUrl"
+      },
+      "fallbacks": [
+        "sin category => General",
+        "sin relatedUrl => sin acción secundaria",
+        "sin answer => item parcial"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "question": "¿Cómo pido vacaciones?",
+            "answer": "Desde el portal RRHH...",
+            "category": "RRHH",
+            "relatedUrl": "/sites/hr/vacaciones"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "faq básica",
+          "sin categoría",
+          "sin enlace",
+          "sin respuesta",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "SmartFaqWebPart",
+        "pattern": "SPFx React + repository + search/filter service",
+        "components": [
+          "SmartFaq",
+          "FaqSearchBar",
+          "FaqCategoryFilter",
+          "FaqAccordionItem"
+        ],
+        "services": [
+          "FaqCatalogService",
+          "FaqFilterService"
+        ],
+        "repositories": [
+          "FaqRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "enableSearch": "boolean",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "IFaqItem": {
+          "id": "string",
+          "question": "string",
+          "answer": "string|null",
+          "category": "string|null",
+          "relatedUrl": "string|null",
+          "featured": "boolean"
+        },
+        "IViewModel": {
+          "items": "IFaqItem[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer FAQs",
+        "normalizar categorías y featured",
+        "aplicar búsqueda y filtro",
+        "renderizar acordeón"
+      ],
+      "algorithms": {
+        "filter": "por categoría y texto sobre question/answer",
+        "sort": "featured primero + question asc"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos",
+        "limit": "maxItems tras filtro"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin answer",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin category",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar relatedUrl",
+          "no renderizar HTML inseguro en respuestas"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "faq_loaded",
+          "faq_partial",
+          "faq_error",
+          "faq_expanded",
+          "faq_search_used"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "queryLength",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "text filter",
+          "category filter",
+          "sorting"
+        ],
+        "component": [
+          "accordion expand/collapse",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento. Preguntas frecuentes por tema, área o proceso, con buscador y categorías.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

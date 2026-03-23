@@ -1,0 +1,73 @@
+{
+  "projectSlug": "asistente-contextual-de-pagina",
+  "rowId": "reciRdVyy2qbjxn0a",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Ayudar justo cuando el usuario lo necesita, sin interrumpir ni ensuciar la página.",
+    "informationArchitecture": {
+      "zones": [
+        "trigger o bloque visible",
+        "mensaje contextual",
+        "links relacionados"
+      ],
+      "priorityOrder": [
+        "ayuda principal",
+        "siguiente paso",
+        "link ampliado"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "panel": "card o callout contextual"
+      },
+      "narrow": {
+        "panel": "compacto colapsable"
+      }
+    },
+    "states": [
+      {
+        "id": "collapsed",
+        "ui": [
+          "hint compacto"
+        ]
+      },
+      {
+        "id": "expanded",
+        "ui": [
+          "mensaje y links"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin ayuda disponible o oculto"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Asistente contextual de página",
+      "messages": {
+        "empty": "No hay ayuda contextual disponible.",
+        "error": "No se ha podido cargar la ayuda contextual."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "botón expand/collapse accesible",
+        "texto claro",
+        "links accesibles"
+      ]
+    }
+  }
+}

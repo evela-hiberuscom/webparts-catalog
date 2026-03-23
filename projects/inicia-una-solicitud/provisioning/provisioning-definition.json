@@ -1,0 +1,23 @@
+{
+  "projectSlug": "inicia-una-solicitud",
+  "archetype": "general",
+  "rowId": "recuGCCruwmSSEE6F",
+  "sources": [
+    {
+      "name": "RequestsCatalogList",
+      "type": "SharePointList",
+      "purpose": "catálogo de solicitudes"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra solicitudes configuradas.",
+    "Permite abrir el flujo correcto.",
+    "Filtra por categoría si existe.",
+    "Muestra prerequisitos cuando existan."
+  ],
+  "businessRules": [
+    "Si una solicitud no tiene enlace principal, no debe mostrarse como accionable.",
+    "Si hay prerequisitos, deben mostrarse de forma breve y visible.",
+    "Las categorías se usan para ordenar y filtrar cuando existen."
+  ]
+}

@@ -1,0 +1,549 @@
+{
+  "rowId": "reczv9XSDJN23xEsz",
+  "name": "Accesos rápidos por audiencia",
+  "slug": "accesos-rapidos-por-audiencia",
+  "artifactType": "SPFxWebPart",
+  "archetype": "audience",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "AudienceLinksList",
+      "type": "SharePointList",
+      "purpose": "catálogo de enlaces segmentados"
+    },
+    {
+      "name": "UserContext",
+      "type": "Context/Directory",
+      "purpose": "atributos del usuario actual"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "audience-quick-links",
+        "name": "Accesos rápidos por audiencia",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra accesos distintos según perfil, área, país o grupos del usuario para personalizar la intranet.",
+        "productGoal": "Ofrecer navegación contextual y relevante según audiencia sin duplicar páginas innecesariamente."
+      },
+      "problem": {
+        "business": "No todos los accesos son relevantes para todos los perfiles.",
+        "operational": "Sin segmentación, la portada se satura o los usuarios no encuentran lo que les corresponde."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar accesos según audiencia",
+          "Reducir ruido visual",
+          "Mantener una experiencia personalizada y reusable"
+        ],
+        "secondary": [
+          "Soportar fallback genérico",
+          "Permitir categorías y prioridad dentro de cada audiencia"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver accesos que aplican a su contexto"
+          ]
+        },
+        {
+          "role": "Owner intranet",
+          "needs": [
+            "publicar enlaces segmentados sin multiplicar páginas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de enlaces con reglas de audiencia",
+          "Resolución de audiencia actual",
+          "Fallback a genérico",
+          "Filtros y orden básicos"
+        ],
+        "out": [
+          "motor complejo de reglas dinámicas externas",
+          "personalización por comportamiento en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Mostrar accesos según departamento",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Mostrar accesos por país o rol",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Fallback a genérico cuando no hay coincidencia",
+          "actor": "Owner intranet"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Resolver audiencia del usuario actual con los atributos configurados o disponibles."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar enlaces correspondientes a esa audiencia y fallback genérico cuando aplique."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir enlaces correctamente."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros por categoría cuando existan."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "La resolución de audiencia debe ser rápida y estable."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura/launcher en V1."
+        }
+      ],
+      "businessRules": [
+        "Si un enlace no tiene reglas de audiencia, se considera genérico.",
+        "Si no hay coincidencia específica, se usan genéricos configurados.",
+        "Si faltan metadatos de audiencia en un enlace, no debe romper el filtrado completo."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "audienceMode": {
+          "type": "enum",
+          "values": [
+            "department",
+            "country",
+            "group",
+            "role",
+            "hybrid"
+          ],
+          "default": "group"
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 20,
+          "min": 1,
+          "max": 100
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra accesos relevantes para la audiencia detectada.",
+        "Usa fallback genérico cuando procede.",
+        "Permite abrir enlaces correctamente.",
+        "Filtra por categoría cuando exista."
+      ],
+      "edgeCases": [
+        "usuario sin atributos esperados",
+        "enlace sin regla de audiencia",
+        "sin enlaces genéricos",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Resuelve audiencia y aplica fallback correctamente",
+        "Incluye tests base de matching y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Mostrar solo los accesos más relevantes para el usuario, sin saturar la interfaz con opciones irrelevantes.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "indicador de audiencia opcional",
+          "grid de accesos"
+        ],
+        "priorityOrder": [
+          "coincidencias exactas",
+          "fallback genérico",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-5 columnas"
+        },
+        "narrow": {
+          "cards": "grid 2 columnas o lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton audience cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "audience hint opcional",
+            "cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin accesos para tu perfil"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con fallback parcial"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "icono",
+          "titulo",
+          "categoria",
+          "audienceBadge opcional",
+          "openAction"
+        ],
+        "badges": [
+          "personalizado",
+          "genérico",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Accesos rápidos por audiencia",
+        "messages": {
+          "empty": "No hay accesos disponibles para tu perfil.",
+          "error": "No se han podido cargar los accesos segmentados."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards accesibles",
+          "texto visible además de iconos"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolver audiencia",
+          "leer enlaces",
+          "render grid"
+        ],
+        "v1": [
+          "fallback genérico",
+          "telemetría",
+          "modo híbrido"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Resolución de audiencia"
+        },
+        {
+          "id": "EP-02",
+          "name": "Matching y fallback"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver audiencia del usuario"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Aplicar matching y fallback"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar grid segmentado"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear AudienceResolver"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar AudienceMatcher"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear AudienceLinksGrid"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "AudienceLinksList",
+          "type": "SharePointList",
+          "purpose": "catálogo de enlaces segmentados"
+        },
+        {
+          "name": "UserContext",
+          "type": "Context/Directory",
+          "purpose": "atributos del usuario actual"
+        }
+      ],
+      "entities": {
+        "AudienceLink": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "icon": "string|null",
+          "openUrl": "string|null",
+          "audiences": "string[]|null",
+          "isGeneric": "boolean|null",
+          "priority": "number|null"
+        }
+      },
+      "mappings": {
+        "audiences": "array normalizado de tokens de audiencia",
+        "isGeneric": "boolean default false"
+      },
+      "validationRules": [
+        "title requerido",
+        "openUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "matching y enlace válidos",
+        "partial": "faltan audiencias, icono o openUrl"
+      },
+      "fallbacks": [
+        "sin audiencias => genérico",
+        "sin icono => icono por defecto",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Portal Comercial",
+            "audiences": [
+              "sales",
+              "es"
+            ],
+            "isGeneric": false,
+            "openUrl": "/sites/sales"
+          },
+          {
+            "title": "Portal General",
+            "audiences": [],
+            "isGeneric": true,
+            "openUrl": "/sites/home"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "exact audience match",
+          "generic fallback",
+          "sin audiencia usuario",
+          "sin url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "AudienceQuickLinksWebPart",
+        "pattern": "SPFx React + audience resolver + repository",
+        "components": [
+          "AudienceQuickLinks",
+          "AudienceLinksGrid"
+        ],
+        "services": [
+          "AudienceLinksService",
+          "AudienceResolver",
+          "AudienceMatcher"
+        ],
+        "repositories": [
+          "AudienceLinksRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "audienceMode": "department|country|group|role|hybrid",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "IAudienceLink": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "icon": "string|null",
+          "openUrl": "string|null",
+          "audiences": "string[]",
+          "isGeneric": "boolean",
+          "priority": "number|null"
+        },
+        "IViewModel": {
+          "items": "IAudienceLink[]",
+          "resolvedAudience": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver audiencia del usuario",
+        "leer catálogo de enlaces",
+        "aplicar matching",
+        "añadir fallback genérico",
+        "ordenar y renderizar"
+      ],
+      "algorithms": {
+        "matching": "coincidencia exacta por audienciaMode o híbrido",
+        "fallback": "incluir enlaces isGeneric cuando no hay coincidencia o además de coincidencias si la política lo permite",
+        "sort": "priority asc/null-last + title asc"
+      },
+      "performance": {
+        "cache": "por usuario y origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin atributos de audiencia",
+          "uiState": "partialData con genéricos"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "sanitizar openUrl",
+          "no exponer atributos sensibles innecesarios en UI"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "audience_links_loaded",
+          "audience_links_partial",
+          "audience_links_error",
+          "audience_link_opened"
+        ],
+        "properties": [
+          "audienceMode",
+          "itemCount",
+          "matchedCount",
+          "genericCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "audience matching",
+          "fallback logic",
+          "sorting"
+        ],
+        "component": [
+          "render grid",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación. Muestra enlaces distintos según departamento, país, rol o grupo Microsoft 365.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

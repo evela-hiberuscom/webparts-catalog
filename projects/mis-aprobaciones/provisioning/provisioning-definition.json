@@ -1,0 +1,28 @@
+{
+  "projectSlug": "mis-aprobaciones",
+  "archetype": "general",
+  "rowId": "reckRsMhPOJPL7QqX",
+  "sources": [
+    {
+      "name": "Approvals",
+      "type": "Connector/API",
+      "purpose": "aprobaciones pendientes"
+    },
+    {
+      "name": "SharePointApprovalsList",
+      "type": "SharePointList",
+      "purpose": "aprobaciones locales"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra aprobaciones pendientes correctamente.",
+    "Marca vencidas cuando aplica.",
+    "Permite abrir el detalle.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Una aprobación vencida se marca si dueDate < now y status pendiente.",
+    "Completadas se ocultan por defecto.",
+    "Si falta dueDate, se ordena por createdDate o prioridad de origen."
+  ]
+}

@@ -1,0 +1,496 @@
+{
+  "rowId": "recDG2ZChOZvUD8ry",
+  "name": "A-Z corporativo",
+  "slug": "a-z-corporativo",
+  "artifactType": "SPFxWebPart",
+  "archetype": "knowledge",
+  "waveNumber": 10,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "AZIndexList",
+      "type": "SharePointList",
+      "purpose": "índice alfabético de recursos o conceptos"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "corporate-a-z",
+        "name": "A-Z corporativo",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Organiza recursos, enlaces o términos corporativos en un índice alfabético simple para exploración rápida.",
+        "productGoal": "Facilitar descubrimiento ordenado cuando el usuario no sabe exactamente qué buscar pero sí puede navegar por letra o nombre."
+      },
+      "problem": {
+        "business": "No toda la navegación empieza con una búsqueda precisa; a veces el usuario necesita explorar por nombre.",
+        "operational": "Un índice alfabético reduce fricción para localizar recursos o conceptos dispersos."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar un índice A-Z",
+          "Permitir navegar por letra",
+          "Abrir el recurso o ver la entrada"
+        ],
+        "secondary": [
+          "Soportar categorías opcionales",
+          "Servir para recursos o conceptos"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "explorar recursos por nombre"
+          ]
+        },
+        {
+          "role": "Owner intranet",
+          "needs": [
+            "mantener un índice simple de referencia"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Índice alfabético",
+          "Entradas con título/definición/enlace",
+          "Filtro por letra"
+        ],
+        "out": [
+          "búsqueda avanzada",
+          "clasificación semántica compleja"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Navegar por letra",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir una entrada indexada",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar entradas ordenadas alfabéticamente."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir filtrar por letra inicial."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir la entrada o recurso cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Muy ligero y escaneable."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe funcionar bien con listas medianas o grandes."
+        }
+      ],
+      "businessRules": [
+        "Si una entrada no tiene letra válida, puede ir a # u Others.",
+        "Las entradas sin URL siguen siendo informativas.",
+        "El orden principal es alfabético por título."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "showAlphabetNav": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 500,
+          "min": 1,
+          "max": 5000
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra entradas ordenadas.",
+        "Permite navegar por letra.",
+        "Abre recursos cuando existe URL.",
+        "Funciona con entradas parciales."
+      ],
+      "edgeCases": [
+        "entrada sin letra",
+        "sin URL",
+        "sin descripción",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza índice A-Z correctamente",
+        "Incluye tests base de ordenación y navegación alfabética"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir explorar un índice corporativo de forma intuitiva y rápida.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "barra alfabética",
+          "lista de entradas"
+        ],
+        "priorityOrder": [
+          "letra seleccionada",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "index": "barra A-Z",
+          "list": "lista agrupada por letra"
+        },
+        "narrow": {
+          "index": "compacto/desplazable",
+          "list": "vertical simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton a-z list"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "alpha nav",
+            "grouped entries"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin entradas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "entradas parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "descripcionCorta",
+          "letter",
+          "openAction"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "A-Z corporativo",
+        "messages": {
+          "empty": "No hay entradas configuradas.",
+          "error": "No se ha podido cargar el índice corporativo."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "barra alfabética accesible",
+          "lista agrupada comprensible",
+          "acciones accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y agrupación por letra"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer entradas",
+          "ordenar",
+          "render agrupado"
+        ],
+        "v1": [
+          "barra A-Z",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Índice alfabético"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer entradas del índice"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Construir índice y agrupación"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista agrupada y A-Z"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear AZRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar AZIndexBuilder"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear AZNav y grouped list"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "AZIndexList",
+          "type": "SharePointList",
+          "purpose": "índice alfabético de recursos o conceptos"
+        }
+      ],
+      "entities": {
+        "AZEntry": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "letter": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "letter": "derivada de title si no viene informada"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title y letter válidos",
+        "partial": "falta description o openUrl"
+      },
+      "fallbacks": [
+        "sin letter => derivar de title o #",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Beneficios",
+            "description": "Información sobre beneficios",
+            "letter": "B",
+            "openUrl": "/sites/hr/beneficios"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "normal A-Z",
+          "entry #",
+          "sin URL",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "CorporateAZWebPart",
+        "pattern": "SPFx React + repository + alpha index builder",
+        "components": [
+          "CorporateAZ",
+          "AZNav",
+          "AZGroupedList",
+          "AZEntryItem"
+        ],
+        "services": [
+          "AZCatalogService",
+          "AZIndexBuilder"
+        ],
+        "repositories": [
+          "AZRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "showAlphabetNav": "boolean",
+          "maxItems": "number"
+        },
+        "IAZEntry": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "letter": "string",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IAZEntry[]",
+          "letters": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer entradas",
+        "normalizar letra inicial",
+        "ordenar",
+        "construir índice",
+        "renderizar"
+      ],
+      "algorithms": {
+        "letter": "primera letra alfabética o #",
+        "sort": "title asc",
+        "group": "por letter"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin openUrl",
+          "uiState": "ready/partialData"
+        },
+        {
+          "condition": "sin title válido",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "az_loaded",
+          "az_partial",
+          "az_error",
+          "az_entry_opened",
+          "az_letter_selected"
+        ],
+        "properties": [
+          "itemCount",
+          "selectedLetter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "alpha index builder",
+          "letter normalization",
+          "sort/grouping"
+        ],
+        "component": [
+          "grouped list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación. Glosario alfabético de enlaces, conceptos y recursos frecuentes.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

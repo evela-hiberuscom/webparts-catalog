@@ -1,0 +1,23 @@
+{
+  "projectSlug": "kpi-mini-cards",
+  "archetype": "analytics",
+  "rowId": "recHAX1V79Y7kqR0Y",
+  "sources": [
+    {
+      "name": "KpiList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "métricas clave"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra KPIs configurados correctamente.",
+    "Respeta orden y formato por KPI.",
+    "Muestra tendencia o comparación cuando existe.",
+    "Permite abrir detalle cuando existe URL."
+  ],
+  "businessRules": [
+    "Cada KPI puede tener su propia unidad y umbral.",
+    "Si falta comparación o tendencia, el KPI sigue siendo válido.",
+    "Los KPIs se ordenan por prioridad configurada o por orden de origen."
+  ]
+}

@@ -1,0 +1,291 @@
+{
+  "rowId": "recaNnaAAvzOvq1Kv",
+  "name": "Ruta guiada",
+  "slug": "ruta-guiada",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 9,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "GuidedRouteList",
+      "type": "SharePointList|StaticConfig",
+      "purpose": "pasos de ruta"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "guided-route",
+        "name": "Ruta guiada",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta un pequeño recorrido paso a paso por contenidos, recursos o acciones recomendadas según un objetivo concreto.",
+        "productGoal": "Ayudar al usuario a avanzar por una secuencia útil sin perderse."
+      },
+      "problem": {
+        "business": "En algunos procesos o páginas, el usuario no sabe por dónde empezar ni cuál es el siguiente paso útil.",
+        "operational": "Se necesita una pieza de orientación simple, no un wizard completo."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar una secuencia guiada de pasos o recursos",
+          "Permitir abrir cada paso",
+          "Servir para onboarding, autoservicio o campañas"
+        ],
+        "secondary": [
+          "Resaltar progreso de lectura o navegación"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "seguir un recorrido claro"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Lista ordenada de pasos",
+          "Descripción breve",
+          "CTA por paso"
+        ],
+        "out": [
+          "wizard transaccional complejo"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar pasos ordenados."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir abrir cada paso."
+        },
+        {
+          "id": "RF-03",
+          "text": "Gestionar ready, empty y error."
+        }
+      ],
+      "businessRules": [
+        "El orden es explícito por sortOrder.",
+        "Si un paso no tiene URL sigue siendo informativo."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "StaticConfig",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra la secuencia configurada.",
+        "Permite abrir pasos válidos."
+      ],
+      "edgeCases": [
+        "paso sin URL",
+        "sin pasos"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza ruta guiada correctamente"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Guiar al usuario con una secuencia clara y visualmente poco intimidante.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "pasos ordenados"
+        ],
+        "priorityOrder": [
+          "primer paso",
+          "resto en orden"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "timeline o lista secuencial"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "steps list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin ruta"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Ruta guiada",
+        "messages": {
+          "empty": "No hay ruta disponible."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "pasos numerados semánticamente",
+          "links accesibles"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "load steps",
+          "sort",
+          "render route"
+        ],
+        "hardening": [
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Contenido ordenado"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer pasos"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar ruta"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "GuidedRouteList",
+          "type": "SharePointList|StaticConfig",
+          "purpose": "pasos de ruta"
+        }
+      ],
+      "entities": {
+        "RouteStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "openUrl": "string|null",
+          "sortOrder": "number|null"
+        }
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "fallbacks": [
+        "sin URL => informativo"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Lee la guía",
+            "sortOrder": 1,
+            "openUrl": "/sites/docs/guia"
+          }
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "GuidedRouteWebPart",
+        "pattern": "SPFx React + ordered content repository",
+        "components": [
+          "GuidedRoute",
+          "RouteStepItem"
+        ],
+        "services": [
+          "GuidedRouteService"
+        ],
+        "repositories": [
+          "GuidedRouteRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|StaticConfig|JsonUrl",
+          "listTitleOrUrl": "string"
+        },
+        "IRouteStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "openUrl": "string|null",
+          "sortOrder": "number|null"
+        }
+      },
+      "executionFlow": [
+        "load steps",
+        "sort by sortOrder",
+        "render"
+      ],
+      "testing": {
+        "unit": [
+          "step sorting"
+        ],
+        "component": [
+          "render ready/empty"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa/Conocimiento. Wizard de 3 a 5 pasos para procesos internos complejos.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

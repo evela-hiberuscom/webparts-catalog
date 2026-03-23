@@ -1,0 +1,28 @@
+{
+  "projectSlug": "mis-documentos-utiles",
+  "archetype": "general",
+  "rowId": "rec7KUlg0cJxKr35x",
+  "sources": [
+    {
+      "name": "SharePointLibrary",
+      "type": "SharePointLibrary",
+      "purpose": "documentos frecuentes o destacados"
+    },
+    {
+      "name": "UsefulDocumentsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de documentos útiles"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra documentos configurados.",
+    "Permite abrir documento.",
+    "Filtra por categoría si existe.",
+    "Funciona con metadatos parciales."
+  ],
+  "businessRules": [
+    "Si falta categoría, el documento sigue visible en grupo general.",
+    "Si el enlace no es accesible, el documento puede ocultarse o mostrarse sin acción según política.",
+    "Los documentos se ordenan por prioridad del origen o actualización reciente."
+  ]
+}

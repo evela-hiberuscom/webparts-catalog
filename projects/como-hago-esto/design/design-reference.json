@@ -1,0 +1,97 @@
+{
+  "projectSlug": "como-hago-esto",
+  "rowId": "reca1ofHWPtHAXRcX",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Resolver dudas procedimentales con guías cortas, claras y sin sobrecargar al usuario.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "categorías",
+        "lista de guías",
+        "pasos expandidos"
+      ],
+      "priorityOrder": [
+        "guías destacadas",
+        "coincidencias filtradas",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "cards o acordeón con pasos"
+      },
+      "narrow": {
+        "items": "lista compacta expandible"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton guides"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "guides list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin guías"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "guías sin pasos completos"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "resumen",
+        "categoria",
+        "steps",
+        "relatedLink"
+      ],
+      "badges": [
+        "destacada",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Cómo hago esto",
+      "messages": {
+        "empty": "No hay guías disponibles.",
+        "error": "No se han podido cargar las guías."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "acordeón/lista accesible",
+        "pasos numerados semánticamente"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, resumen y expandir pasos bajo demanda"
+    }
+  }
+}

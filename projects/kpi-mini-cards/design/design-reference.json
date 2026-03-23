@@ -1,0 +1,98 @@
+{
+  "projectSlug": "kpi-mini-cards",
+  "rowId": "recHAX1V79Y7kqR0Y",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir captar el estado de unas pocas métricas clave en menos de 10 segundos.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera opcional",
+        "grid de mini-cards"
+      ],
+      "priorityOrder": [
+        "prioridad configurada",
+        "severidad visual",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-6 columnas"
+      },
+      "narrow": {
+        "cards": "grid 2 columnas o vertical"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton kpi cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "kpi cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin KPIs"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con tendencia o comparación ausente"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "label",
+        "value",
+        "unit",
+        "trend",
+        "comparison",
+        "openAction"
+      ],
+      "badges": [
+        "ok",
+        "warning",
+        "critical",
+        "unknown",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "KPI mini-cards",
+      "messages": {
+        "empty": "No hay KPIs configurados.",
+        "error": "No se han podido cargar los KPIs."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "no depender solo del color para estado/tendencia",
+        "valores legibles",
+        "cards accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar label, value y trend"
+    }
+  }
+}

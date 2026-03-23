@@ -1,0 +1,109 @@
+{
+  "projectSlug": "turnos-guardias-o-disponibilidad",
+  "rowId": "reclRJcfIJeEsExJe",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Responder en segundos a la pregunta: quién cubre esto ahora y quién lo cubrirá después.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "guardia activa",
+        "próximas coberturas",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "activo",
+        "conflicto",
+        "sinCobertura",
+        "próximos"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "activeCard": "destacada en cabecera",
+        "nextList": "lista lateral o inferior"
+      },
+      "narrow": {
+        "activeCard": "arriba",
+        "nextList": "apilada"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton active card",
+          "skeleton next list"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "active coverage card",
+          "next coverage list",
+          "actions"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin turnos configurados"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner discreto",
+          "cards con campos faltantes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "acción refrescar"
+        ]
+      }
+    ],
+    "cardModel": {
+      "activeFields": [
+        "servicio",
+        "personaOEquipo",
+        "horaInicio",
+        "horaFin",
+        "contacto",
+        "estado"
+      ],
+      "nextFields": [
+        "servicio",
+        "personaOEquipo",
+        "inicio",
+        "fin"
+      ]
+    },
+    "copy": {
+      "title": "Turnos, guardias o disponibilidad",
+      "messages": {
+        "empty": "No hay turnos o guardias configurados.",
+        "error": "No se ha podido cargar la disponibilidad actual.",
+        "partial": "Algunos turnos no tienen toda la información necesaria."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "estado con texto además de color",
+        "acciones de contacto con aria-label",
+        "horarios legibles y localizados"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar tarjeta activa y resumir futuras coberturas"
+    }
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "rowId": "recmF28EPXUEOIwYm",
+  "name": "Resumen de noticias",
+  "slug": "resumen-de-noticias",
+  "artifactType": "SPFxWebPart",
+  "archetype": "summary",
+  "waveNumber": 13,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SharePointNews",
+      "type": "SharePointNews",
+      "purpose": "noticias publicadas"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "news-summary",
+        "name": "Resumen de noticias",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta un resumen compacto de noticias relevantes en formato tarjetas o lista ligera.",
+        "productGoal": "Facilitar que el usuario se ponga al día con pocas piezas destacadas sin leer un feed completo."
+      },
+      "problem": {
+        "business": "Un feed largo de noticias puede ser excesivo para páginas con poco espacio.",
+        "operational": "Se necesita una pieza breve y reutilizable para resaltar pocas noticias clave."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar 3-5 noticias destacadas",
+          "Permitir abrir la noticia completa",
+          "Ordenar por fecha o prioridad editorial"
+        ],
+        "secondary": [
+          "Mostrar imagen opcional",
+          "Etiqueta o categoría",
+          "Resumir visualmente novedades"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ponerse al día rápidamente"
+          ]
+        },
+        {
+          "role": "Comunicaciones",
+          "needs": [
+            "destacar pocas noticias clave"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Tarjetas/lista de noticias",
+          "Título/resumen/fecha/imagen opcional",
+          "CTA abrir noticia"
+        ],
+        "out": [
+          "feed editorial completo",
+          "comentarios o reacciones en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar un conjunto limitado de noticias."
+        },
+        {
+          "id": "RF-02",
+          "text": "Ordenar por fecha o destacado."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir la noticia completa."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Las noticias destacadas pueden mostrarse primero.",
+        "Si falta imagen, la noticia sigue siendo válida.",
+        "Si falta resumen, mostrar solo titular y fecha."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointNews",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "SharePointNews"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1,
+          "max": 10
+        },
+        "showImage": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra noticias configuradas.",
+        "Permite abrir noticia.",
+        "Ordena por fecha/destacado."
+      ],
+      "edgeCases": [
+        "sin imagen",
+        "sin resumen",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza resumen de noticias",
+        "Incluye tests base de ordenación y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir al usuario captar el pulso informativo con muy poco tiempo y espacio.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista o tarjetas de noticias"
+        ],
+        "priorityOrder": [
+          "destacadas",
+          "más recientes"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "tarjetas horizontales o grid"
+        },
+        "narrow": {
+          "items": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton news cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "news summary"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin noticias"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "noticias con metadatos incompletos"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "title",
+          "summary",
+          "publishedAt",
+          "image",
+          "openAction"
+        ],
+        "badges": [
+          "destacada",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Resumen de noticias",
+        "messages": {
+          "empty": "No hay noticias disponibles.",
+          "error": "No se han podido cargar las noticias."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "tarjetas accesibles",
+          "fechas localizadas",
+          "imágenes decorativas con alt correcto"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, fecha y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer noticias",
+          "render resumen",
+          "abrir noticia"
+        ],
+        "v1": [
+          "featured",
+          "imagen opcional",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de resumen"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer noticias destacables"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar tarjetas/lista"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear NewsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar ordenación editorial"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear NewsCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SharePointNews",
+          "type": "SharePointNews",
+          "purpose": "noticias publicadas"
+        }
+      ],
+      "entities": {
+        "News": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "publishedAt": "string|null",
+          "imageUrl": "string|null",
+          "featured": "boolean|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "featured": "boolean default false"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "título, fecha y URL presentes",
+        "partial": "faltan summary, imageUrl o featured"
+      },
+      "fallbacks": [
+        "sin imageUrl => tarjeta sin imagen",
+        "sin summary => solo titular",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Nueva política de gastos",
+            "summary": "Se actualiza la política...",
+            "publishedAt": "2026-03-21T08:00:00Z",
+            "openUrl": "/sites/news/gastos"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "featured news",
+          "sin image",
+          "sin summary",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "NewsSummaryWebPart",
+        "pattern": "SPFx React + repository + editorial sorter",
+        "components": [
+          "NewsSummary",
+          "NewsCard"
+        ],
+        "services": [
+          "NewsSummaryService"
+        ],
+        "repositories": [
+          "NewsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointNews|SharePointList|JsonUrl",
+          "listTitleOrUrl": "string|undefined",
+          "maxItems": "number",
+          "showImage": "boolean"
+        },
+        "INewsItem": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "publishedAt": "string|null",
+          "imageUrl": "string|null",
+          "featured": "boolean",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "INewsItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer noticias",
+        "normalizar featured/fecha/imagen",
+        "ordenar",
+        "limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "featured desc + publishedAt desc"
+      },
+      "performance": {
+        "cache": "por origen con TTL corto",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin imageUrl",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin summary",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl e imageUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "news_summary_loaded",
+          "news_summary_partial",
+          "news_summary_error",
+          "news_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "featuredCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "editorial sort",
+          "mapping"
+        ],
+        "component": [
+          "cards render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Muestra 3 a 5 noticias relevantes en formato compacto.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

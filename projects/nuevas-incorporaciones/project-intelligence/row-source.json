@@ -1,0 +1,495 @@
+{
+  "rowId": "recpU1LZQmFswP606",
+  "name": "Nuevas incorporaciones",
+  "slug": "nuevas-incorporaciones",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 8,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "personas nuevas"
+    },
+    {
+      "name": "JoinersList",
+      "type": "SharePointList",
+      "purpose": "curated list de incorporaciones"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "new-joiners",
+        "name": "Nuevas incorporaciones",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta a las nuevas incorporaciones recientes con nombre, rol, equipo y una breve bienvenida o contexto.",
+        "productGoal": "Ayudar a integrar a nuevas personas y darles visibilidad dentro de la organización."
+      },
+      "problem": {
+        "business": "Las nuevas incorporaciones pueden pasar desapercibidas y tardar más en integrarse socialmente.",
+        "operational": "People y managers necesitan una pieza simple para visibilizar quién se ha incorporado recientemente."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar nuevas incorporaciones recientes",
+          "Permitir conocer nombre, rol y equipo",
+          "Facilitar apertura de perfil o contacto"
+        ],
+        "secondary": [
+          "Mostrar fecha de incorporación o etiqueta de nuevo",
+          "Servir como bloque de bienvenida cultural"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "conocer nuevas personas del equipo o compañía"
+          ]
+        },
+        {
+          "role": "People/Manager",
+          "needs": [
+            "dar visibilidad a nuevas incorporaciones"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Nombre/foto/rol/equipo",
+          "Fecha de incorporación opcional",
+          "Acción abrir perfil",
+          "Mensaje de bienvenida opcional"
+        ],
+        "out": [
+          "workflow de onboarding",
+          "seguimiento de progreso de incorporación"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver nuevas incorporaciones del mes",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir perfil de nueva persona",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar incorporaciones dentro de una ventana temporal configurable."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar nombre, rol, equipo y foto cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir perfil cuando exista."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser acogedor y visualmente amable."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar ausencia de foto o bio de bienvenida."
+        }
+      ],
+      "businessRules": [
+        "Solo se muestran incorporaciones dentro del rango configurado.",
+        "Si falta foto, usar avatar por defecto.",
+        "Si falta perfil, la tarjeta sigue siendo informativa."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Directory",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "daysBack": {
+          "type": "number",
+          "default": 30,
+          "min": 1,
+          "max": 180
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 8,
+          "min": 1,
+          "max": 30
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra nuevas incorporaciones dentro del periodo.",
+        "Permite abrir perfil cuando existe.",
+        "Respeta maxItems y daysBack.",
+        "Funciona con datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "persona sin foto",
+        "sin fecha de incorporación",
+        "sin perfil",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza nuevas incorporaciones correctamente",
+        "Incluye tests base de ventana temporal y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Dar la bienvenida visualmente y ayudar a que las nuevas personas sean reconocibles rápido.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista/grid de nuevas incorporaciones"
+        ],
+        "priorityOrder": [
+          "más recientes",
+          "resto dentro de ventana"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "lista o 2 columnas"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton joiner cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "joiner cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin incorporaciones recientes"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "tarjetas con foto o perfil ausente"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "avatar",
+          "nombre",
+          "rol",
+          "equipo",
+          "joinDateLabel",
+          "profileAction"
+        ],
+        "badges": [
+          "nuevo",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Nuevas incorporaciones",
+        "messages": {
+          "empty": "No hay nuevas incorporaciones en este periodo.",
+          "error": "No se han podido cargar las nuevas incorporaciones."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards accesibles",
+          "texto visible además de imagen"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, rol y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer joiners",
+          "filtrar por ventana",
+          "render cards"
+        ],
+        "v1": [
+          "telemetría",
+          "mensaje de bienvenida opcional"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y ventana temporal"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de bienvenida"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y filtrar nuevas incorporaciones"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards de nuevas incorporaciones"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear JoinersWindowResolver y repositorios"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear JoinerCard"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Directory",
+          "type": "Directory/API",
+          "purpose": "personas nuevas"
+        },
+        {
+          "name": "JoinersList",
+          "type": "SharePointList",
+          "purpose": "curated list de incorporaciones"
+        }
+      ],
+      "entities": {
+        "Joiner": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "team": "string|null",
+          "joinDate": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "joinDate": "datetime or null"
+      },
+      "validationRules": [
+        "displayName requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "nombre y joinDate presentes",
+        "partial": "faltan foto, team o profileUrl"
+      },
+      "fallbacks": [
+        "sin foto => avatar por defecto",
+        "sin profileUrl => informativo sin acción",
+        "sin joinDate => exclusión o partial"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "displayName": "Irene Soto",
+            "jobTitle": "Analista",
+            "team": "Finance",
+            "joinDate": "2026-03-10",
+            "profileUrl": "/profile/irene"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "recent joiner",
+          "old joiner excluded",
+          "no photo",
+          "no profile",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "NewJoinersWebPart",
+        "pattern": "SPFx React + joiner window resolver",
+        "components": [
+          "NewJoiners",
+          "JoinerCard"
+        ],
+        "services": [
+          "NewJoinersService",
+          "JoinersWindowResolver"
+        ],
+        "repositories": [
+          "DirectoryRepository",
+          "JoinersListRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Directory'|'SharePointList'|'JsonUrl')[]",
+          "listTitleOrUrl": "string|undefined",
+          "daysBack": "number",
+          "maxItems": "number"
+        },
+        "IJoinerItem": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "team": "string|null",
+          "joinDate": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IJoinerItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer incorporaciones",
+        "normalizar joinDate y metadatos",
+        "filtrar por ventana temporal",
+        "ordenar por joinDate desc",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "window": "joinDate within last daysBack days",
+        "sort": "joinDate desc with nulls last or exclusion by policy"
+      },
+      "performance": {
+        "cache": "por origen y daysBack",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin joinDate",
+          "uiState": "partialData o exclusión"
+        },
+        {
+          "condition": "sin profileUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar profileUrl/photoUrl",
+          "limitar campos personales al mínimo necesario"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "joiners_loaded",
+          "joiners_partial",
+          "joiners_error",
+          "joiner_profile_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "daysBack",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "window filter",
+          "joinDate sort",
+          "mapping"
+        ],
+        "component": [
+          "cards render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas. Tarjetas de nuevos empleados con nombre, rol, equipo y mensaje de bienvenida.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

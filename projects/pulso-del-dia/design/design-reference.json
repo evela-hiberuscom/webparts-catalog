@@ -1,0 +1,71 @@
+{
+  "projectSlug": "pulso-del-dia",
+  "rowId": "recRt1japWn21MzFX",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Obtener una señal rápida del día sin interrumpir la experiencia normal del usuario.",
+    "informationArchitecture": {
+      "zones": [
+        "prompt",
+        "opciones visuales",
+        "feedback"
+      ],
+      "priorityOrder": [
+        "prompt",
+        "opciones"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "card": "compacta"
+      },
+      "narrow": {
+        "card": "compacta apilada"
+      }
+    },
+    "states": [
+      {
+        "id": "idle",
+        "ui": [
+          "prompt y opciones"
+        ]
+      },
+      {
+        "id": "submitting",
+        "ui": [
+          "bloque deshabilitado"
+        ]
+      },
+      {
+        "id": "success",
+        "ui": [
+          "confirmación"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje y retry"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Pulso del día",
+      "messages": {
+        "success": "Pulso registrado.",
+        "error": "No se ha podido registrar el pulso."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "opciones accesibles",
+        "feedback claro"
+      ]
+    }
+  }
+}

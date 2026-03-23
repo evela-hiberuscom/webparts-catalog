@@ -1,0 +1,98 @@
+{
+  "projectSlug": "mis-accesos-recientes",
+  "rowId": "rec0u1pDtGwTLtIZ1",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir volver al trabajo reciente en uno o dos clics.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros opcionales",
+        "lista de recursos"
+      ],
+      "priorityOrder": [
+        "último acceso",
+        "tipo",
+        "título"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista o cards compactas"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton resources"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "recent list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin actividad reciente"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "lista parcial con campos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "tipo",
+        "lastAccessedAt",
+        "openAction"
+      ],
+      "badges": [
+        "documento",
+        "pagina",
+        "app",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mis accesos recientes",
+      "messages": {
+        "empty": "No hay accesos recientes visibles.",
+        "error": "No se han podido cargar tus accesos recientes."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "lista navegable",
+        "tipo visible por texto",
+        "fechas localizadas"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción"
+    }
+  }
+}

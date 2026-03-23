@@ -1,0 +1,518 @@
+{
+  "rowId": "reca1ofHWPtHAXRcX",
+  "name": "Cómo hago esto",
+  "slug": "como-hago-esto",
+  "artifactType": "SPFxWebPart",
+  "archetype": "knowledge",
+  "waveNumber": 10,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "GuidesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de guías breves"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "how-do-i-do-this",
+        "name": "Cómo hago esto",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Ofrece guías breves y accionables para tareas internas habituales, con pasos claros y enlaces de apoyo.",
+        "productGoal": "Acelerar el autoservicio para procesos comunes sin necesidad de soporte humano inicial."
+      },
+      "problem": {
+        "business": "Muchos usuarios necesitan mini tutoriales para tareas repetitivas y pierden tiempo buscando documentación extensa.",
+        "operational": "Soporte responde una y otra vez a procesos sencillos que podrían resolverse con guías compactas."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar guías paso a paso",
+          "Permitir filtrar por tema",
+          "Abrir material ampliado o formularios relacionados"
+        ],
+        "secondary": [
+          "Resaltar guías más usadas",
+          "Mantener aprendizaje contextual y breve"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender cómo realizar una tarea concreta"
+          ]
+        },
+        {
+          "role": "Soporte/Backoffice",
+          "needs": [
+            "derivar dudas básicas a guías claras"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de guías",
+          "Pasos resumidos",
+          "Categorías",
+          "Enlaces relacionados"
+        ],
+        "out": [
+          "tutoriales multimedia complejos",
+          "seguimiento de progreso",
+          "edición desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consultar una guía breve",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Filtrar por temática",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir documentación ampliada",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar guías configuradas con título, resumen y pasos."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir expandir una guía para ver pasos."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir filtrar por categoría o tema."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir enlaces relacionados o documentación ampliada."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser fácil de escanear y leer."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Carga ligera apta para autoservicio."
+        }
+      ],
+      "businessRules": [
+        "Si faltan pasos detallados, la guía puede mostrarse con resumen solamente.",
+        "Si falta categoría, va a General.",
+        "Las guías destacadas pueden ordenarse primero."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 30,
+          "min": 1,
+          "max": 100
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra guías configuradas.",
+        "Expande pasos cuando existan.",
+        "Filtra por categoría.",
+        "Abre enlaces relacionados cuando existan."
+      ],
+      "edgeCases": [
+        "guía sin pasos",
+        "sin categoría",
+        "sin enlace",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza guías y pasos correctamente",
+        "Incluye tests base de filtros y expand/collapse"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Resolver dudas procedimentales con guías cortas, claras y sin sobrecargar al usuario.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "categorías",
+          "lista de guías",
+          "pasos expandidos"
+        ],
+        "priorityOrder": [
+          "guías destacadas",
+          "coincidencias filtradas",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "cards o acordeón con pasos"
+        },
+        "narrow": {
+          "items": "lista compacta expandible"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton guides"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "guides list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin guías"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "guías sin pasos completos"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "resumen",
+          "categoria",
+          "steps",
+          "relatedLink"
+        ],
+        "badges": [
+          "destacada",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Cómo hago esto",
+        "messages": {
+          "empty": "No hay guías disponibles.",
+          "error": "No se han podido cargar las guías."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "acordeón/lista accesible",
+          "pasos numerados semánticamente"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, resumen y expandir pasos bajo demanda"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer guías",
+          "render lista",
+          "expandir pasos"
+        ],
+        "v1": [
+          "filtros",
+          "featured",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI de guías"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer guías desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Aplicar categorías y featured"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar guías y pasos"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear GuidesRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtros y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear GuideCard y GuideSteps"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "GuidesList",
+          "type": "SharePointList",
+          "purpose": "catálogo de guías breves"
+        }
+      ],
+      "entities": {
+        "Guide": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "category": "string|null",
+          "steps": "string[]|null",
+          "relatedUrl": "string|null",
+          "featured": "boolean|null"
+        }
+      },
+      "mappings": {
+        "category": "string o General",
+        "steps": "array de strings normalizado"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, summary y steps presentes",
+        "partial": "faltan steps, category o relatedUrl"
+      },
+      "fallbacks": [
+        "sin steps => guía parcial con resumen",
+        "sin category => General",
+        "sin relatedUrl => sin acción secundaria"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Cómo pedir material",
+            "summary": "Sigue estos pasos...",
+            "category": "Compras",
+            "steps": [
+              "Abre el portal",
+              "Rellena el formulario"
+            ],
+            "relatedUrl": "/sites/purchases/material"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "guía completa",
+          "sin pasos",
+          "sin categoría",
+          "sin enlace",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "HowDoIDoThisWebPart",
+        "pattern": "SPFx React + repository + guide filter service",
+        "components": [
+          "HowDoIDoThis",
+          "GuideCard",
+          "GuideSteps",
+          "GuideCategoryFilter"
+        ],
+        "services": [
+          "GuidesCatalogService",
+          "GuidesFilterService"
+        ],
+        "repositories": [
+          "GuidesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "IGuideItem": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "category": "string|null",
+          "steps": "string[]",
+          "relatedUrl": "string|null",
+          "featured": "boolean"
+        },
+        "IViewModel": {
+          "items": "IGuideItem[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer guías",
+        "normalizar categorías y steps",
+        "aplicar filtros",
+        "renderizar lista/accordion"
+      ],
+      "algorithms": {
+        "sort": "featured primero + title asc",
+        "filter": "por categoría cuando exista"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin steps",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin relatedUrl",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar relatedUrl",
+          "no renderizar HTML inseguro"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "guides_loaded",
+          "guides_partial",
+          "guides_error",
+          "guide_expanded"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "category filter",
+          "sorting",
+          "steps normalization"
+        ],
+        "component": [
+          "expand/collapse",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento. Tutoriales accionables para tareas internas habituales.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "projectSlug": "proximos-hitos",
+  "rowId": "rec4ZjECVnw5BjShO",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir entender fácilmente qué hitos vienen ahora en una secuencia temporal corta.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "timeline/lista"
+      ],
+      "priorityOrder": [
+        "más próximo",
+        "resto ordenado"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "timeline ligera"
+      },
+      "narrow": {
+        "items": "lista vertical"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton milestones"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "milestones"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin hitos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "hitos con fecha o URL ausente"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "fecha",
+        "titulo",
+        "tipo",
+        "openAction"
+      ],
+      "badges": [
+        "soon",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Próximos hitos",
+      "messages": {
+        "empty": "No hay hitos próximos configurados.",
+        "error": "No se han podido cargar los hitos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "timeline accesible",
+        "fechas legibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar fecha y título"
+    }
+  }
+}

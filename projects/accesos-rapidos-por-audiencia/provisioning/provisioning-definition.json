@@ -1,0 +1,28 @@
+{
+  "projectSlug": "accesos-rapidos-por-audiencia",
+  "archetype": "audience",
+  "rowId": "reczv9XSDJN23xEsz",
+  "sources": [
+    {
+      "name": "AudienceLinksList",
+      "type": "SharePointList",
+      "purpose": "catálogo de enlaces segmentados"
+    },
+    {
+      "name": "UserContext",
+      "type": "Context/Directory",
+      "purpose": "atributos del usuario actual"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra accesos relevantes para la audiencia detectada.",
+    "Usa fallback genérico cuando procede.",
+    "Permite abrir enlaces correctamente.",
+    "Filtra por categoría cuando exista."
+  ],
+  "businessRules": [
+    "Si un enlace no tiene reglas de audiencia, se considera genérico.",
+    "Si no hay coincidencia específica, se usan genéricos configurados.",
+    "Si faltan metadatos de audiencia en un enlace, no debe romper el filtrado completo."
+  ]
+}

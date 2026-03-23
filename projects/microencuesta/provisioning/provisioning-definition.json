@@ -1,0 +1,20 @@
+{
+  "projectSlug": "microencuesta",
+  "archetype": "general",
+  "rowId": "recSZap19q7CuUs5R",
+  "sources": [
+    {
+      "name": "PollList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "preguntas y respuestas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Permite responder una opción válida.",
+    "Muestra confirmación tras el envío."
+  ],
+  "businessRules": [
+    "Debe seleccionarse una opción antes de enviar.",
+    "Si oneResponsePerUser=true, bloquear reenvíos cuando el origen lo permita."
+  ]
+}

@@ -2,3 +2,15 @@
 .env
 .env.local
 .env.*.local
+node_modules/
+dist/
+coverage/
+temp/
+lib/
+orchestration/generated/
+projects/*/node_modules/
+projects/*/dist/
+projects/*/coverage/
+projects/*/temp/
+projects/*/lib/
+projects/*/sharepoint/solution/*.sppkg

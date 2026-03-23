@@ -1,0 +1,24 @@
+{
+  "projectSlug": "mantenimientos-programados",
+  "archetype": "general",
+  "rowId": "receWSKQ5jpVtOdOt",
+  "sources": [
+    {
+      "name": "MaintenanceList",
+      "type": "SharePointList",
+      "purpose": "ventanas de mantenimiento"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Ordena por fecha correctamente.",
+    "Distingue estados temporales.",
+    "Permite ocultar completados.",
+    "Abre detalle cuando existe."
+  ],
+  "businessRules": [
+    "Si now está entre start y end => inProgress.",
+    "Si now < start => upcoming.",
+    "Si now > end => completed.",
+    "Si faltan fechas obligatorias, el registro pasa a partialData."
+  ]
+}

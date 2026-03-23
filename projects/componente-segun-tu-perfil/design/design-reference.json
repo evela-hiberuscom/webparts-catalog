@@ -1,0 +1,76 @@
+{
+  "projectSlug": "componente-segun-tu-perfil",
+  "rowId": "recqkzUHilH8lKoGy",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Mostrar al usuario una experiencia claramente relevante sin obligarle a filtrar manualmente contenido ajeno.",
+    "informationArchitecture": {
+      "zones": [
+        "bloque principal personalizado",
+        "fallback opcional"
+      ],
+      "priorityOrder": [
+        "match específico",
+        "genérico"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "block": "según tipo de contenido"
+      },
+      "narrow": {
+        "block": "compacto"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton block"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "resolved variant block"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin contenido para tu perfil"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "variant fallback aplicada"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Componente según tu perfil",
+      "messages": {
+        "empty": "No hay contenido específico para tu perfil.",
+        "error": "No se ha podido resolver el contenido personalizado."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "contenido accesible cualquiera que sea la variante",
+        "texto claro"
+      ]
+    }
+  }
+}

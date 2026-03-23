@@ -1,0 +1,28 @@
+{
+  "projectSlug": "mis-accesos-recientes",
+  "archetype": "launcher",
+  "rowId": "rec0u1pDtGwTLtIZ1",
+  "sources": [
+    {
+      "name": "GraphRecent",
+      "type": "Connector/API",
+      "purpose": "recursos recientes del usuario"
+    },
+    {
+      "name": "SharePointRecentList",
+      "type": "SharePointList",
+      "purpose": "recientes locales si existen"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra recursos recientes correctamente.",
+    "Ordena por último acceso cuando existe la fecha.",
+    "Permite abrir el recurso.",
+    "Funciona con datos parciales."
+  ],
+  "businessRules": [
+    "Si un recurso ya no es accesible, puede excluirse o marcarse como no disponible.",
+    "Si faltan fechas, el recurso sigue visible pero sin orden temporal preciso.",
+    "El orden por defecto es último acceso descendente."
+  ]
+}

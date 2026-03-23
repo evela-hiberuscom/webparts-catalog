@@ -1,0 +1,23 @@
+{
+  "projectSlug": "checklist-de-offboarding-o-cambios",
+  "archetype": "general",
+  "rowId": "recVXCvX5ElPNmsj4",
+  "sources": [
+    {
+      "name": "OffboardingChecklistList",
+      "type": "SharePointList",
+      "purpose": "pasos de offboarding o cambio"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra pasos configurados por escenario.",
+    "Destaca críticos cuando existan.",
+    "Permite filtrar por fase o escenario.",
+    "Abre recursos cuando existan."
+  ],
+  "businessRules": [
+    "Los pasos críticos se destacan visualmente.",
+    "Si falta escenario, el paso va a Generic.",
+    "Si falta fase, se ordena por prioridad o título."
+  ]
+}

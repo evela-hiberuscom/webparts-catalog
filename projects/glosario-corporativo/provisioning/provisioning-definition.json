@@ -1,0 +1,23 @@
+{
+  "projectSlug": "glosario-corporativo",
+  "archetype": "knowledge",
+  "rowId": "rec8Vu6POl1W3e0SY",
+  "sources": [
+    {
+      "name": "GlossaryList",
+      "type": "SharePointList",
+      "purpose": "catálogo de términos y siglas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra términos y definiciones.",
+    "Permite búsqueda.",
+    "Permite navegación alfabética si está activa.",
+    "Abre enlace relacionado cuando exista."
+  ],
+  "businessRules": [
+    "Si faltan alias, el término sigue siendo válido.",
+    "Si falta categoría, se mantiene navegable por orden alfabético.",
+    "Los términos exactos deben priorizarse sobre coincidencias parciales en búsqueda."
+  ]
+}

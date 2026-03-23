@@ -1,0 +1,91 @@
+{
+  "projectSlug": "favoritos-personales",
+  "rowId": "recZLMapqZ0LFq7Y2",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Dar al usuario una pequeña zona de accesos de confianza siempre visible y muy rápida de usar.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "grid/lista de favoritos"
+      ],
+      "priorityOrder": [
+        "orden guardado",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "grid 2 columnas o lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton favorites"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "favorites list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin favoritos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "icono",
+        "titulo",
+        "tipo",
+        "openAction"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Favoritos personales",
+      "messages": {
+        "empty": "No tienes favoritos visibles.",
+        "error": "No se han podido cargar tus favoritos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards/links accesibles",
+        "texto visible además de iconos"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción"
+    }
+  }
+}

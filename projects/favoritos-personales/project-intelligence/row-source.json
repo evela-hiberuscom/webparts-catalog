@@ -1,0 +1,468 @@
+{
+  "rowId": "recZLMapqZ0LFq7Y2",
+  "name": "Favoritos personales",
+  "slug": "favoritos-personales",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "FavoritesList",
+      "type": "SharePointList",
+      "purpose": "favoritos personales"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "personal-favorites",
+        "name": "Favoritos personales",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra una colección personal de accesos favoritos para acelerar la navegación diaria del usuario.",
+        "productGoal": "Dar al usuario un punto estable para volver a sus herramientas o recursos preferidos."
+      },
+      "problem": {
+        "business": "Aunque existan lanzadores generales, cada usuario repite un subconjunto pequeño de accesos.",
+        "operational": "Sin una zona de favoritos, el usuario vuelve a buscar manualmente los mismos recursos."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar favoritos personales del usuario",
+          "Permitir abrir recursos favoritos rápidamente",
+          "Mantener una vista simple y estable"
+        ],
+        "secondary": [
+          "Ordenar favoritos",
+          "Mostrar icono/tipo cuando exista",
+          "Soportar orígenes personales o catálogo guardado"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "volver a sus accesos frecuentes sin buscar"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de favoritos personales",
+          "Orden configurable o persistido",
+          "Apertura rápida de recurso"
+        ],
+        "out": [
+          "gestión avanzada multi-dispositivo compleja en V1",
+          "sincronización cross-system sofisticada"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Abrir un favorito guardado",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ver mis accesos preferidos",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar favoritos del usuario actual desde la fuente soportada."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir abrir el favorito correctamente."
+        },
+        {
+          "id": "RF-03",
+          "text": "Ordenar favoritos por orden guardado o prioridad."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga muy rápida y experiencia personal."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura/launcher en V1 salvo origen de favoritos ya existente."
+        }
+      ],
+      "businessRules": [
+        "Los favoritos sin URL deben mostrarse como parciales o excluirse según política.",
+        "Si el usuario no tiene favoritos, el estado empty debe ser claro.",
+        "Si no existe orden explícito, ordenar alfabéticamente por título."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "UserProfileSource",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 12,
+          "min": 1,
+          "max": 50
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra favoritos del usuario actual.",
+        "Permite abrir cada favorito válido.",
+        "Ordena de forma consistente.",
+        "Gestiona empty correctamente."
+      ],
+      "edgeCases": [
+        "usuario sin favoritos",
+        "favorito sin URL",
+        "sin icono",
+        "origen inaccesible"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza favoritos correctamente",
+        "Incluye tests base de mapping y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Dar al usuario una pequeña zona de accesos de confianza siempre visible y muy rápida de usar.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "grid/lista de favoritos"
+        ],
+        "priorityOrder": [
+          "orden guardado",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "grid 2 columnas o lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton favorites"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "favorites list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin favoritos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "icono",
+          "titulo",
+          "tipo",
+          "openAction"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Favoritos personales",
+        "messages": {
+          "empty": "No tienes favoritos visibles.",
+          "error": "No se han podido cargar tus favoritos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards/links accesibles",
+          "texto visible además de iconos"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer favoritos",
+          "render lista",
+          "abrir recurso"
+        ],
+        "v1": [
+          "origen personal alternativo",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer favoritos del usuario"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar lista/grid de favoritos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear FavoritesRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Normalizar orden e iconos"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear FavoriteCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "FavoritesList",
+          "type": "SharePointList",
+          "purpose": "favoritos personales"
+        }
+      ],
+      "entities": {
+        "Favorite": {
+          "id": "string",
+          "title": "string",
+          "type": "string|null",
+          "icon": "string|null",
+          "openUrl": "string|null",
+          "sortOrder": "number|null"
+        }
+      },
+      "mappings": {
+        "sortOrder": "number or null"
+      },
+      "validationRules": [
+        "title requerido",
+        "openUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "favorito con enlace y orden válidos",
+        "partial": "falta openUrl, type o icon"
+      },
+      "fallbacks": [
+        "sin sortOrder => ordenar por título",
+        "sin icono => icono por defecto",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Portal Comercial",
+            "type": "site",
+            "icon": "Globe",
+            "openUrl": "/sites/sales",
+            "sortOrder": 1
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "ordered favorites",
+          "sin sortOrder",
+          "sin url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "PersonalFavoritesWebPart",
+        "pattern": "SPFx React + repository + order normalizer",
+        "components": [
+          "PersonalFavorites",
+          "FavoriteCard"
+        ],
+        "services": [
+          "FavoritesService"
+        ],
+        "repositories": [
+          "FavoritesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|UserProfileSource|StaticConfig",
+          "listTitleOrUrl": "string",
+          "maxItems": "number"
+        },
+        "IFavoriteItem": {
+          "id": "string",
+          "title": "string",
+          "type": "string|null",
+          "icon": "string|null",
+          "openUrl": "string|null",
+          "sortOrder": "number|null"
+        },
+        "IViewModel": {
+          "items": "IFavoriteItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen personal",
+        "leer favoritos",
+        "normalizar orden/icono",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "sortOrder asc/null-last + title asc"
+      },
+      "performance": {
+        "cache": "por usuario y origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "usuario sin favoritos",
+          "uiState": "empty"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "limitar datos al usuario actual",
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "favorites_loaded",
+          "favorites_partial",
+          "favorites_error",
+          "favorite_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "sort order",
+          "mapping"
+        ],
+        "component": [
+          "render list",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación. Permite al usuario guardar y ver sus accesos favoritos.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

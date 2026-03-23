@@ -1,0 +1,24 @@
+{
+  "projectSlug": "lanzador-universal-de-accesos",
+  "archetype": "launcher",
+  "rowId": "recfiHUjaapUToQEr",
+  "sources": [
+    {
+      "name": "LauncherLinksList",
+      "type": "SharePointList",
+      "purpose": "catálogo de accesos corporativos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra accesos configurados.",
+    "Permite abrir el enlace correcto.",
+    "Filtra por categoría cuando exista.",
+    "Ordena por prioridad/destacado cuando corresponda."
+  ],
+  "businessRules": [
+    "Los accesos sin URL no deben mostrarse como accionables.",
+    "Si falta categoría, el acceso va a General.",
+    "Si existe prioridad, determina el orden inicial.",
+    "Los destacados pueden priorizarse visualmente."
+  ]
+}

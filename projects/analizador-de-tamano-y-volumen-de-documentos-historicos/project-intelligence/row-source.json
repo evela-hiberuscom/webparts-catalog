@@ -1,0 +1,1387 @@
+{
+  "rowId": "recgszxhqydcwE8va",
+  "name": "Analizador de tamaño y volumen de documentos históricos",
+  "slug": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 11,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SharePoint Library",
+      "type": "primary",
+      "api": "SharePoint REST API",
+      "purpose": "Metadatos de biblioteca, documentos y tamaños visibles"
+    },
+    {
+      "name": "File Versions",
+      "type": "primary",
+      "api": "SharePoint REST API / PnPjs",
+      "purpose": "Versiones históricas por archivo cuando el contexto lo permite"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "historical-storage-analyzer",
+        "name": "Analizador de tamaño y volumen de documentos históricos",
+        "version": "1.2.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation",
+        "owners": [
+          "Producto",
+          "Arquitectura M365",
+          "Desarrollo SPFx"
+        ]
+      },
+      "summary": {
+        "oneLiner": "Diagnostica el coste de almacenamiento histórico de una biblioteca, separando contenido actual, histórico de versiones y nivel de exactitud del cálculo.",
+        "productGoal": "Descubrir espacio fantasma y aportar una base objetiva para limpieza, ajuste de versionado y explicación del crecimiento de almacenamiento."
+      },
+      "problem": {
+        "business": "El tamaño visible de una biblioteca suele infrarepresentar el consumo real cuando el versionado acumula revisiones históricas.",
+        "operational": "Soporte y propietarios del sitio no disponen de una vista única que relacione cantidad de documentos, peso actual, peso histórico, precisión y cobertura.",
+        "decisionImpact": "Sin este análisis, las decisiones de limpieza, gobierno documental y ajuste de políticas se toman con baja evidencia."
+      },
+      "objectives": {
+        "primary": [
+          "Calcular o estimar el peso histórico acumulado de una biblioteca.",
+          "Comparar tamaño actual vs histórico con ratios claros.",
+          "Detectar documentos que concentran el mayor coste histórico.",
+          "Comunicar precisión, cobertura y límites del análisis."
+        ],
+        "secondary": [
+          "Permitir quick scan y deep scan.",
+          "Exportar resultado normalizado para soporte o auditoría.",
+          "Ser reutilizable como bloque técnico dentro de páginas de diagnóstico."
+        ]
+      },
+      "users": [
+        {
+          "role": "SiteOwner",
+          "needs": [
+            "explicar crecimiento",
+            "detectar bibliotecas problemáticas",
+            "abrir biblioteca afectada"
+          ]
+        },
+        {
+          "role": "SharePointFunctionalAdmin",
+          "needs": [
+            "diagnóstico reproducible",
+            "control de cobertura",
+            "visión de exactitud"
+          ]
+        },
+        {
+          "role": "Governance",
+          "needs": [
+            "detectar políticas de versionado agresivas",
+            "priorizar remediación",
+            "generar evidencia"
+          ]
+        },
+        {
+          "role": "SupportM365",
+          "needs": [
+            "aislar causa de consumo",
+            "manejar errores, throttling y permisos parciales",
+            "exportar JSON técnico"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Selección de biblioteca por título o ID",
+          "Quick scan",
+          "Deep scan",
+          "KPIs de tamaño actual e histórico",
+          "Número estimado o exacto de versiones históricas",
+          "Top N documentos por coste histórico",
+          "Cobertura del análisis",
+          "Estados loading, empty, error, throttled y partialData",
+          "Exportación JSON",
+          "Navegación a la biblioteca"
+        ],
+        "out": [
+          "Borrado de versiones",
+          "Cambio automático de políticas de versionado",
+          "Escaneo tenant-wide",
+          "eDiscovery o legal hold",
+          "Acciones destructivas o administrativas",
+          "Programación de escaneos en background en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Explicar crecimiento inesperado",
+          "actor": "SiteOwner",
+          "preconditions": [
+            "Biblioteca accesible"
+          ],
+          "flow": [
+            "Ejecuta quick scan",
+            "Ve tamaño actual vs histórico",
+            "Observa ratio alto",
+            "Comparte evidencia"
+          ],
+          "success": "Comprende que el crecimiento proviene del histórico."
+        },
+        {
+          "id": "CU-02",
+          "name": "Detectar versionado agresivo",
+          "actor": "Governance",
+          "preconditions": [
+            "Permiso de lectura"
+          ],
+          "flow": [
+            "Ejecuta deep scan",
+            "Revisa top documentos",
+            "Ve documentos con ratio extremo"
+          ],
+          "success": "Prioriza cambio de política o limpieza."
+        },
+        {
+          "id": "CU-03",
+          "name": "Priorizar limpieza",
+          "actor": "SupportM365",
+          "flow": [
+            "Ejecuta deep scan",
+            "Ordena top documentos",
+            "Exporta resultado"
+          ],
+          "success": "Obtiene lista priorizada de focos."
+        },
+        {
+          "id": "CU-04",
+          "name": "Análisis rápido de landing",
+          "actor": "SiteOwner",
+          "flow": [
+            "Carga quick scan en página de diagnóstico",
+            "Lee KPIs y badge de precisión"
+          ],
+          "success": "Obtiene señal rápida sin alto coste."
+        },
+        {
+          "id": "CU-05",
+          "name": "Inspección detallada",
+          "actor": "FunctionalAdmin",
+          "flow": [
+            "Activa deep scan con límite configurable",
+            "Lee coveragePercent"
+          ],
+          "success": "Obtiene detalle con límites explícitos."
+        },
+        {
+          "id": "CU-06",
+          "name": "Exportar evidencia",
+          "actor": "SupportM365",
+          "flow": [
+            "Exporta JSON del resultado para ticket o informe"
+          ],
+          "success": "Comparte evidencia técnica consistente."
+        },
+        {
+          "id": "CU-07",
+          "name": "Resultados parciales útiles",
+          "actor": "FunctionalAdmin",
+          "flow": [
+            "Faltan permisos de versiones",
+            "El componente devuelve partialData"
+          ],
+          "success": "La UI no falla y comunica alcance real."
+        },
+        {
+          "id": "CU-08",
+          "name": "Manejo de throttling",
+          "actor": "SupportM365",
+          "flow": [
+            "SharePoint devuelve 429",
+            "El sistema reintenta",
+            "Comunica resultado parcial o throttled"
+          ],
+          "success": "No se rompe la UI."
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Resolver la biblioteca por título o ID."
+        },
+        {
+          "id": "RF-02",
+          "text": "Quick scan debe devolver una estimación con coste bajo."
+        },
+        {
+          "id": "RF-03",
+          "text": "Deep scan debe inspeccionar documentos y versiones hasta un límite configurable."
+        },
+        {
+          "id": "RF-04",
+          "text": "Mostrar KPIs: documentCount, visibleCurrentSizeBytes, historicalVersionCount, historicalEstimatedSizeBytes, historicalToCurrentRatio, analysisCoveragePercent, scanDurationMs."
+        },
+        {
+          "id": "RF-05",
+          "text": "Mostrar Top N documentos con mayor coste histórico."
+        },
+        {
+          "id": "RF-06",
+          "text": "Mostrar precisión exact/estimated/partial."
+        },
+        {
+          "id": "RF-07",
+          "text": "Permitir exportación JSON del resultado."
+        },
+        {
+          "id": "RF-08",
+          "text": "Permitir refresco manual."
+        },
+        {
+          "id": "RF-09",
+          "text": "Abrir la biblioteca objetivo."
+        },
+        {
+          "id": "RF-10",
+          "text": "Gestionar empty, partialData, error y throttled."
+        },
+        {
+          "id": "RF-11",
+          "text": "Cancelar análisis en curso si cambia la configuración o se desmonta el componente."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Quick scan debe ser apto para uso en landing o dashboard."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Deep scan debe limitar coste con maxItemsToInspect y concurrencia controlada."
+        },
+        {
+          "id": "RNF-03",
+          "text": "El componente es solo lectura."
+        },
+        {
+          "id": "RNF-04",
+          "text": "Debe emitir telemetría mínima."
+        },
+        {
+          "id": "RNF-05",
+          "text": "Debe ser usable en sección estrecha y ancha."
+        },
+        {
+          "id": "RNF-06",
+          "text": "Debe separar claramente datos exactos, estimados y parciales."
+        },
+        {
+          "id": "RNF-07",
+          "text": "El código debe ser testeable y desacoplado de la UI."
+        }
+      ],
+      "businessRules": [
+        "Si historicalToCurrentRatio >= warningHistoricalRatio, el estado es al menos warning.",
+        "Si faltan datos de tamaño histórico, isEstimated=true.",
+        "Si coveragePercent < 100 y afecta a la fiabilidad, precision=partial.",
+        "Si faltan permisos de versiones, el análisis sigue con lo disponible.",
+        "Si currentSizeBytes=0 y historicalSizeBytes>0, ratio puede representarse como null o etiqueta especial según diseño.",
+        "Si no hay documentos elegibles, estado empty."
+      ],
+      "configuration": {
+        "libraryTitleOrId": {
+          "type": "string",
+          "required": true,
+          "default": null
+        },
+        "analysisMode": {
+          "type": "enum",
+          "values": [
+            "quickScan",
+            "deepScan"
+          ],
+          "required": false,
+          "default": "quickScan"
+        },
+        "maxItemsToInspect": {
+          "type": "number",
+          "required": false,
+          "default": 200,
+          "min": 1,
+          "max": 5000
+        },
+        "topNHeavyDocuments": {
+          "type": "number",
+          "required": false,
+          "default": 10,
+          "min": 1,
+          "max": 100
+        },
+        "warningHistoricalRatio": {
+          "type": "number",
+          "required": false,
+          "default": 2,
+          "min": 0
+        }
+      },
+      "acceptanceCriteria": [
+        "Selecciona y resuelve una biblioteca válida.",
+        "Muestra número de documentos actuales y tamaño visible.",
+        "Calcula o estima histórico y lo etiqueta correctamente.",
+        "Quick scan y deep scan funcionan con sus límites.",
+        "Top N respeta configuración y cobertura.",
+        "Exportación JSON refleja exactitud, cobertura y salud.",
+        "Throttling y permisos parciales no rompen la UI."
+      ],
+      "edgeCases": [
+        "Biblioteca vacía",
+        "Biblioteca con miles de documentos",
+        "Documentos sin versiones",
+        "Documentos con histórico muy grande",
+        "Permisos insuficientes sobre versiones",
+        "File.Length ausente",
+        "Cambio de modo durante ejecución",
+        "Cambio de biblioteca durante escaneo",
+        "Top N mayor que el universo analizado",
+        "Resultados parcialmente exactos",
+        "Errores de red transitorios",
+        "Throttling 429/503"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx sin errores críticos",
+        "Tests unitarios base en verde",
+        "Manejo de throttling y cancelación implementado",
+        "README técnico con límites",
+        "Telemetría mínima integrada",
+        "Contratos y estados documentados"
+      ],
+      "roadmap": {
+        "mvp": [
+          "Quick scan",
+          "KPIs",
+          "Top N simple",
+          "Export JSON"
+        ],
+        "v1": [
+          "Deep scan",
+          "Cobertura",
+          "Telemetría",
+          "Estados robustos"
+        ],
+        "future": [
+          "Comparativa entre bibliotecas",
+          "Recomendaciones de remediación",
+          "Dashboard agregado"
+        ]
+      }
+    },
+    "designJson": {
+      "uxGoal": "Presentar un diagnóstico técnico comprensible en menos de 30 segundos, dejando claro qué es exacto, qué es estimado y qué es parcial.",
+      "informationArchitecture": {
+        "zones": [
+          "Cabecera",
+          "Resumen KPI",
+          "Indicadores de precisión/cobertura",
+          "Top N documentos",
+          "Acciones"
+        ],
+        "priorityOrder": [
+          "ratio histórico/actual",
+          "tamaño histórico",
+          "tamaño actual",
+          "cobertura",
+          "top documentos"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "header": "una fila con título, biblioteca y badges",
+          "kpis": "grid de 6-8 tarjetas",
+          "table": "tabla completa con 6 columnas",
+          "actions": "alineadas a la derecha"
+        },
+        "narrow": {
+          "header": "apilado",
+          "kpis": "cards verticales",
+          "table": "tabla resumida",
+          "actions": "compactas"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton de cabecera",
+            "skeleton de KPIs",
+            "mensaje de análisis en curso"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "title",
+            "library subtitle",
+            "mode badge",
+            "precision badge",
+            "coverage badge",
+            "kpis",
+            "top table",
+            "actions"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin documentos analizables",
+            "CTA abrir biblioteca",
+            "ayuda de configuración"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner de advertencia",
+            "KPIs con disclaimers",
+            "tabla con precision por fila"
+          ]
+        },
+        {
+          "id": "throttled",
+          "ui": [
+            "banner recoverable",
+            "mensaje de limitación temporal",
+            "últimos datos si existen",
+            "acción refrescar"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro",
+            "detalle no sensible",
+            "acción refrescar"
+          ]
+        }
+      ],
+      "kpiCards": [
+        {
+          "id": "documentCount",
+          "label": "Documentos",
+          "priority": 1
+        },
+        {
+          "id": "visibleCurrentSizeBytes",
+          "label": "Tamaño actual",
+          "priority": 1
+        },
+        {
+          "id": "historicalVersionCount",
+          "label": "Versiones históricas",
+          "priority": 1
+        },
+        {
+          "id": "historicalEstimatedSizeBytes",
+          "label": "Tamaño histórico",
+          "priority": 1
+        },
+        {
+          "id": "historicalToCurrentRatio",
+          "label": "Ratio histórico/actual",
+          "priority": 0
+        },
+        {
+          "id": "analysisCoveragePercent",
+          "label": "Cobertura",
+          "priority": 1
+        },
+        {
+          "id": "scanDurationMs",
+          "label": "Duración",
+          "priority": 2
+        }
+      ],
+      "table": {
+        "name": "TopDocumentsTable",
+        "columns": [
+          {
+            "id": "name",
+            "label": "Documento",
+            "type": "text",
+            "required": true
+          },
+          {
+            "id": "currentSizeBytes",
+            "label": "Tamaño actual",
+            "type": "bytes",
+            "required": true
+          },
+          {
+            "id": "historicalVersionCount",
+            "label": "Versiones",
+            "type": "number",
+            "required": true
+          },
+          {
+            "id": "historicalSizeBytes",
+            "label": "Tamaño histórico",
+            "type": "bytes",
+            "required": false
+          },
+          {
+            "id": "ratio",
+            "label": "Ratio",
+            "type": "number",
+            "required": false
+          },
+          {
+            "id": "precision",
+            "label": "Precisión",
+            "type": "badge",
+            "required": true
+          }
+        ],
+        "sortingDefault": {
+          "field": "historicalSizeBytes",
+          "direction": "desc"
+        },
+        "emptyMessage": "No hay documentos con coste histórico relevante."
+      },
+      "visualSemantics": {
+        "ok": {
+          "intent": "success",
+          "meaning": "sin señales relevantes"
+        },
+        "warning": {
+          "intent": "warning",
+          "meaning": "anomalía moderada o cobertura limitada"
+        },
+        "critical": {
+          "intent": "danger",
+          "meaning": "coste histórico claramente anómalo"
+        },
+        "partial": {
+          "intent": "neutral-warning",
+          "meaning": "datos útiles pero incompletos"
+        }
+      },
+      "copy": {
+        "title": "Analizador de tamaño y volumen de documentos históricos",
+        "subtitles": {
+          "quick": "Estimación rápida del coste histórico",
+          "deep": "Análisis profundo del versionado"
+        },
+        "messages": {
+          "empty": "La biblioteca no contiene documentos analizables.",
+          "partial": "El resultado es parcial o estimado. Revise la cobertura antes de tomar decisiones.",
+          "throttled": "SharePoint ha limitado temporalmente algunas consultas. El resultado puede ser incompleto.",
+          "error": "No se ha podido completar el análisis con los datos disponibles."
+        }
+      },
+      "interactions": [
+        "Cambiar modo de análisis cancela el proceso anterior y lanza uno nuevo.",
+        "Refrescar reejecuta el análisis con la configuración actual.",
+        "Exportar JSON descarga o copia el resultado normalizado.",
+        "Abrir biblioteca navega a la biblioteca objetivo."
+      ],
+      "accessibility": {
+        "requirements": [
+          "ARIA labels en botones y toggles",
+          "Tabla con headers semánticos",
+          "Mensajes de estado anunciables",
+          "Contraste AA mínimo",
+          "No depender solo del color"
+        ],
+        "keyboard": [
+          "Tab order lógico",
+          "Enter/Espacio en toggles y botones"
+        ]
+      },
+      "responsive": {
+        "breakpoints": [
+          "narrow section",
+          "standard column",
+          "full width"
+        ],
+        "tableFallback": "En narrow section la tabla puede resumirse a Documento, Histórico, Ratio y Precisión."
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "Scaffold + property pane",
+          "Quick scan",
+          "KPIs",
+          "Top N simple",
+          "Export JSON"
+        ],
+        "v1": [
+          "Deep scan",
+          "Coverage",
+          "Health evaluator",
+          "Robust states",
+          "Telemetry"
+        ],
+        "hardening": [
+          "Testing ampliado",
+          "Performance",
+          "README técnico",
+          "i18n"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Base del web part",
+          "goal": "Crear la estructura SPFx y el property pane."
+        },
+        {
+          "id": "EP-02",
+          "name": "Acceso a datos",
+          "goal": "Resolver biblioteca, documentos y versiones."
+        },
+        {
+          "id": "EP-03",
+          "name": "Motor de análisis",
+          "goal": "Calcular métricas, precisión, cobertura y salud."
+        },
+        {
+          "id": "EP-04",
+          "name": "UI",
+          "goal": "Presentar KPIs, tabla y estados."
+        },
+        {
+          "id": "EP-05",
+          "name": "Calidad y observabilidad",
+          "goal": "Testing, telemetría y documentación."
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Scaffold SPFx React",
+          "estimate": "S",
+          "doneWhen": [
+            "Proyecto compila",
+            "Estructura creada"
+          ]
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-01",
+          "name": "Property pane funcional",
+          "estimate": "S",
+          "doneWhen": [
+            "Props disponibles",
+            "Validaciones básicas"
+          ]
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-02",
+          "name": "Resolver biblioteca",
+          "estimate": "S",
+          "doneWhen": [
+            "Busca por título o ID",
+            "Maneja inexistente"
+          ]
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-02",
+          "name": "Enumerar documentos",
+          "estimate": "M",
+          "doneWhen": [
+            "Paginación base",
+            "Excluye carpetas",
+            "Mapea tamaños"
+          ]
+        },
+        {
+          "id": "US-05",
+          "epicId": "EP-02",
+          "name": "Consultar versiones",
+          "estimate": "L",
+          "doneWhen": [
+            "Concurrencia limitada",
+            "Retries",
+            "Permisos parciales"
+          ]
+        },
+        {
+          "id": "US-06",
+          "epicId": "EP-03",
+          "name": "Quick scan",
+          "estimate": "M",
+          "doneWhen": [
+            "Estimación rápida",
+            "Precision correcta"
+          ]
+        },
+        {
+          "id": "US-07",
+          "epicId": "EP-03",
+          "name": "Deep scan",
+          "estimate": "L",
+          "doneWhen": [
+            "Respeta límites",
+            "Calcula coverage"
+          ]
+        },
+        {
+          "id": "US-08",
+          "epicId": "EP-03",
+          "name": "Agregación y salud",
+          "estimate": "M",
+          "doneWhen": [
+            "KPIs correctos",
+            "Health evaluator operativo"
+          ]
+        },
+        {
+          "id": "US-09",
+          "epicId": "EP-04",
+          "name": "Resumen KPI y badges",
+          "estimate": "M",
+          "doneWhen": [
+            "Cards operativas",
+            "Formatos correctos"
+          ]
+        },
+        {
+          "id": "US-10",
+          "epicId": "EP-04",
+          "name": "Top N documentos",
+          "estimate": "M",
+          "doneWhen": [
+            "Orden correcto",
+            "Precision visible"
+          ]
+        },
+        {
+          "id": "US-11",
+          "epicId": "EP-04",
+          "name": "Estados y acciones",
+          "estimate": "M",
+          "doneWhen": [
+            "loading/error/partial/throttled",
+            "Export JSON",
+            "Open library"
+          ]
+        },
+        {
+          "id": "US-12",
+          "epicId": "EP-05",
+          "name": "Testing",
+          "estimate": "M",
+          "doneWhen": [
+            "Unit tests clave",
+            "Component tests"
+          ]
+        },
+        {
+          "id": "US-13",
+          "epicId": "EP-05",
+          "name": "Telemetría y README",
+          "estimate": "S",
+          "doneWhen": [
+            "Eventos emitidos",
+            "README escrito"
+          ]
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear HistoricalStorageAnalyzerWebPart.ts",
+          "type": "code"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Crear components/models/utils base",
+          "type": "code"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Implementar props y defaults",
+          "type": "code"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Implementar resolveLibrary",
+          "type": "code"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-04",
+          "name": "Implementar listEligibleDocuments paginado",
+          "type": "code"
+        },
+        {
+          "id": "T-06",
+          "storyId": "US-05",
+          "name": "Implementar getVersionsForDocument con retry/concurrency",
+          "type": "code"
+        },
+        {
+          "id": "T-07",
+          "storyId": "US-06",
+          "name": "Implementar QuickScanStrategy",
+          "type": "code"
+        },
+        {
+          "id": "T-08",
+          "storyId": "US-07",
+          "name": "Implementar DeepScanStrategy",
+          "type": "code"
+        },
+        {
+          "id": "T-09",
+          "storyId": "US-08",
+          "name": "Implementar HistoricalMetricsAggregator y HealthEvaluator",
+          "type": "code"
+        },
+        {
+          "id": "T-10",
+          "storyId": "US-09",
+          "name": "Construir SummaryKpis y CoverageBadge",
+          "type": "ui"
+        },
+        {
+          "id": "T-11",
+          "storyId": "US-10",
+          "name": "Construir TopDocumentsTable",
+          "type": "ui"
+        },
+        {
+          "id": "T-12",
+          "storyId": "US-11",
+          "name": "Construir acciones y estados",
+          "type": "ui"
+        },
+        {
+          "id": "T-13",
+          "storyId": "US-12",
+          "name": "Unit tests de cálculos",
+          "type": "test"
+        },
+        {
+          "id": "T-14",
+          "storyId": "US-12",
+          "name": "Component tests de estados",
+          "type": "test"
+        },
+        {
+          "id": "T-15",
+          "storyId": "US-12",
+          "name": "Integration tests de flujo quick/deep",
+          "type": "test"
+        },
+        {
+          "id": "T-16",
+          "storyId": "US-13",
+          "name": "Añadir telemetría",
+          "type": "obs"
+        },
+        {
+          "id": "T-17",
+          "storyId": "US-13",
+          "name": "Escribir README técnico",
+          "type": "doc"
+        }
+      ],
+      "dependencies": [
+        {
+          "from": "US-03",
+          "to": "US-06",
+          "type": "blocks"
+        },
+        {
+          "from": "US-04",
+          "to": "US-06",
+          "type": "blocks"
+        },
+        {
+          "from": "US-04",
+          "to": "US-07",
+          "type": "blocks"
+        },
+        {
+          "from": "US-05",
+          "to": "US-07",
+          "type": "blocks"
+        },
+        {
+          "from": "US-06",
+          "to": "US-08",
+          "type": "blocks"
+        },
+        {
+          "from": "US-07",
+          "to": "US-08",
+          "type": "blocks"
+        },
+        {
+          "from": "US-08",
+          "to": "US-09",
+          "type": "blocks"
+        },
+        {
+          "from": "US-08",
+          "to": "US-10",
+          "type": "blocks"
+        },
+        {
+          "from": "US-09",
+          "to": "US-11",
+          "type": "supports"
+        },
+        {
+          "from": "US-10",
+          "to": "US-11",
+          "type": "supports"
+        }
+      ],
+      "risks": [
+        {
+          "id": "R-01",
+          "risk": "Throttling en deep scan",
+          "mitigation": "Concurrencia limitada, retry y coverage parcial explícita"
+        },
+        {
+          "id": "R-02",
+          "risk": "No poder calcular tamaños exactos por versión",
+          "mitigation": "Precision policy exact/estimated/partial"
+        },
+        {
+          "id": "R-03",
+          "risk": "Permisos parciales",
+          "mitigation": "PartialData y UI resiliente"
+        },
+        {
+          "id": "R-04",
+          "risk": "Bibliotecas muy grandes",
+          "mitigation": "maxItemsToInspect, paginación y quick scan fallback"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04",
+        "EP-05"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SharePoint Library",
+          "type": "primary",
+          "api": "SharePoint REST API",
+          "purpose": "Metadatos de biblioteca, documentos y tamaños visibles"
+        },
+        {
+          "name": "File Versions",
+          "type": "primary",
+          "api": "SharePoint REST API / PnPjs",
+          "purpose": "Versiones históricas por archivo cuando el contexto lo permite"
+        }
+      ],
+      "entities": {
+        "Library": {
+          "id": "string",
+          "title": "string",
+          "itemCount": "number",
+          "serverRelativeUrl": "string"
+        },
+        "Document": {
+          "id": "number|string",
+          "name": "string",
+          "serverRelativeUrl": "string",
+          "currentSizeBytes": "number",
+          "isFolder": "boolean"
+        },
+        "Version": {
+          "versionLabel": "string",
+          "sizeBytes": "number|null",
+          "created": "string",
+          "createdBy": "string|null"
+        },
+        "AnalyzerResult": {
+          "siteUrl": "string",
+          "libraryId": "string",
+          "libraryTitle": "string",
+          "summary": "object",
+          "topDocuments": "array",
+          "health": "object"
+        }
+      },
+      "mappings": {
+        "documentCount": "count(documents where isFolder=false)",
+        "currentSizeBytes": "sum(document.currentSizeBytes)",
+        "historicalVersionCount": "sum(versions.length per inspected document)",
+        "historicalSizeBytes": "sum(version.sizeBytes when available, else null/estimated)",
+        "coveragePercent": "inspectedDocuments / eligibleDocuments * 100"
+      },
+      "validationRules": [
+        "libraryTitleOrId no vacío",
+        "maxItemsToInspect > 0",
+        "topNHeavyDocuments > 0",
+        "warningHistoricalRatio >= 0"
+      ],
+      "accuracyPolicy": {
+        "exact": "Todos los datos clave requeridos están disponibles.",
+        "estimated": "Parte del histórico requiere aproximación.",
+        "partial": "Cobertura incompleta, permisos parciales o throttling."
+      },
+      "fallbacks": [
+        "Si historicalSizeBytes no está disponible por versión, marcar isEstimated y seguir.",
+        "Si faltan permisos sobre versiones, devolver datos actuales y partialData.",
+        "Si una petición de lote falla y el resto sigue, conservar coverage real."
+      ],
+      "suggestedEndpoints": [
+        {
+          "name": "GetLibraryMetadata",
+          "url": "_api/web/lists/getbytitle('<LIBRARY>')?$select=Id,Title,ItemCount,RootFolder/ServerRelativeUrl&$expand=RootFolder"
+        },
+        {
+          "name": "ListDocuments",
+          "url": "_api/web/lists/getbytitle('<LIBRARY>')/items?$select=Id,FileLeafRef,FileRef,FSObjType,File/Length&$expand=File"
+        }
+      ],
+      "exampleOutput": {
+        "summary": {
+          "documentCount": 125,
+          "currentSizeBytes": 104857600,
+          "historicalVersionCount": 980,
+          "historicalSizeBytes": 314572800,
+          "ratio": 3,
+          "coveragePercent": 72.5,
+          "scanDurationMs": 4812,
+          "isEstimated": true,
+          "precision": "partial"
+        },
+        "topDocuments": [
+          {
+            "name": "Contrato.docx",
+            "currentSizeBytes": 5242880,
+            "historicalVersionCount": 120,
+            "historicalSizeBytes": 73400320,
+            "ratio": 14,
+            "precision": "exact"
+          },
+          {
+            "name": "Informe.xlsx",
+            "currentSizeBytes": 2097152,
+            "historicalVersionCount": 60,
+            "historicalSizeBytes": 37748736,
+            "ratio": 18,
+            "precision": "estimated"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "biblioteca vacía",
+          "documentos sin versiones",
+          "documentos con muchas versiones",
+          "permiso parcial sobre versiones",
+          "throttling simulado",
+          "biblioteca grande con coverage parcial"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "HistoricalStorageAnalyzerWebPart",
+        "pattern": "SPFx React + Services + Repositories + Strategy + Aggregator",
+        "layers": [
+          "webpart",
+          "components",
+          "services",
+          "repositories",
+          "models",
+          "utils"
+        ],
+        "coreStrategies": [
+          "QuickScanStrategy",
+          "DeepScanStrategy"
+        ]
+      },
+      "projectStructure": {
+        "root": "src/webparts/historicalStorageAnalyzer/",
+        "files": [
+          "HistoricalStorageAnalyzerWebPart.ts",
+          "components/HistoricalStorageAnalyzer.tsx",
+          "components/SummaryKpis.tsx",
+          "components/TopDocumentsTable.tsx",
+          "components/AnalysisModeToggle.tsx",
+          "components/CoverageBadge.tsx",
+          "services/HistoricalStorageAnalyzerService.ts",
+          "services/QuickScanStrategy.ts",
+          "services/DeepScanStrategy.ts",
+          "services/HistoricalMetricsAggregator.ts",
+          "repositories/LibraryRepository.ts",
+          "repositories/FileVersionsRepository.ts",
+          "models/HistoricalAnalyzerModels.ts",
+          "utils/formatters.ts",
+          "utils/retry.ts",
+          "utils/abort.ts"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "libraryTitleOrId": "string",
+          "analysisMode": "quickScan|deepScan",
+          "maxItemsToInspect": "number",
+          "topNHeavyDocuments": "number",
+          "warningHistoricalRatio": "number"
+        },
+        "IDocumentHistoricalMetrics": {
+          "name": "string",
+          "serverRelativeUrl": "string",
+          "currentSizeBytes": "number",
+          "historicalVersionCount": "number",
+          "historicalSizeBytes": "number|null",
+          "ratio": "number|null",
+          "isEstimated": "boolean",
+          "precision": "exact|estimated|partial"
+        },
+        "ILibraryHistoricalSummary": {
+          "documentCount": "number",
+          "currentSizeBytes": "number",
+          "historicalVersionCount": "number",
+          "historicalSizeBytes": "number|null",
+          "ratio": "number|null",
+          "coveragePercent": "number",
+          "scanDurationMs": "number",
+          "isEstimated": "boolean",
+          "precision": "exact|estimated|partial"
+        },
+        "IHealthEvaluation": {
+          "level": "ok|warning|critical|unknown",
+          "reasons": "string[]"
+        },
+        "IAnalyzerResult": {
+          "siteUrl": "string",
+          "libraryId": "string",
+          "libraryTitle": "string",
+          "summary": "ILibraryHistoricalSummary",
+          "topDocuments": "IDocumentHistoricalMetrics[]",
+          "health": "IHealthEvaluation",
+          "generatedAt": "string"
+        }
+      },
+      "serviceContracts": [
+        {
+          "name": "HistoricalStorageAnalyzerService.run",
+          "input": "IWebPartProps + SPFx context",
+          "output": "Promise<IAnalyzerResult>"
+        },
+        {
+          "name": "QuickScanStrategy.execute",
+          "input": "Library + eligibleDocuments + config",
+          "output": "Partial<IAnalyzerResult>"
+        },
+        {
+          "name": "DeepScanStrategy.execute",
+          "input": "Library + eligibleDocuments + config",
+          "output": "Partial<IAnalyzerResult>"
+        },
+        {
+          "name": "HistoricalMetricsAggregator.aggregate",
+          "input": "documents + versions + config",
+          "output": "IAnalyzerResult"
+        }
+      ],
+      "repositories": [
+        {
+          "name": "LibraryRepository.resolveLibrary",
+          "returns": "Library metadata"
+        },
+        {
+          "name": "LibraryRepository.listEligibleDocuments",
+          "returns": "Document[] paginated, folders excluded"
+        },
+        {
+          "name": "FileVersionsRepository.getVersionsForDocument",
+          "returns": "Version[] with precision metadata"
+        }
+      ],
+      "executionFlow": [
+        "Validate props.",
+        "Resolve library by title or ID.",
+        "List eligible documents.",
+        "Choose strategy quickScan or deepScan.",
+        "If deepScan, inspect documents until maxItemsToInspect with bounded concurrency.",
+        "Aggregate current sizes, version counts and historical sizes.",
+        "Compute ratio, coveragePercent, precision and health.",
+        "Build view model and return."
+      ],
+      "algorithms": {
+        "coveragePercent": "round((inspectedDocuments / eligibleDocuments) * 100, 2)",
+        "historicalToCurrentRatio": "historicalSizeBytes / currentSizeBytes when currentSizeBytes > 0 else null",
+        "precisionPolicy": [
+          "exact when current and historical sizes are fully known",
+          "estimated when historical size is approximated",
+          "partial when coverage or permissions are incomplete"
+        ],
+        "healthClassification": [
+          "ok if ratio < warningHistoricalRatio and no severe anomaly",
+          "warning if ratio >= warningHistoricalRatio or coverage is limited with signs of growth",
+          "critical if ratio is extremely high or a small number of files dominates historical cost",
+          "unknown if essential data is missing"
+        ]
+      },
+      "dataAccess": {
+        "apis": [
+          {
+            "name": "GetLibraryMetadata",
+            "candidate": "_api/web/lists/getbytitle('<LIBRARY>')?$select=Id,Title,ItemCount,RootFolder/ServerRelativeUrl&$expand=RootFolder"
+          },
+          {
+            "name": "ListDocuments",
+            "candidate": "_api/web/lists/getbytitle('<LIBRARY>')/items?$select=Id,FileLeafRef,FileRef,FSObjType,File/Length&$expand=File"
+          },
+          {
+            "name": "FileVersions",
+            "candidate": "Implementation depends on version endpoints available in SharePoint REST/PnPjs"
+          }
+        ],
+        "notes": [
+          "Do not assume homogeneous availability of per-version size.",
+          "Support a mixture of exact and estimated data.",
+          "Exclude folders when FSObjType indicates folder."
+        ]
+      },
+      "performance": {
+        "cache": "In-memory cache by siteUrl + libraryId + analysisMode with short TTL or per-session semantics.",
+        "concurrency": "3-5 simultaneous version requests in deepScan.",
+        "retry": "At most 2 retries for 429/503 with exponential backoff and jitter.",
+        "paging": "Paginate document enumeration for large libraries.",
+        "abort": "AbortController per execution to avoid stale updates.",
+        "limits": "maxItemsToInspect caps deepScan cost.",
+        "budgets": {
+          "quickScanPreferredSeconds": 5,
+          "deepScanSoftSeconds": 20,
+          "deepScanHardSeconds": 60
+        }
+      },
+      "errorMatrix": [
+        {
+          "condition": "library not found",
+          "uiState": "error",
+          "recoverable": false,
+          "action": "show safe message"
+        },
+        {
+          "condition": "429/503",
+          "uiState": "throttled",
+          "recoverable": true,
+          "action": "retry then partial result or throttled"
+        },
+        {
+          "condition": "permissions on versions missing",
+          "uiState": "partialData",
+          "recoverable": true,
+          "action": "continue with available data"
+        },
+        {
+          "condition": "network failure",
+          "uiState": "error",
+          "recoverable": true,
+          "action": "allow refresh"
+        },
+        {
+          "condition": "user changes mode during scan",
+          "uiState": "loading",
+          "recoverable": true,
+          "action": "cancel previous run and restart"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "No secrets or tokens in logs",
+          "Do not log full internal URLs unnecessarily",
+          "Sanitize names and links before render",
+          "Safe end-user error messages"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "historical_analyzer_loaded",
+          "quickscan_started",
+          "deepscan_started",
+          "versions_batch_completed",
+          "historical_analyzer_throttled",
+          "historical_analyzer_error",
+          "historical_analyzer_completed"
+        ],
+        "properties": [
+          "siteUrlHash",
+          "libraryId",
+          "analysisMode",
+          "documentsInspected",
+          "coveragePercent",
+          "durationMs",
+          "precision",
+          "healthLevel"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "aggregator calculations",
+          "ratio calculation",
+          "coverage calculation",
+          "health evaluator",
+          "precision policy",
+          "retry helper",
+          "abort handling"
+        ],
+        "component": [
+          "loading state",
+          "ready state",
+          "empty state",
+          "partial state",
+          "throttled state",
+          "error state"
+        ],
+        "integration": [
+          "quick scan flow",
+          "deep scan flow with concurrency",
+          "export JSON flow"
+        ]
+      },
+      "qualityConstraints": [
+        "TypeScript strict mode",
+        "No data access logic inside UI components",
+        "Services must be mockable",
+        "Strings externalized for i18n"
+      ]
+    }
+  },
+  "sourceFields": {
+    "notes": "{\"descripcion\":\"Analiza la cantidad de elementos históricos y el espacio aproximado que consumen en el sitio, para detectar ocupación fantasma derivada de históricos o versionado acumulado en bibliotecas de SharePoint.\",\"categoria\":\"Operaciones\",\"prioridad\":\"Alta\",\"valorNegocio\":\"Alto\",\"complejidad\":\"Alta\",\"fuenteDatos\":[\"SharePoint Libraries\",\"SharePoint REST API\"],\"viabilidadSPFx\":\"Media\",\"estado\":\"Idea\",\"analisis\":{\"problemaNegocio\":\"En muchos sitios de SharePoint el crecimiento de espacio no viene del documento visible actual sino de su histórico de versiones, borradores o contenido antiguo retenido, lo que genera consumo silencioso y difícil de justificar para negocio.\",\"objetivo\":\"Proporcionar una web part de diagnóstico que estime y, cuando sea posible, calcule el peso real del histórico documental asociado a una biblioteca, resaltando bibliotecas y archivos con crecimiento anómalo por versiones.\",\"supuestos\":[\"Por documentos históricos se entiende principalmente histórico de versiones de documentos en bibliotecas.\",\"La v1 no aborda de forma exhaustiva escenarios de retención avanzada, eDiscovery o Preservation Hold Library, aunque deja espacio para ampliarlo.\",\"El cálculo exacto por cada versión puede ser costoso y requerirá estrategia gradual quick scan + deep scan.\"],\"usuariosObjetivo\":[\"Administrador funcional SharePoint\",\"Propietario de sitio\",\"Equipo de gobierno documental\",\"Soporte de plataforma M365\"],\"casosUso\":[\"Explicar por qué un sitio ocupa mucho más espacio del esperado.\",\"Detectar bibliotecas con políticas de versionado demasiado agresivas.\",\"Priorizar limpiezas o ajustes de límites de versiones.\",\"Presentar un ranking de elementos o bibliotecas con más coste histórico.\"],\"alcanceV1\":{\"incluye\":[\"Selección de una biblioteca concreta.\",\"Lectura del número de documentos actuales.\",\"Estimación o cálculo del número de versiones históricas acumuladas.\",\"Cálculo del peso visible actual frente al peso histórico estimado o exacto.\",\"Ranking de top documentos por coste histórico cuando sea viable.\",\"Alertas por ratio histórico/actual.\"],\"noIncluye\":[\"Borrado de versiones desde la web part en la v1.\",\"Corrección automática de políticas de versionado.\",\"Escaneo de todas las bibliotecas del tenant.\",\"Análisis forense completo de retención legal.\"]},\"especificacionFuncional\":{\"modosAnalisis\":[{\"nombre\":\"quickScan\",\"descripcion\":\"Usa metadatos agregados y límites razonables para devolver una estimación rápida.\"},{\"nombre\":\"deepScan\",\"descripcion\":\"Enumera documentos y, cuando sea posible, su histórico para calcular un coste más cercano a la realidad.\"}],\"parametrosConfigurables\":[{\"nombre\":\"libraryTitleOrId\",\"tipo\":\"string\",\"obligatorio\":true},{\"nombre\":\"analysisMode\",\"tipo\":\"string\",\"obligatorio\":false,\"default\":\"quickScan\",\"valores\":[\"quickScan\",\"deepScan\"]},{\"nombre\":\"maxItemsToInspect\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":200,\"descripcion\":\"Límite de documentos a inspeccionar en deep scan.\"},{\"nombre\":\"topNHeavyDocuments\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":10},{\"nombre\":\"warningHistoricalRatio\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":2.0,\"descripcion\":\"Umbral a partir del cual el histórico pesa al menos X veces el contenido actual.\"}],\"metricasMostradas\":[\"documentCount\",\"visibleCurrentSizeBytes\",\"historicalVersionCount\",\"historicalEstimatedSizeBytes\",\"historicalToCurrentRatio\",\"topHeavyDocuments\",\"analysisCoveragePercent\",\"scanDurationMs\"],\"accionesUI\":[\"Refrescar\",\"Cambiar modo de análisis\",\"Abrir biblioteca\",\"Exportar resumen JSON\"],\"estadosUI\":[\"loading\",\"ready\",\"warning\",\"critical\",\"partialData\",\"error\",\"throttled\"]},\"especificacionTecnica\":{\"stack\":\"SPFx + React + TypeScript\",\"estrategiaDatos\":[\"Obtener biblioteca y configuración base.\",\"Enumerar documentos paginados bajo límite configurable.\",\"Para quickScan calcular aproximaciones por metadatos agregados y recuentos disponibles.\",\"Para deepScan inspeccionar por documento el histórico de versiones si la API del contexto lo permite.\",\"Agregar resultados en memoria y construir ranking de coste histórico.\"],\"apis\":[{\"nombre\":\"SharePoint REST API\",\"uso\":\"Enumerar documentos y tamaños actuales de la biblioteca.\"},{\"nombre\":\"SharePoint REST API o PnPjs sobre REST\",\"uso\":\"Consultar historial de versiones por archivo cuando sea accesible en el contexto del sitio.\"}],\"modeloDatosSalida\":{\"siteUrl\":\"string\",\"library\":{\"id\":\"string\",\"title\":\"string\",\"itemCount\":\"number\"},\"summary\":{\"documentCount\":\"number\",\"currentSizeBytes\":\"number\",\"historicalVersionCount\":\"number\",\"historicalSizeBytes\":\"number|null\",\"ratio\":\"number|null\",\"coveragePercent\":\"number\"},\"topDocuments\":[{\"name\":\"string\",\"serverRelativeUrl\":\"string\",\"currentSizeBytes\":\"number\",\"historicalVersionCount\":\"number\",\"historicalSizeBytes\":\"number|null\",\"ratio\":\"number|null\"}],\"health\":{\"level\":\"ok|warning|critical|unknown\",\"reasons\":[\"string\"]}},\"permisos\":[\"Lectura de la biblioteca y de los documentos.\",\"Acceso suficiente para consultar metadatos de versiones según permisos efectivos del usuario.\"],\"consideraciones\":[\"El cálculo exacto de tamaño histórico puede ser caro y no siempre estar disponible de forma agregada.\",\"En sitios grandes debe limitarse el deep scan para evitar tiempos excesivos y throttling.\",\"La web part debe dejar claro si el resultado es exacto o estimado.\"],\"riesgosTecnicos\":[\"Posible throttling en bibliotecas grandes.\",\"Disponibilidad desigual de metadatos de versiones.\",\"Tiempo de carga alto si se inspeccionan muchos documentos.\",\"Necesidad de paginación y cancelación de requests.\"],\"estrategiaImplementacion\":[\"Crear HistoricalStorageAnalyzerService.\",\"Separar adapters quickScan y deepScan.\",\"Implementar cola limitada de peticiones y cancelación.\",\"Modelar resultado con flag isEstimated.\",\"Renderizar tarjetas KPI y tabla Top N.\"]},\"disenoTecnico\":{\"arquitectura\":{\"webPart\":\"HistoricalStorageAnalyzerWebPart\",\"componentes\":[\"HistoricalStorageAnalyzer\",\"SummaryKpis\",\"TopDocumentsTable\",\"AnalysisModeToggle\",\"CoverageBadge\"],\"servicios\":[\"HistoricalStorageAnalyzerService\",\"QuickScanStrategy\",\"DeepScanStrategy\",\"HistoricalMetricsAggregator\"],\"repositorios\":[\"LibraryRepository\",\"FileVersionsRepository\"],\"patron\":\"Estrategia para quick scan y deep scan con agregador común\"},\"propertyPane\":{\"grupos\":[{\"nombre\":\"Origen de datos\",\"campos\":[\"libraryTitleOrId\"]},{\"nombre\":\"Modo de análisis\",\"campos\":[\"analysisMode\",\"maxItemsToInspect\",\"topNHeavyDocuments\"]},{\"nombre\":\"Alertas\",\"campos\":[\"warningHistoricalRatio\"]}]},\"contratos\":{\"IWebPartProps\":{\"libraryTitleOrId\":\"string\",\"analysisMode\":\"quickScan|deepScan\",\"maxItemsToInspect\":\"number\",\"topNHeavyDocuments\":\"number\",\"warningHistoricalRatio\":\"number\"},\"IDocumentHistoricalMetrics\":{\"name\":\"string\",\"serverRelativeUrl\":\"string\",\"currentSizeBytes\":\"number\",\"historicalVersionCount\":\"number\",\"historicalSizeBytes\":\"number|null\",\"ratio\":\"number|null\",\"isEstimated\":\"boolean\"},\"ILibraryHistoricalSummary\":{\"documentCount\":\"number\",\"currentSizeBytes\":\"number\",\"historicalVersionCount\":\"number\",\"historicalSizeBytes\":\"number|null\",\"ratio\":\"number|null\",\"coveragePercent\":\"number\",\"scanDurationMs\":\"number\",\"isEstimated\":\"boolean\"},\"IAnalyzerResult\":{\"siteUrl\":\"string\",\"libraryId\":\"string\",\"libraryTitle\":\"string\",\"summary\":\"ILibraryHistoricalSummary\",\"topDocuments\":\"IDocumentHistoricalMetrics[]\",\"health\":\"{ level: string; reasons: string[] }\"}},\"flujoEjecucion\":[\"Leer propiedades configuradas.\",\"Resolver biblioteca y validar existencia.\",\"Enumerar documentos actuales paginados.\",\"Seleccionar estrategia quickScan o deepScan.\",\"En deepScan consultar histórico por archivo con concurrencia limitada.\",\"Agregar métricas y calcular coveragePercent.\",\"Clasificar salud y renderizar KPIs y ranking.\"],\"rendimiento\":{\"limites\":\"Deep scan limitado por maxItemsToInspect.\",\"concurrencia\":\"Procesar peticiones de versiones con cola limitada, por ejemplo 3 a 5 en paralelo.\",\"cache\":\"Cache por combinación siteUrl+libraryId+analysisMode durante la sesión.\",\"cancelacion\":\"AbortController y descarte de resultados tardíos.\",\"reintentos\":\"Backoff exponencial ante 429 y 503.\"},\"seguridad\":{\"modelo\":\"Solo lectura en v1.\",\"validaciones\":[\"Validar números de configuración contra mínimos y máximos.\",\"No exponer rutas internas en logs visibles al usuario.\",\"Sanitizar nombres y URLs antes de renderizar enlaces.\"],\"permisosMinimos\":\"Lectura de biblioteca y acceso a metadatos de versiones donde el contexto lo permita.\"},\"telemetria\":{\"eventos\":[\"historical_analyzer_loaded\",\"quickscan_started\",\"deepscan_started\",\"versions_batch_completed\",\"historical_analyzer_throttled\",\"historical_analyzer_error\"],\"campos\":[\"siteUrlHash\",\"libraryId\",\"analysisMode\",\"documentsInspected\",\"coveragePercent\",\"durationMs\",\"isEstimated\"]},\"ux\":{\"layout\":\"Bloque resumen con KPIs + tabla Top N + indicador de cobertura.\",\"responsive\":\"KPIs apilados en narrow section y tabla simplificada en móvil.\",\"accesibilidad\":[\"Cabeceras semánticas en tabla.\",\"ARIA labels en selector de modo.\",\"Mensajes de estado accesibles para loading y throttling.\"]},\"i18n\":{\"idiomasIniciales\":[\"es-ES\",\"en-US\"],\"clavesRecomendadas\":[\"Title\",\"QuickScan\",\"DeepScan\",\"Coverage\",\"Estimated\",\"Exact\",\"Throttled\",\"ExportJson\"]}},\"automatizacionDesarrollo\":{\"promptObjetivo\":\"Generar una web part SPFx React para SharePoint Online que analice el coste de almacenamiento histórico de una biblioteca, diferenciando contenido actual y versiones históricas, con quick scan y deep scan y ranking de documentos más pesados por histórico.\",\"archivosEsperados\":[\"src/webparts/historicalStorageAnalyzer/HistoricalStorageAnalyzerWebPart.ts\",\"src/webparts/historicalStorageAnalyzer/components/HistoricalStorageAnalyzer.tsx\",\"src/webparts/historicalStorageAnalyzer/components/SummaryKpis.tsx\",\"src/webparts/historicalStorageAnalyzer/components/TopDocumentsTable.tsx\",\"src/webparts/historicalStorageAnalyzer/components/AnalysisModeToggle.tsx\",\"src/webparts/historicalStorageAnalyzer/components/CoverageBadge.tsx\",\"src/webparts/historicalStorageAnalyzer/services/HistoricalStorageAnalyzerService.ts\",\"src/webparts/historicalStorageAnalyzer/services/QuickScanStrategy.ts\",\"src/webparts/historicalStorageAnalyzer/services/DeepScanStrategy.ts\",\"src/webparts/historicalStorageAnalyzer/services/HistoricalMetricsAggregator.ts\",\"src/webparts/historicalStorageAnalyzer/models/HistoricalAnalyzerModels.ts\",\"src/webparts/historicalStorageAnalyzer/loc/en-us.js\",\"src/webparts/historicalStorageAnalyzer/loc/es-es.js\"],\"tareasImplementacion\":[\"Scaffold SPFx React.\",\"Definir property pane con modo quick/deep y límites.\",\"Implementar enumeración de documentos con paginación.\",\"Implementar lectura de versiones por archivo con control de concurrencia.\",\"Agregar cálculo de tamaños y ratios.\",\"Construir ranking topN y resumen ejecutivo.\",\"Añadir exportación JSON del resultado.\",\"Incluir pruebas unitarias de agregación y clasificación.\",\"Añadir telemetría, cache y cancelación.\"],\"criteriosAceptacion\":[\"La web part muestra el número de documentos actuales de la biblioteca.\",\"El modo quick scan devuelve una estimación en tiempo razonable.\",\"El modo deep scan inspecciona hasta el límite configurado sin bloquear la UI.\",\"Cada resultado informa si es exacto o estimado.\",\"La UI muestra ratio histórico/actual y ranking top documentos.\",\"Se muestran mensajes explícitos cuando hay throttling o permisos insuficientes.\"],\"tests\":[\"Unit test de agregación de tamaños actual vs histórico.\",\"Unit test de cálculo de coveragePercent.\",\"Unit test de ranking top documents.\",\"Test de render para quickScan, deepScan, error y throttled.\",\"Test de cancelación de peticiones al desmontar componente.\",\"Test de limitación de concurrencia y retries.\"],\"definitionOfDone\":[\"Compila en SPFx y pasa tests unitarios.\",\"No degrada de forma severa la página en bibliotecas grandes gracias a límites y concurrencia controlada.\",\"Distingue claramente resultados exactos de estimados.\",\"Documenta riesgos, costes y límites del deep scan en README técnico.\",\"Incluye contratos TypeScript, property pane, telemetría y estrategia de rendimiento.\"],\"salidaEsperadaLLM\":{\"tipo\":\"Código SPFx listo para compilar + README técnico + tests unitarios + breve documento de decisiones técnicas\"}}}",
+    "createdTime": "2026-03-19T22:15:29.000Z"
+  }
+}

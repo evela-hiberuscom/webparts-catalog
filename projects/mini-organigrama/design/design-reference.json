@@ -1,0 +1,94 @@
+{
+  "projectSlug": "mini-organigrama",
+  "rowId": "recR0hmAqzSViJFra",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Dar contexto jerárquico mínimo con una representación muy legible y poco intimidante.",
+    "informationArchitecture": {
+      "zones": [
+        "manager/root",
+        "nivel siguiente",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "root manager",
+        "direct reports"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "tree": "árbol pequeño o cards conectadas"
+      },
+      "narrow": {
+        "tree": "lista jerárquica simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton org nodes"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "root person",
+          "children list/tree"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin estructura disponible"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "nodos con relación o perfil ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "avatar",
+        "nombre",
+        "rol",
+        "profileAction"
+      ],
+      "badges": [
+        "manager",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mini organigrama",
+      "messages": {
+        "empty": "No hay estructura organizativa disponible.",
+        "error": "No se ha podido cargar el mini organigrama."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "estructura legible",
+        "nodos y enlaces accesibles",
+        "texto visible además de imagen"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "usar lista jerárquica simple"
+    }
+  }
+}

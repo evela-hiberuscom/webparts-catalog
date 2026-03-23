@@ -1,0 +1,92 @@
+{
+  "projectSlug": "noticias-por-area",
+  "rowId": "recbNBpGtYOyEJ1jH",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Mantener al usuario informado solo de lo que le afecta en el contexto de su área o página.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista de noticias del área"
+      ],
+      "priorityOrder": [
+        "más recientes",
+        "destacadas del área"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "cards o lista"
+      },
+      "narrow": {
+        "items": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "area news list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin noticias para esta área"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "title",
+        "summary",
+        "publishedAt",
+        "image",
+        "openAction"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Noticias por área",
+      "messages": {
+        "empty": "No hay noticias disponibles para esta área.",
+        "error": "No se han podido cargar las noticias del área."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards accesibles",
+        "fechas legibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción"
+    }
+  }
+}

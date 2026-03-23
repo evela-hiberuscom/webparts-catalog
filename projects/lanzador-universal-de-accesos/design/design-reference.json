@@ -1,0 +1,97 @@
+{
+  "projectSlug": "lanzador-universal-de-accesos",
+  "rowId": "recfiHUjaapUToQEr",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir encontrar y lanzar una herramienta corporativa en uno o dos clics.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros opcionales",
+        "grid de accesos"
+      ],
+      "priorityOrder": [
+        "destacados",
+        "prioritarios",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 4-6 columnas"
+      },
+      "narrow": {
+        "cards": "grid 2 columnas o lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton launch cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "launch grid"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin accesos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "icono",
+        "titulo",
+        "categoria",
+        "descripcionBreve",
+        "openAction"
+      ],
+      "badges": [
+        "destacado",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Lanzador universal de accesos",
+      "messages": {
+        "empty": "No hay accesos configurados.",
+        "error": "No se han podido cargar los accesos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards/links accesibles",
+        "texto visible además de iconos",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar icono, título y acción"
+    }
+  }
+}

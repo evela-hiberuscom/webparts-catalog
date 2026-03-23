@@ -1,0 +1,96 @@
+{
+  "projectSlug": "objetivos-del-area",
+  "rowId": "recbt1kGuQnmfS6oL",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Mantener visibles las metas del área con una lectura clara y poco pesada.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista de objetivos",
+        "filtros opcionales"
+      ],
+      "priorityOrder": [
+        "activos/prioritarios",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "cards o lista con barra/progreso opcional"
+      },
+      "narrow": {
+        "items": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton goals"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "goals list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin objetivos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "objetivos con metadatos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "progresoOEstado",
+        "owner",
+        "horizon",
+        "openAction"
+      ],
+      "badges": [
+        "onTrack",
+        "atRisk",
+        "done",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Objetivos del área",
+      "messages": {
+        "empty": "No hay objetivos visibles.",
+        "error": "No se han podido cargar los objetivos del área."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "estado/progreso con texto visible",
+        "listas accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y estado/progreso"
+    }
+  }
+}

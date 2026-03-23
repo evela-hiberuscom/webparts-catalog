@@ -1,0 +1,527 @@
+{
+  "rowId": "recDe4Jh2iLvXpfIB",
+  "name": "Conoce al equipo",
+  "slug": "conoce-al-equipo",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 5,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "TeamMembersList",
+      "type": "SharePointList",
+      "purpose": "presentación de miembros del equipo"
+    },
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "datos básicos de perfil"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "meet-the-team",
+        "name": "Conoce al equipo",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta a las personas de un equipo con foto, rol, descripción breve y enlaces de contacto o perfil.",
+        "productGoal": "Facilitar reconocimiento, cercanía y contexto humano dentro de equipos o áreas."
+      },
+      "problem": {
+        "business": "En equipos distribuidos o grandes, no siempre es fácil saber quién es quién y a qué se dedica cada persona.",
+        "operational": "Las páginas de equipo necesitan una forma clara y reusable de presentar a sus miembros."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar miembros del equipo con información básica",
+          "Permitir abrir perfil o contacto",
+          "Destacar rol y presentación breve"
+        ],
+        "secondary": [
+          "Ordenar por rol, orden manual o seniority",
+          "Servir para equipos pequeños o medianos"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "conocer a las personas del equipo"
+          ]
+        },
+        {
+          "role": "Manager/Owner de equipo",
+          "needs": [
+            "presentar al equipo de forma clara"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Foto/avatar",
+          "nombre",
+          "rol",
+          "bio corta",
+          "contacto o perfil",
+          "orden configurable"
+        ],
+        "out": [
+          "directorio global completo",
+          "org chart complejo",
+          "edición de perfiles desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver quién forma parte del equipo",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir perfil o contacto",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Presentar el equipo en una página de área",
+          "actor": "Manager"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar miembros configurados con nombre y rol."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar foto/avatar y bio corta cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir perfil o contacto cuando existan enlaces."
+        },
+        {
+          "id": "RF-04",
+          "text": "Ordenar por orden manual, rol o prioridad si existe el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Visualmente agradable y muy legible."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar falta de foto o bio sin romper la UI."
+        }
+      ],
+      "businessRules": [
+        "Si falta foto, mostrar avatar por defecto o iniciales.",
+        "Si falta bio, el miembro sigue siendo válido.",
+        "Si falta enlace de perfil/contacto, la tarjeta sigue siendo informativa."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "Directory",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 12,
+          "min": 1,
+          "max": 50
+        },
+        "sortMode": {
+          "type": "enum",
+          "values": [
+            "manual",
+            "role",
+            "name"
+          ],
+          "default": "manual"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra miembros del equipo configurados.",
+        "Permite abrir perfil/contacto cuando existe.",
+        "Ordena según configuración.",
+        "Funciona con metadatos parciales."
+      ],
+      "edgeCases": [
+        "miembro sin foto",
+        "sin bio",
+        "sin perfil",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza tarjetas de equipo correctamente",
+        "Incluye tests base de ordenación y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Generar cercanía y claridad sobre quién compone el equipo y cómo contactar con cada persona.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "grid de miembros"
+        ],
+        "priorityOrder": [
+          "foto/nombre",
+          "rol",
+          "bio",
+          "acciones"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "lista o 2 columnas"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton member cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "member cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin miembros"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "miembros con foto/bio ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "avatar",
+          "nombre",
+          "rol",
+          "bio",
+          "profileAction"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Conoce al equipo",
+        "messages": {
+          "empty": "No hay miembros del equipo configurados.",
+          "error": "No se ha podido cargar la información del equipo."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards y enlaces accesibles",
+          "texto visible además de imagen",
+          "alt adecuado o avatar decorativo según caso"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, rol y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer miembros",
+          "ordenar",
+          "render cards"
+        ],
+        "v1": [
+          "sortMode configurable",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización de personas"
+        },
+        {
+          "id": "EP-02",
+          "name": "Ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer miembros desde orígenes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Ordenar miembros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar tarjetas de equipo"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de miembros"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar sort modes"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear TeamMemberCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "TeamMembersList",
+          "type": "SharePointList",
+          "purpose": "presentación de miembros del equipo"
+        },
+        {
+          "name": "Directory",
+          "type": "Directory/API",
+          "purpose": "datos básicos de perfil"
+        }
+      ],
+      "entities": {
+        "TeamMember": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "bio": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null",
+          "sortOrder": "number|null"
+        }
+      },
+      "mappings": {
+        "sortOrder": "number or null"
+      },
+      "validationRules": [
+        "displayName requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "nombre y rol presentes",
+        "partial": "faltan foto, bio o profileUrl"
+      },
+      "fallbacks": [
+        "sin foto => avatar por defecto",
+        "sin bio => null",
+        "sin profileUrl => tarjeta informativa"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "displayName": "Laura Pérez",
+            "jobTitle": "Product Manager",
+            "photoUrl": "/photo.jpg",
+            "profileUrl": "/profile/laura",
+            "sortOrder": 1
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "full member",
+          "no photo",
+          "no bio",
+          "no profile",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MeetTheTeamWebPart",
+        "pattern": "SPFx React + people normalizer + repository",
+        "components": [
+          "MeetTheTeam",
+          "TeamMemberCard"
+        ],
+        "services": [
+          "MeetTheTeamService"
+        ],
+        "repositories": [
+          "TeamMembersRepository",
+          "DirectoryRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'Directory'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string|undefined",
+          "maxItems": "number",
+          "sortMode": "manual|role|name"
+        },
+        "ITeamMember": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "bio": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null",
+          "sortOrder": "number|null"
+        },
+        "IViewModel": {
+          "items": "ITeamMember[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer miembros desde orígenes",
+        "normalizar datos de persona",
+        "ordenar según sortMode",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "sort": "manual by sortOrder, else role or name"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin photoUrl",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin profileUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin bio",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar profileUrl/photoUrl",
+          "no exponer campos personales no previstos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "meet_team_loaded",
+          "meet_team_partial",
+          "meet_team_error",
+          "team_profile_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "sortMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "sort modes",
+          "mapping"
+        ],
+        "component": [
+          "member card render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas. Presentación reusable de miembros de un área o comité.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

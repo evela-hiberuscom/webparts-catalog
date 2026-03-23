@@ -1,0 +1,496 @@
+{
+  "rowId": "recuGCCruwmSSEE6F",
+  "name": "Inicia una solicitud",
+  "slug": "inicia-una-solicitud",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 6,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "RequestsCatalogList",
+      "type": "SharePointList",
+      "purpose": "catálogo de solicitudes"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "start-a-request",
+        "name": "Inicia una solicitud",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Presenta accesos rápidos a procesos corporativos habituales para iniciar solicitudes sin ambigüedad ni navegación innecesaria.",
+        "productGoal": "Reducir fricción al iniciar procesos como pedir material, vacaciones, soporte o compras."
+      },
+      "problem": {
+        "business": "Los usuarios no siempre saben por dónde empieza cada solicitud ni qué canal usar.",
+        "operational": "Se abren solicitudes por canales incorrectos y aumenta la carga de triage."
+      },
+      "objectives": {
+        "primary": [
+          "Centralizar entradas a procesos frecuentes",
+          "Explicar mínimamente cada solicitud",
+          "Dirigir al flujo correcto",
+          "Permitir segmentación por categoría o audiencia"
+        ],
+        "secondary": [
+          "Resaltar procesos más usados",
+          "Mostrar notas o prerequisitos",
+          "Servir como lanzador reusable en intranet"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber dónde iniciar una solicitud",
+            "entender qué proceso corresponde a su caso"
+          ]
+        },
+        {
+          "role": "Soporte/Backoffice",
+          "needs": [
+            "reducir solicitudes mal encaminadas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de solicitudes",
+          "Tarjetas con descripción breve",
+          "Enlace de inicio",
+          "Filtros por categoría",
+          "Notas o prerequisitos"
+        ],
+        "out": [
+          "Motor de workflow propio",
+          "captura del formulario dentro del web part en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Iniciar ticket de soporte",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Solicitar vacaciones",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar por categoría de solicitud",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar solicitudes configuradas por categoría o audiencia."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar descripción breve y acción principal."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir el flujo correcto de solicitud."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros simples por categoría."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Muy rápida y fácilmente comprensible."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo launcher en V1."
+        }
+      ],
+      "businessRules": [
+        "Si una solicitud no tiene enlace principal, no debe mostrarse como accionable.",
+        "Si hay prerequisitos, deben mostrarse de forma breve y visible.",
+        "Las categorías se usan para ordenar y filtrar cuando existen."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "showPrerequisites": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra solicitudes configuradas.",
+        "Permite abrir el flujo correcto.",
+        "Filtra por categoría si existe.",
+        "Muestra prerequisitos cuando existan."
+      ],
+      "edgeCases": [
+        "solicitud sin enlace",
+        "sin categoría",
+        "sin prerequisitos",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Funciona como launcher consistente",
+        "Incluye tests base de mapping y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir iniciar una solicitud correcta sin dudar qué proceso elegir.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "categorías/filtros",
+          "grid de solicitudes"
+        ],
+        "priorityOrder": [
+          "solicitudes destacadas",
+          "categorías frecuentes",
+          "descripción breve"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-4 columnas"
+        },
+        "narrow": {
+          "cards": "lista o grid 2 columnas"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton request cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "request cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin solicitudes"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con datos faltantes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "titulo",
+          "categoria",
+          "descripcion",
+          "prerequisitos",
+          "accionIniciar"
+        ]
+      },
+      "copy": {
+        "title": "Inicia una solicitud",
+        "messages": {
+          "empty": "No hay solicitudes configuradas.",
+          "error": "No se han podido cargar las solicitudes."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "acciones claras",
+          "texto de ayuda visible",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, descripción y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer catálogo",
+          "render cards",
+          "abrir flujo"
+        ],
+        "v1": [
+          "filtros",
+          "prerequisitos visibles",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y catálogo"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer solicitudes desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards y filtros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear RequestsCatalogRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Normalizar categorías y prerequisitos"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear RequestCard y filters"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "RequestsCatalogList",
+          "type": "SharePointList",
+          "purpose": "catálogo de solicitudes"
+        }
+      ],
+      "entities": {
+        "RequestItem": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "description": "string|null",
+          "prerequisites": "string|null",
+          "startUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "category": "string simple o unknown"
+      },
+      "validationRules": [
+        "title requerido",
+        "startUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "título, descripción y enlace presentes",
+        "partial": "falta categoría, prerequisitos o enlace"
+      },
+      "fallbacks": [
+        "sin categoría => general",
+        "sin prerequisitos => no mostrar bloque",
+        "sin startUrl => visible sin acción principal"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Solicitar vacaciones",
+            "category": "RRHH",
+            "description": "Inicia una solicitud de vacaciones",
+            "startUrl": "/sites/hr/requests/vacaciones"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "con categoría",
+          "sin categoría",
+          "sin prerequisitos",
+          "sin link",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "StartARequestWebPart",
+        "pattern": "SPFx React + repository + category filter",
+        "components": [
+          "StartARequest",
+          "RequestCard",
+          "RequestCategoryFilter"
+        ],
+        "services": [
+          "RequestsCatalogService"
+        ],
+        "repositories": [
+          "RequestsCatalogRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "defaultCategory": "string|undefined",
+          "showPrerequisites": "boolean"
+        },
+        "IRequestItem": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "description": "string|null",
+          "prerequisites": "string|null",
+          "startUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IRequestItem[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer catálogo de solicitudes",
+        "normalizar categorías",
+        "aplicar filtro por defecto",
+        "renderizar"
+      ],
+      "algorithms": {
+        "filter": "por categoría cuando exista",
+        "sort": "destacadas o por categoría/título"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin startUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin categoría",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "sanitizar enlaces",
+          "marcar enlaces externos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "requests_loaded",
+          "requests_partial",
+          "requests_error",
+          "request_started"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "category filter",
+          "mapping"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad/Servicio. Launcher de procesos como pedir material, abrir ticket o solicitar vacaciones.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

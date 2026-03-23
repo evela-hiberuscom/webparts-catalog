@@ -1,0 +1,23 @@
+{
+  "projectSlug": "cumpleanos-y-aniversarios",
+  "archetype": "general",
+  "rowId": "recr2Cr1lD1C3JA6O",
+  "sources": [
+    {
+      "name": "PeopleCelebrations",
+      "type": "Directory|SharePointList",
+      "purpose": "cumpleaños y aniversarios"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra celebraciones en ventana temporal.",
+    "Destaca las de hoy.",
+    "Respeta tipos configurados.",
+    "Funciona con foto o datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Hoy tiene prioridad visual máxima.",
+    "Si falta foto, usar avatar por defecto.",
+    "Si falta fecha válida, excluir la entrada o marcarla parcial según política."
+  ]
+}

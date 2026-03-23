@@ -1,0 +1,520 @@
+{
+  "rowId": "recVXCvX5ElPNmsj4",
+  "name": "Checklist de offboarding o cambios",
+  "slug": "checklist-de-offboarding-o-cambios",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 4,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "OffboardingChecklistList",
+      "type": "SharePointList",
+      "purpose": "pasos de offboarding o cambio"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "offboarding-or-change-checklist",
+        "name": "Checklist de offboarding o cambios",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Organiza pasos de salida, transferencia o cambio organizativo para evitar omisiones operativas y de acceso.",
+        "productGoal": "Estandarizar procesos de offboarding y cambios internos mediante checklists claras y reutilizables."
+      },
+      "problem": {
+        "business": "Las salidas y cambios de rol pueden dejar accesos, activos o pasos sin gestionar.",
+        "operational": "RRHH, managers y soporte necesitan una secuencia clara de tareas según escenario."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar checklist por tipo de cambio",
+          "Ordenar pasos por fase o prioridad",
+          "Destacar pasos críticos de seguridad o acceso"
+        ],
+        "secondary": [
+          "Abrir recursos relacionados",
+          "Servir para offboarding, transferencias o cambios internos"
+        ]
+      },
+      "users": [
+        {
+          "role": "Manager",
+          "needs": [
+            "seguir el proceso correcto según el caso"
+          ]
+        },
+        {
+          "role": "RRHH/IT",
+          "needs": [
+            "no olvidar pasos críticos"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de pasos por escenario",
+          "Fases o prioridades",
+          "Indicadores críticos",
+          "Enlaces relacionados"
+        ],
+        "out": [
+          "automatización de bajas/altas",
+          "seguimiento persistente por caso en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consultar checklist de salida",
+          "actor": "Manager"
+        },
+        {
+          "id": "CU-02",
+          "name": "Consultar checklist de cambio interno",
+          "actor": "RRHH/IT"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir recurso asociado",
+          "actor": "Manager"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar pasos por escenario (offboarding, transferencia, cambio interno) cuando exista el dato."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, descripción, criticidad y fase cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir enlaces o recursos asociados."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por escenario o fase."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy claro y orientado a no omitir pasos críticos."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Los pasos críticos se destacan visualmente.",
+        "Si falta escenario, el paso va a Generic.",
+        "Si falta fase, se ordena por prioridad o título."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "scenario": {
+          "type": "enum",
+          "values": [
+            "offboarding",
+            "transfer",
+            "roleChange",
+            "generic"
+          ],
+          "default": "generic"
+        },
+        "defaultPhase": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra pasos configurados por escenario.",
+        "Destaca críticos cuando existan.",
+        "Permite filtrar por fase o escenario.",
+        "Abre recursos cuando existan."
+      ],
+      "edgeCases": [
+        "paso sin escenario",
+        "sin criticidad",
+        "sin enlace",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza checklist por escenario",
+        "Incluye tests base de filtros, ordenación y criticidad"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Ayudar a ejecutar procesos sensibles sin olvidar pasos de seguridad, accesos o coordinación.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros de escenario/fase",
+          "lista de pasos"
+        ],
+        "priorityOrder": [
+          "críticos",
+          "fase actual",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista secuencial o timeline"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton checklist"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "steps list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin checklist"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "pasos con datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "descripcion",
+          "escenario",
+          "fase",
+          "critico",
+          "relatedLink"
+        ],
+        "badges": [
+          "critico",
+          "normal",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Checklist de offboarding o cambios",
+        "messages": {
+          "empty": "No hay pasos configurados para este escenario.",
+          "error": "No se ha podido cargar el checklist."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "secuencia legible",
+          "badges con texto",
+          "links accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, escenario y criticidad"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer pasos",
+          "render checklist",
+          "filtrar por escenario"
+        ],
+        "v1": [
+          "filtros por fase",
+          "highlight de críticos",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer pasos desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Filtrar por escenario y fase"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar pasos y criticidad"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear ChecklistRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtros y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ChecklistStepItem con criticidad"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "OffboardingChecklistList",
+          "type": "SharePointList",
+          "purpose": "pasos de offboarding o cambio"
+        }
+      ],
+      "entities": {
+        "ChecklistStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "scenario": "string|null",
+          "phase": "string|null",
+          "critical": "boolean|null",
+          "relatedUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "scenario": "offboarding|transfer|roleChange|generic|unknown",
+        "critical": "boolean default false"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, scenario y critical presentes",
+        "partial": "faltan description, phase o relatedUrl"
+      },
+      "fallbacks": [
+        "sin scenario => generic",
+        "sin critical => false",
+        "sin relatedUrl => sin acción secundaria"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Revocar accesos",
+            "scenario": "offboarding",
+            "phase": "Día 0",
+            "critical": true,
+            "relatedUrl": "/sites/it/offboarding"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "offboarding crítico",
+          "transfer",
+          "roleChange",
+          "sin scenario",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "OffboardingOrChangeChecklistWebPart",
+        "pattern": "SPFx React + repository + scenario filter",
+        "components": [
+          "OffboardingOrChangeChecklist",
+          "ChecklistScenarioFilter",
+          "ChecklistStepItem"
+        ],
+        "services": [
+          "ChecklistScenarioService"
+        ],
+        "repositories": [
+          "ChecklistRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "scenario": "offboarding|transfer|roleChange|generic",
+          "defaultPhase": "string|undefined"
+        },
+        "IChecklistStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "scenario": "offboarding|transfer|roleChange|generic|unknown",
+          "phase": "string|null",
+          "critical": "boolean",
+          "relatedUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IChecklistStep[]",
+          "phases": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer pasos",
+        "normalizar scenario/phase/critical",
+        "filtrar por scenario y fase",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "critical desc + phase asc + title asc",
+        "filter": "por scenario y fase cuando existan"
+      },
+      "performance": {
+        "cache": "por origen y scenario",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin scenario",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin relatedUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar relatedUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "offboarding_loaded",
+          "offboarding_partial",
+          "offboarding_error",
+          "offboarding_link_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "scenario",
+          "phaseFilter",
+          "criticalCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "scenario filter",
+          "critical sort",
+          "phase ordering"
+        ],
+        "component": [
+          "checklist render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento/Personas. Pasos para salidas, transferencias o cambios organizativos.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

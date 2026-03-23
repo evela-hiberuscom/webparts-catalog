@@ -1,0 +1,511 @@
+{
+  "rowId": "recCKDr21DGQb4uKd",
+  "name": "Estado de incidencias destacadas",
+  "slug": "estado-de-incidencias-destacadas",
+  "artifactType": "SPFxWebPart",
+  "archetype": "analytics",
+  "waveNumber": 2,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "IncidentsList",
+      "type": "SharePointList",
+      "purpose": "incidencias destacadas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "highlighted-incidents-status",
+        "name": "Estado de incidencias destacadas",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra incidencias activas o recientes con severidad, impacto, workaround y ETA.",
+        "productGoal": "Ofrecer una vista resumida de incidentes relevantes para soporte y usuarios finales."
+      },
+      "problem": {
+        "business": "Los usuarios no saben si un problema es conocido o tiene workaround.",
+        "operational": "Soporte repite contexto en múltiples canales y tickets."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar incidencias destacadas activas",
+          "Mostrar severidad, impacto y ETA",
+          "Mostrar workaround cuando exista"
+        ],
+        "secondary": [
+          "Permitir abrir detalle completo",
+          "Mostrar solo las más relevantes",
+          "Marcar incidencias resueltas recientes opcionalmente"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber si el problema ya está identificado",
+            "ver workaround"
+          ]
+        },
+        {
+          "role": "SupportM365",
+          "needs": [
+            "mostrar severidad e impacto",
+            "enlazar a detalle"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de incidencias destacadas",
+          "Severidad",
+          "Impacto",
+          "ETA",
+          "Workaround",
+          "Estado active/monitoring/resolved opcional"
+        ],
+        "out": [
+          "gestión de tickets",
+          "comentarios o timeline completa del incidente"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consultar incidencia conocida",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Publicar workaround",
+          "actor": "SupportM365"
+        },
+        {
+          "id": "CU-03",
+          "name": "Mostrar monitorización",
+          "actor": "Operaciones"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar incidencias activas o recientes según configuración."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar severidad e impacto."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar ETA cuando exista."
+        },
+        {
+          "id": "RF-04",
+          "text": "Mostrar workaround resumido cuando exista."
+        },
+        {
+          "id": "RF-05",
+          "text": "Permitir abrir detalle externo o interno."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida y lectura clara."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Manejar incidencias incompletas sin romper la UI."
+        }
+      ],
+      "businessRules": [
+        "Solo se muestran incidencias active o monitoring por defecto.",
+        "Resolved puede mostrarse solo si un flag lo habilita.",
+        "Si falta ETA, se muestra estado sin ETA pero no se rompe la UI."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "showResolved": {
+          "type": "boolean",
+          "default": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra incidencias con severidad e impacto.",
+        "Muestra workaround si existe.",
+        "Filtra resolved según configuración.",
+        "Abre detalle cuando existe."
+      ],
+      "edgeCases": [
+        "incidencia sin ETA",
+        "incidencia sin workaround",
+        "lista vacía",
+        "estado desconocido"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Gestiona partialData",
+        "Incluye tests base de filtrado y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir detectar rápido incidentes conocidos y qué hacer mientras siguen activos.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista de incidencias",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "critical",
+          "high",
+          "medium",
+          "low"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "cards o lista rica"
+        },
+        "narrow": {
+          "items": "cards compactas"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton incident cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "incident cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin incidencias destacadas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner sutil",
+            "cards con campos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "titulo",
+          "severidad",
+          "impacto",
+          "estado",
+          "workaround",
+          "eta",
+          "detailLink"
+        ]
+      },
+      "copy": {
+        "title": "Estado de incidencias destacadas",
+        "messages": {
+          "empty": "No hay incidencias destacadas activas.",
+          "error": "No se ha podido cargar el estado de incidencias."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "badges con texto",
+          "contraste AA",
+          "links accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "cards verticales con workaround truncado"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "filtrar activas",
+          "render cards"
+        ],
+        "v1": [
+          "showResolved",
+          "telemetría",
+          "JSON source"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y filtrado"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y priorización visual"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer incidencias y filtrar estados"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards priorizadas por severidad"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear IncidentsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar filtro active/monitoring/resolved"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear IncidentCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-02",
+          "name": "Añadir orden por severidad"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "IncidentsList",
+          "type": "SharePointList",
+          "purpose": "incidencias destacadas"
+        }
+      ],
+      "entities": {
+        "Incident": {
+          "id": "string",
+          "title": "string",
+          "severity": "string",
+          "impact": "string|null",
+          "status": "string",
+          "workaround": "string|null",
+          "eta": "string|null",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "severity": "mapear a critical|high|medium|low|unknown",
+        "status": "mapear a active|monitoring|resolved|unknown"
+      },
+      "validationRules": [
+        "title requerido",
+        "severity recomendada",
+        "status recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "severidad, estado e impacto completos",
+        "partial": "faltan ETA o workaround"
+      },
+      "fallbacks": [
+        "severity desconocida => unknown",
+        "ETA ausente => null",
+        "workaround ausente => null"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "VPN intermitente",
+            "severity": "high",
+            "impact": "Acceso remoto parcial",
+            "status": "active",
+            "workaround": "Reintentar pasados 5 minutos",
+            "eta": "2026-03-21T11:00:00Z"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "active critical",
+          "monitoring high",
+          "resolved hidden",
+          "sin ETA",
+          "sin workaround"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "HighlightedIncidentsWebPart",
+        "pattern": "SPFx React + repository + mapper",
+        "components": [
+          "HighlightedIncidents",
+          "IncidentCard"
+        ],
+        "services": [
+          "HighlightedIncidentsService"
+        ],
+        "repositories": [
+          "IncidentsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl",
+          "listTitleOrUrl": "string",
+          "showResolved": "boolean",
+          "maxItems": "number"
+        },
+        "IIncident": {
+          "id": "string",
+          "title": "string",
+          "severity": "critical|high|medium|low|unknown",
+          "impact": "string|null",
+          "status": "active|monitoring|resolved|unknown",
+          "workaround": "string|null",
+          "eta": "string|null",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IIncident[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer incidencias",
+        "filtrar por estado",
+        "ordenar por severidad",
+        "renderizar"
+      ],
+      "algorithms": {
+        "filter": "active/monitoring por defecto; resolved si showResolved=true",
+        "sort": "critical > high > medium > low"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "ETA ausente",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "estado no reconocido",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar links",
+          "mensajes seguros"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "incidents_loaded",
+          "incidents_partial",
+          "incidents_error"
+        ],
+        "properties": [
+          "itemCount",
+          "criticalCount",
+          "showResolved"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "severity sort",
+          "status filter",
+          "mapper"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Incidencias activas, workaround y ETA de resolución.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

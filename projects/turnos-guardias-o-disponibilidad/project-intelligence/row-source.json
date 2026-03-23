@@ -1,0 +1,611 @@
+{
+  "rowId": "reclRJcfIJeEsExJe",
+  "name": "Turnos, guardias o disponibilidad",
+  "slug": "turnos-guardias-o-disponibilidad",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 10,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "ShiftsList",
+      "type": "SharePointList",
+      "purpose": "guardias y turnos operativos"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "shifts-guards-availability",
+        "name": "Turnos, guardias o disponibilidad",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra quién está de turno, de guardia o disponible en un periodo concreto, con horarios, cobertura y contacto rápido.",
+        "productGoal": "Dar visibilidad operativa inmediata sobre disponibilidad de personas o equipos para soporte, operaciones y continuidad."
+      },
+      "problem": {
+        "business": "Los usuarios no saben quién cubre una función o servicio en un momento determinado.",
+        "operational": "Soporte y operaciones pierden tiempo localizando la guardia correcta o comprobando coberturas manualmente."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar guardia actual o siguiente",
+          "Mostrar persona/equipo, ventana horaria y contacto",
+          "Soportar vista actual y próximas coberturas",
+          "Marcar huecos o conflictos de cobertura"
+        ],
+        "secondary": [
+          "Permitir filtrar por servicio o equipo",
+          "Permitir abrir Teams/mail/perfil",
+          "Servir como tarjeta reusable para on-call u horarios"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber a quién contactar",
+            "ver disponibilidad actual"
+          ]
+        },
+        {
+          "role": "SupportM365",
+          "needs": [
+            "identificar guardia vigente",
+            "ver próximas rotaciones"
+          ]
+        },
+        {
+          "role": "Operaciones",
+          "needs": [
+            "detectar huecos de cobertura",
+            "publicar calendario operativo"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Lectura de turnos o guardias desde lista/JSON",
+          "Detección de cobertura actual",
+          "Próximas coberturas",
+          "Contacto rápido",
+          "Estados activo, próximo, sin cobertura, conflicto"
+        ],
+        "out": [
+          "Edición de turnos desde la web part",
+          "planificación compleja de cuadrantes",
+          "gestión de vacaciones o ausencias"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Saber quién está de guardia ahora",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ver próxima rotación",
+          "actor": "SupportM365"
+        },
+        {
+          "id": "CU-03",
+          "name": "Detectar huecos de cobertura",
+          "actor": "Operaciones"
+        },
+        {
+          "id": "CU-04",
+          "name": "Filtrar por servicio",
+          "actor": "Soporte técnico"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar cobertura activa para el momento actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar próximas coberturas hasta un límite configurable."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar persona/equipo, servicio, horario y canal de contacto."
+        },
+        {
+          "id": "RF-04",
+          "text": "Detectar ausencia de cobertura y conflictos temporales."
+        },
+        {
+          "id": "RF-05",
+          "text": "Permitir filtrar por equipo o servicio cuando existan esos campos."
+        },
+        {
+          "id": "RF-06",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "El cálculo temporal debe ser consistente con la zona horaria del sitio o configuración del tenant."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Carga ligera apta para portada o dashboard operativo."
+        },
+        {
+          "id": "RNF-03",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Un turno es activo si now está entre startAt y endAt.",
+        "Si hay más de un turno activo para el mismo servicio, marcar conflicto.",
+        "Si no hay turno activo para un servicio esperado, marcar sinCobertura.",
+        "Si faltan datos de contacto, el turno se muestra pero con partialData."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "serviceFilter": {
+          "type": "string",
+          "required": false
+        },
+        "showNextCount": {
+          "type": "number",
+          "default": 3,
+          "min": 1,
+          "max": 20
+        },
+        "timezoneMode": {
+          "type": "enum",
+          "values": [
+            "site",
+            "tenant",
+            "custom"
+          ],
+          "default": "site"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra guardia o turno activo correctamente.",
+        "Muestra próximas coberturas ordenadas por inicio.",
+        "Marca huecos o conflictos cuando existan.",
+        "Permite contactar si hay canal disponible."
+      ],
+      "edgeCases": [
+        "turno sin endAt",
+        "conflicto de solape",
+        "sin contacto",
+        "lista vacía",
+        "cambio horario/DST"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Clasifica activo/próximo/conflicto correctamente",
+        "Incluye tests de lógica temporal y conflicto",
+        "README técnico mínimo"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Responder en segundos a la pregunta: quién cubre esto ahora y quién lo cubrirá después.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "guardia activa",
+          "próximas coberturas",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "activo",
+          "conflicto",
+          "sinCobertura",
+          "próximos"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "activeCard": "destacada en cabecera",
+          "nextList": "lista lateral o inferior"
+        },
+        "narrow": {
+          "activeCard": "arriba",
+          "nextList": "apilada"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton active card",
+            "skeleton next list"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "active coverage card",
+            "next coverage list",
+            "actions"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin turnos configurados"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner discreto",
+            "cards con campos faltantes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro",
+            "acción refrescar"
+          ]
+        }
+      ],
+      "cardModel": {
+        "activeFields": [
+          "servicio",
+          "personaOEquipo",
+          "horaInicio",
+          "horaFin",
+          "contacto",
+          "estado"
+        ],
+        "nextFields": [
+          "servicio",
+          "personaOEquipo",
+          "inicio",
+          "fin"
+        ]
+      },
+      "copy": {
+        "title": "Turnos, guardias o disponibilidad",
+        "messages": {
+          "empty": "No hay turnos o guardias configurados.",
+          "error": "No se ha podido cargar la disponibilidad actual.",
+          "partial": "Algunos turnos no tienen toda la información necesaria."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "estado con texto además de color",
+          "acciones de contacto con aria-label",
+          "horarios legibles y localizados"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar tarjeta activa y resumir futuras coberturas"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "detectar guardia activa",
+          "mostrar próximas coberturas"
+        ],
+        "v1": [
+          "conflict/gap detection",
+          "telemetría",
+          "JSON source"
+        ],
+        "hardening": [
+          "tests temporales avanzados",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización temporal"
+        },
+        {
+          "id": "EP-02",
+          "name": "Cobertura y conflicto"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI y contacto"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y normalizar turnos"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Detectar activo, próximo, conflicto y hueco"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar cobertura activa y siguientes"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear ShiftsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Crear utilitario de normalización temporal"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Implementar CoverageEvaluator"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-02",
+          "name": "Implementar ConflictDetector"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-03",
+          "name": "Crear ActiveCoverageCard y NextCoverageList"
+        },
+        {
+          "id": "T-06",
+          "storyId": "US-03",
+          "name": "Añadir acciones de contacto"
+        },
+        {
+          "id": "T-07",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "ShiftsList",
+          "type": "SharePointList",
+          "purpose": "guardias y turnos operativos"
+        }
+      ],
+      "entities": {
+        "Shift": {
+          "id": "string",
+          "service": "string|null",
+          "ownerName": "string",
+          "contactEmail": "string|null",
+          "contactTeamsUrl": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null"
+        }
+      },
+      "mappings": {
+        "status": "derivado por lógica temporal",
+        "ownerType": "person|team|unknown"
+      },
+      "validationRules": [
+        "ownerName requerido",
+        "startAt recomendado",
+        "endAt recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "fechas y propietario completos",
+        "partial": "faltan datos de contacto o fin"
+      },
+      "fallbacks": [
+        "sin endAt => unknown o partialData",
+        "sin contacto => renderizar sin acción"
+      ],
+      "exampleOutput": {
+        "activeCoverage": [
+          {
+            "service": "ERP",
+            "ownerName": "Equipo N1",
+            "status": "active",
+            "startAt": "2026-03-21T08:00:00Z",
+            "endAt": "2026-03-21T16:00:00Z"
+          }
+        ],
+        "nextCoverage": [
+          {
+            "service": "ERP",
+            "ownerName": "Equipo N2",
+            "status": "upcoming",
+            "startAt": "2026-03-21T16:00:00Z",
+            "endAt": "2026-03-22T00:00:00Z"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "active coverage",
+          "upcoming coverage",
+          "conflict overlap",
+          "gap",
+          "missing contact",
+          "DST edge"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "ShiftsAvailabilityWebPart",
+        "pattern": "SPFx React + repository + temporal evaluator",
+        "components": [
+          "ShiftsAvailability",
+          "ActiveCoverageCard",
+          "NextCoverageList",
+          "ContactActions"
+        ],
+        "services": [
+          "ShiftsAvailabilityService",
+          "CoverageEvaluator",
+          "ConflictDetector"
+        ],
+        "repositories": [
+          "ShiftsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl",
+          "listTitleOrUrl": "string",
+          "serviceFilter": "string|undefined",
+          "showNextCount": "number",
+          "timezoneMode": "site|tenant|custom"
+        },
+        "IShift": {
+          "id": "string",
+          "service": "string|null",
+          "ownerName": "string",
+          "ownerType": "person|team|unknown",
+          "contactEmail": "string|null",
+          "contactTeamsUrl": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "status": "active|upcoming|completed|conflict|noCoverage|unknown"
+        },
+        "IViewModel": {
+          "activeCoverage": "IShift[]",
+          "nextCoverage": "IShift[]",
+          "hasConflict": "boolean",
+          "hasGap": "boolean",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer turnos",
+        "normalizar fechas",
+        "evaluar cobertura activa",
+        "detectar conflictos y huecos",
+        "ordenar próximas coberturas",
+        "renderizar"
+      ],
+      "algorithms": {
+        "active": "now between startAt and endAt",
+        "upcoming": "startAt > now",
+        "conflict": "more than one active shift for same service",
+        "gap": "no active shift for expected service"
+      },
+      "performance": {
+        "cache": "por origen y filtro de servicio",
+        "retry": "1-2 reintentos",
+        "timezone": "usar utilitario común para normalizar fechas"
+      },
+      "errorMatrix": [
+        {
+          "condition": "turno sin fechas",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "solape detectado",
+          "uiState": "ready with conflict flag"
+        },
+        {
+          "condition": "lista ausente",
+          "uiState": "error"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar links de contacto",
+          "no exponer datos privados adicionales"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "shifts_loaded",
+          "shifts_conflict_detected",
+          "shifts_gap_detected",
+          "shifts_partial",
+          "shifts_error"
+        ],
+        "properties": [
+          "activeCount",
+          "nextCount",
+          "hasConflict",
+          "hasGap",
+          "serviceFilter"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "active evaluator",
+          "conflict detector",
+          "gap detector",
+          "timezone normalization"
+        ],
+        "component": [
+          "active card",
+          "empty/error/partial"
+        ],
+        "integration": [
+          "sharepoint list flow"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Muy útil para soporte, operaciones o seguridad.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

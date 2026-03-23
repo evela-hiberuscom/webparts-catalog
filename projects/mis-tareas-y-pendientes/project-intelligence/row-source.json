@@ -1,0 +1,590 @@
+{
+  "rowId": "recaaTsZcFG27SukW",
+  "name": "Mis tareas y pendientes",
+  "slug": "mis-tareas-y-pendientes",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 8,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Planner",
+      "type": "Connector/API",
+      "purpose": "tareas planificadas"
+    },
+    {
+      "name": "ToDo",
+      "type": "Connector/API",
+      "purpose": "tareas personales"
+    },
+    {
+      "name": "SharePointTasksList",
+      "type": "SharePointList",
+      "purpose": "tareas locales"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "my-tasks-and-pending",
+        "name": "Mis tareas y pendientes",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Agrega tareas y pendientes personales desde distintas fuentes corporativas en una vista única y accionable.",
+        "productGoal": "Reducir la fragmentación de trabajo pendiente y permitir al usuario ver rápidamente qué debe atender a continuación."
+      },
+      "problem": {
+        "business": "Las tareas suelen estar dispersas entre Planner, listas, To Do u otras fuentes.",
+        "operational": "El usuario pierde contexto cambiando entre herramientas y puede olvidar tareas relevantes."
+      },
+      "objectives": {
+        "primary": [
+          "Unificar tareas personales en una sola vista",
+          "Ordenar por urgencia o vencimiento",
+          "Permitir abrir la tarea en su sistema origen",
+          "Distinguir vencidas, próximas y completadas ocultables"
+        ],
+        "secondary": [
+          "Filtrar por origen o categoría",
+          "Mostrar conteos por estado",
+          "Servir como bloque personal de portada"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver tareas pendientes en una sola tarjeta",
+            "priorizar por vencimiento"
+          ]
+        },
+        {
+          "role": "Manager individual contributor",
+          "needs": [
+            "detectar carga pendiente rápidamente"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Agregación de tareas desde fuentes soportadas",
+          "Lista de tareas abiertas",
+          "Orden por vencimiento o prioridad",
+          "Filtros simples",
+          "Acción abrir tarea"
+        ],
+        "out": [
+          "Edición inline compleja",
+          "reescritura de tareas en todos los orígenes",
+          "automatización de priorización avanzada"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver mis tareas hoy",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Detectar vencidas",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir tarea en origen",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar tareas pendientes agregadas desde uno o varios orígenes configurados."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir ordenar por vencimiento o prioridad."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir filtrar por origen, estado o categoría si los datos existen."
+        },
+        {
+          "id": "RF-04",
+          "text": "Marcar tareas vencidas y próximas a vencer."
+        },
+        {
+          "id": "RF-05",
+          "text": "Permitir abrir la tarea en el sistema origen."
+        },
+        {
+          "id": "RF-06",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga razonable para página personal."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Tolerar datos parciales entre orígenes heterogéneos."
+        },
+        {
+          "id": "RNF-03",
+          "text": "Solo lectura en V1 salvo navegación al origen."
+        }
+      ],
+      "businessRules": [
+        "Tareas completadas se ocultan por defecto salvo configuración contraria.",
+        "Tarea vencida si dueDate < now y no completed.",
+        "Si faltan fechas, la tarea sigue visible pero sin clasificación temporal estricta.",
+        "Las tareas se agrupan lógicamente por vencida, hoy, próxima, sin fecha cuando el dato exista."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Planner",
+            "ToDo",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "showCompleted": {
+          "type": "boolean",
+          "default": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 15,
+          "min": 1,
+          "max": 100
+        },
+        "defaultSort": {
+          "type": "enum",
+          "values": [
+            "dueDate",
+            "priority",
+            "source"
+          ],
+          "default": "dueDate"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra tareas agregadas correctamente.",
+        "Marca vencidas cuando procede.",
+        "Permite abrir el origen.",
+        "Funciona con datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "tarea sin dueDate",
+        "tarea sin priority",
+        "origen inaccesible",
+        "lista vacía",
+        "tarea sin enlace origen"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Agrega tareas y ordena correctamente",
+        "Incluye tests de ordenación y clasificación temporal",
+        "README técnico mínimo"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir que el usuario entienda en segundos qué tiene pendiente y qué requiere atención inmediata.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "resumen de conteos",
+          "lista de tareas",
+          "filtros"
+        ],
+        "priorityOrder": [
+          "vencidas",
+          "hoy",
+          "próximas",
+          "sin fecha"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "summary": "chips o mini KPIs",
+          "list": "lista rica con badges"
+        },
+        "narrow": {
+          "summary": "compacto",
+          "list": "vertical simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton list",
+            "skeleton counters"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "task list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin tareas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner discreto",
+            "lista con tareas parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro",
+            "reintentar"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "origen",
+          "estado",
+          "dueDate",
+          "priority",
+          "group",
+          "openAction"
+        ],
+        "badges": [
+          "overdue",
+          "today",
+          "soon",
+          "completed-hidden",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mis tareas y pendientes",
+        "messages": {
+          "empty": "No tienes tareas pendientes visibles.",
+          "error": "No se han podido cargar tus tareas.",
+          "partial": "Algunas tareas no incluyen toda la información esperada."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "lista navegable por teclado",
+          "badges con texto",
+          "fechas legibles localizadas"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, origen y dueDate"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer orígenes",
+          "normalizar tareas",
+          "render lista"
+        ],
+        "v1": [
+          "filtros",
+          "conteos",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Integración de orígenes"
+        },
+        {
+          "id": "EP-02",
+          "name": "Normalización y agrupación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer tareas desde orígenes configurados"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Clasificar y ordenar tareas"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista y filtros"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear adapters/repositorios por origen"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar grouping y sorting"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear TaskList y filters"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Crear summary chips"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Planner",
+          "type": "Connector/API",
+          "purpose": "tareas planificadas"
+        },
+        {
+          "name": "ToDo",
+          "type": "Connector/API",
+          "purpose": "tareas personales"
+        },
+        {
+          "name": "SharePointTasksList",
+          "type": "SharePointList",
+          "purpose": "tareas locales"
+        }
+      ],
+      "entities": {
+        "Task": {
+          "id": "string",
+          "title": "string",
+          "source": "string",
+          "status": "string",
+          "dueDate": "string|null",
+          "priority": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "group": "derivado por dueDate",
+        "priority": "mapear a low|medium|high|unknown"
+      },
+      "validationRules": [
+        "title requerido",
+        "source requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "campos completos y origen accesible",
+        "partial": "faltan dueDate, priority u openUrl"
+      },
+      "fallbacks": [
+        "sin dueDate => noDate",
+        "sin priority => unknown",
+        "sin openUrl => tarea visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Preparar informe",
+            "source": "Planner",
+            "status": "open",
+            "dueDate": "2026-03-21T17:00:00Z",
+            "priority": "high",
+            "group": "today"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "overdue",
+          "today",
+          "soon",
+          "noDate",
+          "multi-source partial",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MyTasksAndPendingWebPart",
+        "pattern": "SPFx React + adapters por origen + aggregator",
+        "components": [
+          "MyTasksAndPending",
+          "TaskSummaryChips",
+          "TaskList",
+          "TaskFilters"
+        ],
+        "services": [
+          "TasksAggregationService",
+          "TaskGroupingService"
+        ],
+        "repositories": [
+          "PlannerTasksRepository",
+          "ToDoTasksRepository",
+          "SharePointTasksRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Planner'|'ToDo'|'SharePointList'|'JsonUrl')[]",
+          "showCompleted": "boolean",
+          "maxItems": "number",
+          "defaultSort": "dueDate|priority|source"
+        },
+        "ITaskItem": {
+          "id": "string",
+          "title": "string",
+          "source": "string",
+          "status": "open|completed|unknown",
+          "dueDate": "string|null",
+          "priority": "low|medium|high|unknown",
+          "openUrl": "string|null",
+          "group": "overdue|today|soon|someday|noDate"
+        },
+        "IViewModel": {
+          "items": "ITaskItem[]",
+          "counts": "{overdue:number;today:number;soon:number;noDate:number}",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer tareas desde cada origen",
+        "normalizar a ITaskItem",
+        "filtrar completed si procede",
+        "clasificar por grupo temporal",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "grouping": "overdue/today/soon/noDate según dueDate y now",
+        "sort": "group asc + dueDate asc + priority desc o según configuración"
+      },
+      "performance": {
+        "cache": "por origen y usuario actual",
+        "retry": "1-2 reintentos por origen",
+        "limits": "maxItems aplicado tras agregación y ordenación"
+      },
+      "errorMatrix": [
+        {
+          "condition": "origen individual falla",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin dueDate",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "no mezclar datos de otros usuarios",
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "tasks_loaded",
+          "tasks_partial",
+          "tasks_error",
+          "task_opened"
+        ],
+        "properties": [
+          "sourceCount",
+          "itemCount",
+          "overdueCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "grouping logic",
+          "sort logic",
+          "normalization"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ],
+        "integration": [
+          "multi-source aggregation flow"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad. Agrega tareas de Planner, To Do, listas o procesos internos.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

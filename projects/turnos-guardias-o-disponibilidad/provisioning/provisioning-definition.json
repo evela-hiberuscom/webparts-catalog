@@ -1,0 +1,24 @@
+{
+  "projectSlug": "turnos-guardias-o-disponibilidad",
+  "archetype": "general",
+  "rowId": "reclRJcfIJeEsExJe",
+  "sources": [
+    {
+      "name": "ShiftsList",
+      "type": "SharePointList",
+      "purpose": "guardias y turnos operativos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra guardia o turno activo correctamente.",
+    "Muestra próximas coberturas ordenadas por inicio.",
+    "Marca huecos o conflictos cuando existan.",
+    "Permite contactar si hay canal disponible."
+  ],
+  "businessRules": [
+    "Un turno es activo si now está entre startAt y endAt.",
+    "Si hay más de un turno activo para el mismo servicio, marcar conflicto.",
+    "Si no hay turno activo para un servicio esperado, marcar sinCobertura.",
+    "Si faltan datos de contacto, el turno se muestra pero con partialData."
+  ]
+}

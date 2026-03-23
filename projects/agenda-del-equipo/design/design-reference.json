@@ -1,0 +1,97 @@
+{
+  "projectSlug": "agenda-del-equipo",
+  "rowId": "recZIpIIKZAzgI1GU",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir entender en segundos qué reuniones o hitos compartidos vienen ahora y qué acción tomar.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "agenda/lista temporal",
+        "filtros opcionales"
+      ],
+      "priorityOrder": [
+        "hoy",
+        "mañana",
+        "próximos"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista rica o timeline compacta"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton agenda items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "agenda items"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin próximos eventos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items con metadatos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "fechaHora",
+        "tipo",
+        "ubicacionOrJoin",
+        "openAction"
+      ],
+      "badges": [
+        "hoy",
+        "mañana",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Agenda del equipo",
+      "messages": {
+        "empty": "No hay próximos eventos del equipo.",
+        "error": "No se ha podido cargar la agenda del equipo."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "fechas y horas legibles",
+        "lista accesible",
+        "acciones claras"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, fecha y acción"
+    }
+  }
+}

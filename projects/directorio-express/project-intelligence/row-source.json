@@ -1,0 +1,529 @@
+{
+  "rowId": "recFNVhOLdRwWNLIq",
+  "name": "Directorio express",
+  "slug": "directorio-express",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 6,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "personas y perfiles"
+    },
+    {
+      "name": "PeopleList",
+      "type": "SharePointList",
+      "purpose": "personas locales o curated list"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "express-directory",
+        "name": "Directorio express",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Permite localizar rápidamente personas por nombre, rol, área o dato básico de contacto desde una versión ligera del directorio corporativo.",
+        "productGoal": "Reducir el tiempo para encontrar a la persona adecuada sin abrir un directorio completo."
+      },
+      "problem": {
+        "business": "Encontrar a la persona correcta en la organización puede llevar demasiado tiempo.",
+        "operational": "Las páginas de área necesitan un directorio rápido y reutilizable, no un portal completo de people search."
+      },
+      "objectives": {
+        "primary": [
+          "Buscar y listar personas de forma ligera",
+          "Mostrar nombre, rol y contacto básico",
+          "Permitir abrir perfil o iniciar contacto"
+        ],
+        "secondary": [
+          "Filtrar por área o rol",
+          "Servir como componente reusable en páginas de equipo o área"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "encontrar una persona rápidamente"
+          ]
+        },
+        {
+          "role": "Manager/Owner de área",
+          "needs": [
+            "ofrecer un directorio corto y útil"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado ligero de personas",
+          "Buscador simple",
+          "Filtros básicos",
+          "Acción abrir perfil o contacto"
+        ],
+        "out": [
+          "directorio global avanzado",
+          "búsqueda organizacional semántica",
+          "edición de perfiles"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Buscar persona por nombre",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Filtrar por área o rol",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir perfil o mail",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar personas configuradas o provenientes de directorio/origen soportado."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir búsqueda por nombre y filtros por rol/área cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar nombre, rol, área y contacto básico cuando existan."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir perfil o iniciar contacto cuando existan enlaces."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy rápido y usable en espacios pequeños."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar falta de foto, rol o contacto."
+        }
+      ],
+      "businessRules": [
+        "Si falta foto, usar avatar por defecto.",
+        "Si falta perfil, la persona sigue siendo informativa.",
+        "Las coincidencias exactas de nombre deben priorizarse en la búsqueda."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Directory",
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 12,
+          "min": 1,
+          "max": 100
+        },
+        "defaultAreaFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra personas correctamente.",
+        "Permite buscar y filtrar cuando procede.",
+        "Permite abrir perfil/contacto cuando existe.",
+        "Funciona con datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "persona sin foto",
+        "sin rol",
+        "sin perfil",
+        "sin mail",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza directorio y filtros correctamente",
+        "Incluye tests base de búsqueda, filtros y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Encontrar a la persona correcta en segundos con una interfaz mínima y clara.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "buscador",
+          "filtros opcionales",
+          "lista de personas"
+        ],
+        "priorityOrder": [
+          "coincidencias exactas",
+          "resto filtrado"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista rica o cards compactas"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton people items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "search",
+            "filters",
+            "people list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin coincidencias"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "personas con datos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "avatar",
+          "nombre",
+          "rol",
+          "area",
+          "contactAction"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Directorio express",
+        "messages": {
+          "empty": "No se han encontrado personas.",
+          "error": "No se ha podido cargar el directorio express."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "buscador etiquetado",
+          "lista accesible",
+          "acciones de contacto claras"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, rol y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer personas",
+          "buscar por nombre",
+          "render lista"
+        ],
+        "v1": [
+          "filtros por área/rol",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Búsqueda y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer personas desde orígenes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Buscar y filtrar personas"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista de personas"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de personas"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar búsqueda y filtros"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear PersonRow y search bar"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Directory",
+          "type": "Directory/API",
+          "purpose": "personas y perfiles"
+        },
+        {
+          "name": "PeopleList",
+          "type": "SharePointList",
+          "purpose": "personas locales o curated list"
+        }
+      ],
+      "entities": {
+        "Person": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "area": "string|null",
+          "email": "string|null",
+          "profileUrl": "string|null",
+          "photoUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "area": "string or null"
+      },
+      "validationRules": [
+        "displayName requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "nombre y contacto/perfil presentes",
+        "partial": "faltan foto, rol, área o profileUrl"
+      },
+      "fallbacks": [
+        "sin foto => avatar por defecto",
+        "sin profileUrl => sin acción de perfil",
+        "sin email => sin acción de mail"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "displayName": "Marta Ruiz",
+            "jobTitle": "HRBP",
+            "area": "RRHH",
+            "email": "marta@corp.com",
+            "profileUrl": "/profile/marta"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "full person",
+          "no photo",
+          "no profile",
+          "no area",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "ExpressDirectoryWebPart",
+        "pattern": "SPFx React + people search/filter service",
+        "components": [
+          "ExpressDirectory",
+          "PeopleSearchBar",
+          "PeopleFilters",
+          "PersonRow"
+        ],
+        "services": [
+          "ExpressDirectoryService",
+          "PeopleFilterService"
+        ],
+        "repositories": [
+          "DirectoryRepository",
+          "PeopleListRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Directory'|'SharePointList'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string|undefined",
+          "maxItems": "number",
+          "defaultAreaFilter": "string|undefined"
+        },
+        "IPersonItem": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "area": "string|null",
+          "email": "string|null",
+          "profileUrl": "string|null",
+          "photoUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IPersonItem[]",
+          "areas": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer personas desde orígenes",
+        "normalizar campos",
+        "aplicar búsqueda y filtros",
+        "ordenar y limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "search": "displayName exact match first, then partial",
+        "sort": "displayName asc by default"
+      },
+      "performance": {
+        "cache": "por origen y usuario",
+        "retry": "1-2 reintentos",
+        "debounceMs": "200-300"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin profileUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin photoUrl",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar profileUrl/mailto",
+          "no exponer campos adicionales no previstos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "directory_loaded",
+          "directory_partial",
+          "directory_error",
+          "directory_search_used",
+          "directory_profile_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "queryLength",
+          "areaFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "name search",
+          "area filter",
+          "mapping"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas. Buscador rápido de personas con foto, cargo, equipo, ubicación y contacto.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

@@ -1,0 +1,518 @@
+{
+  "rowId": "recw0vit4QRbwI96D",
+  "name": "Mapa de portales",
+  "slug": "mapa-de-portales",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 6,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "PortalMapList",
+      "type": "SharePointList",
+      "purpose": "estructura de hubs/sites/áreas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "portal-map",
+        "name": "Mapa de portales",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Ofrece una vista estructurada de hubs, sites, áreas y utilidades para navegar la intranet como un mapa lógico.",
+        "productGoal": "Hacer comprensible la estructura de portales y reducir desorientación dentro de la intranet."
+      },
+      "problem": {
+        "business": "Las intranets complejas pierden claridad cuando la estructura de hubs y sites no es evidente para el usuario.",
+        "operational": "Los usuarios no siempre saben dónde encaja cada portal o área y terminan navegando a ciegas."
+      },
+      "objectives": {
+        "primary": [
+          "Representar la estructura de portales y áreas",
+          "Permitir navegar por niveles lógicos",
+          "Ayudar a descubrir sites y espacios relacionados"
+        ],
+        "secondary": [
+          "Mostrar jerarquía o relaciones",
+          "Permitir destacar hubs principales",
+          "Servir como guía de orientación"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender cómo se organiza la intranet"
+          ]
+        },
+        {
+          "role": "Owner intranet",
+          "needs": [
+            "explicar la estructura de portales"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Mapa lógico de hubs/sites/áreas",
+          "Niveles jerárquicos o relacionados",
+          "Acción abrir portal"
+        ],
+        "out": [
+          "grafo interactivo complejo",
+          "descubrimiento semántico avanzado",
+          "edición de estructura desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Encontrar un portal por área",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Explorar la estructura global",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir hub o site relacionado",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar nodos o elementos de portal con nombre y relación básica."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir navegar y abrir un portal o site."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir filtrar o colapsar secciones cuando aplique."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe seguir siendo legible en una intranet grande."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Carga ligera/razonable para datos estructurados."
+        }
+      ],
+      "businessRules": [
+        "Si un nodo no tiene padre conocido, puede mostrarse como raíz o no clasificado.",
+        "Si falta URL, el nodo sigue siendo informativo pero no accionable.",
+        "Los hubs o nodos destacados pueden ir primero."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "viewMode": {
+          "type": "enum",
+          "values": [
+            "tree",
+            "grouped",
+            "cards"
+          ],
+          "default": "tree"
+        },
+        "maxDepth": {
+          "type": "number",
+          "default": 4,
+          "min": 1,
+          "max": 10
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra estructura de portales configurada.",
+        "Permite abrir nodos válidos.",
+        "Representa niveles o grupos correctamente.",
+        "Funciona con datos parciales."
+      ],
+      "edgeCases": [
+        "nodo sin padre",
+        "ciclo o jerarquía inválida",
+        "sin URL",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza estructura lógicamente",
+        "Incluye tests base de jerarquía y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Ayudar al usuario a orientarse dentro de la intranet sin necesidad de memorizar su estructura.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "controles de vista",
+          "estructura jerárquica"
+        ],
+        "priorityOrder": [
+          "raíces/hubs",
+          "niveles siguientes",
+          "nodos relacionados"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "tree": "árbol o grupos claros"
+        },
+        "narrow": {
+          "tree": "lista colapsable"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton tree"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "view switch opcional",
+            "portal structure"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin estructura"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "nodos parciales o no accionables"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "nombre",
+          "tipoNodo",
+          "nivel",
+          "descripcionCorta",
+          "openAction"
+        ],
+        "badges": [
+          "hub",
+          "site",
+          "area",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mapa de portales",
+        "messages": {
+          "empty": "No hay estructura de portales configurada.",
+          "error": "No se ha podido cargar el mapa de portales."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "árbol/lista accesible",
+          "niveles comprensibles",
+          "acciones accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "usar lista colapsable con indentación simple"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer nodos",
+          "construir jerarquía",
+          "render árbol"
+        ],
+        "v1": [
+          "switch de vista",
+          "maxDepth",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y jerarquía"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de mapa"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer nodos y construir jerarquía"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar árbol o grupos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear PortalMapRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar PortalHierarchyBuilder"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear PortalTree y node items"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "PortalMapList",
+          "type": "SharePointList",
+          "purpose": "estructura de hubs/sites/áreas"
+        }
+      ],
+      "entities": {
+        "PortalNode": {
+          "id": "string",
+          "title": "string",
+          "nodeType": "string|null",
+          "parentId": "string|null",
+          "description": "string|null",
+          "openUrl": "string|null",
+          "featured": "boolean|null"
+        }
+      },
+      "mappings": {
+        "nodeType": "hub|site|area|utility|unknown",
+        "parentId": "string or null"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "nodo con tipo y relación válidos",
+        "partial": "faltan parentId, openUrl o tipo"
+      },
+      "fallbacks": [
+        "sin parentId => root/orphan",
+        "sin tipo => unknown",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Hub Comercial",
+            "nodeType": "hub",
+            "parentId": null,
+            "openUrl": "/sites/sales-hub"
+          },
+          {
+            "title": "Portal Clientes",
+            "nodeType": "site",
+            "parentId": "hub-sales",
+            "openUrl": "/sites/clientes"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "root hub",
+          "child site",
+          "orphan node",
+          "cycle edge",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "PortalMapWebPart",
+        "pattern": "SPFx React + hierarchy builder + repository",
+        "components": [
+          "PortalMap",
+          "PortalTree",
+          "PortalNodeItem",
+          "PortalViewSwitcher"
+        ],
+        "services": [
+          "PortalMapService",
+          "PortalHierarchyBuilder"
+        ],
+        "repositories": [
+          "PortalMapRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "viewMode": "tree|grouped|cards",
+          "maxDepth": "number"
+        },
+        "IPortalNode": {
+          "id": "string",
+          "title": "string",
+          "nodeType": "hub|site|area|utility|unknown",
+          "parentId": "string|null",
+          "description": "string|null",
+          "openUrl": "string|null",
+          "featured": "boolean"
+        },
+        "IViewModel": {
+          "roots": "IPortalNode[]",
+          "flatItems": "IPortalNode[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer nodos",
+        "construir jerarquía o agrupación",
+        "aplicar maxDepth",
+        "renderizar"
+      ],
+      "algorithms": {
+        "hierarchy": "construir raíces y hijos por parentId",
+        "invalidParent": "mover a root-orphans si no existe padre",
+        "cycleGuard": "detectar ciclos y degradar a flat/grouped view"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "parent ausente",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "cycle detected",
+          "uiState": "partialData con fallback"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "portal_map_loaded",
+          "portal_map_partial",
+          "portal_map_error",
+          "portal_node_opened"
+        ],
+        "properties": [
+          "nodeCount",
+          "rootCount",
+          "viewMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "hierarchy builder",
+          "cycle guard",
+          "depth limiter"
+        ],
+        "component": [
+          "tree render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación. Navegador visual de hubs, sites, áreas y utilidades de la intranet.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

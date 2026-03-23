@@ -1,0 +1,23 @@
+{
+  "projectSlug": "a-z-corporativo",
+  "archetype": "knowledge",
+  "rowId": "recDG2ZChOZvUD8ry",
+  "sources": [
+    {
+      "name": "AZIndexList",
+      "type": "SharePointList",
+      "purpose": "índice alfabético de recursos o conceptos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra entradas ordenadas.",
+    "Permite navegar por letra.",
+    "Abre recursos cuando existe URL.",
+    "Funciona con entradas parciales."
+  ],
+  "businessRules": [
+    "Si una entrada no tiene letra válida, puede ir a # u Others.",
+    "Las entradas sin URL siguen siendo informativas.",
+    "El orden principal es alfabético por título."
+  ]
+}

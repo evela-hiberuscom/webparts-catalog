@@ -1,0 +1,87 @@
+{
+  "projectSlug": "barra-de-avisos-urgentes",
+  "rowId": "recOGlnVLuk3SOqg5",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Transmitir una alerta urgente sin que el usuario tenga que escanear la página entera.",
+    "informationArchitecture": {
+      "zones": [
+        "banner principal",
+        "acciones opcionales"
+      ],
+      "priorityOrder": [
+        "critical",
+        "warning",
+        "info"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "banner": "ancho completo"
+      },
+      "narrow": {
+        "banner": "una sola fila con CTA visible"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton banner"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "alert banners"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin render o placeholder mínimo"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro no intrusivo"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "severity",
+        "title",
+        "message",
+        "cta"
+      ],
+      "badges": [
+        "critical",
+        "warning",
+        "info"
+      ]
+    },
+    "copy": {
+      "title": "Avisos urgentes",
+      "messages": {
+        "error": "No se han podido cargar los avisos urgentes."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "contraste alto",
+        "texto y color para severidad",
+        "CTA accesible"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y mensaje; CTA debajo si hace falta"
+    }
+  }
+}

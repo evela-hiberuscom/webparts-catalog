@@ -1,0 +1,61 @@
+{
+  "projectSlug": "tarjeta-de-decision-rapida",
+  "rowId": "recEiRlEs2Bz4GOGL",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Ayudar a tomar una pequeña decisión con una UI directa y sin sobrecarga.",
+    "informationArchitecture": {
+      "zones": [
+        "pregunta",
+        "opciones",
+        "feedback"
+      ],
+      "priorityOrder": [
+        "pregunta",
+        "opciones"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "card": "compacta"
+      },
+      "narrow": {
+        "card": "apilada"
+      }
+    },
+    "states": [
+      {
+        "id": "idle",
+        "ui": [
+          "question and options"
+        ]
+      },
+      {
+        "id": "success",
+        "ui": [
+          "confirmation"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "error and retry"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Tarjeta de decisión rápida"
+    },
+    "accessibility": {
+      "requirements": [
+        "botones accesibles",
+        "feedback claro"
+      ]
+    }
+  }
+}

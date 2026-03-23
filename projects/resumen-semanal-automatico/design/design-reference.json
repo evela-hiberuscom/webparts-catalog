@@ -1,0 +1,94 @@
+{
+  "projectSlug": "resumen-semanal-automatico",
+  "rowId": "rec2f4QevJzBr8wye",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir leer en menos de un minuto qué ha sido importante esta semana.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera con periodo",
+        "lista de highlights",
+        "acciones opcionales"
+      ],
+      "priorityOrder": [
+        "más relevantes",
+        "más recientes"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista o cards compactas"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton highlights"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header with period",
+          "highlight list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin highlights en el periodo"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "highlights parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "tipo",
+        "fecha",
+        "openAction"
+      ],
+      "badges": [
+        "highlight",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Resumen semanal automático",
+      "messages": {
+        "empty": "No hay highlights para este periodo.",
+        "error": "No se ha podido construir el resumen semanal."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "lista accesible",
+        "periodo legible",
+        "acciones claras"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, tipo y fecha"
+    }
+  }
+}

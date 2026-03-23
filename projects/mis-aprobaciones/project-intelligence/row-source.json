@@ -1,0 +1,554 @@
+{
+  "rowId": "reckRsMhPOJPL7QqX",
+  "name": "Mis aprobaciones",
+  "slug": "mis-aprobaciones",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 7,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Approvals",
+      "type": "Connector/API",
+      "purpose": "aprobaciones pendientes"
+    },
+    {
+      "name": "SharePointApprovalsList",
+      "type": "SharePointList",
+      "purpose": "aprobaciones locales"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "my-approvals",
+        "name": "Mis aprobaciones",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Centraliza aprobaciones pendientes del usuario para acelerar la toma de decisión y evitar bloqueos de procesos.",
+        "productGoal": "Mostrar de forma clara y priorizada las aprobaciones que esperan acción del usuario."
+      },
+      "problem": {
+        "business": "Las aprobaciones pueden quedar ocultas en correos, flujos o herramientas dispersas.",
+        "operational": "Los retrasos en aprobaciones bloquean procesos internos y generan fricción."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar aprobaciones pendientes",
+          "Priorizar por vencimiento o impacto",
+          "Abrir el flujo o detalle de aprobación",
+          "Distinguir pendientes, vencidas y completadas ocultables"
+        ],
+        "secondary": [
+          "Mostrar origen y solicitante",
+          "Agrupar por tipo de aprobación",
+          "Servir de panel personal de acción"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado aprobador",
+          "needs": [
+            "ver qué debe aprobar",
+            "ir al flujo correcto"
+          ]
+        },
+        {
+          "role": "Manager",
+          "needs": [
+            "evitar cuellos de botella por aprobaciones retrasadas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Aprobaciones pendientes del usuario",
+          "Origen/solicitante/fecha",
+          "Acción de abrir detalle",
+          "Agrupación simple por tipo u origen"
+        ],
+        "out": [
+          "aprobar/rechazar inline en V1",
+          "edición de flujos",
+          "re-asignación de aprobaciones"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver aprobaciones vencidas",
+          "actor": "Aprobador"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle de solicitud",
+          "actor": "Aprobador"
+        },
+        {
+          "id": "CU-03",
+          "name": "Revisar cola de aprobaciones",
+          "actor": "Manager"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar aprobaciones pendientes del usuario actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Ordenar por dueDate o createdDate cuando exista."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar solicitante, origen y tipo si existen."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir el detalle de aprobación."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida apta para portada personal."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1 salvo navegación al origen."
+        }
+      ],
+      "businessRules": [
+        "Una aprobación vencida se marca si dueDate < now y status pendiente.",
+        "Completadas se ocultan por defecto.",
+        "Si falta dueDate, se ordena por createdDate o prioridad de origen."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Approvals",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "showCompleted": {
+          "type": "boolean",
+          "default": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 10,
+          "min": 1,
+          "max": 50
+        },
+        "defaultSort": {
+          "type": "enum",
+          "values": [
+            "dueDate",
+            "createdDate",
+            "source"
+          ],
+          "default": "dueDate"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra aprobaciones pendientes correctamente.",
+        "Marca vencidas cuando aplica.",
+        "Permite abrir el detalle.",
+        "Funciona con datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "aprobación sin dueDate",
+        "sin solicitante",
+        "sin enlace detalle",
+        "fuente inaccesible"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Normaliza aprobaciones entre fuentes",
+        "Incluye tests base de ordenación y vencimiento"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir al usuario saber de un vistazo qué aprobaciones bloquean procesos y requieren atención inmediata.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "resumen",
+          "lista de aprobaciones"
+        ],
+        "priorityOrder": [
+          "vencidas",
+          "pendientes de hoy",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "summary": "mini KPIs",
+          "list": "lista rica"
+        },
+        "narrow": {
+          "summary": "compacto",
+          "list": "simple vertical"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton list"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "summary",
+            "approval list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin aprobaciones"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner discreto",
+            "lista parcial"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "solicitante",
+          "origen",
+          "dueDate",
+          "estado",
+          "openAction"
+        ],
+        "badges": [
+          "overdue",
+          "today",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mis aprobaciones",
+        "messages": {
+          "empty": "No tienes aprobaciones pendientes visibles.",
+          "error": "No se han podido cargar tus aprobaciones."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "lista navegable",
+          "badges con texto",
+          "fechas localizadas"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, origen y dueDate"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer aprobaciones",
+          "normalizar",
+          "render lista"
+        ],
+        "v1": [
+          "conteos",
+          "grupos temporales",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Integración de orígenes"
+        },
+        {
+          "id": "EP-02",
+          "name": "Normalización y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer aprobaciones desde orígenes configurados"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Clasificar y ordenar aprobaciones"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista y resumen"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de aprobaciones"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar grouping y ordering"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ApprovalsList y summary"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Approvals",
+          "type": "Connector/API",
+          "purpose": "aprobaciones pendientes"
+        },
+        {
+          "name": "SharePointApprovalsList",
+          "type": "SharePointList",
+          "purpose": "aprobaciones locales"
+        }
+      ],
+      "entities": {
+        "Approval": {
+          "id": "string",
+          "title": "string",
+          "requester": "string|null",
+          "source": "string",
+          "status": "string",
+          "dueDate": "string|null",
+          "createdDate": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "group": "derivado por dueDate",
+        "status": "mapear a pending|completed|unknown"
+      },
+      "validationRules": [
+        "title requerido",
+        "source requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "campos clave presentes",
+        "partial": "faltan dueDate, requester o openUrl"
+      },
+      "fallbacks": [
+        "sin dueDate => noDate",
+        "sin requester => null",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Aprobar vacaciones",
+            "requester": "Ana López",
+            "source": "Approvals",
+            "status": "pending",
+            "dueDate": "2026-03-22T12:00:00Z",
+            "group": "upcoming"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "overdue",
+          "today",
+          "upcoming",
+          "noDate",
+          "partial source",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MyApprovalsWebPart",
+        "pattern": "SPFx React + adapters + approvals aggregator",
+        "components": [
+          "MyApprovals",
+          "ApprovalsSummary",
+          "ApprovalsList"
+        ],
+        "services": [
+          "ApprovalsAggregationService",
+          "ApprovalOrderingService"
+        ],
+        "repositories": [
+          "ApprovalsRepository",
+          "SharePointApprovalsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Approvals'|'SharePointList'|'JsonUrl')[]",
+          "showCompleted": "boolean",
+          "maxItems": "number",
+          "defaultSort": "dueDate|createdDate|source"
+        },
+        "IApprovalItem": {
+          "id": "string",
+          "title": "string",
+          "requester": "string|null",
+          "source": "string",
+          "status": "pending|completed|unknown",
+          "dueDate": "string|null",
+          "createdDate": "string|null",
+          "openUrl": "string|null",
+          "group": "overdue|today|upcoming|noDate"
+        },
+        "IViewModel": {
+          "items": "IApprovalItem[]",
+          "counts": "{overdue:number;today:number;upcoming:number;noDate:number}",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer aprobaciones desde orígenes",
+        "normalizar",
+        "ocultar completed si procede",
+        "clasificar por grupo",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "grouping": "overdue/today/upcoming/noDate",
+        "sort": "group asc + dueDate asc + createdDate desc"
+      },
+      "performance": {
+        "cache": "por usuario y origen",
+        "retry": "1-2 reintentos",
+        "limit": "maxItems tras agregación"
+      },
+      "errorMatrix": [
+        {
+          "condition": "origen falla parcialmente",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin dueDate",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "limitar a aprobaciones del usuario actual",
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "approvals_loaded",
+          "approvals_partial",
+          "approvals_error",
+          "approval_opened"
+        ],
+        "properties": [
+          "sourceCount",
+          "itemCount",
+          "overdueCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "grouping",
+          "ordering",
+          "normalization"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ],
+        "integration": [
+          "multi-source approvals flow"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad. Centraliza aprobaciones pendientes como vacaciones, gastos o documentos.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

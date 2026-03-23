@@ -1,0 +1,108 @@
+{
+  "projectSlug": "buscador-de-recursos-corporativos",
+  "rowId": "recftse8Odprgl5Q8",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir encontrar un recurso corporativo en segundos con un flujo simple de buscar, escanear y abrir.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "search box",
+        "filters",
+        "results list"
+      ],
+      "priorityOrder": [
+        "exact match",
+        "relevantes",
+        "destacados en vacío"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "search": "barra superior",
+        "results": "lista rica"
+      },
+      "narrow": {
+        "search": "compacta",
+        "results": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "idle",
+        "ui": [
+          "search box",
+          "featured opcionales o placeholder"
+        ]
+      },
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton results"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "search box",
+          "filters",
+          "results"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin resultados"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "resultados parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "tipo",
+        "categoria",
+        "resumen",
+        "openAction"
+      ],
+      "badges": [
+        "exacta",
+        "destacado",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Buscador de recursos corporativos",
+      "messages": {
+        "empty": "No se han encontrado recursos para tu búsqueda.",
+        "error": "No se ha podido completar la búsqueda."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "search box etiquetado",
+        "lista de resultados accesible",
+        "texto claro en estados"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción; resumen truncado"
+    }
+  }
+}

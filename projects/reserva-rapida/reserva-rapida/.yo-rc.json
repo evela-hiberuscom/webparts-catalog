@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "reserva-rapida",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "QuickBooking",
+    "componentDescription": "Ofrece accesos rápidos para reservar recursos como salas, puestos, parking o equipamiento, integrando enlaces, disponibilidad resumida y filtros simples.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "reserva-rapida",
+    "libraryId": "a9d3dff1-fe98-4e05-aba0-dc01d0446d14",
+    "solutionShortDescription": "reserva-rapida description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,509 @@
+{
+  "rowId": "recfBMkZlV28UNzAb",
+  "name": "Presencia de sedes",
+  "slug": "presencia-de-sedes",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 9,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SitesPresenceList",
+      "type": "SharePointList",
+      "purpose": "información operativa básica por sede"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "sites-presence",
+        "name": "Presencia de sedes",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra información operativa ligera sobre sedes: horarios, recepción, aforo, festivos o estado abierto/cerrado.",
+        "productGoal": "Centralizar el estado operativo básico de oficinas o sedes para empleados y operaciones."
+      },
+      "problem": {
+        "business": "Los usuarios no siempre saben si una sede está abierta, qué horario tiene o si hay particularidades locales.",
+        "operational": "Facilities y workplace necesitan un punto simple de comunicación por sede."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar sedes y su estado operativo",
+          "Mostrar horarios, recepción, aforo o notas relevantes",
+          "Permitir filtrar o destacar una sede"
+        ],
+        "secondary": [
+          "Indicar abiertos/cerrados",
+          "Enlazar a detalle o mapa",
+          "Mostrar particularidades locales"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber si una sede está abierta",
+            "consultar horario y recepción"
+          ]
+        },
+        {
+          "role": "Workplace/Facilities",
+          "needs": [
+            "publicar información básica actualizada"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Tarjetas por sede",
+          "Horario",
+          "Estado abierto/cerrado",
+          "Recepción/contacto",
+          "Aforo o notas opcionales",
+          "Enlace a detalle/mapa"
+        ],
+        "out": [
+          "control de acceso",
+          "mapa interactivo avanzado",
+          "gestión de puestos en tiempo real"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consultar estado de una sede",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ver horario y recepción",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Publicar notas locales",
+          "actor": "Facilities"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar una lista de sedes configuradas."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar estado abierto/cerrado cuando sea calculable."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar horario, recepción y notas cuando existan."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir detalle o mapa."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga ligera apta para intranet general."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar información parcial por sede."
+        }
+      ],
+      "businessRules": [
+        "Si hay horario y zona horaria, calcular abierto/cerrado respecto a now.",
+        "Si falta horario, mostrar estado unknown pero seguir renderizando.",
+        "Si hay notas de festivo o cierre especial, estas prevalecen sobre el cálculo estándar."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "highlightSite": {
+          "type": "string",
+          "required": false
+        },
+        "showClosedSites": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra sedes configuradas.",
+        "Calcula abierto/cerrado cuando hay horario.",
+        "Muestra notas locales cuando existan.",
+        "Abre detalle o mapa cuando existe enlace."
+      ],
+      "edgeCases": [
+        "sede sin horario",
+        "zona horaria ausente",
+        "cierre especial",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Gestiona partialData por sede",
+        "Incluye tests base de open/closed logic"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Dar una respuesta muy rápida a si una sede está operativa y qué detalles básicos debo conocer antes de ir o contactar.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "destacado opcional",
+          "grid de sedes"
+        ],
+        "priorityOrder": [
+          "highlightSite",
+          "abierto/cerrado",
+          "horario",
+          "recepción/notas"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3 columnas"
+        },
+        "narrow": {
+          "cards": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton site cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "site cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin sedes configuradas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con horarios o notas ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "nombreSede",
+          "estado",
+          "horario",
+          "recepcion",
+          "aforo",
+          "notas",
+          "mapa/detalle"
+        ]
+      },
+      "copy": {
+        "title": "Presencia de sedes",
+        "messages": {
+          "empty": "No hay sedes configuradas.",
+          "error": "No se ha podido cargar la información de sedes."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "estado con texto y color",
+          "links accesibles",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, estado y horario"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "render cards",
+          "calcular open/closed básico"
+        ],
+        "v1": [
+          "highlight site",
+          "telemetría",
+          "JSON source"
+        ],
+        "hardening": [
+          "tests temporales",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y lógica horaria"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y destacado"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer sedes y calcular estado"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards y destacada"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear SitesPresenceRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Crear OpenStateEvaluator"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear SitePresenceCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-02",
+          "name": "Añadir highlighted site"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SitesPresenceList",
+          "type": "SharePointList",
+          "purpose": "información operativa básica por sede"
+        }
+      ],
+      "entities": {
+        "SitePresence": {
+          "id": "string",
+          "name": "string",
+          "timezone": "string|null",
+          "openingHours": "object|null",
+          "reception": "string|null",
+          "capacity": "string|null",
+          "notes": "string|null",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "isOpen": "derivado por horario y timezone",
+        "highlighted": "comparación con highlightSite"
+      },
+      "validationRules": [
+        "name requerido",
+        "timezone recomendada",
+        "openingHours opcional"
+      ],
+      "accuracyPolicy": {
+        "exact": "horario y timezone completos",
+        "partial": "faltan horario, timezone o notas"
+      },
+      "fallbacks": [
+        "sin horario => isOpen null/unknown",
+        "sin timezone => usar site timezone si procede"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "name": "Barcelona",
+            "isOpen": true,
+            "reception": "93 XXX XX XX",
+            "notes": "Cierre parcial viernes tarde"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "abierta",
+          "cerrada",
+          "sin horario",
+          "timezone ausente",
+          "cierre especial"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "SitesPresenceWebPart",
+        "pattern": "SPFx React + repository + schedule evaluator",
+        "components": [
+          "SitesPresence",
+          "SitePresenceCard"
+        ],
+        "services": [
+          "SitesPresenceService",
+          "OpenStateEvaluator"
+        ],
+        "repositories": [
+          "SitesPresenceRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "highlightSite": "string|undefined",
+          "showClosedSites": "boolean"
+        },
+        "ISitePresence": {
+          "id": "string",
+          "name": "string",
+          "timezone": "string|null",
+          "openingHours": "object|null",
+          "isOpen": "boolean|null",
+          "reception": "string|null",
+          "capacity": "string|null",
+          "notes": "string|null",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "ISitePresence[]",
+          "highlighted": "ISitePresence|null",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer sedes",
+        "evaluar abierto/cerrado",
+        "separar destacada si aplica",
+        "renderizar"
+      ],
+      "algorithms": {
+        "openState": "calcular con horario, zona horaria y cierres especiales si existen",
+        "highlight": "coincidencia por nombre o id configurado"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin horario",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "timezone inválida",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar links",
+          "no exponer datos no previstos"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "sites_presence_loaded",
+          "sites_presence_partial",
+          "sites_presence_error"
+        ],
+        "properties": [
+          "siteCount",
+          "hasHighlighted",
+          "openCount"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "open state evaluator",
+          "highlight selection"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Información ligera sobre oficinas, horarios, recepción o aforo.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

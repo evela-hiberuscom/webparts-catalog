@@ -1,0 +1,100 @@
+{
+  "projectSlug": "estado-de-proyectos",
+  "rowId": "rec5BIxCPadkivxcQ",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir leer de un vistazo si las iniciativas están bien, en riesgo o requieren atención.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista de proyectos",
+        "filtros opcionales"
+      ],
+      "priorityOrder": [
+        "red",
+        "amber",
+        "green",
+        "unknown"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista rica o tabla compacta"
+      },
+      "narrow": {
+        "items": "cards simples"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton project items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "project list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin proyectos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items con metadatos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "nombre",
+        "estado",
+        "responsable",
+        "fechaRelevante",
+        "openAction"
+      ],
+      "badges": [
+        "green",
+        "amber",
+        "red",
+        "unknown",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Estado de proyectos",
+      "messages": {
+        "empty": "No hay proyectos visibles.",
+        "error": "No se ha podido cargar el estado de proyectos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "estado con texto además de color",
+        "lista accesible",
+        "fechas legibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, estado y fecha"
+    }
+  }
+}

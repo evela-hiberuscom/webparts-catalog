@@ -1,0 +1,240 @@
+{
+  "projectSlug": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+  "rowId": "recgszxhqydcwE8va",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Presentar un diagnóstico técnico comprensible en menos de 30 segundos, dejando claro qué es exacto, qué es estimado y qué es parcial.",
+    "informationArchitecture": {
+      "zones": [
+        "Cabecera",
+        "Resumen KPI",
+        "Indicadores de precisión/cobertura",
+        "Top N documentos",
+        "Acciones"
+      ],
+      "priorityOrder": [
+        "ratio histórico/actual",
+        "tamaño histórico",
+        "tamaño actual",
+        "cobertura",
+        "top documentos"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "header": "una fila con título, biblioteca y badges",
+        "kpis": "grid de 6-8 tarjetas",
+        "table": "tabla completa con 6 columnas",
+        "actions": "alineadas a la derecha"
+      },
+      "narrow": {
+        "header": "apilado",
+        "kpis": "cards verticales",
+        "table": "tabla resumida",
+        "actions": "compactas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton de cabecera",
+          "skeleton de KPIs",
+          "mensaje de análisis en curso"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "title",
+          "library subtitle",
+          "mode badge",
+          "precision badge",
+          "coverage badge",
+          "kpis",
+          "top table",
+          "actions"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin documentos analizables",
+          "CTA abrir biblioteca",
+          "ayuda de configuración"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner de advertencia",
+          "KPIs con disclaimers",
+          "tabla con precision por fila"
+        ]
+      },
+      {
+        "id": "throttled",
+        "ui": [
+          "banner recoverable",
+          "mensaje de limitación temporal",
+          "últimos datos si existen",
+          "acción refrescar"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "detalle no sensible",
+          "acción refrescar"
+        ]
+      }
+    ],
+    "kpiCards": [
+      {
+        "id": "documentCount",
+        "label": "Documentos",
+        "priority": 1
+      },
+      {
+        "id": "visibleCurrentSizeBytes",
+        "label": "Tamaño actual",
+        "priority": 1
+      },
+      {
+        "id": "historicalVersionCount",
+        "label": "Versiones históricas",
+        "priority": 1
+      },
+      {
+        "id": "historicalEstimatedSizeBytes",
+        "label": "Tamaño histórico",
+        "priority": 1
+      },
+      {
+        "id": "historicalToCurrentRatio",
+        "label": "Ratio histórico/actual",
+        "priority": 0
+      },
+      {
+        "id": "analysisCoveragePercent",
+        "label": "Cobertura",
+        "priority": 1
+      },
+      {
+        "id": "scanDurationMs",
+        "label": "Duración",
+        "priority": 2
+      }
+    ],
+    "table": {
+      "name": "TopDocumentsTable",
+      "columns": [
+        {
+          "id": "name",
+          "label": "Documento",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "currentSizeBytes",
+          "label": "Tamaño actual",
+          "type": "bytes",
+          "required": true
+        },
+        {
+          "id": "historicalVersionCount",
+          "label": "Versiones",
+          "type": "number",
+          "required": true
+        },
+        {
+          "id": "historicalSizeBytes",
+          "label": "Tamaño histórico",
+          "type": "bytes",
+          "required": false
+        },
+        {
+          "id": "ratio",
+          "label": "Ratio",
+          "type": "number",
+          "required": false
+        },
+        {
+          "id": "precision",
+          "label": "Precisión",
+          "type": "badge",
+          "required": true
+        }
+      ],
+      "sortingDefault": {
+        "field": "historicalSizeBytes",
+        "direction": "desc"
+      },
+      "emptyMessage": "No hay documentos con coste histórico relevante."
+    },
+    "visualSemantics": {
+      "ok": {
+        "intent": "success",
+        "meaning": "sin señales relevantes"
+      },
+      "warning": {
+        "intent": "warning",
+        "meaning": "anomalía moderada o cobertura limitada"
+      },
+      "critical": {
+        "intent": "danger",
+        "meaning": "coste histórico claramente anómalo"
+      },
+      "partial": {
+        "intent": "neutral-warning",
+        "meaning": "datos útiles pero incompletos"
+      }
+    },
+    "copy": {
+      "title": "Analizador de tamaño y volumen de documentos históricos",
+      "subtitles": {
+        "quick": "Estimación rápida del coste histórico",
+        "deep": "Análisis profundo del versionado"
+      },
+      "messages": {
+        "empty": "La biblioteca no contiene documentos analizables.",
+        "partial": "El resultado es parcial o estimado. Revise la cobertura antes de tomar decisiones.",
+        "throttled": "SharePoint ha limitado temporalmente algunas consultas. El resultado puede ser incompleto.",
+        "error": "No se ha podido completar el análisis con los datos disponibles."
+      }
+    },
+    "interactions": [
+      "Cambiar modo de análisis cancela el proceso anterior y lanza uno nuevo.",
+      "Refrescar reejecuta el análisis con la configuración actual.",
+      "Exportar JSON descarga o copia el resultado normalizado.",
+      "Abrir biblioteca navega a la biblioteca objetivo."
+    ],
+    "accessibility": {
+      "requirements": [
+        "ARIA labels en botones y toggles",
+        "Tabla con headers semánticos",
+        "Mensajes de estado anunciables",
+        "Contraste AA mínimo",
+        "No depender solo del color"
+      ],
+      "keyboard": [
+        "Tab order lógico",
+        "Enter/Espacio en toggles y botones"
+      ]
+    },
+    "responsive": {
+      "breakpoints": [
+        "narrow section",
+        "standard column",
+        "full width"
+      ],
+      "tableFallback": "En narrow section la tabla puede resumirse a Documento, Histórico, Ratio y Precisión."
+    }
+  }
+}

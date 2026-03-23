@@ -1,0 +1,14 @@
+{
+  "projectSlug": "pregunta-destacada",
+  "archetype": "general",
+  "rowId": "receRlZjmbo737FTQ",
+  "sources": [],
+  "acceptanceCriteria": [
+    "Muestra una pregunta destacada correctamente.",
+    "Permite abrir CTA cuando existe."
+  ],
+  "businessRules": [
+    "Si no hay CTA, la pieza sigue siendo editorial.",
+    "Si hay varias preguntas activas, elegir por prioridad o fecha."
+  ]
+}

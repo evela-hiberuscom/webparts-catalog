@@ -1,0 +1,509 @@
+{
+  "rowId": "recbt1kGuQnmfS6oL",
+  "name": "Objetivos del área",
+  "slug": "objetivos-del-area",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 8,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "GoalsList",
+      "type": "SharePointList|Planner",
+      "purpose": "objetivos o metas del área"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "area-goals",
+        "name": "Objetivos del área",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra objetivos, OKRs o metas del área con progreso resumido, estado y vínculo a detalle cuando exista.",
+        "productGoal": "Alinear a la audiencia con lo que el área intenta conseguir y cómo va respecto a ello."
+      },
+      "problem": {
+        "business": "Los objetivos de área suelen quedar en presentaciones o herramientas separadas y pierden visibilidad continua.",
+        "operational": "Los equipos necesitan una pieza simple para recordar objetivos y su progreso sin abrir un sistema de OKRs completo."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar objetivos activos del área",
+          "Mostrar progreso o estado resumido",
+          "Permitir abrir detalle del objetivo"
+        ],
+        "secondary": [
+          "Distinguir objetivos en riesgo o completados",
+          "Servir de bloque de alineamiento continuo"
+        ]
+      },
+      "users": [
+        {
+          "role": "Miembro del área",
+          "needs": [
+            "recordar objetivos y progreso"
+          ]
+        },
+        {
+          "role": "Lead/Manager",
+          "needs": [
+            "visibilizar metas del área"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Título de objetivo",
+          "estado o progreso",
+          "owner opcional",
+          "fecha u horizonte temporal",
+          "detalle opcional"
+        ],
+        "out": [
+          "gestión completa de OKRs",
+          "edición de objetivos desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver objetivos activos del área",
+          "actor": "Miembro del área"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle de un objetivo",
+          "actor": "Miembro del área"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar objetivos configurados o activos."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar progreso, estado u horizonte cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por estado cuando exista el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser claro y orientado a alineamiento, no a reporting pesado."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar objetivos con distintos niveles de metadato."
+        }
+      ],
+      "businessRules": [
+        "Los objetivos activos o prioritarios pueden mostrarse primero.",
+        "Si falta porcentaje de progreso, el objetivo sigue siendo válido con estado textual.",
+        "Si falta URL, el objetivo sigue siendo informativo."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig",
+            "Planner"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 6,
+          "min": 1,
+          "max": 20
+        },
+        "defaultStatusFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra objetivos configurados correctamente.",
+        "Muestra progreso o estado cuando existe.",
+        "Permite abrir detalle cuando existe URL.",
+        "Filtra por estado cuando existe el dato."
+      ],
+      "edgeCases": [
+        "objetivo sin progreso",
+        "sin owner",
+        "sin URL",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza objetivos del área correctamente",
+        "Incluye tests base de mapping y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Mantener visibles las metas del área con una lectura clara y poco pesada.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista de objetivos",
+          "filtros opcionales"
+        ],
+        "priorityOrder": [
+          "activos/prioritarios",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "cards o lista con barra/progreso opcional"
+        },
+        "narrow": {
+          "items": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton goals"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "goals list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin objetivos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "objetivos con metadatos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "progresoOEstado",
+          "owner",
+          "horizon",
+          "openAction"
+        ],
+        "badges": [
+          "onTrack",
+          "atRisk",
+          "done",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Objetivos del área",
+        "messages": {
+          "empty": "No hay objetivos visibles.",
+          "error": "No se han podido cargar los objetivos del área."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "estado/progreso con texto visible",
+          "listas accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y estado/progreso"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer objetivos",
+          "normalizar",
+          "render lista"
+        ],
+        "v1": [
+          "filtro por estado",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y normalizar objetivos"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Filtrar y ordenar objetivos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar objetivos"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear GoalsRepository y normalizer"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtro y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear GoalItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "GoalsList",
+          "type": "SharePointList|Planner",
+          "purpose": "objetivos o metas del área"
+        }
+      ],
+      "entities": {
+        "Goal": {
+          "id": "string",
+          "title": "string",
+          "progress": "number|null",
+          "status": "string|null",
+          "owner": "string|null",
+          "horizon": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "status": "onTrack|atRisk|offTrack|done|unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title y status/progress presentes",
+        "partial": "faltan owner, horizon o url"
+      },
+      "fallbacks": [
+        "sin progress => null",
+        "sin status => unknown o derivado parcial",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Reducir tiempo de respuesta",
+            "progress": 65,
+            "status": "onTrack",
+            "owner": "Equipo Soporte",
+            "openUrl": "/sites/ops/goals/response-time"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "goal with progress",
+          "goal without progress",
+          "unknown status",
+          "no url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "AreaGoalsWebPart",
+        "pattern": "SPFx React + goals normalizer",
+        "components": [
+          "AreaGoals",
+          "GoalItem",
+          "GoalsFilters"
+        ],
+        "services": [
+          "AreaGoalsService",
+          "GoalStatusNormalizer"
+        ],
+        "repositories": [
+          "GoalsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'JsonUrl'|'StaticConfig'|'Planner')[]",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "defaultStatusFilter": "string|undefined"
+        },
+        "IAreaGoal": {
+          "id": "string",
+          "title": "string",
+          "progress": "number|null",
+          "status": "onTrack|atRisk|offTrack|done|unknown",
+          "owner": "string|null",
+          "horizon": "string|null",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IAreaGoal[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer objetivos",
+        "normalizar status/progress/owner",
+        "filtrar por estado si procede",
+        "ordenar",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "sort": "status severity/prioridad + progress asc/desc según política + title asc",
+        "normalizeStatus": "mapear estado textual o derivarlo parcialmente de progress si hay regla"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin progress",
+          "uiState": "ready/partialData"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "status desconocido",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "area_goals_loaded",
+          "area_goals_partial",
+          "area_goals_error",
+          "area_goal_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "statusFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "status normalization",
+          "sort/filter",
+          "mapping"
+        ],
+        "component": [
+          "goals render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Datos. Indicadores de avance trimestral con barras o donuts simples.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

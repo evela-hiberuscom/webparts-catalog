@@ -1,0 +1,95 @@
+{
+  "projectSlug": "mantenimientos-programados",
+  "rowId": "receWSKQ5jpVtOdOt",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Comunicar mantenimiento de forma preventiva, clara y tranquilizadora.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista temporal",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "inProgress",
+        "upcoming",
+        "completed"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista o tarjetas compactas"
+      },
+      "narrow": {
+        "items": "timeline vertical simplificada"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton timeline"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "items de mantenimiento"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin mantenimientos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner discreto",
+          "items con campos faltantes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "reintentar"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "estadoTemporal",
+        "fechaInicio",
+        "fechaFin",
+        "impacto",
+        "servicios",
+        "detalleLink"
+      ]
+    },
+    "copy": {
+      "title": "Mantenimientos programados",
+      "messages": {
+        "empty": "No hay mantenimientos programados.",
+        "error": "No se han podido cargar los mantenimientos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "timeline legible con teclado",
+        "texto de estado no solo color"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "timeline o lista compacta"
+    }
+  }
+}

@@ -1,0 +1,508 @@
+{
+  "rowId": "recMvcV5gD4jGNDma",
+  "name": "Panel de campaña interna",
+  "slug": "panel-de-campana-interna",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 8,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "CampaignsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de campañas internas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "internal-campaign-panel",
+        "name": "Panel de campaña interna",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Promociona campañas internas de bienestar, formación, seguridad o cultura mediante una pieza visual pequeña y reutilizable.",
+        "productGoal": "Dar visibilidad sostenida a campañas internas sin necesidad de landing pages complejas."
+      },
+      "problem": {
+        "business": "Las campañas internas pierden tracción si solo se anuncian una vez y no cuentan con un espacio visible y flexible.",
+        "operational": "Comms o People necesitan una pieza reusable para impulsar acciones o mensajes de campaña."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar campaña activa con CTA claro",
+          "Mostrar título, claim y periodo",
+          "Permitir abrir detalle o acción principal"
+        ],
+        "secondary": [
+          "Soportar varias campañas por rotación o prioridad",
+          "Mostrar progreso o fechas clave cuando exista"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender rápidamente de qué trata la campaña y qué acción debe hacer"
+          ]
+        },
+        {
+          "role": "Comms/People/Security",
+          "needs": [
+            "mantener una campaña visible con poco esfuerzo editorial"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Mensaje de campaña",
+          "Título/claim/CTA",
+          "Periodo de vigencia",
+          "Imagen o color de campaña",
+          "Enlace a detalle o acción"
+        ],
+        "out": [
+          "motor editorial complejo",
+          "segmentación conductual avanzada",
+          "tracking de conversión profundo en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver campaña de bienestar",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir landing o formulario de campaña",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Mostrar campaña vigente según periodo",
+          "actor": "Comms"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar la campaña activa o prioritaria según vigencia y configuración."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, claim, CTA y fechas cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle o acción principal."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser visualmente atractiva y compacta."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe soportar periodos de vigencia y rotación básica."
+        }
+      ],
+      "businessRules": [
+        "Solo se muestra la campaña activa o la de mayor prioridad entre las vigentes según política.",
+        "Si falta CTA URL, la campaña sigue siendo informativa pero no accionable.",
+        "Las campañas expiradas no se muestran salvo configuración específica."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "showExpired": {
+          "type": "boolean",
+          "default": false
+        },
+        "rotationMode": {
+          "type": "enum",
+          "values": [
+            "priority",
+            "date",
+            "manual"
+          ],
+          "default": "priority"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra campaña vigente o prioritaria correctamente.",
+        "Permite abrir CTA cuando exista.",
+        "Respeta vigencia y modo de rotación.",
+        "Funciona con metadatos parciales."
+      ],
+      "edgeCases": [
+        "campaña sin CTA",
+        "sin fechas",
+        "múltiples campañas activas",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza campaña correctamente",
+        "Incluye tests base de vigencia y selección"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Transmitir claramente una campaña y conducir al usuario a una acción simple y directa.",
+      "informationArchitecture": {
+        "zones": [
+          "hero de campaña",
+          "mensaje principal",
+          "CTA"
+        ],
+        "priorityOrder": [
+          "claim",
+          "CTA",
+          "periodo"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "hero": "banner o card destacada"
+        },
+        "narrow": {
+          "hero": "card compacta apilada"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton campaign"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "campaign hero"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin campaña vigente o sin render según configuración"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "campaña con CTA o fechas ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "claim",
+          "periodo",
+          "ctaLabel",
+          "ctaAction"
+        ],
+        "badges": [
+          "vigente",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Panel de campaña interna",
+        "messages": {
+          "empty": "No hay campañas activas.",
+          "error": "No se ha podido cargar la campaña interna."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "CTA claramente accesible",
+          "contraste alto",
+          "texto visible además de imagen"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar claim y CTA"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer campañas",
+          "seleccionar vigente",
+          "render hero"
+        ],
+        "v1": [
+          "rotationMode",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y vigencia"
+        },
+        {
+          "id": "EP-02",
+          "name": "Selección de campaña"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer campañas y filtrar vigencia"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Seleccionar campaña activa"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar hero y CTA"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear CampaignRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar CampaignSelector"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear CampaignHero"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "CampaignsList",
+          "type": "SharePointList",
+          "purpose": "catálogo de campañas internas"
+        }
+      ],
+      "entities": {
+        "Campaign": {
+          "id": "string",
+          "title": "string",
+          "claim": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "ctaLabel": "string|null",
+          "ctaUrl": "string|null",
+          "priority": "number|null",
+          "imageUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "priority": "number or null",
+        "active": "derivado por fechas"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, vigencia y CTA básicos presentes",
+        "partial": "faltan claim, fechas, CTA o imagen"
+      },
+      "fallbacks": [
+        "sin CTA => informativa",
+        "sin fechas => selección por prioridad/manual",
+        "sin imagen => render visual simplificado"
+      ],
+      "exampleOutput": {
+        "item": {
+          "title": "Mes de la ciberseguridad",
+          "claim": "Completa tu formación obligatoria",
+          "ctaLabel": "Empezar",
+          "ctaUrl": "/sites/sec/formacion",
+          "priority": 1
+        }
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "active campaign",
+          "multiple active campaigns",
+          "no CTA",
+          "expired campaign",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "InternalCampaignPanelWebPart",
+        "pattern": "SPFx React + repository + campaign selector",
+        "components": [
+          "InternalCampaignPanel",
+          "CampaignHero"
+        ],
+        "services": [
+          "CampaignPanelService",
+          "CampaignSelector"
+        ],
+        "repositories": [
+          "CampaignRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "showExpired": "boolean",
+          "rotationMode": "priority|date|manual"
+        },
+        "ICampaignItem": {
+          "id": "string",
+          "title": "string",
+          "claim": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "ctaLabel": "string|null",
+          "ctaUrl": "string|null",
+          "priority": "number|null",
+          "imageUrl": "string|null"
+        },
+        "IViewModel": {
+          "item": "ICampaignItem|null",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer campañas",
+        "filtrar vigentes según fechas",
+        "seleccionar según rotationMode",
+        "renderizar"
+      ],
+      "algorithms": {
+        "active": "now within start/end or fallback by policy",
+        "selection": "priority/date/manual depending on config"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin ctaUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin fechas",
+          "uiState": "ready with fallback selection"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar ctaUrl e imageUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "campaign_loaded",
+          "campaign_partial",
+          "campaign_error",
+          "campaign_opened"
+        ],
+        "properties": [
+          "rotationMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "active window logic",
+          "selection by priority/date"
+        ],
+        "component": [
+          "hero render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa. Pieza pequeña para campañas de bienestar, formación, seguridad o compliance.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

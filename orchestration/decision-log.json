@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-03-23T00:00:00Z",
+  "decisions": [
+    {
+      "id": "DECISION-001",
+      "scope": "workspace",
+      "context": "Estructura física del monorepo",
+      "decision": "Cada solución SPFx vivirá en `projects/<slug>` y el código compartido en `packages/spfx-common`.",
+      "rationale": "Aísla workdirs por proyecto y evita colisiones entre workers sin perder reutilización.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-002",
+      "scope": "design",
+      "context": "Tipografías de marca",
+      "decision": "La estrategia base será self-host en cada proyecto y no se usará CDN externa por defecto.",
+      "rationale": "Cumple CSP y gobernanza definidas en AGENTS.md.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-003",
+      "scope": "scaffold",
+      "context": "Automatización de `yo @microsoft/sharepoint` en Windows",
+      "decision": "En Windows el wrapper de scaffold invocará `yo` vía PowerShell y normalizará el layout anidado al root de `projects/<slug>`.",
+      "rationale": "Evita prompts inesperados, respeta argumentos completos y mantiene la estructura física pactada para todos los workers.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    }
+  ]
+}

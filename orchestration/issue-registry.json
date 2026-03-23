@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-03-23T17:16:25.235Z",
+  "entries": [
+    {
+      "id": "ISSUE-001",
+      "scope": "airtable-ingestion",
+      "archetype": "platform",
+      "projectSlug": null,
+      "summary": "La API de datos de Airtable respondió correctamente al usar el nombre real de tabla y vista, no el ID de tabla/vista.",
+      "rootCause": "Uso inconsistente entre metadata API e API de datos.",
+      "detectionStage": "foundation",
+      "mitigation": "Usar `Table 1` y `Grid view` en las lecturas de registros; reservar IDs para metadata.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-002",
+      "scope": "orchestration",
+      "archetype": "platform",
+      "projectSlug": null,
+      "summary": "`bootstrap:contexts` se lanzó antes de que existiera `project-work-items.json` al ejecutarse en paralelo con `sync:airtable`.",
+      "rootCause": "Dependencia temporal no respetada entre sync y bootstrap.",
+      "detectionStage": "foundation",
+      "mitigation": "Ejecutar foundation de forma secuencial: primero sync, después bootstrap.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-003",
+      "scope": "scaffold",
+      "archetype": "platform",
+      "projectSlug": "lanzador-universal-de-accesos",
+      "summary": "El wrapper de scaffold SPFx lanzó yo con shell:true y rompió el paso de argumentos, dejando prompts interactivos abiertos.",
+      "rootCause": "Uso de child_process con shell en lugar de ejecución directa con argv preservado.",
+      "detectionStage": "wave-1",
+      "mitigation": "Ejecutar spawnSync con shell:false y volver a probar scaffold no interactivo.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-004",
+      "scope": "scaffold",
+      "archetype": "platform",
+      "projectSlug": "lanzador-universal-de-accesos",
+      "summary": "En Windows, el wrapper no pudo resolver yo con shell:false; hay que invocar yo.cmd.",
+      "rootCause": "Resolución de ejecutables .cmd distinta en Windows cuando no se usa shell.",
+      "detectionStage": "wave-1",
+      "mitigation": "Usar yo.cmd en Windows y yo en otros entornos.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-005",
+      "scope": "scaffold",
+      "archetype": "platform",
+      "projectSlug": "lanzador-universal-de-accesos",
+      "summary": "La invocación directa de yo.cmd con spawnSync devolvió EINVAL; el wrapper debe delegar en PowerShell en Windows.",
+      "rootCause": "Comportamiento de procesos .cmd y parsing de argumentos en Windows con child_process.",
+      "detectionStage": "wave-1",
+      "mitigation": "Invocar yo mediante PowerShell en Windows y mantener ejecución directa en otros entornos.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-006",
+      "scope": "scaffold",
+      "archetype": "platform",
+      "projectSlug": null,
+      "summary": "El generador SPFx crea un subdirectorio adicional con el nombre de la solución incluso cuando se ejecuta desde `projects/<slug>`.",
+      "rootCause": "Comportamiento por defecto del generador `yo @microsoft/sharepoint` al crear la carpeta de solución.",
+      "detectionStage": "wave-1",
+      "mitigation": "El wrapper debe mover el contenido generado al root del proyecto y eliminar el subdirectorio anidado.",
+      "status": "resolved",
+      "reusable": true
+    }
+  ]
+}

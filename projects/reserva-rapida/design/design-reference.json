@@ -1,0 +1,95 @@
+{
+  "projectSlug": "reserva-rapida",
+  "rowId": "rec0FWy077HG4YE7v",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir reservar un recurso habitual en el menor número de clics posible.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros",
+        "grid de recursos",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "recursos destacados",
+        "categorías frecuentes",
+        "disponibilidad resumida"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "2 columnas o lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "resource cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin recursos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards sin disponibilidad o datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "nombre",
+        "categoria",
+        "sede",
+        "disponibilidad",
+        "reglas",
+        "accionReservar"
+      ]
+    },
+    "copy": {
+      "title": "Reserva rápida",
+      "messages": {
+        "empty": "No hay recursos configurados.",
+        "error": "No se han podido cargar los recursos de reserva."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "acciones claras y accesibles",
+        "texto alternativo para iconos",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, disponibilidad y acción"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "projectSlug": "ruta-guiada",
+  "archetype": "general",
+  "rowId": "recaNnaAAvzOvq1Kv",
+  "sources": [
+    {
+      "name": "GuidedRouteList",
+      "type": "SharePointList|StaticConfig",
+      "purpose": "pasos de ruta"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra la secuencia configurada.",
+    "Permite abrir pasos válidos."
+  ],
+  "businessRules": [
+    "El orden es explícito por sortOrder.",
+    "Si un paso no tiene URL sigue siendo informativo."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "projectSlug": "objetivos-del-area",
+  "archetype": "general",
+  "rowId": "recbt1kGuQnmfS6oL",
+  "sources": [
+    {
+      "name": "GoalsList",
+      "type": "SharePointList|Planner",
+      "purpose": "objetivos o metas del área"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra objetivos configurados correctamente.",
+    "Muestra progreso o estado cuando existe.",
+    "Permite abrir detalle cuando existe URL.",
+    "Filtra por estado cuando existe el dato."
+  ],
+  "businessRules": [
+    "Los objetivos activos o prioritarios pueden mostrarse primero.",
+    "Si falta porcentaje de progreso, el objetivo sigue siendo válido con estado textual.",
+    "Si falta URL, el objetivo sigue siendo informativo."
+  ]
+}

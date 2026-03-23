@@ -1,0 +1,529 @@
+{
+  "rowId": "recIuFqxxM49oeduW",
+  "name": "Biblioteca de plantillas",
+  "slug": "biblioteca-de-plantillas",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 11,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "TemplatesLibrary",
+      "type": "SharePointLibrary",
+      "purpose": "plantillas oficiales"
+    },
+    {
+      "name": "TemplatesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de plantillas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "templates-library",
+        "name": "Biblioteca de plantillas",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Facilita el acceso a plantillas corporativas de documentos, presentaciones y recursos reutilizables.",
+        "productGoal": "Estandarizar el uso de plantillas y reducir tiempo de búsqueda de material oficial."
+      },
+      "problem": {
+        "business": "Las plantillas oficiales no siempre son fáciles de encontrar y se usan versiones antiguas o inconsistentes.",
+        "operational": "La falta de un acceso claro reduce la estandarización documental."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar plantillas oficiales accesibles",
+          "Permitir apertura o descarga rápida",
+          "Filtrar por tipo o categoría"
+        ],
+        "secondary": [
+          "Mostrar versión o fecha actualizada",
+          "Destacar plantillas clave"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "encontrar la plantilla correcta rápidamente"
+          ]
+        },
+        {
+          "role": "Comms/Brand/Operaciones",
+          "needs": [
+            "promover uso de plantillas oficiales"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de plantillas",
+          "Tipo/categoría",
+          "Abrir o descargar",
+          "Metadatos básicos"
+        ],
+        "out": [
+          "edición documental",
+          "gestión de versiones desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Abrir una plantilla PowerPoint",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Filtrar por tipo de plantilla",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Ver plantillas destacadas",
+          "actor": "Equipo"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar plantillas configuradas o provenientes de biblioteca/lista."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, tipo, categoría y metadatos básicos cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir o descargar la plantilla."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros por tipo/categoría."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida y uso simple."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Si una plantilla no tiene categoría, va a General.",
+        "Si faltan metadatos, la plantilla sigue siendo válida.",
+        "Las destacadas pueden ordenarse primero."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointLibrary",
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 20,
+          "min": 1,
+          "max": 100
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra plantillas configuradas.",
+        "Permite abrir o descargar cuando procede.",
+        "Filtra por tipo/categoría.",
+        "Funciona con metadatos parciales."
+      ],
+      "edgeCases": [
+        "plantilla sin categoría",
+        "sin download/open url",
+        "sin tipo",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza plantillas correctamente",
+        "Incluye tests base de filtros y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir identificar y abrir una plantilla corporativa correcta con rapidez y confianza.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros",
+          "grid/lista de plantillas"
+        ],
+        "priorityOrder": [
+          "destacadas",
+          "categoría/tipo",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "grid o lista rica"
+        },
+        "narrow": {
+          "items": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton templates"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "templates list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin plantillas"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "plantillas con metadatos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "tipo",
+          "categoria",
+          "updatedAt",
+          "open/download action"
+        ],
+        "badges": [
+          "destacada",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Biblioteca de plantillas",
+        "messages": {
+          "empty": "No hay plantillas configuradas.",
+          "error": "No se han podido cargar las plantillas."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "acciones de abrir/descargar accesibles",
+          "badges con texto"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, tipo y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer plantillas",
+          "render lista",
+          "abrir/descargar"
+        ],
+        "v1": [
+          "filtros por tipo/categoría",
+          "featured",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer plantillas desde orígenes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Normalizar y filtrar plantillas"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista/grid y acciones"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de plantillas"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtros y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear TemplateList y actions"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "TemplatesLibrary",
+          "type": "SharePointLibrary",
+          "purpose": "plantillas oficiales"
+        },
+        {
+          "name": "TemplatesList",
+          "type": "SharePointList",
+          "purpose": "catálogo de plantillas"
+        }
+      ],
+      "entities": {
+        "Template": {
+          "id": "string",
+          "title": "string",
+          "templateType": "string|null",
+          "category": "string|null",
+          "updatedAt": "string|null",
+          "openUrl": "string|null",
+          "downloadUrl": "string|null",
+          "featured": "boolean|null"
+        }
+      },
+      "mappings": {
+        "templateType": "string o unknown",
+        "category": "string o General"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "open/download url y metadatos presentes",
+        "partial": "faltan tipo, categoría o urls"
+      },
+      "fallbacks": [
+        "sin categoría => General",
+        "sin tipo => unknown",
+        "sin open/download => item parcial sin acción correspondiente"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Plantilla PowerPoint corporativa",
+            "templateType": "PowerPoint",
+            "category": "Brand",
+            "openUrl": "/sites/brand/templates/pptx",
+            "downloadUrl": "/sites/brand/templates/pptx?download=1"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "con open/download",
+          "sin tipo",
+          "sin categoría",
+          "sin urls",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "TemplatesLibraryWebPart",
+        "pattern": "SPFx React + repositories + template normalizer",
+        "components": [
+          "TemplatesLibrary",
+          "TemplateList",
+          "TemplateFilters"
+        ],
+        "services": [
+          "TemplatesAggregationService"
+        ],
+        "repositories": [
+          "TemplatesRepository",
+          "SharePointLibraryTemplatesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointLibrary'|'SharePointList'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "ITemplateItem": {
+          "id": "string",
+          "title": "string",
+          "templateType": "string|null",
+          "category": "string|null",
+          "updatedAt": "string|null",
+          "openUrl": "string|null",
+          "downloadUrl": "string|null",
+          "featured": "boolean"
+        },
+        "IViewModel": {
+          "items": "ITemplateItem[]",
+          "categories": "string[]",
+          "types": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer plantillas desde orígenes",
+        "normalizar tipo/categoría/urls",
+        "filtrar",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "featured primero + category asc + title asc",
+        "filter": "por categoría/tipo cuando existan"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos",
+        "limit": "maxItems tras ordenación"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin open/download url",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin tipo",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar URLs",
+          "no ofrecer descarga si la URL no es válida"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "templates_loaded",
+          "templates_partial",
+          "templates_error",
+          "template_opened",
+          "template_downloaded"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "typeFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "type/category filter",
+          "sort",
+          "mapping"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento. Acceso a plantillas Word, PowerPoint, Excel, correos y formularios.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

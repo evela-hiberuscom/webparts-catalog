@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "reserva-rapida-client-side-solution",
+    "id": "a9d3dff1-fe98-4e05-aba0-dc01d0446d14",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "reserva-rapida description"
+      },
+      "longDescription": {
+        "default": "reserva-rapida description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "reserva-rapida Feature",
+        "description": "The feature that activates elements of the reserva-rapida solution.",
+        "id": "6a34a24c-b123-4055-93aa-fed090a2ceb2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/reserva-rapida.sppkg"
+  }
+}

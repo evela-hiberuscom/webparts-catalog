@@ -1,0 +1,514 @@
+{
+  "rowId": "rec0u1pDtGwTLtIZ1",
+  "name": "Mis accesos recientes",
+  "slug": "mis-accesos-recientes",
+  "artifactType": "SPFxWebPart",
+  "archetype": "launcher",
+  "waveNumber": 1,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "GraphRecent",
+      "type": "Connector/API",
+      "purpose": "recursos recientes del usuario"
+    },
+    {
+      "name": "SharePointRecentList",
+      "type": "SharePointList",
+      "purpose": "recientes locales si existen"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "my-recent-accesses",
+        "name": "Mis accesos recientes",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra accesos recientes del usuario a documentos, páginas o herramientas para retomar trabajo con rapidez.",
+        "productGoal": "Reducir tiempo de reanudación mostrando atajos a recursos usados recientemente."
+      },
+      "problem": {
+        "business": "Los usuarios vuelven a buscar recursos que ya usaron hace poco.",
+        "operational": "La pérdida de contexto afecta la productividad diaria."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar recursos recientes relevantes",
+          "Permitir reabrir rápidamente",
+          "Distinguir tipo de recurso cuando sea posible"
+        ],
+        "secondary": [
+          "Mostrar fecha de último acceso",
+          "Filtrar por tipo",
+          "Excluir elementos obsoletos o inaccesibles"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "retomar trabajo reciente",
+            "no volver a buscar el mismo recurso"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de accesos recientes",
+          "Tipo de recurso",
+          "Último acceso",
+          "Abrir recurso"
+        ],
+        "out": [
+          "Historial completo ilimitado",
+          "analítica avanzada de comportamiento"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Retomar un documento reciente",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir una página reciente",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar por tipo de recurso",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar recursos recientes del usuario actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, tipo y fecha de último acceso cuando exista."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir el recurso."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por tipo cuando exista el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida y visualmente simple."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Si un recurso ya no es accesible, puede excluirse o marcarse como no disponible.",
+        "Si faltan fechas, el recurso sigue visible pero sin orden temporal preciso.",
+        "El orden por defecto es último acceso descendente."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "GraphRecent",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 10,
+          "min": 1,
+          "max": 50
+        },
+        "resourceTypeFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra recursos recientes correctamente.",
+        "Ordena por último acceso cuando existe la fecha.",
+        "Permite abrir el recurso.",
+        "Funciona con datos parciales."
+      ],
+      "edgeCases": [
+        "recurso sin lastAccessedAt",
+        "recurso inaccesible",
+        "sin tipo",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Ordena recursos recientes",
+        "Incluye tests base de ordenación y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir volver al trabajo reciente en uno o dos clics.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros opcionales",
+          "lista de recursos"
+        ],
+        "priorityOrder": [
+          "último acceso",
+          "tipo",
+          "título"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista o cards compactas"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton resources"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "recent list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin actividad reciente"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "lista parcial con campos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "tipo",
+          "lastAccessedAt",
+          "openAction"
+        ],
+        "badges": [
+          "documento",
+          "pagina",
+          "app",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mis accesos recientes",
+        "messages": {
+          "empty": "No hay accesos recientes visibles.",
+          "error": "No se han podido cargar tus accesos recientes."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "lista navegable",
+          "tipo visible por texto",
+          "fechas localizadas"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer recientes",
+          "normalizar",
+          "render lista"
+        ],
+        "v1": [
+          "filtros por tipo",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Integración de orígenes"
+        },
+        {
+          "id": "EP-02",
+          "name": "Normalización y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer recursos recientes desde orígenes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Ordenar y filtrar por tipo"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista de recientes"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear adapters/repositorios de recientes"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar sort y filter"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear RecentResourceList y filters"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "GraphRecent",
+          "type": "Connector/API",
+          "purpose": "recursos recientes del usuario"
+        },
+        {
+          "name": "SharePointRecentList",
+          "type": "SharePointList",
+          "purpose": "recientes locales si existen"
+        }
+      ],
+      "entities": {
+        "RecentResource": {
+          "id": "string",
+          "title": "string",
+          "type": "string|null",
+          "lastAccessedAt": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "type": "mapear a document|page|app|unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "fecha, tipo y enlace completos",
+        "partial": "falta fecha, tipo o enlace"
+      },
+      "fallbacks": [
+        "sin fecha => ordenar al final",
+        "sin tipo => unknown",
+        "sin enlace => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Propuesta.docx",
+            "type": "document",
+            "lastAccessedAt": "2026-03-21T08:20:00Z",
+            "openUrl": "/sites/docs/Propuesta.docx"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "document recent",
+          "page recent",
+          "no date",
+          "no link",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MyRecentAccessesWebPart",
+        "pattern": "SPFx React + adapters + recent resources normalizer",
+        "components": [
+          "MyRecentAccesses",
+          "RecentResourceList",
+          "RecentFilters"
+        ],
+        "services": [
+          "RecentAccessesAggregationService"
+        ],
+        "repositories": [
+          "GraphRecentRepository",
+          "SharePointRecentRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('GraphRecent'|'SharePointList'|'JsonUrl')[]",
+          "maxItems": "number",
+          "resourceTypeFilter": "string|undefined"
+        },
+        "IRecentResource": {
+          "id": "string",
+          "title": "string",
+          "type": "document|page|app|unknown",
+          "lastAccessedAt": "string|null",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IRecentResource[]",
+          "types": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer recursos recientes de orígenes",
+        "normalizar tipo y fecha",
+        "filtrar por tipo si aplica",
+        "ordenar por último acceso",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "lastAccessedAt desc con nulls al final",
+        "filter": "por type cuando el usuario o config lo indique"
+      },
+      "performance": {
+        "cache": "por usuario y origen",
+        "retry": "1-2 reintentos",
+        "limit": "maxItems tras ordenación"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin lastAccessedAt",
+          "uiState": "ready partial"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "origen inaccesible",
+          "uiState": "partialData o error"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl",
+          "no mostrar recursos si el origen indica falta de acceso"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "recent_loaded",
+          "recent_partial",
+          "recent_error",
+          "recent_opened"
+        ],
+        "properties": [
+          "sourceCount",
+          "itemCount",
+          "typeFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "sort recent desc",
+          "type filter",
+          "normalization"
+        ],
+        "component": [
+          "render list",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad. Atajos a documentos, páginas o herramientas usadas recientemente.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

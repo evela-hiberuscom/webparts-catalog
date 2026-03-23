@@ -1,0 +1,457 @@
+{
+  "rowId": "recOGlnVLuk3SOqg5",
+  "name": "Barra de avisos urgentes",
+  "slug": "barra-de-avisos-urgentes",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 3,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "AlertsList",
+      "type": "SharePointList",
+      "purpose": "avisos críticos o urgentes"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "urgent-alert-bar",
+        "name": "Barra de avisos urgentes",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra avisos críticos o urgentes en formato banner con alta visibilidad.",
+        "productGoal": "Comunicar incidencias, alertas o mensajes críticos de forma inmediata y inequívoca."
+      },
+      "problem": {
+        "business": "Los mensajes urgentes pueden pasar desapercibidos entre noticias o contenido general.",
+        "operational": "Se necesita un canal visible y controlado para alertas críticas."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar avisos urgentes activos",
+          "Diferenciar severidad e impacto",
+          "Permitir enlaces de detalle o acción",
+          "Ocultar automáticamente avisos expirados"
+        ],
+        "secondary": [
+          "Soportar múltiples banners por prioridad",
+          "Auditar qué alertas están activas"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver una alerta crítica al entrar en la página"
+          ]
+        },
+        {
+          "role": "Comunicaciones/IT",
+          "needs": [
+            "publicar alertas con control temporal"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Banner de alertas",
+          "Severidad",
+          "Título y mensaje corto",
+          "Fechas de vigencia",
+          "CTA opcional"
+        ],
+        "out": [
+          "sistema de notificaciones push",
+          "workflow editorial completo"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar avisos activos según ventana temporal."
+        },
+        {
+          "id": "RF-02",
+          "text": "Ordenar por severidad y prioridad."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir un detalle o acción relacionada."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty y error."
+        }
+      ],
+      "businessRules": [
+        "Solo se muestran avisos activos en la fecha actual.",
+        "Critical prevalece visualmente sobre warning e info.",
+        "Si falta endDate, puede considerarse activo hasta despublicación manual según política."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxAlerts": {
+          "type": "number",
+          "default": 3,
+          "min": 1,
+          "max": 10
+        },
+        "dismissible": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra solo avisos vigentes.",
+        "Ordena por severidad/prioridad.",
+        "Permite abrir CTA cuando exista."
+      ],
+      "edgeCases": [
+        "alerta sin fin",
+        "sin CTA",
+        "lista vacía",
+        "severidad desconocida"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Evalúa vigencia correctamente",
+        "Incluye tests de prioridad y ventana temporal"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Transmitir una alerta urgente sin que el usuario tenga que escanear la página entera.",
+      "informationArchitecture": {
+        "zones": [
+          "banner principal",
+          "acciones opcionales"
+        ],
+        "priorityOrder": [
+          "critical",
+          "warning",
+          "info"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "banner": "ancho completo"
+        },
+        "narrow": {
+          "banner": "una sola fila con CTA visible"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton banner"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "alert banners"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin render o placeholder mínimo"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro no intrusivo"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "severity",
+          "title",
+          "message",
+          "cta"
+        ],
+        "badges": [
+          "critical",
+          "warning",
+          "info"
+        ]
+      },
+      "copy": {
+        "title": "Avisos urgentes",
+        "messages": {
+          "error": "No se han podido cargar los avisos urgentes."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "contraste alto",
+          "texto y color para severidad",
+          "CTA accesible"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y mensaje; CTA debajo si hace falta"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer alertas",
+          "filtrar vigentes",
+          "render banner"
+        ],
+        "v1": [
+          "CTA",
+          "dismissible opcional",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y vigencia"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de banner"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y filtrar alertas activas"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar banner por severidad"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear AlertsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar filter y sort"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear AlertBanner"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "AlertsList",
+          "type": "SharePointList",
+          "purpose": "avisos críticos o urgentes"
+        }
+      ],
+      "entities": {
+        "Alert": {
+          "id": "string",
+          "severity": "string|null",
+          "title": "string",
+          "message": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "ctaUrl": "string|null",
+          "priority": "number|null"
+        }
+      },
+      "mappings": {
+        "severity": "critical|warning|info|unknown",
+        "priority": "number or null"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "severity, title y vigencia presentes",
+        "partial": "faltan fechas, message o ctaUrl"
+      },
+      "fallbacks": [
+        "sin severity => unknown",
+        "sin ctaUrl => banner informativo",
+        "sin fechas => partialData"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "severity": "critical",
+            "title": "Incidencia VPN",
+            "message": "La VPN presenta degradación",
+            "ctaUrl": "/sites/it/status/vpn"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "critical active",
+          "warning active",
+          "expired",
+          "sin CTA",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "UrgentAlertBarWebPart",
+        "pattern": "SPFx React + repository + temporal filter",
+        "components": [
+          "UrgentAlertBar",
+          "AlertBanner"
+        ],
+        "services": [
+          "AlertBarService",
+          "AlertPriorityService"
+        ],
+        "repositories": [
+          "AlertsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "maxAlerts": "number",
+          "dismissible": "boolean"
+        },
+        "IAlertItem": {
+          "id": "string",
+          "severity": "critical|warning|info|unknown",
+          "title": "string",
+          "message": "string|null",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "ctaUrl": "string|null",
+          "priority": "number|null"
+        },
+        "IViewModel": {
+          "items": "IAlertItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer alertas",
+        "filtrar vigentes",
+        "ordenar por severidad/prioridad",
+        "limitar maxAlerts",
+        "renderizar"
+      ],
+      "algorithms": {
+        "isActive": "now between startAt and endAt, con null-safe rules",
+        "sort": "severity desc + priority asc"
+      },
+      "performance": {
+        "cache": "por origen con TTL corto",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin fechas",
+          "uiState": "ready/partialData"
+        },
+        {
+          "condition": "severidad desconocida",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar ctaUrl",
+          "no renderizar HTML crudo en mensaje"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "alerts_loaded",
+          "alerts_partial",
+          "alerts_error",
+          "alert_cta_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "criticalCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "active window filter",
+          "severity sort"
+        ],
+        "component": [
+          "banner render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Banner para incidencias, alertas internas o mensajes críticos.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

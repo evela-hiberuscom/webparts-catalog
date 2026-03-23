@@ -1,0 +1,64 @@
+{
+  "projectSlug": "ruta-guiada",
+  "rowId": "recaNnaAAvzOvq1Kv",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Guiar al usuario con una secuencia clara y visualmente poco intimidante.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "pasos ordenados"
+      ],
+      "priorityOrder": [
+        "primer paso",
+        "resto en orden"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "timeline o lista secuencial"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "steps list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin ruta"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Ruta guiada",
+      "messages": {
+        "empty": "No hay ruta disponible."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "pasos numerados semánticamente",
+        "links accesibles"
+      ]
+    }
+  }
+}

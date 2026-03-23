@@ -1,0 +1,516 @@
+{
+  "rowId": "recKUTdRJitx5VvpA",
+  "name": "Checklist de onboarding",
+  "slug": "checklist-de-onboarding",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 5,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "OnboardingChecklistList",
+      "type": "SharePointList",
+      "purpose": "pasos de onboarding"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "onboarding-checklist",
+        "name": "Checklist de onboarding",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Guía los pasos clave de incorporación para que nuevas personas o managers no olviden tareas relevantes durante el onboarding.",
+        "productGoal": "Estandarizar y simplificar el onboarding mediante una checklist clara y accionable."
+      },
+      "problem": {
+        "business": "La incorporación de nuevas personas puede dejar pasos importantes sin completar.",
+        "operational": "Managers y nuevos empleados necesitan una guía clara y ordenada."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar checklist de incorporación",
+          "Ordenar pasos por fase o prioridad",
+          "Permitir abrir recursos vinculados"
+        ],
+        "secondary": [
+          "Distinguir pasos obligatorios y opcionales",
+          "Servir para manager o nuevo empleado según variante"
+        ]
+      },
+      "users": [
+        {
+          "role": "Nuevo empleado",
+          "needs": [
+            "saber qué debe hacer primero"
+          ]
+        },
+        {
+          "role": "Manager/People Ops",
+          "needs": [
+            "asegurar que no se olvidan pasos"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Lista de pasos de onboarding",
+          "Fases o categorías",
+          "Enlaces asociados",
+          "Indicadores obligatorios/opcionales"
+        ],
+        "out": [
+          "seguimiento de completado persistente por usuario en V1",
+          "automatización de onboarding"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consultar pasos de la primera semana",
+          "actor": "Nuevo empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir recurso asociado a un paso",
+          "actor": "Nuevo empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Ver checklist por fase",
+          "actor": "Manager"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar pasos de onboarding ordenados por fase o prioridad."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, descripción y obligatoriedad cuando exista."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir enlaces o recursos asociados."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por fase o variante si existe el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy claro y secuencial."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Los pasos obligatorios se destacan visualmente.",
+        "Si falta fase, el paso va a General.",
+        "Si falta enlace, el paso sigue siendo válido."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "variant": {
+          "type": "enum",
+          "values": [
+            "employee",
+            "manager",
+            "generic"
+          ],
+          "default": "generic"
+        },
+        "defaultPhase": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra pasos configurados.",
+        "Ordena por fase o prioridad.",
+        "Destaca obligatorios.",
+        "Abre recursos cuando existan."
+      ],
+      "edgeCases": [
+        "paso sin fase",
+        "sin descripción",
+        "sin enlace",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza checklist correctamente",
+        "Incluye tests base de ordenación y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Hacer que la incorporación resulte clara, secuencial y tranquilizadora.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "fases/filtros",
+          "lista de pasos"
+        ],
+        "priorityOrder": [
+          "obligatorios",
+          "fase actual",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista secuencial o timeline"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton checklist"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "phase filters",
+            "steps list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin checklist"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "pasos con datos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "descripcion",
+          "fase",
+          "obligatorio",
+          "relatedLink"
+        ],
+        "badges": [
+          "obligatorio",
+          "opcional",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Checklist de onboarding",
+        "messages": {
+          "empty": "No hay pasos de onboarding configurados.",
+          "error": "No se ha podido cargar el checklist de onboarding."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "secuencia legible",
+          "badges con texto",
+          "links accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, fase y obligatoriedad"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer pasos",
+          "render checklist",
+          "abrir recursos"
+        ],
+        "v1": [
+          "filtros por fase/variant",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer pasos de onboarding"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Filtrar y ordenar checklist"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar pasos y badges"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear ChecklistRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtros y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ChecklistStepItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "OnboardingChecklistList",
+          "type": "SharePointList",
+          "purpose": "pasos de onboarding"
+        }
+      ],
+      "entities": {
+        "ChecklistStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "phase": "string|null",
+          "mandatory": "boolean|null",
+          "relatedUrl": "string|null",
+          "variant": "string|null"
+        }
+      },
+      "mappings": {
+        "phase": "string o General",
+        "mandatory": "boolean default false",
+        "variant": "employee|manager|generic|unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, phase y mandatory presentes",
+        "partial": "falta description, phase o relatedUrl"
+      },
+      "fallbacks": [
+        "sin phase => General",
+        "sin mandatory => false",
+        "sin relatedUrl => sin acción secundaria"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Configura MFA",
+            "phase": "Día 1",
+            "mandatory": true,
+            "relatedUrl": "/sites/it/mfa"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "mandatory step",
+          "optional step",
+          "manager variant",
+          "sin fase",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "OnboardingChecklistWebPart",
+        "pattern": "SPFx React + repository + phase sorter",
+        "components": [
+          "OnboardingChecklist",
+          "ChecklistPhaseFilter",
+          "ChecklistStepItem"
+        ],
+        "services": [
+          "ChecklistCatalogService"
+        ],
+        "repositories": [
+          "ChecklistRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "variant": "employee|manager|generic",
+          "defaultPhase": "string|undefined"
+        },
+        "IChecklistStep": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "phase": "string|null",
+          "mandatory": "boolean",
+          "relatedUrl": "string|null",
+          "variant": "employee|manager|generic|unknown"
+        },
+        "IViewModel": {
+          "items": "IChecklistStep[]",
+          "phases": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer pasos",
+        "normalizar fase/mandatory/variant",
+        "filtrar por variant y fase",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "phase asc + mandatory desc + title asc",
+        "filter": "por variant y fase cuando existan"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin phase",
+          "uiState": "ready"
+        },
+        {
+          "condition": "sin relatedUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar relatedUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "onboarding_loaded",
+          "onboarding_partial",
+          "onboarding_error",
+          "onboarding_link_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "variant",
+          "phaseFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "phase sort",
+          "variant filter",
+          "mapping"
+        ],
+        "component": [
+          "checklist render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento/Personas. Pasos para nuevas incorporaciones o cambios de rol.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

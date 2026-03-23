@@ -1,0 +1,22 @@
+{
+  "projectSlug": "que-ha-cambiado",
+  "archetype": "recents",
+  "rowId": "receT1ugT7eGEzsuu",
+  "sources": [
+    {
+      "name": "RecentChangesList",
+      "type": "SharePointList|Library",
+      "purpose": "feed de cambios recientes"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra cambios recientes correctamente.",
+    "Ordena por fecha descendente.",
+    "Permite abrir elementos válidos."
+  ],
+  "businessRules": [
+    "Los cambios más recientes se muestran primero.",
+    "Si falta resumen, el elemento sigue siendo válido.",
+    "Si falta URL, el elemento sigue siendo informativo."
+  ]
+}

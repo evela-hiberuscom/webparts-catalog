@@ -1,0 +1,94 @@
+{
+  "projectSlug": "nuevas-incorporaciones",
+  "rowId": "recpU1LZQmFswP606",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Dar la bienvenida visualmente y ayudar a que las nuevas personas sean reconocibles rápido.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista/grid de nuevas incorporaciones"
+      ],
+      "priorityOrder": [
+        "más recientes",
+        "resto dentro de ventana"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "lista o 2 columnas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton joiner cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "joiner cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin incorporaciones recientes"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "tarjetas con foto o perfil ausente"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "avatar",
+        "nombre",
+        "rol",
+        "equipo",
+        "joinDateLabel",
+        "profileAction"
+      ],
+      "badges": [
+        "nuevo",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Nuevas incorporaciones",
+      "messages": {
+        "empty": "No hay nuevas incorporaciones en este periodo.",
+        "error": "No se han podido cargar las nuevas incorporaciones."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards accesibles",
+        "texto visible además de imagen"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, rol y acción"
+    }
+  }
+}

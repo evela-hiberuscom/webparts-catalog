@@ -1,0 +1,506 @@
+{
+  "rowId": "recR0hmAqzSViJFra",
+  "name": "Mini organigrama",
+  "slug": "mini-organigrama",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 7,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "relaciones manager/report"
+    },
+    {
+      "name": "OrgList",
+      "type": "SharePointList",
+      "purpose": "estructura curada"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "mini-org-chart",
+        "name": "Mini organigrama",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra una jerarquía simple de manager-equipo o una cadena corta de reporting para dar contexto organizativo.",
+        "productGoal": "Ayudar a entender relaciones básicas de reporting sin un organigrama completo."
+      },
+      "problem": {
+        "business": "No siempre es fácil entender cómo encaja un equipo o una persona dentro de la estructura.",
+        "operational": "Muchas páginas necesitan un contexto jerárquico ligero, no un org chart completo."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar relaciones jerárquicas simples",
+          "Permitir abrir perfil de manager o miembros",
+          "Representar una cadena corta o árbol pequeño"
+        ],
+        "secondary": [
+          "Destacar manager principal",
+          "Servir como bloque de contexto organizativo"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender quién reporta a quién a alto nivel"
+          ]
+        },
+        {
+          "role": "Manager",
+          "needs": [
+            "mostrar estructura mínima del área"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Manager",
+          "miembros directos o cadena corta",
+          "Acción abrir perfil"
+        ],
+        "out": [
+          "organigrama corporativo completo",
+          "navegación profunda de varios niveles ilimitados"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver manager y equipo directo",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir perfil de una persona del organigrama",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar manager principal y miembros directos o una cadena corta según configuración."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar nombre, rol y foto cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir perfil cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser visualmente simple y no sobrecargar la página."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe degradar con gracia cuando falten relaciones jerárquicas."
+        }
+      ],
+      "businessRules": [
+        "Si falta foto, usar avatar por defecto.",
+        "Si falta relación jerárquica de un nodo, mostrarlo como aislado o parcial.",
+        "El manager principal siempre debe ir primero si existe."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "Directory",
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "rootPersonId": {
+          "type": "string",
+          "required": false
+        },
+        "viewMode": {
+          "type": "enum",
+          "values": [
+            "managerWithReports",
+            "chain",
+            "smallTree"
+          ],
+          "default": "managerWithReports"
+        },
+        "maxDepth": {
+          "type": "number",
+          "default": 2,
+          "min": 1,
+          "max": 4
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra estructura simple correctamente.",
+        "Permite abrir perfiles válidos.",
+        "Respeta viewMode y maxDepth.",
+        "Funciona con datos parciales sin romper la UI."
+      ],
+      "edgeCases": [
+        "persona sin manager",
+        "miembro sin foto",
+        "sin perfil",
+        "sin reports"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza mini organigrama correctamente",
+        "Incluye tests base de jerarquía y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Dar contexto jerárquico mínimo con una representación muy legible y poco intimidante.",
+      "informationArchitecture": {
+        "zones": [
+          "manager/root",
+          "nivel siguiente",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "root manager",
+          "direct reports"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "tree": "árbol pequeño o cards conectadas"
+        },
+        "narrow": {
+          "tree": "lista jerárquica simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton org nodes"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "root person",
+            "children list/tree"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin estructura disponible"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "nodos con relación o perfil ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "avatar",
+          "nombre",
+          "rol",
+          "profileAction"
+        ],
+        "badges": [
+          "manager",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mini organigrama",
+        "messages": {
+          "empty": "No hay estructura organizativa disponible.",
+          "error": "No se ha podido cargar el mini organigrama."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "estructura legible",
+          "nodos y enlaces accesibles",
+          "texto visible además de imagen"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "usar lista jerárquica simple"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolver root",
+          "render jerarquía simple",
+          "abrir perfil"
+        ],
+        "v1": [
+          "view modes",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y resolución jerárquica"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de mini organigrama"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver root y relaciones"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar organigrama simple"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear OrgHierarchyResolver"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear nodos visuales"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "Directory",
+          "type": "Directory/API",
+          "purpose": "relaciones manager/report"
+        },
+        {
+          "name": "OrgList",
+          "type": "SharePointList",
+          "purpose": "estructura curada"
+        }
+      ],
+      "entities": {
+        "OrgPerson": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null",
+          "managerId": "string|null",
+          "reportIds": "string[]|null"
+        }
+      },
+      "mappings": {
+        "reportIds": "array de ids"
+      },
+      "validationRules": [
+        "displayName requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "root y relaciones válidas",
+        "partial": "faltan foto, profileUrl o relaciones"
+      },
+      "fallbacks": [
+        "sin foto => avatar por defecto",
+        "sin relaciones => nodo aislado",
+        "sin profileUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "root": {
+          "displayName": "Carlos Díaz",
+          "jobTitle": "Director"
+        },
+        "children": [
+          {
+            "displayName": "Ana López",
+            "jobTitle": "Manager"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "manager with reports",
+          "chain mode",
+          "no reports",
+          "no profile",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MiniOrgChartWebPart",
+        "pattern": "SPFx React + hierarchy resolver",
+        "components": [
+          "MiniOrgChart",
+          "OrgRootNode",
+          "OrgChildNode"
+        ],
+        "services": [
+          "OrgChartService",
+          "OrgHierarchyResolver"
+        ],
+        "repositories": [
+          "DirectoryRepository",
+          "OrgListRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('Directory'|'SharePointList'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string|undefined",
+          "rootPersonId": "string|undefined",
+          "viewMode": "managerWithReports|chain|smallTree",
+          "maxDepth": "number"
+        },
+        "IOrgPerson": {
+          "id": "string",
+          "displayName": "string",
+          "jobTitle": "string|null",
+          "photoUrl": "string|null",
+          "profileUrl": "string|null",
+          "managerId": "string|null",
+          "reportIds": "string[]|null"
+        },
+        "IViewModel": {
+          "root": "IOrgPerson|null",
+          "children": "IOrgPerson[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver root person o dataset",
+        "construir jerarquía según viewMode",
+        "aplicar maxDepth",
+        "renderizar"
+      ],
+      "algorithms": {
+        "hierarchy": "resolver manager/reports hasta maxDepth",
+        "fallback": "si faltan relaciones, mostrar nodos conocidos como parciales"
+      },
+      "performance": {
+        "cache": "por rootPersonId y origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin manager/reports",
+          "uiState": "partialData o empty"
+        },
+        {
+          "condition": "sin profileUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar profileUrl",
+          "no exponer datos personales extra"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "mini_org_loaded",
+          "mini_org_partial",
+          "mini_org_error",
+          "mini_org_profile_opened"
+        ],
+        "properties": [
+          "viewMode",
+          "hasRoot",
+          "childCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "hierarchy resolver",
+          "depth limit",
+          "view mode selection"
+        ],
+        "component": [
+          "tree render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas. Vista ligera de jerarquía o cadena de reporting.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

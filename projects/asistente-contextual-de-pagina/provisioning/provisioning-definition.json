@@ -1,0 +1,15 @@
+{
+  "projectSlug": "asistente-contextual-de-pagina",
+  "archetype": "general",
+  "rowId": "reciRdVyy2qbjxn0a",
+  "sources": [],
+  "acceptanceCriteria": [
+    "Muestra ayuda específica cuando existe.",
+    "Hace fallback de forma controlada.",
+    "Permite abrir recursos relacionados."
+  ],
+  "businessRules": [
+    "Si no hay ayuda específica para el contexto, puede mostrarse una ayuda genérica o empty según configuración.",
+    "Si faltan enlaces relacionados, la ayuda sigue siendo válida."
+  ]
+}

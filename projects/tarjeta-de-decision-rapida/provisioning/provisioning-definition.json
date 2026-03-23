@@ -1,0 +1,14 @@
+{
+  "projectSlug": "tarjeta-de-decision-rapida",
+  "archetype": "general",
+  "rowId": "recEiRlEs2Bz4GOGL",
+  "sources": [],
+  "acceptanceCriteria": [
+    "Muestra la decisión activa.",
+    "Permite completar la acción asociada a una opción."
+  ],
+  "businessRules": [
+    "Debe elegirse una opción válida.",
+    "Si el modo es navigation, cada opción puede abrir un recurso en lugar de persistir una respuesta."
+  ]
+}

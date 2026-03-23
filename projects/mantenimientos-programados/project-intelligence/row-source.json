@@ -1,0 +1,514 @@
+{
+  "rowId": "receWSKQ5jpVtOdOt",
+  "name": "Mantenimientos programados",
+  "slug": "mantenimientos-programados",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 6,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "MaintenanceList",
+      "type": "SharePointList",
+      "purpose": "ventanas de mantenimiento"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "planned-maintenance",
+        "name": "Mantenimientos programados",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra ventanas de mantenimiento planificadas, servicios afectados e impacto previsto.",
+        "productGoal": "Dar visibilidad preventiva de mantenimientos para reducir incertidumbre y tickets evitables."
+      },
+      "problem": {
+        "business": "Los usuarios descubren cortes o degradaciones sin contexto previo.",
+        "operational": "Operaciones necesita comunicar mantenimientos de forma consistente y visible."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar mantenimientos próximos y en curso",
+          "Mostrar fechas, servicios afectados e impacto",
+          "Distinguir próximos, en curso y finalizados"
+        ],
+        "secondary": [
+          "Permitir ordenar por fecha",
+          "Permitir abrir detalle o procedimiento",
+          "Servir de feed reutilizable en intranet"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "saber cuándo habrá afectación"
+          ]
+        },
+        {
+          "role": "SupportM365",
+          "needs": [
+            "confirmar si una degradación coincide con mantenimiento"
+          ]
+        },
+        {
+          "role": "Operaciones",
+          "needs": [
+            "publicar mensaje consistente y claro"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de mantenimientos",
+          "Fechas inicio y fin",
+          "Servicios afectados",
+          "Impacto",
+          "Estado upcoming/inProgress/completed",
+          "Enlace de detalle"
+        ],
+        "out": [
+          "Aprobación de cambios",
+          "edición de mantenimientos desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Consulta de próximas ventanas",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Validación de incidencia vs mantenimiento",
+          "actor": "SupportM365"
+        },
+        {
+          "id": "CU-03",
+          "name": "Comunicación operativa",
+          "actor": "Operaciones"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar mantenimientos ordenados por fecha de inicio."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar servicios afectados e impacto."
+        },
+        {
+          "id": "RF-03",
+          "text": "Clasificar upcoming, inProgress y completed."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir ocultar completados opcionalmente."
+        },
+        {
+          "id": "RF-05",
+          "text": "Permitir abrir detalle o documentación asociada."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga ligera apta para portada o dashboard."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe manejar fechas inválidas o incompletas sin romperse."
+        }
+      ],
+      "businessRules": [
+        "Si now está entre start y end => inProgress.",
+        "Si now < start => upcoming.",
+        "Si now > end => completed.",
+        "Si faltan fechas obligatorias, el registro pasa a partialData."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "hideCompleted": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 10,
+          "min": 1
+        }
+      },
+      "acceptanceCriteria": [
+        "Ordena por fecha correctamente.",
+        "Distingue estados temporales.",
+        "Permite ocultar completados.",
+        "Abre detalle cuando existe."
+      ],
+      "edgeCases": [
+        "mantenimiento sin endDate",
+        "mantenimiento sin servicios",
+        "lista vacía",
+        "fechas inválidas"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Gestiona fechas parciales",
+        "Tests base de clasificación temporal"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Comunicar mantenimiento de forma preventiva, clara y tranquilizadora.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista temporal",
+          "acciones"
+        ],
+        "priorityOrder": [
+          "inProgress",
+          "upcoming",
+          "completed"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista o tarjetas compactas"
+        },
+        "narrow": {
+          "items": "timeline vertical simplificada"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton timeline"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "items de mantenimiento"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin mantenimientos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "banner discreto",
+            "items con campos faltantes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro",
+            "reintentar"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "estadoTemporal",
+          "fechaInicio",
+          "fechaFin",
+          "impacto",
+          "servicios",
+          "detalleLink"
+        ]
+      },
+      "copy": {
+        "title": "Mantenimientos programados",
+        "messages": {
+          "empty": "No hay mantenimientos programados.",
+          "error": "No se han podido cargar los mantenimientos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "timeline legible con teclado",
+          "texto de estado no solo color"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "timeline o lista compacta"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer lista",
+          "clasificar upcoming/inProgress/completed",
+          "render lista"
+        ],
+        "v1": [
+          "filtros",
+          "telemetría",
+          "JSON source"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y clasificación"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer lista y clasificar estado temporal"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar timeline/lista"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear MaintenanceRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Crear classifier upcoming/inProgress/completed"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear MaintenanceItem component"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-02",
+          "name": "Añadir hideCompleted"
+        },
+        {
+          "id": "T-05",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "MaintenanceList",
+          "type": "SharePointList",
+          "purpose": "ventanas de mantenimiento"
+        }
+      ],
+      "entities": {
+        "Maintenance": {
+          "id": "string",
+          "title": "string",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "impact": "string",
+          "services": "string[]",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "status": "clasificar con fechas y now"
+      },
+      "validationRules": [
+        "title requerido",
+        "startAt recomendado",
+        "endAt recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "fechas y servicios completos",
+        "partial": "faltan fechas o impacto"
+      },
+      "fallbacks": [
+        "si falta endAt => unknown o partialData",
+        "si faltan servicios => lista vacía"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Mantenimiento ERP",
+            "status": "upcoming",
+            "startAt": "2026-03-22T01:00:00Z",
+            "endAt": "2026-03-22T03:00:00Z",
+            "impact": "high",
+            "services": [
+              "ERP"
+            ]
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "upcoming",
+          "inProgress",
+          "completed",
+          "fechas inválidas",
+          "lista vacía"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "PlannedMaintenanceWebPart",
+        "pattern": "SPFx React + repository + classifier",
+        "components": [
+          "PlannedMaintenance",
+          "MaintenanceItem",
+          "MaintenanceFilterBar"
+        ],
+        "services": [
+          "MaintenanceService",
+          "MaintenanceStatusClassifier"
+        ],
+        "repositories": [
+          "MaintenanceRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl",
+          "listTitleOrUrl": "string",
+          "hideCompleted": "boolean",
+          "maxItems": "number"
+        },
+        "IMaintenanceItem": {
+          "id": "string",
+          "title": "string",
+          "startAt": "string|null",
+          "endAt": "string|null",
+          "impact": "low|medium|high|unknown",
+          "services": "string[]",
+          "status": "upcoming|inProgress|completed|unknown",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IMaintenanceItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer mantenimientos",
+        "clasificar temporalmente",
+        "filtrar completados si procede",
+        "ordenar y renderizar"
+      ],
+      "algorithms": {
+        "status": "upcoming/inProgress/completed según now y fechas",
+        "sort": "inProgress primero, luego upcoming por fecha"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "fechas inválidas",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "lista ausente",
+          "uiState": "error"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar enlaces",
+          "errores seguros"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "maintenance_loaded",
+          "maintenance_partial",
+          "maintenance_error"
+        ],
+        "properties": [
+          "itemCount",
+          "inProgressCount",
+          "upcomingCount"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "temporal classifier",
+          "sort order"
+        ],
+        "component": [
+          "render empty/list/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Operaciones. Lista simple de ventanas de mantenimiento y afectación prevista.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "projectSlug": "directorio-express",
+  "rowId": "recFNVhOLdRwWNLIq",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Encontrar a la persona correcta en segundos con una interfaz mínima y clara.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "buscador",
+        "filtros opcionales",
+        "lista de personas"
+      ],
+      "priorityOrder": [
+        "coincidencias exactas",
+        "resto filtrado"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista rica o cards compactas"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton people items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "search",
+          "filters",
+          "people list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin coincidencias"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "personas con datos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "avatar",
+        "nombre",
+        "rol",
+        "area",
+        "contactAction"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Directorio express",
+      "messages": {
+        "empty": "No se han encontrado personas.",
+        "error": "No se ha podido cargar el directorio express."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "buscador etiquetado",
+        "lista accesible",
+        "acciones de contacto claras"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, rol y acción"
+    }
+  }
+}

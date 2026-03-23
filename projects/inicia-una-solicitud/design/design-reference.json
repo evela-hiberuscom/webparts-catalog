@@ -1,0 +1,93 @@
+{
+  "projectSlug": "inicia-una-solicitud",
+  "rowId": "recuGCCruwmSSEE6F",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir iniciar una solicitud correcta sin dudar qué proceso elegir.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "categorías/filtros",
+        "grid de solicitudes"
+      ],
+      "priorityOrder": [
+        "solicitudes destacadas",
+        "categorías frecuentes",
+        "descripción breve"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "lista o grid 2 columnas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton request cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "request cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin solicitudes"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con datos faltantes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "titulo",
+        "categoria",
+        "descripcion",
+        "prerequisitos",
+        "accionIniciar"
+      ]
+    },
+    "copy": {
+      "title": "Inicia una solicitud",
+      "messages": {
+        "empty": "No hay solicitudes configuradas.",
+        "error": "No se han podido cargar las solicitudes."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "acciones claras",
+        "texto de ayuda visible",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, descripción y acción"
+    }
+  }
+}

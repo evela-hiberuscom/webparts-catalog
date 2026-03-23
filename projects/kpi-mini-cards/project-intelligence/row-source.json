@@ -1,0 +1,528 @@
+{
+  "rowId": "recHAX1V79Y7kqR0Y",
+  "name": "KPI mini-cards",
+  "slug": "kpi-mini-cards",
+  "artifactType": "SPFxWebPart",
+  "archetype": "analytics",
+  "waveNumber": 2,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "KpiList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "métricas clave"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "kpi-mini-cards",
+        "name": "KPI mini-cards",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra un conjunto compacto de KPIs clave con valor, tendencia, comparación y estado visual para dashboards ligeros.",
+        "productGoal": "Dar visibilidad inmediata a métricas esenciales sin necesidad de entrar en informes completos."
+      },
+      "problem": {
+        "business": "Muchas páginas necesitan pocas métricas clave, no un dashboard analítico completo.",
+        "operational": "Sin mini KPIs, los usuarios deben abrir herramientas externas para comprobar señales básicas."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar KPIs resumidos y fáciles de leer",
+          "Permitir comparar con objetivo o periodo anterior",
+          "Señalizar tendencia y estado"
+        ],
+        "secondary": [
+          "Servir como bloque reusable en home o páginas de área",
+          "Abrir detalle de métrica cuando exista"
+        ]
+      },
+      "users": [
+        {
+          "role": "Stakeholder",
+          "needs": [
+            "ver rápidamente si la métrica va bien o mal"
+          ]
+        },
+        {
+          "role": "Owner de área",
+          "needs": [
+            "mostrar métricas clave de forma simple"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Valor actual",
+          "unidad/formato",
+          "tendencia",
+          "objetivo o variación",
+          "detalle opcional"
+        ],
+        "out": [
+          "gráficos complejos",
+          "analítica avanzada",
+          "drill-down completo dentro de la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver KPIs del área",
+          "actor": "Stakeholder"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle de un KPI",
+          "actor": "Stakeholder"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar una colección configurable de KPIs con valor actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar unidad, tendencia o variación cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar estado visual ok/warning/critical/unknown cuando exista lógica o dato."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir detalle del KPI cuando exista URL."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser extremadamente escaneable y ligera."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar KPIs heterogéneos y formatos distintos."
+        }
+      ],
+      "businessRules": [
+        "Cada KPI puede tener su propia unidad y umbral.",
+        "Si falta comparación o tendencia, el KPI sigue siendo válido.",
+        "Los KPIs se ordenan por prioridad configurada o por orden de origen."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig",
+            "ApiEndpoint"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 6,
+          "min": 1,
+          "max": 20
+        },
+        "showTrend": {
+          "type": "boolean",
+          "default": true
+        },
+        "layoutMode": {
+          "type": "enum",
+          "values": [
+            "compact",
+            "standard"
+          ],
+          "default": "compact"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra KPIs configurados correctamente.",
+        "Respeta orden y formato por KPI.",
+        "Muestra tendencia o comparación cuando existe.",
+        "Permite abrir detalle cuando existe URL."
+      ],
+      "edgeCases": [
+        "kpi sin unidad",
+        "sin tendencia",
+        "sin URL",
+        "valor null",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza mini-cards correctamente",
+        "Incluye tests base de formateo, orden y estado"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir captar el estado de unas pocas métricas clave en menos de 10 segundos.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera opcional",
+          "grid de mini-cards"
+        ],
+        "priorityOrder": [
+          "prioridad configurada",
+          "severidad visual",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 3-6 columnas"
+        },
+        "narrow": {
+          "cards": "grid 2 columnas o vertical"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton kpi cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "kpi cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin KPIs"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con tendencia o comparación ausente"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "label",
+          "value",
+          "unit",
+          "trend",
+          "comparison",
+          "openAction"
+        ],
+        "badges": [
+          "ok",
+          "warning",
+          "critical",
+          "unknown",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "KPI mini-cards",
+        "messages": {
+          "empty": "No hay KPIs configurados.",
+          "error": "No se han podido cargar los KPIs."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "no depender solo del color para estado/tendencia",
+          "valores legibles",
+          "cards accesibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar label, value y trend"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer KPIs",
+          "normalizar",
+          "render mini-cards"
+        ],
+        "v1": [
+          "showTrend configurable",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización KPI"
+        },
+        {
+          "id": "EP-02",
+          "name": "Formateo y estado"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer KPIs desde origen"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Evaluar y formatear KPIs"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar mini-cards"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear KpiRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar KpiStateEvaluator y formatter"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear KpiMiniCard"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "KpiList",
+          "type": "SharePointList|ApiEndpoint",
+          "purpose": "métricas clave"
+        }
+      ],
+      "entities": {
+        "Kpi": {
+          "id": "string",
+          "label": "string",
+          "value": "number|string|null",
+          "unit": "string|null",
+          "trend": "string|null",
+          "comparison": "string|null",
+          "state": "string|null",
+          "openUrl": "string|null",
+          "priority": "number|null"
+        }
+      },
+      "mappings": {
+        "trend": "up|down|flat|unknown|null",
+        "state": "ok|warning|critical|unknown"
+      },
+      "validationRules": [
+        "label requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "label, value y estado presentes",
+        "partial": "faltan trend, comparison o openUrl"
+      },
+      "fallbacks": [
+        "sin trend => null",
+        "sin state => unknown o evaluado por umbral",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "label": "Tickets abiertos",
+            "value": 42,
+            "unit": "",
+            "trend": "down",
+            "comparison": "-8 vs semana pasada",
+            "state": "warning"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "full kpi",
+          "sin trend",
+          "sin state",
+          "null value",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "KpiMiniCardsWebPart",
+        "pattern": "SPFx React + kpi normalizer + formatter",
+        "components": [
+          "KpiMiniCards",
+          "KpiMiniCard"
+        ],
+        "services": [
+          "KpiCardsService",
+          "KpiStateEvaluator",
+          "KpiFormatter"
+        ],
+        "repositories": [
+          "KpiRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'JsonUrl'|'StaticConfig'|'ApiEndpoint')[]",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "showTrend": "boolean",
+          "layoutMode": "compact|standard"
+        },
+        "IKpiItem": {
+          "id": "string",
+          "label": "string",
+          "value": "number|string|null",
+          "unit": "string|null",
+          "trend": "up|down|flat|unknown|null",
+          "comparison": "string|null",
+          "state": "ok|warning|critical|unknown",
+          "openUrl": "string|null",
+          "priority": "number|null"
+        },
+        "IViewModel": {
+          "items": "IKpiItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer KPIs desde origen",
+        "normalizar valor/unidad/tendencia/estado",
+        "ordenar por prioridad",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "sort": "priority asc/null-last + label asc",
+        "state": "directo desde dato o evaluado por umbrales si existen"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "valor null",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "ready/partialData"
+        },
+        {
+          "condition": "sin trend",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl",
+          "validar formatos de datos antes de renderizar"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "kpis_loaded",
+          "kpis_partial",
+          "kpis_error",
+          "kpi_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "layoutMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "sort by priority",
+          "state evaluation",
+          "formatters"
+        ],
+        "component": [
+          "cards render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Datos. Tarjetas pequeñas con métricas clave de negocio o servicio.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

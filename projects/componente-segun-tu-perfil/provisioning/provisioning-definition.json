@@ -1,0 +1,16 @@
+{
+  "projectSlug": "componente-segun-tu-perfil",
+  "archetype": "audience",
+  "rowId": "recqkzUHilH8lKoGy",
+  "sources": [],
+  "acceptanceCriteria": [
+    "Muestra la variante correcta cuando hay match.",
+    "Aplica fallback cuando procede.",
+    "No rompe la UI con perfiles parciales."
+  ],
+  "businessRules": [
+    "Si no hay coincidencia específica, usar variante genérica cuando exista.",
+    "Si no hay genérica y no hay match, mostrar empty o placeholder según configuración.",
+    "No exponer atributos sensibles innecesarios en la UI."
+  ]
+}

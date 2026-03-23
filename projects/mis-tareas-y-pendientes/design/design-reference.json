@@ -1,0 +1,110 @@
+{
+  "projectSlug": "mis-tareas-y-pendientes",
+  "rowId": "recaaTsZcFG27SukW",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir que el usuario entienda en segundos qué tiene pendiente y qué requiere atención inmediata.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "resumen de conteos",
+        "lista de tareas",
+        "filtros"
+      ],
+      "priorityOrder": [
+        "vencidas",
+        "hoy",
+        "próximas",
+        "sin fecha"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "summary": "chips o mini KPIs",
+        "list": "lista rica con badges"
+      },
+      "narrow": {
+        "summary": "compacto",
+        "list": "vertical simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton list",
+          "skeleton counters"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "task list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin tareas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner discreto",
+          "lista con tareas parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "reintentar"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "origen",
+        "estado",
+        "dueDate",
+        "priority",
+        "group",
+        "openAction"
+      ],
+      "badges": [
+        "overdue",
+        "today",
+        "soon",
+        "completed-hidden",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mis tareas y pendientes",
+      "messages": {
+        "empty": "No tienes tareas pendientes visibles.",
+        "error": "No se han podido cargar tus tareas.",
+        "partial": "Algunas tareas no incluyen toda la información esperada."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "lista navegable por teclado",
+        "badges con texto",
+        "fechas legibles localizadas"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, origen y dueDate"
+    }
+  }
+}

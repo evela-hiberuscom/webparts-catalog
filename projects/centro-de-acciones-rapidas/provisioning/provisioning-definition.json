@@ -1,0 +1,23 @@
+{
+  "projectSlug": "centro-de-acciones-rapidas",
+  "archetype": "general",
+  "rowId": "recAqLibyGniOU3P7",
+  "sources": [
+    {
+      "name": "QuickActionsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de acciones rápidas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra acciones configuradas.",
+    "Permite abrir la acción correcta.",
+    "Ordena por prioridad si existe.",
+    "Filtra por categoría cuando corresponde."
+  ],
+  "businessRules": [
+    "Las acciones sin enlace no deben aparecer como accionables.",
+    "La prioridad puede determinar el orden inicial.",
+    "Las categorías se usan para agrupación y filtro cuando existan."
+  ]
+}

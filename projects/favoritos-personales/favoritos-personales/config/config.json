@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "personal-favorites-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/personalFavorites/PersonalFavoritesWebPart.js",
+          "manifest": "./src/webparts/personalFavorites/PersonalFavoritesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PersonalFavoritesWebPartStrings": "lib/webparts/personalFavorites/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "projectSlug": "agenda-del-equipo",
+  "archetype": "summary",
+  "rowId": "recZIpIIKZAzgI1GU",
+  "sources": [
+    {
+      "name": "Calendar",
+      "type": "Calendar/API",
+      "purpose": "agenda del equipo"
+    },
+    {
+      "name": "AgendaList",
+      "type": "SharePointList",
+      "purpose": "agenda compartida"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra próximos eventos correctamente ordenados.",
+    "Permite abrir el detalle del evento.",
+    "Respeta maxItems y filtros.",
+    "Funciona con metadatos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Los eventos pasados no se muestran salvo configuración específica.",
+    "Los eventos de hoy pueden destacarse visualmente.",
+    "Si un evento no tiene enlace o ubicación, sigue siendo válido.",
+    "Los eventos sin fecha válida deben excluirse o degradarse a partial según política."
+  ]
+}

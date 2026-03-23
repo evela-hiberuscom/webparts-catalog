@@ -1,0 +1,100 @@
+{
+  "projectSlug": "glosario-corporativo",
+  "rowId": "rec8Vu6POl1W3e0SY",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir resolver una duda de terminología en muy poco tiempo sin interrumpir el flujo de trabajo.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "buscador",
+        "índice alfabético",
+        "lista de términos"
+      ],
+      "priorityOrder": [
+        "coincidencias exactas",
+        "coincidencias parciales",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "index": "barra alfabética",
+        "list": "lista o cards compactas"
+      },
+      "narrow": {
+        "index": "compacto o desplazable",
+        "list": "simple vertical"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton glossary"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "search",
+          "alpha nav",
+          "terms list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin términos"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "términos con metadatos incompletos"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "termino",
+        "definicion",
+        "aliases",
+        "categoria",
+        "relatedLink"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Glosario corporativo",
+      "messages": {
+        "empty": "No hay términos configurados.",
+        "error": "No se ha podido cargar el glosario."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "navegación alfabética accesible",
+        "buscador etiquetado",
+        "definiciones legibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar término y definición; aliases colapsables"
+    }
+  }
+}

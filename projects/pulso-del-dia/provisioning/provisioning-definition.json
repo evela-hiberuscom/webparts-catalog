@@ -1,0 +1,14 @@
+{
+  "projectSlug": "pulso-del-dia",
+  "archetype": "analytics",
+  "rowId": "recRt1japWn21MzFX",
+  "sources": [],
+  "acceptanceCriteria": [
+    "Permite registrar un pulso válido.",
+    "Muestra confirmación tras responder."
+  ],
+  "businessRules": [
+    "Una respuesta por usuario y día si el origen lo permite.",
+    "Si no hay prompt activo, mostrar empty."
+  ]
+}

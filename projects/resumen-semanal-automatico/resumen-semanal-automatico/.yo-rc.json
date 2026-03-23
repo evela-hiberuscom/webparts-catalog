@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "resumen-semanal-automatico",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "AutomaticWeeklySummary",
+    "componentDescription": "Resume noticias, hitos, incidencias o tareas destacadas de una semana en una tarjeta o bloque compacto.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "resumen-semanal-automatico",
+    "libraryId": "9de09c35-9613-4774-82fc-ce6a7d44dff2",
+    "solutionShortDescription": "resumen-semanal-automatico description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

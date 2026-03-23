@@ -1,0 +1,23 @@
+{
+  "projectSlug": "reconocimientos",
+  "archetype": "general",
+  "rowId": "recIYX0vzKpB3ifxS",
+  "sources": [
+    {
+      "name": "RecognitionsList",
+      "type": "SharePointList",
+      "purpose": "feed de reconocimientos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra reconocimientos recientes correctamente.",
+    "Ordena por fecha descendente.",
+    "Permite abrir detalle cuando existe.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Los reconocimientos más recientes se muestran primero.",
+    "Si falta enlace, el reconocimiento sigue siendo informativo.",
+    "Si falta foto, usar avatar por defecto cuando aplique."
+  ]
+}

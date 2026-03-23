@@ -1,0 +1,23 @@
+{
+  "projectSlug": "presencia-de-sedes",
+  "archetype": "general",
+  "rowId": "recfBMkZlV28UNzAb",
+  "sources": [
+    {
+      "name": "SitesPresenceList",
+      "type": "SharePointList",
+      "purpose": "información operativa básica por sede"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra sedes configuradas.",
+    "Calcula abierto/cerrado cuando hay horario.",
+    "Muestra notas locales cuando existan.",
+    "Abre detalle o mapa cuando existe enlace."
+  ],
+  "businessRules": [
+    "Si hay horario y zona horaria, calcular abierto/cerrado respecto a now.",
+    "Si falta horario, mostrar estado unknown pero seguir renderizando.",
+    "Si hay notas de festivo o cierre especial, estas prevalecen sobre el cálculo estándar."
+  ]
+}

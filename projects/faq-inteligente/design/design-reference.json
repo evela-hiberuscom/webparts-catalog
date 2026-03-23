@@ -1,0 +1,98 @@
+{
+  "projectSlug": "faq-inteligente",
+  "rowId": "recKLSpIPYfJdlGsd",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir encontrar y leer una respuesta frecuente en pocos segundos sin abandonar la página.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "buscador",
+        "categorías",
+        "lista acordeón"
+      ],
+      "priorityOrder": [
+        "destacadas",
+        "coincidencias de búsqueda",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "list": "acordeón con buscador superior"
+      },
+      "narrow": {
+        "list": "acordeón compacto"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton faq items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "search",
+          "filters",
+          "accordion"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin FAQs"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items con datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "pregunta",
+        "respuesta",
+        "categoria",
+        "relatedLink"
+      ],
+      "badges": [
+        "destacada",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "FAQ inteligente",
+      "messages": {
+        "empty": "No hay preguntas frecuentes configuradas.",
+        "error": "No se han podido cargar las FAQs."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "acordeón accesible por teclado",
+        "roles aria correctos",
+        "texto visible en estados"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar pregunta y expandir respuesta bajo demanda"
+    }
+  }
+}

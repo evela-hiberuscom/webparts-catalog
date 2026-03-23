@@ -1,0 +1,396 @@
+{
+  "rowId": "recSZap19q7CuUs5R",
+  "name": "Microencuesta",
+  "slug": "microencuesta",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 7,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "PollList",
+      "type": "SharePointList|ApiEndpoint",
+      "purpose": "preguntas y respuestas"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "micro-survey",
+        "name": "Microencuesta",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Lanza una pregunta rápida de una sola respuesta para recoger feedback ligero y frecuente.",
+        "productGoal": "Medir pulso o validar decisiones con una fricción mínima."
+      },
+      "problem": {
+        "business": "Recoger feedback estructurado suele requerir formularios largos y baja participación.",
+        "operational": "Las áreas necesitan un mecanismo ultraligero para preguntas simples."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar una pregunta corta con pocas opciones",
+          "Permitir responder rápido",
+          "Persistir respuesta correctamente"
+        ],
+        "secondary": [
+          "Mostrar estado de respuesta enviada",
+          "Servir como bloque de participación recurrente"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "responder en segundos"
+          ]
+        },
+        {
+          "role": "Comms/People",
+          "needs": [
+            "recoger señales rápidas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Pregunta única",
+          "2-5 opciones",
+          "Submit de una respuesta",
+          "Mensaje de confirmación"
+        ],
+        "out": [
+          "encuestas complejas multistep",
+          "analítica avanzada en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar una pregunta activa y opciones disponibles."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir enviar una única respuesta por interacción."
+        },
+        {
+          "id": "RF-03",
+          "text": "Gestionar idle, submitting, success y error."
+        }
+      ],
+      "businessRules": [
+        "Debe seleccionarse una opción antes de enviar.",
+        "Si oneResponsePerUser=true, bloquear reenvíos cuando el origen lo permita."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "ApiEndpoint",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "oneResponsePerUser": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Permite responder una opción válida.",
+        "Muestra confirmación tras el envío."
+      ],
+      "edgeCases": [
+        "sin pregunta activa",
+        "sin opciones",
+        "doble submit",
+        "error de red"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Envía respuestas correctamente",
+        "Incluye tests base de validación y submit"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir responder una pregunta en pocos segundos y seguir con el flujo normal de la página.",
+      "informationArchitecture": {
+        "zones": [
+          "pregunta",
+          "opciones",
+          "submit",
+          "feedback"
+        ],
+        "priorityOrder": [
+          "pregunta",
+          "opciones",
+          "submit"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "poll": "card compacta"
+        },
+        "narrow": {
+          "poll": "vertical simple"
+        }
+      },
+      "states": [
+        {
+          "id": "idle",
+          "ui": [
+            "question and options"
+          ]
+        },
+        {
+          "id": "submitting",
+          "ui": [
+            "disabled options",
+            "progress"
+          ]
+        },
+        {
+          "id": "success",
+          "ui": [
+            "success state"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "error and retry"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Microencuesta",
+        "messages": {
+          "success": "Respuesta registrada.",
+          "error": "No se ha podido registrar la respuesta."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "radios accesibles",
+          "labels claros",
+          "feedback visible"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "opciones apiladas"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "load question",
+          "answer submit",
+          "success state"
+        ],
+        "v1": [
+          "oneResponsePerUser",
+          "telemetry"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Pregunta y opciones"
+        },
+        {
+          "id": "EP-02",
+          "name": "Respuesta"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Mostrar pregunta activa"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Enviar respuesta"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear PollRepository y options UI"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear PollSubmissionService"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "PollList",
+          "type": "SharePointList|ApiEndpoint",
+          "purpose": "preguntas y respuestas"
+        }
+      ],
+      "entities": {
+        "PollQuestion": {
+          "id": "string",
+          "question": "string",
+          "options": "string[]"
+        },
+        "PollAnswer": {
+          "questionId": "string",
+          "selectedOption": "string",
+          "submittedBy": "string|null"
+        }
+      },
+      "validationRules": [
+        "question requerida",
+        "al menos 2 opciones"
+      ],
+      "accuracyPolicy": {
+        "exact": "pregunta y respuesta persistidas",
+        "partial": "falta submittedBy"
+      },
+      "fallbacks": [
+        "sin submittedBy => null o anonymous"
+      ],
+      "exampleOutput": {
+        "question": {
+          "question": "¿Te sirve la nueva home?",
+          "options": [
+            "Sí",
+            "No",
+            "Parcialmente"
+          ]
+        }
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "valid answer",
+          "no selection",
+          "network error",
+          "no active poll"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MicroSurveyWebPart",
+        "pattern": "SPFx React + poll submit service",
+        "components": [
+          "MicroSurvey",
+          "PollOptions"
+        ],
+        "services": [
+          "PollSubmissionService"
+        ],
+        "repositories": [
+          "PollRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|ApiEndpoint|StaticConfig",
+          "listTitleOrUrl": "string",
+          "oneResponsePerUser": "boolean"
+        },
+        "IPollQuestion": {
+          "id": "string",
+          "question": "string",
+          "options": "string[]"
+        },
+        "IPollAnswer": {
+          "questionId": "string",
+          "selectedOption": "string",
+          "submittedBy": "string|null"
+        }
+      },
+      "executionFlow": [
+        "load active question",
+        "select option",
+        "submit answer",
+        "show success/error"
+      ],
+      "algorithms": {
+        "validation": "option required"
+      },
+      "security": {
+        "mode": "writeLight",
+        "rules": [
+          "sanitize payload",
+          "respect oneResponsePerUser if supported"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "poll_loaded",
+          "poll_answer_submitted",
+          "poll_answer_failed"
+        ],
+        "properties": [
+          "optionCount",
+          "oneResponsePerUser"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "validation",
+          "payload mapping"
+        ],
+        "component": [
+          "idle/success/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Participación. Encuesta de una sola pregunta con resultados rápidos.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

@@ -1,0 +1,524 @@
+{
+  "rowId": "rec8Vu6POl1W3e0SY",
+  "name": "Glosario corporativo",
+  "slug": "glosario-corporativo",
+  "artifactType": "SPFxWebPart",
+  "archetype": "knowledge",
+  "waveNumber": 11,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "GlossaryList",
+      "type": "SharePointList",
+      "purpose": "catálogo de términos y siglas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "corporate-glossary",
+        "name": "Glosario corporativo",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Explica términos internos, siglas y nombres de sistemas para reducir fricción de lenguaje dentro de la organización.",
+        "productGoal": "Facilitar comprensión compartida del vocabulario corporativo y técnico."
+      },
+      "problem": {
+        "business": "Las siglas y términos internos generan confusión especialmente en onboarding o entre áreas.",
+        "operational": "Las aclaraciones repetidas consumen tiempo y pueden crear malentendidos."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar términos y definiciones",
+          "Permitir búsqueda rápida",
+          "Permitir navegación alfabética o por categorías"
+        ],
+        "secondary": [
+          "Incluir sinónimos o alias",
+          "Enlazar a recursos relacionados"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender siglas y términos internos"
+          ]
+        },
+        {
+          "role": "Nuevo empleado",
+          "needs": [
+            "acelerar comprensión del contexto corporativo"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Término",
+          "Definición",
+          "Categoría opcional",
+          "Alias o sinónimos",
+          "Enlace relacionado"
+        ],
+        "out": [
+          "wiki enciclopédica completa",
+          "edición desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Buscar una sigla",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Explorar términos por letra",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Abrir referencia relacionada",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar términos con definición."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir búsqueda por término o alias."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir navegación alfabética o por categoría."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir enlace relacionado cuando exista."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy rápido y escaneable."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Carga ligera apta para onboarding o contexto general."
+        }
+      ],
+      "businessRules": [
+        "Si faltan alias, el término sigue siendo válido.",
+        "Si falta categoría, se mantiene navegable por orden alfabético.",
+        "Los términos exactos deben priorizarse sobre coincidencias parciales en búsqueda."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "enableAlphabetNav": {
+          "type": "boolean",
+          "default": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 200,
+          "min": 1,
+          "max": 1000
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra términos y definiciones.",
+        "Permite búsqueda.",
+        "Permite navegación alfabética si está activa.",
+        "Abre enlace relacionado cuando exista."
+      ],
+      "edgeCases": [
+        "término sin alias",
+        "sin categoría",
+        "sin enlace",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza glosario con búsqueda y navegación",
+        "Incluye tests base de filtro y orden alfabético"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir resolver una duda de terminología en muy poco tiempo sin interrumpir el flujo de trabajo.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "buscador",
+          "índice alfabético",
+          "lista de términos"
+        ],
+        "priorityOrder": [
+          "coincidencias exactas",
+          "coincidencias parciales",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "index": "barra alfabética",
+          "list": "lista o cards compactas"
+        },
+        "narrow": {
+          "index": "compacto o desplazable",
+          "list": "simple vertical"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton glossary"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "search",
+            "alpha nav",
+            "terms list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin términos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "términos con metadatos incompletos"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "termino",
+          "definicion",
+          "aliases",
+          "categoria",
+          "relatedLink"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Glosario corporativo",
+        "messages": {
+          "empty": "No hay términos configurados.",
+          "error": "No se ha podido cargar el glosario."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "navegación alfabética accesible",
+          "buscador etiquetado",
+          "definiciones legibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar término y definición; aliases colapsables"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer términos",
+          "render lista",
+          "búsqueda simple"
+        ],
+        "v1": [
+          "navegación alfabética",
+          "aliases",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Búsqueda e índice"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer términos desde catálogo"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Implementar búsqueda e índice alfabético"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista de términos"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear GlossaryRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar búsqueda y alpha index"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear GlossaryTermItem y nav"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "GlossaryList",
+          "type": "SharePointList",
+          "purpose": "catálogo de términos y siglas"
+        }
+      ],
+      "entities": {
+        "GlossaryTerm": {
+          "id": "string",
+          "term": "string",
+          "definition": "string|null",
+          "aliases": "string[]|null",
+          "category": "string|null",
+          "relatedUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "aliases": "array de strings normalizado",
+        "letter": "primera letra de term"
+      },
+      "validationRules": [
+        "term requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "term y definition presentes",
+        "partial": "faltan definition, aliases o relatedUrl"
+      },
+      "fallbacks": [
+        "sin aliases => []",
+        "sin category => null",
+        "sin relatedUrl => sin acción secundaria"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "term": "ERP",
+            "definition": "Sistema de planificación...",
+            "aliases": [
+              "Enterprise Resource Planning"
+            ],
+            "category": "Sistemas"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "term exact match",
+          "alias match",
+          "sin aliases",
+          "sin definition",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "CorporateGlossaryWebPart",
+        "pattern": "SPFx React + repository + search/index service",
+        "components": [
+          "CorporateGlossary",
+          "GlossarySearch",
+          "GlossaryAlphaNav",
+          "GlossaryTermItem"
+        ],
+        "services": [
+          "GlossaryCatalogService",
+          "GlossarySearchService"
+        ],
+        "repositories": [
+          "GlossaryRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "enableAlphabetNav": "boolean",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "IGlossaryTerm": {
+          "id": "string",
+          "term": "string",
+          "definition": "string|null",
+          "aliases": "string[]",
+          "category": "string|null",
+          "relatedUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IGlossaryTerm[]",
+          "categories": "string[]",
+          "letters": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer términos",
+        "normalizar aliases y letras",
+        "aplicar búsqueda/filtro",
+        "renderizar"
+      ],
+      "algorithms": {
+        "search": "priorizar exact match sobre partial",
+        "sort": "term asc alfabético",
+        "alphaIndex": "construir letras disponibles a partir de term"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin definition",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin aliases",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar relatedUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "glossary_loaded",
+          "glossary_partial",
+          "glossary_error",
+          "glossary_search_used"
+        ],
+        "properties": [
+          "itemCount",
+          "queryLength",
+          "letterFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "alpha sort",
+          "exact match priority",
+          "alias search"
+        ],
+        "component": [
+          "search/index/list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Conocimiento. Términos internos, siglas, nombres de sistemas y definiciones.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

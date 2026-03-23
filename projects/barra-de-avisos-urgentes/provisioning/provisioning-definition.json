@@ -1,0 +1,22 @@
+{
+  "projectSlug": "barra-de-avisos-urgentes",
+  "archetype": "general",
+  "rowId": "recOGlnVLuk3SOqg5",
+  "sources": [
+    {
+      "name": "AlertsList",
+      "type": "SharePointList",
+      "purpose": "avisos críticos o urgentes"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra solo avisos vigentes.",
+    "Ordena por severidad/prioridad.",
+    "Permite abrir CTA cuando exista."
+  ],
+  "businessRules": [
+    "Solo se muestran avisos activos en la fecha actual.",
+    "Critical prevalece visualmente sobre warning e info.",
+    "Si falta endDate, puede considerarse activo hasta despublicación manual según política."
+  ]
+}

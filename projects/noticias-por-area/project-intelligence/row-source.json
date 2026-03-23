@@ -1,0 +1,448 @@
+{
+  "rowId": "recbNBpGtYOyEJ1jH",
+  "name": "Noticias por área",
+  "slug": "noticias-por-area",
+  "artifactType": "SPFxWebPart",
+  "archetype": "summary",
+  "waveNumber": 12,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SharePointNews",
+      "type": "SharePointNews",
+      "purpose": "noticias etiquetadas por área"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "news-by-area",
+        "name": "Noticias por área",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Filtra y presenta noticias de un área o etiqueta concreta para páginas temáticas o departamentales.",
+        "productGoal": "Aumentar relevancia mostrando noticias alineadas con el contexto del área o audiencia."
+      },
+      "problem": {
+        "business": "No todas las noticias son relevantes en todas las páginas.",
+        "operational": "Se necesita una pieza de noticias contextual para áreas o departamentos específicos."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar noticias de un área concreta",
+          "Permitir filtrar por etiqueta/categoría",
+          "Reutilizar el mismo componente en varias áreas"
+        ],
+        "secondary": [
+          "Ordenar por fecha o destacado",
+          "Mostrar pocas noticias relevantes"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver noticias de su área"
+          ]
+        },
+        {
+          "role": "Comunicaciones/Área",
+          "needs": [
+            "publicar noticias contextualizadas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Feed filtrado por área/etiqueta",
+          "Tarjetas/lista",
+          "CTA abrir noticia"
+        ],
+        "out": [
+          "feed global sin filtro",
+          "comentarios/reacciones en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar noticias filtradas por categoría/etiqueta o área configurada."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir abrir la noticia."
+        },
+        {
+          "id": "RF-03",
+          "text": "Ordenar por fecha o destacado."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Si no hay coincidencias, mostrar empty específico del área.",
+        "Si falta etiqueta en la noticia, no debe romper el feed."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointNews",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "SharePointNews"
+        },
+        "areaFilter": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1,
+          "max": 10
+        },
+        "showImage": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra noticias del área indicada.",
+        "Ordena correctamente.",
+        "Permite abrir noticias válidas."
+      ],
+      "edgeCases": [
+        "sin coincidencias",
+        "sin imagen",
+        "sin resumen"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Aplica filtro por área correctamente",
+        "Incluye tests base de filtrado y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Mantener al usuario informado solo de lo que le afecta en el contexto de su área o página.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista de noticias del área"
+        ],
+        "priorityOrder": [
+          "más recientes",
+          "destacadas del área"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "cards o lista"
+        },
+        "narrow": {
+          "items": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "area news list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin noticias para esta área"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "title",
+          "summary",
+          "publishedAt",
+          "image",
+          "openAction"
+        ],
+        "badges": [
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Noticias por área",
+        "messages": {
+          "empty": "No hay noticias disponibles para esta área.",
+          "error": "No se han podido cargar las noticias del área."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "cards accesibles",
+          "fechas legibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer noticias",
+          "filtrar por área",
+          "render lista"
+        ],
+        "v1": [
+          "imagen opcional",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y filtro"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer noticias y aplicar filtro de área"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar lista/tarjetas"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorio y filtro por área"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear NewsCard"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SharePointNews",
+          "type": "SharePointNews",
+          "purpose": "noticias etiquetadas por área"
+        }
+      ],
+      "entities": {
+        "News": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "publishedAt": "string|null",
+          "imageUrl": "string|null",
+          "tags": "string[]|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "tags": "array de categorías/áreas normalizadas"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, tags y URL presentes",
+        "partial": "faltan summary, imageUrl o tags"
+      },
+      "fallbacks": [
+        "sin tags => no match o partial según política",
+        "sin imageUrl => sin imagen",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Nueva guardia IT",
+            "tags": [
+              "IT"
+            ],
+            "publishedAt": "2026-03-21T09:00:00Z",
+            "openUrl": "/sites/it/news/guardia"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "area match",
+          "no match",
+          "sin tags",
+          "sin image",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "NewsByAreaWebPart",
+        "pattern": "SPFx React + filtered news repository",
+        "components": [
+          "NewsByArea",
+          "NewsCard"
+        ],
+        "services": [
+          "AreaNewsService"
+        ],
+        "repositories": [
+          "NewsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointNews|SharePointList|JsonUrl",
+          "areaFilter": "string",
+          "maxItems": "number",
+          "showImage": "boolean"
+        },
+        "INewsItem": {
+          "id": "string",
+          "title": "string",
+          "summary": "string|null",
+          "publishedAt": "string|null",
+          "imageUrl": "string|null",
+          "tags": "string[]",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "INewsItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer noticias",
+        "filtrar por area/tag",
+        "ordenar",
+        "limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "filter": "comparar areaFilter contra categorías/tags normalizados",
+        "sort": "publishedAt desc + featured desc opcional"
+      },
+      "performance": {
+        "cache": "por área y origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin tags",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin coincidencias",
+          "uiState": "empty"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl e imageUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "area_news_loaded",
+          "area_news_partial",
+          "area_news_error",
+          "area_news_opened"
+        ],
+        "properties": [
+          "areaFilter",
+          "itemCount",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "area filter",
+          "sort"
+        ],
+        "component": [
+          "render list",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Filtra noticias por departamento, etiqueta o público objetivo.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

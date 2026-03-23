@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "lanzador-universal-de-accesos-client-side-solution",
+    "id": "0810b12a-601e-4ad9-a507-819bcd0cc391",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "lanzador-universal-de-accesos description"
+      },
+      "longDescription": {
+        "default": "lanzador-universal-de-accesos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "lanzador-universal-de-accesos Feature",
+        "description": "The feature that activates elements of the lanzador-universal-de-accesos solution.",
+        "id": "04822a4b-0e7b-46a5-a554-5dc02e3f5c27",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/lanzador-universal-de-accesos.sppkg"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "projectSlug": "estado-de-incidencias-destacadas",
+  "archetype": "analytics",
+  "rowId": "recCKDr21DGQb4uKd",
+  "sources": [
+    {
+      "name": "IncidentsList",
+      "type": "SharePointList",
+      "purpose": "incidencias destacadas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra incidencias con severidad e impacto.",
+    "Muestra workaround si existe.",
+    "Filtra resolved según configuración.",
+    "Abre detalle cuando existe."
+  ],
+  "businessRules": [
+    "Solo se muestran incidencias active o monitoring por defecto.",
+    "Resolved puede mostrarse solo si un flag lo habilita.",
+    "Si falta ETA, se muestra estado sin ETA pero no se rompe la UI."
+  ]
+}

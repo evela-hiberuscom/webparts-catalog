@@ -1,0 +1,28 @@
+{
+  "projectSlug": "directorio-express",
+  "archetype": "general",
+  "rowId": "recFNVhOLdRwWNLIq",
+  "sources": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "personas y perfiles"
+    },
+    {
+      "name": "PeopleList",
+      "type": "SharePointList",
+      "purpose": "personas locales o curated list"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra personas correctamente.",
+    "Permite buscar y filtrar cuando procede.",
+    "Permite abrir perfil/contacto cuando existe.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Si falta foto, usar avatar por defecto.",
+    "Si falta perfil, la persona sigue siendo informativa.",
+    "Las coincidencias exactas de nombre deben priorizarse en la búsqueda."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "projectSlug": "buzon-de-ideas",
+  "rowId": "rec606dhNoZcBWUIG",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Hacer que proponer una idea resulte fácil, rápida y nada intimidante.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "formulario",
+        "feedback"
+      ],
+      "priorityOrder": [
+        "titulo",
+        "descripcion",
+        "submit"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "form": "card simple"
+      },
+      "narrow": {
+        "form": "una columna"
+      }
+    },
+    "states": [
+      {
+        "id": "idle",
+        "ui": [
+          "form ready"
+        ]
+      },
+      {
+        "id": "submitting",
+        "ui": [
+          "disabled form",
+          "progress"
+        ]
+      },
+      {
+        "id": "success",
+        "ui": [
+          "success message",
+          "reset option"
+        ]
+      },
+      {
+        "id": "validationError",
+        "ui": [
+          "inline validation"
+        ]
+      },
+      {
+        "id": "submitError",
+        "ui": [
+          "error message",
+          "retry"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "title",
+        "description",
+        "category",
+        "submit"
+      ]
+    },
+    "copy": {
+      "title": "Buzón de ideas",
+      "messages": {
+        "success": "Tu idea se ha enviado correctamente.",
+        "error": "No se ha podido enviar la idea."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "labels visibles",
+        "errores asociados a campos",
+        "submit accesible"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "campos apilados"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "projectSlug": "biblioteca-de-plantillas",
+  "archetype": "launcher",
+  "rowId": "recIuFqxxM49oeduW",
+  "sources": [
+    {
+      "name": "TemplatesLibrary",
+      "type": "SharePointLibrary",
+      "purpose": "plantillas oficiales"
+    },
+    {
+      "name": "TemplatesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de plantillas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra plantillas configuradas.",
+    "Permite abrir o descargar cuando procede.",
+    "Filtra por tipo/categoría.",
+    "Funciona con metadatos parciales."
+  ],
+  "businessRules": [
+    "Si una plantilla no tiene categoría, va a General.",
+    "Si faltan metadatos, la plantilla sigue siendo válida.",
+    "Las destacadas pueden ordenarse primero."
+  ]
+}

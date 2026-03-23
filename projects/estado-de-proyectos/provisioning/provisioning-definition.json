@@ -1,0 +1,23 @@
+{
+  "projectSlug": "estado-de-proyectos",
+  "archetype": "analytics",
+  "rowId": "rec5BIxCPadkivxcQ",
+  "sources": [
+    {
+      "name": "ProjectsList",
+      "type": "SharePointList|Planner",
+      "purpose": "estado de iniciativas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra proyectos y semáforos correctamente.",
+    "Permite abrir detalle cuando existe.",
+    "Filtra por estado cuando existe el dato.",
+    "Funciona con datos parciales."
+  ],
+  "businessRules": [
+    "Los estados se normalizan a green/amber/red/unknown o equivalente.",
+    "Los proyectos sin URL siguen siendo informativos.",
+    "La ordenación por defecto puede priorizar peores estados y luego fecha próxima."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "projectSlug": "checklist-de-onboarding",
+  "rowId": "recKUTdRJitx5VvpA",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Hacer que la incorporación resulte clara, secuencial y tranquilizadora.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "fases/filtros",
+        "lista de pasos"
+      ],
+      "priorityOrder": [
+        "obligatorios",
+        "fase actual",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista secuencial o timeline"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton checklist"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "phase filters",
+          "steps list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin checklist"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "pasos con datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "descripcion",
+        "fase",
+        "obligatorio",
+        "relatedLink"
+      ],
+      "badges": [
+        "obligatorio",
+        "opcional",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Checklist de onboarding",
+      "messages": {
+        "empty": "No hay pasos de onboarding configurados.",
+        "error": "No se ha podido cargar el checklist de onboarding."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "secuencia legible",
+        "badges con texto",
+        "links accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, fase y obligatoriedad"
+    }
+  }
+}

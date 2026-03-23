@@ -1,0 +1,28 @@
+{
+  "projectSlug": "buscador-de-recursos-corporativos",
+  "archetype": "general",
+  "rowId": "recftse8Odprgl5Q8",
+  "sources": [
+    {
+      "name": "SearchAPI",
+      "type": "SearchAPI",
+      "purpose": "buscar recursos indexados"
+    },
+    {
+      "name": "ResourcesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de recursos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Busca y muestra recursos relevantes.",
+    "Permite abrir resultados válidos.",
+    "Filtra por tipo/categoría cuando exista.",
+    "Funciona con resultados parciales o sin URL sin romper la UI."
+  ],
+  "businessRules": [
+    "Si no hay texto de búsqueda, puede mostrar recursos destacados o estado inicial vacío según configuración.",
+    "Los resultados sin URL no deben ser accionables.",
+    "Las coincidencias exactas de título pueden priorizarse sobre coincidencias parciales."
+  ]
+}

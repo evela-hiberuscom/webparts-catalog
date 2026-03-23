@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "lanzador-universal-de-accesos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "UniversalAppLauncher",
+    "componentDescription": "Muestra un grid configurable de accesos a apps, sites, formularios y utilidades corporativas.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "lanzador-universal-de-accesos",
+    "libraryId": "0810b12a-601e-4ad9-a507-819bcd0cc391",
+    "solutionShortDescription": "lanzador-universal-de-accesos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

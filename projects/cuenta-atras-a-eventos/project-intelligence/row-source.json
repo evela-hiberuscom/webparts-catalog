@@ -1,0 +1,469 @@
+{
+  "rowId": "rec3wBPZ0kB6HqioK",
+  "name": "Cuenta atrás a eventos",
+  "slug": "cuenta-atras-a-eventos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 5,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "CountdownConfig",
+      "type": "StaticConfig|SharePointList",
+      "purpose": "evento objetivo"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "event-countdown",
+        "name": "Cuenta atrás a eventos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra una cuenta atrás muy visible para campañas, eventos, auditorías, releases o hitos con fecha cerrada.",
+        "productGoal": "Mantener foco continuo sobre una fecha importante con una pieza compacta y reutilizable."
+      },
+      "problem": {
+        "business": "Los eventos importantes pierden visibilidad tras el anuncio inicial.",
+        "operational": "Las áreas necesitan una pieza simple para recordar fechas clave sin crear una landing compleja."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar tiempo restante hasta una fecha objetivo",
+          "Mostrar nombre del evento y CTA opcional",
+          "Soportar estados countdown, live y completed"
+        ],
+        "secondary": [
+          "Variar el tono visual según proximidad",
+          "Servir en home, campaña o páginas de área"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "recordar una fecha importante"
+          ]
+        },
+        {
+          "role": "Comms/Owner de campaña",
+          "needs": [
+            "mantener visibilidad del evento"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Evento principal",
+          "targetDate",
+          "subtitle opcional",
+          "CTA opcional",
+          "estados temporales"
+        ],
+        "out": [
+          "agenda multi-evento compleja",
+          "recordatorios personales"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver countdown a release",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle del evento",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar título y tiempo restante hasta targetDate."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar días/horas/minutos según proximidad."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir CTA cuando exista."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser muy visual y ligero."
+        },
+        {
+          "id": "RNF-02",
+          "text": "La actualización temporal debe ser estable y eficiente."
+        }
+      ],
+      "businessRules": [
+        "Si now < targetDate => countdown.",
+        "Si now >= targetDate y showCompleted=false => completed hidden o empty según configuración.",
+        "Si falta CTA, el bloque sigue siendo informativo."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "StaticConfig",
+            "SharePointList",
+            "JsonUrl"
+          ],
+          "default": "StaticConfig"
+        },
+        "targetDate": {
+          "type": "string",
+          "required": true
+        },
+        "showCompleted": {
+          "type": "boolean",
+          "default": false
+        },
+        "detailUrl": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Calcula countdown correctamente.",
+        "Cambia de estado según fecha.",
+        "Permite abrir CTA cuando existe."
+      ],
+      "edgeCases": [
+        "fecha inválida",
+        "evento pasado",
+        "sin CTA",
+        "timezone ambigua"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza countdown correctamente",
+        "Incluye tests base de cálculo temporal"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Hacer muy visible una fecha importante y transmitir cercanía o urgencia con muy poca lectura.",
+      "informationArchitecture": {
+        "zones": [
+          "titulo",
+          "contador",
+          "subtexto",
+          "CTA"
+        ],
+        "priorityOrder": [
+          "contador",
+          "titulo",
+          "CTA"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "hero": "contador destacado con números grandes"
+        },
+        "narrow": {
+          "hero": "apilado"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton countdown"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "title",
+            "countdown",
+            "cta"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin evento configurado"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "contador sin CTA o subtitle"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "title",
+          "remaining",
+          "subtitle",
+          "openAction"
+        ],
+        "badges": [
+          "soon",
+          "live",
+          "completed",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Cuenta atrás a eventos",
+        "messages": {
+          "empty": "No hay evento configurado.",
+          "error": "No se ha podido calcular la cuenta atrás."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "contador legible",
+          "texto visible además del tratamiento visual",
+          "actualización no intrusiva"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar contador y título"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolver targetDate",
+          "calcular countdown",
+          "render hero"
+        ],
+        "v1": [
+          "showCompleted",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Configuración y cálculo temporal"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI countdown"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver evento y calcular estado"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar contador y CTA"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear CountdownStateEvaluator"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Crear CountdownDisplay"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "CountdownConfig",
+          "type": "StaticConfig|SharePointList",
+          "purpose": "evento objetivo"
+        }
+      ],
+      "entities": {
+        "CountdownEvent": {
+          "title": "string",
+          "targetDate": "string",
+          "subtitle": "string|null",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "state": "derivado de now y targetDate"
+      },
+      "validationRules": [
+        "title requerido",
+        "targetDate válido requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "fecha válida y cálculo correcto",
+        "partial": "falta subtitle o detailUrl"
+      },
+      "fallbacks": [
+        "sin detailUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "item": {
+          "title": "Lanzamiento Q2",
+          "targetDate": "2026-04-01T09:00:00Z",
+          "state": "countdown"
+        },
+        "remaining": {
+          "days": 10,
+          "hours": 5,
+          "minutes": 12
+        }
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "future event",
+          "past event",
+          "invalid date",
+          "no url"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "EventCountdownWebPart",
+        "pattern": "SPFx React + date evaluator",
+        "components": [
+          "EventCountdown",
+          "CountdownDisplay"
+        ],
+        "services": [
+          "CountdownService",
+          "CountdownStateEvaluator"
+        ],
+        "repositories": [
+          "CountdownConfigRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "StaticConfig|SharePointList|JsonUrl",
+          "targetDate": "string",
+          "showCompleted": "boolean",
+          "detailUrl": "string|undefined"
+        },
+        "ICountdownItem": {
+          "title": "string",
+          "targetDate": "string",
+          "subtitle": "string|null",
+          "detailUrl": "string|null",
+          "state": "countdown|live|completed|unknown"
+        },
+        "IViewModel": {
+          "item": "ICountdownItem|null",
+          "remaining": "{days:number;hours:number;minutes:number}|null",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props/origen",
+        "validar targetDate",
+        "calcular remaining y state",
+        "renderizar"
+      ],
+      "algorithms": {
+        "remaining": "difference(targetDate-now)",
+        "state": "countdown/live/completed según fecha y config"
+      },
+      "performance": {
+        "timer": "interval eficiente con cleanup en unmount"
+      },
+      "errorMatrix": [
+        {
+          "condition": "fecha inválida",
+          "uiState": "error"
+        },
+        {
+          "condition": "sin detailUrl",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar detailUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "countdown_loaded",
+          "countdown_partial",
+          "countdown_error",
+          "countdown_opened"
+        ],
+        "properties": [
+          "state",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "remaining calculation",
+          "state evaluator"
+        ],
+        "component": [
+          "countdown render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Temporizador para campañas, releases, auditorías o eventos internos.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

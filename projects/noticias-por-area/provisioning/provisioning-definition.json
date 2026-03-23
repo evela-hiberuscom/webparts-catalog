@@ -1,0 +1,21 @@
+{
+  "projectSlug": "noticias-por-area",
+  "archetype": "summary",
+  "rowId": "recbNBpGtYOyEJ1jH",
+  "sources": [
+    {
+      "name": "SharePointNews",
+      "type": "SharePointNews",
+      "purpose": "noticias etiquetadas por área"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra noticias del área indicada.",
+    "Ordena correctamente.",
+    "Permite abrir noticias válidas."
+  ],
+  "businessRules": [
+    "Si no hay coincidencias, mostrar empty específico del área.",
+    "Si falta etiqueta en la noticia, no debe romper el feed."
+  ]
+}

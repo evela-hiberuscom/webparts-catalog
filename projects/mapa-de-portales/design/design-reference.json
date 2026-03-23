@@ -1,0 +1,99 @@
+{
+  "projectSlug": "mapa-de-portales",
+  "rowId": "recw0vit4QRbwI96D",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Ayudar al usuario a orientarse dentro de la intranet sin necesidad de memorizar su estructura.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "controles de vista",
+        "estructura jerárquica"
+      ],
+      "priorityOrder": [
+        "raíces/hubs",
+        "niveles siguientes",
+        "nodos relacionados"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "tree": "árbol o grupos claros"
+      },
+      "narrow": {
+        "tree": "lista colapsable"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton tree"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "view switch opcional",
+          "portal structure"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin estructura"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "nodos parciales o no accionables"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "nombre",
+        "tipoNodo",
+        "nivel",
+        "descripcionCorta",
+        "openAction"
+      ],
+      "badges": [
+        "hub",
+        "site",
+        "area",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Mapa de portales",
+      "messages": {
+        "empty": "No hay estructura de portales configurada.",
+        "error": "No se ha podido cargar el mapa de portales."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "árbol/lista accesible",
+        "niveles comprensibles",
+        "acciones accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "usar lista colapsable con indentación simple"
+    }
+  }
+}

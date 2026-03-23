@@ -1,0 +1,310 @@
+{
+  "rowId": "reciRdVyy2qbjxn0a",
+  "name": "Asistente contextual de página",
+  "slug": "asistente-contextual-de-pagina",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 3,
+  "dependencies": [],
+  "provisioningNeeds": [],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases",
+      "dataSource"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "page-context-assistant",
+        "name": "Asistente contextual de página",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Ofrece ayuda contextual breve según la página, sección o tipo de contenido donde se encuentre el usuario.",
+        "productGoal": "Reducir dudas y orientar al usuario sin sacarlo del contexto actual."
+      },
+      "problem": {
+        "business": "Muchas páginas requieren orientación, pero un FAQ general o una guía completa resultan excesivos.",
+        "operational": "Se necesita ayuda puntual, embebida y relevante al contexto actual."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar ayuda contextual según página o contexto configurado",
+          "Sugerir siguientes pasos o recursos relacionados",
+          "Permitir abrir ayuda ampliada"
+        ],
+        "secondary": [
+          "Reducir dudas de navegación o uso",
+          "Servir como capa ligera de asistencia contextual"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "entender rápidamente qué puede hacer en esta página"
+          ]
+        },
+        {
+          "role": "Owner de página",
+          "needs": [
+            "añadir ayuda sin recargar el contenido principal"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Mensaje contextual",
+          "Tips o ayudas cortas",
+          "Links a recursos relacionados",
+          "Estado colapsado/expandido"
+        ],
+        "out": [
+          "chat conversacional completo",
+          "búsqueda semántica avanzada en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Resolver el contexto de la página o sección actual."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar contenido de ayuda asociado a ese contexto."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir expandir/contraer la ayuda."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir recursos relacionados cuando existan."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Si no hay ayuda específica para el contexto, puede mostrarse una ayuda genérica o empty según configuración.",
+        "Si faltan enlaces relacionados, la ayuda sigue siendo válida."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "StaticConfig",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "fallbackMode": {
+          "type": "enum",
+          "values": [
+            "generic",
+            "empty"
+          ],
+          "default": "generic"
+        },
+        "collapsedByDefault": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra ayuda específica cuando existe.",
+        "Hace fallback de forma controlada.",
+        "Permite abrir recursos relacionados."
+      ],
+      "edgeCases": [
+        "sin contexto mapeado",
+        "sin links",
+        "contenido parcial"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza ayuda contextual correctamente",
+        "Incluye tests base de resolución de contexto"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Ayudar justo cuando el usuario lo necesita, sin interrumpir ni ensuciar la página.",
+      "informationArchitecture": {
+        "zones": [
+          "trigger o bloque visible",
+          "mensaje contextual",
+          "links relacionados"
+        ],
+        "priorityOrder": [
+          "ayuda principal",
+          "siguiente paso",
+          "link ampliado"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "panel": "card o callout contextual"
+        },
+        "narrow": {
+          "panel": "compacto colapsable"
+        }
+      },
+      "states": [
+        {
+          "id": "collapsed",
+          "ui": [
+            "hint compacto"
+          ]
+        },
+        {
+          "id": "expanded",
+          "ui": [
+            "mensaje y links"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin ayuda disponible o oculto"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Asistente contextual de página",
+        "messages": {
+          "empty": "No hay ayuda contextual disponible.",
+          "error": "No se ha podido cargar la ayuda contextual."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "botón expand/collapse accesible",
+          "texto claro",
+          "links accesibles"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolve context",
+          "load help",
+          "render panel"
+        ],
+        "v1": [
+          "fallback mode",
+          "telemetry"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Resolución de contexto"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI de ayuda"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver contexto actual"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar ayuda contextual"
+        }
+      ]
+    },
+    "dataJson": null,
+    "technicalJson": {
+      "architecture": {
+        "webPart": "PageContextAssistantWebPart",
+        "pattern": "SPFx React + context resolver + help repository",
+        "components": [
+          "PageContextAssistant",
+          "ContextHelpPanel"
+        ],
+        "services": [
+          "PageContextResolver",
+          "ContextHelpService"
+        ],
+        "repositories": [
+          "ContextHelpRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|StaticConfig|JsonUrl",
+          "listTitleOrUrl": "string",
+          "fallbackMode": "generic|empty",
+          "collapsedByDefault": "boolean"
+        },
+        "IContextHelp": {
+          "id": "string",
+          "contextKey": "string",
+          "title": "string|null",
+          "message": "string",
+          "relatedLinks": "{label:string;url:string}[]|null"
+        }
+      },
+      "executionFlow": [
+        "resolve current page context",
+        "load contextual help",
+        "apply fallback if needed",
+        "render collapsed or expanded"
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitize URLs"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "context resolution",
+          "fallback selection"
+        ],
+        "component": [
+          "collapsed/expanded/empty"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa. Detecta la página actual y ofrece acciones útiles.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

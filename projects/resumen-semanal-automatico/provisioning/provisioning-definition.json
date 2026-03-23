@@ -1,0 +1,33 @@
+{
+  "projectSlug": "resumen-semanal-automatico",
+  "archetype": "summary",
+  "rowId": "rec2f4QevJzBr8wye",
+  "sources": [
+    {
+      "name": "News",
+      "type": "SharePointNews",
+      "purpose": "noticias semanales"
+    },
+    {
+      "name": "Milestones",
+      "type": "SharePointList",
+      "purpose": "hitos semanales"
+    },
+    {
+      "name": "Incidents",
+      "type": "SharePointList",
+      "purpose": "incidencias destacadas"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra highlights semanales del periodo correcto.",
+    "Combina fuentes configuradas sin romper la UI.",
+    "Permite abrir elementos válidos.",
+    "Ordena de forma consistente."
+  ],
+  "businessRules": [
+    "Solo se incluyen elementos dentro del rango temporal configurado.",
+    "Los highlights se ordenan por prioridad de origen o fecha descendente.",
+    "Si falta URL, el highlight sigue siendo informativo."
+  ]
+}

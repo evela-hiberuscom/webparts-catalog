@@ -1,0 +1,95 @@
+{
+  "projectSlug": "que-ha-cambiado",
+  "rowId": "receT1ugT7eGEzsuu",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir entender rápidamente qué es nuevo o qué se ha actualizado y decidir si conviene abrirlo.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "feed de cambios",
+        "filtros opcionales"
+      ],
+      "priorityOrder": [
+        "más recientes",
+        "tipo relevante"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista compacta rica"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton change items"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "changes list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin cambios recientes"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "items con metadatos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "tipo",
+        "changedAt",
+        "changeSummary",
+        "openAction"
+      ],
+      "badges": [
+        "updated",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Qué ha cambiado",
+      "messages": {
+        "empty": "No hay cambios recientes visibles.",
+        "error": "No se han podido cargar los cambios recientes."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "lista accesible",
+        "fechas legibles",
+        "resúmenes claros"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, tipo y fecha"
+    }
+  }
+}

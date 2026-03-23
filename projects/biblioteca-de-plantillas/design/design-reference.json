@@ -1,0 +1,96 @@
+{
+  "projectSlug": "biblioteca-de-plantillas",
+  "rowId": "recIuFqxxM49oeduW",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir identificar y abrir una plantilla corporativa correcta con rapidez y confianza.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros",
+        "grid/lista de plantillas"
+      ],
+      "priorityOrder": [
+        "destacadas",
+        "categoría/tipo",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "grid o lista rica"
+      },
+      "narrow": {
+        "items": "lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton templates"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "templates list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin plantillas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "plantillas con metadatos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "tipo",
+        "categoria",
+        "updatedAt",
+        "open/download action"
+      ],
+      "badges": [
+        "destacada",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Biblioteca de plantillas",
+      "messages": {
+        "empty": "No hay plantillas configuradas.",
+        "error": "No se han podido cargar las plantillas."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "acciones de abrir/descargar accesibles",
+        "badges con texto"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, tipo y acción"
+    }
+  }
+}

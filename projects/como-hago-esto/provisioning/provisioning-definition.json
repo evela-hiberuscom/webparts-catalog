@@ -1,0 +1,23 @@
+{
+  "projectSlug": "como-hago-esto",
+  "archetype": "knowledge",
+  "rowId": "reca1ofHWPtHAXRcX",
+  "sources": [
+    {
+      "name": "GuidesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de guías breves"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra guías configuradas.",
+    "Expande pasos cuando existan.",
+    "Filtra por categoría.",
+    "Abre enlaces relacionados cuando existan."
+  ],
+  "businessRules": [
+    "Si faltan pasos detallados, la guía puede mostrarse con resumen solamente.",
+    "Si falta categoría, va a General.",
+    "Las guías destacadas pueden ordenarse primero."
+  ]
+}

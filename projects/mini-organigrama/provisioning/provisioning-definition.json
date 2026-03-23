@@ -1,0 +1,28 @@
+{
+  "projectSlug": "mini-organigrama",
+  "archetype": "general",
+  "rowId": "recR0hmAqzSViJFra",
+  "sources": [
+    {
+      "name": "Directory",
+      "type": "Directory/API",
+      "purpose": "relaciones manager/report"
+    },
+    {
+      "name": "OrgList",
+      "type": "SharePointList",
+      "purpose": "estructura curada"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra estructura simple correctamente.",
+    "Permite abrir perfiles válidos.",
+    "Respeta viewMode y maxDepth.",
+    "Funciona con datos parciales sin romper la UI."
+  ],
+  "businessRules": [
+    "Si falta foto, usar avatar por defecto.",
+    "Si falta relación jerárquica de un nodo, mostrarlo como aislado o parcial.",
+    "El manager principal siempre debe ir primero si existe."
+  ]
+}

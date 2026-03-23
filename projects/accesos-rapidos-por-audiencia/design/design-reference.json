@@ -1,0 +1,97 @@
+{
+  "projectSlug": "accesos-rapidos-por-audiencia",
+  "rowId": "reczv9XSDJN23xEsz",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Mostrar solo los accesos más relevantes para el usuario, sin saturar la interfaz con opciones irrelevantes.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "indicador de audiencia opcional",
+        "grid de accesos"
+      ],
+      "priorityOrder": [
+        "coincidencias exactas",
+        "fallback genérico",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-5 columnas"
+      },
+      "narrow": {
+        "cards": "grid 2 columnas o lista compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton audience cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "audience hint opcional",
+          "cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin accesos para tu perfil"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "cards con fallback parcial"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "icono",
+        "titulo",
+        "categoria",
+        "audienceBadge opcional",
+        "openAction"
+      ],
+      "badges": [
+        "personalizado",
+        "genérico",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Accesos rápidos por audiencia",
+      "messages": {
+        "empty": "No hay accesos disponibles para tu perfil.",
+        "error": "No se han podido cargar los accesos segmentados."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards accesibles",
+        "texto visible además de iconos"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y acción"
+    }
+  }
+}

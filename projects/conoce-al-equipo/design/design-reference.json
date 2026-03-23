@@ -1,0 +1,95 @@
+{
+  "projectSlug": "conoce-al-equipo",
+  "rowId": "recDe4Jh2iLvXpfIB",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Generar cercanía y claridad sobre quién compone el equipo y cómo contactar con cada persona.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "grid de miembros"
+      ],
+      "priorityOrder": [
+        "foto/nombre",
+        "rol",
+        "bio",
+        "acciones"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "lista o 2 columnas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton member cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "member cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin miembros"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "miembros con foto/bio ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "avatar",
+        "nombre",
+        "rol",
+        "bio",
+        "profileAction"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Conoce al equipo",
+      "messages": {
+        "empty": "No hay miembros del equipo configurados.",
+        "error": "No se ha podido cargar la información del equipo."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "cards y enlaces accesibles",
+        "texto visible además de imagen",
+        "alt adecuado o avatar decorativo según caso"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar nombre, rol y acción"
+    }
+  }
+}

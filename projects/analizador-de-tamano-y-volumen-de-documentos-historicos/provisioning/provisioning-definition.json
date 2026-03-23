@@ -1,0 +1,36 @@
+{
+  "projectSlug": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+  "archetype": "launcher",
+  "rowId": "recgszxhqydcwE8va",
+  "sources": [
+    {
+      "name": "SharePoint Library",
+      "type": "primary",
+      "api": "SharePoint REST API",
+      "purpose": "Metadatos de biblioteca, documentos y tamaños visibles"
+    },
+    {
+      "name": "File Versions",
+      "type": "primary",
+      "api": "SharePoint REST API / PnPjs",
+      "purpose": "Versiones históricas por archivo cuando el contexto lo permite"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Selecciona y resuelve una biblioteca válida.",
+    "Muestra número de documentos actuales y tamaño visible.",
+    "Calcula o estima histórico y lo etiqueta correctamente.",
+    "Quick scan y deep scan funcionan con sus límites.",
+    "Top N respeta configuración y cobertura.",
+    "Exportación JSON refleja exactitud, cobertura y salud.",
+    "Throttling y permisos parciales no rompen la UI."
+  ],
+  "businessRules": [
+    "Si historicalToCurrentRatio >= warningHistoricalRatio, el estado es al menos warning.",
+    "Si faltan datos de tamaño histórico, isEstimated=true.",
+    "Si coveragePercent < 100 y afecta a la fiabilidad, precision=partial.",
+    "Si faltan permisos de versiones, el análisis sigue con lo disponible.",
+    "Si currentSizeBytes=0 y historicalSizeBytes>0, ratio puede representarse como null o etiqueta especial según diseño.",
+    "Si no hay documentos elegibles, estado empty."
+  ]
+}

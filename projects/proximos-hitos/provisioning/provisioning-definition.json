@@ -1,0 +1,22 @@
+{
+  "projectSlug": "proximos-hitos",
+  "archetype": "summary",
+  "rowId": "rec4ZjECVnw5BjShO",
+  "sources": [
+    {
+      "name": "MilestonesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de hitos"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra hitos ordenados por fecha.",
+    "Permite abrir detalle cuando existe.",
+    "Respeta maxItems y viewMode."
+  ],
+  "businessRules": [
+    "Los hitos sin fecha van al final o se excluyen según política.",
+    "Si falta URL, el hito sigue siendo informativo.",
+    "Los hitos muy próximos pueden destacarse visualmente."
+  ]
+}

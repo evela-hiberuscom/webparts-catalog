@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "automatic-weekly-summary-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/automaticWeeklySummary/AutomaticWeeklySummaryWebPart.js",
+          "manifest": "./src/webparts/automaticWeeklySummary/AutomaticWeeklySummaryWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AutomaticWeeklySummaryWebPartStrings": "lib/webparts/automaticWeeklySummary/loc/{locale}.js"
+  }
+}

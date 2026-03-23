@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mis-accesos-recientes",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MyRecentAccesses",
+    "componentDescription": "Muestra accesos recientes del usuario a documentos, páginas o herramientas para retomar trabajo con rapidez.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mis-accesos-recientes",
+    "libraryId": "b7a2a334-f319-4540-abbb-559c576f85ba",
+    "solutionShortDescription": "mis-accesos-recientes description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

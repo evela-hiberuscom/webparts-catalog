@@ -1,0 +1,473 @@
+{
+  "rowId": "receT1ugT7eGEzsuu",
+  "name": "Qué ha cambiado",
+  "slug": "que-ha-cambiado",
+  "artifactType": "SPFxWebPart",
+  "archetype": "recents",
+  "waveNumber": 12,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "RecentChangesList",
+      "type": "SharePointList|Library",
+      "purpose": "feed de cambios recientes"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "what-changed-feed",
+        "name": "Qué ha cambiado",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra cambios recientes en páginas, documentos o políticas clave para mantener visible lo actualizado.",
+        "productGoal": "Dar visibilidad a cambios recientes sin obligar al usuario a revisar varios espacios manualmente."
+      },
+      "problem": {
+        "business": "Las actualizaciones importantes pasan desapercibidas si no se exponen de forma clara.",
+        "operational": "Los owners de contenido necesitan un feed simple para comunicar qué ha cambiado."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar cambios recientes relevantes",
+          "Permitir abrir el elemento actualizado",
+          "Mostrar fecha y resumen breve del cambio"
+        ],
+        "secondary": [
+          "Filtrar por tipo de contenido",
+          "Servir como feed reusable en home o área"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver qué se ha actualizado últimamente"
+          ]
+        },
+        {
+          "role": "Owner de contenido",
+          "needs": [
+            "dar visibilidad a cambios importantes"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Feed de cambios",
+          "Fecha",
+          "Tipo",
+          "Resumen breve",
+          "Acción abrir recurso"
+        ],
+        "out": [
+          "diff documental completo",
+          "versionado avanzado en la UI"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar elementos actualizados recientemente."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, tipo y fecha de cambio."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar resumen del cambio cuando exista."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir abrir el recurso actualizado."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Los cambios más recientes se muestran primero.",
+        "Si falta resumen, el elemento sigue siendo válido.",
+        "Si falta URL, el elemento sigue siendo informativo."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "SharePointLibrary",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1,
+          "max": 20
+        },
+        "defaultTypeFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra cambios recientes correctamente.",
+        "Ordena por fecha descendente.",
+        "Permite abrir elementos válidos."
+      ],
+      "edgeCases": [
+        "sin fecha",
+        "sin resumen",
+        "sin URL",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza feed de cambios correctamente",
+        "Incluye tests base de ordenación y mapping"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir entender rápidamente qué es nuevo o qué se ha actualizado y decidir si conviene abrirlo.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "feed de cambios",
+          "filtros opcionales"
+        ],
+        "priorityOrder": [
+          "más recientes",
+          "tipo relevante"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista compacta rica"
+        },
+        "narrow": {
+          "items": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton change items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "changes list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin cambios recientes"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items con metadatos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "tipo",
+          "changedAt",
+          "changeSummary",
+          "openAction"
+        ],
+        "badges": [
+          "updated",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Qué ha cambiado",
+        "messages": {
+          "empty": "No hay cambios recientes visibles.",
+          "error": "No se han podido cargar los cambios recientes."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "lista accesible",
+          "fechas legibles",
+          "resúmenes claros"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título, tipo y fecha"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer cambios",
+          "ordenar",
+          "render feed"
+        ],
+        "v1": [
+          "filtros por tipo",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer cambios recientes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Ordenar y filtrar cambios"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar feed de cambios"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear RecentChangesRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar sort y filtros"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ChangedItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "RecentChangesList",
+          "type": "SharePointList|Library",
+          "purpose": "feed de cambios recientes"
+        }
+      ],
+      "entities": {
+        "ChangedItem": {
+          "id": "string",
+          "title": "string",
+          "contentType": "string|null",
+          "changedAt": "string|null",
+          "changeSummary": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "changedAt": "datetime or null",
+        "contentType": "string or unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title, changedAt y openUrl presentes",
+        "partial": "falta changeSummary, contentType o openUrl"
+      },
+      "fallbacks": [
+        "sin changedAt => final del feed",
+        "sin changeSummary => null",
+        "sin openUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Política de gastos actualizada",
+            "contentType": "Policy",
+            "changedAt": "2026-03-21T08:00:00Z",
+            "changeSummary": "Se actualiza el límite de dietas",
+            "openUrl": "/sites/finance/politicas/gastos"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "recent change",
+          "sin summary",
+          "sin url",
+          "sin date",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "WhatChangedFeedWebPart",
+        "pattern": "SPFx React + repositories + recent changes sorter",
+        "components": [
+          "WhatChangedFeed",
+          "ChangedItem"
+        ],
+        "services": [
+          "RecentChangesService"
+        ],
+        "repositories": [
+          "RecentChangesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'SharePointLibrary'|'JsonUrl')[]",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "defaultTypeFilter": "string|undefined"
+        },
+        "IChangedItem": {
+          "id": "string",
+          "title": "string",
+          "contentType": "string|null",
+          "changedAt": "string|null",
+          "changeSummary": "string|null",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IChangedItem[]",
+          "types": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer cambios desde orígenes",
+        "normalizar tipo/fecha/resumen",
+        "aplicar filtro opcional",
+        "ordenar por fecha desc",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "sort": "changedAt desc with nulls last",
+        "filter": "por contentType cuando exista"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin changedAt",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "changes_loaded",
+          "changes_partial",
+          "changes_error",
+          "changed_item_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "typeFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "recent sort",
+          "type filter",
+          "mapping"
+        ],
+        "component": [
+          "feed render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Feed de cambios recientes en páginas, políticas o documentación clave.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

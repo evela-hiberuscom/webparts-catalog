@@ -1,0 +1,522 @@
+{
+  "rowId": "rec7KUlg0cJxKr35x",
+  "name": "Mis documentos útiles",
+  "slug": "mis-documentos-utiles",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 7,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SharePointLibrary",
+      "type": "SharePointLibrary",
+      "purpose": "documentos frecuentes o destacados"
+    },
+    {
+      "name": "UsefulDocumentsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de documentos útiles"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "my-useful-documents",
+        "name": "Mis documentos útiles",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra una selección configurable de documentos útiles o frecuentes para el usuario, priorizando acceso rápido y contexto mínimo.",
+        "productGoal": "Reducir fricción para acceder a documentos de uso frecuente o importantes dentro de la intranet."
+      },
+      "problem": {
+        "business": "Los documentos útiles suelen estar repartidos y el usuario repite búsquedas de materiales clave.",
+        "operational": "La productividad se resiente cuando no existe una colección clara de documentos frecuentes o importantes."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar documentos relevantes o frecuentes",
+          "Permitir apertura rápida",
+          "Distinguir favoritos, destacados o frecuentes cuando el origen lo permita"
+        ],
+        "secondary": [
+          "Filtrar por categoría",
+          "Mostrar última actualización o propietario",
+          "Servir como bloque personal o de equipo"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "acceder a plantillas o documentos clave rápidamente"
+          ]
+        },
+        {
+          "role": "Equipo",
+          "needs": [
+            "resaltar documentos de referencia"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Lista de documentos útiles",
+          "Abrir documento",
+          "Metadatos ligeros",
+          "Filtros simples"
+        ],
+        "out": [
+          "gestión documental completa",
+          "edición inline",
+          "versionado desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Abrir documento frecuente",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ver documento destacado por el equipo",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar por categoría",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar documentos útiles/frecuentes según origen configurado."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar título, categoría y metadatos básicos cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir el documento."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros simples por categoría o etiqueta cuando existan."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Carga rápida y clara visualmente."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo lectura en V1."
+        }
+      ],
+      "businessRules": [
+        "Si falta categoría, el documento sigue visible en grupo general.",
+        "Si el enlace no es accesible, el documento puede ocultarse o mostrarse sin acción según política.",
+        "Los documentos se ordenan por prioridad del origen o actualización reciente."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointLibrary",
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 10,
+          "min": 1,
+          "max": 50
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra documentos configurados.",
+        "Permite abrir documento.",
+        "Filtra por categoría si existe.",
+        "Funciona con metadatos parciales."
+      ],
+      "edgeCases": [
+        "documento sin categoría",
+        "sin enlace",
+        "sin fecha",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza documentos útiles correctamente",
+        "Incluye tests base de mapping y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir acceder a documentos frecuentes con el menor esfuerzo cognitivo posible.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros opcionales",
+          "lista o grid de documentos"
+        ],
+        "priorityOrder": [
+          "destacados",
+          "actualizados recientemente",
+          "resto"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "grid o lista rica"
+        },
+        "narrow": {
+          "items": "lista compacta"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton documents"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "documents list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin documentos útiles"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "lista con metadatos parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "categoria",
+          "updatedAt",
+          "owner",
+          "openAction"
+        ],
+        "badges": [
+          "destacado",
+          "frecuente",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Mis documentos útiles",
+        "messages": {
+          "empty": "No hay documentos útiles visibles.",
+          "error": "No se han podido cargar tus documentos útiles."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "enlaces accesibles",
+          "texto visible para badges",
+          "fechas localizadas"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer documentos",
+          "normalizar",
+          "render lista"
+        ],
+        "v1": [
+          "filtros",
+          "prioridades visuales",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer documentos útiles desde orígenes"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar lista y filtros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de documentos útiles"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Normalizar prioridad y categoría"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear lista y filtros"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SharePointLibrary",
+          "type": "SharePointLibrary",
+          "purpose": "documentos frecuentes o destacados"
+        },
+        {
+          "name": "UsefulDocumentsList",
+          "type": "SharePointList",
+          "purpose": "catálogo de documentos útiles"
+        }
+      ],
+      "entities": {
+        "UsefulDocument": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "updatedAt": "string|null",
+          "owner": "string|null",
+          "openUrl": "string|null",
+          "priority": "string|null"
+        }
+      },
+      "mappings": {
+        "priority": "mapear a featured|frequent|normal|unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "enlace y metadatos presentes",
+        "partial": "faltan categoría, owner o updatedAt"
+      },
+      "fallbacks": [
+        "sin categoría => general",
+        "sin updatedAt => null",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Plantilla comercial.docx",
+            "category": "Plantillas",
+            "updatedAt": "2026-03-20T10:00:00Z",
+            "priority": "featured",
+            "openUrl": "/sites/docs/Plantilla.docx"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "featured doc",
+          "frequent doc",
+          "no category",
+          "no link",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "MyUsefulDocumentsWebPart",
+        "pattern": "SPFx React + repositories + documents normalizer",
+        "components": [
+          "MyUsefulDocuments",
+          "UsefulDocumentsList",
+          "UsefulDocumentsFilters"
+        ],
+        "services": [
+          "UsefulDocumentsAggregationService"
+        ],
+        "repositories": [
+          "UsefulDocumentsRepository",
+          "SharePointLibraryRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointLibrary'|'SharePointList'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "defaultCategory": "string|undefined"
+        },
+        "IUsefulDocument": {
+          "id": "string",
+          "title": "string",
+          "category": "string|null",
+          "updatedAt": "string|null",
+          "owner": "string|null",
+          "openUrl": "string|null",
+          "priority": "featured|frequent|normal|unknown"
+        },
+        "IViewModel": {
+          "items": "IUsefulDocument[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer documentos desde orígenes",
+        "normalizar categoría y prioridad",
+        "filtrar si procede",
+        "ordenar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "priority desc + updatedAt desc + title asc",
+        "filter": "por categoría cuando exista"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos",
+        "limit": "maxItems tras ordenación"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin categoría",
+          "uiState": "ready"
+        },
+        {
+          "condition": "origen inaccesible",
+          "uiState": "partialData o error"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl",
+          "no mostrar docs sin acceso cuando el origen lo indique"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "useful_docs_loaded",
+          "useful_docs_partial",
+          "useful_docs_error",
+          "useful_doc_opened"
+        ],
+        "properties": [
+          "sourceCount",
+          "itemCount",
+          "categoryFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "category filter",
+          "priority sort",
+          "normalization"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad. Vista configurable de documentos frecuentes o marcados como importantes.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

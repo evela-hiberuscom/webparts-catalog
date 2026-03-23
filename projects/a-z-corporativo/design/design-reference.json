@@ -1,0 +1,96 @@
+{
+  "projectSlug": "a-z-corporativo",
+  "rowId": "recDG2ZChOZvUD8ry",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir explorar un índice corporativo de forma intuitiva y rápida.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "barra alfabética",
+        "lista de entradas"
+      ],
+      "priorityOrder": [
+        "letra seleccionada",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "index": "barra A-Z",
+        "list": "lista agrupada por letra"
+      },
+      "narrow": {
+        "index": "compacto/desplazable",
+        "list": "vertical simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton a-z list"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "alpha nav",
+          "grouped entries"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin entradas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "entradas parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "descripcionCorta",
+        "letter",
+        "openAction"
+      ],
+      "badges": [
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "A-Z corporativo",
+      "messages": {
+        "empty": "No hay entradas configuradas.",
+        "error": "No se ha podido cargar el índice corporativo."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "barra alfabética accesible",
+        "lista agrupada comprensible",
+        "acciones accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título y agrupación por letra"
+    }
+  }
+}

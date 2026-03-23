@@ -1,0 +1,73 @@
+{
+  "projectSlug": "pregunta-destacada",
+  "rowId": "receRlZjmbo737FTQ",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Crear una pausa breve en la página que dirija la atención a una sola pregunta.",
+    "informationArchitecture": {
+      "zones": [
+        "pregunta",
+        "subtexto",
+        "CTA"
+      ],
+      "priorityOrder": [
+        "pregunta",
+        "CTA"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "hero": "card editorial"
+      },
+      "narrow": {
+        "hero": "compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton prompt"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "featured question hero"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin render o placeholder discreto"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "pregunta sin CTA"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "copy": {
+      "title": "Pregunta destacada"
+    },
+    "accessibility": {
+      "requirements": [
+        "CTA accesible",
+        "contraste adecuado"
+      ]
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "projectSlug": "estado-de-incidencias-destacadas",
+  "rowId": "recCKDr21DGQb4uKd",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir detectar rápido incidentes conocidos y qué hacer mientras siguen activos.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "lista de incidencias",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "cards o lista rica"
+      },
+      "narrow": {
+        "items": "cards compactas"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton incident cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "incident cards"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin incidencias destacadas"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner sutil",
+          "cards con campos ausentes"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "titulo",
+        "severidad",
+        "impacto",
+        "estado",
+        "workaround",
+        "eta",
+        "detailLink"
+      ]
+    },
+    "copy": {
+      "title": "Estado de incidencias destacadas",
+      "messages": {
+        "empty": "No hay incidencias destacadas activas.",
+        "error": "No se ha podido cargar el estado de incidencias."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "badges con texto",
+        "contraste AA",
+        "links accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "cards verticales con workaround truncado"
+    }
+  }
+}

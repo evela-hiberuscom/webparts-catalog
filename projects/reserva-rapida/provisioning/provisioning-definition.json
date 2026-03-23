@@ -1,0 +1,23 @@
+{
+  "projectSlug": "reserva-rapida",
+  "archetype": "launcher",
+  "rowId": "rec0FWy077HG4YE7v",
+  "sources": [
+    {
+      "name": "BookingResourcesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de recursos reservables"
+    }
+  ],
+  "acceptanceCriteria": [
+    "Muestra recursos configurados.",
+    "Permite abrir reserva.",
+    "Filtra por categoría si procede.",
+    "Muestra disponibilidad resumida cuando exista."
+  ],
+  "businessRules": [
+    "Si un recurso no tiene disponibilidad integrada, se sigue mostrando como launcher.",
+    "Si faltan reglas o notas, la tarjeta sigue siendo válida.",
+    "Los enlaces externos deben abrir de forma segura y explícita."
+  ]
+}

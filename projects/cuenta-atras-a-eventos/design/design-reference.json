@@ -1,0 +1,99 @@
+{
+  "projectSlug": "cuenta-atras-a-eventos",
+  "rowId": "rec3wBPZ0kB6HqioK",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Hacer muy visible una fecha importante y transmitir cercanía o urgencia con muy poca lectura.",
+    "informationArchitecture": {
+      "zones": [
+        "titulo",
+        "contador",
+        "subtexto",
+        "CTA"
+      ],
+      "priorityOrder": [
+        "contador",
+        "titulo",
+        "CTA"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "hero": "contador destacado con números grandes"
+      },
+      "narrow": {
+        "hero": "apilado"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton countdown"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "title",
+          "countdown",
+          "cta"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "sin evento configurado"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "contador sin CTA o subtitle"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "title",
+        "remaining",
+        "subtitle",
+        "openAction"
+      ],
+      "badges": [
+        "soon",
+        "live",
+        "completed",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Cuenta atrás a eventos",
+      "messages": {
+        "empty": "No hay evento configurado.",
+        "error": "No se ha podido calcular la cuenta atrás."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "contador legible",
+        "texto visible además del tratamiento visual",
+        "actualización no intrusiva"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar contador y título"
+    }
+  }
+}

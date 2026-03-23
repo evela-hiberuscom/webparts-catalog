@@ -1,0 +1,506 @@
+{
+  "rowId": "recAqLibyGniOU3P7",
+  "name": "Centro de acciones rápidas",
+  "slug": "centro-de-acciones-rapidas",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 4,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "QuickActionsList",
+      "type": "SharePointList",
+      "purpose": "catálogo de acciones rápidas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "quick-actions-center",
+        "name": "Centro de acciones rápidas",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Agrupa acciones frecuentes de un área o perfil para lanzar procesos, herramientas o páginas clave en pocos clics.",
+        "productGoal": "Concentrar las acciones corporativas más utilizadas en un bloque compacto, configurable y reusable."
+      },
+      "problem": {
+        "business": "Los usuarios repiten navegación a zonas profundas para ejecutar las mismas acciones.",
+        "operational": "Sin un centro de acciones se dispersan accesos y disminuye la adopción de procesos estándar."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar acciones frecuentes de forma compacta",
+          "Permitir lanzar procesos o herramientas rápidamente",
+          "Adaptarse a área o audiencia",
+          "Servir de bloque reusable en distintas páginas"
+        ],
+        "secondary": [
+          "Mostrar iconos, categorías y etiquetas",
+          "Filtrar por grupo o contexto",
+          "Ordenar por prioridad"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "lanzar acciones comunes rápidamente"
+          ]
+        },
+        {
+          "role": "Owner de área",
+          "needs": [
+            "destacar acciones clave para su equipo"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Catálogo de acciones",
+          "Icono/etiqueta/descripción breve",
+          "Launch action",
+          "Filtros simples"
+        ],
+        "out": [
+          "automatización de la acción dentro del web part",
+          "captura de formularios complejos"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Abrir herramienta frecuente",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Ejecutar acción prioritaria del área",
+          "actor": "Equipo"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar acciones por categoría",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar acciones configuradas con orden y prioridad."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir abrir la acción o herramienta asociada."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar icono, título y descripción breve cuando exista."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros simples por categoría o grupo."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser visual, ligero y apto para portada."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Solo launcher en V1."
+        }
+      ],
+      "businessRules": [
+        "Las acciones sin enlace no deben aparecer como accionables.",
+        "La prioridad puede determinar el orden inicial.",
+        "Las categorías se usan para agrupación y filtro cuando existan."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "defaultCategory": {
+          "type": "string",
+          "required": false
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 12,
+          "min": 1,
+          "max": 50
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra acciones configuradas.",
+        "Permite abrir la acción correcta.",
+        "Ordena por prioridad si existe.",
+        "Filtra por categoría cuando corresponde."
+      ],
+      "edgeCases": [
+        "acción sin icono",
+        "sin categoría",
+        "sin link",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Funciona como launcher reusable",
+        "Incluye tests base de mapping y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir lanzar acciones corporativas frecuentes con una interfaz clara y de baja fricción.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "filtros opcionales",
+          "grid de acciones"
+        ],
+        "priorityOrder": [
+          "acciones prioritarias",
+          "categorías frecuentes",
+          "descripción breve"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "cards": "grid 4 columnas"
+        },
+        "narrow": {
+          "cards": "grid 2 columnas o lista"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton action cards"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "filters",
+            "action cards"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin acciones"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "cards con metadatos incompletos"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "cardModel": {
+        "fields": [
+          "icono",
+          "titulo",
+          "descripcion",
+          "categoria",
+          "accionAbrir"
+        ],
+        "badges": [
+          "prioritaria",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Centro de acciones rápidas",
+        "messages": {
+          "empty": "No hay acciones configuradas.",
+          "error": "No se han podido cargar las acciones rápidas."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "botones/links claramente accesibles",
+          "texto visible además de icono",
+          "contraste AA"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar icono, título y acción"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer catálogo",
+          "render cards",
+          "abrir acción"
+        ],
+        "v1": [
+          "filtros",
+          "prioridades",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "UI y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer acciones rápidas"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar cards y filtros"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear QuickActionsRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Normalizar iconos/categorías/prioridad"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear QuickActionCard y filters"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "QuickActionsList",
+          "type": "SharePointList",
+          "purpose": "catálogo de acciones rápidas"
+        }
+      ],
+      "entities": {
+        "QuickAction": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "category": "string|null",
+          "icon": "string|null",
+          "priority": "number|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "priority": "number or null",
+        "icon": "string/icon token"
+      },
+      "validationRules": [
+        "title requerido",
+        "openUrl recomendado"
+      ],
+      "accuracyPolicy": {
+        "exact": "acción con enlace y metadatos básicos",
+        "partial": "falta icono, categoría o enlace"
+      },
+      "fallbacks": [
+        "sin categoría => general",
+        "sin icono => icono por defecto",
+        "sin openUrl => visible sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Abrir soporte",
+            "category": "IT",
+            "icon": "Headset",
+            "priority": 1,
+            "openUrl": "/sites/it/support"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "con prioridad",
+          "sin prioridad",
+          "sin icono",
+          "sin link",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "QuickActionsCenterWebPart",
+        "pattern": "SPFx React + repository + priority sorter",
+        "components": [
+          "QuickActionsCenter",
+          "QuickActionCard",
+          "QuickActionsFilterBar"
+        ],
+        "services": [
+          "QuickActionsService"
+        ],
+        "repositories": [
+          "QuickActionsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "defaultCategory": "string|undefined",
+          "maxItems": "number"
+        },
+        "IQuickAction": {
+          "id": "string",
+          "title": "string",
+          "description": "string|null",
+          "category": "string|null",
+          "icon": "string|null",
+          "priority": "number|null",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IQuickAction[]",
+          "categories": "string[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer acciones",
+        "normalizar iconos, categorías y prioridad",
+        "ordenar",
+        "aplicar filtro",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "priority asc/desc según convención + title asc",
+        "filter": "por categoría cuando exista"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin icono",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "launcher",
+        "rules": [
+          "sanitizar openUrl",
+          "validar iconos permitidos si aplica"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "quick_actions_loaded",
+          "quick_actions_partial",
+          "quick_actions_error",
+          "quick_action_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "categoryFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "priority sort",
+          "category filter",
+          "mapping"
+        ],
+        "component": [
+          "render cards",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Productividad. Botones directos a las acciones más comunes de un área.",
+    "createdTime": "2026-03-19T21:45:09.000Z"
+  }
+}

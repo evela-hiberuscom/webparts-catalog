@@ -1,0 +1,513 @@
+{
+  "rowId": "rec5BIxCPadkivxcQ",
+  "name": "Estado de proyectos",
+  "slug": "estado-de-proyectos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "analytics",
+  "waveNumber": 2,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "ProjectsList",
+      "type": "SharePointList|Planner",
+      "purpose": "estado de iniciativas"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "project-status",
+        "name": "Estado de proyectos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra un resumen compacto del estado de proyectos o iniciativas con semáforos, fecha y responsables.",
+        "productGoal": "Dar visibilidad rápida del estado de iniciativas sin abrir herramientas completas de gestión."
+      },
+      "problem": {
+        "business": "Las iniciativas importantes necesitan visibilidad resumida para stakeholders que no viven dentro de la herramienta de proyecto.",
+        "operational": "Los equipos quieren una pieza ligera para comunicar progreso, riesgos y próxima revisión."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar proyectos con estado sintetizado",
+          "Destacar salud/semáforo y próxima fecha relevante",
+          "Permitir abrir detalle del proyecto"
+        ],
+        "secondary": [
+          "Mostrar responsable o área",
+          "Filtrar por estado o categoría",
+          "Servir como mini portfolio view"
+        ]
+      },
+      "users": [
+        {
+          "role": "Stakeholder",
+          "needs": [
+            "ver rápido si un proyecto va bien o necesita atención"
+          ]
+        },
+        {
+          "role": "Owner de área",
+          "needs": [
+            "publicar un estado simple y visual"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Proyecto",
+          "estado semafórico",
+          "responsable/área",
+          "fecha relevante",
+          "detalle opcional"
+        ],
+        "out": [
+          "gestión completa de proyectos",
+          "edición de estado desde la web part"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Ver salud de proyectos del área",
+          "actor": "Stakeholder"
+        },
+        {
+          "id": "CU-02",
+          "name": "Abrir detalle del proyecto",
+          "actor": "Stakeholder"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar proyectos con estado sintetizado y orden configurable."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar nombre, estado, responsable y fecha cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtrar por estado cuando exista el dato."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "Debe ser ligero y fácil de escanear."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe tolerar falta de algunos metadatos sin romper la UI."
+        }
+      ],
+      "businessRules": [
+        "Los estados se normalizan a green/amber/red/unknown o equivalente.",
+        "Los proyectos sin URL siguen siendo informativos.",
+        "La ordenación por defecto puede priorizar peores estados y luego fecha próxima."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SharePointList",
+            "Planner",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 8,
+          "min": 1,
+          "max": 30
+        },
+        "defaultStatusFilter": {
+          "type": "string",
+          "required": false
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra proyectos y semáforos correctamente.",
+        "Permite abrir detalle cuando existe.",
+        "Filtra por estado cuando existe el dato.",
+        "Funciona con datos parciales."
+      ],
+      "edgeCases": [
+        "proyecto sin fecha",
+        "sin responsable",
+        "sin URL",
+        "estado desconocido",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza estado de proyectos correctamente",
+        "Incluye tests base de normalización y ordenación"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir leer de un vistazo si las iniciativas están bien, en riesgo o requieren atención.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "lista de proyectos",
+          "filtros opcionales"
+        ],
+        "priorityOrder": [
+          "red",
+          "amber",
+          "green",
+          "unknown"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "lista rica o tabla compacta"
+        },
+        "narrow": {
+          "items": "cards simples"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton project items"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "project list"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin proyectos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "items con metadatos ausentes"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "nombre",
+          "estado",
+          "responsable",
+          "fechaRelevante",
+          "openAction"
+        ],
+        "badges": [
+          "green",
+          "amber",
+          "red",
+          "unknown",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Estado de proyectos",
+        "messages": {
+          "empty": "No hay proyectos visibles.",
+          "error": "No se ha podido cargar el estado de proyectos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "estado con texto además de color",
+          "lista accesible",
+          "fechas legibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar nombre, estado y fecha"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer proyectos",
+          "normalizar estado",
+          "render lista"
+        ],
+        "v1": [
+          "filtro por estado",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y normalización"
+        },
+        {
+          "id": "EP-02",
+          "name": "Filtros y ordenación"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer proyectos y normalizar estado"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Filtrar y ordenar proyectos"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar lista de proyectos"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear ProjectsRepository y normalizer"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar filtro y ordenación"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear ProjectStatusRow"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "ProjectsList",
+          "type": "SharePointList|Planner",
+          "purpose": "estado de iniciativas"
+        }
+      ],
+      "entities": {
+        "Project": {
+          "id": "string",
+          "title": "string",
+          "status": "string|null",
+          "owner": "string|null",
+          "relevantDate": "string|null",
+          "openUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "status": "green|amber|red|unknown"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title y status presentes",
+        "partial": "faltan owner, date o url"
+      },
+      "fallbacks": [
+        "sin status => unknown",
+        "sin openUrl => informativo sin acción",
+        "sin relevantDate => null"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Migración CRM",
+            "status": "amber",
+            "owner": "Equipo Comercial",
+            "relevantDate": "2026-03-28",
+            "openUrl": "/sites/sales/projects/crm"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "green project",
+          "amber project",
+          "unknown status",
+          "no url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "ProjectStatusWebPart",
+        "pattern": "SPFx React + repository + status normalizer",
+        "components": [
+          "ProjectStatus",
+          "ProjectStatusRow",
+          "ProjectStatusFilters"
+        ],
+        "services": [
+          "ProjectStatusService",
+          "ProjectStatusNormalizer"
+        ],
+        "repositories": [
+          "ProjectsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SharePointList'|'Planner'|'JsonUrl'|'StaticConfig')[]",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "defaultStatusFilter": "string|undefined"
+        },
+        "IProjectStatusItem": {
+          "id": "string",
+          "title": "string",
+          "status": "green|amber|red|unknown",
+          "owner": "string|null",
+          "relevantDate": "string|null",
+          "openUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IProjectStatusItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "leer proyectos desde orígenes",
+        "normalizar estado/fecha/owner",
+        "aplicar filtro por estado",
+        "ordenar",
+        "limitar y renderizar"
+      ],
+      "algorithms": {
+        "sort": "status severity desc + relevantDate asc/null-last",
+        "normalizeStatus": "mapear valores de origen a green/amber/red/unknown"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin relevantDate",
+          "uiState": "ready/partialData"
+        },
+        {
+          "condition": "sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "status desconocido",
+          "uiState": "ready"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "project_status_loaded",
+          "project_status_partial",
+          "project_status_error",
+          "project_status_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "statusFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "status normalization",
+          "status/date sort",
+          "filter by status"
+        ],
+        "component": [
+          "list render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Datos. Semáforo ligero con responsable y próxima fecha.",
+    "createdTime": "2026-03-19T21:45:34.000Z"
+  }
+}

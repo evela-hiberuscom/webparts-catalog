@@ -1,0 +1,458 @@
+{
+  "rowId": "rec4ZjECVnw5BjShO",
+  "name": "Próximos hitos",
+  "slug": "proximos-hitos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "summary",
+  "waveNumber": 13,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "MilestonesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de hitos"
+    }
+  ],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "upcoming-milestones",
+        "name": "Próximos hitos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Muestra próximos hitos o entregables relevantes en una timeline ligera y clara.",
+        "productGoal": "Hacer visibles fechas importantes para alinear al equipo."
+      },
+      "problem": {
+        "business": "Los hitos importantes se diluyen cuando no existe una representación temporal compacta.",
+        "operational": "Equipos y áreas necesitan recordar próximas fechas sin abrir una herramienta de roadmap."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar hitos ordenados por fecha",
+          "Permitir abrir detalle",
+          "Representar tipo o fase"
+        ],
+        "secondary": [
+          "Distinguir hitos muy próximos",
+          "Servir como timeline reusable"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver qué viene a continuación"
+          ]
+        },
+        {
+          "role": "Owner de área",
+          "needs": [
+            "mantener hitos visibles"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Listado de hitos",
+          "Fecha",
+          "Tipo/fase opcional",
+          "Acción abrir detalle"
+        ],
+        "out": [
+          "roadmap completo editable"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar hitos ordenados por fecha ascendente."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar fecha, título y tipo/fase cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle cuando exista URL."
+        },
+        {
+          "id": "RF-04",
+          "text": "Limitar número de hitos mostrados."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Los hitos sin fecha van al final o se excluyen según política.",
+        "Si falta URL, el hito sigue siendo informativo.",
+        "Los hitos muy próximos pueden destacarse visualmente."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1,
+          "max": 20
+        },
+        "viewMode": {
+          "type": "enum",
+          "values": [
+            "timeline",
+            "list"
+          ],
+          "default": "timeline"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra hitos ordenados por fecha.",
+        "Permite abrir detalle cuando existe.",
+        "Respeta maxItems y viewMode."
+      ],
+      "edgeCases": [
+        "hito sin fecha",
+        "sin URL",
+        "fechas duplicadas",
+        "lista vacía"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza timeline/lista correctamente",
+        "Incluye tests base de ordenación y fechas"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir entender fácilmente qué hitos vienen ahora en una secuencia temporal corta.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "timeline/lista"
+        ],
+        "priorityOrder": [
+          "más próximo",
+          "resto ordenado"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "items": "timeline ligera"
+        },
+        "narrow": {
+          "items": "lista vertical"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton milestones"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "header",
+            "milestones"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin hitos"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "hitos con fecha o URL ausente"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "fecha",
+          "titulo",
+          "tipo",
+          "openAction"
+        ],
+        "badges": [
+          "soon",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Próximos hitos",
+        "messages": {
+          "empty": "No hay hitos próximos configurados.",
+          "error": "No se han podido cargar los hitos."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "timeline accesible",
+          "fechas legibles"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar fecha y título"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "leer hitos",
+          "ordenar",
+          "render timeline"
+        ],
+        "v1": [
+          "viewMode",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Origen y fechas"
+        },
+        {
+          "id": "EP-02",
+          "name": "Timeline/lista"
+        },
+        {
+          "id": "EP-03",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Leer y ordenar hitos"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Mostrar timeline/lista"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear MilestonesRepository"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-01",
+          "name": "Implementar ordenación por fecha"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-02",
+          "name": "Crear MilestoneTimelineItem"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-03",
+          "name": "Tests y README"
+        }
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "MilestonesList",
+          "type": "SharePointList",
+          "purpose": "catálogo de hitos"
+        }
+      ],
+      "entities": {
+        "Milestone": {
+          "id": "string",
+          "title": "string",
+          "date": "string|null",
+          "type": "string|null",
+          "detailUrl": "string|null"
+        }
+      },
+      "mappings": {
+        "date": "datetime or null",
+        "type": "string or null"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "title y date presentes",
+        "partial": "falta type o detailUrl o date"
+      },
+      "fallbacks": [
+        "sin date => final de lista o exclusión",
+        "sin detailUrl => informativo sin acción"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Cierre Q2",
+            "date": "2026-04-05T09:00:00Z",
+            "type": "Finance",
+            "detailUrl": "/sites/finance/q2"
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "dated milestone",
+          "null date",
+          "duplicate dates",
+          "no url",
+          "empty"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "UpcomingMilestonesWebPart",
+        "pattern": "SPFx React + repository + date sorter",
+        "components": [
+          "UpcomingMilestones",
+          "MilestoneTimelineItem"
+        ],
+        "services": [
+          "MilestonesService"
+        ],
+        "repositories": [
+          "MilestonesRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "viewMode": "timeline|list"
+        },
+        "IMilestone": {
+          "id": "string",
+          "title": "string",
+          "date": "string|null",
+          "type": "string|null",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IMilestone[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "resolver origen",
+        "leer hitos",
+        "normalizar fecha/tipo",
+        "ordenar",
+        "limitar",
+        "renderizar"
+      ],
+      "algorithms": {
+        "sort": "date asc with nulls last",
+        "soon": "destacar hitos dentro de ventana configurable"
+      },
+      "performance": {
+        "cache": "por origen",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "sin date",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "sin detailUrl",
+          "uiState": "ready/partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar detailUrl"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "milestones_loaded",
+          "milestones_partial",
+          "milestones_error",
+          "milestone_opened"
+        ],
+        "properties": [
+          "itemCount",
+          "viewMode",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "date sort",
+          "null date handling"
+        ],
+        "component": [
+          "timeline render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Comunicación. Línea de tiempo ligera con fechas importantes de la compañía o del área.",
+    "createdTime": "2026-03-19T21:44:48.000Z"
+  }
+}

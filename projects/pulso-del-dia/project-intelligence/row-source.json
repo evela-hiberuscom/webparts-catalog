@@ -1,0 +1,281 @@
+{
+  "rowId": "recRt1japWn21MzFX",
+  "name": "Pulso del día",
+  "slug": "pulso-del-dia",
+  "artifactType": "SPFxWebPart",
+  "archetype": "analytics",
+  "waveNumber": 3,
+  "dependencies": [],
+  "provisioningNeeds": [],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases",
+      "dataSource"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "daily-pulse",
+        "name": "Pulso del día",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Recoge una señal diaria muy rápida del usuario, como estado de ánimo, carga o percepción general.",
+        "productGoal": "Tomar una pequeña señal diaria con fricción mínima."
+      },
+      "problem": {
+        "business": "Es difícil recoger una señal frecuente si el mecanismo es demasiado pesado.",
+        "operational": "People o managers quieren una pieza mínima para tomar temperatura del día."
+      },
+      "objectives": {
+        "primary": [
+          "Permitir marcar un pulso diario",
+          "Usar una interacción de un clic o pocos clics",
+          "Persistir correctamente la respuesta"
+        ],
+        "secondary": [
+          "Servir como señal cultural de baja fricción"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "responder en segundos"
+          ]
+        },
+        {
+          "role": "People/Manager",
+          "needs": [
+            "tener una señal ligera del día"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "1 pregunta o prompt",
+          "3-5 opciones visuales",
+          "submit de una respuesta"
+        ],
+        "out": [
+          "analítica emocional compleja",
+          "seguimiento médico o sensible"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar prompt diario y opciones."
+        },
+        {
+          "id": "RF-02",
+          "text": "Permitir registrar una respuesta."
+        },
+        {
+          "id": "RF-03",
+          "text": "Gestionar success y error."
+        }
+      ],
+      "businessRules": [
+        "Una respuesta por usuario y día si el origen lo permite.",
+        "Si no hay prompt activo, mostrar empty."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "ApiEndpoint",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "oneResponsePerDay": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Permite registrar un pulso válido.",
+        "Muestra confirmación tras responder."
+      ],
+      "edgeCases": [
+        "sin prompt",
+        "doble submit",
+        "error de red"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Registra pulsos correctamente"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Obtener una señal rápida del día sin interrumpir la experiencia normal del usuario.",
+      "informationArchitecture": {
+        "zones": [
+          "prompt",
+          "opciones visuales",
+          "feedback"
+        ],
+        "priorityOrder": [
+          "prompt",
+          "opciones"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "card": "compacta"
+        },
+        "narrow": {
+          "card": "compacta apilada"
+        }
+      },
+      "states": [
+        {
+          "id": "idle",
+          "ui": [
+            "prompt y opciones"
+          ]
+        },
+        {
+          "id": "submitting",
+          "ui": [
+            "bloque deshabilitado"
+          ]
+        },
+        {
+          "id": "success",
+          "ui": [
+            "confirmación"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje y retry"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Pulso del día",
+        "messages": {
+          "success": "Pulso registrado.",
+          "error": "No se ha podido registrar el pulso."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "opciones accesibles",
+          "feedback claro"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "load prompt",
+          "submit response"
+        ],
+        "v1": [
+          "oneResponsePerDay",
+          "telemetry"
+        ],
+        "hardening": [
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Prompt diario"
+        },
+        {
+          "id": "EP-02",
+          "name": "Respuesta"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Mostrar prompt del día"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Registrar respuesta"
+        }
+      ]
+    },
+    "dataJson": null,
+    "technicalJson": {
+      "architecture": {
+        "webPart": "DailyPulseWebPart",
+        "pattern": "SPFx React + lightweight response submit",
+        "components": [
+          "DailyPulse"
+        ],
+        "services": [
+          "DailyPulseService"
+        ],
+        "repositories": [
+          "DailyPulseRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|ApiEndpoint|StaticConfig",
+          "oneResponsePerDay": "boolean"
+        },
+        "IDailyPulsePrompt": {
+          "id": "string",
+          "prompt": "string",
+          "options": "string[]"
+        },
+        "IDailyPulseAnswer": {
+          "promptId": "string",
+          "value": "string",
+          "submittedBy": "string|null"
+        }
+      },
+      "executionFlow": [
+        "load prompt",
+        "select option",
+        "submit response",
+        "show success/error"
+      ],
+      "security": {
+        "mode": "writeLight",
+        "rules": [
+          "sanitize payload",
+          "respect oneResponsePerDay if supported"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "validation"
+        ],
+        "component": [
+          "idle/success/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Participación. Estado rápido de la jornada o feedback instantáneo.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}

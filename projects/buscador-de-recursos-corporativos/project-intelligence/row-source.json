@@ -1,0 +1,547 @@
+{
+  "rowId": "recftse8Odprgl5Q8",
+  "name": "Buscador de recursos corporativos",
+  "slug": "buscador-de-recursos-corporativos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 4,
+  "dependencies": [],
+  "provisioningNeeds": [
+    {
+      "name": "SearchAPI",
+      "type": "SearchAPI",
+      "purpose": "buscar recursos indexados"
+    },
+    {
+      "name": "ResourcesList",
+      "type": "SharePointList",
+      "purpose": "catálogo de recursos"
+    }
+  ],
+  "enrichmentStatus": "sufficient",
+  "completeness": {
+    "enrichmentStatus": "sufficient",
+    "presentAreas": [
+      "goal",
+      "useCases",
+      "dataSource",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": []
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "corporate-resources-search",
+        "name": "Buscador de recursos corporativos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Permite buscar recursos corporativos como políticas, plantillas, procedimientos o manuales desde una caja unificada y contextual.",
+        "productGoal": "Reducir el tiempo para encontrar recursos corporativos clave dentro de la intranet."
+      },
+      "problem": {
+        "business": "Los recursos corporativos suelen estar en varias bibliotecas, páginas o listas y son difíciles de encontrar para usuarios no expertos.",
+        "operational": "Soporte y áreas funcionales responden repetidamente dónde está cada documento o procedimiento."
+      },
+      "objectives": {
+        "primary": [
+          "Permitir búsqueda rápida de recursos corporativos",
+          "Mostrar resultados relevantes y accionables",
+          "Filtrar por tipo/categoría cuando exista"
+        ],
+        "secondary": [
+          "Destacar recursos más consultados o críticos",
+          "Servir como caja de búsqueda contextual en páginas temáticas"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "encontrar políticas, procedimientos o plantillas"
+          ]
+        },
+        {
+          "role": "Backoffice",
+          "needs": [
+            "reducir preguntas repetidas sobre dónde está cada recurso"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Caja de búsqueda",
+          "Resultados de recursos",
+          "Filtros ligeros",
+          "Apertura del recurso"
+        ],
+        "out": [
+          "motor de búsqueda empresarial completo",
+          "ranking semántico avanzado propio",
+          "búsqueda federada compleja en V1"
+        ]
+      },
+      "useCases": [
+        {
+          "id": "CU-01",
+          "name": "Buscar una política",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-02",
+          "name": "Buscar un procedimiento",
+          "actor": "Empleado"
+        },
+        {
+          "id": "CU-03",
+          "name": "Filtrar resultados por tipo",
+          "actor": "Empleado"
+        }
+      ],
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Permitir búsqueda por texto libre sobre recursos configurados o indexados."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar resultados con título, tipo, categoría y descripción/resumen cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir el recurso encontrado."
+        },
+        {
+          "id": "RF-04",
+          "text": "Permitir filtros simples por tipo/categoría cuando existan."
+        },
+        {
+          "id": "RF-05",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "nonFunctionalRequirements": [
+        {
+          "id": "RNF-01",
+          "text": "La búsqueda debe responder rápido para consultas razonables."
+        },
+        {
+          "id": "RNF-02",
+          "text": "Debe ser usable como widget pequeño o medio en una página."
+        }
+      ],
+      "businessRules": [
+        "Si no hay texto de búsqueda, puede mostrar recursos destacados o estado inicial vacío según configuración.",
+        "Los resultados sin URL no deben ser accionables.",
+        "Las coincidencias exactas de título pueden priorizarse sobre coincidencias parciales."
+      ],
+      "configuration": {
+        "dataSourceTypes": {
+          "type": "array",
+          "values": [
+            "SearchAPI",
+            "SharePointList",
+            "SharePointLibrary",
+            "JsonUrl"
+          ],
+          "required": true
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": false
+        },
+        "showFeaturedWhenEmpty": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 10,
+          "min": 1,
+          "max": 50
+        }
+      },
+      "acceptanceCriteria": [
+        "Busca y muestra recursos relevantes.",
+        "Permite abrir resultados válidos.",
+        "Filtra por tipo/categoría cuando exista.",
+        "Funciona con resultados parciales o sin URL sin romper la UI."
+      ],
+      "edgeCases": [
+        "consulta vacía",
+        "resultado sin URL",
+        "sin categoría",
+        "sin resumen",
+        "sin resultados"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza caja y resultados correctamente",
+        "Incluye tests base de búsqueda y filtros"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Permitir encontrar un recurso corporativo en segundos con un flujo simple de buscar, escanear y abrir.",
+      "informationArchitecture": {
+        "zones": [
+          "cabecera",
+          "search box",
+          "filters",
+          "results list"
+        ],
+        "priorityOrder": [
+          "exact match",
+          "relevantes",
+          "destacados en vacío"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "search": "barra superior",
+          "results": "lista rica"
+        },
+        "narrow": {
+          "search": "compacta",
+          "results": "lista simple"
+        }
+      },
+      "states": [
+        {
+          "id": "idle",
+          "ui": [
+            "search box",
+            "featured opcionales o placeholder"
+          ]
+        },
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton results"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "search box",
+            "filters",
+            "results"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "mensaje sin resultados"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "resultados parciales"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "itemModel": {
+        "fields": [
+          "titulo",
+          "tipo",
+          "categoria",
+          "resumen",
+          "openAction"
+        ],
+        "badges": [
+          "exacta",
+          "destacado",
+          "partial"
+        ]
+      },
+      "copy": {
+        "title": "Buscador de recursos corporativos",
+        "messages": {
+          "empty": "No se han encontrado recursos para tu búsqueda.",
+          "error": "No se ha podido completar la búsqueda."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "search box etiquetado",
+          "lista de resultados accesible",
+          "texto claro en estados"
+        ]
+      },
+      "responsive": {
+        "narrowStrategy": "priorizar título y acción; resumen truncado"
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "search box",
+          "resultados",
+          "abrir recurso"
+        ],
+        "v1": [
+          "filtros",
+          "featured en vacío",
+          "telemetría"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Integración de búsqueda"
+        },
+        {
+          "id": "EP-02",
+          "name": "Ranking y filtros"
+        },
+        {
+          "id": "EP-03",
+          "name": "UI"
+        },
+        {
+          "id": "EP-04",
+          "name": "Calidad"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Consultar orígenes de búsqueda"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Normalizar y rankear resultados"
+        },
+        {
+          "id": "US-03",
+          "epicId": "EP-03",
+          "name": "Mostrar caja y resultados"
+        },
+        {
+          "id": "US-04",
+          "epicId": "EP-04",
+          "name": "Testing y documentación"
+        }
+      ],
+      "tasks": [
+        {
+          "id": "T-01",
+          "storyId": "US-01",
+          "name": "Crear repositorios/adapters de búsqueda"
+        },
+        {
+          "id": "T-02",
+          "storyId": "US-02",
+          "name": "Implementar ranking y filtros"
+        },
+        {
+          "id": "T-03",
+          "storyId": "US-03",
+          "name": "Crear SearchBox y ResultsList"
+        },
+        {
+          "id": "T-04",
+          "storyId": "US-04",
+          "name": "Tests y README"
+        }
+      ],
+      "implementationOrder": [
+        "EP-01",
+        "EP-02",
+        "EP-03",
+        "EP-04"
+      ]
+    },
+    "dataJson": {
+      "sources": [
+        {
+          "name": "SearchAPI",
+          "type": "SearchAPI",
+          "purpose": "buscar recursos indexados"
+        },
+        {
+          "name": "ResourcesList",
+          "type": "SharePointList",
+          "purpose": "catálogo de recursos"
+        }
+      ],
+      "entities": {
+        "SearchResult": {
+          "id": "string",
+          "title": "string",
+          "resourceType": "string|null",
+          "category": "string|null",
+          "summary": "string|null",
+          "openUrl": "string|null",
+          "isExactMatch": "boolean|null"
+        }
+      },
+      "mappings": {
+        "resourceType": "string o unknown",
+        "isExactMatch": "boolean derivado por ranking"
+      },
+      "validationRules": [
+        "title requerido"
+      ],
+      "accuracyPolicy": {
+        "exact": "resultado con enlace y metadatos básicos",
+        "partial": "faltan summary, category o openUrl"
+      },
+      "fallbacks": [
+        "sin openUrl => visible sin acción",
+        "sin category => General/unknown",
+        "sin summary => null"
+      ],
+      "exampleOutput": {
+        "items": [
+          {
+            "title": "Política de vacaciones",
+            "resourceType": "Policy",
+            "category": "RRHH",
+            "summary": "Documento oficial...",
+            "openUrl": "/sites/hr/politicas/vacaciones",
+            "isExactMatch": true
+          }
+        ]
+      },
+      "testDataset": {
+        "minimumScenarios": [
+          "exact match",
+          "partial match",
+          "sin URL",
+          "query vacía",
+          "sin resultados"
+        ]
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "CorporateResourcesSearchWebPart",
+        "pattern": "SPFx React + search adapters + results normalizer",
+        "components": [
+          "CorporateResourcesSearch",
+          "SearchBox",
+          "SearchFilters",
+          "SearchResultsList"
+        ],
+        "services": [
+          "CorporateResourcesSearchService",
+          "ResultsRankingService"
+        ],
+        "repositories": [
+          "SearchApiRepository",
+          "ResourcesListRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceTypes": "('SearchAPI'|'SharePointList'|'SharePointLibrary'|'JsonUrl')[]",
+          "listTitleOrUrl": "string|undefined",
+          "showFeaturedWhenEmpty": "boolean",
+          "maxItems": "number"
+        },
+        "ISearchResultItem": {
+          "id": "string",
+          "title": "string",
+          "resourceType": "string|null",
+          "category": "string|null",
+          "summary": "string|null",
+          "openUrl": "string|null",
+          "isExactMatch": "boolean"
+        },
+        "IViewModel": {
+          "items": "ISearchResultItem[]",
+          "featured": "ISearchResultItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "executionFlow": [
+        "leer props",
+        "si query vacía evaluar featured/idle",
+        "si query existe consultar orígenes",
+        "normalizar resultados",
+        "rankear",
+        "aplicar filtros",
+        "renderizar"
+      ],
+      "algorithms": {
+        "ranking": "exact title match first + type/category boosts + title asc fallback",
+        "filter": "por tipo/categoría cuando existan"
+      },
+      "performance": {
+        "cache": "por query y origen",
+        "debounceMs": "250-400",
+        "retry": "1-2 reintentos"
+      },
+      "errorMatrix": [
+        {
+          "condition": "query vacía",
+          "uiState": "idle"
+        },
+        {
+          "condition": "resultado sin openUrl",
+          "uiState": "partialData"
+        },
+        {
+          "condition": "origen parcial falla",
+          "uiState": "partialData"
+        }
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "sanitizar openUrl",
+          "no exponer datos sin permiso"
+        ]
+      },
+      "telemetry": {
+        "events": [
+          "resources_search_loaded",
+          "resources_search_partial",
+          "resources_search_error",
+          "resources_search_submitted",
+          "resource_opened"
+        ],
+        "properties": [
+          "queryLength",
+          "itemCount",
+          "typeFilter",
+          "hasPartialData"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "ranking",
+          "type/category filter",
+          "query debounce helper"
+        ],
+        "component": [
+          "idle/loading/results/empty/error states"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Navegación/Conocimiento. Busca políticas, plantillas, procedimientos y manuales.",
+    "createdTime": "2026-03-19T21:44:20.000Z"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "projectSlug": "checklist-de-offboarding-o-cambios",
+  "rowId": "recVXCvX5ElPNmsj4",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Ayudar a ejecutar procesos sensibles sin olvidar pasos de seguridad, accesos o coordinación.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros de escenario/fase",
+        "lista de pasos"
+      ],
+      "priorityOrder": [
+        "críticos",
+        "fase actual",
+        "resto"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "items": "lista secuencial o timeline"
+      },
+      "narrow": {
+        "items": "lista simple"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton checklist"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "filters",
+          "steps list"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin checklist"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "pasos con datos parciales"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro"
+        ]
+      }
+    ],
+    "itemModel": {
+      "fields": [
+        "titulo",
+        "descripcion",
+        "escenario",
+        "fase",
+        "critico",
+        "relatedLink"
+      ],
+      "badges": [
+        "critico",
+        "normal",
+        "partial"
+      ]
+    },
+    "copy": {
+      "title": "Checklist de offboarding o cambios",
+      "messages": {
+        "empty": "No hay pasos configurados para este escenario.",
+        "error": "No se ha podido cargar el checklist."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "secuencia legible",
+        "badges con texto",
+        "links accesibles"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "priorizar título, escenario y criticidad"
+    }
+  }
+}

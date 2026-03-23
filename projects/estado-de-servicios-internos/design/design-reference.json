@@ -1,0 +1,108 @@
+{
+  "projectSlug": "estado-de-servicios-internos",
+  "rowId": "rec4IT47Qufu125ug",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Permitir saber en segundos si un servicio interno está OK, degradado o caído.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "filtros opcionales",
+        "grid de tarjetas",
+        "acciones"
+      ],
+      "priorityOrder": [
+        "critical",
+        "warning",
+        "maintenance",
+        "ok",
+        "unknown"
+      ]
+    },
+    "layout": {
+      "fullWidth": {
+        "cards": "grid 3-4 columnas"
+      },
+      "narrow": {
+        "cards": "lista vertical compacta"
+      }
+    },
+    "states": [
+      {
+        "id": "loading",
+        "ui": [
+          "skeleton cards"
+        ]
+      },
+      {
+        "id": "ready",
+        "ui": [
+          "header",
+          "service cards",
+          "refresh"
+        ]
+      },
+      {
+        "id": "empty",
+        "ui": [
+          "mensaje sin servicios"
+        ]
+      },
+      {
+        "id": "partialData",
+        "ui": [
+          "banner de datos parciales",
+          "cards"
+        ]
+      },
+      {
+        "id": "error",
+        "ui": [
+          "mensaje seguro",
+          "reintentar"
+        ]
+      }
+    ],
+    "cardModel": {
+      "fields": [
+        "nombre",
+        "estado",
+        "criticidad",
+        "descripcion",
+        "ultimaActualizacion",
+        "accionDetalle"
+      ],
+      "badges": [
+        "ok",
+        "warning",
+        "critical",
+        "maintenance",
+        "unknown",
+        "stale"
+      ]
+    },
+    "copy": {
+      "title": "Estado de servicios internos",
+      "messages": {
+        "empty": "No hay servicios configurados.",
+        "error": "No se ha podido cargar el estado de servicios.",
+        "partial": "Algunos servicios no tienen datos completos."
+      }
+    },
+    "accessibility": {
+      "requirements": [
+        "texto + color para el estado",
+        "ARIA labels en refresh y enlaces",
+        "contraste AA"
+      ]
+    },
+    "responsive": {
+      "narrowStrategy": "apilar tarjetas y truncar descripción"
+    }
+  }
+}

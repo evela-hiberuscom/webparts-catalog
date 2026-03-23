@@ -1,0 +1,317 @@
+{
+  "rowId": "recqkzUHilH8lKoGy",
+  "name": "Componente según tu perfil",
+  "slug": "componente-segun-tu-perfil",
+  "artifactType": "SPFxWebPart",
+  "archetype": "audience",
+  "waveNumber": 3,
+  "dependencies": [],
+  "provisioningNeeds": [],
+  "enrichmentStatus": "needs-enrichment",
+  "completeness": {
+    "enrichmentStatus": "needs-enrichment",
+    "presentAreas": [
+      "goal",
+      "uiStates",
+      "businessRules",
+      "acceptanceCriteria",
+      "provisioning"
+    ],
+    "missingAreas": [
+      "useCases",
+      "dataSource"
+    ]
+  },
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "profile-based-component",
+        "name": "Componente según tu perfil",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Renderiza contenido, accesos o mensajes distintos según atributos del perfil o segmentación del usuario.",
+        "productGoal": "Personalizar la experiencia sin duplicar páginas ni mantener múltiples variantes manuales."
+      },
+      "problem": {
+        "business": "Una misma página necesita a menudo mostrar contenido distinto según perfil, rol, país o área.",
+        "operational": "Sin un componente segmentado, se multiplica el contenido o se satura a todos con demasiada información."
+      },
+      "objectives": {
+        "primary": [
+          "Mostrar variantes según perfil de usuario",
+          "Hacer fallback a variante genérica",
+          "Reducir ruido e irrelevancia"
+        ],
+        "secondary": [
+          "Permitir reglas simples de segmentación",
+          "Servir como bloque reusable de personalización"
+        ]
+      },
+      "users": [
+        {
+          "role": "Empleado",
+          "needs": [
+            "ver contenido que realmente le aplica"
+          ]
+        },
+        {
+          "role": "Owner intranet",
+          "needs": [
+            "segmentar sin duplicar páginas"
+          ]
+        }
+      ],
+      "scope": {
+        "in": [
+          "Resolución de perfil/audiencia",
+          "Contenido o bloque por variante",
+          "Fallback genérico"
+        ],
+        "out": [
+          "motor avanzado de reglas dinámicas externas",
+          "personalización por comportamiento en V1"
+        ]
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Resolver atributos del usuario actual según configuración."
+        },
+        {
+          "id": "RF-02",
+          "text": "Elegir la variante de contenido adecuada."
+        },
+        {
+          "id": "RF-03",
+          "text": "Mostrar variante genérica si no hay match específico."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Si no hay coincidencia específica, usar variante genérica cuando exista.",
+        "Si no hay genérica y no hay match, mostrar empty o placeholder según configuración.",
+        "No exponer atributos sensibles innecesarios en la UI."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "StaticConfig",
+            "JsonUrl"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "audienceMode": {
+          "type": "enum",
+          "values": [
+            "department",
+            "country",
+            "role",
+            "group",
+            "hybrid"
+          ],
+          "default": "group"
+        },
+        "fallbackMode": {
+          "type": "enum",
+          "values": [
+            "generic",
+            "empty"
+          ],
+          "default": "generic"
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra la variante correcta cuando hay match.",
+        "Aplica fallback cuando procede.",
+        "No rompe la UI con perfiles parciales."
+      ],
+      "edgeCases": [
+        "usuario sin atributo esperado",
+        "sin variante genérica",
+        "múltiples matches"
+      ],
+      "definitionOfDone": [
+        "Compila en SPFx",
+        "Renderiza variante por perfil correctamente",
+        "Incluye tests base de matching y fallback"
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Mostrar al usuario una experiencia claramente relevante sin obligarle a filtrar manualmente contenido ajeno.",
+      "informationArchitecture": {
+        "zones": [
+          "bloque principal personalizado",
+          "fallback opcional"
+        ],
+        "priorityOrder": [
+          "match específico",
+          "genérico"
+        ]
+      },
+      "layout": {
+        "fullWidth": {
+          "block": "según tipo de contenido"
+        },
+        "narrow": {
+          "block": "compacto"
+        }
+      },
+      "states": [
+        {
+          "id": "loading",
+          "ui": [
+            "skeleton block"
+          ]
+        },
+        {
+          "id": "ready",
+          "ui": [
+            "resolved variant block"
+          ]
+        },
+        {
+          "id": "empty",
+          "ui": [
+            "sin contenido para tu perfil"
+          ]
+        },
+        {
+          "id": "partialData",
+          "ui": [
+            "variant fallback aplicada"
+          ]
+        },
+        {
+          "id": "error",
+          "ui": [
+            "mensaje seguro"
+          ]
+        }
+      ],
+      "copy": {
+        "title": "Componente según tu perfil",
+        "messages": {
+          "empty": "No hay contenido específico para tu perfil.",
+          "error": "No se ha podido resolver el contenido personalizado."
+        }
+      },
+      "accessibility": {
+        "requirements": [
+          "contenido accesible cualquiera que sea la variante",
+          "texto claro"
+        ]
+      }
+    },
+    "backlogJson": {
+      "roadmap": {
+        "mvp": [
+          "resolve audience",
+          "match variant",
+          "render content"
+        ],
+        "v1": [
+          "hybrid mode",
+          "telemetry"
+        ],
+        "hardening": [
+          "tests",
+          "README"
+        ]
+      },
+      "epics": [
+        {
+          "id": "EP-01",
+          "name": "Perfil y matching"
+        },
+        {
+          "id": "EP-02",
+          "name": "Render de variante"
+        }
+      ],
+      "stories": [
+        {
+          "id": "US-01",
+          "epicId": "EP-01",
+          "name": "Resolver perfil y hacer match"
+        },
+        {
+          "id": "US-02",
+          "epicId": "EP-02",
+          "name": "Renderizar variante o fallback"
+        }
+      ]
+    },
+    "dataJson": null,
+    "technicalJson": {
+      "architecture": {
+        "webPart": "ProfileBasedComponentWebPart",
+        "pattern": "SPFx React + audience resolver + variant repository",
+        "components": [
+          "ProfileBasedComponent",
+          "ResolvedVariantRenderer"
+        ],
+        "services": [
+          "ProfileResolver",
+          "VariantMatcher"
+        ],
+        "repositories": [
+          "ProfileVariantRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|StaticConfig|JsonUrl",
+          "listTitleOrUrl": "string",
+          "audienceMode": "department|country|role|group|hybrid",
+          "fallbackMode": "generic|empty"
+        },
+        "IProfileVariant": {
+          "id": "string",
+          "audiences": "string[]",
+          "isGeneric": "boolean",
+          "contentType": "string",
+          "payload": "object"
+        }
+      },
+      "executionFlow": [
+        "resolve user attributes",
+        "load variants",
+        "match variant",
+        "apply fallback if needed",
+        "render variant"
+      ],
+      "security": {
+        "mode": "readOnly",
+        "rules": [
+          "do not expose raw audience attributes unnecessarily"
+        ]
+      },
+      "testing": {
+        "unit": [
+          "variant matching",
+          "fallback logic"
+        ],
+        "component": [
+          "ready/empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Creativa. Cambia recomendaciones, accesos y contenido según rol o ubicación.",
+    "createdTime": "2026-03-19T21:46:13.000Z"
+  }
+}
