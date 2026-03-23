@@ -1,0 +1,653 @@
+{
+  "$schema": "Component inventory extracted from visual reference analysis",
+  "$instructions": "Inventario de componentes observados en hiberus.com, mapeados a Fluent UI v8 para implementación SPFx.",
+
+  "sourceReference": {
+    "url": "https://www.hiberus.com/",
+    "pages": ["home", "sobre-hiberus", "data-ia/ia", "casos-de-exito", "sectores/media", "sectores/banca"],
+    "capturedAt": "2026-03-23"
+  },
+
+  "components": [
+    {
+      "id": "header-sticky",
+      "name": "Header / Sticky Nav",
+      "observedIn": ["home", "sobre-hiberus", "all pages"],
+      "description": "Barra de navegación fija en la parte superior. Contiene logo, hamburger menu, buscador, selector de idioma y CTA 'Contáctanos'.",
+      "visualBehavior": "Sticky top, fondo blanco con blur/opacity sutil, z-index alto. Se mantiene visible durante scroll.",
+      "tokens": {
+        "background": "rgba(255,255,255,0.95) o #FFFFFF",
+        "height": "72-80px",
+        "borderBottom": "none visible — separación por sombra sutil o contraste de fondo",
+        "ctaColor": "#5B53FF",
+        "ctaBorderRadius": "200px",
+        "ctaPadding": "11px 24px",
+        "ctaWeight": "700",
+        "ctaSize": "16px"
+      },
+      "elements": [
+        { "name": "Logo", "type": "image/svg", "position": "left" },
+        { "name": "Hamburger", "type": "icon button", "position": "left of logo or right" },
+        { "name": "CTA 'Contáctanos'", "type": "pill button solid", "position": "right" },
+        { "name": "Search icon", "type": "icon button", "position": "right area" },
+        { "name": "Language selector", "type": "dropdown/link", "position": "right area" }
+      ],
+      "fluentUIMapping": {
+        "component": "Custom header — no direct Fluent equivalent",
+        "recommendation": "Stack horizontal con CommandBar simplificado + PrimaryButton pill. Usar position:sticky + z-index. Logo como Image. En SPFx portal: considerar usar el header nativo de SharePoint y limitar a breadcrumb + acciones contextuales.",
+        "customization": "PrimaryButton con borderRadius:200px, background:#5B53FF"
+      },
+      "spfxNotes": "En un portal SPFx, el header nativo de SharePoint ya provee navegación. Usar este componente solo como referencia visual para customizar el suite bar o como header en una app page full-width."
+    },
+    {
+      "id": "hero-section",
+      "name": "Hero con Vídeo/Foto + Overlay",
+      "observedIn": ["home"],
+      "description": "Sección hero a sangre completa con vídeo de fondo (o imagen fallback), overlay azul semitransparente, heading grande, subtítulo y CTA. Incluye KPIs numéricos en la parte inferior.",
+      "visualBehavior": "Full viewport width, height ~100vh estimada. Vídeo autoplay muted con botón de pausa. Texto centrado sobre overlay. KPIs en fila horizontal en la parte inferior.",
+      "tokens": {
+        "overlayColor": "rgba(16,50,207, 0.65-0.80)",
+        "headingFont": "Montserrat",
+        "headingSize": "56px",
+        "headingLineHeight": "64px",
+        "headingWeight": "700",
+        "headingColor": "#FFFFFF",
+        "subtitleSize": "18-20px",
+        "subtitleColor": "#FFFFFF",
+        "ctaBackground": "#FFFFFF",
+        "ctaColor": "#5B53FF",
+        "ctaBorderRadius": "200px",
+        "ctaPadding": "15px 24px",
+        "ctaBorder": "0.64px solid #5B53FF"
+      },
+      "elements": [
+        { "name": "Video/imagen background", "type": "media", "fullWidth": true },
+        { "name": "Overlay azul", "type": "layer", "color": "primary + opacity" },
+        { "name": "H2 heading", "type": "text", "style": "hero" },
+        { "name": "Subtitle/description", "type": "text", "style": "lg" },
+        { "name": "CTA ghost pill", "type": "button", "variant": "ghost-on-dark" },
+        { "name": "KPI counters", "type": "stat group", "count": "3-4" },
+        { "name": "Pause video button", "type": "icon button" }
+      ],
+      "fluentUIMapping": {
+        "component": "Custom — no Fluent equivalent",
+        "recommendation": "Div full-width con background-image/video + pseudo-element overlay. Stack vertical para texto centrado. DefaultButton customizado para CTA ghost. Para KPIs: Stack horizontal con Text components.",
+        "customization": "Este es un componente 100% custom. En SPFx portal, podría adaptarse como banner de bienvenida con imagen + stats."
+      },
+      "spfxNotes": "Para un web part Hero en SPFx: usar PropertyFieldFilePicker para imagen, text fields para heading/subtitle, y un link field para CTA. Los KPIs podrían extraerse de una lista SharePoint."
+    },
+    {
+      "id": "card-carousel",
+      "name": "Carrusel de Cards",
+      "observedIn": ["home — Business Accelerators", "home — Cases"],
+      "description": "Carrusel horizontal de cards con navegación por flechas y dots. Cada card tiene imagen, título, descripción breve y CTA 'Saber más →'.",
+      "visualBehavior": "Scroll horizontal paginado. Muestra 3-4 cards visibles por vez. Flechas laterales para avanzar/retroceder. Indicadores de página (dots) abajo.",
+      "tokens": {
+        "cardBackground": "#FFFFFF",
+        "cardBorderRadius": "8-12px",
+        "cardPadding": "0 (imagen edge-to-edge arriba) + 16-24px (contenido)",
+        "cardShadow": "none o sutil",
+        "cardGap": "24px",
+        "titleFont": "Montserrat",
+        "titleSize": "20px",
+        "titleWeight": "700",
+        "titleColor": "#111111",
+        "descriptionFont": "Lato",
+        "descriptionSize": "16px",
+        "descriptionColor": "#3A3A3A",
+        "ctaColor": "#1032CF o #5B53FF",
+        "ctaSize": "14-16px",
+        "ctaWeight": "700",
+        "ctaStyle": "text link con flecha →"
+      },
+      "elements": [
+        { "name": "Card image", "type": "image", "position": "top", "aspectRatio": "~16:10" },
+        { "name": "Card title", "type": "text", "style": "xl bold" },
+        { "name": "Card description", "type": "text", "style": "base secondary" },
+        { "name": "CTA link", "type": "link", "style": "bold colored + arrow" },
+        { "name": "Nav arrows", "type": "icon buttons", "count": 2 },
+        { "name": "Dot indicators", "type": "pagination dots" }
+      ],
+      "fluentUIMapping": {
+        "component": "Custom carousel + DocumentCard variant",
+        "recommendation": "Usar DocumentCard (image + title + activity) o custom card component. Para el carrusel: implementar con scroll-snap CSS o librería ligera compatible con SPFx. Los dots son un control custom.",
+        "customization": "DocumentCard.styles con borderRadius:12px, boxShadow:none. Imagen con ImageFit.cover."
+      },
+      "spfxNotes": "En SPFx: crear un web part 'Featured Content Carousel' que lea items de una lista SharePoint. Cada item = Title, Description, Image (thumbnail), Link. El carrusel puede implementarse con CSS scroll-snap para evitar dependencias externas."
+    },
+    {
+      "id": "section-heading",
+      "name": "Encabezado de Sección",
+      "observedIn": ["home — múltiples secciones"],
+      "description": "Heading H2 con subtítulo opcional. Alineado a la izquierda o centrado según sección. A veces incluye un CTA link.",
+      "visualBehavior": "Montserrat bold en tamaño grande (32-52px). Texto oscuro sobre fondo claro o blanco sobre fondo oscuro. Subtítulo en Lato regular debajo.",
+      "tokens": {
+        "headingFont": "Montserrat",
+        "headingSize": "32-52px",
+        "headingWeight": "700",
+        "headingColor": "#111111 (claro) o #FFFFFF (oscuro)",
+        "subtitleFont": "Lato",
+        "subtitleSize": "16-18px",
+        "subtitleColor": "#3A3A3A (claro) o rgba(255,255,255,0.8) (oscuro)",
+        "gap": "8-16px entre heading y subtitle",
+        "marginBottom": "32-48px antes del contenido"
+      },
+      "fluentUIMapping": {
+        "component": "Text (variant: xLarge/xxLarge) + Text (variant: medium)",
+        "recommendation": "Stack vertical con Text components. Usar tokens de typography del design-tokens.json.",
+        "customization": "Text con fontFamily:Montserrat, fontWeight:700, fontSize según nivel"
+      },
+      "spfxNotes": "Componente reutilizable SectionHeading con props: title, subtitle?, alignment('left'|'center'), theme('light'|'dark'), ctaText?, ctaUrl?"
+    },
+    {
+      "id": "logo-grid",
+      "name": "Grid de Logos (Clientes/Partners)",
+      "observedIn": ["home — +190 clientes confían en nosotros", "home — Nuestros partners"],
+      "description": "Grid de logos de clientes o partners en formato rectangular. Logos en escala de grises o color sobre fondo blanco. Layout de 4-6 columnas adaptable.",
+      "visualBehavior": "Logos equiespaciados en grid. Sin hover effect visible. Posiblemente carousel/paginado en la versión de clientes (24 logos visibles).",
+      "tokens": {
+        "logoMaxHeight": "40-60px",
+        "logoOpacity": "0.7-1.0",
+        "gap": "24-32px",
+        "columns": "4-6 responsive",
+        "background": "#FFFFFF",
+        "padding": "48-64px vertical"
+      },
+      "fluentUIMapping": {
+        "component": "Custom grid con Image components",
+        "recommendation": "CSS Grid con auto-fill, minmax. Cada logo como Image con maxHeight fijo y objectFit:contain.",
+        "customization": "Filtro grayscale opcional: filter:grayscale(100%) con hover:grayscale(0%) para interactividad"
+      },
+      "spfxNotes": "Web part 'Logo Grid/Clients': Lee de una lista con columns Title y Logo (imagen). PropertyPane con selección de lista y número de columnas."
+    },
+    {
+      "id": "pill-button-primary",
+      "name": "Pill Button Primary (Solid)",
+      "observedIn": ["header CTA", "forms submit", "sections"],
+      "description": "Botón redondeado (pill) con fondo violeta sólido y texto blanco. El componente más característico de la marca.",
+      "tokens": {
+        "background": "#5B53FF",
+        "backgroundHover": "#4A42E0",
+        "color": "#FFFFFF",
+        "borderRadius": "200px",
+        "padding": "11px 24px",
+        "fontFamily": "Lato",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "border": "none",
+        "cursor": "pointer",
+        "transition": "background 300ms ease"
+      },
+      "fluentUIMapping": {
+        "component": "PrimaryButton",
+        "customization": {
+          "root": { "borderRadius": "200px", "padding": "11px 24px" },
+          "rootHovered": { "backgroundColor": "#4A42E0" },
+          "label": { "fontWeight": 700, "fontSize": "16px" }
+        }
+      },
+      "variants": ["default (violet)", "on-dark (white bg, violet text)"]
+    },
+    {
+      "id": "pill-button-ghost",
+      "name": "Pill Button Ghost/Outline",
+      "observedIn": ["hero CTA", "sections CTA"],
+      "description": "Botón redondeado con fondo transparente o blanco y borde violeta/blanco. Usado como CTA secundario.",
+      "tokens": {
+        "background": "transparent o #FFFFFF",
+        "color": "#5B53FF",
+        "border": "0.64px solid #5B53FF",
+        "borderOnDark": "0.64px solid #FFFFFF",
+        "colorOnDark": "#FFFFFF",
+        "borderRadius": "200px",
+        "padding": "15px 24px",
+        "fontFamily": "Lato",
+        "fontSize": "16px",
+        "fontWeight": "700"
+      },
+      "fluentUIMapping": {
+        "component": "DefaultButton",
+        "customization": {
+          "root": { "borderRadius": "200px", "border": "1px solid", "borderColor": "#5B53FF", "backgroundColor": "transparent" },
+          "rootHovered": { "backgroundColor": "rgba(91,83,255,0.08)" },
+          "label": { "fontWeight": 700, "color": "#5B53FF" }
+        }
+      }
+    },
+    {
+      "id": "text-link-arrow",
+      "name": "Text Link con Flecha →",
+      "observedIn": ["cards CTA", "section links"],
+      "description": "Link de texto bold con flecha → al final. Sin underline por defecto. Color primary o accent.",
+      "tokens": {
+        "color": "#1032CF o #5B53FF",
+        "fontSize": "14-16px",
+        "fontWeight": "700",
+        "textDecoration": "none",
+        "hoverTextDecoration": "underline",
+        "arrow": " →",
+        "fontFamily": "Lato"
+      },
+      "fluentUIMapping": {
+        "component": "Link",
+        "customization": "Link con fontWeight:700, textDecoration:none. Añadir ' →' como contenido o pseudo-element."
+      }
+    },
+    {
+      "id": "form-input-pill",
+      "name": "Form Input Pill",
+      "observedIn": ["contact form"],
+      "description": "Input de formulario con bordes redondeados (pill). Borde azul-gris, texto dark, placeholder ligero.",
+      "tokens": {
+        "border": "0.64px solid #3B477A",
+        "borderRadius": "200px",
+        "padding": "19px 24px",
+        "fontSize": "16px",
+        "fontFamily": "Lato",
+        "color": "#111111",
+        "placeholderColor": "#707070",
+        "background": "#FFFFFF",
+        "focusBorder": "#5B53FF",
+        "focusBorderNote": "[INF · medium] Asumido — el focus probablemente destaca el borde en accent color"
+      },
+      "fluentUIMapping": {
+        "component": "TextField",
+        "customization": {
+          "fieldGroup": { "borderRadius": "200px", "border": "1px solid #3B477A", "padding": "8px 16px" },
+          "field": { "fontSize": "16px", "fontFamily": "Lato" }
+        },
+        "note": "Fluent UI TextField usa border rectangular por defecto. Necesita override importante de estilos para lograr pill shape."
+      },
+      "spfxNotes": "Considerar crear un PillTextField wrapper que aplique los estilos pill globalmente. Alternativa: usar un styled input nativo envuelto en un componente React."
+    },
+    {
+      "id": "contact-form",
+      "name": "Formulario de Contacto",
+      "observedIn": ["home — sección inferior"],
+      "description": "Formulario con inputs pill, checkboxes legales, y botón de envío. Fondo blanco dentro de sección azul oscura.",
+      "tokens": {
+        "formBackground": "#FFFFFF",
+        "formPadding": "32-48px",
+        "formBorderRadius": "12-16px",
+        "labelSize": "14-16px",
+        "labelColor": "#111111",
+        "requiredAsterisk": "#FF0000",
+        "legal_textSize": "12-14px",
+        "legal_textColor": "#3A3A3A",
+        "gridColumns": "2 columns para campos, 1 column para legal y submit",
+        "gap": "16-24px"
+      },
+      "elements": [
+        { "name": "Text inputs (pill)", "count": "5-7 fields" },
+        { "name": "Textarea", "count": 1, "note": "Posiblemente pill o con borderRadius menor" },
+        { "name": "Legal checkboxes", "count": "2-3", "note": "Con links a política de privacidad" },
+        { "name": "Submit button", "type": "pill-button-primary" },
+        { "name": "Required indicators", "type": "asterisk rojo" }
+      ],
+      "fluentUIMapping": {
+        "component": "Stack con TextField + Checkbox + PrimaryButton",
+        "recommendation": "Layout con CSS Grid 2 columnas para inputs, Stack vertical para checkboxes y submit. Validación con Zod según AGENTS.md."
+      },
+      "spfxNotes": "En SPFx: formulario puede enviar a una lista SharePoint o a un endpoint. Validar con Zod. Sanitizar inputs. Usar el patrón de formulario descrito en AGENTS.md (lógica en service, presentación en component)."
+    },
+    {
+      "id": "newsletter-inline",
+      "name": "Newsletter Inline Form",
+      "observedIn": ["home — footer area"],
+      "description": "Input de email inline con botón de envío a la derecha, dentro de una sección navy. Estilo pill.",
+      "tokens": {
+        "inputBackground": "transparent o #FFFFFF",
+        "inputBorder": "0.64px solid rgba(255,255,255,0.5)",
+        "inputBorderRadius": "200px",
+        "buttonBackground": "#5B53FF",
+        "buttonBorderRadius": "200px",
+        "layoutDirection": "horizontal (input + button inline)"
+      },
+      "fluentUIMapping": {
+        "component": "SearchBox variant o custom Stack horizontal con TextField + PrimaryButton",
+        "recommendation": "Stack horizontal con gap:0, TextField sin border derecho + PrimaryButton sin border izquierdo, envueltos en contenedor con borderRadius:200px overflow:hidden."
+      }
+    },
+    {
+      "id": "footer",
+      "name": "Footer Multi-columna",
+      "observedIn": ["home", "all pages"],
+      "description": "Footer con fondo navy oscuro (#19255A), logo blanco, navegación en columnas, iconos sociales, y links legales.",
+      "tokens": {
+        "background": "#19255A",
+        "textColor": "#FFFFFF",
+        "linkColor": "rgba(255,255,255,0.8)",
+        "linkHoverColor": "#FFFFFF",
+        "columns": "4-5",
+        "padding": "64-80px vertical",
+        "separatorColor": "rgba(255,255,255,0.2)",
+        "socialIconSize": "24px"
+      },
+      "fluentUIMapping": {
+        "component": "Custom footer — no Fluent equivalent",
+        "recommendation": "CSS Grid multi-columna. Links como Link components con color override. Iconos sociales como IconButton. Separador como Separator con color custom."
+      },
+      "spfxNotes": "En un portal SPFx, el footer normalmente es parte del Application Customizer (bottom placeholder). Implementar como React component inyectado via PlaceholderContent.Bottom."
+    },
+    {
+      "id": "stat-counter",
+      "name": "Contador Estadístico / KPI",
+      "observedIn": ["hero — bottom area", "sobre-hiberus"],
+      "description": "Número grande con etiqueta descriptiva debajo. Usado para mostrar KPIs de la empresa (empleados, oficinas, proyectos).",
+      "tokens": {
+        "numberFont": "Montserrat",
+        "numberSize": "48-56px",
+        "numberWeight": "700",
+        "numberColor": "#FFFFFF (sobre oscuro) o #1032CF (sobre claro)",
+        "labelFont": "Lato",
+        "labelSize": "14-16px",
+        "labelColor": "rgba(255,255,255,0.8) o #3A3A3A",
+        "prefix": "+" (antes del número, ej: +3800)"
+      },
+      "fluentUIMapping": {
+        "component": "Custom — Stack vertical con Text",
+        "recommendation": "Componente KPICard o StatCounter con props: value, label, prefix?, suffix?"
+      },
+      "spfxNotes": "Los valores pueden venir de una lista SharePoint 'KPIs' o de propiedades del web part. Considerar animación de conteo al entrar en viewport."
+    },
+    {
+      "id": "case-study-card",
+      "name": "Card de Caso de Éxito",
+      "observedIn": ["home — carousel de Cases"],
+      "description": "Card con imagen grande superior, logo del cliente, descripción del proyecto y CTA. Dentro de un carrusel.",
+      "tokens": {
+        "cardBackground": "#FFFFFF",
+        "imageAspectRatio": "~16:9",
+        "imageBorderRadius": "8-12px top corners",
+        "clientLogoHeight": "30-40px",
+        "titleSize": "20px",
+        "titleWeight": "700",
+        "descriptionSize": "14-16px",
+        "ctaStyle": "text-link-arrow"
+      },
+      "fluentUIMapping": {
+        "component": "DocumentCard custom variant",
+        "recommendation": "DocumentCard con DocumentCardImage + DocumentCardTitle + DocumentCardActivity (para logo) + Link styled CTA."
+      }
+    },
+    {
+      "id": "tab-navigation",
+      "name": "Tabs / Navegación por Pestañas",
+      "observedIn": ["home — sección Noticias/Eventos"],
+      "description": "Navegación horizontal por pestañas para filtrar contenido (Noticias, Eventos, etc.). Tab activa destacada.",
+      "tokens": {
+        "tabFont": "Lato",
+        "tabSize": "16px",
+        "tabWeight": "400 (inactive) / 700 (active)",
+        "tabColor": "#707070 (inactive) / #111111 (active)",
+        "tabIndicator": "underline o cambio de peso",
+        "gap": "24-32px"
+      },
+      "fluentUIMapping": {
+        "component": "Pivot",
+        "customization": "Pivot con linkFormat:tabs, estilos custom para quitar background y usar underline indicator + bold active."
+      },
+      "spfxNotes": "Pivot de Fluent UI es el mapeo directo. Customizar estilos para matching visual."
+    },
+    {
+      "id": "breadcrumb-bar",
+      "name": "Breadcrumb / Ruta de Navegación",
+      "observedIn": ["data-ia/ia", "sectores/media", "sectores/banca", "all sector/service pages"],
+      "description": "Barra de migas de pan sobre el hero, con separador '|'. Muestra la ruta jerárquica de la página actual.",
+      "visualBehavior": "Posicionada sobre el hero (z-index alto), texto blanco sobre fondo oscuro. Lato regular 16px. Separador '|' entre segmentos.",
+      "tokens": {
+        "fontFamily": "Lato",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "color": "#FFFFFF",
+        "separator": "|",
+        "gap": "8px",
+        "activeSegment": "font-weight:700"
+      },
+      "fluentUIMapping": {
+        "component": "Breadcrumb",
+        "customization": "Breadcrumb con dividerAs custom (Text '|'), estilos de color blanco para uso sobre fondos oscuros."
+      },
+      "spfxNotes": "En SPFx: usar el Breadcrumb de Fluent UI. Customizar divider, colores y tipografía. Puede alimentarse desde la navegación del sitio."
+    },
+    {
+      "id": "service-feature-card",
+      "name": "Service Feature Card (con accent line)",
+      "observedIn": ["sectores/media", "sectores/banca", "data-ia/ia"],
+      "description": "Card de texto con título Montserrat bold, accent line violeta decorativa debajo del título, descripción y link 'Saber más →'. Sin imagen.",
+      "visualBehavior": "Cards dispuestas en grid de 3 o 4 columnas. El accent line es una tira muy corta (11px × 2px) en violeta #5B53FF justo debajo del título. Es el marcador visual más distintivo de las páginas de sector.",
+      "tokens": {
+        "titleFont": "Montserrat",
+        "titleSize": "20-24px",
+        "titleWeight": "700",
+        "titleColor": "#111111",
+        "accentLineColor": "#5B53FF",
+        "accentLineWidth": "11px",
+        "accentLineHeight": "2px",
+        "accentLineClass": "span.search-line.main-line",
+        "descriptionFont": "Lato",
+        "descriptionSize": "16px",
+        "descriptionColor": "#2D2D2D",
+        "ctaColor": "#5B53FF",
+        "ctaWeight": "700",
+        "ctaText": "Saber más →",
+        "boldEmphasis": "<strong> dentro del párrafo para destacar términos clave"
+      },
+      "elements": [
+        { "name": "Title", "type": "text", "style": "Montserrat 20-24px bold" },
+        { "name": "Accent line", "type": "decorative span", "color": "#5B53FF", "size": "11×2px" },
+        { "name": "Description", "type": "text", "style": "Lato 16px, con <strong> en términos clave" },
+        { "name": "CTA link", "type": "text-link-arrow", "text": "Saber más →" }
+      ],
+      "fluentUIMapping": {
+        "component": "Custom card — Stack vertical",
+        "recommendation": "Stack vertical con Text (title), span decorativo (accent line via CSS pseudo-element o div explícito), Text (description), Link (CTA). No usar DocumentCard porque no hay imagen.",
+        "customization": "Accent line: display:block, width:11px, height:2px, background:#5B53FF, margin:8px 0 16px"
+      },
+      "spfxNotes": "Componente reutilizable ServiceFeatureCard. Puede alimentarse desde lista SP o properties del web part. El accent line es puramente decorativo — implementar como pseudo-element ::after del título."
+    },
+    {
+      "id": "accordion-faq",
+      "name": "Accordion / FAQ (Bootstrap-style)",
+      "observedIn": ["data-ia/ia"],
+      "description": "Acordeón expandible con secciones colapsables. Estilo Bootstrap 'accordion accordion-flush'. Usado para preguntas frecuentes o detalle de servicios.",
+      "visualBehavior": "Secciones apiladas verticalmente, cada una con título clicable y contenido expandible. Sin bordes laterales (flush). Header con hover sutil.",
+      "tokens": {
+        "headerFont": "Montserrat",
+        "headerSize": "18-20px",
+        "headerWeight": "600",
+        "headerColor": "#111111",
+        "bodyFont": "Lato",
+        "bodySize": "16px",
+        "bodyColor": "#2D2D2D",
+        "borderBottom": "1px solid #E8E8E8",
+        "headerPadding": "16px 0",
+        "bodyPadding": "0 0 16px",
+        "iconExpand": "chevron down → up rotation",
+        "cssClass": "accordion accordion-flush"
+      },
+      "fluentUIMapping": {
+        "component": "Accordion (Fluent UI v9) o custom con CSS transitions",
+        "recommendation": "En Fluent v8: no hay Accordion nativo. Implementar con un componente custom que use Icon('ChevronDown') + collapse CSS transition. Alternativa: usar Details/Summary HTML semántico con estilos custom."
+      },
+      "spfxNotes": "Crear componente AccordionSection reutilizable. Puede alimentarse desde lista SP (Title, Content) para FAQs o desde properties del web part para contenido estático."
+    },
+    {
+      "id": "case-study-square-card",
+      "name": "Case Study Square Card (flip animation)",
+      "observedIn": ["casos-de-exito"],
+      "description": "Card cuadrada (288×288px) con cara frontal (overlay azul + logo centrado blanco) y cara trasera (detalles del caso). Flip animation al hover.",
+      "visualBehavior": "Grid de 3 columnas. Frontal: imagen de fondo con overlay azul semitransparente + logo de cliente centrado en blanco. Al hover: voltea para mostrar subtítulo y detalles del caso.",
+      "tokens": {
+        "cardSize": "288px × 288px",
+        "overlayColor": "rgba(16, 50, 207, 0.7)",
+        "logoColor": "#FFFFFF",
+        "logoMaxHeight": "60-80px",
+        "flipTransition": "transform 0.6s ease",
+        "backBackground": "#FFFFFF o #F5F5F5",
+        "backTitleSize": "18-20px",
+        "backDescriptionSize": "14px",
+        "cssClasses": "c-card c-card--primary, c-card__image, c-card__image--logo, c-card__subtitle"
+      },
+      "elements": [
+        { "name": "Front — Background image", "type": "image", "fullCover": true },
+        { "name": "Front — Blue overlay", "type": "layer", "color": "primary + opacity" },
+        { "name": "Front — Client logo", "type": "image/svg", "centered": true, "color": "white" },
+        { "name": "Back — Case title", "type": "text", "style": "bold" },
+        { "name": "Back — Case description", "type": "text", "style": "small" }
+      ],
+      "fluentUIMapping": {
+        "component": "Custom card with CSS 3D transforms",
+        "recommendation": "Implementar con CSS perspective + rotateY flip. No hay equivalente directo en Fluent UI. Usar dos divs (front/back) con backface-visibility:hidden y transform:rotateY(180deg) en hover.",
+        "customization": "Asegurar que el contenido de la cara trasera sea accesible por teclado (focusable, no solo hover)"
+      },
+      "spfxNotes": "Componente CaseStudyCard. Fuente de datos: lista SP con Title, ClientLogo (imagen), BackgroundImage, Description, Link. Considerar alternativa sin flip para accesibilidad (modal o expand instead)."
+    },
+    {
+      "id": "split-section-50-50",
+      "name": "50/50 Split Section (foto + contenido)",
+      "observedIn": ["data-ia/ia", "sectores/banca"],
+      "description": "Sección dividida en dos mitades: una con fotografía edge-to-edge y otra con fondo sólido (azul primary o blanco) + texto + CTA.",
+      "visualBehavior": "Full-width con dos columnas iguales. La foto ocupa el 100% de su mitad. El contenido tiene padding generoso y puede incluir heading, descripción y botón/link.",
+      "tokens": {
+        "layoutRatio": "50/50",
+        "imagePosition": "left o right (alterna)",
+        "contentBackground": "#1032CF (primary) o #FFFFFF",
+        "contentTextColor": "#FFFFFF (sobre primary) o #111111 (sobre blanco)",
+        "contentPadding": "48-64px",
+        "headingSize": "24-32px",
+        "headingWeight": "700"
+      },
+      "fluentUIMapping": {
+        "component": "Custom — CSS Grid 2 columnas",
+        "recommendation": "CSS Grid con grid-template-columns: 1fr 1fr. Image con object-fit:cover, height:100%. Contenido centrado verticalmente con flexbox."
+      },
+      "spfxNotes": "Util para newsletter CTA, about sections, o destacados. En SPFx: considerar web part con PropertyPane para imagen, texto, CTA y orden (imagen izq/der)."
+    },
+    {
+      "id": "technology-partner-grid",
+      "name": "Technology Partner Logo Grid (sobre fondo oscuro)",
+      "observedIn": ["data-ia/ia — partners IA", "sectores/banca — partners"],
+      "description": "Grid de logos de partners tecnológicos sobre fondo azul primary (#1032CF). Logos en blanco. Incluye heading, descripción y CTA pill.",
+      "visualBehavior": "Fondo azul primary a sangre completa. Heading + descripción en blanco a la izquierda. Grid de logos SVG en blanco a 3 columnas a la derecha. CTA pill ghost (blanco sobre azul).",
+      "tokens": {
+        "background": "#1032CF",
+        "textColor": "#FFFFFF",
+        "logoColor": "filter:brightness(0) invert(1) — logos forzados a blanco",
+        "logoGrid": "3 columnas",
+        "logoGap": "32-40px",
+        "logoMaxHeight": "40-50px",
+        "ctaVariant": "ghost-on-dark (borde blanco, texto blanco)"
+      },
+      "fluentUIMapping": {
+        "component": "Custom — variant del logo-grid con fondo oscuro",
+        "recommendation": "Reutilizar el componente Logo Grid existente con prop theme:'dark', que aplica fondo azul y filter brightness/invert a los logos."
+      },
+      "spfxNotes": "Variante del Logo Grid web part. Los logos pueden filtrarse automáticamente a blanco con CSS filter. Lista SP source con tag 'Partner Tipo: Tecnológico/IA'."
+    },
+    {
+      "id": "testimonial-quote",
+      "name": "Testimonial / Quote Card",
+      "observedIn": ["sectores/banca"],
+      "description": "Bloque de testimonial con foto recortada arriba y cita sobre fondo azul primary debajo. Texto de la cita en Montserrat 24px semibold blanco.",
+      "visualBehavior": "Diseño vertical: foto de la persona o equipo en la parte superior, seguida de un bloque azul (#1032CF) con la cita entrecomillada. Puede estar junto a contenido de texto como sidebar o embebido en flujo de sección.",
+      "tokens": {
+        "quoteFont": "Montserrat",
+        "quoteSize": "24px",
+        "quoteWeight": "600",
+        "quoteColor": "#FFFFFF",
+        "quoteBackground": "#1032CF",
+        "quotePadding": "32-40px",
+        "quoteBorderRadius": "0 o 12px",
+        "imageAspect": "16:9 o libre",
+        "blockType": "vlsuite-block__testimonials"
+      },
+      "fluentUIMapping": {
+        "component": "Custom — Persona variant o card custom",
+        "recommendation": "Div con Image (cover), debajo un div con background primary y Text semibold 24px blanco. Puede usarse Persona de Fluent para mostrar nombre/rol del autor debajo."
+      },
+      "spfxNotes": "Componente TestimonialCard. Datos: Quote text, Author name, Author role, Photo, optional link. En SPFx: lista 'Testimoniales' con esos campos. Verificar contraste y readability de Montserrat 24px sobre primary."
+    },
+    {
+      "id": "load-more-button",
+      "name": "Load More / Pagination Button",
+      "observedIn": ["casos-de-exito"],
+      "description": "Botón 'Carga más' / 'Load More' para cargar items adicionales en grids paginados. Comportamiento de scroll infinito simulado.",
+      "tokens": {
+        "cssClasses": "button btn btn-secondary",
+        "background": "transparent o #F5F5F5",
+        "borderRadius": "200px (pill)",
+        "fontSize": "16px",
+        "fontWeight": "700",
+        "color": "#1032CF o #5B53FF"
+      },
+      "fluentUIMapping": {
+        "component": "DefaultButton",
+        "customization": "DefaultButton con borderRadius pill, variant secondary. Puede ocultarse y reemplazarse por Intersection Observer para auto-load."
+      },
+      "spfxNotes": "En grids de SPFx: implementar paginación con botón 'Cargar más' + estado de carga. Usar PnPjs .top(n).skip(offset) para paginar contra listas grandes."
+    },
+    {
+      "id": "product-solution-card",
+      "name": "Product / Solution Card",
+      "observedIn": ["sectores/banca — Xalok, Sintra"],
+      "description": "Card de producto/solución propietaria con logo del producto arriba, título, accent line violeta, descripción y CTA 'Ir a [producto] →'. Layout en 2 columnas.",
+      "visualBehavior": "Card en fondo blanco (o variante invertida con fondo navy) con logo SVG del producto, heading Montserrat bold, accent line violeta, párrafo descriptivo y text link CTA.",
+      "tokens": {
+        "logoHeight": "40-50px",
+        "titleFont": "Montserrat",
+        "titleSize": "24-28px",
+        "titleWeight": "700",
+        "accentLine": "same as service-feature-card (11px × 2px #5B53FF)",
+        "descriptionFont": "Lato",
+        "descriptionSize": "16px",
+        "ctaStyle": "text-link-arrow",
+        "invertedVariant": "bg:#19255A, text:#FFFFFF"
+      },
+      "fluentUIMapping": {
+        "component": "Custom card — Stack vertical",
+        "recommendation": "Reutilizar ServiceFeatureCard con prop adicional para logo de producto y variante invertida (dark bg)."
+      }
+    },
+    {
+      "id": "hero-watermark",
+      "name": "Hero Watermark Text",
+      "observedIn": ["sectores/banca — #wEAREDIFFERENT"],
+      "description": "Texto decorativo grande en opacity reducida repetido verticalmente sobre el costado derecho del hero. Funciona como marca de agua de marca.",
+      "visualBehavior": "Texto rotado o apilado verticalmente en el borde derecho del hero, color blanco con opacity ~0.15-0.25. Genera textura visual sin interferir con el heading principal.",
+      "tokens": {
+        "text": "#wEAREDIFFERENT",
+        "color": "rgba(255, 255, 255, 0.15-0.25)",
+        "fontSize": "~80-100px",
+        "fontWeight": "700",
+        "fontFamily": "Montserrat",
+        "rotation": "90deg o apilado vertical",
+        "position": "right edge, absolute"
+      },
+      "fluentUIMapping": {
+        "component": "Pure CSS/pseudo-element",
+        "recommendation": "Implementar como pseudo-element ::after del hero container con transform:rotate(90deg), opacity baja y overflow:hidden."
+      },
+      "spfxNotes": "Elemento puramente decorativo. Puede incluirse en el Hero Banner web part como opción activable en PropertyPane."
+    }
+  ],
+
+  "componentPatterns": {
+    "buttonHierarchy": [
+      "1. PrimaryButton pill solid (#5B53FF) — acción principal",
+      "2. Ghost/Outline pill (#5B53FF border) — acción secundaria",
+      "3. Text link con flecha → — acción terciaria / navegación",
+      "4. Icon button — acciones contextuales (búsqueda, menú, pause)"
+    ],
+    "cardPattern": "Imagen top (edge-to-edge) + contenido con padding + CTA link al pie",
+    "serviceCardPattern": "Título Montserrat bold + accent line violeta (11×2px) + descripción con <strong> + 'Saber más →'",
+    "caseStudyPattern": "Card cuadrada 288×288px con flip: frontal (overlay azul + logo blanco), trasera (detalles del caso)",
+    "productCardPattern": "Logo de producto + título + accent line + descripción + 'Ir a [producto] →'",
+    "sectionPattern": "Fondo alternado (blanco ↔ azul ↔ navy) + heading Montserrat bold + contenido + CTA",
+    "sectorPagePattern": "Breadcrumb → Hero (foto + overlay + heading + ghost pill CTA) → Intro texto → Feature cards → Logos → Partners → Form/CTA",
+    "formPattern": "Inputs pill en grid 2 columnas + legal checkboxes + submit pill button",
+    "spacingRhythm": "Secciones: 80-120px padding vertical. Componentes internos: 16-24px padding. Elementos hermanos: 8-16px gap."
+  },
+
+  "globalNotes": "El sistema de componentes de Hiberus es limpio, con alta consistencia visual verificada en 6 páginas. Los patrones más distintivos son: (1) forma pill universal en botones/inputs, (2) sistema tipográfico binario Montserrat/Lato, (3) paleta azul/violeta con neutrales casi negros, (4) alternancia de secciones full-bleed con fondos de color, (5) accent line violeta como marcador de servicio/feature cards, (6) patrón de sector page repetido con hero + breadcrumb + feature grid + logos + partners. Para SPFx: priorizar los 8-10 componentes base (buttons, inputs, cards, service cards, headings, layout sections, logo grids, testimonials) antes de abordar los más específicos (flip cards, accordion, watermark)."
+}

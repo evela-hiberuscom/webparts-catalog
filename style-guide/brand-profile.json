@@ -1,0 +1,202 @@
+{
+  "$schema": "Brand profile extracted from visual reference analysis",
+
+  "sourceReference": {
+    "url": "https://www.hiberus.com/",
+    "screenshotPaths": [
+      ".playwright-mcp/page-2026-03-23T16-14-56-651Z.png",
+      ".playwright-mcp/page-2026-03-23T16-16-23-934Z.png",
+      ".playwright-mcp/page-2026-03-23T16-16-34-114Z.png",
+      ".playwright-mcp/page-2026-03-23T16-16-45-882Z.png",
+      ".playwright-mcp/page-2026-03-23T16-16-56-832Z.png",
+      ".playwright-mcp/page-2026-03-23T16-17-13-120Z.png",
+      ".playwright-mcp/page-2026-03-23T16-17-29-448Z.png",
+      ".playwright-mcp/page-2026-03-23T16-17-48-027Z.png",
+      ".playwright-mcp/page-2026-03-23T16-17-58-200Z.png",
+      ".playwright-mcp/page-2026-03-23T16-33-26-020Z.png",
+      ".playwright-mcp/page-2026-03-23T16-35-29-281Z.png",
+      ".playwright-mcp/page-2026-03-23T16-35-42-917Z.png",
+      ".playwright-mcp/page-2026-03-23T16-35-53-856Z.png",
+      ".playwright-mcp/page-2026-03-23T16-36-05-758Z.png",
+      ".playwright-mcp/page-2026-03-23T16-36-16-975Z.png",
+      ".playwright-mcp/page-2026-03-23T16-36-31-090Z.png"
+    ],
+    "capturedAt": "2026-03-23",
+    "pagesAnalyzed": ["/ (home)", "/sobre-hiberus", "/data-ia/ia", "/casos-de-exito", "/sectores/media", "/sectores/banca"]
+  },
+
+  "visualTone": {
+    "primary": "Corporativo-tecnológico con carácter enérgico y confianza",
+    "secondary": "Cercano pero con peso institucional, orientado a decisores de negocio",
+    "evidence": "[OBS] El hero ocupa viewport completo con vídeo de fondo oscurecido y heading en Montserrat bold 56px blanco. La paleta dominante azul eléctrico (#1032CF) y violeta (#5B53FF) transmite dinamismo técnico. Las secciones alternan entre fondos blancos amplios y bloques azules saturados a sangre completa, creando contraste alto entre zonas.",
+    "spectrum": {
+      "formalToCasual": 2,
+      "denseToBreezy": 2,
+      "seriousToPlayful": 2,
+      "boldToSubtle": 2
+    },
+    "spectrumNotes": "1=formal/denso/serio/bold, 5=casual/breezy/playful/sutil. Hiberus se posiciona claramente en el lado formal-bold: tipografía grande y pesada, colores saturados, mensajes directos."
+  },
+
+  "brandPersonality": {
+    "traits": [
+      "Confiable — logos de clientes enterprise (Inditex, Santander, Roca, BBVA) refuerzan credibilidad",
+      "Ambicioso — claims como 'TOP3 de España', '4500+ profesionales', '15 países'",
+      "Directo — CTAs explícitos ('Solicitar información', 'Contáctanos'), sin rodeos",
+      "Tecnológico — partners AWS, Microsoft, Google Cloud, Salesforce visibles en grid",
+      "Cercano — uso de 'Las cosas ocurren aquí', '#somoshiberus', fotos reales de empleados"
+    ],
+    "evidence": "[OBS] Sección de clientes muestra 24 logos enterprise. Sección de partners muestra 15+ logos tech. Sección '#somoshiberus' incluye fotografía real de eventos internos. Sección 'Únete a hiberus' habla en primera persona del plural. La página de banca repite este patrón: logos de Santander, CaixaBank, Ibercaja, Kutxabank, etc.",
+    "voiceCharacter": "Primera persona del plural, declarativo, con claims numéricos que refuerzan escala",
+    "crossPageConsistency": "Alta — verificado en 6 páginas. El tono y la estructura visual son idénticos en home, service pages y sector pages. Los traits de marca se refuerzan con cada página adicional analizada."
+  },
+
+  "perceivedAudience": {
+    "primary": "CTOs, CIOs y directivos de empresas medianas-grandes que buscan partner tecnológico",
+    "secondary": "Talento IT que considera unirse a la compañía",
+    "technicalLevel": "Medio-alto — mencionan microservicios, SAP CX, Drupal headless, Process Mining, pero sin entrar en detalle técnico profundo en la home",
+    "evidence": "[OBS] El formulario de contacto pide 'Email de empresa' y 'Compañía'. Los casos de éxito mencionan Santander, Inditex, Roca — proyectos enterprise. La sección de empleo tiene CTA dedicado."
+  },
+
+  "visualPrinciples": [
+    {
+      "principle": "Contraste máximo entre secciones: alternar bloques de color sólido saturado (azul/violeta) con fondos blancos amplios",
+      "evidence": "[OBS] Hero azul (#1032CF) a pantalla completa → sección blanca con cards → sección '#somoshiberus' fondo blanco → grid clientes fondo blanco → casos éxito fondo gris oscuro (#19255A) → partners fondo azul → noticias fondo blanco → empleo fondo blanco → form fondo blanco → footer fondo navy. Confirmado en 6 páginas: el patrón de alternancia es consistente en home, sector pages y service pages.",
+      "testableRule": "Ninguna sección consecutiva debe compartir el mismo color de fondo"
+    },
+    {
+      "principle": "Tipografía como elemento visual dominante: headings grandes y bold como ancla visual de cada sección",
+      "evidence": "[OBS] H2 de hero en Montserrat 56px/64px bold blanco. H2 de secciones interiores en tamaños 28-52px bold. Confirmado con computed styles en 6 páginas: sector pages usan Montserrat 32px/36px bold para H2 de sección. El texto no compite con ornamentación — es el elemento protagonista.",
+      "testableRule": "Cada sección debe tener un heading H2 visible con peso ≥700 y tamaño ≥28px"
+    },
+    {
+      "principle": "Espaciado generoso entre secciones con agrupación interna ajustada",
+      "evidence": "[OBS] Las secciones de la home tienen padding vertical de >80px. Confirmado con CSS classes: mt-spacing-2xl (48px+). Dentro de cada sección, los elementos están agrupados con gaps de 16-24px.",
+      "testableRule": "Padding vertical de sección ≥64px. Gap entre elementos internos ≤24px."
+    },
+    {
+      "principle": "CTAs siempre como pill buttons con border-radius completo (200px)",
+      "evidence": "[OBS] Confirmado en 6 páginas: 'Contáctanos' en nav, 'Solicitar información' en heroes, 'Saber más' links, 'Ir a todos los partners', 'Ir a todos los clientes', 'Suscribirme', 'Ir a IA' — todos usan border-radius: 200px. Los inputs de formulario también usan 200px.",
+      "testableRule": "Todo botón interactivo debe usar border-radius ≥200px (estilo pill)"
+    },
+    {
+      "principle": "Contenido visual basado en fotografía real, no stock genérico ni ilustraciones abstractas",
+      "evidence": "[OBS] Hero con vídeo real de oficina. Sector pages con fotos de arquitectura corporativa (edificios de cristal en banca). Casos de éxito con fotos de clientes reales. Sin ilustraciones vectoriales decorativas.",
+      "testableRule": "Toda imagen debe ser fotografía corporativa real o logo de cliente/partner — no stock genérico"
+    },
+    {
+      "principle": "Dos familias tipográficas con roles claros: Montserrat para titulares, Lato para cuerpo",
+      "evidence": "[OBS] getComputedStyle confirma Montserrat en H2 y Lato en body en las 6 páginas analizadas. Sin excepción. Montserrat aporta peso y personalidad en headings. Lato aporta legibilidad en párrafos.",
+      "testableRule": "Headings (H1-H3) usan Montserrat. Body, labels, inputs usan Lato."
+    },
+    {
+      "principle": "Accent line violeta como marcador visual de contenido de servicio/feature",
+      "evidence": "[OBS] Descubierto en sector pages (/sectores/media, /sectores/banca): una tira horizontal de 11px × 2px en #5B53FF (violeta) aparece consistentemente bajo los títulos de service feature cards. Es un micro-elemento distintivo de la marca observado en todas las páginas de sector y servicio.",
+      "testableRule": "Cada service/feature card debe incluir un accent line de 11×2px en color accent bajo el título"
+    },
+    {
+      "principle": "Patrón de sector page repetible y consistente",
+      "evidence": "[OBS] Las 3 páginas de sector analizadas (/data-ia/ia, /sectores/media, /sectores/banca) siguen exactamente la misma estructura: Breadcrumb → Hero (foto oscura + overlay + Montserrat heading + ghost pill CTA) → Intro descriptiva → Service feature cards (3-4 columnas) → Client logo grid → Partners section (fondo azul) → CTA / Form → Footer.",
+      "testableRule": "Las landing pages de sector/servicio siguen una plantilla fija con secciones predefinidas"
+    }
+  ],
+
+  "typographyCharacter": {
+    "overallImpression": "Dual-family system con contraste claro entre headings impactantes y body legible. Los headings dominan visualmente cada sección — actúan como elementos gráficos, no solo texto.",
+    "headingPersonality": "Montserrat Bold — geométrica, ancha, con presencia industrial que refuerza el carácter tecnológico-corporativo",
+    "bodyPersonality": "Lato Regular — humanista, equilibrada, buena legibilidad en párrafos largos pero sin personalidad excesiva",
+    "hierarchyStrategy": "Escala agresiva: los H2 de sección (28-56px) son 2-3.5x más grandes que el body (16px). Los H3 (20-24px) sirven como subtítulos dentro de cards.",
+    "evidence": "[OBS] Computed styles: body=Lato 16px/24px, hero H2=Montserrat 56px/64px bold, section H2=Montserrat 28-52px bold. Font sizes encontrados: 12, 14, 15, 16, 18, 20, 24, 28, 32, 52, 56px."
+  },
+
+  "colorStrategy": {
+    "approach": "Paleta reducida de alta saturación: azul eléctrico como base, violeta como acento interactivo, navy como fondo oscuro alternativo",
+    "dominantTone": "Azul frío saturado (#1032CF) — presente en hero, secciones a sangre completa, y como overlay en fotografías",
+    "accentUsage": "Violeta (#5B53FF) — exclusivamente en elementos interactivos: botón 'Contáctanos', hover states, bordes de CTAs. Funciona como color de acción.",
+    "neutralStrategy": "Escala de grises limitada: #111111 (texto primario), #2D2D2D, #3A3A3A (texto secundario), #707070 (texto terciario), #D6D6D6 y #E8E8E8 (bordes y separadores). Fondo blanco puro #FFFFFF.",
+    "contrastPhilosophy": "Alto contraste entre texto y fondo — blanco sobre azul/navy, casi-negro sobre blanco. Sin tonos intermedios ambiguos.",
+    "evidence": "[OBS] Colors extraídos del CSS en 6 páginas: primary text rgb(17,17,17), blue rgb(16,50,207), violet rgb(91,83,255), navy rgb(25,37,90), borders rgb(59,71,122). BG colors: rgb(16,50,207), rgb(25,37,90), rgb(91,83,255), rgb(255,255,255), rgb(247,248,253) — nuevo: surface azulado #F7F8FD en service pages, rgb(243,243,243) — form bg #F3F3F3. La paleta es absolutamente consistente en las 6 páginas analizadas."
+  },
+
+  "densityLevel": {
+    "overall": "Moderadamente aireado — las secciones tienen margen amplio entre sí pero la información dentro de cada sección está bien agrupada",
+    "rating": 2,
+    "ratingScale": "1=very airy, 5=very dense",
+    "whitespacePhilosophy": "Whitespace como separador de secciones, no como lujo decorativo. Las secciones respiran entre sí (≥80px padding) pero el contenido interno es compacto. Los carruseles de cards comprimen mucho contenido en espacios horizontales.",
+    "evidence": "[OBS] Hero ocupa viewport completo. Cada sección de la home tiene padding vertical generoso. Pero dentro de los carruseles de 'Business Accelerators' y 'Casos de éxito', las cards están densamente empaquetadas con texto largo."
+  },
+
+  "borderRadiusStyle": {
+    "dominantStyle": "Pill (200px) para elementos interactivos, Sharp (0) para secciones, Suave (8-12px) para cards/contenedores",
+    "estimatedValues": {
+      "small": "4-8px (tags, badges)",
+      "medium": "12px (cards, contenedores de contenido)",
+      "large": "200px (botones, inputs de formulario)"
+    },
+    "consistency": "Alta — el estilo pill es omnipresente en CTAs e inputs. Las secciones y contenedores mantienen bordes rectos o suaves.",
+    "evidence": "[OBS] Computed: contactButton borderRadius=200px, formInput borderRadius=200px. Cards de carrusel tienen esquinas redondeadas suaves. Las secciones a sangre completa no tienen border-radius."
+  },
+
+  "shadowStyle": {
+    "usage": "Mínimo — casi ausente en la interfaz observable",
+    "intensity": "Nula o muy sutil. La separación entre secciones se logra por contraste de color de fondo, no por sombras.",
+    "layering": "No se observa un sistema de elevación basado en sombras",
+    "evidence": "[INF · high] No se detectan sombras prominentes en ningún componente visible. Las cards de carrusel están delimitadas por bordes sutiles o color de fondo, no por box-shadow."
+  },
+
+  "iconographyStyle": {
+    "family": "Outlined/linear, trazo fino",
+    "weight": "Peso de trazo uniforme, consistente con un set de iconos tipo Phosphor o similar",
+    "usage": "Funcional — iconos en nav (hamburger, search, globe), redes sociales (footer), flechas de carrusel. No decorativo.",
+    "consistency": "Alta dentro del header/nav. Los iconos de redes sociales en el footer usan estilo outlined con bordes redondeados.",
+    "evidence": "[OBS] Hamburger menu icon con 3 líneas horizontales. Search icon como lupa. Globe icon para idioma. Flechas ← → para carruseles. Social icons en footer con borde cuadrado redondeado (Instagram, X, LinkedIn, YouTube, TikTok)."
+  },
+
+  "imageryStyle": {
+    "photoStyle": "Fotografía corporativa real — oficinas, eventos de empresa, equipos trabajando. Filtro azulado/oscurecido en heroes. Sin manipulación artística excesiva.",
+    "illustrationStyle": "No se observan ilustraciones. El sistema visual es exclusivamente fotográfico + tipográfico.",
+    "decorativeElements": "Líneas verticales finas blancas como separadores en la columna de KPIs del hero (4500+, 46 áreas, 35 sedes, 15 países). No se observan blobs, gradientes decorativos ni formas geométricas sueltas.",
+    "avatarTreatment": "No se observan avatares en la home.",
+    "emptyStates": "No observables en la versión pública.",
+    "evidence": "[OBS] Hero con vídeo de oficina + overlay azul. Sección 'sobre-hiberus' con fotos reales de empleados en eventos. Sección '#somoshiberus' con foto de evento corporativo."
+  },
+
+  "interactionTone": {
+    "hoverStyle": "[INF · medium] Los links 'Saber más →' probablemente cambian color al hover. El botón 'Contáctanos' violeta probablemente aclara su fondo.",
+    "transitionCharacter": "[INF · medium] Los carruseles usan transiciones de slide horizontal con dots y flechas como controles.",
+    "feedbackApproach": "CTAs con flecha → claros. El carrusel tiene indicador visual de posición (dots + numeración '1 de 11').",
+    "focusIndicators": "[INF · low] No se observaron focus rings en el estado actual. Posible concern de accesibilidad.",
+    "evidence": "[OBS] Los carruseles tienen botones 'Anterior'/'Siguiente' y dots numerados (11 para accelerators, 5 para cases). Los links 'Saber más' incluyen flecha → como affordance de acción."
+  },
+
+  "accessibilitySignals": {
+    "contrastApproach": "Contraste alto: blanco sobre azul (#1032CF), casi-negro (#111111) sobre blanco. Cumplimiento estimado AA para texto body.",
+    "focusVisibility": "[INF · low] No se observaron focus indicators dedicados. Posible issue para navegación por teclado.",
+    "textSizing": "Body a 16px — tamaño base estándar. Headings escalados generosamente.",
+    "touchTargets": "Botones con padding 11-15px y altura cómoda. Inputs con padding 19px.",
+    "concerns": [
+      "[INF · medium] Los carruseles auto-rotan — pueden causar issues con WCAG 2.2.2 (pausa/stop). Hay botón 'Pause video' en hero, lo cual es positivo.",
+      "[INF · low] No visible skip-link destacado, aunque existe un link 'Pasar al contenido principal' en el DOM.",
+      "[INF · medium] El contraste del texto violeta (#5B53FF) sobre blanco puede ser insuficiente para AA (ratio ~4.0:1)."
+    ],
+    "evidence": "[OBS] Link 'Go to main content' presente en DOM. Botón 'Pause video' en hero. Formulario con labels asociados y campos obligatorios marcados con *."
+  },
+
+  "risksAndUnknowns": [
+    {
+      "item": "Color violeta (#5B53FF) puede no cumplir WCAG AA como color de texto sobre blanco",
+      "impact": "Los CTAs ghost (texto violeta sobre fondo blanco) podrían tener contraste insuficiente",
+      "mitigation": "En el portal SPFx, oscurecer ligeramente el violeta a ~#4A42E0 o asegurar que siempre se use como fondo con texto blanco"
+    },
+    {
+      "item": "Las fuentes Montserrat y Lato son Google Fonts — verificar política de privacidad/GDPR del portal interno",
+      "impact": "Cargar fuentes de Google CDN puede implicar transferencia de datos a terceros",
+      "mitigation": "Self-host las fuentes dentro del paquete SPFx o usar las variantes del sistema operativo como fallback"
+    },
+    {
+      "item": "El sistema visual depende mucho de fotografías corporativas reales para los heroes",
+      "impact": "Un portal interno sin banco de imágenes quedará visualmente plano",
+      "mitigation": "Definir un set de imágenes corporativas o usar el color azul sólido como hero alternativo"
+    }
+  ]
+}

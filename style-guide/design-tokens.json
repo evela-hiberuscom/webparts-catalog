@@ -1,0 +1,307 @@
+{
+  "$schema": "Design tokens extracted from visual reference analysis",
+  "$instructions": "Tokens extraídos de hiberus.com via computed styles + observación visual. Valores marcados con inferred:true son aproximaciones razonables.",
+
+  "sourceReference": {
+    "url": "https://www.hiberus.com/",
+    "capturedAt": "2026-03-23",
+    "pagesAnalyzed": ["/", "/sobre-hiberus", "/data-ia/ia", "/casos-de-exito", "/sectores/media", "/sectores/banca"]
+  },
+
+  "colors": {
+    "primary": {
+      "value": "#1032CF",
+      "rgb": "rgb(16, 50, 207)",
+      "usage": "Hero backgrounds, secciones a sangre completa, overlays fotográficos, links activos",
+      "inferred": false
+    },
+    "primaryDark": {
+      "value": "#19255A",
+      "rgb": "rgb(25, 37, 90)",
+      "usage": "Footer background, secciones oscuras alternativas, newsletter area",
+      "inferred": false
+    },
+    "primaryHover": {
+      "value": "#0D28A8",
+      "usage": "Hover del primary — oscurecido un 15%",
+      "inferred": true
+    },
+    "accent": {
+      "value": "#5B53FF",
+      "rgb": "rgb(91, 83, 255)",
+      "usage": "Botón 'Contáctanos', CTAs primarios, bordes de inputs activos, elements interactivos",
+      "inferred": false
+    },
+    "accentHover": {
+      "value": "#4A42E0",
+      "usage": "Hover del accent — oscurecido para mejorar contraste",
+      "inferred": true
+    },
+    "accentLine": {
+      "value": "#5B53FF",
+      "rgb": "rgb(91, 83, 255)",
+      "width": "11px",
+      "height": "2px",
+      "usage": "Línea decorativa bajo títulos de service/feature cards — marca visual consistente en todas las páginas de sector",
+      "inferred": false,
+      "cssSelector": "span.search-line.main-line"
+    },
+    "background": {
+      "default": "#FFFFFF",
+      "surface": "#F7F8FD",
+      "surfaceRgb": "rgb(247, 248, 253)",
+      "surfaceNote": "[OBS] Fondo sutil azulado observado en /data-ia/ia — ligeramente frío vs blanco puro",
+      "elevated": "#F5F5F5",
+      "formBackground": "#F3F3F3",
+      "formBackgroundRgb": "rgb(243, 243, 243)",
+      "formBackgroundNote": "[OBS] Fondo del bloque formulario en /sectores/banca — gris cálido suave"
+    },
+    "text": {
+      "primary": "#111111",
+      "primaryRgb": "rgb(17, 17, 17)",
+      "secondary": "#3A3A3A",
+      "secondaryRgb": "rgb(58, 58, 58)",
+      "tertiary": "#707070",
+      "tertiaryRgb": "rgb(112, 112, 112)",
+      "disabled": "#A0A0A0",
+      "disabledNote": "[INF · medium] No observado directamente, extrapolado de la escala de grises",
+      "inverse": "#FFFFFF",
+      "onPrimary": "#FFFFFF",
+      "onAccent": "#FFFFFF"
+    },
+    "border": {
+      "default": "#3B477A",
+      "defaultRgb": "rgb(59, 71, 122)",
+      "defaultNote": "Borde de inputs — tono azulado-gris, no gris puro",
+      "subtle": "#D6D6D6",
+      "subtleRgb": "rgb(214, 214, 214)",
+      "strong": "#111111"
+    },
+    "semantic": {
+      "success": "#22C55E",
+      "successNote": "[INF · low] No observado directamente, valor sugerido coherente con la paleta fría",
+      "warning": "#F59E0B",
+      "warningNote": "[INF · low] No observado directamente",
+      "error": "#FF0000",
+      "errorRgb": "rgb(255, 0, 0)",
+      "errorNote": "[OBS] Asteriscos de campos obligatorios en rojo puro #FF0000",
+      "info": "#1032CF",
+      "infoNote": "Reutiliza el primary como color informativo"
+    },
+    "neutralScale": {
+      "50": "#F9F9F9",
+      "100": "#F0F0F0",
+      "200": "#E8E8E8",
+      "300": "#D6D6D6",
+      "400": "#A0A0A0",
+      "500": "#707070",
+      "600": "#585858",
+      "700": "#3A3A3A",
+      "800": "#2D2D2D",
+      "900": "#111111",
+      "note": "Escala reconstruida a partir de los valores observados en computed styles. 50-200 son inferred."
+    },
+    "notes": "¡IMPORTANTE! #5B53FF como color de texto sobre #FFFFFF tiene ratio ~4.0:1 — bordea el límite AA. En portal SPFx, considerar oscurecer a #4A42E0 (~5.2:1) para garantizar cumplimiento."
+  },
+
+  "typography": {
+    "fontFamilies": {
+      "heading": {
+        "value": "Montserrat, sans-serif",
+        "inferred": false,
+        "confidence": "high",
+        "note": "[OBS] Confirmado por computed style en H2 del hero"
+      },
+      "body": {
+        "value": "Lato, 'Open Sans', 'Helvetica Neue', arial, system-ui, sans-serif",
+        "inferred": false,
+        "confidence": "high",
+        "note": "[OBS] Confirmado por computed style en body"
+      },
+      "mono": {
+        "value": "'Cascadia Code', 'Fira Code', monospace",
+        "inferred": true,
+        "confidence": "low",
+        "note": "No observado — sugerido para uso en portal SPFx si se necesita código"
+      }
+    },
+    "scale": {
+      "xs": { "size": "12px", "lineHeight": "16px", "usage": "Legal text, footnotes, labels de cookie" },
+      "sm": { "size": "14px", "lineHeight": "20px", "usage": "Tags, badges, metadata secundaria" },
+      "base": { "size": "16px", "lineHeight": "24px", "usage": "Body text, paragraphs, form labels, nav items" },
+      "lg": { "size": "18px", "lineHeight": "26px", "usage": "Lead paragraphs, subtitles" },
+      "xl": { "size": "20px", "lineHeight": "28px", "usage": "H3 cards, subtítulos de sección" },
+      "2xl": { "size": "24px", "lineHeight": "32px", "usage": "H3 large, subtítulos destacados, testimonial quotes (Montserrat semibold 600)" },
+      "3xl": { "size": "32px", "lineHeight": "40px", "usage": "H2 secciones secundarias" },
+      "4xl": { "size": "52px", "lineHeight": "60px", "usage": "H2 secciones principales, stats grandes" },
+      "hero": { "size": "56px", "lineHeight": "64px", "usage": "Hero principal H2" }
+    },
+    "weights": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    },
+    "letterSpacing": {
+      "tight": "-0.02em",
+      "tightNote": "[INF · medium] Los headings parecen tener tracking ligeramente negativo",
+      "normal": "0em",
+      "wide": "0.05em",
+      "wideNote": "[INF · low] Posible uso en labels uppercase, no confirmado"
+    },
+    "notes": "El sistema tipográfico es binario: Montserrat bold para impacto (headings) y Lato regular para legibilidad (body). No hay niveles intermedios de peso en los headings observados — siempre bold 700."
+  },
+
+  "spacing": {
+    "baseUnit": "8px",
+    "baseUnitNote": "[INF · high] Los paddings y gaps observados son múltiplos de 4px y 8px (11px, 15px, 19px, 24px ≈ 3×8, 2×8, 2.375×8, 3×8). El sistema parece basarse en 8px con ajustes de ±4px.",
+    "scale": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px",
+      "3xl": "64px",
+      "4xl": "96px"
+    },
+    "sectionGap": "80-120px",
+    "sectionGapNote": "[INF · high] Las secciones de la home tienen padding vertical muy generoso, estimado en 80-120px por observación visual",
+    "componentInternalPadding": "16-24px",
+    "notes": "Regla: entre secciones, espacio ≥64px. Dentro de componentes, ≤24px. Entre elementos hermanos, 8-16px."
+  },
+
+  "radii": {
+    "none": "0px",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "xl": "16px",
+    "intermediate": "20px",
+    "intermediateNote": "[OBS] Observado en /data-ia/ia — border-radius intermedio entre 12px y pill, usado en algunos contenedores y cards",
+    "bottomOnly": "0px 0px 8px 8px",
+    "bottomOnlyNote": "[OBS] Dropdown menus en /casos-de-exito: redondeado solo esquinas inferiores",
+    "pill": "200px",
+    "full": "9999px",
+    "dominantStyle": "pill (200px) para botones e inputs, 0-12px para contenedores, 20px intermedio en contenedores destacados",
+    "notes": "[OBS] Computed: buttons=200px, inputs=200px. Las cards y contenedores usan radii suaves o ninguno. Dropdown menus usan 0px top + 8px bottom. El estilo pill es el rasgo visual más distintivo de la marca."
+  },
+
+  "shadows": {
+    "sm": "0 1px 2px rgba(0, 0, 0, 0.05)",
+    "md": "0 4px 8px rgba(0, 0, 0, 0.08)",
+    "lg": "0 8px 24px rgba(0, 0, 0, 0.12)",
+    "xl": "0 16px 48px rgba(0, 0, 0, 0.16)",
+    "usage": "Mínimo. El sistema visual no depende de sombras para crear jerarquía — usa contraste de color de fondo.",
+    "notes": "[INF · high] Valores sugeridos para portal SPFx. La web de Hiberus prácticamente no usa box-shadow. La separación visual se logra alternando fondos (azul/blanco/navy)."
+  },
+
+  "borders": {
+    "width": {
+      "thin": "0.64px",
+      "thinNote": "[OBS] Computed en inputs y CTAs ghost: 0.64px (≈ subpixel rendering)",
+      "medium": "1px",
+      "thick": "2px"
+    },
+    "style": "solid",
+    "usage": "Bordes en inputs de formulario (azul-gris #3B477A), CTAs ghost (violeta #5B53FF), separadores sutiles",
+    "notes": "Los bordes son discretos — nunca dominan visualmente. El color de borde de inputs es azulado, no gris puro, lo que refuerza la paleta de marca."
+  },
+
+  "layout": {
+    "maxContentWidth": "1200px",
+    "maxContentWidthNote": "[INF · high] La mayoría del contenido parece contenido dentro de ~1200px con padding lateral. Las secciones de color van a sangre completa.",
+    "columns": "12",
+    "columnsNote": "[INF · medium] Grid implícito. Las secciones 50/50 (texto + imagen) sugieren 6+6. Los grids de logos usan 3-4 columnas.",
+    "gutter": "24px",
+    "gutterNote": "[INF · medium] Estimado por espaciado entre cards y columnas",
+    "sidebarWidth": "N/A — no hay sidebar en la web pública",
+    "headerHeight": "72-80px",
+    "headerHeightNote": "[INF · high] Header sticky con logo + nav, altura visual estimada",
+    "breakpoints": {
+      "sm": "576px",
+      "md": "768px",
+      "lg": "992px",
+      "xl": "1200px",
+      "inferred": true,
+      "note": "[INF · medium] Breakpoints Bootstrap estándar — el sitio parece usar un framework basado en 12 columnas compatible"
+    },
+    "cardWidths": {
+      "threeCol": "288px",
+      "twoCol": "448px",
+      "fourCol": "~220px",
+      "note": "[OBS] Anchos reales de cards según número de columnas. Observados en /sectores/media y /sectores/banca."
+    },
+    "layoutVariants": {
+      "columnTwo": "2 columnas — 50/50 split (foto + contenido)",
+      "columnThree": "3 columnas — cards de servicio (288px cada una)",
+      "columnFour": "4 columnas — service feature cards compactas",
+      "note": "[OBS] Clases CSS: column-two, column-three, column-four. Observadas en vlsuite layout system."
+    },
+    "notes": "El patrón de layout principal es: secciones full-width con contenido centrado a max-width ~1200px. Dentro de secciones, layouts de 1 columna (hero, texto central), 2 columnas (50/50 split), 3 columnas (service cards, case studies) o 4 columnas (feature grid compacto)."
+  },
+
+  "motionHints": {
+    "transitionDuration": "300ms",
+    "transitionDurationNote": "[INF · medium] Velocidad típica estimada para hover states y transiciones de carrusel",
+    "transitionEasing": "ease-in-out",
+    "hoverTransform": "opacity change + color shift",
+    "hoverTransformNote": "[INF · medium] Los links 'Saber más →' probablemente cambian opacity/color al hover",
+    "animationStyle": "Slide horizontal en carruseles. Fade-in en scroll (posiblemente con Intersection Observer).",
+    "confidence": "medium",
+    "notes": "El sitio usa carruseles con controles de navegación (dots + arrows). El vídeo hero tiene botón de pausa explícito."
+  },
+
+  "accessibilityNotes": {
+    "contrastRatioEstimate": "AA para body text (#111111 sobre #FFFFFF = 18.9:1). Borderline para accent text (#5B53FF sobre #FFFFFF ≈ 4.0:1).",
+    "focusIndicatorStyle": "[INF · low] No observado — necesita implementación dedicada en portal SPFx",
+    "minimumTouchTarget": "44px estimado — botones con padding 11-15px + texto ≥16px",
+    "concerns": [
+      "Contraste de #5B53FF sobre blanco puede ser insuficiente",
+      "Focus indicators no observados necesitan implementación explícita",
+      "Carruseles auto-rotantes deben tener pausa accesible"
+    ],
+    "notes": "En el portal SPFx: asegurar focus rings visibles (outline: 2px solid #5B53FF, offset: 2px), skip links funcionales, y testar con axe-core."
+  },
+
+  "implementationHints": {
+    "cssStrategy": "CSS custom properties (~50 variables) + utility classes para spacing y typography",
+    "fluentUIMapping": {
+      "themePrimary": "#1032CF",
+      "themeDark": "#19255A",
+      "themeDarker": "#0D1A40",
+      "themeLighter": "#5B53FF",
+      "themeLighterAlt": "#F0EFFF",
+      "neutralPrimary": "#111111",
+      "neutralSecondary": "#3A3A3A",
+      "neutralTertiary": "#707070",
+      "neutralLight": "#E8E8E8",
+      "neutralLighter": "#F5F5F5",
+      "neutralLighterAlt": "#FAFAFA",
+      "white": "#FFFFFF",
+      "note": "Mapeo a ITheme de Fluent UI v8 compatible con SPFx"
+    },
+    "cssVariablePrefix": "--hiberus-",
+    "themeStructure": "Flat token system con categorías: --hiberus-color-*, --hiberus-font-*, --hiberus-space-*, --hiberus-radius-*, --hiberus-shadow-*",
+    "cmsBlockSystem": {
+      "note": "[OBS] El sitio usa Drupal con vlsuite blocks. La anatomía de bloques observada sirve como referencia para definir web parts SPFx equivalentes.",
+      "blockTypes": [
+        "vlsuite-block__hero",
+        "vlsuite-block__banner",
+        "vlsuite-block__text",
+        "vlsuite-block__services",
+        "vlsuite-block__text-link",
+        "vlsuite-block__dinamic-list",
+        "vlsuite-block__highlights",
+        "vlsuite-block__video",
+        "vlsuite-block__success-stories-referenced",
+        "vlsuite-block__testimonials",
+        "vlsuite-block__formulario"
+      ],
+      "spacingClasses": ["mt-spacing-2xl"],
+      "bgClasses": ["bg-white-color", "bg-box-secondary-color", "bg-primary-color"],
+      "sizeClasses": ["size-small-line", "heading-level-h2", "button-simple"]
+    },
+    "notes": "Para SPFx: definir tokens como CSS custom properties en el root del web part. Mapear a Fluent UI ITheme para componentes nativos. Las pill buttons necesitan override de border-radius en los DefaultButton/PrimaryButton de Fluent."
+  }
+}

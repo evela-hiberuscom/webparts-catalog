@@ -1,0 +1,17 @@
+[     190ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.hiberus.com/casos-de-exito:0
+[     295ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://consent.cookiebot.com/uc.js:1
+[     296ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://consent.cookiebot.com/uc.js:1
+[     342ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://consent.cookiebot.com/uc.js:1
+[     343ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://consent.cookiebot.com/uc.js:1
+[     553ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.gstatic.com/recaptcha/releases/qm3PSRIx10pekcnS9DjGnjPW/recaptcha__es.js:288
+[     563ms] [ERROR] Framing 'https://www.google.com/' violates the following report-only Content Security Policy directive: "frame-src 'self' https://consent.cookiebot.com https://consentcdn.cookiebot.com https://www.googletagmanager.com https://td.doubleclick.net". The violation has been logged, but no further action has been taken.
+ @ https://www.gstatic.com/:0
+[     785ms] [ERROR] Framing 'https://www.google.com/' violates the following report-only Content Security Policy directive: "frame-src 'self' https://consent.cookiebot.com https://consentcdn.cookiebot.com https://www.googletagmanager.com https://td.doubleclick.net". The violation has been logged, but no further action has been taken.
+ @ https://www.gstatic.com/:0
+[     812ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.gstatic.com/recaptcha/releases/qm3PSRIx10pekcnS9DjGnjPW/recaptcha__es.js:575
+[     813ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.gstatic.com/recaptcha/releases/qm3PSRIx10pekcnS9DjGnjPW/recaptcha__es.js:575
+[     822ms] [WARNING] Uno o más elementos no existen. La función changeHtml3 no se ejecutará. @ :1
+[    1128ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://script.hotjar.com/modules.6a0f3932cb1341a35c18.js:3
+[    1129ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://script.hotjar.com/modules.6a0f3932cb1341a35c18.js:3
+[    1193ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.gstatic.com/recaptcha/releases/qm3PSRIx10pekcnS9DjGnjPW/recaptcha__es.js:665
+[    1193ms] [ERROR] The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy. @ https://www.gstatic.com/recaptcha/releases/qm3PSRIx10pekcnS9DjGnjPW/recaptcha__es.js:665
