@@ -1,34 +1,211 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
-.universalAppLauncher {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
-  color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+.root {
+  padding: 24px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(16, 50, 207, 0.04), rgba(91, 83, 255, 0.08));
+  border: 1px solid rgba(16, 50, 207, 0.12);
+  color: #111111;
 }
 
-.welcome {
-  text-align: center;
+.dark {
+  background: linear-gradient(135deg, rgba(16, 50, 207, 0.16), rgba(91, 83, 255, 0.2));
 }
 
-.welcomeImage {
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.title {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  color: #111111;
+}
+
+.subtitle {
+  margin-top: 4px;
+  color: #3a3a3a;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metaPill,
+.audienceChip,
+.badge,
+.featuredChip,
+.mutedChip {
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.metaPill,
+.featuredChip {
+  background: #1032cf;
+  color: #ffffff;
+}
+
+.metaText,
+.mutedChip {
+  color: #3a3a3a;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.notice {
+  border-radius: 12px;
+}
+
+.sourceLine,
+.environmentLine {
+  font-size: 12px;
+  color: #707070;
+}
+
+.environmentLine {
+  margin-top: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(16, 50, 207, 0.08);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.iconFrame {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(16, 50, 207, 0.08);
+  color: #1032cf;
+}
+
+.badge {
+  background: rgba(91, 83, 255, 0.12);
+  color: #4a42e0;
+}
+
+.cardTitle {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+.cardDescription {
+  color: #3a3a3a;
+  min-height: 44px;
+}
+
+.audienceRow,
+.pillRow,
+.filterRow,
+.audienceSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.audienceRow {
+  min-height: 24px;
+}
+
+.audienceChip {
+  background: rgba(16, 50, 207, 0.08);
+  color: #1032cf;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.cardAction,
+.cardActionDisabled {
+  font-weight: 700;
+}
+
+.cardActionDisabled {
+  color: #a0a0a0;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.searchBox {
   width: 100%;
-  max-width: 420px;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+.filterLabel {
+  font-weight: 700;
+  color: #111111;
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
+.filterRow,
+.audienceSummary {
+  align-items: center;
+}
+
+.filterPill {
+  border-radius: 9999px;
+}
+
+.filterPillActive {
+  background: #1032cf;
+  color: #ffffff;
+}
+
+.resetButton,
+.emptyAction {
+  border-radius: 9999px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px dashed rgba(16, 50, 207, 0.2);
+}
+
+.emptyTitle {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+.emptyMessage {
+  color: #3a3a3a;
 }

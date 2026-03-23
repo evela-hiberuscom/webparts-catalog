@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "reserva-rapida-client-side-solution",
+    "id": "a9d3dff1-fe98-4e05-aba0-dc01d0446d14",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Paquete Webparts",
+      "websiteUrl": "https://hiberus.com",
+      "privacyUrl": "https://hiberus.com/politica-de-privacidad",
+      "termsOfUseUrl": "https://hiberus.com/aviso-legal",
+      "mpnId": "PaqueteWebparts-SPFx"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SPFx launcher for fast resource booking with category and site filters."
+      },
+      "longDescription": {
+        "default": "Reserva rapida centraliza accesos a reservas de salas, puestos, parking o equipamiento. Consume SharePoint list, same-origin JSON or static config, validates booking links and renders loading, empty, partial and error states explicitly."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Reserva rápida",
+        "description": "Activa el web part de reserva rápida de recursos frecuentes.",
+        "id": "6a34a24c-b123-4055-93aa-fed090a2ceb2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/reserva-rapida.sppkg"
+  }
+}

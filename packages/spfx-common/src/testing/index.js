@@ -1,4 +1,4 @@
-export function createProjectTestChecklist(projectSlug) {
+function createProjectTestChecklist(projectSlug) {
   return {
     projectSlug,
     requiredChecks: [
@@ -11,7 +11,7 @@ export function createProjectTestChecklist(projectSlug) {
   };
 }
 
-export function createAsyncStateFixture(overrides = {}) {
+function createAsyncStateFixture(overrides = {}) {
   return {
     hasData: false,
     hasError: false,
@@ -20,3 +20,8 @@ export function createAsyncStateFixture(overrides = {}) {
     ...overrides
   };
 }
+
+module.exports = {
+  createProjectTestChecklist,
+  createAsyncStateFixture
+};

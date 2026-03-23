@@ -1,0 +1,225 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.automaticWeeklySummary {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(91, 83, 255, 0.28), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(16, 50, 207, 0.18), transparent 42%),
+    linear-gradient(180deg, #0f1736 0%, #111a3e 100%);
+  color: #ffffff;
+  box-shadow: 0 16px 40px rgba(17, 17, 17, 0.18);
+}
+
+.header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.headerCopy {
+  min-width: 0;
+}
+
+.accentLine {
+  display: block;
+  width: 11px;
+  height: 2px;
+  margin-bottom: 14px;
+  background: #5b53ff;
+  border-radius: 999px;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.subtitle {
+  display: block;
+  max-width: 720px;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.periodPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.summaryMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metaChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.statePanel {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 28px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.stateIcon {
+  font-size: 28px;
+  color: #5b53ff;
+}
+
+.stateTitle {
+  margin: 16px 0 8px;
+  color: #ffffff;
+}
+
+.stateMessage {
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.retryButton {
+  margin-top: 18px;
+  border-radius: 999px;
+  border-color: #ffffff;
+  color: #ffffff;
+  background: transparent;
+}
+
+.highlightGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 100%;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.partialCard {
+  border-color: rgba(91, 83, 255, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(91, 83, 255, 0.18);
+}
+
+.cardTopRow,
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(91, 83, 255, 0.16);
+  color: #f2f0ff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cardDate,
+.mutedAction,
+.sourceLabel {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.cardSummary {
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.6;
+}
+
+.sourceLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cardButton {
+  min-height: 32px;
+  border-radius: 999px;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+}
+
+.partialNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 16px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(91, 83, 255, 0.16);
+  color: #efeefe;
+}
+
+@media screen and (max-width: 640px) {
+  .automaticWeeklySummary {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+}

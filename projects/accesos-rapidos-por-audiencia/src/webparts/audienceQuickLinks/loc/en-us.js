@@ -1,0 +1,31 @@
+define([], function () {
+  return {
+    PropertyPaneDescription: 'Configuración de accesos rápidos por audiencia',
+    BasicGroupName: 'Contenido y audiencia',
+    TitleFieldLabel: 'Título del web part',
+    DescriptionFieldLabel: 'Descripción breve',
+    DataSourceTypeFieldLabel: 'Origen de datos',
+    SharePointListLabel: 'Lista SharePoint',
+    JsonUrlLabel: 'URL JSON (mismo origen)',
+    StaticConfigLabel: 'Catálogo interno',
+    ListTitleOrUrlFieldLabel: 'Nombre de la lista o URL JSON del mismo origen',
+    AudienceModeFieldLabel: 'Modo de audiencia',
+    GroupLabel: 'Grupo',
+    DepartmentLabel: 'Departamento',
+    CountryLabel: 'País',
+    RoleLabel: 'Rol',
+    HybridLabel: 'Híbrido',
+    DefaultCategoryFieldLabel: 'Categoría por defecto',
+    MaxItemsFieldLabel: 'Máximo de tarjetas',
+    ShowAudienceHintFieldLabel: 'Mostrar tokens de audiencia resueltos',
+    AppLocalEnvironmentSharePoint: 'La app se está ejecutando en tu entorno local como web part de SharePoint',
+    AppLocalEnvironmentTeams: 'La app se está ejecutando en tu entorno local como app de Microsoft Teams',
+    AppLocalEnvironmentOffice: 'La app se está ejecutando en tu entorno local en office.com',
+    AppLocalEnvironmentOutlook: 'La app se está ejecutando en tu entorno local en Outlook',
+    AppSharePointEnvironment: 'La app se está ejecutando en una página de SharePoint',
+    AppTeamsTabEnvironment: 'La app se está ejecutando en Microsoft Teams',
+    AppOfficeEnvironment: 'La app se está ejecutando en office.com',
+    AppOutlookEnvironment: 'La app se está ejecutando en Outlook',
+    UnknownEnvironment: 'La app se está ejecutando en un entorno desconocido'
+  };
+});

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "725d1f2f-c9a8-4559-bbb3-f24bae6d733b",
+  "alias": "AudienceQuickLinksWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Navegación"
+      },
+      "title": {
+        "default": "Accesos rápidos por audiencia"
+      },
+      "description": {
+        "default": "Muestra accesos distintos según perfil, área, país o grupos del usuario para personalizar la intranet."
+      },
+      "officeFabricIconFontName": "Link",
+      "properties": {
+        "title": "Accesos rápidos por audiencia",
+        "description": "Muestra accesos distintos según perfil, área, país o grupos del usuario para personalizar la intranet.",
+        "dataSourceType": "StaticConfig",
+        "listTitleOrUrl": "",
+        "audienceMode": "group",
+        "defaultCategory": "General",
+        "maxItems": 12,
+        "showAudienceHint": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.personalFavorites {
+  overflow: hidden;
+  padding: 24px;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top right, rgba(91, 83, 255, 0.12), transparent 38%),
+    linear-gradient(135deg, #ffffff 0%, #f7f8fd 100%);
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  box-shadow: 0 12px 30px rgba(16, 50, 207, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.headerCopy {
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5b53ff;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  color: #111111;
+}
+
+.description {
+  margin: 8px 0 0;
+  max-width: 52rem;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3a3a3a;
+}
+
+.headerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.metaPill,
+.metaPillSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metaPill {
+  background: #111111;
+  color: #ffffff;
+}
+
+.metaPillSecondary {
+  border: 1px solid #d6d6d6;
+  background: #ffffff;
+  color: #3a3a3a;
+}
+
+.loadingState {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.emptyState {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px dashed #d6d6d6;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.emptyEyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #5b53ff;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.emptyText,
+.emptyMeta {
+  margin: 8px 0 0;
+  color: #3a3a3a;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  min-height: 100%;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(16, 50, 207, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #5b53ff;
+  box-shadow: 0 14px 30px rgba(16, 50, 207, 0.12);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+}
+
+.cardLink:focus-visible {
+  outline: 2px solid #5b53ff;
+  outline-offset: 3px;
+}
+
+.cardTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.iconBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: rgba(91, 83, 255, 0.1);
+  color: #5b53ff;
+  font-size: 18px;
+}
+
+.badge,
+.partialTag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge {
+  background: rgba(16, 50, 207, 0.1);
+  color: #1032cf;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.cardDescription {
+  margin: 10px 0 0;
+  color: #3a3a3a;
+  line-height: 1.5;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.actionLink {
+  font-weight: 700;
+  color: #1032cf;
+}
+
+.partialTag {
+  border: 1px solid #d6d6d6;
+  color: #707070;
+}
+
+@media only screen and (max-width: 640px) {
+  .personalFavorites {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .headerMeta {
+    justify-content: flex-start;
+  }
+}

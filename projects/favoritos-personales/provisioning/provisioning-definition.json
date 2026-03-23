@@ -9,6 +9,57 @@
       "purpose": "favoritos personales"
     }
   ],
+  "favoritesList": {
+    "name": "FavoritesList",
+    "ownership": {
+      "mode": "per-user-items",
+      "ownerField": "FavoriteOwner",
+      "ownerFieldInternalName": "FavoriteOwnerId",
+      "rule": "each item belongs to a single SharePoint user and only that user's rows are returned"
+    },
+    "filtering": {
+      "mode": "current-user",
+      "expression": "FavoriteOwnerId eq {currentUserId}",
+      "runtime": "SharePoint REST"
+    },
+    "minimumSchema": [
+      {
+        "name": "Title",
+        "type": "Single line text",
+        "required": true
+      },
+      {
+        "name": "OpenUrl",
+        "type": "Single line text",
+        "required": true
+      },
+      {
+        "name": "SortOrder",
+        "type": "Number",
+        "required": false
+      },
+      {
+        "name": "Icon",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "Type",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "Category",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "Featured",
+        "type": "Yes/No",
+        "required": false
+      }
+    ]
+  },
   "acceptanceCriteria": [
     "Muestra favoritos del usuario actual.",
     "Permite abrir cada favorito válido.",
@@ -19,5 +70,10 @@
     "Los favoritos sin URL deben mostrarse como parciales o excluirse según política.",
     "Si el usuario no tiene favoritos, el estado empty debe ser claro.",
     "Si no existe orden explícito, ordenar alfabéticamente por título."
+  ],
+  "implementationNotes": [
+    "V1 soporta configuración estática y una lista SharePoint real sin permisos Graph nuevos.",
+    "FavoritesList filtra por el usuario actual mediante FavoriteOwnerId.",
+    "No se han introducido dependencias Graph ni APIs externas."
   ]
 }

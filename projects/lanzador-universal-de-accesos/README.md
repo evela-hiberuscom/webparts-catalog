@@ -1,77 +1,27 @@
-# lanzador-universal-de-accesos
+# Lanzador universal de accesos
 
-## Summary
+Web part SPFx para exponer accesos corporativos con grid configurable, filtros por categoría y fallback local. La primera versión usa un catálogo JSON del panel de propiedades y deja preparada la transición a una `SharePoint List` mediante la misma arquitectura por capas.
 
-Short summary on functionality and used technologies.
+## Implemented
 
-[picture of the solution in action, if possible]
+- SPFx 1.22.2 con React 17 y Fluent UI v8
+- `components`, `hooks`, `services`, `repositories`, `models` y `utils`
+- dependencia local a `@paquete/spfx-common`
+- estado `loading`, `empty`, `partialData` y `ready`
+- tipografías documentadas como self-host dentro de cada proyecto
 
-## Used SharePoint Framework Version
+## Build
 
-![version](https://img.shields.io/badge/version-1.22.2-green.svg)
+- `npm install`
+- `heft test --clean --production`
+- `heft package-solution --production`
 
-## Applies to
+Validated on 2026-03-23 with `npm run build` from the project root.
 
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant)
+## Data strategy
 
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
+La primera versión consume `launchItemsJson` desde el panel de propiedades y usa un catálogo de ejemplo si el JSON no existe o no es válido. El contrato de datos queda aislado en el repositorio y en el servicio para sustituirlo posteriormente por un origen SharePoint sin rehacer la UI.
 
-## Prerequisites
+## Fonts
 
-> Any special pre-requisites?
-
-## Solution
-
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
-
-## Version history
-
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
-
-## Disclaimer
-
-**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
-
----
-
-## Minimal Path to Awesome
-
-- Clone this repository
-- Ensure that you are at the solution folder
-- in the command-line run:
-  - `npm install -g @rushstack/heft`
-  - `npm install`
-  - `heft start`
-
-> Include any additional steps as needed.
-
-Other build commands can be listed using `heft --help`.
-
-## Features
-
-Description of the extension that expands upon high-level summary above.
-
-This extension illustrates the following concepts:
-
-- topic 1
-- topic 2
-- topic 3
-
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
-
-## References
-
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
-- [Heft Documentation](https://heft.rushstack.io/)
+Montserrat y Lato se deben alojar localmente dentro de `src/assets/fonts/` cuando el paquete de tipografías esté disponible. Mientras tanto, el stack cae a `Segoe UI` sin depender de CDN externas.

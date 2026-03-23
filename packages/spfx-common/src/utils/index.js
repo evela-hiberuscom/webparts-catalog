@@ -1,12 +1,26 @@
-export function createSafeExternalLink(url) {
+function isDangerousProtocol(value) {
+  return /^(javascript|data|vbscript):/i.test(value);
+}
+
+function isAllowedDirectLink(value) {
+  return /^(https?:\/\/|mailto:|tel:|\/|#|\?)/i.test(value);
+}
+
+function createSafeExternalLink(url) {
+  const value = typeof url === "string" ? url.trim() : "";
+
+  if (!value || isDangerousProtocol(value) || !isAllowedDirectLink(value)) {
+    return undefined;
+  }
+
   return {
-    href: url,
+    href: value,
     rel: "noopener noreferrer",
     target: "_blank"
   };
 }
 
-export function classifyAsyncState({ hasData = false, hasError = false, isLoading = false, isPartial = false }) {
+function classifyAsyncState({ hasData = false, hasError = false, isLoading = false, isPartial = false }) {
   if (isLoading) {
     return "loading";
   }
@@ -26,6 +40,12 @@ export function classifyAsyncState({ hasData = false, hasError = false, isLoadin
   return "ready";
 }
 
-export function ensureUniqueStrings(values = []) {
+function ensureUniqueStrings(values = []) {
   return [...new Set(values.filter(Boolean))];
 }
+
+module.exports = {
+  createSafeExternalLink,
+  classifyAsyncState,
+  ensureUniqueStrings
+};

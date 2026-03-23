@@ -1,4 +1,4 @@
-export const sharedComponentContracts = {
+const sharedComponentContracts = {
   sectionHeading: {
     requiredProps: ["title"],
     optionalProps: ["subtitle", "alignment", "theme", "ctaText", "ctaUrl"]
@@ -11,4 +11,8 @@ export const sharedComponentContracts = {
     requiredProps: ["state"],
     optionalProps: ["title", "description", "retryLabel"]
   }
+};
+
+module.exports = {
+  sharedComponentContracts
 };

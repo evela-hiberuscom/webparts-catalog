@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "accesos-rapidos-por-audiencia",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "AudienceQuickLinks",
+    "componentDescription": "Muestra accesos distintos según perfil, área, país o grupos del usuario para personalizar la intranet.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "accesos-rapidos-por-audiencia",
+    "libraryId": "133ab025-dec0-42ee-b931-88f753cc9d0f",
+    "solutionShortDescription": "accesos-rapidos-por-audiencia description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

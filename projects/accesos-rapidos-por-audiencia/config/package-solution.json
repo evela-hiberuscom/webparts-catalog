@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "accesos-rapidos-por-audiencia-client-side-solution",
+    "id": "133ab025-dec0-42ee-b931-88f753cc9d0f",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Accesos segmentados por audiencia para SharePoint Online."
+      },
+      "longDescription": {
+        "default": "Web part SPFx que resuelve el contexto del usuario, aplica matching por audiencia y muestra accesos relevantes con fallback genérico, filtros por categoría y estados de carga, vacío y error."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "accesos-rapidos-por-audiencia Feature",
+        "description": "The feature that activates elements of the accesos-rapidos-por-audiencia solution.",
+        "id": "a91e5ae8-527b-46dd-94fa-e95ba727fa8e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/accesos-rapidos-por-audiencia.sppkg"
+  }
+}

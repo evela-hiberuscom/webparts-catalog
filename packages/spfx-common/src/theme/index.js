@@ -1,4 +1,4 @@
-export const hiberusThemeTokens = {
+const hiberusThemeTokens = {
   palette: {
     primary: "#1032CF",
     primaryDark: "#19255A",
@@ -30,7 +30,7 @@ export const hiberusThemeTokens = {
   }
 };
 
-export const selfHostedFontManifest = {
+const selfHostedFontManifest = {
   families: [
     {
       family: "Montserrat",
@@ -45,4 +45,9 @@ export const selfHostedFontManifest = {
   ],
   strategy: "self-host",
   cspSafe: true
+};
+
+module.exports = {
+  hiberusThemeTokens,
+  selfHostedFontManifest
 };

@@ -1,4 +1,6 @@
-export * from "./theme/index.js";
-export * from "./utils/index.js";
-export * from "./components/index.js";
-export * from "./testing/index.js";
+module.exports = {
+  ...require("./theme/index.js"),
+  ...require("./utils/index.js"),
+  ...require("./components/index.js"),
+  ...require("./testing/index.js")
+};

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "favoritos-personales",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "PersonalFavorites",
+    "componentDescription": "Muestra una colección personal de accesos favoritos para acelerar la navegación diaria del usuario.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "favoritos-personales",
+    "libraryId": "a748fcc4-9b5e-4d0d-bb09-4da5f33ac444",
+    "solutionShortDescription": "favoritos-personales description",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-03-23T00:00:00Z",
+  "updatedAt": "2026-03-23T18:00:00.000Z",
   "decisions": [
     {
       "id": "DECISION-001",
@@ -28,6 +28,26 @@
       "context": "Automatización de `yo @microsoft/sharepoint` en Windows",
       "decision": "En Windows el wrapper de scaffold invocará `yo` vía PowerShell y normalizará el layout anidado al root de `projects/<slug>`.",
       "rationale": "Evita prompts inesperados, respeta argumentos completos y mantiene la estructura física pactada para todos los workers.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-004",
+      "scope": "shared-package",
+      "context": "Compatibilidad runtime de `@paquete/spfx-common`",
+      "decision": "El paquete compartido se mantendrá en CommonJS para ser consumible tanto por SPFx como por Jest sin transformaciones adicionales.",
+      "rationale": "Evita errores de parsing en tests y respeta el consumo runtime del proyecto actual.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-005",
+      "scope": "shared-package",
+      "context": "Seguridad de enlaces en utilidades comunes",
+      "decision": "`createSafeExternalLink` debe validar protocolos permitidos y devolver `undefined` cuando reciba entradas peligrosas o malformadas.",
+      "rationale": "Evita que varios proyectos hereden sinks inseguros para `javascript:`, `data:` o valores no saneados.",
       "appliesTo": [
         "all-projects"
       ]

@@ -21,7 +21,8 @@
     "@microsoft/sp-property-pane": "1.22.2",
     "@microsoft/sp-webpart-base": "1.22.2",
     "@microsoft/sp-lodash-subset": "1.22.2",
-    "@microsoft/sp-office-ui-fabric-core": "1.22.2"
+    "@microsoft/sp-office-ui-fabric-core": "1.22.2",
+    "@paquete/spfx-common": "file:../../packages/spfx-common"
   },
   "devDependencies": {
     "@rushstack/eslint-config": "4.5.2",

@@ -126,8 +126,6 @@
           "type": "enum",
           "values": [
             "SharePointList",
-            "JsonUrl",
-            "UserProfileSource",
             "StaticConfig"
           ],
           "default": "SharePointList"
@@ -388,7 +386,7 @@
       },
       "contracts": {
         "IWebPartProps": {
-          "dataSourceType": "SharePointList|JsonUrl|UserProfileSource|StaticConfig",
+          "dataSourceType": "SharePointList|StaticConfig",
           "listTitleOrUrl": "string",
           "maxItems": "number"
         },

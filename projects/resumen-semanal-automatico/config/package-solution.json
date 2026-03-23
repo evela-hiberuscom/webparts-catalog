@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "resumen-semanal-automatico-client-side-solution",
+    "id": "9de09c35-9613-4774-82fc-ce6a7d44dff2",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "resumen-semanal-automatico description"
+      },
+      "longDescription": {
+        "default": "resumen-semanal-automatico description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "resumen-semanal-automatico Feature",
+        "description": "The feature that activates elements of the resumen-semanal-automatico solution.",
+        "id": "98f0b73a-209c-4b61-83d9-65f30791a988",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/resumen-semanal-automatico.sppkg"
+  }
+}
