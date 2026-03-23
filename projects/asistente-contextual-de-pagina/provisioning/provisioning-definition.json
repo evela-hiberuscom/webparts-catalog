@@ -2,7 +2,22 @@
   "projectSlug": "asistente-contextual-de-pagina",
   "archetype": "general",
   "rowId": "reciRdVyy2qbjxn0a",
-  "sources": [],
+  "sources": [
+    {
+      "dataSourceType": "SharePointList",
+      "listTitleOrUrl": "ContextualHelp",
+      "purpose": "Catálogo principal de ayuda contextual"
+    },
+    {
+      "dataSourceType": "JsonUrl",
+      "listTitleOrUrl": "/SiteAssets/contextual-help.json",
+      "purpose": "Origen same-origin ligero para escenarios sin lista"
+    },
+    {
+      "dataSourceType": "StaticConfig",
+      "purpose": "Respaldo local embebido para `empty` o arranque"
+    }
+  ],
   "acceptanceCriteria": [
     "Muestra ayuda específica cuando existe.",
     "Hace fallback de forma controlada.",
@@ -11,5 +26,18 @@
   "businessRules": [
     "Si no hay ayuda específica para el contexto, puede mostrarse una ayuda genérica o empty según configuración.",
     "Si faltan enlaces relacionados, la ayuda sigue siendo válida."
-  ]
+  ],
+  "inferredContract": {
+    "dataSourceType": [
+      "SharePointList",
+      "JsonUrl",
+      "StaticConfig"
+    ],
+    "fallbackMode": [
+      "generic",
+      "empty"
+    ],
+    "collapsedByDefault": true,
+    "contextKeyResolution": "contexto de página o título de la vista actual, con override opcional"
+  }
 }

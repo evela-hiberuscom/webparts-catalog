@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "asistente-contextual-de-pagina-client-side-solution",
+    "id": "c8589ec7-6607-41ad-b966-e8d82b6d5796",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Asistente contextual de página"
+      },
+      "longDescription": {
+        "default": "Web part SPFx para ofrecer ayuda contextual embebida según la página, sección o contexto del usuario."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Asistente contextual de página Feature",
+        "description": "Activa el web part contextual para SharePoint Online.",
+        "id": "6c0546a9-e19e-4b3c-96c2-c8492c13282c",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/asistente-contextual-de-pagina.sppkg"
+  }
+}

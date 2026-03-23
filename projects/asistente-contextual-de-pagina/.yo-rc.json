@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "asistente-contextual-de-pagina",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "PageContextAssistant",
+    "componentDescription": "Asistente contextual de página",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "asistente-contextual-de-pagina",
+    "libraryId": "c8589ec7-6607-41ad-b966-e8d82b6d5796",
+    "solutionShortDescription": "asistente-contextual-de-pagina description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}
