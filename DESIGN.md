@@ -43,12 +43,12 @@ Esta capa impide que las reglas del cliente contradigan restricciones reales de:
 
 ## Precedencia obligatoria
 
-Sigue siempre este orden:
+Usa la misma cadena de resolución definida en `AGENTS.md`:
 
-1. capa gate de `DESIGN.md`
-2. restricciones reales del proyecto y del stack
-3. capa personal del proyecto
-4. preferencias cosméticas del agente o del desarrollador
+1. **Seguridad y restricciones de plataforma** — `AGENTS.md`. Nunca se anula.
+2. **Capa gate de diseño** — `DESIGN.md` (esta sección).
+3. **Capa personal del proyecto** — `DESIGN.md`.
+4. **Preferencias cosméticas** del agente o del desarrollador.
 
 Si una petición del cliente choca con la capa gate:
 
@@ -109,4 +109,6 @@ Si una petición del cliente choca con la capa gate:
 ## Relación con AGENTS.md
 
 - Si una tarea afecta a UI o UX, consulta `DESIGN.md` y `AGENTS.md` juntos.
-- `DESIGN.md` manda en reglas de diseño y experiencia, pero nunca anula restricciones técnicas o de seguridad de `AGENTS.md`.
+- `DESIGN.md` manda en reglas de diseño y experiencia, pero nunca anula restricciones técnicas, de seguridad o de plataforma de `AGENTS.md`.
+- La cadena de precedencia completa vive en `AGENTS.md` y es la misma para ambos archivos.
+- Si la capa personal del proyecto está vacía, el agente debe usar los defaults de Fluent UI y el theme del tenant sin inventar branding.

@@ -27,6 +27,15 @@ Usa estos archivos como fuente de verdad del repositorio:
 - Si hay conflicto entre una preferencia del cliente y una restricción de plataforma, prevalece la capa gate de `DESIGN.md`
 - No contradigas la compatibilidad real de SPFx, React, Fluent UI o SharePoint Online
 
+### Cadena de resolución (de mayor a menor)
+
+1. Seguridad y plataforma (`AGENTS.md`) — nunca se anula
+2. Capa gate de diseño (`DESIGN.md`)
+3. Capa personal del proyecto (`DESIGN.md`)
+4. Preferencias cosméticas
+
+Si este archivo contradice a `AGENTS.md` o `DESIGN.md`, ignora este archivo y sigue los canónicos.
+
 ## Forma de trabajar
 
 - Analiza antes de proponer

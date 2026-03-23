@@ -30,9 +30,19 @@ Usa este orden de lectura:
 
 ### Precedencia obligatoria
 
+Cadena de resolución única (de mayor a menor prioridad):
+
+1. **Seguridad y restricciones de plataforma** — `AGENTS.md` (SPFx, SharePoint, React, permisos, CSP). Nunca se anula.
+2. **Capa gate de diseño** — `DESIGN.md` (accesibilidad, restricciones del host, Fluent UI).
+3. **Capa personal del proyecto** — `DESIGN.md` (branding, tono, preferencias del cliente).
+4. **Preferencias cosméticas** del agente o del desarrollador.
+
+Reglas de asignación:
+
 - Si el cambio afecta a **arquitectura, repositorios, servicios, hooks, contexts, permisos, build, testing, seguridad o estructura**, manda `AGENTS.md`.
-- Si el cambio afecta a **UI, UX, layout, formularios, estados, copy visual, accesibilidad o patrones de interacción**, consulta `DESIGN.md` y aplícalo junto con este archivo.
-- Si existe conflicto entre una preferencia del cliente y una restricción de plataforma, **prevalece la capa gate de `DESIGN.md`**.
+- Si el cambio afecta a **UI, UX, layout, estados, copy visual o patrones de interacción**, consulta `DESIGN.md` y aplícalo junto con este archivo.
+- **Formularios**: la lógica de validación (esquemas Zod, sanitización, reglas de negocio) la rige `AGENTS.md`. La presentación de errores, layout de campos y flujo visual lo rige `DESIGN.md`.
+- **Accesibilidad**: la validación técnica (axe, roles ARIA, estructura DOM) se comprueba desde `AGENTS.md`. Las reglas de diseño accesible (contraste, foco visible, semántica visual) las define `DESIGN.md`.
 - Nunca contradigas la compatibilidad real de **SPFx, React, Fluent UI o SharePoint Online**.
 
 ## Flujo obligatorio del agente
@@ -61,11 +71,11 @@ Es el modo por defecto.
 Solo si el usuario lo pide explícitamente.
 
 - Puede ejecutar tras proponer.
-- Aun así, debe detenerse y pedir confirmación si el cambio toca permisos, secretos, `package-solution.json`, dominios externos, CSP, despliegue, dependencias nuevas o decisiones difíciles de revertir.
+- Aun así, debe detenerse y pedir confirmación si el cambio toca permisos, secretos, `package-solution.json`, dominios externos, CSP, despliegue, dependencias nuevas, identidad visual global, sistema de diseño, reglas de la capa gate de `DESIGN.md` o decisiones difíciles de revertir.
 
 ## Baseline técnico
 
-- Objetivo: **última versión soportada de SPFx para SharePoint Online**.
+- Objetivo: la **última versión de SPFx ya validada por el proyecto**. Si el proyecto no tiene versión fijada, usa la última estable para SharePoint Online.
 - Usa la **versión exacta de React compatible con la versión de SPFx del proyecto**.
 - Usa **la versión más reciente de Fluent UI que sea realmente compatible** con la combinación de SPFx y React del proyecto.
 - Usa **PnPjs** para acceso a SharePoint y Graph cuando mejore claridad, tipado y mantenibilidad.
@@ -92,6 +102,7 @@ Mantén esta separación de responsabilidades:
 - No mezcles UI, acceso a datos y reglas de negocio en el mismo archivo.
 - Toda llamada a SharePoint, Graph o REST debe pasar por repositorios o adaptadores equivalentes.
 - Los hooks personalizados son el mecanismo preferido para reutilizar lógica de estado y carga.
+- Los hooks consumen services (nunca al revés). Un hook puede llamar a un service, pero un service nunca debe usar hooks ni estado React.
 - Si una lógica puede expresarse como función pura, sáquela fuera de React y cúbrala con tests unitarios.
 
 ## React y Fluent UI
