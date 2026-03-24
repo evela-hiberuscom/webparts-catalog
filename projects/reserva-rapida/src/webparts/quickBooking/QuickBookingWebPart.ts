@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'QuickBookingWebPartStrings';
 import QuickBooking from './components/QuickBooking';
 import type { IQuickBookingProps } from './components/IQuickBookingProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IQuickBookingWebPartProps } from './models/quickBookingModels';
 
 export default class QuickBookingWebPart extends BaseClientSideWebPart<IQuickBookingWebPartProps> {
@@ -42,7 +43,14 @@ export default class QuickBookingWebPart extends BaseClientSideWebPart<IQuickBoo
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

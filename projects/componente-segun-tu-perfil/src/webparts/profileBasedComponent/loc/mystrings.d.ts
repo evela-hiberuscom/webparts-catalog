@@ -11,6 +11,8 @@ declare interface IProfileBasedComponentWebPartStrings {
   FallbackModeFieldLabel: string;
   ProfileTokensFieldLabel: string;
   MaxItemsFieldLabel: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'ProfileBasedComponentWebPartStrings' {

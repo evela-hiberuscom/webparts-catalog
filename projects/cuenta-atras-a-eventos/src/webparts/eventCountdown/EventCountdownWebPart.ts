@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'EventCountdownWebPartStrings';
 import EventCountdown from './components/EventCountdown';
 import type { IEventCountdownProps } from './components/IEventCountdownProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { CountdownSourceType, ICountdownWebPartConfig } from './models/eventCountdownModels';
 
 export interface IEventCountdownWebPartProps {
@@ -44,7 +45,14 @@ export default class EventCountdownWebPart extends BaseClientSideWebPart<IEventC
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

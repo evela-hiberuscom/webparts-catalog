@@ -12,5 +12,7 @@ define([], function() {
     "FallbackModeFieldLabel": "Modo de fallback",
     "ProfileTokensFieldLabel": "Tokens de perfil",
     "MaxItemsFieldLabel": "Máximo de variantes"
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator.",
   };
 });

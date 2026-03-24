@@ -20,6 +20,8 @@ declare interface IUrgentAlertBarWebPartStrings {
   ErrorHeading: string;
   ErrorMessage: string;
   RetryButtonLabel: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'UrgentAlertBarWebPartStrings' {

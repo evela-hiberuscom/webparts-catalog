@@ -10,6 +10,8 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import type { SPHttpClient } from '@microsoft/sp-http';
 import BirthdaysAndAnniversaries from './components/BirthdaysAndAnniversaries';
 import type { IBirthdaysAndAnniversariesProps } from './components/IBirthdaysAndAnniversariesProps';
+import * as strings from 'BirthdaysAndAnniversariesWebPartStrings';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import { parseDataSourceTypes } from './utils/celebrationUtils';
 
 export interface IBirthdaysAndAnniversariesWebPartProps {
@@ -45,7 +47,14 @@ export default class BirthdaysAndAnniversariesWebPart extends BaseClientSideWebP
       daysAhead: Number(this.properties.daysAhead) || 14
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

@@ -11,6 +11,8 @@ declare interface IMeetTheTeamWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'MeetTheTeamWebPartStrings' {

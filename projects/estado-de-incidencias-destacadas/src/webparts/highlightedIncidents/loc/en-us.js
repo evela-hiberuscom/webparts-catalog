@@ -18,6 +18,8 @@ define([], function() {
     "PartialNotice": "Hay incidencias con datos parciales. El contenido disponible se muestra sin bloquear la vista.",
     "LoadingStateTitle": "Cargando incidencias destacadas",
     "LoadingStateMessage": "Preparando el panel...",
-    "RetryLabel": "Reintentar"
+    "RetryLabel": "Reintentar",
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator."
   }
 });

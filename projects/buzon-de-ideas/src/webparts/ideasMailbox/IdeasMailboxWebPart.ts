@@ -12,6 +12,7 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "IdeasMailboxWebPartStrings";
 import IdeasMailbox from "./components/IdeasMailbox";
 import type { IIdeasMailboxProps, IIdeasMailboxWebPartProps } from "./components/IIdeasMailboxProps";
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 
 const DEFAULT_PROPS: IIdeasMailboxWebPartProps = {
   title: "Buzón de ideas",
@@ -45,7 +46,14 @@ export default class IdeasMailboxWebPart extends BaseClientSideWebPart<IIdeasMai
       pageUrl: this.context.pageContext.web.absoluteUrl
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

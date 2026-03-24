@@ -20,6 +20,8 @@ define([], function() {
     "EmptyMessage": "No existen alertas vigentes en este momento.",
     "ErrorHeading": "No se han podido cargar los avisos urgentes",
     "ErrorMessage": "Revisa el origen configurado y vuelve a intentarlo.",
-    "RetryButtonLabel": "Reintentar"
+    "RetryButtonLabel": "Reintentar",
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator."
   }
 });

@@ -15,6 +15,7 @@ import { hiberusThemeTokens } from '@paquete/spfx-common';
 import * as strings from 'AudienceQuickLinksWebPartStrings';
 import AudienceQuickLinks from './components/AudienceQuickLinks';
 import type { IAudienceQuickLinksProps } from './components/IAudienceQuickLinksProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type {
   IAudienceQuickLinksHostContext,
   IAudienceQuickLinksWebPartProps
@@ -42,7 +43,14 @@ export default class AudienceQuickLinksWebPart extends BaseClientSideWebPart<IAu
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

@@ -87,6 +87,8 @@ declare interface IHistoricalStorageAnalyzerWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'HistoricalStorageAnalyzerWebPartStrings' {

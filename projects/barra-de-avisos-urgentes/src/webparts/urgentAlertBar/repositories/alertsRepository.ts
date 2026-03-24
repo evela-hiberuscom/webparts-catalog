@@ -211,6 +211,11 @@ export class AlertsRepository {
     const { endpoint, sourceLabel } = buildSharePointListEndpoint(request);
     const response = await this.spHttpClient.get(`${endpoint}&${getSelectClause(request.maxAlerts)}`);
 
+    // 404 → lista no encontrada, 403 → sin permisos: devolvemos vacío en lugar de lanzar excepción
+    if (response.status === 404 || response.status === 403) {
+      return { items: [], hasPartialData: false, sourceLabel };
+    }
+
     if (!response.ok) {
       throw new Error(`SharePoint list request failed with status ${response.status}.`);
     }

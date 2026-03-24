@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'DailyPulseWebPartStrings';
 import DailyPulse from './components/DailyPulse';
 import { IDailyPulseProps } from './components/IDailyPulseProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IDailyPulseWebPartProps } from './models/dailyPulseModels';
 import { DEFAULT_DAILY_PULSE_PROMPT, serializePrompt } from './utils/dailyPulseUtils';
 
@@ -38,7 +39,14 @@ export default class DailyPulseWebPart extends BaseClientSideWebPart<IDailyPulse
       userLoginName: this.context.pageContext.user.loginName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

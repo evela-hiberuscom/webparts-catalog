@@ -13,6 +13,7 @@ import { SPHttpClient } from '@microsoft/sp-http';
 import * as strings from 'RecycleBinSpaceCalculatorWebPartStrings';
 import RecycleBinSpaceCalculator from './components/RecycleBinSpaceCalculator';
 import type { IRecycleBinSpaceCalculatorProps } from './components/IRecycleBinSpaceCalculatorProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IRecycleBinSpaceCalculatorWebPartProps } from './models/recycleBinSpaceCalculatorModels';
 
 export default class RecycleBinSpaceCalculatorWebPart extends BaseClientSideWebPart<IRecycleBinSpaceCalculatorWebPartProps> {
@@ -35,7 +36,14 @@ export default class RecycleBinSpaceCalculatorWebPart extends BaseClientSideWebP
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

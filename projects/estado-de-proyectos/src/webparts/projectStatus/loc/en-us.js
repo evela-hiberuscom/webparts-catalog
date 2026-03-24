@@ -19,5 +19,7 @@ define([], function() {
     "AppOfficeEnvironment": "La aplicación se ejecuta en office.com",
     "AppOutlookEnvironment": "La aplicación se ejecuta en Outlook",
     "UnknownEnvironment": "La aplicación se ejecuta en un entorno desconocido"
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator.",
   };
 });

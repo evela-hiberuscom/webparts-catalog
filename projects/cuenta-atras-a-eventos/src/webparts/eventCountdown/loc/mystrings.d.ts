@@ -29,6 +29,8 @@ declare interface IEventCountdownWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'EventCountdownWebPartStrings' {

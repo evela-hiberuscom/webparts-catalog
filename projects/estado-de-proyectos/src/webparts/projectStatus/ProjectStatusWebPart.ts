@@ -14,6 +14,7 @@ import { initializeIcons } from '@fluentui/react';
 import * as strings from 'ProjectStatusWebPartStrings';
 import ProjectStatus from './components/ProjectStatus';
 import type { IProjectStatusProps } from './components/IProjectStatusProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import {
   DATA_SOURCE_OPTIONS,
   DEFAULT_DATA_SOURCE_TYPE,
@@ -37,7 +38,14 @@ export default class ProjectStatusWebPart extends BaseClientSideWebPart<IProject
       showOwner: this.properties.showOwner
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

@@ -13,6 +13,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'PersonalFavoritesWebPartStrings';
 import PersonalFavorites from './components/PersonalFavorites';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IPersonalFavoritesWebPartProps } from './models/favoritesTypes';
 
 const DEFAULT_FAVORITES_JSON = `[
@@ -63,7 +64,14 @@ export default class PersonalFavoritesWebPart extends BaseClientSideWebPart<IPer
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

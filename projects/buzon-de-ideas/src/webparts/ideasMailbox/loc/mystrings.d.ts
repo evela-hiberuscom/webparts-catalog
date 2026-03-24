@@ -21,6 +21,8 @@ declare interface IIdeasMailboxWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'IdeasMailboxWebPartStrings' {

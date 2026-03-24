@@ -8,6 +8,8 @@ declare interface IPageContextAssistantWebPartStrings {
   FallbackModeFieldLabel: string;
   CollapsedByDefaultFieldLabel: string;
   ContextKeyOverrideFieldLabel: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module "PageContextAssistantWebPartStrings" {

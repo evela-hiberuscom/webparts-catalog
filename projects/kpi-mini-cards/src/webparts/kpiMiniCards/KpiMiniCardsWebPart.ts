@@ -12,6 +12,8 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import KpiMiniCards from './components/KpiMiniCards';
 import type { IKpiMiniCardsProps } from './components/IKpiMiniCardsProps';
+import * as strings from 'KpiMiniCardsWebPartStrings';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { KpiLayoutMode, KpiSourceType } from './models/kpiModels';
 import { DEFAULT_KPI_CARD_JSON } from './models/kpiModels';
 
@@ -71,7 +73,14 @@ export default class KpiMiniCardsWebPart extends BaseClientSideWebPart<IKpiMiniC
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

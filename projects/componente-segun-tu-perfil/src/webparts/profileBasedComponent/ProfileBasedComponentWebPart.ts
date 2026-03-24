@@ -11,6 +11,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'ProfileBasedComponentWebPartStrings';
 import ProfileBasedComponent from './components/ProfileBasedComponent';
 import type { IProfileBasedComponentProps } from './components/IProfileBasedComponentProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type {
   IProfileBasedComponentWebPartConfiguration,
   ProfileAudienceMode,
@@ -76,7 +77,14 @@ export default class ProfileBasedComponentWebPart extends BaseClientSideWebPart<
       hasTeamsContext: !!this.context.sdks.microsoftTeams
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

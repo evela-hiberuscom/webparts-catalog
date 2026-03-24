@@ -157,6 +157,61 @@ El trabajo no está terminado si el repo dispone de mecanismos para validar y no
 - Evita `any` salvo justificación excepcional.
 - No cierres una tarea con logs de depuración, TODOs ambiguos o deuda técnica silenciosa.
 
+## Error Boundary
+
+Todo web part o extensión React **debe envolver su componente raíz** con un `WebPartErrorBoundary`.
+
+### Reglas obligatorias
+
+- Cada web part tiene un `components/WebPartErrorBoundary.tsx` (clase React, no función) que captura errores de render no controlados en el subárbol.
+- El componente raíz (el que monta el WebPart con `React.createElement`) envuelve su `return` principal con `<WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>`.
+- Los strings del ErrorBoundary deben vivir en los archivos de localización del proyecto (`ErrorBoundaryTitle`, `ErrorBoundaryMessage`).
+- El `WebPartErrorBoundary` usa `MessageBar` de Fluent UI (`MessageBarType.error`) para mantener el estilo coherente con el host sin SCSS custom.
+- El `componentDidCatch` debe hacer `console.error` del error — nunca silenciarlo.
+- Sin `ErrorBoundary`, un error de render React desmonta la zona entera de SharePoint rompiendo la convivencia con otras piezas de la página. Esto viola `DESIGN.md`.
+
+### Patrón de implementación
+
+```tsx
+// components/WebPartErrorBoundary.tsx
+import * as React from 'react';
+import { MessageBar, MessageBarType } from '@fluentui/react';
+
+interface IWebPartErrorBoundaryProps {
+  title: string;
+  message: string;
+  children: React.ReactNode;
+}
+interface IWebPartErrorBoundaryState {
+  hasError: boolean;
+}
+export class WebPartErrorBoundary extends React.Component<
+  IWebPartErrorBoundaryProps,
+  IWebPartErrorBoundaryState
+> {
+  public constructor(props: IWebPartErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  public static getDerivedStateFromError(): IWebPartErrorBoundaryState {
+    return { hasError: true };
+  }
+  public componentDidCatch(error: Error, info: React.ErrorInfo): void {
+    console.error('[WebPartErrorBoundary]', error, info.componentStack);
+  }
+  public render(): React.ReactNode {
+    if (this.state.hasError) {
+      return (
+        <MessageBar messageBarType={MessageBarType.error} isMultiline={true}>
+          <strong>{this.props.title}</strong>{' — '}{this.props.message}
+        </MessageBar>
+      );
+    }
+    return this.props.children;
+  }
+}
+```
+
 ## Localización
 
 - **Todos los literales de UI** (etiquetas, textos, tooltips, mensajes de error, textos de botones, descripciones, placeholders, aria-labels y textos del Property Pane) deben vivir en los archivos de localización de SPFx (`loc/`), nunca hardcodeados en componentes, hooks, servicios ni utilidades.

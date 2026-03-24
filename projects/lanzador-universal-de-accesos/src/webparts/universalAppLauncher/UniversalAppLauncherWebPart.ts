@@ -16,6 +16,7 @@ import { hiberusThemeTokens } from '@paquete/spfx-common';
 import * as strings from 'UniversalAppLauncherWebPartStrings';
 import UniversalAppLauncher from './components/UniversalAppLauncher';
 import type { IUniversalAppLauncherProps } from './components/IUniversalAppLauncherProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { AudienceMatchMode } from './models/launchModels';
 
 export interface IUniversalAppLauncherWebPartProps {
@@ -109,7 +110,14 @@ export default class UniversalAppLauncherWebPart extends BaseClientSideWebPart<I
       userDisplayName: this.context.pageContext.user.displayName ?? ''
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {

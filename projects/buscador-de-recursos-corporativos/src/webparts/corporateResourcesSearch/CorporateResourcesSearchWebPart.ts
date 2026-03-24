@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'CorporateResourcesSearchWebPartStrings';
 import CorporateResourcesSearch from './components/CorporateResourcesSearch';
 import type { ICorporateResourcesSearchProps } from './components/ICorporateResourcesSearchProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { ICorporateResourcesSearchWebPartProps } from './models/corporateResourcesSearchModels';
 
 export default class CorporateResourcesSearchWebPart extends BaseClientSideWebPart<ICorporateResourcesSearchWebPartProps> {
@@ -45,7 +46,14 @@ export default class CorporateResourcesSearchWebPart extends BaseClientSideWebPa
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {

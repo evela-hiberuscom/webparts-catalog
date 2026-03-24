@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'HistoricalStorageAnalyzerWebPartStrings';
 import HistoricalStorageAnalyzer from './components/HistoricalStorageAnalyzer';
 import { IHistoricalStorageAnalyzerProps } from './components/IHistoricalStorageAnalyzerProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 
 export interface IHistoricalStorageAnalyzerWebPartProps {
   description: string;
@@ -44,7 +45,14 @@ export default class HistoricalStorageAnalyzerWebPart extends BaseClientSideWebP
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

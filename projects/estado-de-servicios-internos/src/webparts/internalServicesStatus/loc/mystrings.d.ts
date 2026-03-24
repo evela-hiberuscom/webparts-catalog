@@ -11,6 +11,8 @@ declare interface IInternalServicesStatusWebPartStrings {
   DataSourceJsonUrlOption: string;
   DataSourceStaticConfigOption: string;
   DefaultDescription: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module "InternalServicesStatusWebPartStrings" {

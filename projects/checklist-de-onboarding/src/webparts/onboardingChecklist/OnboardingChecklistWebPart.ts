@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'OnboardingChecklistWebPartStrings';
 import OnboardingChecklist from './components/OnboardingChecklist';
 import type { IOnboardingChecklistProps } from './components/IOnboardingChecklistProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IOnboardingChecklistWebPartProps } from './models/onboardingChecklistModels';
 
 const DEFAULT_WEB_PART_PROPS: IOnboardingChecklistWebPartProps = {
@@ -56,7 +57,14 @@ export default class OnboardingChecklistWebPart extends BaseClientSideWebPart<IO
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   private async _getEnvironmentMessage(): Promise<string> {

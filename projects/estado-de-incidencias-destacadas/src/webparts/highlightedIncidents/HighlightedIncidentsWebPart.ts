@@ -14,6 +14,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'HighlightedIncidentsWebPartStrings';
 import HighlightedIncidents from './components/HighlightedIncidents';
 import { IHighlightedIncidentsProps } from './components/IHighlightedIncidentsProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 
 import {
   defaultHighlightedIncidentsWebPartProps,
@@ -42,7 +43,14 @@ export default class HighlightedIncidentsWebPart extends BaseClientSideWebPart<I
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onInit(): Promise<void> {

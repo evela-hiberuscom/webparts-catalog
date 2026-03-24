@@ -14,6 +14,7 @@ import type { SPHttpClient } from '@microsoft/sp-http';
 import * as strings from 'UrgentAlertBarWebPartStrings';
 import UrgentAlertBar from './components/UrgentAlertBar';
 import type { IUrgentAlertBarProps } from './components/IUrgentAlertBarProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { AlertDataSourceType } from './models/alertModels';
 
 export interface IUrgentAlertBarWebPartProps {
@@ -48,7 +49,14 @@ export default class UrgentAlertBarWebPart extends BaseClientSideWebPart<IUrgent
       dismissible: this.properties.dismissible
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

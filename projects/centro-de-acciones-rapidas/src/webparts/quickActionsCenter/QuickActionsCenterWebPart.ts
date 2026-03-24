@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'QuickActionsCenterWebPartStrings';
 import QuickActionsCenter from './components/QuickActionsCenter';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IQuickActionsWebPartProps } from './models/quickActionsModels';
 import { QuickActionsRepository } from './repositories/quickActionsRepository';
 import { QuickActionsService } from './services/quickActionsService';
@@ -62,7 +63,14 @@ export default class QuickActionsCenterWebPart extends BaseClientSideWebPart<IQu
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {

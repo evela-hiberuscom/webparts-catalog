@@ -12,6 +12,8 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import MeetTheTeam from './components/MeetTheTeam';
 import type { IMeetTheTeamProps } from './components/IMeetTheTeamProps';
+import * as strings from 'MeetTheTeamWebPartStrings';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IMeetTheTeamWebPartProps, TeamMembersDataSourceType, TeamMembersSortMode } from './models/teamMemberModels';
 import { normalizeMeetTheTeamWebPartProps } from './utils/teamMemberUtils';
 
@@ -58,7 +60,14 @@ export default class MeetTheTeamWebPart extends BaseClientSideWebPart<IMeetTheTe
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {

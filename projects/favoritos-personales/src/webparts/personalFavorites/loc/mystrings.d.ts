@@ -17,6 +17,8 @@ declare interface IPersonalFavoritesWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'PersonalFavoritesWebPartStrings' {

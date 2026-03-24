@@ -12,5 +12,7 @@ define([], function() {
     "FallbackModeFieldLabel": "Modo de fallback",
     "ProfileTokensFieldLabel": "Tokens de perfil",
     "MaxItemsFieldLabel": "Máximo de variantes"
+    ErrorBoundaryTitle: "Se ha producido un error inesperado",
+    ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
   };
 });

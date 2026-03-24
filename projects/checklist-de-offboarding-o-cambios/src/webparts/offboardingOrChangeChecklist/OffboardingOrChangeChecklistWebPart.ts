@@ -11,6 +11,8 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import OffboardingOrChangeChecklist from './components/OffboardingOrChangeChecklist';
 import type { IOffboardingOrChangeChecklistProps } from './components/IOffboardingOrChangeChecklistProps';
+import * as strings from 'OffboardingOrChangeChecklistWebPartStrings';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { IOffboardingOrChangeChecklistWebPartProps } from './models/offboardingOrChangeChecklistModels';
 
 const SCENARIO_OPTIONS = [
@@ -41,7 +43,14 @@ export default class OffboardingOrChangeChecklistWebPart extends BaseClientSideW
       userDisplayName: this.context.pageContext.user.displayName
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected async onInit(): Promise<void> {

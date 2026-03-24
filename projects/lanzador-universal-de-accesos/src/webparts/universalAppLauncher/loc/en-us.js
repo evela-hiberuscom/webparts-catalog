@@ -19,6 +19,8 @@ define([], function() {
     "AppTeamsTabEnvironment": "Running in Microsoft Teams",
     "AppOfficeEnvironment": "Running in office.com",
     "AppOutlookEnvironment": "Running in Outlook",
-    "UnknownEnvironment": "Running in an unknown environment"
+    "UnknownEnvironment": "Running in an unknown environment",
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator."
   }
 });

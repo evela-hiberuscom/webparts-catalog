@@ -6,6 +6,8 @@ declare interface IRecycleBinSpaceCalculatorWebPartStrings {
   RefreshIntervalFieldLabel: string;
   WarningThresholdItemsFieldLabel: string;
   WarningThresholdSizeMbFieldLabel: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'RecycleBinSpaceCalculatorWebPartStrings' {

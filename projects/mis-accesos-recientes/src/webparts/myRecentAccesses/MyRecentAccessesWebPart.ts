@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'MyRecentAccessesWebPartStrings';
 import MyRecentAccesses from './components/MyRecentAccesses';
 import type { IMyRecentAccessesProps } from './components/IMyRecentAccessesProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { RecentAccessesSourceMode } from './models/recentAccesses.types';
 import { recentAccessesDefaults } from './models/recentAccesses.constants';
 
@@ -54,7 +55,14 @@ export default class MyRecentAccessesWebPart extends BaseClientSideWebPart<IMyRe
       resourceTypeFilter: this.properties.resourceTypeFilter ?? ''
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {

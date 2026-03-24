@@ -12,6 +12,7 @@ import { BaseClientSideWebPart } from "@microsoft/sp-webpart-base";
 import * as strings from "PageContextAssistantWebPartStrings";
 import PageContextAssistant from "./components/PageContextAssistant";
 import type { IPageContextAssistantProps } from "./components/IPageContextAssistantProps";
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type {
   IPageContextAssistantWebPartProps,
   PageContextAssistantDataSourceType,
@@ -77,7 +78,14 @@ export default class PageContextAssistantWebPart extends BaseClientSideWebPart<I
       }
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

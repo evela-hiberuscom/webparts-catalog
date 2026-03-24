@@ -13,6 +13,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'AutomaticWeeklySummaryWebPartStrings';
 import AutomaticWeeklySummary from './components/AutomaticWeeklySummary';
 import type { IAutomaticWeeklySummaryProps } from './components/IAutomaticWeeklySummaryProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
 import type { SummaryPeriodMode } from './models/weeklySummaryTypes';
 import { StaticSummarySourceRepository } from './repositories/StaticSummarySourceRepository';
 import { WeeklySummaryService } from './services/WeeklySummaryService';
@@ -52,7 +53,14 @@ export default class AutomaticWeeklySummaryWebPart extends BaseClientSideWebPart
       service: this._service
     });
 
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        { title: strings.ErrorBoundaryTitle, message: strings.ErrorBoundaryMessage },
+        element
+      ),
+      this.domElement
+    );
   }
 
   protected onDispose(): void {

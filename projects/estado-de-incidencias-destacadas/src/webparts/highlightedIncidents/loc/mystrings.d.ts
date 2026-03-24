@@ -18,6 +18,8 @@ declare interface IHighlightedIncidentsWebPartStrings {
   LoadingStateTitle: string;
   LoadingStateMessage: string;
   RetryLabel: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'HighlightedIncidentsWebPartStrings' {

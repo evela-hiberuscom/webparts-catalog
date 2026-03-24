@@ -9,5 +9,7 @@ define([], function() {
     "FallbackModeFieldLabel": "Fallback",
     "CollapsedByDefaultFieldLabel": "Iniciar colapsado",
     "ContextKeyOverrideFieldLabel": "Clave de contexto opcional"
+    ErrorBoundaryTitle: "Se ha producido un error inesperado",
+    ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
   };
 });

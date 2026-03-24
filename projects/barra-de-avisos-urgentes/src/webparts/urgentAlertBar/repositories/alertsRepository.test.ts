@@ -131,6 +131,53 @@ describe('AlertsRepository', () => {
     ).rejects.toThrow('JsonUrl must be a same-origin or relative URL.');
   });
 
+  it('returns empty result when SharePoint list is not found (404)', async () => {
+    const get = jest.fn().mockResolvedValue({ ok: false, status: 404 });
+    const repository = new AlertsRepository({ get } as unknown as Pick<SPHttpClient, 'get'>, 'https://contoso.sharepoint.com/sites/portal');
+
+    const result = await repository.load({
+      dataSourceType: 'SharePointList',
+      listTitleOrUrl: 'ListaThatDoesNotExist',
+      maxAlerts: 3,
+      dismissible: false,
+      webAbsoluteUrl: 'https://contoso.sharepoint.com/sites/portal'
+    });
+
+    expect(result.items).toHaveLength(0);
+    expect(result.hasPartialData).toBe(false);
+  });
+
+  it('returns empty result when user lacks permission to the list (403)', async () => {
+    const get = jest.fn().mockResolvedValue({ ok: false, status: 403 });
+    const repository = new AlertsRepository({ get } as unknown as Pick<SPHttpClient, 'get'>, 'https://contoso.sharepoint.com/sites/portal');
+
+    const result = await repository.load({
+      dataSourceType: 'SharePointList',
+      listTitleOrUrl: 'AlertsList',
+      maxAlerts: 3,
+      dismissible: false,
+      webAbsoluteUrl: 'https://contoso.sharepoint.com/sites/portal'
+    });
+
+    expect(result.items).toHaveLength(0);
+    expect(result.hasPartialData).toBe(false);
+  });
+
+  it('throws when SharePoint returns an unexpected error status', async () => {
+    const get = jest.fn().mockResolvedValue({ ok: false, status: 500 });
+    const repository = new AlertsRepository({ get } as unknown as Pick<SPHttpClient, 'get'>, 'https://contoso.sharepoint.com/sites/portal');
+
+    await expect(
+      repository.load({
+        dataSourceType: 'SharePointList',
+        listTitleOrUrl: 'AlertsList',
+        maxAlerts: 3,
+        dismissible: false,
+        webAbsoluteUrl: 'https://contoso.sharepoint.com/sites/portal'
+      })
+    ).rejects.toThrow('SharePoint list request failed with status 500.');
+  });
+
   it('drops unsafe CTA urls from payload records and marks the result as partial', async () => {
     const repository = new AlertsRepository({ get: jest.fn() } as unknown as Pick<SPHttpClient, 'get'>, 'https://contoso.sharepoint.com/sites/portal');
 
