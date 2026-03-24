@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "estado-de-servicios-internos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "InternalServicesStatus",
+    "componentDescription": "Muestra el estado operativo de servicios internos mediante semáforos, criticidad y enlaces de detalle.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "estado-de-servicios-internos",
+    "libraryId": "faa3bb45-7126-4cc2-8e62-8bbdd6521ea3",
+    "solutionShortDescription": "estado-de-servicios-internos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

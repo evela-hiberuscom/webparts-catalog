@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "centro-de-acciones-rapidas",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "QuickActionsCenter",
+    "componentDescription": "Agrupa acciones frecuentes de un área o perfil para lanzar procesos, herramientas o páginas clave en pocos clics.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "centro-de-acciones-rapidas",
+    "libraryId": "a886aacd-d4e3-421a-9a09-c24b9cce2289",
+    "solutionShortDescription": "centro-de-acciones-rapidas description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

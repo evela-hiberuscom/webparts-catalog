@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "meet-the-team-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/meetTheTeam/MeetTheTeamWebPart.js",
+          "manifest": "./src/webparts/meetTheTeam/MeetTheTeamWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MeetTheTeamWebPartStrings": "lib/webparts/meetTheTeam/loc/{locale}.js"
+  }
+}

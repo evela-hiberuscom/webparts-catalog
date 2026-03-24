@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "estado-de-incidencias-destacadas",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "HighlightedIncidents",
+    "componentDescription": "Muestra incidencias activas o recientes con severidad, impacto, workaround y ETA.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "estado-de-incidencias-destacadas",
+    "libraryId": "c2f7e852-1a77-4761-add2-8c3a9a656fc4",
+    "solutionShortDescription": "estado-de-incidencias-destacadas description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

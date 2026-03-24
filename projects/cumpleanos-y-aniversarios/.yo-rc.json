@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "cumpleanos-y-aniversarios",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "BirthdaysAndAnniversaries",
+    "componentDescription": "Destaca cumpleaños y aniversarios laborales próximos o del día para reforzar cercanía y reconocimiento informal.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "cumpleanos-y-aniversarios",
+    "libraryId": "6c42ca02-6379-468f-b329-6691ba63a93c",
+    "solutionShortDescription": "cumpleanos-y-aniversarios description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "kpi-mini-cards-client-side-solution",
+    "id": "aa18c115-dc57-4ccb-9012-63f790ac10ea",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "KPI mini-cards dashboard for concise operational metrics."
+      },
+      "longDescription": {
+        "default": "Compact analytics web part that renders KPI mini-cards with state badges, trend indicators, sanitized open links, and responsive grid layouts."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "kpi-mini-cards Feature",
+        "description": "The feature that activates elements of the kpi-mini-cards solution.",
+        "id": "c8f6f204-8565-411e-ab42-01d69f437cc5",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/kpi-mini-cards.sppkg"
+  }
+}

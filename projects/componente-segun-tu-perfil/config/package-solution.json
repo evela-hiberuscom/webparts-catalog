@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "componente-segun-tu-perfil-client-side-solution",
+    "id": "7583d7ef-69eb-420c-ba9b-5676d61cea30",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "componente-segun-tu-perfil description"
+      },
+      "longDescription": {
+        "default": "componente-segun-tu-perfil description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "componente-segun-tu-perfil Feature",
+        "description": "The feature that activates elements of the componente-segun-tu-perfil solution.",
+        "id": "2bbbc0d9-d07d-4792-8118-733c6187137e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/componente-segun-tu-perfil.sppkg"
+  }
+}

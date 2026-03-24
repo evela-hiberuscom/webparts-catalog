@@ -20,8 +20,8 @@ function parseBoolean(input: boolean | string | undefined, fallback: boolean): b
   return fallback;
 }
 
-function parseNumber(input: number | string | undefined | null): number | undefined {
-  if (input === undefined || input === null || input === '') {
+function parseNumber(input: number | string | undefined): number | undefined {
+  if (input === undefined || input === '') {
     return undefined;
   }
 
@@ -84,7 +84,7 @@ function normalizeInput(input: IKpiMiniCardInput, index: number): IKpiMiniCardIn
   return {
     id: ensureText(input.id, `kpi-${index + 1}`),
     label: ensureText(input.label, `KPI ${index + 1}`),
-    value: input.value ?? null,
+    value: input.value,
     unit: ensureText(input.unit, ''),
     state: normalizeOptionalText(input.state) as 'ok' | 'warning' | 'critical' | 'unknown' | 'partial' | undefined,
     trend: ensureText(input.trend, 'unknown').toLowerCase(),
@@ -111,7 +111,7 @@ function coerceRawItem(raw: unknown, index: number): IKpiMiniCardInput {
     {
       id: pickText(source, ['id', 'ID', 'Id', 'key', 'Key'], `kpi-${index + 1}`),
       label: pickText(source, ['label', 'Label', 'title', 'Title', 'name', 'Name'], `KPI ${index + 1}`),
-      value: pickRawValue(source, ['value', 'Value']) as number | string | null | undefined,
+      value: pickRawValue(source, ['value', 'Value']) as number | string | undefined,
       unit: pickText(source, ['unit', 'Unit'], ''),
       state: pickOptionalText(source, ['state', 'State']) as 'ok' | 'warning' | 'critical' | 'unknown' | 'partial' | undefined,
       trend: pickText(source, ['trend', 'Trend'], 'unknown'),
@@ -157,7 +157,7 @@ function parseCollection(raw: unknown): IKpiMiniCardInput[] {
 }
 
 function isExplicitEmptyValue(input: unknown): boolean {
-  return input === null || input === undefined || input === '';
+  return input === undefined || input === '';
 }
 
 function extractPartialFlags(items: IKpiMiniCardInput[]): boolean {
@@ -172,6 +172,27 @@ function createRequestHeaders(): Record<string, string> {
 
 function escapeODataTitle(value: string): string {
   return value.replace(/'/g, "''");
+}
+
+function isAbsoluteOrRelativeUrl(value: string): boolean {
+  return /^https?:\/\//i.test(value) || value.startsWith('/');
+}
+
+function deriveServerRelativePath(listTitleOrUrl: string, webUrl: string): string {
+  const url = new URL(listTitleOrUrl, webUrl);
+  let pathname = decodeURIComponent(url.pathname);
+
+  if (pathname.toLowerCase().endsWith('/allitems.aspx')) {
+    pathname = pathname.slice(0, -'/AllItems.aspx'.length);
+  } else if (pathname.toLowerCase().endsWith('.aspx')) {
+    pathname = pathname.slice(0, pathname.lastIndexOf('/'));
+  }
+
+  if (pathname.toLowerCase().endsWith('/forms')) {
+    pathname = pathname.slice(0, -'/Forms'.length);
+  }
+
+  return pathname.replace(/\/$/, '');
 }
 
 async function fetchJson(fetcher: Fetcher, url: string): Promise<unknown> {
@@ -204,18 +225,28 @@ async function loadFromSharePointList(fetcher: Fetcher, config: IKpiCatalogConfi
     throw new Error('webUrl is required when sourceType is SharePointList');
   }
 
-  if (!config.sharePointListTitle) {
-    throw new Error('sharePointListTitle is required when sourceType is SharePointList');
+  if (!config.listTitleOrUrl) {
+    throw new Error('listTitleOrUrl is required when sourceType is SharePointList');
   }
 
-  const listTitle = escapeODataTitle(config.sharePointListTitle.trim());
-  const url = `${config.webUrl.replace(/\/$/, '')}/_api/web/lists/getbytitle('${listTitle}')/items?$top=100`;
+  const listTitleOrUrl = config.listTitleOrUrl.trim();
+  let url: string;
+
+  if (isAbsoluteOrRelativeUrl(listTitleOrUrl)) {
+    const resolvedUrl = resolveSameOriginUrl(listTitleOrUrl, config.webUrl, 'listTitleOrUrl');
+    const serverRelativePath = deriveServerRelativePath(resolvedUrl, config.webUrl);
+    url = `${config.webUrl.replace(/\/$/, '')}/_api/web/GetList(@listUrl)/items?$top=100&@listUrl='${encodeURIComponent(serverRelativePath)}'`;
+  } else {
+    const listTitle = escapeODataTitle(listTitleOrUrl);
+    url = `${config.webUrl.replace(/\/$/, '')}/_api/web/lists/getbytitle('${listTitle}')/items?$top=100`;
+  }
+
   const payload = await fetchJson(fetcher, url);
   const inputs = parseCollection(payload);
 
   return {
     inputs,
-    sourceLabel: `SharePoint list: ${config.sharePointListTitle}`,
+    sourceLabel: `SharePoint list: ${config.listTitleOrUrl}`,
     hasPartialData: extractPartialFlags(inputs),
     notes: []
   };

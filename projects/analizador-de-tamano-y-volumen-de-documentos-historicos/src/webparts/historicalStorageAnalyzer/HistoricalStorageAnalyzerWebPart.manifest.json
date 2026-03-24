@@ -1,0 +1,33 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "7751cf70-a7b4-4590-b38a-2bacdf20a545",
+  "alias": "HistoricalStorageAnalyzerWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
+    "title": { "default": "HistoricalStorageAnalyzer" },
+    "description": { "default": "Diagnostica el coste de almacenamiento histórico de una biblioteca, separando contenido actual, histórico de versiones y nivel de exactitud del cálculo." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "Diagnostica el coste de almacenamiento histórico de una biblioteca, separando contenido actual, histórico de versiones y nivel de exactitud del cálculo.",
+      "defaultLibraryTitleOrUrl": "",
+      "defaultScanMode": "deepScan",
+      "topDocumentsLimit": "8",
+      "maxVersionConcurrency": "3",
+      "includeHiddenLibraries": false
+    }
+  }]
+}

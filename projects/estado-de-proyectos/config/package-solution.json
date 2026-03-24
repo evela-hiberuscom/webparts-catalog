@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "estado-de-proyectos-client-side-solution",
+    "id": "97b70d09-6aa2-48a1-8b2f-3a2df117efa7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "estado-de-proyectos description"
+      },
+      "longDescription": {
+        "default": "estado-de-proyectos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "estado-de-proyectos Feature",
+        "description": "The feature that activates elements of the estado-de-proyectos solution.",
+        "id": "9b654fc5-f531-4b51-80c3-162912bff4ca",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/estado-de-proyectos.sppkg"
+  }
+}

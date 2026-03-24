@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "highlighted-incidents-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/highlightedIncidents/HighlightedIncidentsWebPart.js",
+          "manifest": "./src/webparts/highlightedIncidents/HighlightedIncidentsWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HighlightedIncidentsWebPartStrings": "lib/webparts/highlightedIncidents/loc/{locale}.js"
+  }
+}

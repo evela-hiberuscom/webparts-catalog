@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "recycle-bin-space-calculator-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/recycleBinSpaceCalculator/RecycleBinSpaceCalculatorWebPart.js",
+          "manifest": "./src/webparts/recycleBinSpaceCalculator/RecycleBinSpaceCalculatorWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RecycleBinSpaceCalculatorWebPartStrings": "lib/webparts/recycleBinSpaceCalculator/loc/{locale}.js"
+  }
+}

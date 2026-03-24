@@ -9,6 +9,36 @@
       "purpose": "cumpleaños y aniversarios"
     }
   ],
+  "lists": [
+    {
+      "name": "PeopleCelebrations",
+      "type": "SharePointList",
+      "purpose": "cumpleaños y aniversarios",
+      "fields": [
+        {
+          "name": "Title",
+          "type": "Text",
+          "purpose": "nombre visible"
+        },
+        {
+          "name": "CelebrationType",
+          "type": "Choice",
+          "choices": ["birthday", "anniversary", "unknown"],
+          "purpose": "tipo de hito"
+        },
+        {
+          "name": "CelebrationDate",
+          "type": "DateTime",
+          "purpose": "fecha del hito"
+        },
+        {
+          "name": "PhotoUrl",
+          "type": "URL",
+          "purpose": "foto opcional"
+        }
+      ]
+    }
+  ],
   "acceptanceCriteria": [
     "Muestra celebraciones en ventana temporal.",
     "Destaca las de hoy.",

@@ -1,0 +1,174 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.quickActionsCenter {
+  position: relative;
+  overflow: hidden;
+  padding: 1.25rem;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(245, 248, 252, 0.98)),
+    radial-gradient(circle at top right, rgba(0, 120, 212, 0.08), transparent 32%);
+  color: "[theme:bodyText, default: #201f1e]";
+  color: var(--bodyText);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.dark {
+  background:
+    linear-gradient(135deg, rgba(32, 31, 30, 0.92), rgba(18, 18, 18, 0.98)),
+    radial-gradient(circle at top right, rgba(91, 165, 255, 0.14), transparent 32%);
+}
+
+.teams {
+  font-family: $ms-font-family-fallbacks;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 0.35rem;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  color: var(--link);
+}
+
+.meta {
+  min-width: 10rem;
+  text-align: right;
+}
+
+.metaLine {
+  display: block;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.environmentBar,
+.stateBar {
+  margin-bottom: 1rem;
+}
+
+.filterBar {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.filterHint {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.filterChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.filterChip,
+.filterChipSelected {
+  min-width: auto;
+}
+
+.filterChipSelected {
+  background: "[theme:themePrimary, default: #0f6cbd]";
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.9rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 180px;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(8px);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.cardIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(0, 120, 212, 0.12);
+  color: "[theme:themePrimary, default: #0f6cbd]";
+}
+
+.cardTitleBlock {
+  min-width: 0;
+}
+
+.cardTitle {
+  display: block;
+  font-weight: 600;
+}
+
+.cardCategory {
+  display: inline-block;
+  margin-top: 0.15rem;
+  padding: 0.14rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cardDescription {
+  min-height: 2.5rem;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.cardFooter {
+  margin-top: auto;
+}
+
+.cardDisabled {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.emptyState {
+  padding: 1.25rem;
+  border: 1px dashed rgba(0, 0, 0, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.emptyHint {
+  display: block;
+  margin-top: 0.35rem;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .meta {
+    text-align: left;
+  }
+}

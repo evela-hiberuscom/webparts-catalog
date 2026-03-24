@@ -7,7 +7,7 @@ function buildConfig(overrides: Partial<IKpiCatalogConfig> = {}): IKpiCatalogCon
     kpiCardsJson: '',
     jsonUrl: '',
     apiEndpointUrl: '',
-    sharePointListTitle: '',
+    listTitleOrUrl: '',
     webUrl: 'https://contoso.sharepoint.com/sites/intranet',
     showTrend: true,
     layoutMode: 'compact',
@@ -72,7 +72,7 @@ describe('kpiCatalogRepository', () => {
     const result = await repository.load(
       buildConfig({
         sourceType: 'SharePointList',
-        sharePointListTitle: "KPI's",
+        listTitleOrUrl: "KPI's",
         kpiCardsJson: ''
       })
     );
@@ -90,6 +90,42 @@ describe('kpiCatalogRepository', () => {
     expect(result.inputs[0].value).toBe(96);
     expect(result.sourceLabel).toBe("SharePoint list: KPI's");
     expect(result.hasPartialData).toBe(false);
+  });
+
+  it('loads SharePoint list results from a same-origin list URL', async () => {
+    const fetcher = jest.fn(async () =>
+      createResponse({
+        value: [
+          {
+            Id: 2,
+            Title: 'Disponibilidad',
+            Value: 99,
+            Trend: 'flat',
+            Comparison: 'vs ayer',
+            OpenUrl: '/sites/ops'
+          }
+        ]
+      })
+    );
+
+    const repository = new KpiCatalogRepository(fetcher as never);
+    const result = await repository.load(
+      buildConfig({
+        sourceType: 'SharePointList',
+        listTitleOrUrl: '/sites/intranet/Lists/KpiList/AllItems.aspx'
+      })
+    );
+
+    expect(fetcher).toHaveBeenCalledWith(
+      "https://contoso.sharepoint.com/sites/intranet/_api/web/GetList(@listUrl)/items?$top=100&@listUrl='%2Fsites%2Fintranet%2FLists%2FKpiList'",
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          Accept: 'application/json'
+        })
+      })
+    );
+    expect(result.inputs[0].label).toBe('Disponibilidad');
+    expect(result.sourceLabel).toBe('SharePoint list: /sites/intranet/Lists/KpiList/AllItems.aspx');
   });
 
   it.each([

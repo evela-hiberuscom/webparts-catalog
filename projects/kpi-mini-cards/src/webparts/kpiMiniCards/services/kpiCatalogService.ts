@@ -34,8 +34,8 @@ const STATE_RANKING: Record<KpiBadge, number> = {
   ok: 4
 };
 
-function ensureNumber(input: number | string | null | undefined): number | undefined {
-  if (input === undefined || input === null || input === '') {
+function ensureNumber(input: number | string | undefined): number | undefined {
+  if (input === undefined || input === '') {
     return undefined;
   }
 
@@ -172,7 +172,7 @@ export function normalizeKpiCards(
     const safeLink = sanitizeKpiUrl(input.openUrl, config.openInNewTab || Boolean(input.openInNewTab));
     const hasComparison = Boolean(input.comparison && input.comparison.trim());
     const hasTrend = config.showTrend ? trend !== 'unknown' : true;
-    const hasValue = input.value !== null && input.value !== undefined && input.value !== '';
+    const hasValue = input.value !== undefined && input.value !== '';
     const hasPartialData = !safeLink || !hasComparison || !hasTrend || !hasValue;
     const state = inferStateFromKpi(input, trend);
     const explicitBadge = typeof input.badge === 'string' && input.badge.trim() ? ensureBadge(input.badge) : undefined;
@@ -181,7 +181,7 @@ export function normalizeKpiCards(
     return {
       id: input.id ?? `kpi-${index + 1}`,
       label: input.label ?? `KPI ${index + 1}`,
-      value: input.value ?? null,
+      value: input.value,
       unit: input.unit ?? '',
       state,
       trend,

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "1582b415-c38e-401c-8213-bca86796c1c3",
+  "alias": "KpiMiniCardsWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
+    "title": { "default": "KpiMiniCards" },
+    "description": { "default": "Muestra un conjunto compacto de KPIs clave con valor, tendencia, comparación y estado visual para dashboards ligeros." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "title": "KPI mini-cards",
+      "subtitle": "Métricas clave para leer el estado del equipo al instante.",
+      "layoutMode": "standard",
+      "sourceType": "StaticConfig",
+      "kpiCardsJson": "[{\"id\":\"revenue\",\"label\":\"Ingresos\",\"value\":1240,\"unit\":\"k€\",\"trend\":\"up\",\"comparison\":\"vs mes anterior\",\"priority\":1,\"threshold\":1000,\"thresholdDirection\":\"above\",\"openUrl\":\"/sites/finance\"},{\"id\":\"delivery\",\"label\":\"Entregas a tiempo\",\"value\":94,\"unit\":\"%\",\"trend\":\"up\",\"comparison\":\"vs objetivo trimestral\",\"priority\":2,\"threshold\":90,\"thresholdDirection\":\"above\",\"openUrl\":\"/sites/ops\"},{\"id\":\"risks\",\"label\":\"Riesgos abiertos\",\"value\":3,\"unit\":\"\",\"trend\":\"down\",\"comparison\":\"vs sprint anterior\",\"priority\":3,\"threshold\":5,\"thresholdDirection\":\"below\",\"openUrl\":\"/sites/pm\"},{\"id\":\"coverage\",\"label\":\"Cobertura\",\"value\":98,\"unit\":\"%\",\"trend\":\"flat\",\"comparison\":\"última ejecución\",\"priority\":4,\"threshold\":95,\"thresholdDirection\":\"above\",\"openUrl\":\"/sites/quality\"}]",
+      "jsonUrl": "",
+      "apiEndpointUrl": "",
+      "listTitleOrUrl": "KpiList",
+      "showTrend": true,
+      "maxItems": 6,
+      "openInNewTab": false
+    }
+  }]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "daily-pulse-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dailyPulse/DailyPulseWebPart.js",
+          "manifest": "./src/webparts/dailyPulse/DailyPulseWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DailyPulseWebPartStrings": "lib/webparts/dailyPulse/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "centro-de-acciones-rapidas-client-side-solution",
+    "id": "a886aacd-d4e3-421a-9a09-c24b9cce2289",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "centro-de-acciones-rapidas description"
+      },
+      "longDescription": {
+        "default": "centro-de-acciones-rapidas description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "centro-de-acciones-rapidas Feature",
+        "description": "The feature that activates elements of the centro-de-acciones-rapidas solution.",
+        "id": "17ea6d14-3451-480f-82dd-68b852a51c24",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/centro-de-acciones-rapidas.sppkg"
+  }
+}

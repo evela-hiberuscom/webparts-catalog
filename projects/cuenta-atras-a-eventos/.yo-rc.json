@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "cuenta-atras-a-eventos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "EventCountdown",
+    "componentDescription": "Muestra una cuenta atrás muy visible para campañas, eventos, auditorías, releases o hitos con fecha cerrada.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "cuenta-atras-a-eventos",
+    "libraryId": "48ed0b43-98ee-41ed-a964-e57b78024eb8",
+    "solutionShortDescription": "cuenta-atras-a-eventos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

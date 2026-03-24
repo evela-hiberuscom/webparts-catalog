@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "quick-actions-center-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/quickActionsCenter/QuickActionsCenterWebPart.js",
+          "manifest": "./src/webparts/quickActionsCenter/QuickActionsCenterWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "QuickActionsCenterWebPartStrings": "lib/webparts/quickActionsCenter/loc/{locale}.js"
+  }
+}

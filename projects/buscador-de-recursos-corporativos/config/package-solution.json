@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "buscador-de-recursos-corporativos-client-side-solution",
+    "id": "4f54e387-492b-4bfc-92a1-8775c628576c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "buscador-de-recursos-corporativos description"
+      },
+      "longDescription": {
+        "default": "buscador-de-recursos-corporativos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "buscador-de-recursos-corporativos Feature",
+        "description": "The feature that activates elements of the buscador-de-recursos-corporativos solution.",
+        "id": "93fc18ae-8dbe-41d6-977d-a2884028384a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/buscador-de-recursos-corporativos.sppkg"
+  }
+}

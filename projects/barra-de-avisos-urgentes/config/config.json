@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "urgent-alert-bar-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/urgentAlertBar/UrgentAlertBarWebPart.js",
+          "manifest": "./src/webparts/urgentAlertBar/UrgentAlertBarWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "UrgentAlertBarWebPartStrings": "lib/webparts/urgentAlertBar/loc/{locale}.js"
+  }
+}

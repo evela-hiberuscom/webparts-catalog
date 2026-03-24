@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "buzon-de-ideas",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "IdeasMailbox",
+    "componentDescription": "Recoge ideas o propuestas breves desde la intranet mediante un formulario ligero y una experiencia de baja fricción.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "buzon-de-ideas",
+    "libraryId": "7483c2d2-4594-4f07-8998-0acd0f4694fb",
+    "solutionShortDescription": "buzon-de-ideas description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

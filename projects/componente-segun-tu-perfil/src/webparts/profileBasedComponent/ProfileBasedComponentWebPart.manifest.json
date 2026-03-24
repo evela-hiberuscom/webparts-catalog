@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "f3159d7a-9aee-4f35-9ac9-1f9b84869450",
+  "alias": "ProfileBasedComponentWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
+    "title": { "default": "Componente según tu perfil" },
+    "description": { "default": "Renderiza contenido, accesos o mensajes distintos según atributos del perfil o segmentación del usuario." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "title": "Componente según tu perfil",
+      "description": "Personaliza el bloque según audiencia y origen de variantes.",
+      "dataSourceType": "SharePointList",
+      "listTitleOrUrl": "ProfileVariants",
+      "jsonUrl": "",
+      "staticConfigJson": "",
+      "audienceMode": "hybrid",
+      "fallbackMode": "generic",
+      "profileTokens": "",
+      "maxItems": 3
+    }
+  }]
+}

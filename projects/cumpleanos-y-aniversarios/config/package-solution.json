@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "cumpleanos-y-aniversarios-client-side-solution",
+    "id": "6c42ca02-6379-468f-b329-6691ba63a93c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Destaca cumpleaños y aniversarios laborales próximos o del día."
+      },
+      "longDescription": {
+        "default": "Web part SPFx para mostrar celebraciones personales con estados accesibles y fuentes same-origin."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "cumpleanos-y-aniversarios Feature",
+        "description": "The feature that activates elements of the cumpleanos-y-aniversarios solution.",
+        "id": "c1badd92-c120-48d4-9036-8f7844aca5f8",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/cumpleanos-y-aniversarios.sppkg"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "pulso-del-dia-client-side-solution",
+    "id": "f28c2cbe-9ddd-412b-8400-fd60925d4995",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "pulso-del-dia description"
+      },
+      "longDescription": {
+        "default": "pulso-del-dia description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "pulso-del-dia Feature",
+        "description": "The feature that activates elements of the pulso-del-dia solution.",
+        "id": "1ff0f112-605f-4fc3-a278-fcf77aca245b",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/pulso-del-dia.sppkg"
+  }
+}

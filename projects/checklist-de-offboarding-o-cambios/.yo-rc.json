@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "checklist-de-offboarding-o-cambios",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "OffboardingOrChangeChecklist",
+    "componentDescription": "Organiza pasos de salida, transferencia o cambio organizativo para evitar omisiones operativas y de acceso.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "checklist-de-offboarding-o-cambios",
+    "libraryId": "e696764c-e0a3-4f88-88c5-d30fc689503a",
+    "solutionShortDescription": "checklist-de-offboarding-o-cambios description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "c5a4ac0b-a11a-47a6-986e-375625675157",
+  "alias": "MeetTheTeamWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
+    "title": { "default": "Conoce al equipo" },
+    "description": { "default": "Presenta a las personas de un equipo con foto, rol, descripción breve y enlaces de contacto o perfil." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "title": "Conoce al equipo",
+      "description": "Presenta a las personas de un equipo con foto, rol, descripción breve y enlaces de contacto o perfil.",
+      "dataSourceType": "StaticConfig",
+      "dataSourceTypesCsv": "SharePointList,JsonUrl,Directory,StaticConfig",
+      "listTitleOrUrl": "",
+      "jsonUrl": "",
+      "directoryEndpoint": "",
+      "staticMembersJson": "[{\"id\":\"team-member-1\",\"displayName\":\"Laura Pérez\",\"jobTitle\":\"Product Manager\",\"bio\":\"Conecta negocio y equipo para mantener el foco en valor y prioridades.\",\"photoUrl\":\"/sites/demo/SiteAssets/team/laura-perez.jpg\",\"profileUrl\":\"/sites/demo/SitePages/perfil-laura-perez.aspx\",\"sortOrder\":1},{\"id\":\"team-member-2\",\"displayName\":\"Carlos Romero\",\"jobTitle\":\"Frontend Engineer\",\"bio\":\"Especialista en UI accesible y componentes reutilizables para SharePoint.\",\"photoUrl\":\"/sites/demo/SiteAssets/team/carlos-romero.jpg\",\"profileUrl\":\"/sites/demo/SitePages/perfil-carlos-romero.aspx\",\"sortOrder\":2},{\"id\":\"team-member-3\",\"displayName\":\"Marta Gil\",\"jobTitle\":\"UX Designer\",\"bio\":\"Diseña experiencias claras, coherentes y centradas en tareas reales.\",\"photoUrl\":\"/sites/demo/SiteAssets/team/marta-gil.jpg\",\"profileUrl\":\"/sites/demo/SitePages/perfil-marta-gil.aspx\",\"sortOrder\":3}]",
+      "maxItems": 12,
+      "sortMode": "manual"
+    }
+  }]
+}

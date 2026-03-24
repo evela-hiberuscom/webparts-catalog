@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "kpi-mini-cards",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "KpiMiniCards",
+    "componentDescription": "Muestra un conjunto compacto de KPIs clave con valor, tendencia, comparación y estado visual para dashboards ligeros.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "kpi-mini-cards",
+    "libraryId": "aa18c115-dc57-4ccb-9012-63f790ac10ea",
+    "solutionShortDescription": "kpi-mini-cards description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

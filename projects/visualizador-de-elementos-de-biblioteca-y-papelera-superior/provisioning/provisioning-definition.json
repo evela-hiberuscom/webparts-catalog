@@ -4,31 +4,26 @@
   "rowId": "recH4dtMmWDWA8VzV",
   "sources": [
     {
-      "name": "SharePoint Library",
-      "type": "primary",
-      "api": "SharePoint REST API",
-      "purpose": "Metadatos de biblioteca e ItemCount"
+      "name": "Site Recycle Bin Stage 1",
+      "type": "SharePointRecycleBin",
+      "purpose": "conteo y tamaño de primer nivel"
     },
     {
-      "name": "Site Recycle Bin",
-      "type": "primary",
-      "api": "SharePoint REST API",
-      "purpose": "Conteo y tamaño agregado de elementos eliminados"
+      "name": "Site Recycle Bin Stage 2",
+      "type": "SharePointRecycleBin",
+      "purpose": "conteo y tamaño de segundo nivel"
     }
   ],
   "acceptanceCriteria": [
-    "Muestra ItemCount real de la biblioteca.",
-    "Muestra conteo de la papelera de primer nivel.",
-    "Muestra tamaño agregado cuando sea viable.",
-    "Informa partialData si faltan propiedades.",
-    "Permite refresco y abrir biblioteca/papelera.",
-    "Clasifica salud correctamente."
+    "Muestra tamaño de papelera de primer nivel.",
+    "Muestra tamaño de papelera de segundo nivel cuando sea accesible.",
+    "Muestra total agregado cuando ambas etapas estén disponibles.",
+    "Informa partialData si falta el tamaño de una etapa.",
+    "Permite refresco y acceso a la papelera del sitio."
   ],
   "businessRules": [
-    "Si recycleBinItemCount >= warningThresholdItems, estado al menos warning.",
-    "Si recycleBinSizeMb >= warningThresholdSizeMb, estado al menos warning cuando el dato exista.",
-    "Si faltan tamaños pero hay conteos, precision=partial y la UI sigue operativa.",
-    "Si la biblioteca no existe, estado error.",
-    "Si libraryItemCount=0 y recycleBinItemCount>0, ratio puede ser null o tratarse como señal crítica según health evaluator."
+    "Si el tamaño de una etapa no está disponible, la UI debe seguir siendo operativa.",
+    "El objetivo no es comparar con biblioteca activa.",
+    "Si el contexto no permite leer la segunda etapa, se registra una limitación técnica explícita."
   ]
 }

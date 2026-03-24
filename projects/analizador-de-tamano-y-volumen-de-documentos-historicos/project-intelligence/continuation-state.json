@@ -1,0 +1,36 @@
+{
+  "project": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+  "rowId": "recgszxhqydcwE8va",
+  "waveNumber": 11,
+  "status": "ready-for-handoff",
+  "currentPhase": "validated",
+  "priorityDefinition": {
+    "scanModes": ["quickScan", "deepScan"],
+    "librarySelection": "all site libraries",
+    "goal": "exactness"
+  },
+  "completedWork": [
+    "root scaffold normalized",
+    "project preparation rerun",
+    "domain layer added",
+    "ui refactor started",
+    "continuation docs persisted",
+    "pipeline validated",
+    "sppkg generated"
+  ],
+  "pendingWork": [
+    "optional lint warning cleanup"
+  ],
+  "knownRisks": [
+    "version endpoint response shape may need refinement",
+    "quickScan may resolve as partialData by design when not all versions are crawled",
+    "strict build could require minor typing fixes in Fluent UI or SPFx imports"
+  ],
+  "restartNotes": [
+    "read session-log.md first",
+    "run npm run build only if the build needs to be revalidated",
+    "fix failures without changing locked scope",
+    "re-run build until green"
+  ],
+  "updatedAt": "2026-03-24T00:00:00.000Z"
+}

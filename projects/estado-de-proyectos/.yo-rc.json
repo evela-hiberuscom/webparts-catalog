@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "estado-de-proyectos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ProjectStatus",
+    "componentDescription": "Muestra un resumen compacto del estado de proyectos o iniciativas con semáforos, fecha y responsables.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "estado-de-proyectos",
+    "libraryId": "97b70d09-6aa2-48a1-8b2f-3a2df117efa7",
+    "solutionShortDescription": "estado-de-proyectos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

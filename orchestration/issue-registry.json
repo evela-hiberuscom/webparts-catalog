@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-03-23T20:42:00.000Z",
+  "updatedAt": "2026-03-24T10:05:00.000Z",
   "entries": [
     {
       "id": "ISSUE-001",
@@ -251,6 +251,102 @@
       "rootCause": "Parte del código inicial heredó patrones de scaffold o de pruebas rápidas que no cumplen las reglas `@rushstack/no-new-null` y `@rushstack/pair-react-dom-render-unmount`.",
       "detectionStage": "wave-1",
       "mitigation": "Normalizar contratos a `undefined` en lugar de `null` salvo APIs legacy y emparejar cada `render` de tests con `unmount` en el mismo flujo del caso de prueba.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-022",
+      "scope": "analytics-contract",
+      "archetype": "analytics",
+      "projectSlug": null,
+      "summary": "Cuando una row expone `listTitleOrUrl`, el repositorio `SharePointList` debe soportar tanto título como URL same-origin de lista; tratar siempre el valor como título rompe el contrato funcional.",
+      "rootCause": "Los primeros repositorios analíticos implementaron solo `getbytitle(...)` y olvidaron derivar `GetList(@listUrl)` para rutas o URLs de lista.",
+      "detectionStage": "wave-2",
+      "mitigation": "Detectar si el valor es URL/ruta same-origin, derivar la ruta server-relative y usar `GetList(@listUrl)`; mantener `getbytitle(...)` solo para títulos puros.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-023",
+      "scope": "analytics-state-handling",
+      "archetype": "analytics",
+      "projectSlug": null,
+      "summary": "Los payloads malformados o respuestas inesperadas no deben degradarse a `empty`; deben producir `error` real para no ocultar problemas de configuración.",
+      "rootCause": "Varios repositorios devolvían `[]` por comodidad cuando el JSON no tenía la forma esperada, y el servicio convertía eso en `empty`.",
+      "detectionStage": "wave-2",
+      "mitigation": "Lanzar error explícito cuando falten las colecciones esperadas o el parseo falle, y cubrir esa rama con tests de repositorio, hook y contenedor.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-024",
+      "scope": "analytics-state-mapping",
+      "archetype": "analytics",
+      "projectSlug": null,
+      "summary": "Un estado de dominio válido como `unknown` no debe forzar `partialData` por sí mismo; `partialData` debe reservarse para datos incompletos de verdad.",
+      "rootCause": "La implementación mezcló semántica de estado operativo con semántica de calidad/completitud del dato.",
+      "detectionStage": "wave-2",
+      "mitigation": "Separar el estado de dominio (`ok|warning|critical|unknown`) del flag `isPartial`, y considerar parcial solo la ausencia de campos obligatorios o enlaces/datos críticos.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-025",
+      "scope": "analytics-refresh",
+      "archetype": "analytics",
+      "projectSlug": null,
+      "summary": "Los proyectos con `autoRefreshSeconds` pueden compilar sin que el refresh automático funcione si el valor no se propaga desde el web part al hook.",
+      "rootCause": "El contrato de configuración quedó definido en el web part pero no se cableó hasta la request consumida por el hook.",
+      "detectionStage": "wave-2",
+      "mitigation": "Hacer trazabilidad completa de la config (`property pane -> props -> request -> hook`) y añadir test explícito del temporizador automático.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-026",
+      "scope": "build-pipeline",
+      "archetype": "platform",
+      "projectSlug": null,
+      "summary": "El script `npm run build` basado en `heft test --clean --production && heft package-solution --production` puede dejar un falso negativo de packaging en nuevas soluciones SPFx aunque el bundle y los tests hayan generado `release/manifests`.",
+      "rootCause": "Encadenar `test --clean` y `package-solution` como único gate no deja una secuencia suficientemente estable para todas las soluciones recién generadas en Windows.",
+      "detectionStage": "wave-3",
+      "mitigation": "Normalizar el gate a `heft build --clean --production && heft test --production && heft package-solution --production`, y propagar la corrección al scaffolder/preparador para proyectos nuevos.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-027",
+      "scope": "analytics-persistence",
+      "archetype": "analytics",
+      "projectSlug": null,
+      "summary": "Los analytics interactivos no pueden declarar persistencia SharePoint o API remota si el repositorio solo guarda en `localStorage` y devuelve éxito igualmente.",
+      "rootCause": "La primera implementación priorizó experiencia de workbench y confirmación visual, pero dejó sin cablear el POST real a la fuente remota y no validó `response.ok` en endpoints.",
+      "detectionStage": "wave-3",
+      "mitigation": "Si el contrato y el provisioning prometen respuestas remotas, implementar el POST real a lista SharePoint o endpoint same-origin, validar el resultado HTTP y cubrir esa rama con tests explícitos.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-028",
+      "scope": "remote-submit-consistency",
+      "archetype": "shared",
+      "projectSlug": "pulso-del-dia",
+      "summary": "Un proyecto puede bloquear falsamente `oneResponsePerDay` si persiste la respuesta en local antes de confirmar el submit remoto.",
+      "rootCause": "La cache local se escribió antes de que SharePoint o el endpoint devolvieran éxito, dejando al usuario marcado como si ya hubiera respondido aunque el POST fallara.",
+      "detectionStage": "wave-3",
+      "mitigation": "Persistir la respuesta local solo después del éxito remoto, o limpiar explícitamente la cache si la operación remota falla; cubrirlo con test de error de submit.",
+      "status": "resolved",
+      "reusable": true
+    },
+    {
+      "id": "ISSUE-029",
+      "scope": "sharepoint-list-url-normalization",
+      "archetype": "shared",
+      "projectSlug": null,
+      "summary": "Cuando un contrato acepta `listTitleOrUrl`, pasar una URL de vista (`.../Forms/AllItems.aspx`) directamente a `GetList(@listUrl)` rompe la resolución de la lista.",
+      "rootCause": "Varios repositorios trataron la URL pegada desde el navegador como si ya fuera la raíz de la lista, sin recortar `Forms` o `AllItems.aspx`.",
+      "detectionStage": "wave-3",
+      "mitigation": "Normalizar siempre la URL same-origin al server-relative root de la lista antes de construir `GetList(@listUrl)`, y cubrir explícitamente el caso `AllItems.aspx` en tests.",
       "status": "resolved",
       "reusable": true
     }

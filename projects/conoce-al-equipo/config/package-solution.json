@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "conoce-al-equipo-client-side-solution",
+    "id": "6043aae8-34b6-4486-aacd-17d1f6893480",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "conoce-al-equipo description"
+      },
+      "longDescription": {
+        "default": "conoce-al-equipo description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "conoce-al-equipo Feature",
+        "description": "The feature that activates elements of the conoce-al-equipo solution.",
+        "id": "175e6af4-9bd6-4cf6-8ec3-2d568db1ddca",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/conoce-al-equipo.sppkg"
+  }
+}

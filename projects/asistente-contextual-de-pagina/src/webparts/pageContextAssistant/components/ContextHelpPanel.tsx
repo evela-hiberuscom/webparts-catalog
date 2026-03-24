@@ -1,5 +1,6 @@
 import * as React from "react";
 import { DefaultButton, Link, MessageBar, MessageBarType, PrimaryButton, Stack, Text } from "@fluentui/react";
+import { createSafeExternalLink } from "@paquete/spfx-common/utils";
 import styles from "./PageContextAssistant.module.scss";
 import type {
   IPageContextAssistantResult,
@@ -25,15 +26,35 @@ function renderRelatedLinks(result?: IPageContextAssistantResult): React.ReactEl
     return undefined;
   }
 
+  const safeLinks = help.relatedLinks
+    .map((link) => {
+      const safeLink = createSafeExternalLink(link.url);
+      if (!safeLink) {
+        return undefined;
+      }
+
+      return {
+        label: link.label,
+        ...safeLink
+      };
+    })
+    .filter((link): link is { label: string; href: string; rel: string; target: string } => Boolean(link));
+
+  if (!safeLinks.length) {
+    return undefined;
+  }
+
   return (
     <div className={styles.linksBlock}>
       <Text variant="mediumPlus" as="h3" className={styles.sectionHeading}>
         Recursos relacionados
       </Text>
       <Stack as="ul" tokens={{ childrenGap: 8 }} className={styles.linkList}>
-        {help.relatedLinks.map((link) => (
-          <li key={`${help.id}-${link.url}`} className={styles.linkItem}>
-            <Link href={link.url}>{link.label}</Link>
+        {safeLinks.map((link) => (
+          <li key={`${help.id}-${link.href}`} className={styles.linkItem}>
+            <Link href={link.href} rel={link.rel} target={link.target}>
+              {link.label}
+            </Link>
           </li>
         ))}
       </Stack>

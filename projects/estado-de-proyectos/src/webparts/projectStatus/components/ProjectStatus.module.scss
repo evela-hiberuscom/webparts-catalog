@@ -1,0 +1,278 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.projectStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  border: 1px solid #d6d6d6;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fd 100%);
+  color: #111111;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, system-ui, sans-serif;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.titleBlock {
+  flex: 1 1 320px;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  line-height: 34px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.accentLine {
+  width: 11px;
+  height: 2px;
+  margin: 10px 0 12px;
+  background: #5b53ff;
+  border-radius: 999px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #3a3a3a;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.summaryChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 200px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  font-size: 14px;
+  line-height: 20px;
+  color: #3a3a3a;
+}
+
+.summaryChipIcon {
+  color: #1032cf;
+}
+
+.filtersBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  padding: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+}
+
+.filtersField {
+  min-width: 240px;
+  flex: 1 1 280px;
+}
+
+.filtersActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.statePanel {
+  display: grid;
+  place-items: center;
+  min-height: 180px;
+  padding: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  text-align: center;
+}
+
+.stateContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.stateTitle {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stateMessage {
+  margin: 0;
+  color: #3a3a3a;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.stateIcon {
+  font-size: 28px;
+  color: #1032cf;
+}
+
+.stateRetry {
+  margin-top: 8px;
+}
+
+.partialNotice {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 16px;
+  border-left: 4px solid #5b53ff;
+  border-radius: 8px;
+  background: #f7f8fd;
+  color: #3a3a3a;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #d6d6d6;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 200px;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 700;
+}
+
+.statusGreen {
+  background: #e7f8ef;
+  color: #12633b;
+}
+
+.statusAmber {
+  background: #fff5e5;
+  color: #8b5300;
+}
+
+.statusRed {
+  background: #fff0f0;
+  color: #a11a1a;
+}
+
+.statusUnknown {
+  background: #f3f3f3;
+  color: #585858;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.cardAccentLine {
+  width: 11px;
+  height: 2px;
+  border-radius: 999px;
+  background: #5b53ff;
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  color: #3a3a3a;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metaIcon {
+  color: #1032cf;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-radius: 200px;
+  border: 1px solid #5b53ff;
+  color: #5b53ff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cardLink:hover,
+.cardLink:focus-visible {
+  color: #4a42e0;
+  border-color: #4a42e0;
+}
+
+.mutedAction {
+  color: #707070;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.footerNote {
+  margin: 0;
+  color: #707070;
+  font-size: 13px;
+  line-height: 18px;
+}

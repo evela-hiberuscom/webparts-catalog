@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "514f405c-4751-4285-bdb7-8f2049697e7e",
+  "alias": "RecycleBinSpaceCalculatorWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": { "default": "Advanced" },
+      "title": { "default": "Recycle Bin Space Calculator" },
+      "description": {
+        "default": "Calcula el espacio ocupado por elementos de papelera de primer y segundo nivel del sitio."
+      },
+      "officeFabricIconFontName": "Trash",
+      "properties": {
+        "description": "Calcula el espacio ocupado por elementos de papelera de primer y segundo nivel del sitio.",
+        "showStageBreakdown": true,
+        "refreshIntervalSeconds": 300,
+        "warningThresholdItems": 1000,
+        "warningThresholdSizeMb": 512
+      }
+    }
+  ]
+}

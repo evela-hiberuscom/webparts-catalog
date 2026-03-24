@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "da2c1416-d310-4861-9265-440c61a40c10",
+  "alias": "IdeasMailboxWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "General"
+      },
+      "title": {
+        "default": "Buzón de ideas"
+      },
+      "description": {
+        "default": "Recoge ideas o propuestas breves mediante un formulario ligero y seguro."
+      },
+      "officeFabricIconFontName": "Lightbulb",
+      "properties": {
+        "title": "Buzón de ideas",
+        "subtitle": "Comparte una propuesta sin fricción y con validación clara.",
+        "sourceType": "SharePointList",
+        "listTitleOrUrl": "",
+        "endpointUrl": "",
+        "allowAnonymous": false,
+        "showCategory": true,
+        "submitLabel": "Enviar idea",
+        "categoryLabel": "Categoría"
+      }
+    }
+  ]
+}

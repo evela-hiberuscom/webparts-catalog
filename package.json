@@ -11,6 +11,8 @@
     "orchestrate:foundation": "npm run sync:airtable && npm run bootstrap:contexts",
     "scaffold:spfx": "node ./scripts/scaffold-spfx-project.mjs",
     "prepare:spfx": "node ./scripts/prepare-spfx-project.mjs",
-    "record:issue": "node ./scripts/record-issue.mjs"
+    "record:issue": "node ./scripts/record-issue.mjs",
+    "progress:board": "node ./scripts/render-progress-board.mjs",
+    "audit:redteam": "node ./scripts/generate-red-team-audit.mjs"
   }
 }

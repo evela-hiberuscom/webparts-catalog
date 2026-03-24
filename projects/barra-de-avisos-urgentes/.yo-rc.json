@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "barra-de-avisos-urgentes",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "UrgentAlertBar",
+    "componentDescription": "Muestra avisos críticos o urgentes en formato banner con alta visibilidad.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "barra-de-avisos-urgentes",
+    "libraryId": "bc52208f-6b67-4067-aa67-39c01101420d",
+    "solutionShortDescription": "barra-de-avisos-urgentes description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

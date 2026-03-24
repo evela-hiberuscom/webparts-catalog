@@ -24,5 +24,23 @@
     "Si falta foto, mostrar avatar por defecto o iniciales.",
     "Si falta bio, el miembro sigue siendo válido.",
     "Si falta enlace de perfil/contacto, la tarjeta sigue siendo informativa."
-  ]
+  ],
+  "siteProvisioning": {
+    "lists": [
+      {
+        "title": "TeamMembersList",
+        "purpose": "presentación de miembros del equipo",
+        "columns": [
+          { "name": "Title", "type": "Single line of text", "required": true },
+          { "name": "JobTitle", "type": "Single line of text", "required": false },
+          { "name": "Bio", "type": "Multiple lines of text", "required": false },
+          { "name": "PhotoUrl", "type": "Hyperlink or Picture", "required": false },
+          { "name": "ProfileUrl", "type": "Hyperlink or Picture", "required": false },
+          { "name": "SortOrder", "type": "Number", "required": false }
+        ]
+      }
+    ],
+    "pages": [],
+    "assets": ["SiteAssets/team/"]
+  }
 }

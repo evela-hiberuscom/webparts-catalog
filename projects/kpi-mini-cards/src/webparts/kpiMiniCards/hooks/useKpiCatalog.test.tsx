@@ -13,7 +13,7 @@ const baseConfig: IKpiCatalogConfig = {
   kpiCardsJson: '[]',
   jsonUrl: '',
   apiEndpointUrl: '',
-  sharePointListTitle: '',
+  listTitleOrUrl: '',
   webUrl: 'https://contoso.sharepoint.com/sites/intranet',
   showTrend: true,
   layoutMode: 'compact',
@@ -48,6 +48,10 @@ describe('useKpiCatalog', () => {
     ReactDOM.unmountComponentAtNode(container);
     container.remove();
   });
+
+  function unmountHarness(): void {
+    ReactDOM.unmountComponentAtNode(container);
+  }
 
   async function renderWithService(serviceResult: Promise<IKpiCatalogViewModel> | IKpiCatalogViewModel): Promise<void> {
     const service = {
@@ -106,6 +110,11 @@ describe('useKpiCatalog', () => {
     expect(latestResult?.status).toBe('ready');
     expect(latestResult?.items).toHaveLength(1);
     expect(latestResult?.items[0].state).toBe('ok');
+
+    await act(async () => {
+      unmountHarness();
+      await Promise.resolve();
+    });
   });
 
   it('publishes an error state when the service rejects', async () => {
@@ -131,5 +140,10 @@ describe('useKpiCatalog', () => {
 
     expect(latestResult?.status).toBe('error');
     expect(latestResult?.notes[0]).toContain('feed failure');
+
+    await act(async () => {
+      unmountHarness();
+      await Promise.resolve();
+    });
   });
 });

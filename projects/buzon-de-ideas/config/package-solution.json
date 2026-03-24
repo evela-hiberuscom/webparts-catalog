@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "buzon-de-ideas-client-side-solution",
+    "id": "7483c2d2-4594-4f07-8998-0acd0f4694fb",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "buzon-de-ideas description"
+      },
+      "longDescription": {
+        "default": "buzon-de-ideas description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "buzon-de-ideas Feature",
+        "description": "The feature that activates elements of the buzon-de-ideas solution.",
+        "id": "298077ec-9ad8-4946-a2ed-96beab103710",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/buzon-de-ideas.sppkg"
+  }
+}

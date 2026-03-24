@@ -66,6 +66,26 @@
         "opciones accesibles",
         "feedback claro"
       ]
+    },
+    "behaviors": {
+      "oneResponsePerDay": true,
+      "fallbackMode": "StaticConfig when no remote source is configured",
+      "remoteSource": "SharePointList"
+    },
+    "componentRequirements": {
+      "prompt": "title, helper text, options grid",
+      "feedback": [
+        "loading",
+        "partialData",
+        "empty",
+        "error",
+        "success"
+      ],
+      "actions": [
+        "selectOption",
+        "submitSelection",
+        "reload"
+      ]
     }
   }
 }

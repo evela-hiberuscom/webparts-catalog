@@ -1,0 +1,318 @@
+import { SPHttpClient } from '@microsoft/sp-http';
+import type { WebPartContext } from '@microsoft/sp-webpart-base';
+import type {
+  IHistoricalStorageAnalysisRequest,
+  IHistoricalStorageAnalysisResult,
+  IHistoricalStorageDocumentSnapshot,
+  IHistoricalStorageLibraryOption
+} from '../models/historicalStorageAnalyzer.types';
+import {
+  calculateHistoricalRatio,
+  derivePrecisionState,
+  normalizeBytes,
+  sortDocumentsByHistoricalCost,
+  sumBytes
+} from '../utils/analysisCalculations';
+import type { IHistoricalStorageAnalyzerRepository } from './IHistoricalStorageAnalyzerRepository';
+
+interface ISharePointPagedResponse<T> {
+  value?: T[];
+  '@odata.nextLink'?: string;
+  __next?: string;
+}
+
+interface ISharePointLibraryResponse {
+  Id: string;
+  Title: string;
+  Hidden?: boolean;
+  ItemCount?: number;
+  RootFolder?: {
+    ServerRelativeUrl?: string;
+  };
+}
+
+interface ISharePointListItemResponse {
+  Id: number;
+  Title?: string;
+  File?: {
+    Name?: string;
+    ServerRelativeUrl?: string;
+    Length?: number;
+  };
+}
+
+interface ISharePointVersionResponse {
+  Size?: number;
+  Length?: number;
+}
+
+interface IHistoricalDocumentScan extends IHistoricalStorageDocumentSnapshot {
+  scanComplete: boolean;
+}
+
+function createWarnings(...warnings: Array<string | undefined>): string[] {
+  const uniqueWarnings: string[] = [];
+  warnings.forEach((warning) => {
+    if (!warning || warning.trim().length === 0 || uniqueWarnings.indexOf(warning) !== -1) {
+      return;
+    }
+
+    uniqueWarnings.push(warning);
+  });
+
+  return uniqueWarnings;
+}
+
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  mapper: (item: T, index: number) => Promise<R>
+): Promise<R[]> {
+  if (items.length === 0) {
+    return [];
+  }
+
+  const results = new Array<R>(items.length);
+  let nextIndex = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  });
+
+  await Promise.all(workers);
+  return results;
+}
+
+export class SharePointHistoricalStorageAnalyzerRepository
+  implements IHistoricalStorageAnalyzerRepository
+{
+  public constructor(private readonly context: WebPartContext) {}
+
+  public async listLibraries(includeHiddenLibraries: boolean): Promise<IHistoricalStorageLibraryOption[]> {
+    const hiddenClause = includeHiddenLibraries ? '' : ' and Hidden eq false';
+    const url =
+      `web/lists?$select=Id,Title,Hidden,ItemCount,RootFolder/ServerRelativeUrl` +
+      `&$expand=RootFolder&$filter=BaseTemplate eq 101${hiddenClause}`;
+    const response = await this.getPagedCollection<ISharePointLibraryResponse>(url);
+
+    return response
+      .map((library) => this.toLibraryOption(library))
+      .filter((library) => library.serverRelativeUrl.length > 0)
+      .sort((left, right) => left.title.localeCompare(right.title));
+  }
+
+  public async analyzeLibrary(
+    request: IHistoricalStorageAnalysisRequest
+  ): Promise<IHistoricalStorageAnalysisResult> {
+    const startedAt = Date.now();
+    const libraries = await this.listLibraries(request.includeHiddenLibraries);
+    const library = libraries.find((entry) => entry.id === request.selectedLibraryId);
+
+    if (!library) {
+      throw new Error(`Library not found for id ${request.selectedLibraryId}`);
+    }
+
+    const items = await this.getPagedCollection<ISharePointListItemResponse>(
+      `web/lists(guid'${library.id}')/items?$select=Id,Title,File/Name,File/ServerRelativeUrl,File/Length&$expand=File`
+    );
+
+    const documents = items
+      .map((item) => this.toDocumentSnapshot(item))
+      .filter((item): item is IHistoricalDocumentScan => !!item);
+
+    if (documents.length === 0) {
+      return {
+        library,
+        scanMode: request.scanMode,
+        summary: {
+          totalDocuments: 0,
+          documentsAnalyzed: 0,
+          visibleCurrentSizeBytes: 0,
+          historicalVersionCount: 0,
+          historicalEstimatedSizeBytes: null,
+          historicalToCurrentRatio: null,
+          analysisCoveragePercent: 0,
+          exactness: 'estimated',
+          durationMs: Date.now() - startedAt,
+          throttled: false
+        },
+        topDocuments: [],
+        warnings: ['empty-library'],
+        exportedAt: new Date().toISOString()
+      };
+    }
+
+    const topCount = Math.max(1, request.topDocumentsLimit);
+    const scanLimit =
+      request.scanMode === 'deepScan'
+        ? documents.length
+        : Math.min(documents.length, Math.max(topCount * 2, 10));
+    const candidateDocuments = sortDocumentsByHistoricalCost(documents).slice(0, scanLimit);
+    const analyzedDocuments = await mapWithConcurrency(
+      candidateDocuments,
+      Math.max(1, request.maxVersionConcurrency),
+      async (document) => this.enrichDocumentWithVersions(document)
+    );
+
+    const analyzedDocumentMap = new Map<number, IHistoricalDocumentScan>();
+    analyzedDocuments.forEach((document) => {
+      analyzedDocumentMap.set(document.id, document);
+    });
+    const mergedDocuments = documents.map((document) => analyzedDocumentMap.get(document.id) ?? document);
+    const visibleCurrentSizeBytes = sumBytes(documents.map((document) => document.currentSizeBytes));
+    const historicalEstimatedSizeBytes = sumBytes(
+      analyzedDocuments.map((document) => document.historicalSizeBytes)
+    );
+    const historicalVersionCount = analyzedDocuments.reduce(
+      (total, document) => total + document.historicalVersionCount,
+      0
+    );
+    const coveragePercent = Math.round((analyzedDocuments.length / documents.length) * 100);
+    const throttled = analyzedDocuments.some((document) =>
+      document.warnings.some((warning) => warning === 'throttled')
+    );
+    const partialCount = mergedDocuments.filter((document) => !document.scanComplete).length;
+    const exactness = derivePrecisionState({
+      coveragePercent,
+      partialCount,
+      throttled
+    });
+
+    return {
+      library,
+      scanMode: request.scanMode,
+      summary: {
+        totalDocuments: documents.length,
+        documentsAnalyzed: analyzedDocuments.length,
+        visibleCurrentSizeBytes,
+        historicalVersionCount,
+        historicalEstimatedSizeBytes: historicalEstimatedSizeBytes > 0 ? historicalEstimatedSizeBytes : null,
+        historicalToCurrentRatio: calculateHistoricalRatio(
+          historicalEstimatedSizeBytes,
+          visibleCurrentSizeBytes
+        ),
+        analysisCoveragePercent: coveragePercent,
+        exactness,
+        durationMs: Date.now() - startedAt,
+        throttled
+      },
+      topDocuments: sortDocumentsByHistoricalCost(mergedDocuments).slice(0, topCount),
+      warnings: createWarnings(
+        ...analyzedDocuments.reduce<string[]>((accumulator, document) => accumulator.concat(document.warnings), []),
+        request.scanMode === 'quickScan' && analyzedDocuments.length < documents.length
+          ? 'quick-scan-capped'
+          : undefined
+      ),
+      exportedAt: new Date().toISOString()
+    };
+  }
+
+  private toLibraryOption(library: ISharePointLibraryResponse): IHistoricalStorageLibraryOption {
+    const serverRelativeUrl = library.RootFolder?.ServerRelativeUrl ?? '';
+    return {
+      id: library.Id,
+      title: library.Title,
+      serverRelativeUrl,
+      webUrl: `${this.context.pageContext.web.absoluteUrl}${serverRelativeUrl}`,
+      hidden: !!library.Hidden,
+      itemCount: Number(library.ItemCount ?? 0),
+      isSystemLibrary: serverRelativeUrl.startsWith('/_') || serverRelativeUrl.toLowerCase().includes('/forms/')
+    };
+  }
+
+  private toDocumentSnapshot(item: ISharePointListItemResponse): IHistoricalDocumentScan | undefined {
+    const serverRelativeUrl = item.File?.ServerRelativeUrl?.trim();
+    if (!serverRelativeUrl) {
+      return undefined;
+    }
+
+    return {
+      id: item.Id,
+      title: item.File?.Name?.trim() || item.Title?.trim() || `Documento ${item.Id}`,
+      serverRelativeUrl,
+      currentSizeBytes: normalizeBytes(item.File?.Length),
+      historicalVersionCount: 0,
+      historicalSizeBytes: null,
+      ratio: null,
+      precision: 'estimated',
+      warnings: [],
+      scanComplete: false
+    };
+  }
+
+  private async enrichDocumentWithVersions(
+    document: IHistoricalStorageDocumentSnapshot
+  ): Promise<IHistoricalDocumentScan> {
+    try {
+      const versions = await this.getPagedCollection<ISharePointVersionResponse>(
+        `web/getfilebyserverrelativeurl('${document.serverRelativeUrl.replace(/'/g, "''")}')/versions?$select=Size,Length`
+      );
+      const historicalVersionCount = versions.length;
+      const historicalSizeBytes = sumBytes(
+        versions.map((version) => normalizeBytes(version.Size ?? version.Length))
+      );
+
+      return {
+        ...document,
+        historicalVersionCount,
+        historicalSizeBytes,
+        ratio: calculateHistoricalRatio(historicalSizeBytes, document.currentSizeBytes),
+        precision: 'exact',
+        warnings: createWarnings(...document.warnings),
+        scanComplete: true
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'version-fetch-failed';
+      const throttled = /429|throttl|503/i.test(message);
+
+      return {
+        ...document,
+        historicalVersionCount: 0,
+        historicalSizeBytes: null,
+        ratio: null,
+        precision: 'partial',
+        warnings: createWarnings(...document.warnings, throttled ? 'throttled' : 'version-fetch-failed'),
+        scanComplete: false
+      };
+    }
+  }
+
+  private async getPagedCollection<T>(relativeOrAbsoluteUrl: string): Promise<T[]> {
+    const result: T[] = [];
+    let nextUrl: string | undefined = this.buildApiUrl(relativeOrAbsoluteUrl);
+
+    while (nextUrl) {
+      const response = await this.context.spHttpClient.get(
+        nextUrl,
+        SPHttpClient.configurations.v1,
+        {
+          headers: {
+            Accept: 'application/json;odata=nometadata'
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`SharePoint request failed (${response.status}) for ${nextUrl}`);
+      }
+
+      const body = (await response.json()) as ISharePointPagedResponse<T>;
+      result.push(...(body.value ?? []));
+      const nextLink = body['@odata.nextLink'] ?? body.__next;
+      nextUrl = typeof nextLink === 'string' && nextLink.length > 0 ? nextLink : undefined;
+    }
+
+    return result;
+  }
+
+  private buildApiUrl(relativeOrAbsoluteUrl: string): string {
+    if (/^https?:\/\//i.test(relativeOrAbsoluteUrl)) {
+      return relativeOrAbsoluteUrl;
+    }
+
+    return `${this.context.pageContext.web.absoluteUrl}/_api/${relativeOrAbsoluteUrl.replace(/^\/+/, '')}`;
+  }
+}

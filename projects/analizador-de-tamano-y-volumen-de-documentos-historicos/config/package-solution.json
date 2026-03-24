@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "analizador-de-tamano-y-volumen-de-documentos-historicos-client-side-solution",
+    "id": "ef5bfabc-88fb-45af-8fbd-b4bebc0a791e",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "analizador-de-tamano-y-volumen-de-documentos-historicos description"
+      },
+      "longDescription": {
+        "default": "analizador-de-tamano-y-volumen-de-documentos-historicos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "analizador-de-tamano-y-volumen-de-documentos-historicos Feature",
+        "description": "The feature that activates elements of the analizador-de-tamano-y-volumen-de-documentos-historicos solution.",
+        "id": "7fe4df3b-364a-4cf7-a6ce-a19828691ff0",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/analizador-de-tamano-y-volumen-de-documentos-historicos.sppkg"
+  }
+}

@@ -36,6 +36,8 @@ if (!fs.existsSync(packageJsonPath)) {
 updateJson(packageJsonPath, (packageJson) => {
   packageJson.dependencies ??= {};
   packageJson.dependencies["@paquete/spfx-common"] = "file:../../packages/spfx-common";
+  packageJson.scripts ??= {};
+  packageJson.scripts.build = "heft build --clean --production && heft test --production && heft package-solution --production";
   return packageJson;
 });
 
@@ -56,6 +58,7 @@ fs.writeFileSync(
     "",
     `- Project: ${slug}`,
     "- Added local dependency: `@paquete/spfx-common`",
+    "- Normalized `npm run build` to `heft build --clean --production && heft test --production && heft package-solution --production`",
     "- Forced `skipFeatureDeployment=false` in `config/package-solution.json` when present"
   ].join("\n"),
   "utf8"

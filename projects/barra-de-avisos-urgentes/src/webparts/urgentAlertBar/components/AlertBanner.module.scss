@@ -1,0 +1,177 @@
+.banner {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  border-radius: 20px;
+  padding: 18px 18px 18px 0;
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  overflow: hidden;
+}
+
+.accent {
+  width: 10px;
+  flex: 0 0 10px;
+  border-radius: 999px;
+}
+
+.body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.headerRow,
+.footerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.headerRow {
+  margin-bottom: 10px;
+}
+
+.badge,
+.partial,
+.meta,
+.cta,
+.dismissButton {
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 14px;
+}
+
+.badge,
+.partial {
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+}
+
+.badge {
+  background: rgba(16, 50, 207, 0.08);
+  color: #1032cf;
+}
+
+.partial {
+  background: rgba(91, 83, 255, 0.08);
+  color: #4a42e0;
+}
+
+.dismissButton {
+  border: 0;
+  background: transparent;
+  color: #3a3a3a;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dismissButton:hover,
+.dismissButton:focus-visible,
+.cta:hover,
+.cta:focus-visible {
+  outline: 2px solid #5b53ff;
+  outline-offset: 2px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111111;
+}
+
+.message {
+  margin: 0 0 14px;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2d2d2d;
+}
+
+.meta {
+  color: #707070;
+}
+
+.cta {
+  border-radius: 200px;
+  padding: 10px 16px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #ffffff;
+  background: #1032cf;
+}
+
+.critical {
+  background: linear-gradient(180deg, #19255a 0%, #1032cf 100%);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.critical .accent {
+  background: #5b53ff;
+}
+
+.critical .badge,
+.critical .partial,
+.critical .title,
+.critical .message,
+.critical .meta,
+.critical .dismissButton {
+  color: #ffffff;
+}
+
+.critical .badge {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.critical .partial {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.critical .cta {
+  background: #ffffff;
+  color: #1032cf;
+}
+
+.warning {
+  background: #fff9eb;
+  border-color: #f59e0b;
+}
+
+.warning .accent {
+  background: #f59e0b;
+}
+
+.warning .badge {
+  background: rgba(245, 158, 11, 0.12);
+  color: #92400e;
+}
+
+.info {
+  background: #f7f8fd;
+  border-color: #d6d6d6;
+}
+
+.info .accent {
+  background: #1032cf;
+}
+
+@media (max-width: 640px) {
+  .banner {
+    padding-right: 12px;
+  }
+
+  .headerRow,
+  .footerRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+

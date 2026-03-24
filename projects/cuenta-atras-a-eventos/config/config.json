@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "event-countdown-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/eventCountdown/EventCountdownWebPart.js",
+          "manifest": "./src/webparts/eventCountdown/EventCountdownWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "EventCountdownWebPartStrings": "lib/webparts/eventCountdown/loc/{locale}.js"
+  }
+}

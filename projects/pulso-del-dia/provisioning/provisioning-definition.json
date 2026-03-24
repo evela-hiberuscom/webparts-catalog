@@ -2,7 +2,12 @@
   "projectSlug": "pulso-del-dia",
   "archetype": "analytics",
   "rowId": "recRt1japWn21MzFX",
-  "sources": [],
+  "sources": [
+    "SharePointList",
+    "StaticConfig",
+    "JsonUrl",
+    "ApiEndpoint"
+  ],
   "acceptanceCriteria": [
     "Permite registrar un pulso válido.",
     "Muestra confirmación tras responder."
@@ -10,5 +15,65 @@
   "businessRules": [
     "Una respuesta por usuario y día si el origen lo permite.",
     "Si no hay prompt activo, mostrar empty."
-  ]
+  ],
+  "inferredProvisioning": {
+    "listName": "DailyPulse",
+    "listPurpose": "Guardar prompt activo y respuestas diarias.",
+    "columns": [
+      {
+        "name": "Title",
+        "type": "Single line of text",
+        "purpose": "Título operativo del registro"
+      },
+      {
+        "name": "DailyPulseItemType",
+        "type": "Choice",
+        "values": [
+          "Prompt",
+          "Response"
+        ],
+        "purpose": "Distinguir el prompt activo de las respuestas"
+      },
+      {
+        "name": "DailyPulseActive",
+        "type": "Yes/No",
+        "purpose": "Marcar el prompt vigente"
+      },
+      {
+        "name": "DailyPulsePromptText",
+        "type": "Multiple lines of text",
+        "purpose": "Pregunta mostrada al usuario"
+      },
+      {
+        "name": "DailyPulseOptionsJson",
+        "type": "Multiple lines of text",
+        "purpose": "Opciones serializadas del prompt"
+      },
+      {
+        "name": "DailyPulseResponseValue",
+        "type": "Single line of text",
+        "purpose": "Valor seleccionado por el usuario"
+      },
+      {
+        "name": "DailyPulseResponseLabel",
+        "type": "Single line of text",
+        "purpose": "Etiqueta legible de la opción elegida"
+      },
+      {
+        "name": "DailyPulseSubmittedBy",
+        "type": "Single line of text",
+        "purpose": "Usuario que envía la respuesta"
+      },
+      {
+        "name": "DailyPulseSubmittedAt",
+        "type": "Date and Time",
+        "purpose": "Marca temporal de la respuesta"
+      }
+    ],
+    "indexes": [
+      "DailyPulseItemType",
+      "DailyPulseActive",
+      "DailyPulseSubmittedAt"
+    ]
+  }
 }

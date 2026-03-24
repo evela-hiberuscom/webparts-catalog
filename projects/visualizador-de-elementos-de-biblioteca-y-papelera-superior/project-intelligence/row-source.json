@@ -8,872 +8,174 @@
   "dependencies": [],
   "provisioningNeeds": [
     {
-      "name": "SharePoint Library",
-      "type": "primary",
-      "api": "SharePoint REST API",
-      "purpose": "Metadatos de biblioteca e ItemCount"
+      "name": "SiteRecycleBinStage1",
+      "type": "SharePointRecycleBin",
+      "purpose": "conteo y tamaño de papelera de primer nivel"
     },
     {
-      "name": "Site Recycle Bin",
-      "type": "primary",
-      "api": "SharePoint REST API",
-      "purpose": "Conteo y tamaño agregado de elementos eliminados"
+      "name": "SiteRecycleBinStage2",
+      "type": "SharePointRecycleBin",
+      "purpose": "conteo y tamaño de papelera de segundo nivel"
     }
   ],
   "enrichmentStatus": "sufficient",
   "completeness": {
     "enrichmentStatus": "sufficient",
-    "presentAreas": [
-      "goal",
-      "useCases",
-      "dataSource",
-      "uiStates",
-      "businessRules",
-      "acceptanceCriteria",
-      "provisioning"
-    ],
-    "missingAreas": []
+    "presentAreas": ["goal", "useCases", "dataSource", "uiStates", "businessRules", "acceptanceCriteria", "provisioning"],
+    "missingAreas": ["detailBreakdownPreference"]
   },
   "sourceJsons": {
     "specsJson": {
       "meta": {
-        "id": "library-recyclebin-visualizer",
+        "id": "recycle-bin-space-calculator",
         "name": "Visualizador de elementos de biblioteca y papelera superior",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "artifactType": "SPFxWebPart",
         "domain": "SharePoint Online",
         "status": "ready-for-implementation"
       },
       "summary": {
-        "oneLiner": "Compara el contenido activo de una biblioteca con el contenido eliminado presente en la papelera de primer nivel del sitio.",
-        "productGoal": "Hacer visible la relación entre contenido activo y residuos documentales para detectar acumulación y oportunidades de limpieza."
-      },
-      "problem": {
-        "business": "Los equipos suelen ver solo la biblioteca activa y no la presión que genera la papelera sobre la higiene documental del sitio.",
-        "operational": "Sin una comparativa clara es difícil saber si existe acumulación anómala de elementos eliminados.",
-        "decisionImpact": "La ausencia de visibilidad impide detectar hábitos de limpieza deficientes y dificulta justificar acciones de gobierno."
+        "oneLiner": "Calcula el espacio ocupado por elementos de papelera de primer y segundo nivel del sitio.",
+        "productGoal": "Hacer visible el peso real de los eliminados en ambas etapas de la papelera para priorizar limpieza y gobierno."
       },
       "objectives": {
         "primary": [
-          "Mostrar ItemCount real de la biblioteca",
-          "Mostrar conteo de la papelera de primer nivel",
-          "Mostrar tamaño agregado de la papelera cuando sea posible",
-          "Calcular ratio papelera/biblioteca"
+          "Mostrar tamaño ocupado por la papelera de primer nivel",
+          "Mostrar tamaño ocupado por la papelera de segundo nivel",
+          "Mostrar total agregado cuando ambos datos estén disponibles"
         ],
         "secondary": [
-          "Alertar de acumulación anómala",
-          "Dar acceso rápido a biblioteca y papelera",
-          "Servir como tarjeta de diagnóstico en landing técnica"
+          "Mostrar conteo por nivel",
+          "Permitir refresco manual",
+          "Permitir apertura de la papelera del sitio"
         ]
       },
-      "users": [
-        {
-          "role": "SiteOwner",
-          "needs": [
-            "ver si la papelera está cargada",
-            "abrir la papelera"
-          ]
-        },
-        {
-          "role": "SupportM365",
-          "needs": [
-            "diagnóstico rápido del estado higiénico del sitio",
-            "comprobar partialData o permisos insuficientes"
-          ]
-        },
-        {
-          "role": "DocumentManager",
-          "needs": [
-            "comparar volumen activo vs eliminado"
-          ]
-        }
-      ],
       "scope": {
         "in": [
-          "Selección de biblioteca",
-          "Lectura ItemCount",
-          "Consulta papelera de primer nivel",
-          "Conteo de elementos en papelera",
-          "Tamaño agregado cuando sea posible",
-          "KPIs comparativos",
-          "Health badge",
-          "Refresco manual",
-          "Apertura de biblioteca y papelera"
+          "Consulta de papelera de primer nivel",
+          "Consulta de papelera de segundo nivel",
+          "Agregación de conteo y tamaño",
+          "KPIs de tamaño y salud",
+          "Refresco manual"
         ],
         "out": [
-          "Eliminar o restaurar desde la web part",
-          "Explorar segunda etapa de papelera",
-          "Cruce exacto documento a documento",
-          "Análisis multi-sitio"
+          "Comparativa contra biblioteca activa",
+          "Restaurar o eliminar elementos",
+          "Análisis multi-sitio",
+          "Cruce documento a documento"
         ]
       },
-      "useCases": [
-        {
-          "id": "CU-01",
-          "name": "Detectar papelera muy cargada",
-          "actor": "SiteOwner",
-          "flow": [
-            "Carga la tarjeta",
-            "Ve umbral superado",
-            "Abre papelera"
-          ],
-          "success": "Detecta residuos acumulados."
-        },
-        {
-          "id": "CU-02",
-          "name": "Comparar tamaño activo vs eliminado",
-          "actor": "SupportM365",
-          "flow": [
-            "Consulta KPIs",
-            "Compara conteo y tamaño"
-          ],
-          "success": "Evalúa si la limpieza puede aportar valor."
-        },
-        {
-          "id": "CU-03",
-          "name": "Punto rápido de acción",
-          "actor": "DocumentManager",
-          "flow": [
-            "Usa acciones de abrir biblioteca o papelera"
-          ],
-          "success": "Va al punto operativo sin navegar por el sitio."
-        },
-        {
-          "id": "CU-04",
-          "name": "Datos parciales útiles",
-          "actor": "SupportM365",
-          "flow": [
-            "No se puede calcular tamaño pero sí conteo"
-          ],
-          "success": "Se informa partialData y la tarjeta sigue siendo útil."
-        }
-      ],
       "functionalRequirements": [
-        {
-          "id": "RF-01",
-          "text": "Seleccionar biblioteca por título o ID."
-        },
-        {
-          "id": "RF-02",
-          "text": "Mostrar ItemCount de biblioteca."
-        },
-        {
-          "id": "RF-03",
-          "text": "Mostrar conteo de elementos de la papelera de primer nivel."
-        },
-        {
-          "id": "RF-04",
-          "text": "Calcular tamaño agregado de papelera cuando la API lo permita."
-        },
-        {
-          "id": "RF-05",
-          "text": "Mostrar ratio papelera/biblioteca."
-        },
-        {
-          "id": "RF-06",
-          "text": "Clasificar salud ok/warning/critical/unknown."
-        },
-        {
-          "id": "RF-07",
-          "text": "Permitir refresco manual y opcional automático."
-        },
-        {
-          "id": "RF-08",
-          "text": "Abrir biblioteca y papelera."
-        },
-        {
-          "id": "RF-09",
-          "text": "Gestionar empty, partialData, error y loading."
-        }
-      ],
-      "nonFunctionalRequirements": [
-        {
-          "id": "RNF-01",
-          "text": "La carga inicial debe ser ligera y apta para dashboards."
-        },
-        {
-          "id": "RNF-02",
-          "text": "Debe manejar permisos parciales y propiedades variables de la papelera."
-        },
-        {
-          "id": "RNF-03",
-          "text": "Opera en solo lectura."
-        },
-        {
-          "id": "RNF-04",
-          "text": "Debe soportar cache y reintentos básicos."
-        },
-        {
-          "id": "RNF-05",
-          "text": "Debe ser usable en sección estrecha y ancha."
-        }
+        "Calcular el tamaño ocupado por elementos de papelera de primer nivel.",
+        "Calcular el tamaño ocupado por elementos de papelera de segundo nivel.",
+        "Mostrar un total agregado cuando ambas etapas estén disponibles.",
+        "Gestionar loading, ready, empty, partialData y error."
       ],
       "businessRules": [
-        "Si recycleBinItemCount >= warningThresholdItems, estado al menos warning.",
-        "Si recycleBinSizeMb >= warningThresholdSizeMb, estado al menos warning cuando el dato exista.",
-        "Si faltan tamaños pero hay conteos, precision=partial y la UI sigue operativa.",
-        "Si la biblioteca no existe, estado error.",
-        "Si libraryItemCount=0 y recycleBinItemCount>0, ratio puede ser null o tratarse como señal crítica según health evaluator."
+        "Si el tamaño de una etapa no está disponible, marcar partialData sin reinterpretar el objetivo.",
+        "Si se dispone de las dos etapas, el total agregado debe ser exacto.",
+        "El cálculo no debe depender de una comparativa con bibliotecas activas."
       ],
       "configuration": {
-        "libraryTitleOrId": {
-          "type": "string",
-          "required": true
-        },
-        "showSizeMetrics": {
-          "type": "boolean",
-          "default": true
-        },
-        "refreshIntervalSeconds": {
-          "type": "number",
-          "default": 300,
-          "min": 0
-        },
-        "warningThresholdItems": {
-          "type": "number",
-          "default": 1000,
-          "min": 0
-        },
-        "warningThresholdSizeMb": {
-          "type": "number",
-          "default": 512,
-          "min": 0
-        }
+        "showStageBreakdown": { "type": "boolean", "default": true },
+        "refreshIntervalSeconds": { "type": "number", "default": 300, "min": 0 },
+        "warningThresholdItems": { "type": "number", "default": 1000, "min": 0 },
+        "warningThresholdSizeMb": { "type": "number", "default": 512, "min": 0 }
       },
       "acceptanceCriteria": [
-        "Muestra ItemCount real de la biblioteca.",
-        "Muestra conteo de la papelera de primer nivel.",
-        "Muestra tamaño agregado cuando sea viable.",
-        "Informa partialData si faltan propiedades.",
-        "Permite refresco y abrir biblioteca/papelera.",
-        "Clasifica salud correctamente."
+        "Muestra el espacio ocupado por la papelera de primer nivel.",
+        "Muestra el espacio ocupado por la papelera de segundo nivel.",
+        "Muestra un total agregado exacto cuando ambos datos están disponibles.",
+        "Informa partialData si falta el tamaño de alguna etapa."
       ],
       "edgeCases": [
-        "Biblioteca inexistente",
         "Papelera vacía",
-        "Papelera muy grande",
-        "Sin permisos suficientes",
-        "Tamaño no disponible por elemento",
+        "Falta el tamaño de una etapa",
+        "Permisos parciales",
         "Errores transitorios 429/503"
       ],
       "definitionOfDone": [
         "Compila en SPFx",
-        "Gestiona errores y partialData",
+        "Gestiona tamaño de ambas etapas de la papelera",
         "Incluye tests base y README técnico"
       ]
     },
     "designJson": {
-      "uxGoal": "Ofrecer una tarjeta operativa muy rápida de leer para comparar contenido activo vs eliminado en el sitio.",
+      "uxGoal": "Ofrecer una tarjeta operativa muy rápida de leer para ver el espacio consumido por la papelera del sitio.",
       "informationArchitecture": {
-        "zones": [
-          "Cabecera",
-          "KPIs comparativos",
-          "Badge de salud",
-          "Acciones"
-        ],
-        "priorityOrder": [
-          "conteo papelera",
-          "conteo biblioteca",
-          "tamaño papelera",
-          "ratio"
-        ]
-      },
-      "layout": {
-        "fullWidth": {
-          "header": "compacto",
-          "kpis": "4-5 tarjetas en grid",
-          "actions": "alineadas al final"
-        },
-        "narrow": {
-          "header": "apilado",
-          "kpis": "verticales",
-          "actions": "compactas"
-        }
+        "zones": ["Cabecera", "KPIs de papelera", "Badge de salud", "Acciones"],
+        "priorityOrder": ["tamaño total", "tamaño primer nivel", "tamaño segundo nivel", "conteo"]
       },
       "states": [
-        {
-          "id": "loading",
-          "ui": [
-            "skeleton cards",
-            "mensaje de carga"
-          ]
-        },
-        {
-          "id": "ready",
-          "ui": [
-            "title",
-            "health badge",
-            "kpi biblioteca",
-            "kpi papelera",
-            "kpi tamaño",
-            "kpi ratio",
-            "acciones"
-          ]
-        },
-        {
-          "id": "empty",
-          "ui": [
-            "estado sin residuos o sin datos útiles"
-          ]
-        },
-        {
-          "id": "partialData",
-          "ui": [
-            "warning message",
-            "KPIs con tamaño ausente o incompleto"
-          ]
-        },
-        {
-          "id": "error",
-          "ui": [
-            "mensaje seguro",
-            "acción refrescar"
-          ]
-        }
+        { "id": "loading", "ui": ["skeleton cards", "mensaje de carga"] },
+        { "id": "ready", "ui": ["title", "health badge", "kpi primer nivel", "kpi segundo nivel", "kpi total", "acciones"] },
+        { "id": "empty", "ui": ["estado sin residuos o sin datos útiles"] },
+        { "id": "partialData", "ui": ["warning message", "KPIs con una etapa sin tamaño"] },
+        { "id": "error", "ui": ["mensaje seguro", "acción refrescar"] }
       ],
-      "kpiCards": [
-        {
-          "id": "libraryItemCount",
-          "label": "Elementos biblioteca"
-        },
-        {
-          "id": "recycleBinItemCount",
-          "label": "Elementos papelera"
-        },
-        {
-          "id": "recycleBinSize",
-          "label": "Tamaño papelera"
-        },
-        {
-          "id": "ratio",
-          "label": "Ratio papelera/biblioteca"
-        },
-        {
-          "id": "lastUpdated",
-          "label": "Última actualización"
-        }
-      ],
-      "visualSemantics": {
-        "ok": {
-          "intent": "success"
-        },
-        "warning": {
-          "intent": "warning"
-        },
-        "critical": {
-          "intent": "danger"
-        },
-        "partial": {
-          "intent": "neutral-warning"
-        }
-      },
       "copy": {
         "title": "Visualizador de elementos de biblioteca y papelera superior",
         "messages": {
           "empty": "No hay datos relevantes para mostrar.",
-          "partial": "El resultado no es completo. Algunas métricas pueden no estar disponibles.",
+          "partial": "El resultado no es completo. Algunas métricas de la papelera pueden no estar disponibles.",
           "error": "No se ha podido cargar el diagnóstico del sitio."
         }
       },
-      "interactions": [
-        "Refrescar datos",
-        "Abrir biblioteca",
-        "Abrir papelera del sitio"
-      ],
-      "accessibility": {
-        "requirements": [
-          "ARIA labels",
-          "Contraste AA",
-          "No depender solo del color"
-        ]
-      },
-      "responsive": {
-        "breakpoints": [
-          "narrow section",
-          "standard",
-          "full width"
-        ]
-      }
+      "interactions": ["Refrescar datos", "Abrir papelera del sitio"]
     },
     "backlogJson": {
       "roadmap": {
-        "mvp": [
-          "Lectura biblioteca",
-          "Lectura papelera",
-          "KPIs básicos",
-          "Health badge"
-        ],
-        "v1": [
-          "Tamaño agregado",
-          "Paginación papelera",
-          "PartialData robusto",
-          "Telemetría"
-        ],
-        "hardening": [
-          "Testing",
-          "README",
-          "auto refresh opcional"
-        ]
+        "mvp": ["lectura de papelera nivel 1", "lectura de papelera nivel 2", "KPIs básicos", "health badge"],
+        "v1": ["desglose por nivel", "partialData robusto", "telemetría"],
+        "hardening": ["testing", "README", "auto refresh opcional"]
       },
-      "epics": [
-        {
-          "id": "EP-01",
-          "name": "Base del web part"
-        },
-        {
-          "id": "EP-02",
-          "name": "Acceso a datos"
-        },
-        {
-          "id": "EP-03",
-          "name": "Cálculo y salud"
-        },
-        {
-          "id": "EP-04",
-          "name": "UI"
-        },
-        {
-          "id": "EP-05",
-          "name": "Calidad"
-        }
-      ],
-      "stories": [
-        {
-          "id": "US-01",
-          "epicId": "EP-01",
-          "name": "Scaffold SPFx y property pane",
-          "estimate": "S"
-        },
-        {
-          "id": "US-02",
-          "epicId": "EP-02",
-          "name": "Resolver biblioteca",
-          "estimate": "S"
-        },
-        {
-          "id": "US-03",
-          "epicId": "EP-02",
-          "name": "Consultar papelera",
-          "estimate": "M"
-        },
-        {
-          "id": "US-04",
-          "epicId": "EP-03",
-          "name": "Agregar conteo, tamaño y ratio",
-          "estimate": "M"
-        },
-        {
-          "id": "US-05",
-          "epicId": "EP-03",
-          "name": "Evaluar salud",
-          "estimate": "S"
-        },
-        {
-          "id": "US-06",
-          "epicId": "EP-04",
-          "name": "Construir KPI cards y acciones",
-          "estimate": "M"
-        },
-        {
-          "id": "US-07",
-          "epicId": "EP-04",
-          "name": "Gestionar estados de UI",
-          "estimate": "S"
-        },
-        {
-          "id": "US-08",
-          "epicId": "EP-05",
-          "name": "Añadir testing, telemetría y README",
-          "estimate": "M"
-        }
-      ],
       "tasks": [
-        {
-          "id": "T-01",
-          "storyId": "US-01",
-          "name": "Crear SiteStorageDiagnosticsWebPart.ts"
-        },
-        {
-          "id": "T-02",
-          "storyId": "US-01",
-          "name": "Implementar props y defaults"
-        },
-        {
-          "id": "T-03",
-          "storyId": "US-02",
-          "name": "Implementar LibraryRepository"
-        },
-        {
-          "id": "T-04",
-          "storyId": "US-03",
-          "name": "Implementar RecycleBinRepository"
-        },
-        {
-          "id": "T-05",
-          "storyId": "US-04",
-          "name": "Mapear y agregar resultados de papelera"
-        },
-        {
-          "id": "T-06",
-          "storyId": "US-05",
-          "name": "Implementar HealthEvaluator"
-        },
-        {
-          "id": "T-07",
-          "storyId": "US-06",
-          "name": "Crear MetricCard, HealthBadge y DiagnosticsActions"
-        },
-        {
-          "id": "T-08",
-          "storyId": "US-07",
-          "name": "Implementar loading/ready/partial/error/empty"
-        },
-        {
-          "id": "T-09",
-          "storyId": "US-08",
-          "name": "Añadir unit tests y component tests"
-        },
-        {
-          "id": "T-10",
-          "storyId": "US-08",
-          "name": "Añadir telemetría y README técnico"
-        }
-      ],
-      "dependencies": [
-        {
-          "from": "US-02",
-          "to": "US-04",
-          "type": "blocks"
-        },
-        {
-          "from": "US-03",
-          "to": "US-04",
-          "type": "blocks"
-        },
-        {
-          "from": "US-04",
-          "to": "US-05",
-          "type": "blocks"
-        },
-        {
-          "from": "US-04",
-          "to": "US-06",
-          "type": "blocks"
-        },
-        {
-          "from": "US-05",
-          "to": "US-06",
-          "type": "supports"
-        }
-      ],
-      "risks": [
-        {
-          "id": "R-01",
-          "risk": "Tamaño no disponible en papelera",
-          "mitigation": "partialData y precisión explícita"
-        },
-        {
-          "id": "R-02",
-          "risk": "Permisos parciales",
-          "mitigation": "errores seguros y resultado parcial"
-        },
-        {
-          "id": "R-03",
-          "risk": "Papelera grande",
-          "mitigation": "paginación y cache"
-        }
-      ],
-      "implementationOrder": [
-        "EP-01",
-        "EP-02",
-        "EP-03",
-        "EP-04",
-        "EP-05"
+        { "id": "T-01", "name": "Crear RecycleBinSpaceCalculatorWebPart.ts" },
+        { "id": "T-02", "name": "Implementar repositorio de papelera por niveles" },
+        { "id": "T-03", "name": "Implementar agregador y health evaluator" },
+        { "id": "T-04", "name": "Crear cards y estados" },
+        { "id": "T-05", "name": "Añadir tests base y documentación" }
       ]
     },
     "dataJson": {
       "sources": [
-        {
-          "name": "SharePoint Library",
-          "type": "primary",
-          "api": "SharePoint REST API",
-          "purpose": "Metadatos de biblioteca e ItemCount"
-        },
-        {
-          "name": "Site Recycle Bin",
-          "type": "primary",
-          "api": "SharePoint REST API",
-          "purpose": "Conteo y tamaño agregado de elementos eliminados"
-        }
-      ],
-      "entities": {
-        "Library": {
-          "id": "string",
-          "title": "string",
-          "itemCount": "number",
-          "serverRelativeUrl": "string"
-        },
-        "RecycleBinItem": {
-          "id": "string",
-          "sizeBytes": "number|null",
-          "deletedDate": "string|null",
-          "dirName": "string|null",
-          "leafName": "string|null"
-        },
-        "DiagnosticsResult": {
-          "siteUrl": "string",
-          "library": "object",
-          "recycleBin": "object",
-          "ratio": "number|null",
-          "health": "object"
-        }
-      },
-      "mappings": {
-        "libraryItemCount": "library.itemCount",
-        "firstStageItemCount": "count(recycleBinItems)",
-        "firstStageSizeBytes": "sum(item.sizeBytes when available)",
-        "ratio": "firstStageItemCount / library.itemCount"
-      },
-      "validationRules": [
-        "libraryTitleOrId no vacío",
-        "warningThresholdItems >= 0",
-        "warningThresholdSizeMb >= 0",
-        "refreshIntervalSeconds >= 0"
+        { "name": "Site Recycle Bin Stage 1", "type": "SharePointRecycleBin", "purpose": "conteo y tamaño de primer nivel" },
+        { "name": "Site Recycle Bin Stage 2", "type": "SharePointRecycleBin", "purpose": "conteo y tamaño de segundo nivel" }
       ],
       "accuracyPolicy": {
-        "exact": "Conteos y tamaños disponibles completamente",
-        "estimated": "Tamaño aproximado o derivado",
-        "partial": "Conteo disponible pero tamaño o parte de datos no disponible"
+        "exact": "cuando ambas etapas exponen conteo y tamaño",
+        "partial": "cuando una etapa no expone tamaño o el contexto no permite acceder a ella"
       },
       "fallbacks": [
-        "Si no hay tamaño por elemento, mostrar conteo y partialData.",
-        "Si la papelera devuelve resultados paginados, agregar hasta cobertura lograda o límite interno."
-      ],
-      "suggestedEndpoints": [
-        {
-          "name": "GetLibraryMetadata",
-          "url": "_api/web/lists/getbytitle('<LIBRARY>')?$select=Id,Title,ItemCount,RootFolder/ServerRelativeUrl&$expand=RootFolder"
-        },
-        {
-          "name": "RecycleBin",
-          "url": "_api/site/RecycleBin"
-        }
-      ],
-      "exampleOutput": {
-        "library": {
-          "itemCount": 420,
-          "title": "Documentos"
-        },
-        "recycleBin": {
-          "firstStageItemCount": 128,
-          "firstStageSizeBytes": 536870912,
-          "precision": "exact"
-        },
-        "ratio": 0.3048,
-        "health": {
-          "level": "warning",
-          "reasons": [
-            "Recycle bin item count above threshold"
-          ]
-        }
-      }
+        "Si una etapa no expone tamaño, mostrar el dato disponible y marcar partialData.",
+        "Si la etapa 2 no es accesible desde el contexto actual, registrar la limitación técnica explícitamente."
+      ]
     },
     "technicalJson": {
       "architecture": {
-        "webPart": "SiteStorageDiagnosticsWebPart",
-        "pattern": "SPFx React + services + repositories + mappers",
-        "layers": [
-          "webpart",
-          "components",
-          "services",
-          "repositories",
-          "models",
-          "utils"
-        ]
+        "webPart": "RecycleBinSpaceCalculatorWebPart",
+        "pattern": "SPFx React + services + repository + aggregator",
+        "components": ["RecycleBinSpaceCalculator", "StageMetricCard", "HealthBadge", "DiagnosticsActions"],
+        "services": ["RecycleBinDiagnosticsService", "RecycleBinAggregator", "HealthEvaluator"],
+        "repositories": ["RecycleBinRepository"]
       },
-      "projectStructure": {
-        "root": "src/webparts/siteStorageDiagnostics/",
-        "files": [
-          "SiteStorageDiagnosticsWebPart.ts",
-          "components/SiteStorageDiagnostics.tsx",
-          "components/MetricCard.tsx",
-          "components/HealthBadge.tsx",
-          "components/DiagnosticsActions.tsx",
-          "services/SharePointSiteDiagnosticsService.ts",
-          "services/RecycleBinMapper.ts",
-          "services/HealthEvaluator.ts",
-          "repositories/LibraryRepository.ts",
-          "repositories/RecycleBinRepository.ts",
-          "models/DiagnosticsModels.ts",
-          "utils/formatters.ts",
-          "utils/retry.ts"
-        ]
-      },
-      "contracts": {
-        "IWebPartProps": {
-          "libraryTitleOrId": "string",
-          "showSizeMetrics": "boolean",
-          "refreshIntervalSeconds": "number",
-          "warningThresholdItems": "number",
-          "warningThresholdSizeMb": "number"
-        },
-        "ILibraryDiagnostics": {
-          "id": "string",
-          "title": "string",
-          "itemCount": "number",
-          "serverRelativeUrl": "string"
-        },
-        "IRecycleBinDiagnostics": {
-          "firstStageItemCount": "number",
-          "firstStageSizeBytes": "number|null",
-          "precision": "exact|estimated|partial"
-        },
-        "IHealthEvaluation": {
-          "level": "ok|warning|critical|unknown",
-          "reasons": "string[]"
-        },
-        "IViewModel": {
-          "siteUrl": "string",
-          "library": "ILibraryDiagnostics",
-          "recycleBin": "IRecycleBinDiagnostics",
-          "ratio": "number|null",
-          "health": "IHealthEvaluation",
-          "lastUpdated": "string"
-        }
-      },
-      "serviceContracts": [
-        {
-          "name": "SharePointSiteDiagnosticsService.run",
-          "input": "IWebPartProps + SPFx context",
-          "output": "Promise<IViewModel>"
-        },
-        {
-          "name": "LibraryRepository.resolveLibrary",
-          "input": "libraryTitleOrId",
-          "output": "ILibraryDiagnostics"
-        },
-        {
-          "name": "RecycleBinRepository.listFirstStageItems",
-          "input": "site context",
-          "output": "RecycleBinItem[]"
-        },
-        {
-          "name": "RecycleBinMapper.aggregate",
-          "input": "RecycleBinItem[]",
-          "output": "IRecycleBinDiagnostics"
-        }
-      ],
       "executionFlow": [
-        "Validate props",
-        "Resolve library",
-        "Query first-stage recycle bin",
-        "Aggregate count and size",
-        "Compute ratio and health",
-        "Build view model",
-        "Render KPI cards and actions"
+        "Leer propiedades configuradas.",
+        "Resolver contexto del sitio actual.",
+        "Consultar papelera de primer nivel.",
+        "Consultar papelera de segundo nivel cuando exista acceso.",
+        "Calcular total y nivel de salud.",
+        "Renderizar tarjetas y acciones."
       ],
-      "algorithms": {
-        "ratio": "recycleBinItemCount / libraryItemCount when libraryItemCount > 0 else null",
-        "healthClassification": [
-          "warning if recycleBinItemCount >= warningThresholdItems",
-          "warning if recycleBinSizeMb >= warningThresholdSizeMb",
-          "critical if both thresholds are widely exceeded",
-          "unknown if essential data missing"
-        ]
-      },
-      "dataAccess": {
-        "apis": [
-          {
-            "name": "GetLibraryMetadata",
-            "candidate": "_api/web/lists/getbytitle('<LIBRARY>')?$select=Id,Title,ItemCount,RootFolder/ServerRelativeUrl&$expand=RootFolder"
-          },
-          {
-            "name": "RecycleBin",
-            "candidate": "_api/site/RecycleBin"
-          }
-        ],
-        "notes": [
-          "Recycle bin is site scoped.",
-          "Size may require manual aggregation.",
-          "Pagination may be needed for large bins."
-        ]
-      },
-      "performance": {
-        "cache": "In-memory cache by siteUrl + libraryId",
-        "retry": "Up to 2 retries for 429/503",
-        "paging": "Support recycle bin pagination when needed",
-        "budgets": {
-          "preferredSeconds": 3,
-          "softSeconds": 10
-        }
-      },
       "errorMatrix": [
-        {
-          "condition": "library not found",
-          "uiState": "error",
-          "recoverable": false
-        },
-        {
-          "condition": "recycle bin size unavailable",
-          "uiState": "partialData",
-          "recoverable": true
-        },
-        {
-          "condition": "429/503",
-          "uiState": "partialData or error",
-          "recoverable": true
-        },
-        {
-          "condition": "permissions partial",
-          "uiState": "partialData",
-          "recoverable": true
-        }
-      ],
-      "security": {
-        "mode": "readOnly",
-        "rules": [
-          "Do not expose sensitive internal details in errors",
-          "Sanitize values before render"
-        ]
-      },
-      "telemetry": {
-        "events": [
-          "site_storage_loaded",
-          "library_query_completed",
-          "recyclebin_query_completed",
-          "site_storage_partial_data",
-          "site_storage_error"
-        ],
-        "properties": [
-          "siteUrlHash",
-          "libraryId",
-          "durationMs",
-          "healthLevel",
-          "hasPartialData"
-        ]
-      },
-      "testing": {
-        "unit": [
-          "ratio calculation",
-          "health evaluator",
-          "recycle bin mapping"
-        ],
-        "component": [
-          "loading/ready/partial/error states"
-        ],
-        "integration": [
-          "library + recycle bin flow"
-        ]
-      },
-      "qualityConstraints": [
-        "TypeScript strict mode",
-        "No data access in UI components",
-        "Services mockable"
+        { "condition": "stage2 unavailable", "uiState": "partialData", "recoverable": true },
+        { "condition": "size unavailable for one stage", "uiState": "partialData", "recoverable": true },
+        { "condition": "429/503", "uiState": "partialData or error", "recoverable": true }
       ]
     }
   },
   "sourceFields": {
-    "notes": "{\"descripcion\":\"Muestra la cantidad de elementos existentes en la biblioteca del sitio y en la papelera de reciclaje de nivel superior, con vista rápida de capacidad o volumen.\",\"categoria\":\"Operaciones\",\"prioridad\":\"Media\",\"valorNegocio\":\"Alto\",\"complejidad\":\"Media\",\"fuenteDatos\":[\"SharePoint Libraries\",\"SharePoint REST API\"],\"viabilidadSPFx\":\"Media\",\"estado\":\"Idea\",\"analisis\":{\"problemaNegocio\":\"Los propietarios de sitios y equipos de soporte no suelen tener visibilidad rápida del volumen real de contenido activo frente al contenido eliminado que sigue ocupando espacio lógico y generando ruido operativo.\",\"objetivo\":\"Dar una tarjeta o panel de diagnóstico rápido para comparar el número de elementos de una biblioteca concreta con el volumen de elementos presentes en la papelera de primer nivel del sitio.\",\"supuestos\":[\"La web part se ejecuta en el mismo sitio donde quiere analizarse la biblioteca y la papelera.\",\"El término papelera de nivel superior se interpreta como papelera de primer nivel del sitio, no segunda etapa de la colección.\",\"La primera versión prioriza conteo y volumen resumido antes que exploración exhaustiva de cada elemento eliminado.\"],\"usuariosObjetivo\":[\"Propietario del sitio\",\"Administrador funcional de SharePoint\",\"Soporte M365\",\"Responsable documental\"],\"casosUso\":[\"Detectar que una biblioteca aparentemente pequeña convive con una papelera muy cargada.\",\"Diagnosticar degradación percibida por exceso de residuos documentales.\",\"Mostrar en una landing técnica el estado higiénico del sitio.\",\"Servir de apoyo a tareas de limpieza y gobierno.\"],\"alcanceV1\":{\"incluye\":[\"Selección de una biblioteca concreta por título o id.\",\"Lectura del ItemCount actual de la biblioteca.\",\"Consulta de elementos eliminados del sitio en papelera de primer nivel.\",\"Cálculo de conteo total en papelera y, cuando sea viable, suma de tamaño total.\",\"Comparativa visual biblioteca vs papelera.\",\"Estados visuales vacío, cargando, error y datos insuficientes.\"],\"noIncluye\":[\"Restaurar o eliminar elementos desde la web part en la v1.\",\"Explorar segunda etapa de la papelera.\",\"Cruce exacto entre cada elemento de biblioteca y su correspondiente residuo en papelera.\",\"Análisis multi-sitio o multi-biblioteca en paralelo.\"]},\"especificacionFuncional\":{\"parametrosConfigurables\":[{\"nombre\":\"libraryTitleOrId\",\"tipo\":\"string\",\"obligatorio\":true,\"descripcion\":\"Biblioteca objetivo a analizar.\"},{\"nombre\":\"showSizeMetrics\",\"tipo\":\"boolean\",\"obligatorio\":false,\"default\":true,\"descripcion\":\"Muestra tamaño agregado cuando la API lo permita.\"},{\"nombre\":\"refreshIntervalSeconds\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":300,\"descripcion\":\"Refresco automático opcional.\"},{\"nombre\":\"warningThresholdItems\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":1000,\"descripcion\":\"Umbral de alerta por volumen de papelera.\"},{\"nombre\":\"warningThresholdSizeMb\",\"tipo\":\"number\",\"obligatorio\":false,\"default\":512,\"descripcion\":\"Umbral de alerta por tamaño en papelera.\"}],\"metricasMostradas\":[\"numeroElementosBiblioteca\",\"numeroElementosPapeleraPrimerNivel\",\"tamanoPapeleraPrimerNivelMb\",\"ratioPapeleraVsBiblioteca\",\"fechaUltimaActualizacion\"],\"accionesUI\":[\"Refrescar datos\",\"Abrir biblioteca\",\"Abrir papelera del sitio\"],\"estadosUI\":[\"loading\",\"ready\",\"empty\",\"warning\",\"error\",\"partialData\"]},\"especificacionTecnica\":{\"stack\":\"SPFx + React + TypeScript\",\"apis\":[{\"nombre\":\"SharePoint REST API\",\"uso\":\"Obtener metadatos y conteo de la biblioteca objetivo.\",\"sugerencia\":\"_api/web/lists/getbytitle('<LIBRARY>')?$select=Id,Title,ItemCount,RootFolder/ServerRelativeUrl&$expand=RootFolder\"},{\"nombre\":\"SharePoint REST API\",\"uso\":\"Consultar elementos de la papelera del sitio.\",\"sugerencia\":\"_api/site/RecycleBin\"}],\"modeloDatosSalida\":{\"siteUrl\":\"string\",\"library\":{\"id\":\"string\",\"title\":\"string\",\"itemCount\":\"number\",\"serverRelativeUrl\":\"string\"},\"recycleBin\":{\"firstStageItemCount\":\"number\",\"firstStageSizeBytes\":\"number|null\"},\"health\":{\"level\":\"ok|warning|critical|unknown\",\"reasons\":[\"string\"]}},\"permisos\":[\"Lectura sobre la biblioteca objetivo.\",\"Acceso suficiente para consultar la papelera del sitio; validar comportamiento según permisos reales del usuario.\"],\"consideraciones\":[\"La papelera es ámbito sitio; no existe relación 1:1 garantizada con la biblioteca salvo filtrado adicional por origen cuando los metadatos lo permitan.\",\"El tamaño en papelera puede requerir agregado manual a partir de propiedades por elemento.\",\"Conviene cachear peticiones para no saturar páginas con múltiples web parts.\"],\"riesgosTecnicos\":[\"Campos de la API de papelera pueden variar en disponibilidad según contexto.\",\"Usuarios sin permisos suficientes pueden ver datos parciales.\",\"Bibliotecas o papeleras muy grandes pueden requerir paginación.\"],\"estrategiaImplementacion\":[\"Crear servicio SharePointSiteDiagnosticsService.\",\"Encapsular llamadas REST en provider reutilizable.\",\"Modelar DTOs para biblioteca y papelera.\",\"Resolver agregación de conteo y tamaño.\",\"Construir UI tipo card con semáforo y métricas.\"]},\"disenoTecnico\":{\"arquitectura\":{\"webPart\":\"SiteStorageDiagnosticsWebPart\",\"componentes\":[\"SiteStorageDiagnostics\",\"MetricCard\",\"HealthBadge\",\"DiagnosticsActions\"],\"servicios\":[\"SharePointSiteDiagnosticsService\",\"RecycleBinMapper\",\"HealthEvaluator\"],\"repositorios\":[\"LibraryRepository\",\"RecycleBinRepository\"],\"patron\":\"UI desacoplada de acceso a datos mediante servicios y mappers\"},\"propertyPane\":{\"grupos\":[{\"nombre\":\"Origen de datos\",\"campos\":[\"libraryTitleOrId\"]},{\"nombre\":\"Visualización\",\"campos\":[\"showSizeMetrics\",\"refreshIntervalSeconds\"]},{\"nombre\":\"Alertas\",\"campos\":[\"warningThresholdItems\",\"warningThresholdSizeMb\"]}]},\"contratos\":{\"IWebPartProps\":{\"libraryTitleOrId\":\"string\",\"showSizeMetrics\":\"boolean\",\"refreshIntervalSeconds\":\"number\",\"warningThresholdItems\":\"number\",\"warningThresholdSizeMb\":\"number\"},\"ILibraryDiagnostics\":{\"id\":\"string\",\"title\":\"string\",\"itemCount\":\"number\",\"serverRelativeUrl\":\"string\"},\"IRecycleBinDiagnostics\":{\"firstStageItemCount\":\"number\",\"firstStageSizeBytes\":\"number|null\"},\"IHealthEvaluation\":{\"level\":\"ok|warning|critical|unknown\",\"reasons\":\"string[]\"},\"IViewModel\":{\"siteUrl\":\"string\",\"library\":\"ILibraryDiagnostics\",\"recycleBin\":\"IRecycleBinDiagnostics\",\"health\":\"IHealthEvaluation\",\"lastUpdated\":\"string\"}},\"flujoEjecucion\":[\"Leer propiedades configuradas.\",\"Resolver contexto del sitio actual.\",\"Consultar biblioteca objetivo.\",\"Consultar papelera del sitio.\",\"Mapear respuestas REST a DTOs internos.\",\"Calcular ratio y nivel de salud.\",\"Renderizar tarjetas y acciones.\"],\"rendimiento\":{\"cache\":\"Cache en memoria por clave siteUrl+libraryTitleOrId durante el intervalo configurado.\",\"paginacion\":\"Activar cuando la papelera devuelva grandes volúmenes.\",\"cancelacion\":\"AbortController para evitar actualizaciones de estado tras desmontaje.\",\"reintentos\":\"Máximo 2 reintentos en errores transitorios 429 o 503 con backoff exponencial.\"},\"seguridad\":{\"modelo\":\"Solo lectura en v1.\",\"validaciones\":[\"Sanitizar parámetros de configuración.\",\"No interpolar directamente valores en URLs sin encode.\",\"No mostrar datos internos sensibles en mensajes de error.\"],\"permisosMinimos\":\"Permisos de lectura efectivos sobre la biblioteca y capacidad de consulta de papelera según contexto.\"},\"telemetria\":{\"eventos\":[\"webpart_loaded\",\"library_query_started\",\"library_query_completed\",\"recyclebin_query_completed\",\"diagnostics_partial_data\",\"diagnostics_error\"],\"campos\":[\"siteUrlHash\",\"libraryId\",\"durationMs\",\"resultLevel\",\"hasPartialData\"]},\"ux\":{\"layout\":\"Tarjetas KPI compactas + badge de salud + acciones rápidas.\",\"responsive\":\"1 columna en narrow section, 2 o 3 en ancho completo.\",\"accesibilidad\":[\"Etiquetas ARIA en botones.\",\"Contraste AA.\",\"Texto alternativo en iconos semafóricos.\"]},\"i18n\":{\"idiomasIniciales\":[\"es-ES\",\"en-US\"],\"clavesRecomendadas\":[\"Title\",\"Loading\",\"Empty\",\"PartialData\",\"Error\",\"OpenLibrary\",\"OpenRecycleBin\"]}},\"automatizacionDesarrollo\":{\"promptObjetivo\":\"Generar una web part SPFx React para SharePoint Online que compare una biblioteca seleccionada con la papelera de primer nivel del sitio y muestre conteo, tamaño agregado y alertas configurables.\",\"archivosEsperados\":[\"src/webparts/siteStorageDiagnostics/SiteStorageDiagnosticsWebPart.ts\",\"src/webparts/siteStorageDiagnostics/components/SiteStorageDiagnostics.tsx\",\"src/webparts/siteStorageDiagnostics/components/MetricCard.tsx\",\"src/webparts/siteStorageDiagnostics/components/HealthBadge.tsx\",\"src/webparts/siteStorageDiagnostics/components/DiagnosticsActions.tsx\",\"src/webparts/siteStorageDiagnostics/services/SharePointSiteDiagnosticsService.ts\",\"src/webparts/siteStorageDiagnostics/services/RecycleBinMapper.ts\",\"src/webparts/siteStorageDiagnostics/services/HealthEvaluator.ts\",\"src/webparts/siteStorageDiagnostics/models/DiagnosticsModels.ts\",\"src/webparts/siteStorageDiagnostics/loc/en-us.js\",\"src/webparts/siteStorageDiagnostics/loc/es-es.js\"],\"tareasImplementacion\":[\"Scaffold de web part SPFx React.\",\"Definir propiedades configurables.\",\"Implementar servicio de lectura de biblioteca.\",\"Implementar servicio de lectura de papelera.\",\"Agregar transformación de datos y cálculo de salud.\",\"Construir UI responsive y estados de error.\",\"Añadir tests unitarios de agregación y mapping.\",\"Añadir telemetría y cache básica.\"],\"criteriosAceptacion\":[\"La web part permite elegir una biblioteca válida.\",\"Muestra el ItemCount real de la biblioteca.\",\"Muestra el conteo de elementos de la papelera de primer nivel del sitio.\",\"Cuando la API aporta tamaño, muestra total agregado en MB o GB.\",\"En ausencia de permisos o propiedades, informa partialData sin romper la UI.\",\"Permite refresco manual y opcionalmente automático.\"],\"tests\":[\"Unit test de cálculo de ratio papelera/biblioteca.\",\"Unit test de clasificación ok-warning-critical.\",\"Unit test de mapping de respuestas REST a DTO interno.\",\"Test de render para loading, error y ready.\",\"Test de propiedades configurables.\",\"Test de AbortController y cleanup al desmontar.\"],\"definitionOfDone\":[\"Compila en SPFx sin warnings críticos.\",\"No expone secretos ni dependencias externas innecesarias.\",\"Maneja errores de permisos y red.\",\"Documenta límites funcionales de la papelera en README técnico.\",\"Incluye contrato TypeScript, property pane y telemetría mínima.\"]}}",
+    "notes": "{\"descripcion\":\"Calcula el espacio ocupado por los elementos presentes en la papelera del sitio, separando la primera y la segunda etapa cuando sea posible.\",\"categoria\":\"Operaciones\",\"prioridad\":\"Alta\",\"valorNegocio\":\"Alto\",\"complejidad\":\"Media\",\"estado\":\"Aclarada\"}",
     "createdTime": "2026-03-19T22:02:33.000Z"
   }
 }

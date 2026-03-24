@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "componente-segun-tu-perfil",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ProfileBasedComponent",
+    "componentDescription": "Renderiza contenido, accesos o mensajes distintos según atributos del perfil o segmentación del usuario.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "componente-segun-tu-perfil",
+    "libraryId": "7583d7ef-69eb-420c-ba9b-5676d61cea30",
+    "solutionShortDescription": "componente-segun-tu-perfil description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

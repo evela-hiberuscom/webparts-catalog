@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "estado-de-incidencias-destacadas-client-side-solution",
+    "id": "c2f7e852-1a77-4761-add2-8c3a9a656fc4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "estado-de-incidencias-destacadas description"
+      },
+      "longDescription": {
+        "default": "estado-de-incidencias-destacadas description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "estado-de-incidencias-destacadas Feature",
+        "description": "The feature that activates elements of the estado-de-incidencias-destacadas solution.",
+        "id": "20ef3400-45a8-40ee-b5e9-000561fc721b",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/estado-de-incidencias-destacadas.sppkg"
+  }
+}

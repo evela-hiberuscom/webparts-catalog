@@ -9,6 +9,57 @@
       "purpose": "avisos críticos o urgentes"
     }
   ],
+  "sourceModes": [
+    "SharePointList",
+    "JsonUrl",
+    "StaticConfig"
+  ],
+  "inferredListSchema": {
+    "listName": "AlertsList",
+    "columns": [
+      {
+        "name": "Title",
+        "type": "Text",
+        "required": true
+      },
+      {
+        "name": "Severity",
+        "type": "Choice",
+        "required": false,
+        "values": [
+          "critical",
+          "warning",
+          "info",
+          "unknown"
+        ]
+      },
+      {
+        "name": "Message",
+        "type": "Text",
+        "required": false
+      },
+      {
+        "name": "StartAt",
+        "type": "DateTime",
+        "required": false
+      },
+      {
+        "name": "EndAt",
+        "type": "DateTime",
+        "required": false
+      },
+      {
+        "name": "CtaUrl",
+        "type": "Url",
+        "required": false
+      },
+      {
+        "name": "Priority",
+        "type": "Number",
+        "required": false
+      }
+    ]
+  },
   "acceptanceCriteria": [
     "Muestra solo avisos vigentes.",
     "Ordena por severidad/prioridad.",

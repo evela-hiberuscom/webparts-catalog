@@ -2,7 +2,23 @@
   "projectSlug": "componente-segun-tu-perfil",
   "archetype": "audience",
   "rowId": "recqkzUHilH8lKoGy",
-  "sources": [],
+  "sources": [
+    {
+      "name": "ProfileVariants",
+      "type": "SharePointList",
+      "purpose": "catálogo principal de variantes por perfil"
+    },
+    {
+      "name": "JsonUrl",
+      "type": "SameOriginJson",
+      "purpose": "origen alternativo para pruebas o migraciones"
+    },
+    {
+      "name": "StaticConfig",
+      "type": "InlineJson",
+      "purpose": "preview rápido sin depender de listas"
+    }
+  ],
   "acceptanceCriteria": [
     "Muestra la variante correcta cuando hay match.",
     "Aplica fallback cuando procede.",
@@ -11,6 +27,82 @@
   "businessRules": [
     "Si no hay coincidencia específica, usar variante genérica cuando exista.",
     "Si no hay genérica y no hay match, mostrar empty o placeholder según configuración.",
-    "No exponer atributos sensibles innecesarios en la UI."
+    "No exponer atributos sensibles innecesarios en la UI.",
+    "Los orígenes remotos deben ser same-origin."
+  ],
+  "listSchema": {
+    "listName": "ProfileVariants",
+    "columns": [
+      {
+        "name": "Title",
+        "type": "Single line text",
+        "required": true
+      },
+      {
+        "name": "AudienceTokens",
+        "type": "Multiple lines of text",
+        "required": true
+      },
+      {
+        "name": "IsGeneric",
+        "type": "Yes/No",
+        "required": false
+      },
+      {
+        "name": "ContentType",
+        "type": "Choice",
+        "values": [
+          "card",
+          "message",
+          "links"
+        ],
+        "required": true
+      },
+      {
+        "name": "Summary",
+        "type": "Multiple lines of text",
+        "required": true
+      },
+      {
+        "name": "Body",
+        "type": "Multiple lines of text",
+        "required": false
+      },
+      {
+        "name": "AccentLabel",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "IconName",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "CtaLabel",
+        "type": "Single line text",
+        "required": false
+      },
+      {
+        "name": "CtaUrl",
+        "type": "Hyperlink",
+        "required": false
+      },
+      {
+        "name": "Priority",
+        "type": "Number",
+        "required": false
+      },
+      {
+        "name": "Tags",
+        "type": "Multiple lines of text",
+        "required": false
+      },
+      {
+        "name": "PayloadJson",
+        "type": "Multiple lines of text",
+        "required": false
+      }
+    ]
   ]
 }

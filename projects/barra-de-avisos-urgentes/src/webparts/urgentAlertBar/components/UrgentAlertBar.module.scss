@@ -1,0 +1,164 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(16, 50, 207, 0.06) 0%, rgba(91, 83, 255, 0.03) 100%),
+    #ffffff;
+  color: #111111;
+  box-shadow: 0 8px 24px rgba(25, 37, 90, 0.08);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kicker {
+  margin: 0 0 6px;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #707070;
+}
+
+.title {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  line-height: 1.15;
+  font-weight: 700;
+  color: #111111;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2d2d2d;
+  max-width: 56rem;
+}
+
+.headerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.sourceBadge,
+.partialBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sourceBadge {
+  background: rgba(16, 50, 207, 0.08);
+  color: #1032cf;
+}
+
+.partialBadge {
+  background: rgba(91, 83, 255, 0.1);
+  color: #4a42e0;
+}
+
+.loadingState,
+.statePanel {
+  border-radius: 20px;
+  padding: 20px;
+  background: #f7f8fd;
+  border: 1px solid #e8e8e8;
+}
+
+.loadingState {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.skeletonStack {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+}
+
+.skeletonLine,
+.skeletonLineShort {
+  display: block;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(16, 50, 207, 0.1), rgba(16, 50, 207, 0.18), rgba(16, 50, 207, 0.1));
+  background-size: 200% 100%;
+  animation: shimmer 1.35s infinite linear;
+}
+
+.skeletonLine {
+  width: 100%;
+}
+
+.skeletonLineShort {
+  width: 68%;
+}
+
+.stateTitle {
+  margin: 0 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.stateMessage {
+  margin: 0;
+  font-family: 'Lato', 'Open Sans', 'Helvetica Neue', arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2d2d2d;
+}
+
+.list {
+  display: grid;
+  gap: 14px;
+}
+
+.listItem {
+  min-width: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .root {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
+

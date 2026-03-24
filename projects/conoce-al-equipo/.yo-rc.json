@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "conoce-al-equipo",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MeetTheTeam",
+    "componentDescription": "Presenta a las personas de un equipo con foto, rol, descripción breve y enlaces de contacto o perfil.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "conoce-al-equipo",
+    "libraryId": "6043aae8-34b6-4486-aacd-17d1f6893480",
+    "solutionShortDescription": "conoce-al-equipo description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

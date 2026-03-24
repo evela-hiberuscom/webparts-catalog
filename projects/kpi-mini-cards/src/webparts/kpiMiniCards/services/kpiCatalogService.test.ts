@@ -44,13 +44,13 @@ describe('kpiCatalogService', () => {
     expect(items.map((item) => item.id)).toEqual(['a', 'b']);
   });
 
-  it('honours explicit state before badge and preserves null values', () => {
+  it('honours explicit state before badge and preserves empty values as partial data', () => {
     const [item] = normalizeKpiCards(
       [
         {
           id: 'kpi',
           label: 'Cobertura',
-          value: null,
+          value: undefined,
           state: 'warning',
           badge: 'ok',
           trend: 'up',
@@ -66,7 +66,7 @@ describe('kpiCatalogService', () => {
 
     expect(item.state).toBe('warning');
     expect(item.badge).toBe('ok');
-    expect(item.value).toBeNull();
+    expect(item.value).toBeUndefined();
     expect(item.hasPartialData).toBe(true);
   });
 
@@ -117,7 +117,7 @@ describe('kpiCatalogService', () => {
       kpiCardsJson: '[]',
       jsonUrl: '',
       apiEndpointUrl: '',
-      sharePointListTitle: '',
+      listTitleOrUrl: '',
       webUrl: '',
       showTrend: true,
       layoutMode: 'compact',

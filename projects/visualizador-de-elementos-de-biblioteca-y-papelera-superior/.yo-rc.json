@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "RecycleBinSpaceCalculator",
+    "componentDescription": "Calcula el espacio ocupado por elementos de papelera de primer y segundo nivel del sitio.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+    "libraryId": "031bc783-fdfb-406e-b581-4738d44123f1",
+    "solutionShortDescription": "visualizador-de-elementos-de-biblioteca-y-papelera-superior description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

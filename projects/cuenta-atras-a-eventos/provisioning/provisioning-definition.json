@@ -1,22 +1,44 @@
 {
   "projectSlug": "cuenta-atras-a-eventos",
-  "archetype": "general",
   "rowId": "rec3wBPZ0kB6HqioK",
+  "archetype": "general",
   "sources": [
     {
-      "name": "CountdownConfig",
-      "type": "StaticConfig|SharePointList",
-      "purpose": "evento objetivo"
+      "name": "StaticConfig",
+      "type": "StaticConfig",
+      "purpose": "Evento único configurado manualmente en la web part."
+    },
+    {
+      "name": "SharePointList",
+      "type": "SharePointList",
+      "purpose": "Fuente de una fila o lista filtrada con al menos `Title`, `TargetDate`, `Subtitle` y `DetailUrl`."
+    },
+    {
+      "name": "JsonUrl",
+      "type": "JsonUrl",
+      "purpose": "JSON same-origin con una colección compatible con `items`, `value`, `results` o `d.results`."
     }
   ],
+  "fieldContract": {
+    "required": [
+      "Title",
+      "TargetDate"
+    ],
+    "optional": [
+      "Subtitle",
+      "DetailUrl"
+    ]
+  },
   "acceptanceCriteria": [
-    "Calcula countdown correctamente.",
-    "Cambia de estado según fecha.",
-    "Permite abrir CTA cuando existe."
+    "Calcula la cuenta atrás correctamente.",
+    "Cambia a estado live o completed según la fecha objetivo.",
+    "Oculta el evento finalizado cuando `showCompleted=false`.",
+    "Valida enlaces de detalle y URLs remotas same-origin."
   ],
   "businessRules": [
     "Si now < targetDate => countdown.",
-    "Si now >= targetDate y showCompleted=false => completed hidden o empty según configuración.",
-    "Si falta CTA, el bloque sigue siendo informativo."
+    "Si now >= targetDate y showCompleted=false => completed oculto como empty.",
+    "Si falta CTA, el bloque sigue siendo informativo.",
+    "Las URLs remotas deben resolverse dentro del mismo origen o como rutas relativas."
   ]
 }

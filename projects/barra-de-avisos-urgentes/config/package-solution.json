@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "barra-de-avisos-urgentes-client-side-solution",
+    "id": "bc52208f-6b67-4067-aa67-39c01101420d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "barra-de-avisos-urgentes description"
+      },
+      "longDescription": {
+        "default": "barra-de-avisos-urgentes description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+      "title": "barra-de-avisos-urgentes Feature",
+        "description": "Feature que activa la barra de avisos urgentes.",
+        "id": "5dd89c4c-a4ae-4e51-b8e3-2118e4340ce1",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/barra-de-avisos-urgentes.sppkg"
+  }
+}

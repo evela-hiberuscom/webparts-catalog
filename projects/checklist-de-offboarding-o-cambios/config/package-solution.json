@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "checklist-de-offboarding-o-cambios-client-side-solution",
+    "id": "e696764c-e0a3-4f88-88c5-d30fc689503a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "checklist-de-offboarding-o-cambios description"
+      },
+      "longDescription": {
+        "default": "checklist-de-offboarding-o-cambios description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "checklist-de-offboarding-o-cambios Feature",
+        "description": "The feature that activates elements of the checklist-de-offboarding-o-cambios solution.",
+        "id": "5cc9b744-5bc3-4936-8baa-a575a30a1ddc",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/checklist-de-offboarding-o-cambios.sppkg"
+  }
+}

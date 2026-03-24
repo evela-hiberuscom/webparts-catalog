@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "checklist-de-onboarding",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "OnboardingChecklist",
+    "componentDescription": "Guía los pasos clave de incorporación para que nuevas personas o managers no olviden tareas relevantes durante el onboarding.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "checklist-de-onboarding",
+    "libraryId": "c8a5f483-cacf-476c-a9bc-150ee34b11df",
+    "solutionShortDescription": "checklist-de-onboarding description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -18,8 +18,10 @@
   ],
   "acceptanceCriteria": [
     "Selecciona y resuelve una biblioteca válida.",
+    "Permite elegir entre las bibliotecas del sitio en tiempo de ejecución.",
+    "Expone quickScan y deepScan como modos de análisis.",
     "Muestra número de documentos actuales y tamaño visible.",
-    "Calcula o estima histórico y lo etiqueta correctamente.",
+    "Calcula el histórico con exactitud cuando el crawl lo permite y degrada a partialData solo si es inevitable.",
     "Quick scan y deep scan funcionan con sus límites.",
     "Top N respeta configuración y cobertura.",
     "Exportación JSON refleja exactitud, cobertura y salud.",
@@ -27,7 +29,7 @@
   ],
   "businessRules": [
     "Si historicalToCurrentRatio >= warningHistoricalRatio, el estado es al menos warning.",
-    "Si faltan datos de tamaño histórico, isEstimated=true.",
+    "Si faltan datos de tamaño histórico por limitación técnica real, isEstimated=true y el estado puede ser partialData.",
     "Si coveragePercent < 100 y afecta a la fiabilidad, precision=partial.",
     "Si faltan permisos de versiones, el análisis sigue con lo disponible.",
     "Si currentSizeBytes=0 y historicalSizeBytes>0, ratio puede representarse como null o etiqueta especial según diseño.",

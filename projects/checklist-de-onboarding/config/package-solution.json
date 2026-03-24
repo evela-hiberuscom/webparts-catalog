@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "checklist-de-onboarding-client-side-solution",
+    "id": "c8a5f483-cacf-476c-a9bc-150ee34b11df",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "checklist-de-onboarding description"
+      },
+      "longDescription": {
+        "default": "checklist-de-onboarding description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "checklist-de-onboarding Feature",
+        "description": "The feature that activates elements of the checklist-de-onboarding solution.",
+        "id": "cca8dd11-6fe7-4026-99c7-c47544c30e88",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/checklist-de-onboarding.sppkg"
+  }
+}

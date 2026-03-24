@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "visualizador-de-elementos-de-biblioteca-y-papelera-superior-client-side-solution",
+    "id": "031bc783-fdfb-406e-b581-4738d44123f1",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "visualizador-de-elementos-de-biblioteca-y-papelera-superior description"
+      },
+      "longDescription": {
+        "default": "visualizador-de-elementos-de-biblioteca-y-papelera-superior description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "visualizador-de-elementos-de-biblioteca-y-papelera-superior Feature",
+        "description": "The feature that activates elements of the visualizador-de-elementos-de-biblioteca-y-papelera-superior solution.",
+        "id": "376bdde8-a05d-4a23-a629-1b4ebfae1490",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/visualizador-de-elementos-de-biblioteca-y-papelera-superior.sppkg"
+  }
+}

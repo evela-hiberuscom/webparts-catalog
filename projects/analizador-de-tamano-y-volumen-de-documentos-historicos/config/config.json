@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "historical-storage-analyzer-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/historicalStorageAnalyzer/HistoricalStorageAnalyzerWebPart.js",
+          "manifest": "./src/webparts/historicalStorageAnalyzer/HistoricalStorageAnalyzerWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HistoricalStorageAnalyzerWebPartStrings": "lib/webparts/historicalStorageAnalyzer/loc/{locale}.js"
+  }
+}

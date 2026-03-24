@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-03-23T18:00:00.000Z",
+  "updatedAt": "2026-03-24T09:45:00.000Z",
   "decisions": [
     {
       "id": "DECISION-001",
@@ -50,6 +50,27 @@
       "rationale": "Evita que varios proyectos hereden sinks inseguros para `javascript:`, `data:` o valores no saneados.",
       "appliesTo": [
         "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-006",
+      "scope": "build-pipeline",
+      "context": "Gate de build/test/package para soluciones SPFx generadas por los workers",
+      "decision": "El script `build` estándar de cada proyecto será `heft build --clean --production && heft test --production && heft package-solution --production`.",
+      "rationale": "Hace explícita la fase de bundle antes de tests y elimina el falso negativo detectado en packaging de la ola 3 bajo Windows.",
+      "appliesTo": [
+        "all-projects"
+      ]
+    },
+    {
+      "id": "DECISION-007",
+      "scope": "priority-projects",
+      "context": "Aclaraciones funcionales directas del usuario para proyectos de alta prioridad",
+      "decision": "Priorizar por nombre `Analizador de tamaño y volumen de documentos históricos` y `Visualizador de elementos de biblioteca y papelera superior`. El primero debe soportar `quickScan + deepScan` permitiendo elegir entre todas las bibliotecas del sitio y perseguir exactitud. El segundo debe redefinirse como calculador del espacio ocupado por elementos de papelera de primer y segundo nivel, abandonando la interpretación previa de comparativa biblioteca vs papelera.",
+      "rationale": "Corrige la interpretación inicial del catálogo y fija las expectativas funcionales críticas antes de la implementación para evitar que futuras olas hereden una spec incorrecta.",
+      "appliesTo": [
+        "analizador-de-tamano-y-volumen-de-documentos-historicos",
+        "visualizador-de-elementos-de-biblioteca-y-papelera-superior"
       ]
     }
   ]

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "estado-de-servicios-internos-client-side-solution",
+    "id": "faa3bb45-7126-4cc2-8e62-8bbdd6521ea3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "estado-de-servicios-internos description"
+      },
+      "longDescription": {
+        "default": "estado-de-servicios-internos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "estado-de-servicios-internos Feature",
+        "description": "The feature that activates elements of the estado-de-servicios-internos solution.",
+        "id": "281f7610-b226-4423-91a7-61c45221d1a8",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/estado-de-servicios-internos.sppkg"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "pulso-del-dia",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "DailyPulse",
+    "componentDescription": "Recoge una señal diaria muy rápida del usuario, como estado de ánimo, carga o percepción general.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "pulso-del-dia",
+    "libraryId": "f28c2cbe-9ddd-412b-8400-fd60925d4995",
+    "solutionShortDescription": "pulso-del-dia description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

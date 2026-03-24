@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "offboarding-or-change-checklist-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/offboardingOrChangeChecklist/OffboardingOrChangeChecklistWebPart.js",
+          "manifest": "./src/webparts/offboardingOrChangeChecklist/OffboardingOrChangeChecklistWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "OffboardingOrChangeChecklistWebPartStrings": "lib/webparts/offboardingOrChangeChecklist/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "HistoricalStorageAnalyzer",
+    "componentDescription": "Diagnostica el coste de almacenamiento histórico de una biblioteca, separando contenido actual, histórico de versiones y nivel de exactitud del cálculo.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+    "libraryId": "ef5bfabc-88fb-45af-8fbd-b4bebc0a791e",
+    "solutionShortDescription": "analizador-de-tamano-y-volumen-de-documentos-historicos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -18,7 +18,7 @@ function buildProps(overrides: Partial<IKpiMiniCardsProps> = {}): IKpiMiniCardsP
     kpiCardsJson: '[]',
     jsonUrl: '',
     apiEndpointUrl: '',
-    sharePointListTitle: '',
+    listTitleOrUrl: '',
     webUrl: 'https://contoso.sharepoint.com/sites/intranet',
     showTrend: true,
     layoutMode: 'compact',

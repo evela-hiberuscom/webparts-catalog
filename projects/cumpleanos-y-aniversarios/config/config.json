@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "birthdays-and-anniversaries-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/birthdaysAndAnniversaries/BirthdaysAndAnniversariesWebPart.js",
+          "manifest": "./src/webparts/birthdaysAndAnniversaries/BirthdaysAndAnniversariesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "BirthdaysAndAnniversariesWebPartStrings": "lib/webparts/birthdaysAndAnniversaries/loc/{locale}.js"
+  }
+}

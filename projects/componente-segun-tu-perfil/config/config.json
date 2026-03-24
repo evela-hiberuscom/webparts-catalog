@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "profile-based-component-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/profileBasedComponent/ProfileBasedComponentWebPart.js",
+          "manifest": "./src/webparts/profileBasedComponent/ProfileBasedComponentWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ProfileBasedComponentWebPartStrings": "lib/webparts/profileBasedComponent/loc/{locale}.js"
+  }
+}

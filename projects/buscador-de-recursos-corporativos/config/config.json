@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "corporate-resources-search-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/corporateResourcesSearch/CorporateResourcesSearchWebPart.js",
+          "manifest": "./src/webparts/corporateResourcesSearch/CorporateResourcesSearchWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CorporateResourcesSearchWebPartStrings": "lib/webparts/corporateResourcesSearch/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,184 @@
+.root {
+  min-height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 211, 118, 0.18), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(93, 160, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, #0d1323 0%, #111827 56%, #0b1020 100%);
+  color: #f4f7fb;
+}
+
+.shell {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(14, 23, 39, 0.96) 0%, rgba(10, 15, 28, 0.98) 100%);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  padding: 1.75rem;
+}
+
+.shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.06), transparent 28%, transparent 72%, rgba(255, 255, 255, 0.04));
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: rgba(244, 247, 251, 0.7);
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  max-width: 64ch;
+  color: rgba(244, 247, 251, 0.78);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(244, 247, 251, 0.88);
+  font-size: 0.82rem;
+}
+
+.leadCard {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.2rem;
+  padding: 1rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.leadIcon {
+  margin-top: 0.2rem;
+  color: #f1bb4f;
+  font-size: 1.35rem;
+}
+
+.leadTitle {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.leadCopy {
+  display: block;
+  color: rgba(244, 247, 251, 0.8);
+}
+
+.messageBar {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.formSpan {
+  grid-column: 1 / -1;
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footerMeta {
+  color: rgba(244, 247, 251, 0.72);
+  font-size: 0.9rem;
+}
+
+:global(.ms-TextField-field) {
+  background: rgba(255, 255, 255, 0.94);
+}
+
+:global(.ms-TextField-fieldGroup) {
+  border-radius: 14px;
+}
+
+@media (max-width: 720px) {
+  .root {
+    padding: 0.85rem;
+  }
+
+  .shell {
+    padding: 1.2rem;
+    border-radius: 22px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pills {
+    justify-content: flex-start;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+}

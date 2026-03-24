@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "cuenta-atras-a-eventos-client-side-solution",
+    "id": "48ed0b43-98ee-41ed-a964-e57b78024eb8",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Cuenta atrás visual para eventos, campañas y releases"
+      },
+      "longDescription": {
+        "default": "Muestra una cuenta atrás compacta y de alto impacto para un evento único con fuente estática, SharePoint o JSON same-origin."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "cuenta-atras-a-eventos Feature",
+        "description": "The feature that activates elements of the cuenta-atras-a-eventos solution.",
+        "id": "11eb4e17-a093-449d-af08-e071c87d097a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/cuenta-atras-a-eventos.sppkg"
+  }
+}

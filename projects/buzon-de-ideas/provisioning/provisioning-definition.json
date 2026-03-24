@@ -5,9 +5,25 @@
   "sources": [
     {
       "name": "IdeasList",
-      "type": "SharePointList|ApiEndpoint",
-      "purpose": "almacenar ideas"
+      "type": "SharePointList|ApiEndpoint|JsonBridge",
+      "purpose": "almacenar y enrutar ideas"
     }
+  ],
+  "listSchema": {
+    "fields": [
+      "Title",
+      "Description",
+      "Category",
+      "SubmittedBy",
+      "SubmittedAt",
+      "SourceType",
+      "PageUrl"
+    ]
+  },
+  "submitModes": [
+    "SharePointList",
+    "ApiEndpoint",
+    "JsonBridge"
   ],
   "acceptanceCriteria": [
     "Permite enviar ideas válidas.",

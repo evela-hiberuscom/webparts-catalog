@@ -1,23 +1,46 @@
 {
   "projectSlug": "checklist-de-onboarding",
-  "archetype": "general",
+  "archetype": "shared-data-sources",
   "rowId": "recKUTdRJitx5VvpA",
   "sources": [
     {
       "name": "OnboardingChecklistList",
       "type": "SharePointList",
-      "purpose": "pasos de onboarding"
+      "purpose": "pasos de onboarding",
+      "fields": [
+        "Title",
+        "Description",
+        "Phase",
+        "Variant",
+        "Mandatory",
+        "Order",
+        "RelatedUrl",
+        "RelatedLabel"
+      ],
+      "defaultView": "All Items"
+    },
+    {
+      "name": "OnboardingChecklistJson",
+      "type": "JsonUrl",
+      "purpose": "fuente same-origin para previsualizacion o sincronizacion"
+    },
+    {
+      "name": "StaticConfig",
+      "type": "InlineJson",
+      "purpose": "configuracion local del web part para demos y pruebas"
     }
   ],
   "acceptanceCriteria": [
     "Muestra pasos configurados.",
-    "Ordena por fase o prioridad.",
+    "Ordena por fase y obligatoriedad.",
+    "Filtra por variante y fase.",
     "Destaca obligatorios.",
     "Abre recursos cuando existan."
   ],
   "businessRules": [
     "Los pasos obligatorios se destacan visualmente.",
     "Si falta fase, el paso va a General.",
+    "Si falta variante, el paso va a General.",
     "Si falta enlace, el paso sigue siendo válido."
   ]
 }

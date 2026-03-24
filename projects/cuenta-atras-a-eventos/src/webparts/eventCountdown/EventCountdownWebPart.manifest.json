@@ -1,0 +1,33 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "3750263f-3257-421d-96b1-d1fe505edcd8",
+  "alias": "EventCountdownWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Communication"
+      },
+      "title": {
+        "default": "Cuenta atrás a eventos"
+      },
+      "description": {
+        "default": "Muestra una cuenta atrás muy visible para campañas, eventos, auditorías, releases o hitos con fecha cerrada."
+      },
+      "officeFabricIconFontName": "Calendar",
+      "properties": {
+        "sourceType": "StaticConfig",
+        "eventTitle": "Cuenta atrás a eventos",
+        "targetDate": "",
+        "showCompleted": false,
+        "refreshIntervalSeconds": 60
+      }
+    }
+  ]
+}
