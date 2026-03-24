@@ -26,15 +26,26 @@ export interface IUrgentAlertBarWebPartProps {
   dismissible: boolean;
 }
 
+const DEFAULT_PROPERTIES: IUrgentAlertBarWebPartProps = {
+  dataSourceType: 'SharePointList',
+  listTitleOrUrl: 'AlertsList',
+  jsonUrl: '',
+  staticConfigJson: '',
+  maxAlerts: 3,
+  dismissible: false
+};
+
 export default class UrgentAlertBarWebPart extends BaseClientSideWebPart<IUrgentAlertBarWebPartProps> {
-  public constructor() {
-    super();
-    this.properties.dataSourceType = 'SharePointList';
-    this.properties.listTitleOrUrl = 'AlertsList';
-    this.properties.jsonUrl = '';
-    this.properties.staticConfigJson = '';
-    this.properties.maxAlerts = 3;
-    this.properties.dismissible = false;
+  protected onAfterDeserialize(
+    deserializedObject: Partial<IUrgentAlertBarWebPartProps>,
+    dataVersion: Version
+  ): IUrgentAlertBarWebPartProps {
+    const properties = super.onAfterDeserialize(deserializedObject, dataVersion) as Partial<IUrgentAlertBarWebPartProps>;
+
+    return {
+      ...DEFAULT_PROPERTIES,
+      ...properties
+    };
   }
 
   public render(): void {

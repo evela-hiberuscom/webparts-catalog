@@ -22,7 +22,12 @@
     "description": { "default": "Muestra avisos críticos o urgentes en formato banner con alta visibilidad." },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "UrgentAlertBar"
+      "dataSourceType": "SharePointList",
+      "listTitleOrUrl": "AlertsList",
+      "jsonUrl": "",
+      "staticConfigJson": "",
+      "maxAlerts": 3,
+      "dismissible": false
     }
   }]
 }

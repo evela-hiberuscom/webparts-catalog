@@ -14,3 +14,4 @@ projects/*/coverage/
 projects/*/temp/
 projects/*/lib/
 projects/*/sharepoint/solution/*.sppkg
+.playwright-mcp
