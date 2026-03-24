@@ -6,7 +6,6 @@ export interface IHistoricalStorageAnalyzerProps {
   description: string;
   defaultLibraryTitleOrUrl?: string;
   defaultScanMode: HistoricalStorageScanMode;
-  topDocumentsLimit: string;
   maxVersionConcurrency: string;
   includeHiddenLibraries: boolean;
   isDarkTheme: boolean;

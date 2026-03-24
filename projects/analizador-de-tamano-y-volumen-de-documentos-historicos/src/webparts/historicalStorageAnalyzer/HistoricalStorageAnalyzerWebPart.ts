@@ -18,7 +18,6 @@ export interface IHistoricalStorageAnalyzerWebPartProps {
   description: string;
   defaultLibraryTitleOrUrl?: string;
   defaultScanMode: 'quickScan' | 'deepScan';
-  topDocumentsLimit: string;
   maxVersionConcurrency: string;
   includeHiddenLibraries: boolean;
 }
@@ -36,7 +35,6 @@ export default class HistoricalStorageAnalyzerWebPart extends BaseClientSideWebP
         description: this.properties.description,
         defaultLibraryTitleOrUrl: this.properties.defaultLibraryTitleOrUrl,
         defaultScanMode: this.properties.defaultScanMode ?? 'deepScan',
-        topDocumentsLimit: this.properties.topDocumentsLimit ?? '8',
         maxVersionConcurrency: this.properties.maxVersionConcurrency ?? '3',
         includeHiddenLibraries: this.properties.includeHiddenLibraries ?? false,
         isDarkTheme: this._isDarkTheme,
@@ -133,9 +131,6 @@ export default class HistoricalStorageAnalyzerWebPart extends BaseClientSideWebP
                     { key: 'quickScan', text: 'Quick scan' },
                     { key: 'deepScan', text: 'Deep scan' }
                   ]
-                }),
-                PropertyPaneTextField('topDocumentsLimit', {
-                  label: 'Top N documentos'
                 }),
                 PropertyPaneTextField('maxVersionConcurrency', {
                   label: 'Concurrencia de versiones'

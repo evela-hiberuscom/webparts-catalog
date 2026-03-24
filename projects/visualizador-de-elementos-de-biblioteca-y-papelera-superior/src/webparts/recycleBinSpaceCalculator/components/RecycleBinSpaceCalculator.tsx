@@ -51,6 +51,12 @@ export default function RecycleBinSpaceCalculator(props: IRecycleBinSpaceCalcula
         </MessageBar>
       ) : null}
 
+      {viewModel?.stage2PermissionLimited ? (
+        <MessageBar messageBarType={MessageBarType.info}>
+          La papelera de segundo nivel solo es accesible para administradores de colección de sitios. Se muestran únicamente los datos del nivel 1.
+        </MessageBar>
+      ) : null}
+
       {state.status === 'empty' && viewModel ? (
         <MessageBar messageBarType={MessageBarType.info}>La papelera del sitio está vacía o no contiene elementos recuperables en este momento.</MessageBar>
       ) : null}
@@ -77,7 +83,9 @@ export default function RecycleBinSpaceCalculator(props: IRecycleBinSpaceCalcula
                 <StageMetricCard
                   title={viewModel.stage2.label}
                   value={formatBytes(viewModel.stage2.sizeBytes)}
-                  caption={viewModel.stage2.itemCount === null ? 'No accesible' : `${viewModel.stage2.itemCount} elementos`}
+                  caption={viewModel.stage2.itemCount === null
+                    ? (viewModel.stage2PermissionLimited ? 'Solo administradores de colección' : 'No accesible')
+                    : `${viewModel.stage2.itemCount} elementos`}
                   iconName="RecycleBin"
                   variant={viewModel.stage2.isAccessible ? 'ok' : 'neutral'}
                 />

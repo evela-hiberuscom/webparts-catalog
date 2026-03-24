@@ -14,6 +14,7 @@ import {
   sumBytes
 } from '../utils/analysisCalculations';
 import type { IHistoricalStorageAnalyzerRepository } from './IHistoricalStorageAnalyzerRepository';
+import type { AnalysisProgressCallback } from './IHistoricalStorageAnalyzerRepository';
 
 interface ISharePointPagedResponse<T> {
   value?: T[];
@@ -105,9 +106,11 @@ export class SharePointHistoricalStorageAnalyzerRepository
   }
 
   public async analyzeLibrary(
-    request: IHistoricalStorageAnalysisRequest
+    request: IHistoricalStorageAnalysisRequest,
+    onProgress?: AnalysisProgressCallback
   ): Promise<IHistoricalStorageAnalysisResult> {
     const startedAt = Date.now();
+    onProgress?.({ currentFileName: '', completedFiles: 0, totalFiles: 0, phase: 'listing' });
     const libraries = await this.listLibraries(request.includeHiddenLibraries);
     const library = libraries.find((entry) => entry.id === request.selectedLibraryId);
 
@@ -145,16 +148,32 @@ export class SharePointHistoricalStorageAnalyzerRepository
       };
     }
 
-    const topCount = Math.max(1, request.topDocumentsLimit);
-    const scanLimit =
-      request.scanMode === 'deepScan'
-        ? documents.length
-        : Math.min(documents.length, Math.max(topCount * 2, 10));
+    const scanLimit = request.maxDocumentsToScan > 0
+      ? Math.min(documents.length, request.maxDocumentsToScan)
+      : documents.length;
     const candidateDocuments = sortDocumentsByHistoricalCost(documents).slice(0, scanLimit);
+    let completedFiles = 0;
+    const totalFiles = candidateDocuments.length;
     const analyzedDocuments = await mapWithConcurrency(
       candidateDocuments,
       Math.max(1, request.maxVersionConcurrency),
-      async (document) => this.enrichDocumentWithVersions(document)
+      async (document) => {
+        onProgress?.({
+          currentFileName: document.title,
+          completedFiles,
+          totalFiles,
+          phase: 'analyzing'
+        });
+        const enriched = await this.enrichDocumentWithVersions(document);
+        completedFiles += 1;
+        onProgress?.({
+          currentFileName: document.title,
+          completedFiles,
+          totalFiles,
+          phase: 'analyzing'
+        });
+        return enriched;
+      }
     );
 
     const analyzedDocumentMap = new Map<number, IHistoricalDocumentScan>();
@@ -199,15 +218,21 @@ export class SharePointHistoricalStorageAnalyzerRepository
         durationMs: Date.now() - startedAt,
         throttled
       },
-      topDocuments: sortDocumentsByHistoricalCost(mergedDocuments).slice(0, topCount),
+      topDocuments: sortDocumentsByHistoricalCost(mergedDocuments),
       warnings: createWarnings(
         ...analyzedDocuments.reduce<string[]>((accumulator, document) => accumulator.concat(document.warnings), []),
-        request.scanMode === 'quickScan' && analyzedDocuments.length < documents.length
-          ? 'quick-scan-capped'
+        analyzedDocuments.length < documents.length
+          ? 'scan-capped'
           : undefined
       ),
       exportedAt: new Date().toISOString()
     };
+  }
+
+  public async retryDocument(
+    document: IHistoricalStorageDocumentSnapshot
+  ): Promise<IHistoricalStorageDocumentSnapshot> {
+    return this.enrichDocumentWithVersions(document);
   }
 
   private toLibraryOption(library: ISharePointLibraryResponse): IHistoricalStorageLibraryOption {
@@ -248,7 +273,7 @@ export class SharePointHistoricalStorageAnalyzerRepository
   ): Promise<IHistoricalDocumentScan> {
     try {
       const versions = await this.getPagedCollection<ISharePointVersionResponse>(
-        `web/getfilebyserverrelativeurl('${document.serverRelativeUrl.replace(/'/g, "''")}')/versions?$select=Size,Length`
+        `web/getfilebyserverrelativeurl('${document.serverRelativeUrl.replace(/'/g, "''").replace(/#/g, '%23')}')/versions?$select=Size,Length`
       );
       const historicalVersionCount = versions.length;
       const historicalSizeBytes = sumBytes(
@@ -287,12 +312,7 @@ export class SharePointHistoricalStorageAnalyzerRepository
     while (nextUrl) {
       const response = await this.context.spHttpClient.get(
         nextUrl,
-        SPHttpClient.configurations.v1,
-        {
-          headers: {
-            Accept: 'application/json;odata=nometadata'
-          }
-        }
+        SPHttpClient.configurations.v1
       );
 
       if (!response.ok) {

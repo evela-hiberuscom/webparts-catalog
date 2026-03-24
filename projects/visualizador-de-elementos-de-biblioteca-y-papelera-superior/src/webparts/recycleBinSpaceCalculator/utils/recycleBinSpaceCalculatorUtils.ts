@@ -143,21 +143,28 @@ export function evaluateHealth(args: {
   warningThresholdItems: number;
   warningThresholdSizeMb: number;
 }): IRecycleBinHealthEvaluation {
-  const reasons: string[] = [];
-  const totalSizeBytes = sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
-  const totalItems = args.stage1.itemCount !== null && args.stage2.itemCount !== null
-    ? args.stage1.itemCount + args.stage2.itemCount
-    : null;
+  // Stage 2 being inaccessible is expected for non-admin users — not an error.
+  const stage2PermissionLimited = !args.stage2.isAccessible && args.stage1.isAccessible;
 
-  if (totalItems !== null && totalItems >= args.warningThresholdItems) {
+  const reasons: string[] = [];
+  const effectiveSizeBytes = stage2PermissionLimited
+    ? args.stage1.sizeBytes
+    : sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
+  const effectiveItems = stage2PermissionLimited
+    ? args.stage1.itemCount
+    : (args.stage1.itemCount !== null && args.stage2.itemCount !== null
+        ? args.stage1.itemCount + args.stage2.itemCount
+        : null);
+
+  if (effectiveItems !== null && effectiveItems >= args.warningThresholdItems) {
     reasons.push(`El número de elementos eliminados supera el umbral configurado (${args.warningThresholdItems}).`);
   }
 
-  if (totalSizeBytes !== null && totalSizeBytes >= args.warningThresholdSizeMb * 1024 * 1024) {
+  if (effectiveSizeBytes !== null && effectiveSizeBytes >= args.warningThresholdSizeMb * 1024 * 1024) {
     reasons.push(`El tamaño total supera el umbral configurado (${args.warningThresholdSizeMb} MB).`);
   }
 
-  if (!args.stage1.isAccessible || !args.stage2.isAccessible) {
+  if (!stage2PermissionLimited && (!args.stage1.isAccessible || !args.stage2.isAccessible)) {
     reasons.push('Falta acceso completo a una de las etapas de la papelera.');
   }
 
@@ -169,7 +176,7 @@ export function evaluateHealth(args: {
     };
   }
 
-  if (!args.stage1.isAccessible || !args.stage2.isAccessible) {
+  if (!stage2PermissionLimited && (!args.stage1.isAccessible || !args.stage2.isAccessible)) {
     return {
       level: 'unknown',
       reasons
@@ -191,19 +198,26 @@ export function buildViewModel(args: {
   warningThresholdSizeMb: number;
   title?: string;
 }): IRecycleBinSpaceCalculatorViewModel {
-  const totalSizeBytes = sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
-  const totalItemCount =
-    args.stage1.itemCount !== null && args.stage2.itemCount !== null
-      ? args.stage1.itemCount + args.stage2.itemCount
-      : null;
+  // Stage 2 requires Site Collection Administrator. When only stage 2 is inaccessible,
+  // use stage 1 data for totals so the user still gets useful information.
+  const stage2PermissionLimited = !args.stage2.isAccessible && args.stage1.isAccessible;
 
-  const hasPartialData =
-    args.stage1.precision === 'partial' ||
-    args.stage2.precision === 'partial' ||
-    !args.stage1.isAccessible ||
-    !args.stage2.isAccessible ||
-    totalSizeBytes === null ||
-    totalItemCount === null;
+  const totalSizeBytes = stage2PermissionLimited
+    ? args.stage1.sizeBytes
+    : sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
+  const totalItemCount = stage2PermissionLimited
+    ? args.stage1.itemCount
+    : (args.stage1.itemCount !== null && args.stage2.itemCount !== null
+        ? args.stage1.itemCount + args.stage2.itemCount
+        : null);
+
+  const hasPartialData = stage2PermissionLimited
+    ? args.stage1.precision === 'partial' || args.stage1.sizeBytes === null
+    : (args.stage1.precision === 'partial' ||
+       args.stage2.precision === 'partial' ||
+       !args.stage1.isAccessible ||
+       totalSizeBytes === null ||
+       totalItemCount === null);
 
   return {
     siteUrl: args.siteUrl,
@@ -215,6 +229,7 @@ export function buildViewModel(args: {
     totalItemCount,
     totalSizeBytes,
     hasPartialData,
+    stage2PermissionLimited,
     health: evaluateHealth({
       stage1: args.stage1,
       stage2: args.stage2,

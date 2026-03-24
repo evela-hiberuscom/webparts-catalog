@@ -44,7 +44,9 @@ describe('RecycleBinSpaceCalculatorService', () => {
 
     expect(viewModel.stage1.isAccessible).toBe(true);
     expect(viewModel.stage2.isAccessible).toBe(false);
-    expect(viewModel.hasPartialData).toBe(true);
-    expect(viewModel.totalSizeBytes).toBeNull();
+    // Stage 2 inaccessibility is expected for non-admin users: totals use stage 1 data.
+    expect(viewModel.stage2PermissionLimited).toBe(true);
+    expect(viewModel.hasPartialData).toBe(false);
+    expect(viewModel.totalSizeBytes).toBe(2048);
   });
 });

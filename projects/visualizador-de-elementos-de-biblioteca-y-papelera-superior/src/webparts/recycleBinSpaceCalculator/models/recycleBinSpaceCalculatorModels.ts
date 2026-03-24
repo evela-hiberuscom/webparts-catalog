@@ -47,6 +47,8 @@ export interface IRecycleBinSpaceCalculatorViewModel {
   totalItemCount: number | null;
   totalSizeBytes: number | null;
   hasPartialData: boolean;
+  /** Stage 2 is expected to be inaccessible — user is not a Site Collection Administrator. */
+  stage2PermissionLimited: boolean;
   health: IRecycleBinHealthEvaluation;
   lastUpdated: string;
 }

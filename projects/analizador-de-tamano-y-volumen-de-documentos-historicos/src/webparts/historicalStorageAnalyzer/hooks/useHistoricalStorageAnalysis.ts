@@ -3,7 +3,9 @@ import type { WebPartContext } from '@microsoft/sp-webpart-base';
 import {
   type HistoricalStorageAnalysisStatus,
   type HistoricalStorageScanMode,
+  type IAnalysisProgressInfo,
   type IHistoricalStorageAnalysisResult,
+  type IHistoricalStorageDocumentSnapshot,
   type IHistoricalStorageLibraryOption
 } from '../models/historicalStorageAnalyzer.types';
 import { HistoricalStorageAnalyzerService } from '../services/HistoricalStorageAnalyzerService';
@@ -13,7 +15,6 @@ import { toPositiveInteger } from '../utils/analysisCalculations';
 export interface IUseHistoricalStorageAnalysisOptions {
   defaultLibraryTitleOrUrl?: string;
   defaultScanMode: HistoricalStorageScanMode;
-  topDocumentsLimit: string;
   maxVersionConcurrency: string;
   includeHiddenLibraries: boolean;
 }
@@ -22,16 +23,21 @@ export interface IHistoricalStorageAnalysisActions {
   refresh: () => void;
   setSelectedLibraryId: (libraryId: string) => void;
   setScanMode: (scanMode: HistoricalStorageScanMode) => void;
+  setMaxDocumentsToScan: (limit: number) => void;
+  retryDocument: (document: IHistoricalStorageDocumentSnapshot) => void;
 }
 
 export interface IHistoricalStorageAnalysisHookResult {
   libraries: IHistoricalStorageLibraryOption[];
   selectedLibrary?: IHistoricalStorageLibraryOption;
   scanMode: HistoricalStorageScanMode;
+  maxDocumentsToScan: number;
   isRefreshing: boolean;
   status: HistoricalStorageAnalysisStatus;
   errorMessage?: string;
   result?: IHistoricalStorageAnalysisResult;
+  progress?: IAnalysisProgressInfo;
+  retryingDocumentIds: ReadonlySet<number>;
   actions: IHistoricalStorageAnalysisActions;
 }
 
@@ -43,10 +49,15 @@ export function useHistoricalStorageAnalysis(
   const [libraries, setLibraries] = React.useState<IHistoricalStorageLibraryOption[]>([]);
   const [selectedLibraryId, setSelectedLibraryId] = React.useState('');
   const [scanMode, setScanMode] = React.useState<HistoricalStorageScanMode>(options.defaultScanMode);
+  const [maxDocumentsToScan, setMaxDocumentsToScan] = React.useState(
+    options.defaultScanMode === 'deepScan' ? 0 : 20
+  );
   const [status, setStatus] = React.useState<HistoricalStorageAnalysisStatus>('idle');
   const [isRefreshing, setIsRefreshing] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>();
   const [result, setResult] = React.useState<IHistoricalStorageAnalysisResult | undefined>();
+  const [progress, setProgress] = React.useState<IAnalysisProgressInfo | undefined>();
+  const [retryingDocumentIds, setRetryingDocumentIds] = React.useState<ReadonlySet<number>>(new Set<number>());
   const [refreshToken, setRefreshToken] = React.useState(0);
   const requestIdRef = React.useRef(0);
 
@@ -97,21 +108,30 @@ export function useHistoricalStorageAnalysis(
     setIsRefreshing(true);
     setStatus('loading');
     setErrorMessage(undefined);
+    setProgress(undefined);
 
     void service
-      .analyzeLibrary({
-        selectedLibraryId,
-        scanMode,
-        topDocumentsLimit: toPositiveInteger(options.topDocumentsLimit, 8),
-        maxVersionConcurrency: toPositiveInteger(options.maxVersionConcurrency, 3),
-        includeHiddenLibraries: options.includeHiddenLibraries
-      })
+      .analyzeLibrary(
+        {
+          selectedLibraryId,
+          scanMode,
+          maxDocumentsToScan,
+          maxVersionConcurrency: toPositiveInteger(options.maxVersionConcurrency, 3),
+          includeHiddenLibraries: options.includeHiddenLibraries
+        },
+        (progressInfo) => {
+          if (requestIdRef.current === requestId) {
+            setProgress(progressInfo);
+          }
+        }
+      )
       .then((nextResult) => {
         if (requestIdRef.current !== requestId) {
           return;
         }
 
         setResult(nextResult);
+        setProgress(undefined);
         setStatus(
           nextResult.summary.totalDocuments === 0
             ? 'empty'
@@ -131,6 +151,7 @@ export function useHistoricalStorageAnalysis(
         setErrorMessage(message);
         setStatus('error');
         setResult(undefined);
+        setProgress(undefined);
       })
       .then(() => {
         if (requestIdRef.current === requestId) {
@@ -138,9 +159,9 @@ export function useHistoricalStorageAnalysis(
         }
       });
   }, [
+    maxDocumentsToScan,
     options.includeHiddenLibraries,
     options.maxVersionConcurrency,
-    options.topDocumentsLimit,
     refreshToken,
     scanMode,
     selectedLibraryId,
@@ -153,16 +174,58 @@ export function useHistoricalStorageAnalysis(
     libraries,
     selectedLibrary,
     scanMode,
+    maxDocumentsToScan,
     isRefreshing,
     status,
     errorMessage,
     result,
+    progress,
+    retryingDocumentIds,
     actions: {
       refresh: (): void => {
         setRefreshToken((currentValue) => currentValue + 1);
       },
       setSelectedLibraryId,
-      setScanMode
+      setScanMode: (mode: HistoricalStorageScanMode): void => {
+        setScanMode(mode);
+        setMaxDocumentsToScan(mode === 'deepScan' ? 0 : 20);
+      },
+      setMaxDocumentsToScan: (limit: number): void => {
+        setMaxDocumentsToScan(Math.max(0, Math.floor(limit)));
+      },
+      retryDocument: (document: IHistoricalStorageDocumentSnapshot): void => {
+        setRetryingDocumentIds((prev) => {
+          const next = new Set<number>(prev);
+          next.add(document.id);
+          return next;
+        });
+        const cleanup = (): void => {
+          setRetryingDocumentIds((prev) => {
+            const next = new Set<number>(prev);
+            next.delete(document.id);
+            return next;
+          });
+        };
+        void service
+          .retryDocument(document)
+          .then(
+            (retried) => {
+              setResult((currentResult) => {
+                if (!currentResult) return currentResult;
+                return {
+                  ...currentResult,
+                  topDocuments: currentResult.topDocuments.map((doc) =>
+                    doc.id === retried.id ? retried : doc
+                  )
+                };
+              });
+              cleanup();
+            },
+            () => {
+              cleanup();
+            }
+          );
+      }
     }
   };
 }

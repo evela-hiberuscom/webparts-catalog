@@ -2,7 +2,9 @@ import {
   aggregateStage,
   buildRecycleBinPageUrl,
   buildRecycleBinUrl,
+  buildViewModel,
   coerceRecycleBinItem,
+  createUnavailableStage,
   evaluateHealth,
   formatBytes
 } from './recycleBinSpaceCalculatorUtils';
@@ -65,5 +67,45 @@ describe('recycleBinSpaceCalculatorUtils', () => {
     });
 
     expect(health.level).toBe('critical');
+  });
+
+  it('treats stage 2 inaccessibility as permission-limited, not unknown', () => {
+    const stage1 = aggregateStage(
+      [{ id: '1', stage: 1, title: 'A', deletedDate: null, path: null, sizeBytes: 1024 }],
+      1
+    );
+    const stage2 = createUnavailableStage(2, 'HTTP 403 al leer la papelera de nivel 2.');
+
+    const health = evaluateHealth({
+      stage1,
+      stage2,
+      warningThresholdItems: 1000,
+      warningThresholdSizeMb: 512
+    });
+
+    expect(health.level).toBe('ok');
+  });
+
+  it('sets stage2PermissionLimited and uses stage1 data for totals', () => {
+    const stage1 = aggregateStage(
+      [{ id: '1', stage: 1, title: 'A', deletedDate: null, path: null, sizeBytes: 2048 }],
+      1
+    );
+    const stage2 = createUnavailableStage(2, 'HTTP 403 al leer la papelera de nivel 2.');
+
+    const vm = buildViewModel({
+      siteUrl: 'https://contoso.sharepoint.com/sites/portal',
+      description: 'Test',
+      stage1,
+      stage2,
+      warningThresholdItems: 1000,
+      warningThresholdSizeMb: 512
+    });
+
+    expect(vm.stage2PermissionLimited).toBe(true);
+    expect(vm.totalSizeBytes).toBe(2048);
+    expect(vm.totalItemCount).toBe(1);
+    expect(vm.hasPartialData).toBe(false);
+    expect(vm.health.level).toBe('ok');
   });
 });

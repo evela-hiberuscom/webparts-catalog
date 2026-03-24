@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  Checkbox,
   ChoiceGroup,
   type IChoiceGroupOption,
   type IColumn,
@@ -7,19 +8,25 @@ import {
   DefaultButton,
   DetailsList,
   DetailsListLayoutMode,
+  DirectionalHint,
+  IconButton,
   MessageBar,
   MessageBarType,
   PrimaryButton,
+  ProgressIndicator,
   SelectionMode,
+  SpinButton,
   Spinner,
   SpinnerSize,
   Stack,
-  Text
+  Text,
+  TooltipHost
 } from '@fluentui/react';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { classifyAsyncState, createSafeExternalLink } from '@paquete/spfx-common';
 import styles from './HistoricalStorageAnalyzer.module.scss';
 import type { IHistoricalStorageAnalyzerProps } from './IHistoricalStorageAnalyzerProps';
+import type { IHistoricalStorageDocumentSnapshot } from '../models/historicalStorageAnalyzer.types';
 import { useHistoricalStorageAnalysis } from '../hooks/useHistoricalStorageAnalysis';
 import { downloadAnalysisResult } from '../utils/exportResult';
 import { formatBytes, formatPercent, formatRatio } from '../utils/analysisCalculations';
@@ -28,22 +35,56 @@ import { getSelectableLibraryTitle, toLibraryComboBoxOption } from '../utils/lib
 const scanModeOptions: IChoiceGroupOption[] = [
   {
     key: 'quickScan',
-    text: 'Quick scan'
+    text: 'Quick scan — Solo los documentos más pesados (rápido, parcial)'
   },
   {
     key: 'deepScan',
-    text: 'Deep scan'
+    text: 'Deep scan — Todos los documentos y todas sus versiones (completo, más lento)'
   }
 ];
 
-const topDocumentColumns: IColumn[] = [
-  { key: 'title', name: 'Documento', fieldName: 'title', minWidth: 180, isResizable: true },
-  { key: 'currentSizeBytes', name: 'Tamaño actual', fieldName: 'currentSizeBytes', minWidth: 110, isResizable: true },
-  { key: 'historicalVersionCount', name: 'Versiones', fieldName: 'historicalVersionCount', minWidth: 90, isResizable: true },
-  { key: 'historicalSizeBytes', name: 'Tamaño histórico', fieldName: 'historicalSizeBytes', minWidth: 130, isResizable: true },
-  { key: 'ratio', name: 'Ratio', fieldName: 'ratio', minWidth: 80, isResizable: true },
-  { key: 'precision', name: 'Precisión', fieldName: 'precision', minWidth: 90, isResizable: true }
-];
+function buildColumns(): IColumn[] {
+  return [
+    { key: 'title', name: 'Documento', fieldName: 'title', minWidth: 180, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'currentSizeBytes', name: 'Tamaño actual', fieldName: 'currentSizeBytes', minWidth: 110, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'historicalVersionCount', name: 'Versiones', fieldName: 'historicalVersionCount', minWidth: 90, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'historicalSizeBytes', name: 'Tamaño histórico', fieldName: 'historicalSizeBytes', minWidth: 130, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'ratio', name: 'Ratio', fieldName: 'ratio', minWidth: 80, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'precision', name: 'Precisión', fieldName: 'precision', minWidth: 160, isResizable: true, isSorted: false, isSortedDescending: false }
+  ];
+}
+
+function compareDocuments(
+  a: IHistoricalStorageDocumentSnapshot,
+  b: IHistoricalStorageDocumentSnapshot,
+  columnKey: string,
+  descending: boolean
+): number {
+  let result = 0;
+  switch (columnKey) {
+    case 'title':
+      result = (a.title || '').localeCompare(b.title || '');
+      break;
+    case 'currentSizeBytes':
+      result = a.currentSizeBytes - b.currentSizeBytes;
+      break;
+    case 'historicalVersionCount':
+      result = a.historicalVersionCount - b.historicalVersionCount;
+      break;
+    case 'historicalSizeBytes':
+      result = (a.historicalSizeBytes ?? 0) - (b.historicalSizeBytes ?? 0);
+      break;
+    case 'ratio':
+      result = (a.ratio ?? 0) - (b.ratio ?? 0);
+      break;
+    case 'precision':
+      result = (a.precision || '').localeCompare(b.precision || '');
+      break;
+    default:
+      break;
+  }
+  return descending ? -result : result;
+}
 
 function precisionBadgeClassName(precision: string): string {
   switch (precision) {
@@ -58,6 +99,33 @@ function precisionBadgeClassName(precision: string): string {
   }
 }
 
+function precisionLabel(item: IHistoricalStorageDocumentSnapshot): string {
+  switch (item.precision) {
+    case 'exact': return 'Exacto';
+    case 'partial':
+      return item.warnings.indexOf('throttled') !== -1 ? 'Parcial (límite)' : 'Parcial (error)';
+    case 'estimated': return 'Estimado';
+    default: return item.precision;
+  }
+}
+
+function precisionTooltip(item: IHistoricalStorageDocumentSnapshot): string {
+  switch (item.precision) {
+    case 'exact':
+      return 'Todas las versiones históricas se obtuvieron correctamente.';
+    case 'partial':
+      return item.warnings.indexOf('throttled') !== -1
+        ? 'SharePoint limitó las solicitudes (throttling). No fue posible obtener el historial completo de versiones para este documento.'
+        : 'Hubo un error al consultar el historial de versiones de este documento. Los datos mostrados son incompletos.';
+    case 'estimated':
+      return 'Este documento no entró en el rango de análisis definido. Los valores históricos son estimaciones basadas en el tamaño actual del documento.';
+    default:
+      return '';
+  }
+}
+
+const PAGE_SIZE = 50;
+
 export default function HistoricalStorageAnalyzer(
   props: IHistoricalStorageAnalyzerProps
 ): React.ReactElement<IHistoricalStorageAnalyzerProps> {
@@ -65,18 +133,55 @@ export default function HistoricalStorageAnalyzer(
     libraries,
     selectedLibrary,
     scanMode,
+    maxDocumentsToScan,
     status,
     isRefreshing,
     errorMessage,
     result,
+    progress,
+    retryingDocumentIds,
     actions
   } = useHistoricalStorageAnalysis(props.context, {
     defaultLibraryTitleOrUrl: props.defaultLibraryTitleOrUrl,
     defaultScanMode: props.defaultScanMode,
-    topDocumentsLimit: props.topDocumentsLimit,
     maxVersionConcurrency: props.maxVersionConcurrency,
     includeHiddenLibraries: props.includeHiddenLibraries
   });
+
+  const [columns, setColumns] = React.useState<IColumn[]>(buildColumns);
+  const [sortKey, setSortKey] = React.useState<string | undefined>();
+  const [sortDescending, setSortDescending] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const sortedDocuments = React.useMemo(() => {
+    if (!result?.topDocuments) return [];
+    if (!sortKey) return result.topDocuments;
+    return [...result.topDocuments].sort((a, b) => compareDocuments(a, b, sortKey, sortDescending));
+  }, [result?.topDocuments, sortKey, sortDescending]);
+
+  const totalPages = Math.max(1, Math.ceil(sortedDocuments.length / PAGE_SIZE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+  const paginatedDocuments = sortedDocuments.slice(
+    (safeCurrentPage - 1) * PAGE_SIZE,
+    safeCurrentPage * PAGE_SIZE
+  );
+
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [result?.topDocuments, sortKey, sortDescending]);
+
+  const handleColumnClick = React.useCallback((_ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
+    const newDescending = column.key === sortKey ? !sortDescending : false;
+    setSortKey(column.key);
+    setSortDescending(newDescending);
+    setColumns((prev) =>
+      prev.map((col) => ({
+        ...col,
+        isSorted: col.key === column.key,
+        isSortedDescending: col.key === column.key ? newDescending : false
+      }))
+    );
+  }, [sortKey, sortDescending]);
 
   const stateClassName = classifyAsyncState({
     hasData: !!result,
@@ -123,6 +228,20 @@ export default function HistoricalStorageAnalyzer(
         { label: 'Duración', value: `${Math.max(0, result.summary.durationMs)} ms` }
       ]
     : [];
+
+  const progressPercent = progress && progress.totalFiles > 0
+    ? progress.completedFiles / progress.totalFiles
+    : undefined;
+
+  const progressLabel = progress
+    ? progress.phase === 'listing'
+      ? 'Obteniendo lista de documentos...'
+      : `Analizando versiones: ${progress.completedFiles} de ${progress.totalFiles}`
+    : undefined;
+
+  const progressDescription = progress?.phase === 'analyzing' && progress.currentFileName
+    ? progress.currentFileName
+    : undefined;
 
   return (
     <section className={`${styles.root} ${props.hasTeamsContext ? styles.teams : ''} ${props.isDarkTheme ? styles.darkTheme : ''}`}>
@@ -200,11 +319,67 @@ export default function HistoricalStorageAnalyzer(
             }}
           />
         </div>
+
+        <div className={styles.controlBlock}>
+          <Text variant="smallPlus" block className={styles.controlLabel}>
+            Documentos a escanear
+          </Text>
+          <Checkbox
+            label="Todos los documentos"
+            checked={maxDocumentsToScan === 0}
+            onChange={(_, checked) => {
+              actions.setMaxDocumentsToScan(checked ? 0 : 20);
+            }}
+            disabled={isRefreshing}
+          />
+          {maxDocumentsToScan > 0 && (
+            <SpinButton
+              value={String(maxDocumentsToScan)}
+              min={1}
+              max={10000}
+              step={5}
+              onValidate={(value) => {
+                const parsed = Number.parseInt(value, 10);
+                if (Number.isFinite(parsed) && parsed >= 1) {
+                  actions.setMaxDocumentsToScan(parsed);
+                }
+                return String(maxDocumentsToScan);
+              }}
+              onIncrement={(value) => {
+                const next = Math.min(10000, (Number.parseInt(value, 10) || maxDocumentsToScan) + 5);
+                actions.setMaxDocumentsToScan(next);
+                return String(next);
+              }}
+              onDecrement={(value) => {
+                const next = Math.max(1, (Number.parseInt(value, 10) || maxDocumentsToScan) - 5);
+                actions.setMaxDocumentsToScan(next);
+                return String(next);
+              }}
+              disabled={isRefreshing}
+              styles={{ root: { maxWidth: 120, marginTop: 4 } }}
+            />
+          )}
+          <Text variant="small" block className={styles.helperText}>
+            {maxDocumentsToScan === 0
+              ? 'Se analizarán las versiones de todos los documentos de la biblioteca.'
+              : `Se analizarán las versiones de los ${maxDocumentsToScan} documentos más pesados.`}
+          </Text>
+        </div>
       </div>
 
       {status === 'loading' && (
         <div className={styles.statePanel}>
-          <Spinner size={SpinnerSize.medium} label="Analizando biblioteca..." />
+          {progress ? (
+            <Stack tokens={{ childrenGap: 4 }} styles={{ root: { width: '100%', padding: '0 16px' } }}>
+              <ProgressIndicator
+                label={progressLabel}
+                description={progressDescription}
+                percentComplete={progressPercent}
+              />
+            </Stack>
+          ) : (
+            <Spinner size={SpinnerSize.medium} label="Analizando biblioteca..." />
+          )}
         </div>
       )}
 
@@ -232,27 +407,42 @@ export default function HistoricalStorageAnalyzer(
 
         {result && (
           <Stack tokens={{ childrenGap: 12 }}>
-            <div className={styles.sectionHeader}>
-              <Text variant="mediumPlus" block>
-                Top documentos
-              </Text>
-              <Text variant="small" block className={styles.helperText}>
-                Ordenados por coste histórico exacto cuando el análisis lo permite.
-              </Text>
-            </div>
+            <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
+              <div className={styles.sectionHeader}>
+                <Text variant="mediumPlus" block>
+                  Documentos analizados
+                </Text>
+                <Text variant="small" block className={styles.helperText}>
+                  {sortedDocuments.length} documentos · Haz clic en las cabeceras para ordenar.
+                </Text>
+              </div>
+              {totalPages > 1 && (
+                <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 4 }}>
+                  <IconButton
+                    iconProps={{ iconName: 'ChevronLeft' }}
+                    disabled={safeCurrentPage <= 1}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    ariaLabel="Página anterior"
+                  />
+                  <Text variant="small">
+                    {safeCurrentPage} / {totalPages}
+                  </Text>
+                  <IconButton
+                    iconProps={{ iconName: 'ChevronRight' }}
+                    disabled={safeCurrentPage >= totalPages}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    ariaLabel="Página siguiente"
+                  />
+                </Stack>
+              )}
+            </Stack>
 
             <DetailsList
-              items={result.topDocuments}
-              columns={topDocumentColumns.map((column) => ({
+              items={paginatedDocuments}
+              columns={columns.map((column) => ({
                 ...column,
-                onRender: (item: {
-                  title: string;
-                  currentSizeBytes: number;
-                  historicalVersionCount: number;
-                  historicalSizeBytes: number | null;
-                  ratio: number | null;
-                  precision: string;
-                }) => {
+                onColumnClick: handleColumnClick,
+                onRender: (item: IHistoricalStorageDocumentSnapshot) => {
                   switch (column.key) {
                     case 'currentSizeBytes':
                       return formatBytes(item.currentSizeBytes);
@@ -264,8 +454,32 @@ export default function HistoricalStorageAnalyzer(
                         : formatBytes(item.historicalSizeBytes);
                     case 'ratio':
                       return formatRatio(item.ratio);
-                    case 'precision':
-                      return <span className={`${styles.badge} ${precisionBadgeClassName(item.precision)}`}>{item.precision}</span>;
+                    case 'precision': {
+                      const isRetrying = retryingDocumentIds.has(item.id);
+                      return (
+                        <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 6 }}>
+                          <TooltipHost
+                            content={precisionTooltip(item)}
+                            directionalHint={DirectionalHint.topCenter}
+                          >
+                            <span className={`${styles.badge} ${precisionBadgeClassName(item.precision)}`}>
+                              {precisionLabel(item)}
+                            </span>
+                          </TooltipHost>
+                          {item.precision === 'partial' && (
+                            isRetrying
+                              ? <Spinner size={SpinnerSize.xSmall} />
+                              : <IconButton
+                                  iconProps={{ iconName: 'Refresh' }}
+                                  title="Reintentar"
+                                  ariaLabel="Reintentar análisis de este documento"
+                                  styles={{ root: { height: 24, width: 24, minWidth: 24 } }}
+                                  onClick={() => actions.retryDocument(item)}
+                                />
+                          )}
+                        </Stack>
+                      );
+                    }
                     default:
                       return item.title;
                   }

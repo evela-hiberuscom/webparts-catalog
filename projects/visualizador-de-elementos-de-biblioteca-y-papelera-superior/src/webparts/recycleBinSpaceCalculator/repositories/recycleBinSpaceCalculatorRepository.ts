@@ -18,11 +18,7 @@ export class RecycleBinSpaceCalculatorRepository {
     const endpoint = buildRecycleBinUrl(this.options.siteUrl, stage);
 
     try {
-      const response = await this.options.spHttpClient.get(endpoint, undefined, {
-        headers: {
-          Accept: 'application/json;odata=nometadata'
-        }
-      });
+      const response = await this.options.spHttpClient.get(endpoint, undefined);
 
       if (!response.ok) {
         return createUnavailableStage(stage, `HTTP ${response.status} al leer la papelera de nivel ${stage}.`);

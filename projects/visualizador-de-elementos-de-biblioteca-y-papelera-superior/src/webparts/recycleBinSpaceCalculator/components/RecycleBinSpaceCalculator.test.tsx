@@ -41,6 +41,7 @@ describe('RecycleBinSpaceCalculator', () => {
         totalItemCount: 3,
         totalSizeBytes: 3072,
         hasPartialData: false,
+        stage2PermissionLimited: false,
         health: {
           level: 'ok',
           reasons: ['La papelera se mantiene por debajo de los umbrales configurados.']

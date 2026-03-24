@@ -59,9 +59,16 @@ export interface IHistoricalStorageAnalysisResult {
 export interface IHistoricalStorageAnalysisRequest {
   selectedLibraryId: string;
   scanMode: HistoricalStorageScanMode;
-  topDocumentsLimit: number;
+  maxDocumentsToScan: number;
   maxVersionConcurrency: number;
   includeHiddenLibraries: boolean;
+}
+
+export interface IAnalysisProgressInfo {
+  currentFileName: string;
+  completedFiles: number;
+  totalFiles: number;
+  phase: 'listing' | 'analyzing';
 }
 
 export interface IHistoricalStorageAnalyzerViewState {

@@ -8,6 +8,7 @@ import {
   PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { SPHttpClient } from '@microsoft/sp-http';
 
 import * as strings from 'RecycleBinSpaceCalculatorWebPartStrings';
 import RecycleBinSpaceCalculator from './components/RecycleBinSpaceCalculator';
@@ -26,7 +27,10 @@ export default class RecycleBinSpaceCalculatorWebPart extends BaseClientSideWebP
       warningThresholdSizeMb: this.properties.warningThresholdSizeMb ?? 512,
       runtimeContext: {
         siteUrl: this.context.pageContext.web.absoluteUrl,
-        spHttpClient: this.context.spHttpClient
+        spHttpClient: {
+          get: (url: string, _configuration: unknown, options?: { headers?: Record<string, string> }) =>
+            this.context.spHttpClient.get(url, SPHttpClient.configurations.v1, options)
+        }
       }
       }
     );

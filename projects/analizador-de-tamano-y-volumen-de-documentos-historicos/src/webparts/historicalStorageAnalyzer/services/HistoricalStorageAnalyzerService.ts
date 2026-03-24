@@ -2,9 +2,13 @@ import type { WebPartContext } from '@microsoft/sp-webpart-base';
 import type {
   IHistoricalStorageAnalysisRequest,
   IHistoricalStorageAnalysisResult,
+  IHistoricalStorageDocumentSnapshot,
   IHistoricalStorageLibraryOption
 } from '../models/historicalStorageAnalyzer.types';
-import type { IHistoricalStorageAnalyzerRepository } from '../repositories/IHistoricalStorageAnalyzerRepository';
+import type {
+  AnalysisProgressCallback,
+  IHistoricalStorageAnalyzerRepository
+} from '../repositories/IHistoricalStorageAnalyzerRepository';
 import { SharePointHistoricalStorageAnalyzerRepository } from '../repositories/SharePointHistoricalStorageAnalyzerRepository';
 
 export class HistoricalStorageAnalyzerService {
@@ -21,8 +25,15 @@ export class HistoricalStorageAnalyzerService {
   }
 
   public analyzeLibrary(
-    request: IHistoricalStorageAnalysisRequest
+    request: IHistoricalStorageAnalysisRequest,
+    onProgress?: AnalysisProgressCallback
   ): Promise<IHistoricalStorageAnalysisResult> {
-    return this.repository.analyzeLibrary(request);
+    return this.repository.analyzeLibrary(request, onProgress);
+  }
+
+  public retryDocument(
+    document: IHistoricalStorageDocumentSnapshot
+  ): Promise<IHistoricalStorageDocumentSnapshot> {
+    return this.repository.retryDocument(document);
   }
 }
