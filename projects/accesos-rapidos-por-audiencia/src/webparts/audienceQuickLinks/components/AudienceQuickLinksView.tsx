@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'AudienceQuickLinksWebPartStrings';
 
 import type {
   IAudienceLinkRecord,
@@ -24,28 +25,28 @@ export function AudienceQuickLinksView(props: IAudienceQuickLinksViewProps): Rea
   const hasCards = vm.visibleItems.length > 0;
   const showFilters = vm.state !== 'loading' && vm.state !== 'error' && vm.categories.length > 1;
   const emptyMessage =
-    vm.selectedCategory !== 'Todas'
-      ? 'No hay accesos para esta categoría. Prueba con otra categoría o limpia el filtro.'
-      : 'No hay accesos disponibles para tu perfil.';
+vm.selectedCategory !== strings.AllCategoriesLabel
+      ? strings.EmptyStatePanelMessageNoCategory
+      : strings.EmptyStatePanelMessageDefault;
 
   return (
     <section className={styles.root} aria-label={vm.title}>
       <header className={styles.hero}>
-        <div className={styles.heroEyebrow}>Navegación contextual</div>
+        <div className={styles.heroEyebrow}>{strings.ContextualNavigationLabel}</div>
         <div className={styles.heroHeader}>
           <div>
             <h2 className={styles.title}>{vm.title}</h2>
             {vm.description ? <p className={styles.subtitle}>{vm.description}</p> : null}
           </div>
           <div className={styles.heroMeta}>
-            <span className={styles.heroMetaLabel}>Fuente</span>
+            <span className={styles.heroMetaLabel}>{strings.SourceMetaLabel}</span>
             <span className={styles.heroMetaValue}>{vm.sourceLabel}</span>
-            <span className={styles.heroMetaLabel}>Audiencia</span>
+            <span className={styles.heroMetaLabel}>{strings.AudienceMetaLabel}</span>
             <span className={styles.heroMetaValue}>{vm.resolvedAudienceLabel}</span>
           </div>
         </div>
         {props.showAudienceHint ? (
-          <div className={styles.audienceHint} aria-label="Tokens de audiencia resueltos">
+          <div className={styles.audienceHint} aria-label={strings.AudienceHintAriaLabel}>
             {vm.resolvedAudienceTokens.length > 0 ? (
               vm.resolvedAudienceTokens.slice(0, 3).map((token) => (
                 <span key={token} className={styles.hintBadge}>
@@ -63,17 +64,17 @@ export function AudienceQuickLinksView(props: IAudienceQuickLinksViewProps): Rea
         {vm.state === 'loading' ? (
           <AudienceStatePanel
             state="loading"
-            title="Cargando"
-            message="Resolvemos la audiencia y preparamos los accesos."
+            title={strings.LoadingStatePanelTitle}
+            message={strings.LoadingStatePanelMessage}
           />
         ) : (
           <>
             {vm.state === 'error' ? (
               <AudienceStatePanel
                 state="error"
-                title="No se han podido cargar los accesos segmentados."
-                message="Revisa la configuración de la lista o vuelve a intentar la carga."
-                actionLabel="Reintentar"
+                title={strings.ErrorStatePanelTitle}
+                message={strings.ErrorStatePanelMessage}
+                actionLabel={strings.RetryActionLabel}
                 onAction={props.onRetry}
               />
             ) : null}
@@ -81,9 +82,9 @@ export function AudienceQuickLinksView(props: IAudienceQuickLinksViewProps): Rea
             {vm.state === 'partialData' ? (
               <AudienceStatePanel
                 state="partialData"
-                title="Se han usado accesos de reserva."
-                message="Faltan algunas señales de audiencia o parte del catálogo no está completo."
-                actionLabel="Reintentar"
+                title={strings.PartialDataStatePanelTitle}
+                message={strings.PartialDataStatePanelMessage}
+                actionLabel={strings.RetryActionLabel}
                 onAction={props.onRetry}
               />
             ) : null}
@@ -91,9 +92,9 @@ export function AudienceQuickLinksView(props: IAudienceQuickLinksViewProps): Rea
             {vm.state === 'empty' ? (
               <AudienceStatePanel
                 state="empty"
-                title="No hay accesos disponibles para tu perfil."
+                title={strings.EmptyStatePanelTitle}
                 message={emptyMessage}
-                actionLabel="Reintentar"
+                actionLabel={strings.RetryActionLabel}
                 onAction={props.onRetry}
               />
             ) : null}
@@ -126,8 +127,8 @@ export function AudienceQuickLinksView(props: IAudienceQuickLinksViewProps): Rea
       </div>
 
       <footer className={styles.footer}>
-        <span>Estado: {vm.state}</span>
-        <span>Notas: {vm.notes.length > 0 ? vm.notes[0] : 'sin incidencias'}</span>
+        <span>{strings.FooterStatusLabel}: {vm.state}</span>
+        <span>{strings.FooterNotesLabel}: {vm.notes.length > 0 ? vm.notes[0] : strings.FooterNoIncidenciasLabel}</span>
       </footer>
     </section>
   );

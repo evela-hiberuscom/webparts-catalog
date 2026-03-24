@@ -92,7 +92,20 @@ export interface IAudienceQuickLinksViewModel {
   notes: string[];
 }
 
+export interface IAudienceQuickLinksLabels {
+  allCategoriesLabel: string;
+  defaultWebPartTitle: string;
+  loadingCatalogLabel: string;
+  loadingAudienceLabel: string;
+  noDataSourceLabel: string;
+  couldNotResolveAudienceLabel: string;
+  audienceGeneralLabel: string;
+  audienceHybridPrefix: string;
+  audienceNamedPrefix: string;
+}
+
 export interface IAudienceQuickLinksLoadRequest {
   webPartProps: IAudienceQuickLinksWebPartProps;
   hostContext: IAudienceQuickLinksHostContext;
+  labels: IAudienceQuickLinksLabels;
 }

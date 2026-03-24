@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'HistoricalStorageAnalyzerWebPartStrings';
 import {
   Checkbox,
   ChoiceGroup,
@@ -32,25 +33,27 @@ import { downloadAnalysisResult } from '../utils/exportResult';
 import { formatBytes, formatPercent, formatRatio } from '../utils/analysisCalculations';
 import { getSelectableLibraryTitle, toLibraryComboBoxOption } from '../utils/librarySelection';
 
-const scanModeOptions: IChoiceGroupOption[] = [
-  {
-    key: 'quickScan',
-    text: 'Quick scan — Solo los documentos más pesados (rápido, parcial)'
-  },
-  {
-    key: 'deepScan',
-    text: 'Deep scan — Todos los documentos y todas sus versiones (completo, más lento)'
-  }
-];
+function getScanModeOptions(): IChoiceGroupOption[] {
+  return [
+    {
+      key: 'quickScan',
+      text: strings.ScanModeQuickLabel
+    },
+    {
+      key: 'deepScan',
+      text: strings.ScanModeDeepLabel
+    }
+  ];
+}
 
 function buildColumns(): IColumn[] {
   return [
-    { key: 'title', name: 'Documento', fieldName: 'title', minWidth: 180, isResizable: true, isSorted: false, isSortedDescending: false },
-    { key: 'currentSizeBytes', name: 'Tamaño actual', fieldName: 'currentSizeBytes', minWidth: 110, isResizable: true, isSorted: false, isSortedDescending: false },
-    { key: 'historicalVersionCount', name: 'Versiones', fieldName: 'historicalVersionCount', minWidth: 90, isResizable: true, isSorted: false, isSortedDescending: false },
-    { key: 'historicalSizeBytes', name: 'Tamaño histórico', fieldName: 'historicalSizeBytes', minWidth: 130, isResizable: true, isSorted: false, isSortedDescending: false },
-    { key: 'ratio', name: 'Ratio', fieldName: 'ratio', minWidth: 80, isResizable: true, isSorted: false, isSortedDescending: false },
-    { key: 'precision', name: 'Precisión', fieldName: 'precision', minWidth: 160, isResizable: true, isSorted: false, isSortedDescending: false }
+    { key: 'title', name: strings.ColumnDocumentLabel, fieldName: 'title', minWidth: 180, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'currentSizeBytes', name: strings.ColumnCurrentSizeLabel, fieldName: 'currentSizeBytes', minWidth: 110, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'historicalVersionCount', name: strings.ColumnVersionsLabel, fieldName: 'historicalVersionCount', minWidth: 90, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'historicalSizeBytes', name: strings.ColumnHistoricalSizeLabel, fieldName: 'historicalSizeBytes', minWidth: 130, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'ratio', name: strings.ColumnRatioLabel, fieldName: 'ratio', minWidth: 80, isResizable: true, isSorted: false, isSortedDescending: false },
+    { key: 'precision', name: strings.ColumnPrecisionLabel, fieldName: 'precision', minWidth: 160, isResizable: true, isSorted: false, isSortedDescending: false }
   ];
 }
 
@@ -101,10 +104,10 @@ function precisionBadgeClassName(precision: string): string {
 
 function precisionLabel(item: IHistoricalStorageDocumentSnapshot): string {
   switch (item.precision) {
-    case 'exact': return 'Exacto';
+    case 'exact': return strings.PrecisionExactLabel;
     case 'partial':
-      return item.warnings.indexOf('throttled') !== -1 ? 'Parcial (límite)' : 'Parcial (error)';
-    case 'estimated': return 'Estimado';
+      return item.warnings.indexOf('throttled') !== -1 ? strings.PrecisionPartialThrottledLabel : strings.PrecisionPartialErrorLabel;
+    case 'estimated': return strings.PrecisionEstimatedLabel;
     default: return item.precision;
   }
 }
@@ -112,13 +115,13 @@ function precisionLabel(item: IHistoricalStorageDocumentSnapshot): string {
 function precisionTooltip(item: IHistoricalStorageDocumentSnapshot): string {
   switch (item.precision) {
     case 'exact':
-      return 'Todas las versiones históricas se obtuvieron correctamente.';
+      return strings.PrecisionExactTooltip;
     case 'partial':
       return item.warnings.indexOf('throttled') !== -1
-        ? 'SharePoint limitó las solicitudes (throttling). No fue posible obtener el historial completo de versiones para este documento.'
-        : 'Hubo un error al consultar el historial de versiones de este documento. Los datos mostrados son incompletos.';
+        ? strings.PrecisionPartialThrottledTooltip
+        : strings.PrecisionPartialErrorTooltip;
     case 'estimated':
-      return 'Este documento no entró en el rango de análisis definido. Los valores históricos son estimaciones basadas en el tamaño actual del documento.';
+      return strings.PrecisionEstimatedTooltip;
     default:
       return '';
   }
@@ -145,9 +148,14 @@ export default function HistoricalStorageAnalyzer(
     defaultLibraryTitleOrUrl: props.defaultLibraryTitleOrUrl,
     defaultScanMode: props.defaultScanMode,
     maxVersionConcurrency: props.maxVersionConcurrency,
-    includeHiddenLibraries: props.includeHiddenLibraries
+    includeHiddenLibraries: props.includeHiddenLibraries,
+    labels: {
+      loadLibrariesError: strings.LoadLibrariesErrorMessage,
+      analyzeLibraryError: strings.AnalyzeLibraryErrorMessage
+    }
   });
 
+  const scanModeOptions = getScanModeOptions();
   const [columns, setColumns] = React.useState<IColumn[]>(buildColumns);
   const [sortKey, setSortKey] = React.useState<string | undefined>();
   const [sortDescending, setSortDescending] = React.useState(false);
@@ -203,29 +211,29 @@ export default function HistoricalStorageAnalyzer(
   const statusText =
     errorMessage ||
     (status === 'empty'
-      ? 'La biblioteca seleccionada no contiene documentos analizables.'
+      ? strings.StatusEmptyLabel
       : status === 'throttled'
-        ? 'SharePoint ha limitado parte de las consultas. El resultado puede ser parcial.'
+        ? strings.StatusThrottledLabel
         : status === 'partialData'
-          ? 'El resultado es parcial. La cobertura no es completa.'
+          ? strings.StatusPartialDataLabel
           : result?.warnings[0] || '');
 
   const kpis = result
     ? [
-        { label: 'Documentos', value: result.summary.totalDocuments.toLocaleString('es-ES') },
-        { label: 'Tamaño actual', value: formatBytes(result.summary.visibleCurrentSizeBytes) },
-        { label: 'Versiones históricas', value: result.summary.historicalVersionCount.toLocaleString('es-ES') },
+        { label: strings.KpiDocumentsLabel, value: result.summary.totalDocuments.toLocaleString('es-ES') },
+        { label: strings.KpiCurrentSizeLabel, value: formatBytes(result.summary.visibleCurrentSizeBytes) },
+        { label: strings.KpiHistoricalVersionsLabel, value: result.summary.historicalVersionCount.toLocaleString('es-ES') },
         {
-          label: 'Tamaño histórico',
+          label: strings.KpiHistoricalSizeLabel,
           value:
             result.summary.historicalEstimatedSizeBytes !== null &&
             result.summary.historicalEstimatedSizeBytes !== undefined
               ? formatBytes(result.summary.historicalEstimatedSizeBytes)
               : '—'
         },
-        { label: 'Ratio histórico/actual', value: formatRatio(result.summary.historicalToCurrentRatio) },
-        { label: 'Cobertura', value: formatPercent(result.summary.analysisCoveragePercent) },
-        { label: 'Duración', value: `${Math.max(0, result.summary.durationMs)} ms` }
+        { label: strings.KpiRatioLabel, value: formatRatio(result.summary.historicalToCurrentRatio) },
+        { label: strings.KpiCoverageLabel, value: formatPercent(result.summary.analysisCoveragePercent) },
+        { label: strings.KpiDurationLabel, value: `${Math.max(0, result.summary.durationMs)} ms` }
       ]
     : [];
 
@@ -235,8 +243,8 @@ export default function HistoricalStorageAnalyzer(
 
   const progressLabel = progress
     ? progress.phase === 'listing'
-      ? 'Obteniendo lista de documentos...'
-      : `Analizando versiones: ${progress.completedFiles} de ${progress.totalFiles}`
+      ? strings.ProgressListingLabel
+      : strings.ProgressAnalyzingLabel.replace('{0}', String(progress.completedFiles)).replace('{1}', String(progress.totalFiles))
     : undefined;
 
   const progressDescription = progress?.phase === 'analyzing' && progress.currentFileName
@@ -248,7 +256,7 @@ export default function HistoricalStorageAnalyzer(
       <div className={styles.hero}>
         <div className={styles.heroTitleBlock}>
           <Text variant="xxLarge" block className={styles.title}>
-            {escape('Analizador de tamaño y volumen de documentos históricos')}
+            {escape(strings.WebPartTitle)}
           </Text>
           <Text variant="medium" block className={styles.subtitle}>
             {escape(props.description)}
@@ -260,19 +268,19 @@ export default function HistoricalStorageAnalyzer(
 
         <Stack horizontal tokens={{ childrenGap: 8 }} className={styles.heroActions}>
           <PrimaryButton
-            text="Refrescar"
+            text={strings.RefreshButton}
             iconProps={{ iconName: 'Refresh' }}
             onClick={actions.refresh}
             disabled={!selectedLibrary || isRefreshing}
           />
           <DefaultButton
-            text="Exportar JSON"
+            text={strings.ExportJsonButton}
             iconProps={{ iconName: 'Download' }}
             onClick={() => result && downloadAnalysisResult(result)}
             disabled={!result}
           />
           <DefaultButton
-            text="Abrir biblioteca"
+            text={strings.OpenLibraryButton}
             iconProps={{ iconName: 'OpenInNewTab' }}
             href={safeLibraryLink?.href}
             target={safeLibraryLink?.target as '_blank' | undefined}
@@ -285,11 +293,11 @@ export default function HistoricalStorageAnalyzer(
       <div className={styles.controlPanel}>
         <div className={styles.controlBlock}>
           <Text variant="smallPlus" block className={styles.controlLabel}>
-            Biblioteca del sitio
+            {strings.LibraryControlLabel}
           </Text>
           <ComboBox
-            placeholder="Buscar biblioteca"
-            options={libraries.map(toLibraryComboBoxOption)}
+            placeholder={strings.LibraryComboBoxPlaceholder}
+            options={libraries.map((lib) => toLibraryComboBoxOption(lib, strings.LibraryItemCountSuffix))}
             selectedKey={selectedLibrary?.id}
             onChange={(_, option) => {
               if (option?.key) {
@@ -301,13 +309,13 @@ export default function HistoricalStorageAnalyzer(
             useComboBoxAsMenuWidth
           />
           <Text variant="small" block className={styles.helperText}>
-            {getSelectableLibraryTitle(selectedLibrary)}
+            {getSelectableLibraryTitle(selectedLibrary, strings.NoLibrarySelectedLabel)}
           </Text>
         </div>
 
         <div className={styles.controlBlock}>
           <Text variant="smallPlus" block className={styles.controlLabel}>
-            Modo de análisis
+            {strings.ScanModeControlLabel}
           </Text>
           <ChoiceGroup
             selectedKey={scanMode}
@@ -322,10 +330,10 @@ export default function HistoricalStorageAnalyzer(
 
         <div className={styles.controlBlock}>
           <Text variant="smallPlus" block className={styles.controlLabel}>
-            Documentos a escanear
+            {strings.MaxDocumentsControlLabel}
           </Text>
           <Checkbox
-            label="Todos los documentos"
+            label={strings.AllDocumentsCheckboxLabel}
             checked={maxDocumentsToScan === 0}
             onChange={(_, checked) => {
               actions.setMaxDocumentsToScan(checked ? 0 : 20);
@@ -361,8 +369,8 @@ export default function HistoricalStorageAnalyzer(
           )}
           <Text variant="small" block className={styles.helperText}>
             {maxDocumentsToScan === 0
-              ? 'Se analizarán las versiones de todos los documentos de la biblioteca.'
-              : `Se analizarán las versiones de los ${maxDocumentsToScan} documentos más pesados.`}
+              ? strings.AllDocumentsHelperText
+              : strings.TopDocumentsHelperText.replace('{0}', String(maxDocumentsToScan))}
           </Text>
         </div>
       </div>
@@ -378,7 +386,7 @@ export default function HistoricalStorageAnalyzer(
               />
             </Stack>
           ) : (
-            <Spinner size={SpinnerSize.medium} label="Analizando biblioteca..." />
+            <Spinner size={SpinnerSize.medium} label={strings.SpinnerAnalyzingLabel} />
           )}
         </div>
       )}
@@ -410,10 +418,10 @@ export default function HistoricalStorageAnalyzer(
             <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
               <div className={styles.sectionHeader}>
                 <Text variant="mediumPlus" block>
-                  Documentos analizados
+                  {strings.AnalyzedDocumentsSectionLabel}
                 </Text>
                 <Text variant="small" block className={styles.helperText}>
-                  {sortedDocuments.length} documentos · Haz clic en las cabeceras para ordenar.
+                  {strings.SortHintLabel.replace('{0}', String(sortedDocuments.length))}
                 </Text>
               </div>
               {totalPages > 1 && (
@@ -422,7 +430,7 @@ export default function HistoricalStorageAnalyzer(
                     iconProps={{ iconName: 'ChevronLeft' }}
                     disabled={safeCurrentPage <= 1}
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    ariaLabel="Página anterior"
+                    ariaLabel={strings.PreviousPageAriaLabel}
                   />
                   <Text variant="small">
                     {safeCurrentPage} / {totalPages}
@@ -431,7 +439,7 @@ export default function HistoricalStorageAnalyzer(
                     iconProps={{ iconName: 'ChevronRight' }}
                     disabled={safeCurrentPage >= totalPages}
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                    ariaLabel="Página siguiente"
+                    ariaLabel={strings.NextPageAriaLabel}
                   />
                 </Stack>
               )}
@@ -471,8 +479,8 @@ export default function HistoricalStorageAnalyzer(
                               ? <Spinner size={SpinnerSize.xSmall} />
                               : <IconButton
                                   iconProps={{ iconName: 'Refresh' }}
-                                  title="Reintentar"
-                                  ariaLabel="Reintentar análisis de este documento"
+                                  title={strings.RetryButtonTitle}
+                                  ariaLabel={strings.RetryButtonAriaLabel}
                                   styles={{ root: { height: 24, width: 24, minWidth: 24 } }}
                                   onClick={() => actions.retryDocument(item)}
                                 />

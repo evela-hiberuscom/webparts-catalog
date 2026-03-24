@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'AudienceQuickLinksWebPartStrings';
 
 import styles from './AudienceQuickLinks.module.scss';
 
@@ -14,7 +15,7 @@ export function AudienceFilters(props: IAudienceFiltersProps): React.ReactElemen
   }
 
   return (
-    <div className={styles.filters} role="toolbar" aria-label="Filtrar accesos por categoría">
+    <div className={styles.filters} role="toolbar" aria-label={strings.FilterToolbarAriaLabel}>
       {props.categories.map((category) => {
         const isSelected = category === props.selectedCategory;
         return (

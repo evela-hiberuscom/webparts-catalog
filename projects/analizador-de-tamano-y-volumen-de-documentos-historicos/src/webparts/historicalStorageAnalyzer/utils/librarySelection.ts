@@ -34,12 +34,15 @@ export function pickDefaultLibrary(
   return visibleLibrary ?? libraries[0];
 }
 
-export function toLibraryComboBoxOption(library: IHistoricalStorageLibraryOption): {
+export function toLibraryComboBoxOption(
+  library: IHistoricalStorageLibraryOption,
+  itemCountSuffix: string = ' ({0} elementos)'
+): {
   key: string;
   text: string;
   data: IHistoricalStorageLibraryOption;
 } {
-  const suffix = library.itemCount > 0 ? ` · ${library.itemCount} elementos` : '';
+  const suffix = library.itemCount > 0 ? itemCountSuffix.replace('{0}', String(library.itemCount)) : '';
   return {
     key: library.id,
     text: `${library.title}${suffix}`,
@@ -47,9 +50,12 @@ export function toLibraryComboBoxOption(library: IHistoricalStorageLibraryOption
   };
 }
 
-export function getSelectableLibraryTitle(library?: IHistoricalStorageLibraryOption): string {
+export function getSelectableLibraryTitle(
+  library: IHistoricalStorageLibraryOption | undefined,
+  noSelectionLabel: string = 'Ninguna biblioteca seleccionada'
+): string {
   if (!library) {
-    return 'Ninguna biblioteca seleccionada';
+    return noSelectionLabel;
   }
 
   return `${library.title} (${library.serverRelativeUrl})`;

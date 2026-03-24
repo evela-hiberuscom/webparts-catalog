@@ -10,8 +10,21 @@ import { AudienceQuickLinksService } from './audienceQuickLinksService';
 import type {
   IAudienceLinkRepositoryResult,
   IAudienceQuickLinksHostContext,
+  IAudienceQuickLinksLabels,
   IUserContextResult
 } from '../models/audienceLinkModels';
+
+const DEFAULT_TEST_LABELS: IAudienceQuickLinksLabels = {
+  allCategoriesLabel: 'Todas',
+  defaultWebPartTitle: 'Accesos rápidos',
+  loadingCatalogLabel: 'Cargando catálogo...',
+  loadingAudienceLabel: 'Resolviendo audiencia...',
+  noDataSourceLabel: 'Sin origen de datos configurado',
+  couldNotResolveAudienceLabel: 'No se ha podido resolver la audiencia',
+  audienceGeneralLabel: 'Audiencia general',
+  audienceHybridPrefix: 'Audiencia híbrida',
+  audienceNamedPrefix: 'Audiencia'
+};
 
 const hostContext: IAudienceQuickLinksHostContext = {
   spHttpClient: {} as never,
@@ -95,7 +108,8 @@ describe('AudienceQuickLinksService', () => {
         maxItems: 12,
         showAudienceHint: true
       },
-      hostContext
+      hostContext,
+      labels: DEFAULT_TEST_LABELS
     });
 
     expect(model.state).toBe('ready');
@@ -136,7 +150,8 @@ describe('AudienceQuickLinksService', () => {
         maxItems: 12,
         showAudienceHint: true
       },
-      hostContext
+      hostContext,
+      labels: DEFAULT_TEST_LABELS
     });
 
     expect(model.state).toBe('partialData');
@@ -169,7 +184,8 @@ describe('AudienceQuickLinksService', () => {
         maxItems: 12,
         showAudienceHint: true
       },
-      hostContext
+      hostContext,
+      labels: DEFAULT_TEST_LABELS
     });
 
     expect(model.state).toBe('empty');

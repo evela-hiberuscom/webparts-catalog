@@ -7,7 +7,6 @@ import type {
 import { AudienceLinksRepository } from '../repositories/audienceLinksRepository';
 import { UserContextRepository } from '../repositories/userContextRepository';
 import {
-  ALL_CATEGORIES_LABEL,
   buildAudienceSummaryLabel,
   buildAudienceTokensByMode,
   filterByCategory,
@@ -98,9 +97,18 @@ export class AudienceQuickLinksService {
     ]);
 
     const resolvedAudienceTokens = buildAudienceTokensByMode(userContext.tokens, request.webPartProps.audienceMode);
-    const resolvedAudienceLabel = buildAudienceSummaryLabel(resolvedAudienceTokens, request.webPartProps.audienceMode);
+    const resolvedAudienceLabel = buildAudienceSummaryLabel(
+      resolvedAudienceTokens,
+      request.webPartProps.audienceMode,
+      {
+        general: request.labels.audienceGeneralLabel,
+        hybridPrefix: request.labels.audienceHybridPrefix,
+        namedPrefix: request.labels.audienceNamedPrefix
+      }
+    );
+    const allCategoriesLabel = request.labels.allCategoriesLabel;
     const matchedItems = sortAudienceLinks(filterMatchingLinks(linkSource.items, resolvedAudienceTokens));
-    const categories = [ALL_CATEGORIES_LABEL].concat(
+    const categories = [allCategoriesLabel].concat(
       matchedItems.reduce((accumulator: string[], item) => {
         if (accumulator.indexOf(item.category) === -1) {
           accumulator.push(item.category);
@@ -109,9 +117,9 @@ export class AudienceQuickLinksService {
         return accumulator;
       }, [])
     );
-    const selectedCategory = request.webPartProps.defaultCategory.trim() || ALL_CATEGORIES_LABEL;
-    const normalizedSelectedCategory = categories.indexOf(selectedCategory) >= 0 ? selectedCategory : ALL_CATEGORIES_LABEL;
-    const visibleItems = sortAudienceLinks(filterByCategory(matchedItems, normalizedSelectedCategory));
+    const selectedCategory = request.webPartProps.defaultCategory.trim() || allCategoriesLabel;
+    const normalizedSelectedCategory = categories.indexOf(selectedCategory) >= 0 ? selectedCategory : allCategoriesLabel;
+    const visibleItems = sortAudienceLinks(filterByCategory(matchedItems, normalizedSelectedCategory, allCategoriesLabel));
     const specificMatchesCount = linkSource.items.filter((item) => {
       if (item.isGeneric || item.audiences.length === 0) {
         return false;
@@ -129,7 +137,7 @@ export class AudienceQuickLinksService {
     const state = deriveViewState(visibleItems, hasPartialData);
 
     return {
-      title: request.webPartProps.title.trim() || 'Accesos rápidos por audiencia',
+      title: request.webPartProps.title.trim() || request.labels.defaultWebPartTitle,
       description: request.webPartProps.description.trim(),
       sourceLabel: `${linkSource.sourceLabel} · ${userContext.sourceLabel}`,
       resolvedAudienceLabel,

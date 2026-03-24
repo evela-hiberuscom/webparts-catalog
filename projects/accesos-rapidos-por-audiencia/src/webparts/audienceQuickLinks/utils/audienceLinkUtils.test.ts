@@ -50,7 +50,8 @@ describe('audienceLinkUtils', () => {
   });
 
   it('builds readable audience summary labels', () => {
-    expect(buildAudienceSummaryLabel([], 'group')).toBe('Audiencia general');
-    expect(buildAudienceSummaryLabel(['sales', 'people'], 'hybrid')).toBe('Audiencia híbrida: sales · people');
+    const labels = { general: 'Audiencia general', hybridPrefix: 'Audiencia híbrida', namedPrefix: 'Audiencia' };
+    expect(buildAudienceSummaryLabel([], 'group', labels)).toBe('Audiencia general');
+    expect(buildAudienceSummaryLabel(['sales', 'people'], 'hybrid', labels)).toBe('Audiencia híbrida: sales · people');
   });
 });

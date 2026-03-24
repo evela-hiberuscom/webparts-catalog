@@ -1,0 +1,21 @@
+define([], function() {
+  return {
+    "PropertyPaneDescription": "Configura el lanzador de accesos recientes y su origen de datos.",
+    "BasicGroupName": "Origen de datos",
+    "DescriptionFieldLabel": "Texto del título",
+    "DataSourceModeFieldLabel": "Modo del origen",
+    "RecentItemsJsonUrlFieldLabel": "URL del feed JSON",
+    "MaxItemsFieldLabel": "Máximo de elementos",
+    "ResourceTypeFilterFieldLabel": "Filtro por tipo de recurso",
+    "DefaultDescription": "Mis accesos recientes",
+    "AppLocalEnvironmentSharePoint": "La app se está ejecutando en tu entorno local como web part de SharePoint",
+    "AppLocalEnvironmentTeams": "La app se está ejecutando en tu entorno local como app de Microsoft Teams",
+    "AppLocalEnvironmentOffice": "La app se está ejecutando en tu entorno local en office.com",
+    "AppLocalEnvironmentOutlook": "La app se está ejecutando en tu entorno local en Outlook",
+    "AppSharePointEnvironment": "La app se está ejecutando en una página de SharePoint",
+    "AppTeamsTabEnvironment": "La app se está ejecutando en Microsoft Teams",
+    "AppOfficeEnvironment": "La app se está ejecutando en office.com",
+    "AppOutlookEnvironment": "La app se está ejecutando en Outlook",
+    "UnknownEnvironment": "La app se está ejecutando en un entorno desconocido"
+  };
+});

@@ -157,6 +157,18 @@ El trabajo no está terminado si el repo dispone de mecanismos para validar y no
 - Evita `any` salvo justificación excepcional.
 - No cierres una tarea con logs de depuración, TODOs ambiguos o deuda técnica silenciosa.
 
+## Localización
+
+- **Todos los literales de UI** (etiquetas, textos, tooltips, mensajes de error, textos de botones, descripciones, placeholders, aria-labels y textos del Property Pane) deben vivir en los archivos de localización de SPFx (`loc/`), nunca hardcodeados en componentes, hooks, servicios ni utilidades.
+- Cada web part o extensión debe tener como mínimo:
+  - `loc/mystrings.d.ts` con la interfaz tipada de todas las claves.
+  - `loc/es-es.js` con los valores en español (idioma principal del proyecto).
+  - `loc/en-us.js` con los valores en inglés.
+- Importa los strings con `import * as strings from '<WebPartName>WebPartStrings';` y úsalos por clave.
+- Los códigos internos de warning o error que no se muestran al usuario (p. ej. `'throttled'`, `'scan-capped'`) no necesitan localización.
+- Si un literal se repite entre proyectos, evalúa si debe vivir en `spfx-common` como recurso compartido.
+- Mantén las claves descriptivas en inglés, con nombres coherentes por tipo: `Label`, `Tooltip`, `Error`, `Description`, `Button`, `Aria`.
+
 ## Reglas de cambio
 
 Antes de crear carpetas, abstracciones o patrones nuevos:

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Icon, Shimmer, Spinner, SpinnerSize } from '@fluentui/react';
+import * as strings from 'AudienceQuickLinksWebPartStrings';
 
 import type { AudienceQuickLinksState } from '../models/audienceLinkModels';
 import styles from './AudienceQuickLinks.module.scss';
@@ -33,7 +34,7 @@ export function AudienceStatePanel(props: IAudienceStatePanelProps): React.React
     return (
       <div className={styles.loadingPanel} aria-live="polite" aria-busy="true">
         <div className={styles.loadingHeader}>
-          <Spinner size={SpinnerSize.small} label="Cargando accesos..." />
+          <Spinner size={SpinnerSize.small} label={strings.LoadingSpinnerLabel} />
         </div>
         <div className={styles.loadingGrid}>
           <Shimmer className={styles.loadingCard} />

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'AudienceQuickLinksWebPartStrings';
 
 import type { IAudienceQuickLinksProps } from './IAudienceQuickLinksProps';
 import { useAudienceQuickLinks } from '../hooks/useAudienceQuickLinks';
@@ -8,7 +9,18 @@ import styles from './AudienceQuickLinks.module.scss';
 export default function AudienceQuickLinks(props: IAudienceQuickLinksProps): React.ReactElement {
   const { viewModel, reload, setSelectedCategory } = useAudienceQuickLinks({
     webPartProps: props.webPartProps,
-    hostContext: props.hostContext
+    hostContext: props.hostContext,
+    labels: {
+      allCategoriesLabel: strings.AllCategoriesLabel,
+      defaultWebPartTitle: strings.DefaultWebPartTitle,
+      loadingCatalogLabel: strings.LoadingCatalogLabel,
+      loadingAudienceLabel: strings.LoadingAudienceLabel,
+      noDataSourceLabel: strings.NoDataSourceLabel,
+      couldNotResolveAudienceLabel: strings.CouldNotResolveAudienceLabel,
+      audienceGeneralLabel: strings.AudienceGeneralLabel,
+      audienceHybridPrefix: strings.AudienceHybridPrefix,
+      audienceNamedPrefix: strings.AudienceNamedPrefix
+    }
   });
 
   const rootClassName = `${styles.container} ${props.hasTeamsContext ? styles.teams : ''} ${

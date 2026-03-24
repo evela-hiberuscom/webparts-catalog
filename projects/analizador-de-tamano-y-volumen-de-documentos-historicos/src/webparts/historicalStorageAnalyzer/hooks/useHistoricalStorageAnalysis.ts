@@ -17,6 +17,10 @@ export interface IUseHistoricalStorageAnalysisOptions {
   defaultScanMode: HistoricalStorageScanMode;
   maxVersionConcurrency: string;
   includeHiddenLibraries: boolean;
+  labels: {
+    loadLibrariesError: string;
+    analyzeLibraryError: string;
+  };
 }
 
 export interface IHistoricalStorageAnalysisActions {
@@ -61,6 +65,10 @@ export function useHistoricalStorageAnalysis(
   const [refreshToken, setRefreshToken] = React.useState(0);
   const requestIdRef = React.useRef(0);
 
+  // Destructure to primitives so effect deps compare by value, not object identity.
+  const loadLibrariesErrorLabel = options.labels.loadLibrariesError;
+  const analyzeLibraryErrorLabel = options.labels.analyzeLibraryError;
+
   React.useEffect(() => {
     let cancelled = false;
     setIsRefreshing(true);
@@ -83,7 +91,7 @@ export function useHistoricalStorageAnalysis(
           return;
         }
 
-        const message = error instanceof Error ? error.message : 'No se han podido cargar las bibliotecas del sitio.';
+        const message = error instanceof Error ? error.message : loadLibrariesErrorLabel;
         setErrorMessage(message);
         setStatus('error');
       })
@@ -96,7 +104,7 @@ export function useHistoricalStorageAnalysis(
     return () => {
       cancelled = true;
     };
-  }, [options.defaultLibraryTitleOrUrl, options.includeHiddenLibraries, service]);
+  }, [options.defaultLibraryTitleOrUrl, options.includeHiddenLibraries, loadLibrariesErrorLabel, service]);
 
   React.useEffect(() => {
     if (!selectedLibraryId) {
@@ -147,7 +155,7 @@ export function useHistoricalStorageAnalysis(
           return;
         }
 
-        const message = error instanceof Error ? error.message : 'No se ha podido completar el análisis.';
+        const message = error instanceof Error ? error.message : analyzeLibraryErrorLabel;
         setErrorMessage(message);
         setStatus('error');
         setResult(undefined);

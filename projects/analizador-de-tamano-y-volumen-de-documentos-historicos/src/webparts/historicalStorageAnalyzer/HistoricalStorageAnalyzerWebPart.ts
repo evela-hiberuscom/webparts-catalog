@@ -120,25 +120,25 @@ export default class HistoricalStorageAnalyzerWebPart extends BaseClientSideWebP
               groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField('description', {
-                  label: 'Subtítulo de la web part'
+                  label: strings.SubtitleFieldLabel
                 }),
                 PropertyPaneTextField('defaultLibraryTitleOrUrl', {
-                  label: 'Biblioteca por defecto (título o URL)'
+                  label: strings.DefaultLibraryFieldLabel
                 }),
                 PropertyPaneChoiceGroup('defaultScanMode', {
-                  label: 'Modo por defecto',
+                  label: strings.DefaultScanModeFieldLabel,
                   options: [
-                    { key: 'quickScan', text: 'Quick scan' },
-                    { key: 'deepScan', text: 'Deep scan' }
+                    { key: 'quickScan', text: strings.QuickScanOptionLabel },
+                    { key: 'deepScan', text: strings.DeepScanOptionLabel }
                   ]
                 }),
                 PropertyPaneTextField('maxVersionConcurrency', {
-                  label: 'Concurrencia de versiones'
+                  label: strings.MaxVersionConcurrencyFieldLabel
                 }),
                 PropertyPaneToggle('includeHiddenLibraries', {
-                  label: 'Incluir bibliotecas ocultas',
-                  onText: 'Sí',
-                  offText: 'No'
+                  label: strings.IncludeHiddenLibrariesFieldLabel,
+                  onText: strings.YesLabel,
+                  offText: strings.NoLabel
                 })
               ]
             }

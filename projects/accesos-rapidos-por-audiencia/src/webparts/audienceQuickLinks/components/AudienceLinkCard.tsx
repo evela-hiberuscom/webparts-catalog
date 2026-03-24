@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Icon } from '@fluentui/react';
+import * as strings from 'AudienceQuickLinksWebPartStrings';
 
 import type { IAudienceLinkRecord, IAudienceQuickLinksHostContext } from '../models/audienceLinkModels';
 import { resolveSafeLink } from '../utils/linkSafety';
@@ -14,14 +15,14 @@ interface IAudienceLinkCardProps {
 
 function getBadgeLabel(value: IAudienceLinkRecord['sourceBadge']): string {
   if (value === 'personalizado') {
-    return 'Personalizado';
+    return strings.BadgePersonalizadoLabel;
   }
 
   if (value === 'genérico') {
-    return 'Genérico';
+    return strings.BadgeGenericoLabel;
   }
 
-  return 'Partial';
+  return strings.BadgePartialLabel;
 }
 
 function getBadgeClassName(value: IAudienceLinkRecord['sourceBadge']): string {
@@ -60,7 +61,7 @@ export function AudienceLinkCard(props: IAudienceLinkCardProps): React.ReactElem
         ) : null}
       </div>
       <span className={styles.cardCta}>
-        Abrir acceso
+        {strings.OpenLinkLabel}
         <span aria-hidden="true"> →</span>
       </span>
     </>

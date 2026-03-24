@@ -2,11 +2,24 @@ import * as React from 'react';
 
 import type {
   IAudienceQuickLinksHostContext,
-  IAudienceQuickLinksLoadRequest,
+  IAudienceQuickLinksLabels,
   IAudienceQuickLinksViewModel,
   IAudienceQuickLinksWebPartProps
 } from '../models/audienceLinkModels';
+import { ALL_CATEGORIES_LABEL } from '../utils/audienceLinkUtils';
 import { AudienceQuickLinksService } from '../services/audienceQuickLinksService';
+
+const DEFAULT_LABELS: IAudienceQuickLinksLabels = {
+  allCategoriesLabel: ALL_CATEGORIES_LABEL,
+  defaultWebPartTitle: 'Accesos rápidos por audiencia',
+  loadingCatalogLabel: 'Cargando catálogo...',
+  loadingAudienceLabel: 'Resuelto desde el contexto de usuario',
+  noDataSourceLabel: 'Sin datos disponibles',
+  couldNotResolveAudienceLabel: 'No se pudo resolver la audiencia',
+  audienceGeneralLabel: 'Audiencia general',
+  audienceHybridPrefix: 'Audiencia híbrida',
+  audienceNamedPrefix: 'Audiencia'
+};
 
 interface IUseAudienceQuickLinksResult {
   viewModel: IAudienceQuickLinksViewModel | undefined;
@@ -18,17 +31,21 @@ interface IUseAudienceQuickLinksResult {
 interface IUseAudienceQuickLinksInput {
   webPartProps: IAudienceQuickLinksWebPartProps;
   hostContext: IAudienceQuickLinksHostContext;
+  labels?: IAudienceQuickLinksLabels;
 }
 
-function buildLoadingViewModel(webPartProps: IAudienceQuickLinksWebPartProps): IAudienceQuickLinksViewModel {
+function buildLoadingViewModel(
+  webPartProps: IAudienceQuickLinksWebPartProps,
+  labels: IAudienceQuickLinksLabels
+): IAudienceQuickLinksViewModel {
   return {
-    title: webPartProps.title.trim() || 'Accesos rápidos por audiencia',
+    title: webPartProps.title.trim() || labels.defaultWebPartTitle,
     description: webPartProps.description.trim(),
-    sourceLabel: 'Cargando catálogo...',
-    resolvedAudienceLabel: 'Resuelto desde el contexto de usuario',
+    sourceLabel: labels.loadingCatalogLabel,
+    resolvedAudienceLabel: labels.loadingAudienceLabel,
     resolvedAudienceTokens: [],
-    categories: ['Todas'],
-    selectedCategory: 'Todas',
+    categories: [labels.allCategoriesLabel],
+    selectedCategory: labels.allCategoriesLabel,
     allItems: [],
     visibleItems: [],
     hasPartialData: false,
@@ -46,8 +63,9 @@ function deriveVisibleState(hasPartialData: boolean, visibleItemsCount: number):
 }
 
 export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseAudienceQuickLinksResult {
+  const labels = input.labels ?? DEFAULT_LABELS;
   const [viewModel, setViewModel] = React.useState<IAudienceQuickLinksViewModel | undefined>(undefined);
-  const [selectedCategory, setSelectedCategoryState] = React.useState('Todas');
+  const [selectedCategory, setSelectedCategoryState] = React.useState(labels.allCategoriesLabel);
   const [reloadCounter, setReloadCounter] = React.useState(0);
   const [isRetrying, setIsRetrying] = React.useState(false);
   const selectedCategoryRef = React.useRef(selectedCategory);
@@ -60,13 +78,14 @@ export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseA
 
     async function loadData(): Promise<void> {
       setIsRetrying(true);
-      setViewModel(buildLoadingViewModel(input.webPartProps));
+      setViewModel(buildLoadingViewModel(input.webPartProps, labels));
 
       try {
         const model = await service.load({
           webPartProps: input.webPartProps,
-          hostContext: input.hostContext
-        } as IAudienceQuickLinksLoadRequest);
+          hostContext: input.hostContext,
+          labels
+        });
 
         if (!isMounted) {
           return;
@@ -78,7 +97,7 @@ export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseA
             : model.categories[0];
 
         const filteredItems =
-          normalizedSelectedCategory === 'Todas'
+          normalizedSelectedCategory === labels.allCategoriesLabel
             ? model.allItems
             : model.allItems.filter((item) => item.category === normalizedSelectedCategory);
 
@@ -95,13 +114,13 @@ export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseA
         }
 
         setViewModel({
-          title: input.webPartProps.title.trim() || 'Accesos rápidos por audiencia',
+          title: input.webPartProps.title.trim() || labels.defaultWebPartTitle,
           description: input.webPartProps.description.trim(),
-          sourceLabel: 'Sin datos disponibles',
-          resolvedAudienceLabel: 'No se pudo resolver la audiencia',
+          sourceLabel: labels.noDataSourceLabel,
+          resolvedAudienceLabel: labels.couldNotResolveAudienceLabel,
           resolvedAudienceTokens: [],
-          categories: ['Todas'],
-          selectedCategory: 'Todas',
+          categories: [labels.allCategoriesLabel],
+          selectedCategory: labels.allCategoriesLabel,
           allItems: [],
           visibleItems: [],
           hasPartialData: false,
@@ -143,16 +162,16 @@ export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseA
   }, []);
 
   const setSelectedCategory = React.useCallback((category: string) => {
-    let normalizedCategory = 'Todas';
+    let normalizedCategory = labels.allCategoriesLabel;
 
     setViewModel((current) => {
       if (!current) {
         return current;
       }
 
-      normalizedCategory = current.categories.indexOf(category) >= 0 ? category : 'Todas';
+      normalizedCategory = current.categories.indexOf(category) >= 0 ? category : labels.allCategoriesLabel;
       const visibleItems =
-        normalizedCategory === 'Todas'
+        normalizedCategory === labels.allCategoriesLabel
           ? current.allItems
           : current.allItems.filter((item) => item.category === normalizedCategory);
 
@@ -165,7 +184,8 @@ export function useAudienceQuickLinks(input: IUseAudienceQuickLinksInput): IUseA
     });
 
     setSelectedCategoryState(normalizedCategory);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [labels.allCategoriesLabel]);
 
   return {
     viewModel,

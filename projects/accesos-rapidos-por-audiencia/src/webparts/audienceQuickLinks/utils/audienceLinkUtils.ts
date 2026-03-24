@@ -110,8 +110,11 @@ export function sortAudienceLinks(items: IAudienceLinkRecord[]): IAudienceLinkRe
   });
 }
 
-export function getAudienceCategories(items: IAudienceLinkRecord[]): string[] {
-  const categories: string[] = [ALL_CATEGORIES_LABEL];
+export function getAudienceCategories(
+  items: IAudienceLinkRecord[],
+  allCategoriesLabel: string = ALL_CATEGORIES_LABEL
+): string[] {
+  const categories: string[] = [allCategoriesLabel];
 
   items.forEach((item) => {
     const category = normalizeCategory(item.category);
@@ -123,8 +126,12 @@ export function getAudienceCategories(items: IAudienceLinkRecord[]): string[] {
   return categories;
 }
 
-export function filterByCategory(items: IAudienceLinkRecord[], category: string): IAudienceLinkRecord[] {
-  if (!category || category === ALL_CATEGORIES_LABEL) {
+export function filterByCategory(
+  items: IAudienceLinkRecord[],
+  category: string,
+  allCategoriesLabel: string = ALL_CATEGORIES_LABEL
+): IAudienceLinkRecord[] {
+  if (!category || category === allCategoriesLabel) {
     return items;
   }
 
@@ -179,19 +186,35 @@ export function matchAudienceLinkTokens(item: IAudienceLinkRecord, resolvedToken
   return false;
 }
 
-export function buildAudienceSummaryLabel(tokens: string[], mode: string): string {
+export interface IAudienceSummaryLabels {
+  general: string;
+  hybridPrefix: string;
+  namedPrefix: string;
+}
+
+const DEFAULT_AUDIENCE_SUMMARY_LABELS: IAudienceSummaryLabels = {
+  general: 'Audiencia general',
+  hybridPrefix: 'Audiencia híbrida',
+  namedPrefix: 'Audiencia'
+};
+
+export function buildAudienceSummaryLabel(
+  tokens: string[],
+  mode: string,
+  labels: IAudienceSummaryLabels = DEFAULT_AUDIENCE_SUMMARY_LABELS
+): string {
   if (tokens.length === 0) {
-    return 'Audiencia general';
+    return labels.general;
   }
 
   const preview = tokens.slice(0, 3).join(' · ');
   const normalizedMode = normalizeText(mode);
 
   if (normalizedMode === 'hybrid') {
-    return `Audiencia híbrida: ${preview}`;
+    return `${labels.hybridPrefix}: ${preview}`;
   }
 
-  return `Audiencia ${normalizedMode || 'general'}: ${preview}`;
+  return `${labels.namedPrefix} ${normalizedMode || 'general'}: ${preview}`;
 }
 
 export function markPartialLink(item: IAudienceLinkRecord): IAudienceLinkRecord {
