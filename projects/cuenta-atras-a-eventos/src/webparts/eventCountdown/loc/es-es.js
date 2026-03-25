@@ -29,7 +29,7 @@ define([], function() {
     "AppTeamsTabEnvironment": "Ejecutándose en Microsoft Teams",
     "AppOfficeEnvironment": "Ejecutándose en office.com",
     "AppOutlookEnvironment": "Ejecutándose en Outlook",
-    "UnknownEnvironment": "Ejecutándose en un entorno desconocido"
+    "UnknownEnvironment": "Ejecutándose en un entorno desconocido",
     ErrorBoundaryTitle: "Se ha producido un error inesperado",
     ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
   };

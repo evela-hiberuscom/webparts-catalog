@@ -29,7 +29,7 @@ define([], function() {
     "AppTeamsTabEnvironment": "Ejecutándose en Microsoft Teams",
     "AppOfficeEnvironment": "Ejecutándose en office.com",
     "AppOutlookEnvironment": "Ejecutándose en Outlook",
-    "UnknownEnvironment": "Ejecutándose en un entorno desconocido"
+    "UnknownEnvironment": "Ejecutándose en un entorno desconocido",
     ErrorBoundaryTitle: "Something went wrong",
     ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator.",
   };

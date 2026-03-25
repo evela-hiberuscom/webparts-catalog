@@ -17,7 +17,7 @@ define([], function() {
     "AppTeamsTabEnvironment": "La aplicación se ejecuta en Microsoft Teams",
     "AppOfficeEnvironment": "La aplicación se ejecuta en office.com",
     "AppOutlookEnvironment": "La aplicación se ejecuta en Outlook",
-    "UnknownEnvironment": "La aplicación se ejecuta en un entorno desconocido"
+    "UnknownEnvironment": "La aplicación se ejecuta en un entorno desconocido",
     ErrorBoundaryTitle: "Se ha producido un error inesperado",
     ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
   };

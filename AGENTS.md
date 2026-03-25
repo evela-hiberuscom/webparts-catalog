@@ -224,6 +224,42 @@ export class WebPartErrorBoundary extends React.Component<
 - Si un literal se repite entre proyectos, evalúa si debe vivir en `spfx-common` como recurso compartido.
 - Mantén las claves descriptivas en inglés, con nombres coherentes por tipo: `Label`, `Tooltip`, `Error`, `Description`, `Button`, `Aria`.
 
+### Reglas de integridad de ficheros `.js` de localización
+
+Los ficheros `es-es.js` y `en-us.js` son módulos AMD (`define([], function() { return { … }; });`). Un error de sintaxis en ellos rompe el web part silenciosamente en runtime con un `SyntaxError` en consola.
+
+**Reglas obligatorias al modificar estos ficheros:**
+
+1. **Coma obligatoria en la última clave existente antes de insertar nuevas claves.** Al añadir entradas al final del objeto, incluye siempre una coma al final de la línea del par clave-valor inmediatamente anterior. Ejemplo correcto:
+   ```js
+   "UnknownEnvironment": "...",   // ← coma necesaria si viene otro par después
+   ErrorBoundaryTitle: "...",
+   ```
+2. **Coherencia de comillas.** Usa comillas dobles en todas las claves y valores, o al menos sé consistente con el fichero. No mezcles claves sin comillas con claves entre comillas en el mismo objeto.
+3. **`mystrings.d.ts` siempre en sincronía.** Toda clave nueva en `es-es.js` y `en-us.js` debe añadirse también a la interfaz de `mystrings.d.ts` en la misma operación. No se pueden desincronizar.
+4. **Las claves de localización deben estar en ambos ficheros.** Si añades `ErrorBoundaryTitle` a `es-es.js`, añádelo también a `en-us.js` con el texto en inglés.
+5. **El fichero `en-us.js` debe tener todo su contenido en inglés.** No copies el texto español a `en-us.js`.
+6. **Valida la sintaxis.** Tras cualquier edición de un fichero de localización, verifica mentalmente (o con build) que el objeto JavaScript tiene comas entre todos sus pares y que no hay trailing comma en el último par antes del `}`.
+
+### Error de CORS loopback en depuración local (entorno de desarrollo)
+
+Al depurar un web part con `?debugManifestsFile=https://localhost:4321/...` desde una página real de SharePoint Online, es normal ver en consola:
+
+```
+Access to fetch at 'http://localhost:<puerto>/…' has been blocked by CORS policy:
+Permission was denied for this request to access the `loopback` address space.
+```
+
+**Causa:** Chrome 94+ aplica la política *Private Network Access* (PNA), que bloquea peticiones desde orígenes públicos (`https://`) hacia el espacio de direcciones de loopback (`localhost`). Es una restricción del navegador, no un bug del proyecto.
+
+**No requiere cambio en el código del proyecto.** Para trabajar sin este bloqueo durante el desarrollo:
+
+- **Opción 1 (recomendada):** Lanzar Chrome con la flag `--disable-features=PrivateNetworkAccessChecks` (solo para sesiones de desarrollo; nunca en producción).
+- **Opción 2:** Usar Firefox, que aún no aplica PNA de forma estricta.
+- **Opción 3:** Verificar que el servidor SPFx local usa HTTPS en todos sus endpoints (`gulp serve` con certificado de confianza).
+
+Este bloqueo provoca errores en cascada (`Timeout` en `sp-pages-assembly`) que son consecuencia del mismo problema, no bugs independientes.
+
 ## Reglas de cambio
 
 Antes de crear carpetas, abstracciones o patrones nuevos:
