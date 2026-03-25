@@ -8,7 +8,7 @@ define([], function() {
     "ListTitleOrUrlFieldLabel": "Lista o URL same-origin",
     "FallbackModeFieldLabel": "Fallback",
     "CollapsedByDefaultFieldLabel": "Iniciar colapsado",
-    "ContextKeyOverrideFieldLabel": "Clave de contexto opcional"
+    "ContextKeyOverrideFieldLabel": "Clave de contexto opcional",
     ErrorBoundaryTitle: "Something went wrong",
     ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator.",
   };

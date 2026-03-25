@@ -165,10 +165,49 @@ Todo web part o extensión React **debe envolver su componente raíz** con un `W
 
 - Cada web part tiene un `components/WebPartErrorBoundary.tsx` (clase React, no función) que captura errores de render no controlados en el subárbol.
 - El componente raíz (el que monta el WebPart con `React.createElement`) envuelve su `return` principal con `<WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>`.
-- Los strings del ErrorBoundary deben vivir en los archivos de localización del proyecto (`ErrorBoundaryTitle`, `ErrorBoundaryMessage`).
+- Los strings del ErrorBoundary deben vivir en los archivos de localización del proyecto (`ErrorBoundaryTitle`, `ErrorBoundaryMessage`). **Véase la sección "Localización → Reglas de integridad de ficheros `.js`" para la forma correcta de añadirlos.**
 - El `WebPartErrorBoundary` usa `MessageBar` de Fluent UI (`MessageBarType.error`) para mantener el estilo coherente con el host sin SCSS custom.
 - El `componentDidCatch` debe hacer `console.error` del error — nunca silenciarlo.
 - Sin `ErrorBoundary`, un error de render React desmonta la zona entera de SharePoint rompiendo la convivencia con otras piezas de la página. Esto viola `DESIGN.md`.
+
+### Cómo añadir las claves de localización del ErrorBoundary
+
+**El script `scripts/prepare-spfx-project.mjs` inyecta estas claves automáticamente** en `es-es.js`, `en-us.js` y `mystrings.d.ts` al ejecutarse. Si el proyecto ya fue preparado, las claves ya deben estar presentes con la coma correcta.
+
+Si por algún motivo hay que añadirlas a mano, la clave anterior **debe** terminar siempre en coma. El generador Yeoman crea el objeto sin coma en el último par; al insertar nuevas claves esa coma se vuelve obligatoria:
+
+```js
+// es-es.js  — CORRECTO
+define([], function() {
+  return {
+    "PropertyPaneDescription": "...",
+    "UnknownEnvironment": "La app se está ejecutando en un entorno desconocido",  // ← coma
+    ErrorBoundaryTitle: "Se ha producido un error inesperado",
+    ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
+  };
+});
+```
+
+```js
+// en-us.js  — CORRECTO
+define([], function() {
+  return {
+    "PropertyPaneDescription": "...",
+    "UnknownEnvironment": "The app is running in an unknown environment",  // ← coma
+    ErrorBoundaryTitle: "Something went wrong",
+    ErrorBoundaryMessage: "This web part encountered an unexpected error. Please reload the page or contact your administrator."
+  };
+});
+```
+
+```ts
+// mystrings.d.ts  — añadir también
+declare interface IWebPartNameWebPartStrings {
+  // …claves existentes…
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
+}
+```
 
 ### Patrón de implementación
 

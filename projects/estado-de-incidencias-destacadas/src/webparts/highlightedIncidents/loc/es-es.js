@@ -18,7 +18,7 @@ define([], function() {
     "PartialNotice": "Hay incidencias con datos parciales. El contenido disponible se muestra sin bloquear la vista.",
     "LoadingStateTitle": "Cargando incidencias destacadas",
     "LoadingStateMessage": "Preparando el panel...",
-    "RetryLabel": "Reintentar"
+    "RetryLabel": "Reintentar",
     ErrorBoundaryTitle: "Se ha producido un error inesperado",
     ErrorBoundaryMessage: "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
   };
