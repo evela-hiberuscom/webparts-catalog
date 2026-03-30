@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "inicia-una-solicitud-client-side-solution",
+    "id": "c95152a9-8807-4731-a2c6-8a019419cba3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "inicia-una-solicitud description"
+      },
+      "longDescription": {
+        "default": "inicia-una-solicitud description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "inicia-una-solicitud Feature",
+        "description": "The feature that activates elements of the inicia-una-solicitud solution.",
+        "id": "87441acc-833c-4027-b287-7dabff3e80f2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/inicia-una-solicitud.sppkg"
+  }
+}

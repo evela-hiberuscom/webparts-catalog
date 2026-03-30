@@ -1,4 +1,3 @@
-import { SPHttpClient } from '@microsoft/sp-http';
 import type {
   CelebrationDataSourceType,
   ICelebrationRecord,
@@ -6,8 +5,6 @@ import type {
   IPeopleCelebrationsRequest
 } from '../models/celebrationModels';
 import {
-  formatCelebrationDateLabel,
-  getDaysRemaining,
   normalizeCelebrationType,
   normalizeDateValue,
   normalizeListReference,
@@ -143,7 +140,7 @@ async function loadSharePointList(
       ? `${baseUrl}/_api/web/lists/getbytitle('${reference.value.replace(/'/g, "''")}')/items?$select=${selectFields}&$top=500`
       : `${baseUrl}/_api/web/GetList(@listUrl)/items?$select=${selectFields}&$top=500&@listUrl='${encodeURIComponent(reference.value)}'`;
 
-  const response = await request.spHttpClient.get(endpoint, SPHttpClient.configurations.v1);
+  const response = await request.spHttpClient.get(endpoint, request.spHttpClientConfiguration ?? {});
 
   if (!response.ok) {
     throw new Error(`HTTP ${response.status} ${response.statusText}`.trim());
@@ -185,8 +182,8 @@ export class PeopleCelebrationsRepository {
   public async load(request: IPeopleCelebrationsRequest): Promise<IPeopleCelebrationsRepositoryResult> {
     const notes: string[] = [];
     const dataSourceTypes = request.dataSourceTypes.length > 0 ? request.dataSourceTypes : (['SharePointList'] as CelebrationDataSourceType[]);
-    let emptyResult: IPeopleCelebrationsRepositoryResult | null = null;
-    let lastError: Error | null = null;
+    let emptyResult: IPeopleCelebrationsRepositoryResult | undefined;
+    let lastError: Error | undefined;
     let sawConfiguredSource = false;
 
     for (const dataSourceType of dataSourceTypes) {

@@ -1,0 +1,110 @@
+{
+  "updatedAt": "2026-03-30T09:35:00+02:00",
+  "projects": [
+    {
+      "slug": "conoce-al-equipo",
+      "waveId": "A",
+      "agentId": "019d1eb8-ee88-7ae1-82b5-50a0cb1e2a07",
+      "agentNickname": "Banach",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-03-30T09:35:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_redteam_completed",
+      "gates": {
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
+        "package": "done",
+        "audit": "done"
+      },
+      "notes": [
+        "Jest/runtime import issue mitigated by local HTTP adapter",
+        "Residual Fluent SSR warning in tests is non-blocking",
+        "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    },
+    {
+      "slug": "cuenta-atras-a-eventos",
+      "waveId": "A",
+      "agentId": "019d1eb9-1aea-7293-b533-eae269718c85",
+      "agentNickname": "Dewey",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-03-30T09:35:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_redteam_completed",
+      "gates": {
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
+        "package": "done",
+        "audit": "done"
+      },
+      "notes": [
+        "Hook and list URL normalization finished",
+        "Nested scaffold residue may remain as empty folder only",
+        "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    },
+    {
+      "slug": "cumpleanos-y-aniversarios",
+      "waveId": "A",
+      "agentId": "019d1eb9-31f2-7e21-afb5-6c7030b8b56d",
+      "agentNickname": "Arendt",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-03-30T09:35:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_redteam_completed",
+      "gates": {
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
+        "package": "done",
+        "audit": "done"
+      },
+      "notes": [
+        "SPHttpClient isolated from repository/tests",
+        "Fluent icon warning remains non-blocking in Jest",
+        "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    },
+    {
+      "slug": "directorio-express",
+      "waveId": "A",
+      "agentId": "019d3d64-4404-75a0-93a5-84d7f9ad2ce1",
+      "agentNickname": "Rawls",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-03-30T09:35:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_redteam_completed",
+      "gates": {
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
+        "package": "done",
+        "audit": "done"
+      },
+      "notes": [
+        "Directory search/filter UI implemented with layered services and repositories",
+        "Fluent icon warnings remain non-blocking in Jest",
+        "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    },
+    {
+      "slug": "inicia-una-solicitud",
+      "waveId": "A",
+      "agentId": "019d3d64-6047-7822-bfe0-588f9899ab73",
+      "agentNickname": "Avicenna",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-03-30T09:35:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_redteam_completed",
+      "gates": {
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
+        "package": "done",
+        "audit": "done"
+      },
+      "notes": [
+        "Catalog launcher implemented with context, hooks and repository",
+        "Column mapping assumptions remain documented for tenant validation",
+        "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "inicia-una-solicitud",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "StartARequest",
+    "componentDescription": "Presenta accesos rápidos a procesos corporativos habituales para iniciar solicitudes sin ambigüedad ni navegación innecesaria.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "inicia-una-solicitud",
+    "libraryId": "c95152a9-8807-4731-a2c6-8a019419cba3",
+    "solutionShortDescription": "inicia-una-solicitud description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

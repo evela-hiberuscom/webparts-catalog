@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { MessageBar, MessageBarType, Spinner, SpinnerSize, Stack, Text } from '@fluentui/react';
+import * as strings from 'BirthdaysAndAnniversariesWebPartStrings';
 import styles from './BirthdaysAndAnniversaries.module.scss';
 import type { IBirthdaysAndAnniversariesProps } from './IBirthdaysAndAnniversariesProps';
 import CelebrationCard from './CelebrationCard';
@@ -10,9 +11,9 @@ import { CelebrationService } from '../services/celebrationService';
 function CelebrationSection(props: {
   title: string;
   items: React.ReactElement[];
-}): React.ReactElement | null {
+}): React.ReactElement {
   if (props.items.length === 0) {
-    return null;
+    return <></>;
   }
 
   return (
@@ -32,6 +33,7 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
   const { status, title, subtitle, sourceLabel, todayItems, upcomingItems, partialItems, items, errorMessage, hasPartialData, notes, refresh } = useCelebrations(
     {
       spHttpClient: props.spHttpClient,
+      spHttpClientConfiguration: props.spHttpClientConfiguration,
       webAbsoluteUrl: props.webAbsoluteUrl,
       dataSourceTypes: props.dataSourceTypes,
       directoryJsonUrl: props.directoryJsonUrl,
@@ -40,28 +42,31 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
       showBirthdays: props.showBirthdays,
       showAnniversaries: props.showAnniversaries,
       daysAhead: props.daysAhead,
-      title: 'Cumpleaños y aniversarios',
-      subtitle: 'Reconoce los hitos de hoy y los próximos en una vista ligera.'
+      title: strings.WebPartTitle,
+      subtitle: strings.WebPartSubtitle
     },
     service
   );
+  const resolvedTitle = title || strings.WebPartTitle;
+  const resolvedSubtitle = subtitle || strings.WebPartSubtitle;
+  const resolvedSourceLabel = sourceLabel || strings.SourceUnavailableLabel;
 
   if (status === 'loading') {
     return (
-      <section className={styles.root} aria-label="Cumpleaños y aniversarios">
+      <section className={styles.root} aria-label={strings.WebPartTitle}>
         <Stack tokens={{ childrenGap: 16 }}>
           <div className={styles.header}>
             <div>
               <Text variant="xxLarge" as="h2" className={styles.title} block>
-                {title}
+                {resolvedTitle}
               </Text>
               <Text variant="medium" className={styles.subtitle} block>
-                {subtitle}
+                {resolvedSubtitle}
               </Text>
             </div>
-            <span className={styles.sourcePill}>{sourceLabel}</span>
+            <span className={styles.sourcePill}>{resolvedSourceLabel}</span>
           </div>
-          <Spinner size={SpinnerSize.medium} label="Cargando celebraciones" />
+          <Spinner size={SpinnerSize.medium} label={strings.LoadingLabel} />
         </Stack>
       </section>
     );
@@ -71,10 +76,10 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
     if (status === 'error') {
       return (
         <CelebrationsEmptyState
-          title="No se han podido cargar las celebraciones"
-          message={errorMessage ?? 'Revisa el origen configurado y vuelve a intentarlo.'}
+          title={strings.ErrorStateTitle}
+          message={errorMessage ? strings.ErrorStateMessageDetailed : strings.ErrorStateMessage}
           variant="error"
-          actionLabel="Reintentar"
+          actionLabel={strings.ErrorStateRetryAction}
           onAction={refresh}
         />
       );
@@ -83,10 +88,10 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
     if (items.length === 0) {
       return (
         <CelebrationsEmptyState
-          title={status === 'partialData' ? 'Solo hay información parcial disponible' : 'No hay celebraciones próximas'}
-          message={status === 'partialData' ? 'Algunos registros tienen campos incompletos y se han mantenido visibles como referencia.' : 'No hay hitos dentro de la ventana configurada.'}
+          title={status === 'partialData' ? strings.PartialEmptyStateTitle : strings.EmptyStateTitle}
+          message={status === 'partialData' ? strings.PartialEmptyStateMessage : strings.EmptyStateMessage}
           variant={status === 'partialData' ? 'warning' : 'info'}
-          actionLabel="Actualizar"
+          actionLabel={strings.RefreshAction}
           onAction={refresh}
         />
       );
@@ -94,38 +99,38 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
 
     return (
       <Stack tokens={{ childrenGap: 20 }}>
-        {hasPartialData ? (
+        {hasPartialData && (
           <MessageBar messageBarType={MessageBarType.warning} isMultiline={false} className={styles.messageBar}>
-            Algunos registros se han normalizado con datos parciales. La vista sigue siendo utilizable.
+            {strings.PartialBannerMessage}
           </MessageBar>
-        ) : null}
+        )}
 
         {notes.length > 0 ? (
           <MessageBar messageBarType={MessageBarType.info} isMultiline={false} className={styles.messageBar}>
-            Origen: {sourceLabel}
+            {strings.SourceLabel}: {resolvedSourceLabel}
           </MessageBar>
         ) : (
-          <div className={styles.sourceLine}>Origen: {sourceLabel}</div>
+          <div className={styles.sourceLine}>{strings.SourceLabel}: {resolvedSourceLabel}</div>
         )}
 
         <CelebrationSection
-          title="Hoy"
+          title={strings.TodaySectionTitle}
           items={todayItems.map((item) => (
-            <CelebrationCard key={item.id} item={item} sectionLabel="Hoy" />
+            <CelebrationCard key={item.id} item={item} sectionLabel={strings.TodaySectionTitle} />
           ))}
         />
 
         <CelebrationSection
-          title="Próximos"
+          title={strings.UpcomingSectionTitle}
           items={upcomingItems.map((item) => (
-            <CelebrationCard key={item.id} item={item} sectionLabel="Próximos" />
+            <CelebrationCard key={item.id} item={item} sectionLabel={strings.UpcomingSectionTitle} />
           ))}
         />
 
         <CelebrationSection
-          title="Datos parciales"
+          title={strings.PartialSectionTitle}
           items={partialItems.map((item) => (
-            <CelebrationCard key={item.id} item={item} sectionLabel="Datos parciales" />
+            <CelebrationCard key={item.id} item={item} sectionLabel={strings.PartialSectionTitle} />
           ))}
         />
       </Stack>
@@ -133,18 +138,18 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
   })();
 
   return (
-    <section className={styles.root} aria-label="Cumpleaños y aniversarios">
+    <section className={styles.root} aria-label={strings.WebPartTitle}>
       <Stack tokens={{ childrenGap: 16 }}>
         <div className={styles.header}>
           <div>
             <Text variant="xxLarge" as="h2" className={styles.title} block>
-              {title}
+              {resolvedTitle}
             </Text>
             <Text variant="medium" className={styles.subtitle} block>
-              {subtitle}
+              {resolvedSubtitle}
             </Text>
           </div>
-          <span className={styles.sourcePill}>{sourceLabel}</span>
+          <span className={styles.sourcePill}>{resolvedSourceLabel}</span>
         </div>
 
         {content}
@@ -152,4 +157,3 @@ export default function BirthdaysAndAnniversaries(props: IBirthdaysAndAnniversar
     </section>
   );
 }
-

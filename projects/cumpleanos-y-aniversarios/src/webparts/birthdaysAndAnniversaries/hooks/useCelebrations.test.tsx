@@ -1,11 +1,3 @@
-jest.mock('@microsoft/sp-http', () => ({
-  SPHttpClient: {
-    configurations: {
-      v1: {}
-    }
-  }
-}));
-
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { act } from 'react-dom/test-utils';
@@ -36,7 +28,8 @@ describe('useCelebrations', () => {
           webAbsoluteUrl: 'https://contoso.sharepoint.com/sites/portal',
           showBirthdays: true,
           showAnniversaries: true,
-          daysAhead: 14
+          daysAhead: 14,
+          spHttpClientConfiguration: {}
         },
         service
       );

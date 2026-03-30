@@ -1,4 +1,5 @@
 import { createSafeExternalLink, classifyAsyncState } from '@paquete/spfx-common/utils';
+import * as strings from 'EventCountdownWebPartStrings';
 import type {
   ICountdownItem,
   ICountdownRepositoryResult,
@@ -13,12 +14,12 @@ function buildEmptyViewModel(sourceLabel: string, notes: string[], reason: strin
   return {
     state: 'empty',
     phase: 'unknown',
-    item: null,
-    remaining: null,
+    item: undefined,
+    remaining: undefined,
     sourceLabel,
     hasPartialData: false,
     notes,
-    phaseLabel: 'Sin evento',
+    phaseLabel: strings.EmptyPhaseLabel,
     supportingText: reason,
     emptyReason: reason
   };
@@ -28,12 +29,12 @@ function buildErrorViewModel(sourceLabel: string, notes: string[], errorMessage:
   return {
     state: 'error',
     phase: 'unknown',
-    item: null,
-    remaining: null,
+    item: undefined,
+    remaining: undefined,
     sourceLabel,
     hasPartialData: false,
     notes,
-    phaseLabel: 'Error',
+    phaseLabel: strings.ErrorPhaseLabel,
     supportingText: errorMessage,
     errorMessage
   };
@@ -45,20 +46,33 @@ function buildSourceSnapshot(result: ICountdownRepositoryResult): ICountdownSnap
   };
 }
 
-function buildCtaLink(item: ICountdownItem) {
+function buildCtaLink(item: ICountdownItem): ICountdownViewModel['ctaLink'] {
   return item.detailUrl ? createSafeExternalLink(item.detailUrl) : undefined;
 }
 
 function buildPhaseLabel(phase: ICountdownItem['state']): string {
   switch (phase) {
     case 'countdown':
-      return 'Cuenta atrás';
+      return strings.CountdownPhaseLabel;
     case 'live':
-      return 'En curso';
+      return strings.LivePhaseLabel;
     case 'completed':
-      return 'Completado';
+      return strings.CompletedPhaseLabel;
     default:
-      return 'Sin estado';
+      return strings.UnknownPhaseLabel;
+  }
+}
+
+function buildSupportingText(item: ICountdownItem, phase: ICountdownItem['state'], formattedDate: string, remainingSummary?: string): string {
+  switch (phase) {
+    case 'countdown':
+      return `${strings.CountdownSupportingPrefix} ${remainingSummary} ${strings.CountdownSupportingConnector} ${item.title}.`;
+    case 'live':
+      return `${strings.LiveSupportingPrefix} ${item.title} ${strings.LiveSupportingConnector} ${formattedDate}.`;
+    case 'completed':
+      return `${strings.CompletedSupportingPrefix} ${item.title} ${strings.CompletedSupportingConnector} ${formattedDate}.`;
+    default:
+      return item.title;
   }
 }
 
@@ -71,7 +85,7 @@ export class CountdownService {
       return buildSourceSnapshot(result);
     } catch (error) {
       return {
-        item: null,
+        item: undefined,
         sourceLabel: this.resolveSourceLabel(config),
         hasPartialData: false,
         notes: [],
@@ -86,26 +100,29 @@ export class CountdownService {
     }
 
     if (!snapshot.item) {
-      return buildEmptyViewModel(snapshot.sourceLabel, snapshot.notes, 'No hay evento configurado.');
+      return buildEmptyViewModel(snapshot.sourceLabel, snapshot.notes, strings.EmptyEventMessage);
     }
 
     const targetDate = parseCountdownDate(snapshot.item.targetDate);
     if (!targetDate) {
-      return buildErrorViewModel(snapshot.sourceLabel, snapshot.notes, 'No se ha podido interpretar la fecha objetivo.');
+      return buildErrorViewModel(snapshot.sourceLabel, snapshot.notes, strings.InvalidTargetDateMessage);
     }
 
     const phase = deriveCountdownPhase(snapshot.item, now);
     if (phase === 'completed' && !config.showCompleted) {
-      return buildEmptyViewModel(snapshot.sourceLabel, snapshot.notes, 'El evento ya ha finalizado y está oculto por configuración.');
+      return buildEmptyViewModel(snapshot.sourceLabel, snapshot.notes, strings.CompletedHiddenMessage);
     }
 
-    const remaining = phase === 'countdown' ? calculateRemaining(targetDate, now) : null;
+    const remaining = phase === 'countdown' ? calculateRemaining(targetDate, now) : undefined;
     const state = classifyAsyncState({
       hasData: Boolean(snapshot.item),
       hasError: false,
       isLoading: false,
       isPartial: snapshot.hasPartialData
     });
+
+    const formattedDate = formatEventDate(snapshot.item.targetDate);
+    const remainingSummary = remaining ? formatRemainingSummary(remaining) : undefined;
 
     return {
       state,
@@ -116,12 +133,7 @@ export class CountdownService {
       hasPartialData: snapshot.hasPartialData,
       notes: snapshot.notes,
       phaseLabel: buildPhaseLabel(phase),
-      supportingText:
-        phase === 'countdown'
-          ? `Faltan ${formatRemainingSummary(remaining as NonNullable<typeof remaining>)} para ${snapshot.item.title}.`
-          : phase === 'live'
-            ? `El evento ${snapshot.item.title} está en curso desde ${formatEventDate(snapshot.item.targetDate)}.`
-            : `El evento ${snapshot.item.title} finalizó el ${formatEventDate(snapshot.item.targetDate)}.`,
+      supportingText: buildSupportingText(snapshot.item, phase, formattedDate, remainingSummary),
       ctaLink: buildCtaLink(snapshot.item)
     };
   }
@@ -129,11 +141,11 @@ export class CountdownService {
   private resolveSourceLabel(config: ICountdownWebPartConfig): string {
     switch (config.sourceType) {
       case 'JsonUrl':
-        return 'JSON URL';
+        return strings.JsonSourceLabel;
       case 'SharePointList':
-        return 'Lista de SharePoint';
+        return strings.SharePointSourceLabel;
       default:
-        return 'Configuración estática';
+        return strings.StaticSourceLabel;
     }
   }
 }

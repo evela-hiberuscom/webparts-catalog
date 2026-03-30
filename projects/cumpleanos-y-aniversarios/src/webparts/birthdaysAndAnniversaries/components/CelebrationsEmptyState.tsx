@@ -28,9 +28,8 @@ export default function CelebrationsEmptyState(props: ICelebrationsEmptyStatePro
         </Text>
         {props.onAction && props.actionLabel ? (
           <PrimaryButton text={props.actionLabel} onClick={props.onAction} />
-        ) : null}
+        ) : undefined}
       </Stack>
     </MessageBar>
   );
 }
-

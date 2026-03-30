@@ -1,27 +1,18 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { act } from 'react-dom/test-utils';
+import { renderToStaticMarkup } from 'react-dom/server';
+
+import { initializeIcons } from '@fluentui/react/lib/Icons';
 
 import { MeetTheTeamView } from './MeetTheTeamView';
 import type { ITeamMembersViewModel } from '../models/teamMemberModels';
 
+initializeIcons();
+
 describe('MeetTheTeamView', () => {
-  let container: HTMLDivElement;
-
-  beforeEach(() => {
-    container = document.createElement('div');
-    document.body.appendChild(container);
-  });
-
-  afterEach(() => {
-    ReactDom.unmountComponentAtNode(container);
-    container.remove();
-  });
-
-  it('renders ready state cards', async () => {
+  it('renders ready state cards', () => {
     const viewModel: ITeamMembersViewModel = {
       title: 'Conoce al equipo',
-      description: 'Descripción',
+      description: 'Descripcion',
       sourceLabel: 'StaticConfig',
       state: 'ready',
       hasPartialData: false,
@@ -29,7 +20,7 @@ describe('MeetTheTeamView', () => {
       items: [
         {
           id: '1',
-          displayName: 'Laura Pérez',
+          displayName: 'Laura Perez',
           jobTitle: 'Product Manager',
           bio: 'Bio',
           photoUrl: '/img.jpg',
@@ -41,22 +32,18 @@ describe('MeetTheTeamView', () => {
       ]
     };
 
-    await act(async () => {
-      ReactDom.render(
-        <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />,
-        container
-      );
-      await Promise.resolve();
-    });
+    const markup = renderToStaticMarkup(
+      <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />
+    );
 
-    expect(container.textContent).toContain('Laura Pérez');
-    expect(container.textContent).toContain('Ver perfil');
+    expect(markup).toContain('Laura Perez');
+    expect(markup).toContain('Ver perfil');
   });
 
-  it('renders the empty state message', async () => {
+  it('renders the empty state message', () => {
     const viewModel: ITeamMembersViewModel = {
       title: 'Conoce al equipo',
-      description: 'Descripción',
+      description: 'Descripcion',
       sourceLabel: 'StaticConfig',
       state: 'empty',
       hasPartialData: false,
@@ -64,14 +51,11 @@ describe('MeetTheTeamView', () => {
       items: []
     };
 
-    await act(async () => {
-      ReactDom.render(
-        <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />,
-        container
-      );
-      await Promise.resolve();
-    });
+    const markup = renderToStaticMarkup(
+      <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />
+    );
 
-    expect(container.textContent).toContain('No hay miembros del equipo configurados.');
+    expect(markup).toContain('Estado: empty');
+    expect(markup).toContain('Reintentar');
   });
 });

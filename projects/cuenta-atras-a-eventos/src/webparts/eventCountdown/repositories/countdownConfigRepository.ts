@@ -1,3 +1,4 @@
+import * as strings from 'EventCountdownWebPartStrings';
 import type {
   ICountdownItem,
   ICountdownRepositoryResult,
@@ -81,23 +82,35 @@ function normalizeResultItems(records: ICountdownSourceRecord[], config: ICountd
   const selected = selectPrimaryRecord(records, config);
   if (!selected) {
     return {
-      item: null,
-      sourceLabel: 'Origen vacío',
+      item: undefined,
+      sourceLabel: resolveSourceLabel(config.sourceType),
       hasPartialData: false,
-      notes: ['El origen no devolvió elementos.']
+      notes: [strings.EmptySourceNote]
     };
   }
 
   const item = mapSourceRecordToCountdownItem(selected, config);
   const hasPartialData = item.hasPartialData || records.length > 1;
-  const notes = records.length > 1 ? ['El origen devolvió varios elementos; se usará el primero compatible.'] : [];
+  const notes = records.length > 1 ? [strings.MultipleRecordsNote] : [];
 
   return {
     item,
-    sourceLabel: 'Origen remoto',
+    sourceLabel: resolveSourceLabel(config.sourceType),
     hasPartialData,
     notes
   };
+}
+
+function resolveSourceLabel(sourceType: ICountdownWebPartConfig['sourceType']): string {
+  switch (sourceType) {
+    case 'SharePointList':
+      return strings.SharePointSourceLabel;
+    case 'JsonUrl':
+      return strings.JsonSourceLabel;
+    case 'StaticConfig':
+    default:
+      return strings.StaticSourceLabel;
+  }
 }
 
 export class CountdownConfigRepository {

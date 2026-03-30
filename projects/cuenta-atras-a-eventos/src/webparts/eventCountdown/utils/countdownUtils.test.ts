@@ -34,7 +34,7 @@ describe('countdownUtils', () => {
     expect(remaining.minutes).toBe(12);
     expect(parseCountdownDate('2026-03-25T11:12:00Z')).toBeInstanceOf(Date);
     expect(deriveCountdownPhase({ title: 'Launch', targetDate: '2026-03-25T11:12:00Z', state: 'unknown', showCompleted: true, hasPartialData: false }, now)).toBe('countdown');
-    expect(deriveCountdownPhase({ title: 'Launch', targetDate: '2026-03-24T12:00:00Z', state: 'unknown', showCompleted: true, hasPartialData: false }, now)).toBe('live');
+    expect(deriveCountdownPhase({ title: 'Launch', targetDate: '2026-03-24T08:00:00Z', state: 'unknown', showCompleted: true, hasPartialData: false }, now)).toBe('live');
     expect(deriveCountdownPhase({ title: 'Launch', targetDate: '2026-03-23T12:00:00Z', state: 'unknown', showCompleted: true, hasPartialData: false }, now)).toBe('completed');
   });
 

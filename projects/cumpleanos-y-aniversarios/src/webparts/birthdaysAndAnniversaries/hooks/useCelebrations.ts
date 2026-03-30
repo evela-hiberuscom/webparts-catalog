@@ -7,14 +7,14 @@ export interface IUseCelebrationsResult extends ICelebrationServiceResult {
 }
 
 const INITIAL_STATE: ICelebrationServiceResult = {
-  title: 'Cumpleaños y aniversarios',
-  subtitle: 'Reconoce los hitos de hoy y los próximos en una vista ligera.',
+  title: '',
+  subtitle: '',
   status: 'loading',
   items: [],
   todayItems: [],
   upcomingItems: [],
   partialItems: [],
-  sourceLabel: 'Cargando',
+  sourceLabel: '',
   hasPartialData: false,
   notes: []
 };
@@ -32,12 +32,13 @@ export function useCelebrations(
     setState((current) => ({
       ...current,
       status: 'loading',
-      sourceLabel: current.sourceLabel || 'Cargando',
+      sourceLabel: current.sourceLabel,
       errorMessage: undefined
     }));
 
-    void service
-      .resolveCelebrations(request)
+    const loadCelebrations = async (): Promise<void> => {
+      await service
+        .resolveCelebrations(request)
       .then((nextState) => {
         if (!disposed) {
           setState(nextState);
@@ -49,12 +50,26 @@ export function useCelebrations(
           setState({
             ...INITIAL_STATE,
             status: 'error',
-            sourceLabel: 'Error',
+            sourceLabel: '',
             errorMessage: message,
             notes: [message]
           });
         }
       });
+    };
+
+    loadCelebrations().catch((error) => {
+      if (!disposed) {
+        const message = error instanceof Error ? error.message : String(error);
+        setState({
+          ...INITIAL_STATE,
+          status: 'error',
+          sourceLabel: '',
+          errorMessage: message,
+          notes: [message]
+        });
+      }
+    });
 
     return () => {
       disposed = true;
@@ -80,4 +95,3 @@ export function useCelebrations(
     }
   };
 }
-

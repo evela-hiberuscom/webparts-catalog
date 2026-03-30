@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Persona, PersonaSize, Stack, Text } from '@fluentui/react';
+import * as strings from 'BirthdaysAndAnniversariesWebPartStrings';
 import styles from './BirthdaysAndAnniversaries.module.scss';
 import type { ICelebrationItem } from '../models/celebrationModels';
 
@@ -10,18 +11,18 @@ export interface ICelebrationCardProps {
 
 function getBadgeLabel(item: ICelebrationItem): string {
   if (item.isToday) {
-    return 'Hoy';
+    return strings.CardTodayBadge;
   }
 
   if (item.celebrationType === 'birthday') {
-    return 'Cumpleaños';
+    return strings.CardBirthdayBadge;
   }
 
   if (item.celebrationType === 'anniversary') {
-    return 'Aniversario';
+    return strings.CardAnniversaryBadge;
   }
 
-  return 'Datos parciales';
+  return strings.CardPartialBadge;
 }
 
 export default function CelebrationCard(props: ICelebrationCardProps): React.ReactElement {
@@ -46,7 +47,11 @@ export default function CelebrationCard(props: ICelebrationCardProps): React.Rea
             {item.dateLabel}
           </Text>
           <Text variant="small" className={styles.cardMeta} block>
-            {item.daysRemaining === 0 ? 'Celebración de hoy' : item.daysRemaining === null ? 'Fecha pendiente de validar' : `Faltan ${item.daysRemaining} días`}
+            {item.daysRemaining === 0
+              ? strings.CardTodayMessage
+              : item.daysRemaining === undefined
+                ? strings.CardPendingDateMessage
+                : strings.CardDaysRemainingFormat.replace('{0}', String(item.daysRemaining))}
           </Text>
         </Stack>
 
@@ -54,9 +59,8 @@ export default function CelebrationCard(props: ICelebrationCardProps): React.Rea
       </Stack>
 
       <Text variant="small" className={styles.cardFooter} block>
-        {item.isPartial ? 'Información parcial normalizada para no ocultar el hito.' : 'Información completa.'}
+        {item.isPartial ? strings.CardPartialFootnote : strings.CardCompleteFootnote}
       </Text>
     </article>
   );
 }
-

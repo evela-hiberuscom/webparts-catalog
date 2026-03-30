@@ -5,6 +5,7 @@ const rootDir = process.cwd();
 const orchestrationDir = path.join(rootDir, "orchestration");
 const generatedDir = path.join(orchestrationDir, "generated");
 const catalogPath = path.join(orchestrationDir, "project-work-items.json");
+const runtimeTrackerPath = path.join(orchestrationDir, "runtime-tracker.json");
 
 fs.mkdirSync(generatedDir, { recursive: true });
 
@@ -13,7 +14,11 @@ if (!fs.existsSync(catalogPath)) {
 }
 
 const catalog = JSON.parse(fs.readFileSync(catalogPath, "utf8"));
+const runtimeTracker = fs.existsSync(runtimeTrackerPath)
+  ? JSON.parse(fs.readFileSync(runtimeTrackerPath, "utf8"))
+  : { projects: [] };
 const generatedAt = new Date().toISOString();
+const runtimeProjects = new Map((runtimeTracker.projects ?? []).map((project) => [project.slug, project]));
 
 function pathExists(targetPath) {
   return fs.existsSync(targetPath);
@@ -91,6 +96,7 @@ function classifyProject(projectDir, slug) {
 const items = catalog.items.map((item) => {
   const projectDir = path.join(rootDir, "projects", item.slug);
   const runtime = classifyProject(projectDir, item.slug);
+  const tracked = runtimeProjects.get(item.slug);
 
   return {
     rowId: item.rowId,
@@ -101,6 +107,12 @@ const items = catalog.items.map((item) => {
     enrichmentStatus: item.enrichmentStatus,
     progressStatus: runtime.status,
     completionRank: runtime.completionRank,
+    runtimePhase: tracked?.phase ?? null,
+    auditStatus: tracked?.gates?.audit ?? (runtime.status === "packaged" ? "pending" : "not-started"),
+    agentId: tracked?.agentId ?? null,
+    agentNickname: tracked?.agentNickname ?? null,
+    lastTrackedAt: tracked?.lastTrackedAt ?? null,
+    trackedNotes: tracked?.notes ?? [],
     nestedScaffoldExists: runtime.nestedScaffoldExists,
     projectDir,
     hasPackageJson: runtime.hasPackageJson,
@@ -191,11 +203,11 @@ const mdLines = [
   "",
   "## Projects",
   "",
-  "| Wave | Project | Slug | Status | Enrichment | Nested Scaffold | Package |",
-  "|---|---|---|---|---|---|---|",
+  "| Wave | Project | Slug | Status | Runtime Phase | Audit | Agent | Enrichment | Nested Scaffold | Package |",
+  "|---|---|---|---|---|---|---|---|---|---|",
   ...payload.items.map((item) => {
     const packageLabel = item.sppkgFiles.length > 0 ? "yes" : "no";
-    return `| ${item.waveNumber} | ${item.name} | ${item.slug} | ${item.progressStatus} | ${item.enrichmentStatus} | ${item.nestedScaffoldExists ? "yes" : "no"} | ${packageLabel} |`;
+    return `| ${item.waveNumber} | ${item.name} | ${item.slug} | ${item.progressStatus} | ${item.runtimePhase ?? "-"} | ${item.auditStatus} | ${item.agentNickname ?? "-"} | ${item.enrichmentStatus} | ${item.nestedScaffoldExists ? "yes" : "no"} | ${packageLabel} |`;
   }),
   ""
 ];

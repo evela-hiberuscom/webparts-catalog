@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "express-directory-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/expressDirectory/ExpressDirectoryWebPart.js",
+          "manifest": "./src/webparts/expressDirectory/ExpressDirectoryWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ExpressDirectoryWebPartStrings": "lib/webparts/expressDirectory/loc/{locale}.js"
+  }
+}

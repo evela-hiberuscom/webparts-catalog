@@ -43,7 +43,16 @@ describe('teamMemberUtils', () => {
   });
 
   it('builds initials and partial data markers', () => {
-    const member = normalizeTeamMember({ displayName: 'Marta Gil', bio: 'Bio', photoUrl: '/img.jpg', profileUrl: '/p' }, 'fallback');
+    const member = normalizeTeamMember(
+      {
+        displayName: 'Marta Gil',
+        jobTitle: 'UX Designer',
+        bio: 'Bio',
+        photoUrl: '/img.jpg',
+        profileUrl: '/p'
+      },
+      'fallback'
+    );
     expect(buildTeamMemberInitials('Marta Gil')).toBe('MG');
     expect(member.partialData).toBe(false);
   });

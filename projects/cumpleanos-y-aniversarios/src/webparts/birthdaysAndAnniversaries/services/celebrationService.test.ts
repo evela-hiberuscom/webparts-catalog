@@ -1,11 +1,3 @@
-jest.mock('@microsoft/sp-http', () => ({
-  SPHttpClient: {
-    configurations: {
-      v1: {}
-    }
-  }
-}));
-
 import { buildCelebrationViewModel } from './celebrationService';
 import type { ICelebrationRecord } from '../models/celebrationModels';
 
@@ -27,9 +19,9 @@ const sampleItems: ICelebrationRecord[] = [
   {
     id: 'partial',
     displayName: 'María López',
-    photoUrl: null,
+    photoUrl: undefined,
     celebrationType: 'unknown',
-    date: null
+    date: undefined
   }
 ];
 

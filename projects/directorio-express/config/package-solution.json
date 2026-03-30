@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "directorio-express-client-side-solution",
+    "id": "a221488c-b698-4ae2-9e9a-f226ac8efc32",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Express people directory for SharePoint"
+      },
+      "longDescription": {
+        "default": "Express directory web part with search, area filters, and multiple people sources."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "directorio-express Feature",
+        "description": "The feature that activates elements of the directorio-express solution.",
+        "id": "be418c9b-3b9b-43ff-9ccd-18b0309e7b0f",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/directorio-express.sppkg"
+  }
+}

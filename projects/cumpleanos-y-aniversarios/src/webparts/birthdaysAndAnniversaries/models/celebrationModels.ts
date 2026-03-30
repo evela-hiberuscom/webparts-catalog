@@ -1,5 +1,3 @@
-import type { SPHttpClient } from '@microsoft/sp-http';
-
 export type CelebrationDataSourceType = 'Directory' | 'SharePointList' | 'JsonUrl';
 
 export type CelebrationType = 'birthday' | 'anniversary' | 'unknown';
@@ -23,21 +21,22 @@ export interface IPeopleCelebrationsRequest {
   showAnniversaries: boolean;
   daysAhead: number;
   webAbsoluteUrl: string;
-  spHttpClient?: SPHttpClient;
+  spHttpClient?: ISharePointHttpClientLike;
+  spHttpClientConfiguration?: unknown;
 }
 
 export interface ICelebrationRecord {
   id: string;
   displayName: string;
-  photoUrl: string | null;
+  photoUrl?: string;
   celebrationType: CelebrationType;
-  date: string | null;
+  date?: string;
 }
 
 export interface ICelebrationItem extends ICelebrationRecord {
   avatarText: string;
   dateLabel: string;
-  daysRemaining: number | null;
+  daysRemaining?: number;
   isToday: boolean;
   isPartial: boolean;
 }
@@ -65,4 +64,3 @@ export interface ICelebrationSourceReference {
   mode: 'title' | 'url';
   value: string;
 }
-

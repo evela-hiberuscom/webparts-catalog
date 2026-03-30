@@ -39,7 +39,7 @@ export interface ICountdownRemaining {
 }
 
 export interface ICountdownRepositoryResult {
-  item: ICountdownItem | null;
+  item?: ICountdownItem;
   sourceLabel: string;
   hasPartialData: boolean;
   notes: string[];
@@ -52,8 +52,8 @@ export interface ICountdownSnapshot extends ICountdownRepositoryResult {
 export interface ICountdownViewModel {
   state: CountdownViewState;
   phase: CountdownPhase;
-  item: ICountdownItem | null;
-  remaining: ICountdownRemaining | null;
+  item?: ICountdownItem;
+  remaining?: ICountdownRemaining;
   sourceLabel: string;
   hasPartialData: boolean;
   notes: string[];

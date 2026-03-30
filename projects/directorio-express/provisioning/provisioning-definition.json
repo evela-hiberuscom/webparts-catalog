@@ -24,5 +24,38 @@
     "Si falta foto, usar avatar por defecto.",
     "Si falta perfil, la persona sigue siendo informativa.",
     "Las coincidencias exactas de nombre deben priorizarse en la búsqueda."
+  ],
+  "fields": [
+    {
+      "name": "Title",
+      "purpose": "Nombre visible de la persona"
+    },
+    {
+      "name": "JobTitle",
+      "purpose": "Cargo o rol"
+    },
+    {
+      "name": "Area",
+      "purpose": "Área o departamento"
+    },
+    {
+      "name": "Email",
+      "purpose": "Contacto de correo"
+    },
+    {
+      "name": "ProfileUrl",
+      "purpose": "Perfil o ficha de persona"
+    },
+    {
+      "name": "PhotoUrl",
+      "purpose": "Fotografía"
+    }
+  ],
+  "uiStates": [
+    "loading",
+    "ready",
+    "empty",
+    "partialData",
+    "error"
   ]
 }

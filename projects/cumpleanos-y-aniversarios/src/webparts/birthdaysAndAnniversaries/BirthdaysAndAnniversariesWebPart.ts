@@ -7,7 +7,7 @@ import {
   type IPropertyPaneConfiguration
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import type { SPHttpClient } from '@microsoft/sp-http';
+import { SPHttpClient } from '@microsoft/sp-http';
 import BirthdaysAndAnniversaries from './components/BirthdaysAndAnniversaries';
 import type { IBirthdaysAndAnniversariesProps } from './components/IBirthdaysAndAnniversariesProps';
 import * as strings from 'BirthdaysAndAnniversariesWebPartStrings';
@@ -37,6 +37,7 @@ export default class BirthdaysAndAnniversariesWebPart extends BaseClientSideWebP
   public render(): void {
     const element: React.ReactElement<IBirthdaysAndAnniversariesProps> = React.createElement(BirthdaysAndAnniversaries, {
       spHttpClient: this.context.spHttpClient as SPHttpClient,
+      spHttpClientConfiguration: SPHttpClient.configurations.v1,
       webAbsoluteUrl: this.context.pageContext.web.absoluteUrl,
       dataSourceTypes: parseDataSourceTypes(this.properties.dataSourceTypesCsv),
       directoryJsonUrl: this.properties.directoryJsonUrl || '',
@@ -70,48 +71,48 @@ export default class BirthdaysAndAnniversariesWebPart extends BaseClientSideWebP
       pages: [
         {
           header: {
-            description: 'Configura la fuente de celebraciones y la ventana temporal.'
+            description: strings.PropertyPaneDescription
           },
           groups: [
             {
-              groupName: 'Origen de datos',
+              groupName: strings.PropertyPaneDataGroupName,
               groupFields: [
                 PropertyPaneTextField('dataSourceTypesCsv', {
-                  label: 'Tipos de origen',
-                  description: 'Valores permitidos: Directory, SharePointList, JsonUrl',
+                  label: strings.DataSourceTypesLabel,
+                  description: strings.DataSourceTypesDescription,
                   multiline: false
                 }),
                 PropertyPaneTextField('directoryJsonUrl', {
-                  label: 'URL JSON de directorio',
-                  description: 'Origen same-origin para el feed de directorio.',
+                  label: strings.DirectoryJsonUrlLabel,
+                  description: strings.DirectoryJsonUrlDescription,
                   multiline: false
                 }),
                 PropertyPaneTextField('listTitleOrUrl', {
-                  label: 'Título o URL de la lista',
-                  description: 'Acepta título de lista o URL de vista same-origin.',
+                  label: strings.ListTitleOrUrlLabel,
+                  description: strings.ListTitleOrUrlDescription,
                   multiline: false
                 }),
                 PropertyPaneTextField('jsonUrl', {
-                  label: 'URL JSON alternativa',
-                  description: 'Origen same-origin para cargas JSON directas.',
+                  label: strings.JsonUrlLabel,
+                  description: strings.JsonUrlDescription,
                   multiline: false
                 })
               ]
             },
             {
-              groupName: 'Comportamiento',
+              groupName: strings.PropertyPaneBehaviorGroupName,
               groupFields: [
                 PropertyPaneCheckbox('showBirthdays', {
-                  text: 'Mostrar cumpleaños',
+                  text: strings.ShowBirthdaysText,
                   checked: true
                 }),
                 PropertyPaneCheckbox('showAnniversaries', {
-                  text: 'Mostrar aniversarios',
+                  text: strings.ShowAnniversariesText,
                   checked: true
                 }),
                 PropertyPaneTextField('daysAhead', {
-                  label: 'Días hacia adelante',
-                  description: 'Ventana temporal para próximas celebraciones.'
+                  label: strings.DaysAheadLabel,
+                  description: strings.DaysAheadDescription
                 })
               ]
             }

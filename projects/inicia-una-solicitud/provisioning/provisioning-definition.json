@@ -6,7 +6,66 @@
     {
       "name": "RequestsCatalogList",
       "type": "SharePointList",
-      "purpose": "catálogo de solicitudes"
+      "purpose": "catalogo de solicitudes"
+    }
+  ],
+  "listDefinition": {
+    "title": "RequestsCatalogList",
+    "fields": [
+      {
+        "name": "Title",
+        "type": "Single line of text",
+        "required": true
+      },
+      {
+        "name": "Category",
+        "type": "Choice or text",
+        "required": false
+      },
+      {
+        "name": "Audience",
+        "type": "Text",
+        "required": false
+      },
+      {
+        "name": "Description",
+        "type": "Multiple lines of text",
+        "required": false
+      },
+      {
+        "name": "Prerequisites",
+        "type": "Multiple lines of text",
+        "required": false
+      },
+      {
+        "name": "StartUrl",
+        "type": "Hyperlink",
+        "required": false
+      },
+      {
+        "name": "Featured",
+        "type": "Yes/No",
+        "required": false
+      },
+      {
+        "name": "SortOrder",
+        "type": "Number",
+        "required": false
+      }
+    ]
+  },
+  "seedItems": [
+    {
+      "title": "Solicitar vacaciones",
+      "category": "RRHH",
+      "audience": "Empleado",
+      "startUrl": "/sites/hr/requests/vacaciones"
+    },
+    {
+      "title": "Abrir ticket de soporte",
+      "category": "IT",
+      "audience": "Empleado",
+      "startUrl": "/sites/it/requests/soporte"
     }
   ],
   "acceptanceCriteria": [

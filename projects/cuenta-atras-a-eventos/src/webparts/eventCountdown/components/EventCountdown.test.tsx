@@ -1,27 +1,16 @@
+jest.mock('EventCountdownWebPartStrings', () => jest.requireActual('../testSupport/mockEventCountdownStrings').mockEventCountdownStrings, {
+  virtual: true
+});
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 import EventCountdown from './EventCountdown';
-import type { IEventCountdownProps } from './IEventCountdownProps';
-
-jest.mock('../hooks/useCountdown', () => ({
-  useCountdownModel: jest.fn()
-}));
-
-const mockUseCountdownModel = require('../hooks/useCountdown').useCountdownModel as jest.Mock;
-
-function renderComponent(props: IEventCountdownProps): HTMLDivElement {
-  const container = document.createElement('div');
-  act(() => {
-    ReactDOM.render(<EventCountdown {...props} />, container);
-  });
-
-  return container;
-}
+import * as countdownHook from '../hooks/useCountdown';
 
 describe('EventCountdown', () => {
   it('renders the countdown hero and CTA', () => {
-    mockUseCountdownModel.mockReturnValue({
+    const useCountdownModelSpy = jest.spyOn(countdownHook, 'useCountdownModel').mockReturnValue({
       state: 'ready',
       phase: 'countdown',
       item: {
@@ -51,36 +40,45 @@ describe('EventCountdown', () => {
       }
     });
 
-    const container = renderComponent({
-      config: {
-        sourceType: 'StaticConfig',
-        eventTitle: 'Cuenta atrás a eventos',
-        targetDate: '2026-04-01T09:00:00Z',
-        subtitle: 'Campaña',
-        detailUrl: 'https://contoso.sharepoint.com/sites/portal/SitePages/evento.aspx',
-        showCompleted: false,
-        webUrl: 'https://contoso.sharepoint.com/sites/portal',
-        refreshIntervalSeconds: 60
-      },
-      isDarkTheme: false,
-      environmentMessage: 'Running on a SharePoint page',
-      hasTeamsContext: false,
-      userDisplayName: 'Marta'
+    const container = document.createElement('div');
+    act(() => {
+      ReactDOM.render(
+        <EventCountdown
+          config={{
+            sourceType: 'StaticConfig',
+            eventTitle: 'Cuenta atrás a eventos',
+            targetDate: '2026-04-01T09:00:00Z',
+            subtitle: 'Campaña',
+            detailUrl: 'https://contoso.sharepoint.com/sites/portal/SitePages/evento.aspx',
+            showCompleted: false,
+            webUrl: 'https://contoso.sharepoint.com/sites/portal',
+            refreshIntervalSeconds: 60
+          }}
+          isDarkTheme={false}
+          environmentMessage="Running on a SharePoint page"
+          hasTeamsContext={false}
+          userDisplayName="Marta"
+        />,
+        container
+      );
     });
 
     expect(container.textContent).toContain('Lanzamiento Q2');
     expect(container.textContent).toContain('10');
-    expect(container.textContent).toContain('Abrir detalle');
-    ReactDOM.unmountComponentAtNode(container);
-    jest.clearAllMocks();
+    expect(container.textContent).toContain('Open details');
+
+    act(() => {
+      ReactDOM.unmountComponentAtNode(container);
+    });
+    useCountdownModelSpy.mockRestore();
   });
 
   it('renders an empty state when the hook returns empty', () => {
-    mockUseCountdownModel.mockReturnValue({
+    const useCountdownModelSpy = jest.spyOn(countdownHook, 'useCountdownModel').mockReturnValue({
       state: 'empty',
       phase: 'unknown',
-      item: null,
-      remaining: null,
+      item: undefined,
+      remaining: undefined,
       sourceLabel: 'Configuración estática',
       hasPartialData: false,
       notes: [],
@@ -89,24 +87,33 @@ describe('EventCountdown', () => {
       emptyReason: 'No hay evento configurado.'
     });
 
-    const container = renderComponent({
-      config: {
-        sourceType: 'StaticConfig',
-        eventTitle: 'Cuenta atrás a eventos',
-        targetDate: '',
-        showCompleted: false,
-        webUrl: 'https://contoso.sharepoint.com/sites/portal',
-        refreshIntervalSeconds: 60
-      },
-      isDarkTheme: false,
-      environmentMessage: 'Running on a SharePoint page',
-      hasTeamsContext: false,
-      userDisplayName: 'Marta'
+    const container = document.createElement('div');
+    act(() => {
+      ReactDOM.render(
+        <EventCountdown
+          config={{
+            sourceType: 'StaticConfig',
+            eventTitle: 'Cuenta atrás a eventos',
+            targetDate: '',
+            showCompleted: false,
+            webUrl: 'https://contoso.sharepoint.com/sites/portal',
+            refreshIntervalSeconds: 60
+          }}
+          isDarkTheme={false}
+          environmentMessage="Running on a SharePoint page"
+          hasTeamsContext={false}
+          userDisplayName="Marta"
+        />,
+        container
+      );
     });
 
-    expect(container.textContent).toContain('No hay evento activo');
+    expect(container.textContent).toContain('There is no active event');
     expect(container.textContent).toContain('No hay evento configurado.');
-    ReactDOM.unmountComponentAtNode(container);
-    jest.clearAllMocks();
+
+    act(() => {
+      ReactDOM.unmountComponentAtNode(container);
+    });
+    useCountdownModelSpy.mockRestore();
   });
 });

@@ -1,6 +1,5 @@
 import { classifyAsyncState } from '@paquete/spfx-common';
 import type {
-  CelebrationDataSourceType,
   ICelebrationItem,
   ICelebrationRecord,
   ICelebrationViewModel,
@@ -58,8 +57,8 @@ function sortAndSplitItems(items: ICelebrationItem[]): {
 } {
   const sorted = sortCelebrationItems(items);
   const todayItems = sorted.filter((item) => item.isToday);
-  const upcomingItems = sorted.filter((item) => !item.isToday && item.daysRemaining !== null);
-  const partialItems = sorted.filter((item) => item.daysRemaining === null);
+  const upcomingItems = sorted.filter((item) => !item.isToday && item.daysRemaining !== undefined);
+  const partialItems = sorted.filter((item) => item.daysRemaining === undefined);
 
   return {
     todayItems,
@@ -84,7 +83,7 @@ export function buildCelebrationViewModel(input: {
   const normalizedItems = input.items
     .filter((record) => filterByCelebrationType(record, input.request.showBirthdays, input.request.showAnniversaries))
     .map((record) => resolveItem(record, today))
-    .filter((item) => item.daysRemaining === null || item.daysRemaining <= maxDaysAhead);
+    .filter((item) => item.daysRemaining === undefined || item.daysRemaining <= maxDaysAhead);
 
   const { todayItems, upcomingItems, partialItems } = sortAndSplitItems(normalizedItems);
   const hasData = normalizedItems.length > 0;

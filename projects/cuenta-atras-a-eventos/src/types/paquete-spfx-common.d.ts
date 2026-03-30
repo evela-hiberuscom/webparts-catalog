@@ -5,7 +5,7 @@ declare module '@paquete/spfx-common/utils' {
     target: string;
   }
 
-  export function createSafeExternalLink(url: string | undefined | null): ISafeExternalLink | undefined;
+  export function createSafeExternalLink(url: string | undefined): ISafeExternalLink | undefined;
   export function classifyAsyncState(input: {
     hasData?: boolean;
     hasError?: boolean;

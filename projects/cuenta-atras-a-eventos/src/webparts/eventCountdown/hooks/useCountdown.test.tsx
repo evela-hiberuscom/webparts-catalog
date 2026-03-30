@@ -1,3 +1,7 @@
+jest.mock('EventCountdownWebPartStrings', () => jest.requireActual('../testSupport/mockEventCountdownStrings').mockEventCountdownStrings, {
+  virtual: true
+});
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
@@ -17,6 +21,7 @@ function Harness(props: { config: ICountdownWebPartConfig; service: { loadSnapsh
 describe('useCountdownModel', () => {
   it('loads a snapshot and refreshes the derived view model on timer ticks', async () => {
     jest.useFakeTimers();
+    jest.setSystemTime(new Date('2026-03-24T09:00:00Z'));
 
     const snapshot: ICountdownSnapshot = {
       item: {

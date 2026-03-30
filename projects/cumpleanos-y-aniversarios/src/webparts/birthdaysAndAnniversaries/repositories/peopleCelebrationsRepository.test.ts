@@ -1,12 +1,3 @@
-jest.mock('@microsoft/sp-http', () => ({
-  SPHttpClient: {
-    configurations: {
-      v1: {}
-    }
-  }
-}));
-
-import { SPHttpClient } from '@microsoft/sp-http';
 import { PeopleCelebrationsRepository } from './peopleCelebrationsRepository';
 
 describe('PeopleCelebrationsRepository', () => {
@@ -81,9 +72,10 @@ describe('PeopleCelebrationsRepository', () => {
       showBirthdays: true,
       showAnniversaries: true,
       daysAhead: 14,
+      spHttpClientConfiguration: {},
       spHttpClient: {
         get: getMock
-      } as unknown as SPHttpClient
+      } as never
     });
 
     expect(getMock).toHaveBeenCalledTimes(1);

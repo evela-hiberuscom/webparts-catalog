@@ -242,15 +242,15 @@ export function mapSourceRecordToCountdownItem(
   };
 }
 
-export function selectPrimaryRecord(records: ICountdownSourceRecord[], config: Pick<ICountdownWebPartConfig, 'targetDate'>): ICountdownSourceRecord | null {
+export function selectPrimaryRecord(records: ICountdownSourceRecord[], config: Pick<ICountdownWebPartConfig, 'targetDate'>): ICountdownSourceRecord | undefined {
   if (!records.length) {
-    return null;
+    return undefined;
   }
 
   const datePreference = records.find((record) => {
     const candidate = getTextValue(record, ['targetDate', 'TargetDate', 'date', 'Date', 'eventDate', 'EventDate']);
-    return Boolean(candidate || config.targetDate);
+    return Boolean(candidate);
   });
 
-  return datePreference ?? records[0] ?? null;
+  return datePreference ?? (config.targetDate ? records[0] : undefined);
 }

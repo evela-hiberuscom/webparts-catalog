@@ -57,7 +57,7 @@ export default class EventCountdownWebPart extends BaseClientSideWebPart<IEventC
 
   protected onInit(): Promise<void> {
     this.properties.sourceType = this.properties.sourceType ?? 'StaticConfig';
-    this.properties.eventTitle = this.properties.eventTitle ?? 'Cuenta atrás a eventos';
+    this.properties.eventTitle = this.properties.eventTitle ?? strings.DefaultEventTitle;
     this.properties.targetDate = this.properties.targetDate ?? '';
     this.properties.subtitle = this.properties.subtitle ?? '';
     this.properties.detailUrl = this.properties.detailUrl ?? '';
@@ -78,7 +78,7 @@ export default class EventCountdownWebPart extends BaseClientSideWebPart<IEventC
   private _buildConfig(): ICountdownWebPartConfig {
     return {
       sourceType: this.properties.sourceType ?? 'StaticConfig',
-      eventTitle: this.properties.eventTitle?.trim() || 'Cuenta atrás a eventos',
+      eventTitle: this.properties.eventTitle?.trim() || strings.DefaultEventTitle,
       targetDate: this.properties.targetDate?.trim() || '',
       subtitle: this.properties.subtitle?.trim() || undefined,
       detailUrl: this.properties.detailUrl?.trim() || undefined,
@@ -129,9 +129,9 @@ export default class EventCountdownWebPart extends BaseClientSideWebPart<IEventC
     const { semanticColors } = currentTheme;
 
     if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || '');
+      this.domElement.style.setProperty('--link', semanticColors.link || '');
+      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || '');
     }
   }
 

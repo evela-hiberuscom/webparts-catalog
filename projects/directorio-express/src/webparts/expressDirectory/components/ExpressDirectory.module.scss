@@ -1,0 +1,80 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.expressDirectory {
+  padding: 20px;
+  overflow: hidden;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  background:
+    radial-gradient(circle at top right, rgba(0, 120, 212, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.98));
+  border-radius: 16px;
+}
+
+.teams {
+  font-family: $ms-font-family-fallbacks;
+}
+
+.darkTheme {
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.12), transparent 30%),
+    linear-gradient(180deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.98));
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.subtitle,
+.meta {
+  margin-top: 6px;
+}
+
+.heroStats {
+  min-width: 180px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.controls {
+  margin-bottom: 18px;
+}
+
+.statePanel,
+.emptyState {
+  padding: 20px;
+  text-align: center;
+}
+
+.emptyTitle {
+  margin-bottom: 8px;
+}
+
+.peopleList {
+  display: grid;
+  gap: 12px;
+}
+
+.personRow {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.personActions {
+  flex: 1;
+}
+

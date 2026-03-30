@@ -1,3 +1,7 @@
+jest.mock('EventCountdownWebPartStrings', () => jest.requireActual('../testSupport/mockEventCountdownStrings').mockEventCountdownStrings, {
+  virtual: true
+});
+
 import { CountdownService } from './countdownService';
 
 describe('CountdownService', () => {
@@ -50,7 +54,7 @@ describe('CountdownService', () => {
       {
         item: {
           title: 'Lanzamiento Q2',
-          targetDate: '2026-03-24T12:00:00Z',
+          targetDate: '2026-03-24T08:00:00Z',
           state: 'unknown',
           showCompleted: true,
           hasPartialData: true
@@ -62,7 +66,7 @@ describe('CountdownService', () => {
       {
         sourceType: 'JsonUrl',
         eventTitle: 'Lanzamiento Q2',
-        targetDate: '2026-03-24T12:00:00Z',
+        targetDate: '2026-03-24T08:00:00Z',
         showCompleted: true,
         jsonUrl: '/sites/portal/data/event.json',
         webUrl,
@@ -103,7 +107,7 @@ describe('CountdownService', () => {
     );
 
     expect(viewModel.state).toBe('empty');
-    expect(viewModel.emptyReason).toContain('oculto por configuración');
+    expect(viewModel.emptyReason).toContain('hidden by configuration');
   });
 
   it('returns error when the target date is invalid', () => {
@@ -133,6 +137,6 @@ describe('CountdownService', () => {
     );
 
     expect(viewModel.state).toBe('error');
-    expect(viewModel.errorMessage).toContain('No se ha podido interpretar la fecha objetivo.');
+    expect(viewModel.errorMessage).toContain('The target date could not be interpreted.');
   });
 });

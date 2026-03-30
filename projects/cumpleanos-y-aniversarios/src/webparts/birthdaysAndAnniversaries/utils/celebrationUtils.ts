@@ -59,11 +59,11 @@ export function buildAvatarText(displayName: string): string {
     .join('');
 }
 
-export function sanitizeImageUrl(value: unknown, webAbsoluteUrl: string): string | null {
+export function sanitizeImageUrl(value: unknown, webAbsoluteUrl: string): string | undefined {
   const rawValue = toTrimmedString(value);
 
   if (!rawValue || isDangerousProtocol(rawValue)) {
-    return null;
+    return undefined;
   }
 
   try {
@@ -71,36 +71,36 @@ export function sanitizeImageUrl(value: unknown, webAbsoluteUrl: string): string
     const origin = new URL(webAbsoluteUrl).origin;
 
     if (resolved.origin !== origin) {
-      return null;
+      return undefined;
     }
 
     return resolved.href;
   } catch {
-    return null;
+    return undefined;
   }
 }
 
-export function normalizeDateValue(value: unknown): string | null {
+export function normalizeDateValue(value: unknown): string | undefined {
   const rawValue = toTrimmedString(value);
 
   if (!rawValue) {
-    return null;
+    return undefined;
   }
 
   const parsed = new Date(rawValue);
 
-  return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
 }
 
-export function getDaysRemaining(dateValue: string | null, today: Date = new Date()): number | null {
+export function getDaysRemaining(dateValue: string | undefined, today: Date = new Date()): number | undefined {
   if (!dateValue) {
-    return null;
+    return undefined;
   }
 
   const parsed = new Date(dateValue);
 
   if (Number.isNaN(parsed.getTime())) {
-    return null;
+    return undefined;
   }
 
   const currentDay = startOfDay(today);
@@ -115,14 +115,14 @@ export function getDaysRemaining(dateValue: string | null, today: Date = new Dat
   return Math.max(0, Math.round(diff / 86400000));
 }
 
-export function isTodayCelebration(daysRemaining: number | null): boolean {
+export function isTodayCelebration(daysRemaining: number | undefined): boolean {
   return daysRemaining === 0;
 }
 
-export function formatCelebrationDateLabel(dateValue: string | null, today: Date = new Date()): string {
+export function formatCelebrationDateLabel(dateValue: string | undefined, today: Date = new Date()): string {
   const daysRemaining = getDaysRemaining(dateValue, today);
 
-  if (daysRemaining === null) {
+  if (daysRemaining === undefined) {
     return 'Fecha pendiente';
   }
 
@@ -191,4 +191,3 @@ export function sortCelebrationItems(items: ICelebrationItem[]): ICelebrationIte
     return left.displayName.localeCompare(right.displayName, 'es');
   });
 }
-

@@ -18,6 +18,7 @@ const issueRegistry = fs.existsSync(issueRegistryPath)
   ? JSON.parse(fs.readFileSync(issueRegistryPath, "utf8"))
   : { entries: [] };
 const generatedAt = new Date().toISOString();
+const dateStamp = generatedAt.slice(0, 10);
 
 const packagedProjects = progressBoard.items.filter((item) => item.progressStatus === "packaged");
 const sharedOpenIssues = issueRegistry.entries.filter((entry) => entry.status === "open");
@@ -407,7 +408,9 @@ for (const project of projectAudits) {
   mdLines.push("");
 }
 
-fs.writeFileSync(path.join(generatedDir, "red-team-audit-2026-03-24.json"), JSON.stringify(payload, null, 2), "utf8");
-fs.writeFileSync(path.join(generatedDir, "red-team-audit-2026-03-24.md"), mdLines.join("\n"), "utf8");
+fs.writeFileSync(path.join(generatedDir, `red-team-audit-${dateStamp}.json`), JSON.stringify(payload, null, 2), "utf8");
+fs.writeFileSync(path.join(generatedDir, `red-team-audit-${dateStamp}.md`), mdLines.join("\n"), "utf8");
+fs.writeFileSync(path.join(generatedDir, "red-team-audit-latest.json"), JSON.stringify(payload, null, 2), "utf8");
+fs.writeFileSync(path.join(generatedDir, "red-team-audit-latest.md"), mdLines.join("\n"), "utf8");
 
 console.log(`Red-team audit backlog generated for ${packagedProjects.length} packaged projects.`);

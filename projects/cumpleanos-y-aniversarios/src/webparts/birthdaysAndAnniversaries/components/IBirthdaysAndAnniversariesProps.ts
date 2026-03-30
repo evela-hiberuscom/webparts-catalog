@@ -3,6 +3,7 @@ import type { CelebrationDataSourceType } from '../models/celebrationModels';
 
 export interface IBirthdaysAndAnniversariesProps {
   spHttpClient: SPHttpClient;
+  spHttpClientConfiguration: unknown;
   webAbsoluteUrl: string;
   dataSourceTypes: CelebrationDataSourceType[];
   directoryJsonUrl: string;
@@ -12,4 +13,3 @@ export interface IBirthdaysAndAnniversariesProps {
   showAnniversaries: boolean;
   daysAhead: number;
 }
-

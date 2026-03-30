@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "directorio-express",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ExpressDirectory",
+    "componentDescription": "Permite localizar rápidamente personas por nombre, rol, área o dato básico de contacto desde una versión ligera del directorio corporativo.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "directorio-express",
+    "libraryId": "a221488c-b698-4ae2-9e9a-f226ac8efc32",
+    "solutionShortDescription": "directorio-express description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

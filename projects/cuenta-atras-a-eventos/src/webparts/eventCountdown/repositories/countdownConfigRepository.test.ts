@@ -1,3 +1,7 @@
+jest.mock('EventCountdownWebPartStrings', () => jest.requireActual('../testSupport/mockEventCountdownStrings').mockEventCountdownStrings, {
+  virtual: true
+});
+
 import { CountdownConfigRepository } from './countdownConfigRepository';
 
 describe('CountdownConfigRepository', () => {
@@ -71,6 +75,6 @@ describe('CountdownConfigRepository', () => {
         webUrl,
         refreshIntervalSeconds: 60
       })
-    ).rejects.toThrow('jsonUrl debe ser same-origin o relativa.');
+    ).rejects.toThrow('jsonUrl must be same-origin or relative');
   });
 });

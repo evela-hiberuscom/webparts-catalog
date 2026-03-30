@@ -1,0 +1,275 @@
+.root {
+  padding: 24px 0;
+  color: #111111;
+  font-family: "Lato", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #d6d6d6;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #1032cf 0%, #19255a 100%);
+  color: #ffffff;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.metaChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.metaChipWarning {
+  background: rgba(91, 83, 255, 0.2);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.stateMessage {
+  margin-top: 16px;
+}
+
+.emptyState {
+  padding: 32px;
+  border-radius: 16px;
+  background: #f7f8fd;
+  border: 1px dashed #d6d6d6;
+}
+
+.emptyTitle {
+  margin: 0 0 8px;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.emptyCopy {
+  margin: 0;
+  color: #3a3a3a;
+  line-height: 1.6;
+}
+
+.filterBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filterLabel {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #3a3a3a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterButton {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  border: 1px solid #3b477a;
+  background: #ffffff;
+  color: #1032cf;
+  cursor: pointer;
+  font: inherit;
+}
+
+.filterButtonActive {
+  border-color: #1032cf;
+  background: #1032cf;
+  color: #ffffff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 20px;
+  border: 1px solid #d6d6d6;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.cardHeader {
+  margin-bottom: 12px;
+}
+
+.cardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.categoryBadge,
+.featuredBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.categoryBadge {
+  background: #f0efff;
+  color: #4a42e0;
+}
+
+.featuredBadge {
+  background: #e8f1ff;
+  color: #1032cf;
+}
+
+.cardBody {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.cardMeta {
+  margin: 0;
+  color: #707070;
+  font-size: 14px;
+}
+
+.cardDescription {
+  margin: 0;
+  color: #3a3a3a;
+  line-height: 1.6;
+}
+
+.prerequisites {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #f7f8fd;
+  border-left: 3px solid #5b53ff;
+}
+
+.prerequisitesLabel {
+  margin: 0 0 4px;
+  color: #1032cf;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prerequisitesText {
+  margin: 0;
+  color: #2d2d2d;
+  line-height: 1.5;
+}
+
+.inlineMessage {
+  margin-top: 4px;
+}
+
+.cardFooter {
+  margin-top: 16px;
+}
+
+.actionLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #5b53ff;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.actionLink:hover,
+.actionLink:focus-visible {
+  background: #4a42e0;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.footerNote {
+  margin-top: 12px;
+  color: #707070;
+  font-size: 14px;
+}

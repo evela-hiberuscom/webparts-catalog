@@ -32,7 +32,7 @@ export class WebPartErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         <MessageBar messageBarType={MessageBarType.error} isMultiline={true}>
-          <strong>{this.props.title}</strong>{' \u2014 '}{this.props.message}
+          <strong>{this.props.title}</strong>{' - '}{this.props.message}
         </MessageBar>
       );
     }
