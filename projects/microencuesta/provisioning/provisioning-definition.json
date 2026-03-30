@@ -2,19 +2,106 @@
   "projectSlug": "microencuesta",
   "archetype": "general",
   "rowId": "recSZap19q7CuUs5R",
-  "sources": [
+  "dataSources": [
     {
-      "name": "PollList",
-      "type": "SharePointList|ApiEndpoint",
-      "purpose": "preguntas y respuestas"
+      "name": "Poll Questions",
+      "type": "SharePointList",
+      "purpose": "Pregunta activa y opciones configurables",
+      "requiredFields": [
+        {
+          "internalName": "Title",
+          "type": "Single line of text",
+          "required": true
+        },
+        {
+          "internalName": "PollOptions",
+          "type": "Multiple lines of text",
+          "required": true
+        },
+        {
+          "internalName": "IsActive",
+          "type": "Yes/No",
+          "required": true
+        },
+        {
+          "internalName": "PollDescription",
+          "type": "Multiple lines of text",
+          "required": false
+        },
+        {
+          "internalName": "ThankYouMessage",
+          "type": "Multiple lines of text",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "Poll Responses",
+      "type": "SharePointList",
+      "purpose": "Persistencia de respuestas por usuario y pregunta",
+      "requiredFields": [
+        {
+          "internalName": "Title",
+          "type": "Single line of text",
+          "required": true
+        },
+        {
+          "internalName": "PollQuestionId",
+          "type": "Single line of text",
+          "required": true
+        },
+        {
+          "internalName": "QuestionLabel",
+          "type": "Single line of text",
+          "required": true
+        },
+        {
+          "internalName": "SelectedOption",
+          "type": "Single line of text",
+          "required": true
+        },
+        {
+          "internalName": "SubmittedByEmail",
+          "type": "Single line of text",
+          "required": false
+        },
+        {
+          "internalName": "SubmittedByDisplayName",
+          "type": "Single line of text",
+          "required": false
+        },
+        {
+          "internalName": "SubmittedByLoginName",
+          "type": "Single line of text",
+          "required": false
+        }
+      ]
     }
   ],
-  "acceptanceCriteria": [
-    "Permite responder una opción válida.",
-    "Muestra confirmación tras el envío."
-  ],
-  "businessRules": [
-    "Debe seleccionarse una opción antes de enviar.",
-    "Si oneResponsePerUser=true, bloquear reenvíos cuando el origen lo permita."
-  ]
+  "apiContract": {
+    "sameOriginOnly": true,
+    "getResponseShape": {
+      "question": {
+        "id": "string",
+        "question": "string",
+        "description": "string?",
+        "options": [
+          "string"
+        ],
+        "thankYouMessage": "string?"
+      },
+      "alreadySubmitted": "boolean?",
+      "selectedOption": "string?",
+      "submittedAt": "string?"
+    },
+    "postPayloadShape": {
+      "questionId": "string",
+      "selectedOption": "string",
+      "submittedBy": "string",
+      "submittedByDisplayName": "string"
+    }
+  },
+  "staticFallback": {
+    "storageKeyPattern": "microencuesta:<questionId>:<userKey>"
+  }
 }

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "microencuesta-client-side-solution",
+    "id": "90d5db49-fef2-4e77-95b5-f23da4a762b1",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Pregunta rapida de una sola respuesta para recoger feedback ligero en SharePoint."
+      },
+      "longDescription": {
+        "default": "Web part SPFx para publicar una pregunta activa, permitir un unico envio por usuario cuando aplique y mostrar confirmacion inmediata sin sacar al usuario del contexto de la pagina."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Microencuesta Feature",
+        "description": "Activa el web part de microencuesta y sus assets de cliente.",
+        "id": "601842ef-2aec-45df-838b-e10e31170ea7",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/microencuesta.sppkg"
+  }
+}

@@ -1,0 +1,208 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.portalMap {
+  color: "[theme:bodyText, default: #1f2937]";
+  color: var(--bodyText);
+  background: linear-gradient(180deg, rgba(5, 77, 163, 0.06) 0%, rgba(255, 255, 255, 0.98) 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 20px;
+  padding: 20px;
+
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+}
+
+.darkTheme {
+  background: linear-gradient(180deg, rgba(8, 47, 73, 0.32) 0%, rgba(17, 24, 39, 0.18) 100%);
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.subtitle {
+  color: rgba(31, 41, 55, 0.8);
+}
+
+.statCard {
+  min-width: 110px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.statLabel {
+  color: rgba(31, 41, 55, 0.7);
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-weight: 700;
+}
+
+.viewSelector {
+  min-width: 280px;
+}
+
+.surface {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.statePanel {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.noteList {
+  margin: 8px 0 0 16px;
+  padding: 0;
+}
+
+.tree,
+.childList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.childList {
+  margin-left: 20px;
+  padding-left: 12px;
+  border-left: 2px solid rgba(5, 77, 163, 0.12);
+}
+
+.nodeItem {
+  margin-bottom: 12px;
+}
+
+.nodeCard {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.nodeContent {
+  flex: 1 1 320px;
+}
+
+.nodeTitle {
+  font-weight: 700;
+}
+
+.nodeDescription {
+  color: rgba(31, 41, 55, 0.8);
+}
+
+.nodeHint {
+  color: #7f1d1d;
+}
+
+.nodeIcon {
+  font-size: 20px;
+  color: rgba(5, 77, 163, 0.72);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(5, 77, 163, 0.12);
+  color: #054da3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.typeBadge {
+  background: rgba(15, 23, 42, 0.08);
+  color: #111827;
+}
+
+.partialBadge {
+  background: rgba(180, 83, 9, 0.14);
+  color: #92400e;
+}
+
+.groupedView,
+.cardGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.groupSection {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.groupTitle {
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.groupRow {
+  padding: 12px 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.groupRow:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.cardGrid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.portalCard {
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+}
+
+.cardEyebrow {
+  color: #054da3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.cardTitle {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .portalMap {
+    padding: 16px;
+  }
+
+  .viewSelector {
+    min-width: 100%;
+  }
+
+  .statCard {
+    min-width: 90px;
+  }
+
+  .childList {
+    margin-left: 8px;
+    padding-left: 8px;
+  }
+}

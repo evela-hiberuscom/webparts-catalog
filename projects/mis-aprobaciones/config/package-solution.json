@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mis-aprobaciones-client-side-solution",
+    "id": "57292224-4b9f-41ba-a775-8513c1b8bb17",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mis-aprobaciones description"
+      },
+      "longDescription": {
+        "default": "mis-aprobaciones description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mis-aprobaciones Feature",
+        "description": "The feature that activates elements of the mis-aprobaciones solution.",
+        "id": "01c94f56-5ec8-48d5-89e5-779d5f75a6c1",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mis-aprobaciones.sppkg"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mantenimientos-programados-client-side-solution",
+    "id": "629fbf8a-864a-475b-a8b2-d0cde9fc97e3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mantenimientos-programados description"
+      },
+      "longDescription": {
+        "default": "mantenimientos-programados description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mantenimientos-programados Feature",
+        "description": "The feature that activates elements of the mantenimientos-programados solution.",
+        "id": "30649e91-f031-4047-bd6c-a2206f4e3996",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mantenimientos-programados.sppkg"
+  }
+}

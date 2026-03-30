@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "microencuesta",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MicroSurvey",
+    "componentDescription": "Lanza una pregunta rápida de una sola respuesta para recoger feedback ligero y frecuente.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "microencuesta",
+    "libraryId": "90d5db49-fef2-4e77-95b5-f23da4a762b1",
+    "solutionShortDescription": "microencuesta description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,65 @@
+declare interface IPortalMapWebPartStrings {
+  PropertyPaneDescription: string;
+  BasicGroupName: string;
+  DataSourceTypeFieldLabel: string;
+  DataSourceTypeSharePointListOption: string;
+  DataSourceTypeJsonUrlOption: string;
+  DataSourceTypeStaticConfigOption: string;
+  ListTitleOrUrlFieldLabel: string;
+  ListTitleOrUrlDescription: string;
+  ViewModeFieldLabel: string;
+  ViewModeTreeOption: string;
+  ViewModeGroupedOption: string;
+  ViewModeCardsOption: string;
+  MaxDepthFieldLabel: string;
+  WebPartTitle: string;
+  WebPartSubtitle: string;
+  SourceLabelPrefix: string;
+  ViewSwitcherLabel: string;
+  StructureSectionTitle: string;
+  StateLoadingTitle: string;
+  StateLoadingMessage: string;
+  StateEmptyTitle: string;
+  StateEmptyMessage: string;
+  StateErrorTitle: string;
+  StateErrorMessage: string;
+  PartialDataBanner: string;
+  PartialCycleWarning: string;
+  PartialOrphanWarning: string;
+  PartialNoActionWarning: string;
+  PartialUnknownTypeWarning: string;
+  PartialDepthWarning: string;
+  SourceLabelStaticConfig: string;
+  SourceLabelJsonUrl: string;
+  SourceLabelSharePointList: string;
+  StatsRootsLabel: string;
+  StatsNodesLabel: string;
+  TreeAriaLabel: string;
+  GroupedAriaLabel: string;
+  CardsAriaLabel: string;
+  NodeTypeHub: string;
+  NodeTypeSite: string;
+  NodeTypeArea: string;
+  NodeTypeUtility: string;
+  NodeTypeUnknown: string;
+  GroupsHubLabel: string;
+  GroupsSiteLabel: string;
+  GroupsAreaLabel: string;
+  GroupsUtilityLabel: string;
+  GroupsUnknownLabel: string;
+  NodeBadgeFeatured: string;
+  NodeBadgePartial: string;
+  NodeBadgeOrphan: string;
+  NodeOpenButton: string;
+  NodeExpandLabel: string;
+  NodeCollapseLabel: string;
+  NodeNoLinkMessage: string;
+  UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
+}
+
+declare module 'PortalMapWebPartStrings' {
+  const strings: IPortalMapWebPartStrings;
+  export = strings;
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mantenimientos-programados",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "PlannedMaintenance",
+    "componentDescription": "Muestra ventanas de mantenimiento planificadas, servicios afectados e impacto previsto.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mantenimientos-programados",
+    "libraryId": "629fbf8a-864a-475b-a8b2-d0cde9fc97e3",
+    "solutionShortDescription": "mantenimientos-programados description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

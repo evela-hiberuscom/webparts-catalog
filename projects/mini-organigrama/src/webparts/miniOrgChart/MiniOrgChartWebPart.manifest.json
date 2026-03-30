@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "95f18687-3a8f-43ab-becc-5be3b88528da",
+  "alias": "MiniOrgChartWebPart",
+  "componentType": "WebPart",
+
+  // The "*" signifies that the version should be taken from the package.json
+  "version": "*",
+  "manifestVersion": 2,
+
+  // If true, the component can only be installed on sites where Custom Script is allowed.
+  // Components that allow authors to embed arbitrary script code should set this to true.
+  // https://support.office.com/en-us/article/Turn-scripting-capabilities-on-or-off-1f2c515f-5d7e-448a-9fd7-835da935584f
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "TeamsPersonalApp", "TeamsTab", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
+    "group": { "default": "Advanced" },
+    "title": { "default": "Mini organigrama" },
+    "description": { "default": "Muestra una jerarquía simple de manager-equipo o una cadena corta de reporting para dar contexto organizativo." },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "title": "Mini organigrama",
+      "description": "Muestra una jerarquía simple de manager-equipo o una cadena corta de reporting para dar contexto organizativo.",
+      "dataSourceTypesCsv": "Directory,SharePointList",
+      "viewMode": "managerWithReports",
+      "maxDepth": 2
+    }
+  }]
+}

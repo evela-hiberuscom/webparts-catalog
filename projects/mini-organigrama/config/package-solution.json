@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mini-organigrama-client-side-solution",
+    "id": "1d5180c4-e66c-454c-8776-f1b77dd0e832",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mini-organigrama description"
+      },
+      "longDescription": {
+        "default": "mini-organigrama description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mini-organigrama Feature",
+        "description": "The feature that activates elements of the mini-organigrama solution.",
+        "id": "63d0bbf9-7f3e-4fae-8a4f-af49e50bc494",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mini-organigrama.sppkg"
+  }
+}

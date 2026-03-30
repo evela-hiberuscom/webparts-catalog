@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mapa-de-portales-client-side-solution",
+    "id": "57abe8f5-43f1-4fe3-85bc-9d5c5c575b6d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Mapa de portales para orientar la navegación dentro de la intranet."
+      },
+      "longDescription": {
+        "default": "Representa hubs, sites, áreas y utilidades de SharePoint como un mapa lógico con vista árbol, agrupada o en tarjetas."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mapa-de-portales Feature",
+        "description": "The feature that activates elements of the mapa-de-portales solution.",
+        "id": "273ed19a-a3f1-4f04-9123-fb2333a60d91",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mapa-de-portales.sppkg"
+  }
+}

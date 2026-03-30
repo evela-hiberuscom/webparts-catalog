@@ -9,6 +9,21 @@
       "purpose": "estructura de hubs/sites/áreas"
     }
   ],
+  "sharePointLists": [
+    {
+      "title": "PortalMapList",
+      "description": "Mapa lógico de portales y hubs de la intranet.",
+      "fields": [
+        { "internalName": "Title", "type": "Text", "required": true },
+        { "internalName": "NodeType", "type": "Choice", "required": false, "choices": ["hub", "site", "area", "utility"] },
+        { "internalName": "ParentId", "type": "Text", "required": false },
+        { "internalName": "Description", "type": "Note", "required": false },
+        { "internalName": "OpenUrl", "type": "URL", "required": false },
+        { "internalName": "Featured", "type": "Boolean", "required": false },
+        { "internalName": "SortOrder", "type": "Number", "required": false }
+      ]
+    }
+  ],
   "acceptanceCriteria": [
     "Muestra estructura de portales configurada.",
     "Permite abrir nodos válidos.",
@@ -19,5 +34,27 @@
     "Si un nodo no tiene padre conocido, puede mostrarse como raíz o no clasificado.",
     "Si falta URL, el nodo sigue siendo informativo pero no accionable.",
     "Los hubs o nodos destacados pueden ir primero."
+  ],
+  "sampleRecords": [
+    {
+      "Id": "hub-sales",
+      "Title": "Hub Comercial",
+      "NodeType": "hub",
+      "ParentId": "",
+      "Description": "Entrada principal a ventas y clientes.",
+      "OpenUrl": "/sites/sales-hub",
+      "Featured": true,
+      "SortOrder": 1
+    },
+    {
+      "Id": "site-customers",
+      "Title": "Portal Clientes",
+      "NodeType": "site",
+      "ParentId": "hub-sales",
+      "Description": "Operativa y recursos de atención a clientes.",
+      "OpenUrl": "/sites/clientes",
+      "Featured": false,
+      "SortOrder": 2
+    }
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mis-aprobaciones",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MyApprovals",
+    "componentDescription": "Centraliza aprobaciones pendientes del usuario para acelerar la toma de decisión y evitar bloqueos de procesos.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mis-aprobaciones",
+    "libraryId": "57292224-4b9f-41ba-a775-8513c1b8bb17",
+    "solutionShortDescription": "mis-aprobaciones description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

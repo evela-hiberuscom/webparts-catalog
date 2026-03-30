@@ -16,9 +16,25 @@
     "Abre detalle cuando existe."
   ],
   "businessRules": [
-    "Si now está entre start y end => inProgress.",
+    "Si now esta entre start y end => inProgress.",
     "Si now < start => upcoming.",
     "Si now > end => completed.",
     "Si faltan fechas obligatorias, el registro pasa a partialData."
-  ]
+  ],
+  "siteProvisioning": {
+    "lists": [
+      {
+        "title": "MaintenanceList",
+        "purpose": "ventanas de mantenimiento",
+        "columns": [
+          { "name": "Title", "type": "Single line of text", "required": true },
+          { "name": "StartAt", "type": "Date and Time", "required": false },
+          { "name": "EndAt", "type": "Date and Time", "required": false },
+          { "name": "Impact", "type": "Choice", "choices": ["low", "medium", "high", "unknown"], "required": false },
+          { "name": "Services", "type": "Multiple lines of text", "required": false },
+          { "name": "DetailUrl", "type": "Hyperlink or Picture", "required": false }
+        ]
+      }
+    ]
+  }
 }

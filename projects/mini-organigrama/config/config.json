@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "mini-org-chart-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/miniOrgChart/MiniOrgChartWebPart.js",
+          "manifest": "./src/webparts/miniOrgChart/MiniOrgChartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MiniOrgChartWebPartStrings": "lib/webparts/miniOrgChart/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,99 @@
+.root {
+  padding: 16px;
+  color: var(--bodyText, #323130);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 248, 248, 0.88));
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.subtitle,
+.meta {
+  color: var(--body-subtext, #605e5c);
+}
+
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.reloadButton {
+  border: 0;
+  background: transparent;
+  color: var(--link, #0f6cbd);
+  cursor: pointer;
+  padding: 0;
+}
+
+.tree {
+  margin-top: 16px;
+}
+
+.treeGrid,
+.compactTree {
+  display: grid;
+  gap: 16px;
+}
+
+.childrenGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.chainList {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 12px;
+}
+
+.nodeCard {
+  padding: 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nodeCardRoot {
+  border-color: rgba(15, 108, 189, 0.24);
+  background: linear-gradient(180deg, rgba(15, 108, 189, 0.08), #ffffff);
+}
+
+.badge,
+.badgeMuted {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge {
+  background: rgba(15, 108, 189, 0.12);
+  color: #0f6cbd;
+}
+
+.badgeMuted {
+  background: rgba(96, 94, 92, 0.12);
+  color: #605e5c;
+}
+
+.details {
+  margin-top: 12px;
+}
+
+@media (max-width: 640px) {
+  .root {
+    padding: 12px;
+  }
+}
+

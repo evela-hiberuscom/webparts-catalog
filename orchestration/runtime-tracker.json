@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-30T09:35:00+02:00",
+  "updatedAt": "2026-03-30T09:50:00+02:00",
   "projects": [
     {
       "slug": "conoce-al-equipo",
@@ -104,6 +104,106 @@
         "Catalog launcher implemented with context, hooks and repository",
         "Column mapping assumptions remain documented for tenant validation",
         "Static red-team left medium backlog for endpoint/list-scale hardening"
+      ]
+    },
+    {
+      "slug": "mantenimientos-programados",
+      "waveId": "B",
+      "agentId": "019d1eb8-ee88-7ae1-82b5-50a0cb1e2a07",
+      "agentNickname": "Banach",
+      "phase": "assigned_prepared",
+      "lastTrackedAt": "2026-03-30T09:50:00+02:00",
+      "lastSignal": "wave_b_assigned",
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "test": "pending",
+        "package": "pending",
+        "audit": "pending"
+      },
+      "notes": [
+        "Start from prepared project context only",
+        "Apply ISSUE-006 ISSUE-018 ISSUE-026 ISSUE-029 from the first commit"
+      ]
+    },
+    {
+      "slug": "mapa-de-portales",
+      "waveId": "B",
+      "agentId": "019d1eb9-1aea-7293-b533-eae269718c85",
+      "agentNickname": "Dewey",
+      "phase": "assigned_prepared",
+      "lastTrackedAt": "2026-03-30T09:50:00+02:00",
+      "lastSignal": "wave_b_assigned",
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "test": "pending",
+        "package": "pending",
+        "audit": "pending"
+      },
+      "notes": [
+        "Start from prepared project context only",
+        "Apply ISSUE-006 ISSUE-018 ISSUE-026 ISSUE-029 from the first commit"
+      ]
+    },
+    {
+      "slug": "microencuesta",
+      "waveId": "B",
+      "agentId": "019d1eb9-31f2-7e21-afb5-6c7030b8b56d",
+      "agentNickname": "Arendt",
+      "phase": "assigned_prepared",
+      "lastTrackedAt": "2026-03-30T09:50:00+02:00",
+      "lastSignal": "wave_b_assigned",
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "test": "pending",
+        "package": "pending",
+        "audit": "pending"
+      },
+      "notes": [
+        "Start from prepared project context only",
+        "Apply ISSUE-006 ISSUE-018 ISSUE-026 ISSUE-029 from the first commit"
+      ]
+    },
+    {
+      "slug": "mini-organigrama",
+      "waveId": "B",
+      "agentId": "019d3d64-4404-75a0-93a5-84d7f9ad2ce1",
+      "agentNickname": "Rawls",
+      "phase": "assigned_prepared",
+      "lastTrackedAt": "2026-03-30T09:50:00+02:00",
+      "lastSignal": "wave_b_assigned",
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "test": "pending",
+        "package": "pending",
+        "audit": "pending"
+      },
+      "notes": [
+        "Start from prepared project context only",
+        "Apply ISSUE-006 ISSUE-018 ISSUE-026 ISSUE-029 from the first commit"
+      ]
+    },
+    {
+      "slug": "mis-aprobaciones",
+      "waveId": "B",
+      "agentId": "019d3d64-6047-7822-bfe0-588f9899ab73",
+      "agentNickname": "Avicenna",
+      "phase": "assigned_prepared",
+      "lastTrackedAt": "2026-03-30T09:50:00+02:00",
+      "lastSignal": "wave_b_assigned",
+      "gates": {
+        "implementation": "pending",
+        "build": "pending",
+        "test": "pending",
+        "package": "pending",
+        "audit": "pending"
+      },
+      "notes": [
+        "Start from prepared project context only",
+        "Apply ISSUE-006 ISSUE-018 ISSUE-026 ISSUE-029 from the first commit"
       ]
     }
   ]

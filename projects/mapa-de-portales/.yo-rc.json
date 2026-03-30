@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mapa-de-portales",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "PortalMap",
+    "componentDescription": "Ofrece una vista estructurada de hubs, sites, áreas y utilidades para navegar la intranet como un mapa lógico.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mapa-de-portales",
+    "libraryId": "57abe8f5-43f1-4fe3-85bc-9d5c5c575b6d",
+    "solutionShortDescription": "mapa-de-portales description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

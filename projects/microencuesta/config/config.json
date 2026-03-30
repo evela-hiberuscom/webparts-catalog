@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "micro-survey-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/microSurvey/MicroSurveyWebPart.js",
+          "manifest": "./src/webparts/microSurvey/MicroSurveyWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MicroSurveyWebPartStrings": "lib/webparts/microSurvey/loc/{locale}.js"
+  }
+}
