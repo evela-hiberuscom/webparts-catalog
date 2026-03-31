@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "tarjeta-de-decision-rapida-client-side-solution",
+    "id": "c115c0eb-374f-4467-8992-8150a6e9b496",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "tarjeta-de-decision-rapida description"
+      },
+      "longDescription": {
+        "default": "tarjeta-de-decision-rapida description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "tarjeta-de-decision-rapida Feature",
+        "description": "The feature that activates elements of the tarjeta-de-decision-rapida solution.",
+        "id": "87daff28-a2ba-4f4d-81a4-f230dcea826e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/tarjeta-de-decision-rapida.sppkg"
+  }
+}

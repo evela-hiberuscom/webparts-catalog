@@ -1,0 +1,4 @@
+export interface IRouteStep { id: string; title: string; description: string; linkUrl: string | undefined; icon: string; order: number; }
+export interface IGuidedRouteConfiguration { dataSourceType: 'SharePointList' | 'JsonUrl' | 'StaticConfig'; listTitleOrUrl: string; routeTitle: string; maxSteps: number; autoRefreshSeconds?: number; }
+export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'empty' } | { status: 'partialData'; data: T; hasPartialData: boolean } | { status: 'error'; message: string };
+export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;

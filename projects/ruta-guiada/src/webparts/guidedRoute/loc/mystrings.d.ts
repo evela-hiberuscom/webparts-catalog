@@ -1,0 +1,2 @@
+declare interface IGuidedRouteWebPartStrings { PropertyPaneDescription: string; WebPartTitle: string; PropertyPaneGeneralGroupName: string; DataSourceFieldLabel: string; DataSourceSharePointListLabel: string; DataSourceJsonUrlLabel: string; DataSourceStaticConfigLabel: string; ListTitleOrUrlFieldLabel: string; MaxStepsFieldLabel: string; AppLocalEnvironmentSharePoint: string; AppSharePointEnvironment: string; UnknownEnvironment: string; }
+declare module 'GuidedRouteWebPartStrings' { const strings: IGuidedRouteWebPartStrings; export = strings; }

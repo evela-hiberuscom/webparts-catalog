@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "pregunta-destacada",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "FeaturedQuestion",
+    "componentDescription": "Destaca una única pregunta o reflexión relevante para atraer interacción o foco editorial.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "pregunta-destacada",
+    "libraryId": "b629998d-eaa7-421a-a10f-0c1543fe706d",
+    "solutionShortDescription": "pregunta-destacada description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

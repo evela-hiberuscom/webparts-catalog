@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "pregunta-destacada-client-side-solution",
+    "id": "b629998d-eaa7-421a-a10f-0c1543fe706d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "pregunta-destacada description"
+      },
+      "longDescription": {
+        "default": "pregunta-destacada description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "pregunta-destacada Feature",
+        "description": "The feature that activates elements of the pregunta-destacada solution.",
+        "id": "c686739b-294d-4f94-9661-00ae07229940",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/pregunta-destacada.sppkg"
+  }
+}

@@ -1,0 +1,2 @@
+declare interface ISitesPresenceWebPartStrings { PropertyPaneDescription: string; WebPartTitle: string; PropertyPaneGeneralGroupName: string; DataSourceFieldLabel: string; DataSourceSharePointListLabel: string; DataSourceJsonUrlLabel: string; DataSourceStaticConfigLabel: string; ListTitleOrUrlFieldLabel: string; MaxItemsFieldLabel: string; AppLocalEnvironmentSharePoint: string; AppSharePointEnvironment: string; UnknownEnvironment: string; }
+declare module 'SitesPresenceWebPartStrings' { const strings: ISitesPresenceWebPartStrings; export = strings; }

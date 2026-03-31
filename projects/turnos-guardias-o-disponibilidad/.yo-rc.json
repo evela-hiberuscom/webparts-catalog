@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "turnos-guardias-o-disponibilidad",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ShiftsGuardsAvailability",
+    "componentDescription": "Muestra quién está de turno, de guardia o disponible en un periodo concreto, con horarios, cobertura y contacto rápido.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "turnos-guardias-o-disponibilidad",
+    "libraryId": "93474ca9-0533-4dd2-8522-cfe05ca9b896",
+    "solutionShortDescription": "turnos-guardias-o-disponibilidad description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

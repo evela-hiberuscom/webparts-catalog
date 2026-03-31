@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "presencia-de-sedes-client-side-solution",
+    "id": "1a5b7736-4369-40bc-8c95-6b9cc9c67445",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "presencia-de-sedes description"
+      },
+      "longDescription": {
+        "default": "presencia-de-sedes description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "presencia-de-sedes Feature",
+        "description": "The feature that activates elements of the presencia-de-sedes solution.",
+        "id": "289a3842-9432-4933-a8f6-74a5c362c17c",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/presencia-de-sedes.sppkg"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "ruta-guiada",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "GuidedRoute",
+    "componentDescription": "Presenta un pequeño recorrido paso a paso por contenidos, recursos o acciones recomendadas según un objetivo concreto.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "ruta-guiada",
+    "libraryId": "fbff871b-a3a4-424c-b5d0-7f1d3fcc00e8",
+    "solutionShortDescription": "ruta-guiada description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

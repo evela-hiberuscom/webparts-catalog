@@ -1,0 +1,4 @@
+export interface IAzEntry { id: string; letter: string; title: string; description: string | undefined; linkUrl: string | undefined; }
+export interface ICorporateAzConfiguration { dataSourceType: 'SharePointList' | 'JsonUrl' | 'StaticConfig'; listTitleOrUrl: string; maxItems: number; autoRefreshSeconds?: number; }
+export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'empty' } | { status: 'partialData'; data: T; hasPartialData: boolean } | { status: 'error'; message: string };
+export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;

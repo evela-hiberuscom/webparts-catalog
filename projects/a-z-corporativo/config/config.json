@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "corporate-az-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/corporateAz/CorporateAzWebPart.js",
+          "manifest": "./src/webparts/corporateAz/CorporateAzWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CorporateAzWebPartStrings": "lib/webparts/corporateAz/loc/{locale}.js"
+  }
+}

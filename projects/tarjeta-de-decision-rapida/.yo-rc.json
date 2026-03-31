@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "tarjeta-de-decision-rapida",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "QuickDecisionCard",
+    "componentDescription": "Presenta una decisión puntual con pocas opciones y contexto mínimo para acelerar pequeñas validaciones o elecciones.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "tarjeta-de-decision-rapida",
+    "libraryId": "c115c0eb-374f-4467-8992-8150a6e9b496",
+    "solutionShortDescription": "tarjeta-de-decision-rapida description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

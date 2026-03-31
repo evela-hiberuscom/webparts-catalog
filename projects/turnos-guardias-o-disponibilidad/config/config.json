@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "shifts-guards-availability-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/shiftsGuardsAvailability/ShiftsGuardsAvailabilityWebPart.js",
+          "manifest": "./src/webparts/shiftsGuardsAvailability/ShiftsGuardsAvailabilityWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ShiftsGuardsAvailabilityWebPartStrings": "lib/webparts/shiftsGuardsAvailability/loc/{locale}.js"
+  }
+}

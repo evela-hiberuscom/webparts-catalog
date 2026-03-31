@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "a-z-corporativo-client-side-solution",
+    "id": "f3234112-7d7b-4c95-83ff-662d46f49f1b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "a-z-corporativo description"
+      },
+      "longDescription": {
+        "default": "a-z-corporativo description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "a-z-corporativo Feature",
+        "description": "The feature that activates elements of the a-z-corporativo solution.",
+        "id": "512abfff-df8d-4d83-867f-e693e8446934",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/a-z-corporativo.sppkg"
+  }
+}

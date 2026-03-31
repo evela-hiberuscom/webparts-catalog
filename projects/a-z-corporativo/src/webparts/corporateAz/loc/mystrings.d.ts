@@ -1,0 +1,2 @@
+declare interface ICorporateAzWebPartStrings { PropertyPaneDescription: string; WebPartTitle: string; PropertyPaneGeneralGroupName: string; DataSourceFieldLabel: string; DataSourceSharePointListLabel: string; DataSourceJsonUrlLabel: string; DataSourceStaticConfigLabel: string; ListTitleOrUrlFieldLabel: string; MaxItemsFieldLabel: string; AppLocalEnvironmentSharePoint: string; AppSharePointEnvironment: string; UnknownEnvironment: string; }
+declare module 'CorporateAzWebPartStrings' { const strings: ICorporateAzWebPartStrings; export = strings; }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "quick-decision-card-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/quickDecisionCard/QuickDecisionCardWebPart.js",
+          "manifest": "./src/webparts/quickDecisionCard/QuickDecisionCardWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "QuickDecisionCardWebPartStrings": "lib/webparts/quickDecisionCard/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "turnos-guardias-o-disponibilidad-client-side-solution",
+    "id": "93474ca9-0533-4dd2-8522-cfe05ca9b896",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "turnos-guardias-o-disponibilidad description"
+      },
+      "longDescription": {
+        "default": "turnos-guardias-o-disponibilidad description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "turnos-guardias-o-disponibilidad Feature",
+        "description": "The feature that activates elements of the turnos-guardias-o-disponibilidad solution.",
+        "id": "0d0c00fe-dd72-48fd-802b-8fe02152be61",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/turnos-guardias-o-disponibilidad.sppkg"
+  }
+}

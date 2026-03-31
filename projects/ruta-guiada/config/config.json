@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "guided-route-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/guidedRoute/GuidedRouteWebPart.js",
+          "manifest": "./src/webparts/guidedRoute/GuidedRouteWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "GuidedRouteWebPartStrings": "lib/webparts/guidedRoute/loc/{locale}.js"
+  }
+}

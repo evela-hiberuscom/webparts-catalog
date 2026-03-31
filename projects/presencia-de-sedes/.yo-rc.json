@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "presencia-de-sedes",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SitesPresence",
+    "componentDescription": "Muestra información operativa ligera sobre sedes: horarios, recepción, aforo, festivos o estado abierto/cerrado.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "presencia-de-sedes",
+    "libraryId": "1a5b7736-4369-40bc-8c95-6b9cc9c67445",
+    "solutionShortDescription": "presencia-de-sedes description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

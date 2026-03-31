@@ -1,0 +1,4 @@
+export interface ISitePresence { id: string; name: string; address: string | undefined; status: 'open' | 'closed' | 'limited'; capacity: number | undefined; currentOccupancy: number | undefined; hours: string | undefined; contact: string | undefined; }
+export interface ISitesPresenceConfiguration { dataSourceType: 'SharePointList' | 'JsonUrl' | 'StaticConfig'; listTitleOrUrl: string; maxItems: number; autoRefreshSeconds?: number; }
+export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+export type AsyncState<T> = { status: 'loading' } | { status: 'ready'; data: T } | { status: 'empty' } | { status: 'partialData'; data: T; hasPartialData: boolean } | { status: 'error'; message: string };

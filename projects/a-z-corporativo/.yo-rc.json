@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "a-z-corporativo",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "CorporateAZ",
+    "componentDescription": "Organiza recursos, enlaces o términos corporativos en un índice alfabético simple para exploración rápida.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "a-z-corporativo",
+    "libraryId": "f3234112-7d7b-4c95-83ff-662d46f49f1b",
+    "solutionShortDescription": "a-z-corporativo description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}
