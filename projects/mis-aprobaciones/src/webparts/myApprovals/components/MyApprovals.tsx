@@ -1,43 +1,50 @@
 import * as React from 'react';
+import { MessageBar, MessageBarType, Spinner, SpinnerSize, Stack, Text } from '@fluentui/react';
+import * as strings from 'MyApprovalsWebPartStrings';
+import { useMyApprovals } from '../hooks/useMyApprovals';
+import { IMyApprovalsProps } from './IMyApprovalsProps';
+import { ApprovalsList } from './ApprovalsList';
+import { ApprovalsSummary } from './ApprovalsSummary';
 import styles from './MyApprovals.module.scss';
-import type { IMyApprovalsProps } from './IMyApprovalsProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class MyApprovals extends React.Component<IMyApprovalsProps> {
-  public render(): React.ReactElement<IMyApprovalsProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+export function MyApprovals(props: IMyApprovalsProps): React.ReactElement<IMyApprovalsProps> {
+  const { title, description, config, service } = props;
+  const { isLoading, error, snapshot, refresh } = useMyApprovals({ config, service });
 
-    return (
-      <section className={`${styles.myApprovals} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
-    );
-  }
+  return (
+    <Stack tokens={{ childrenGap: 16 }} className={styles.myApprovals} styles={{ root: { padding: 16 } }} data-testid="my-approvals-root">
+      <Stack tokens={{ childrenGap: 6 }} className={styles.myApprovalsHeader}>
+        <Text variant="xLarge">{title}</Text>
+        {description ? <Text variant="small">{description}</Text> : null}
+      </Stack>
+
+      {isLoading ? (
+        <MessageBar messageBarType={MessageBarType.info}>
+          <Spinner size={SpinnerSize.small} label={strings.LoadingMessage} />
+        </MessageBar>
+      ) : null}
+
+      {error ? (
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          actions={<button type="button" onClick={() => { refresh().catch(() => undefined); }}>{strings.RetryLabel}</button>}
+        >
+          {strings.ErrorMessage}
+        </MessageBar>
+      ) : null}
+
+      {snapshot ? (
+        <>
+          {snapshot.hasPartialData ? (
+            <MessageBar messageBarType={MessageBarType.warning}>{strings.PartialDataMessage}</MessageBar>
+          ) : null}
+          <ApprovalsSummary counts={snapshot.counts} hasPartialData={snapshot.hasPartialData} onRefresh={() => { refresh().catch(() => undefined); }} />
+          <ApprovalsList items={snapshot.items} />
+          {!isLoading && snapshot.items.length === 0 ? <MessageBar messageBarType={MessageBarType.info}>{strings.EmptyMessage}</MessageBar> : null}
+        </>
+      ) : null}
+    </Stack>
+  );
 }
+
+export default MyApprovals;

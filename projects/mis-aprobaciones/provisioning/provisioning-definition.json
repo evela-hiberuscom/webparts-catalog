@@ -2,27 +2,54 @@
   "projectSlug": "mis-aprobaciones",
   "archetype": "general",
   "rowId": "reckRsMhPOJPL7QqX",
-  "sources": [
+  "dataSources": [
     {
       "name": "Approvals",
       "type": "Connector/API",
-      "purpose": "aprobaciones pendientes"
+      "purpose": "aprobaciones pendientes del usuario actual",
+      "fields": [
+        "title",
+        "requester",
+        "source",
+        "status",
+        "dueDate",
+        "createdDate",
+        "openUrl"
+      ]
     },
     {
       "name": "SharePointApprovalsList",
       "type": "SharePointList",
-      "purpose": "aprobaciones locales"
+      "purpose": "aprobaciones locales o replicadas",
+      "fields": [
+        "Title",
+        "Requester",
+        "Source",
+        "Status",
+        "DueDate",
+        "Created",
+        "OpenUrl"
+      ]
     }
   ],
-  "acceptanceCriteria": [
-    "Muestra aprobaciones pendientes correctamente.",
-    "Marca vencidas cuando aplica.",
-    "Permite abrir el detalle.",
-    "Funciona con datos parciales sin romper la UI."
-  ],
+  "webPartProperties": {
+    "title": "Mis aprobaciones",
+    "dataSourceType": "Approvals",
+    "sourceUrl": "",
+    "listTitleOrUrl": "",
+    "showCompleted": false,
+    "maxItems": 10,
+    "defaultSort": "dueDate"
+  },
   "businessRules": [
-    "Una aprobación vencida se marca si dueDate < now y status pendiente.",
-    "Completadas se ocultan por defecto.",
-    "Si falta dueDate, se ordena por createdDate o prioridad de origen."
+    "Una aprobación vencida se clasifica cuando dueDate < now y el estado sigue pendiente.",
+    "Las aprobaciones completadas se ocultan por defecto.",
+    "Si falta dueDate, se ordena por createdDate y luego por origen.",
+    "Si falta openUrl, el elemento se muestra como parcialmente accionable."
+  ],
+  "security": [
+    "mínimo privilegio",
+    "same-origin para URLs externas",
+    "solo lectura en V1"
   ]
 }

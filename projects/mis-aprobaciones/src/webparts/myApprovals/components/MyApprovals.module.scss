@@ -1,34 +1,35 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .myApprovals {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
+  color: "[theme:bodyText, default: #242424]";
   color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+  background: linear-gradient(180deg, rgba(248, 250, 253, 0.92), rgba(255, 255, 255, 1));
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
 }
 
-.welcome {
-  text-align: center;
+.myApprovalsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
+.myApprovalsSummary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+.myApprovalsList {
+  display: grid;
+  gap: 0.75rem;
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
+.myApprovalsCard {
+  border-radius: 12px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }

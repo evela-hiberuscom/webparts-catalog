@@ -17,12 +17,18 @@
 
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
-    "group": { "default": "Advanced" },
-    "title": { "default": "MyApprovals" },
+    "group": { "default": "Productividad" },
+    "title": { "default": "Mis aprobaciones" },
     "description": { "default": "Centraliza aprobaciones pendientes del usuario para acelerar la toma de decisión y evitar bloqueos de procesos." },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "MyApprovals"
+      "title": "Mis aprobaciones",
+      "dataSourceType": "Approvals",
+      "sourceUrl": "",
+      "listTitleOrUrl": "",
+      "showCompleted": false,
+      "maxItems": 10,
+      "defaultSort": "dueDate"
     }
   }]
 }

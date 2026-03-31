@@ -93,10 +93,24 @@ function classifyProject(projectDir, slug) {
   };
 }
 
+function resolveTrackedStatus(runtimeStatus, trackedPhase) {
+  if (trackedPhase === "rework_required") {
+    return "in_progress";
+  }
+
+  return runtimeStatus;
+}
+
 const items = catalog.items.map((item) => {
   const projectDir = path.join(rootDir, "projects", item.slug);
   const runtime = classifyProject(projectDir, item.slug);
   const tracked = runtimeProjects.get(item.slug);
+  const effectiveStatus = resolveTrackedStatus(runtime.status, tracked?.phase);
+  const completionRank =
+    effectiveStatus === "packaged" ? 3 :
+    effectiveStatus === "in_progress" ? 2 :
+    effectiveStatus === "prepared" ? 1 :
+    0;
 
   return {
     rowId: item.rowId,
@@ -105,8 +119,9 @@ const items = catalog.items.map((item) => {
     waveNumber: item.waveNumber,
     archetype: item.archetype,
     enrichmentStatus: item.enrichmentStatus,
-    progressStatus: runtime.status,
-    completionRank: runtime.completionRank,
+    physicalStatus: runtime.status,
+    progressStatus: effectiveStatus,
+    completionRank,
     runtimePhase: tracked?.phase ?? null,
     auditStatus: tracked?.gates?.audit ?? (runtime.status === "packaged" ? "pending" : "not-started"),
     agentId: tracked?.agentId ?? null,

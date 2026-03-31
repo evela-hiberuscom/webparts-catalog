@@ -1,7 +1,8 @@
+import { IApprovalsAggregationService, IApprovalsSourceConfig } from '../models/myApprovalsModels';
+
 export interface IMyApprovalsProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+  title: string;
+  description?: string;
+  config: IApprovalsSourceConfig;
+  service?: IApprovalsAggregationService;
 }
