@@ -15,3 +15,4 @@ projects/*/temp/
 projects/*/lib/
 projects/*/sharepoint/solution/*.sppkg
 .playwright-mcp
+.commit_msg.txt
