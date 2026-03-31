@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "panel-de-campana-interna",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "InternalCampaignPanel",
+    "componentDescription": "Promociona campañas internas de bienestar, formación, seguridad o cultura mediante una pieza visual pequeña y reutilizable.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "panel-de-campana-interna",
+    "libraryId": "66546cfe-2e3a-4188-8d38-3ad40d99d87e",
+    "solutionShortDescription": "panel-de-campana-interna description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

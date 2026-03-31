@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mis-tareas-y-pendientes-client-side-solution",
+    "id": "8934f26c-8a92-40b5-bee9-d3d2490ef423",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mis-tareas-y-pendientes description"
+      },
+      "longDescription": {
+        "default": "mis-tareas-y-pendientes description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mis-tareas-y-pendientes Feature",
+        "description": "The feature that activates elements of the mis-tareas-y-pendientes solution.",
+        "id": "fceaf61f-e58a-4b6b-b0bd-c85949264186",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mis-tareas-y-pendientes.sppkg"
+  }
+}

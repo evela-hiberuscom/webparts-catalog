@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "my-tasks-and-pending-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/myTasksAndPending/MyTasksAndPendingWebPart.js",
+          "manifest": "./src/webparts/myTasksAndPending/MyTasksAndPendingWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MyTasksAndPendingWebPartStrings": "lib/webparts/myTasksAndPending/loc/{locale}.js"
+  }
+}

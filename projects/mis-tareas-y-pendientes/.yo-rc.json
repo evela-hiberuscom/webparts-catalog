@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mis-tareas-y-pendientes",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MyTasksAndPending",
+    "componentDescription": "Agrega tareas y pendientes personales desde distintas fuentes corporativas en una vista única y accionable.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mis-tareas-y-pendientes",
+    "libraryId": "8934f26c-8a92-40b5-bee9-d3d2490ef423",
+    "solutionShortDescription": "mis-tareas-y-pendientes description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

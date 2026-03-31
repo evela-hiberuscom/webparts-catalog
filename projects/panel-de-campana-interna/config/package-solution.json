@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "panel-de-campana-interna-client-side-solution",
+    "id": "66546cfe-2e3a-4188-8d38-3ad40d99d87e",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "panel-de-campana-interna description"
+      },
+      "longDescription": {
+        "default": "panel-de-campana-interna description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "panel-de-campana-interna Feature",
+        "description": "The feature that activates elements of the panel-de-campana-interna solution.",
+        "id": "9d47f963-7413-4eb4-bd32-e9848e494347",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/panel-de-campana-interna.sppkg"
+  }
+}

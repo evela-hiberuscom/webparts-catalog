@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mis-documentos-utiles-client-side-solution",
+    "id": "95209a30-dcff-4570-9622-aff48c1b8905",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mis-documentos-utiles description"
+      },
+      "longDescription": {
+        "default": "mis-documentos-utiles description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mis-documentos-utiles Feature",
+        "description": "The feature that activates elements of the mis-documentos-utiles solution.",
+        "id": "8c7ce5b1-7d1f-43d0-b62d-71fb84999c04",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mis-documentos-utiles.sppkg"
+  }
+}

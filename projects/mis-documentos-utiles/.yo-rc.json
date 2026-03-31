@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "mis-documentos-utiles",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "MyUsefulDocuments",
+    "componentDescription": "Muestra una selección configurable de documentos útiles o frecuentes para el usuario, priorizando acceso rápido y contexto mínimo.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "mis-documentos-utiles",
+    "libraryId": "95209a30-dcff-4570-9622-aff48c1b8905",
+    "solutionShortDescription": "mis-documentos-utiles description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

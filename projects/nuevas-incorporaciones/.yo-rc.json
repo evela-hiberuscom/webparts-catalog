@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "nuevas-incorporaciones",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "NewJoiners",
+    "componentDescription": "Presenta a las nuevas incorporaciones recientes con nombre, rol, equipo y una breve bienvenida o contexto.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "nuevas-incorporaciones",
+    "libraryId": "6729112c-75ba-4f3b-a31c-e0985ecc706a",
+    "solutionShortDescription": "nuevas-incorporaciones description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

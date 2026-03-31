@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "nuevas-incorporaciones-client-side-solution",
+    "id": "6729112c-75ba-4f3b-a31c-e0985ecc706a",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "nuevas-incorporaciones description"
+      },
+      "longDescription": {
+        "default": "nuevas-incorporaciones description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "nuevas-incorporaciones Feature",
+        "description": "The feature that activates elements of the nuevas-incorporaciones solution.",
+        "id": "d2f10620-2bc5-42fb-a25c-79071ac44a1f",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/nuevas-incorporaciones.sppkg"
+  }
+}

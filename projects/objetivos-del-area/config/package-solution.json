@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "objetivos-del-area-client-side-solution",
+    "id": "87a3c0a2-94b5-43d2-a5a7-6024ec02b7c5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "objetivos-del-area description"
+      },
+      "longDescription": {
+        "default": "objetivos-del-area description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "objetivos-del-area Feature",
+        "description": "The feature that activates elements of the objetivos-del-area solution.",
+        "id": "d59cec11-52b3-4864-b04a-c8b325305db9",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/objetivos-del-area.sppkg"
+  }
+}

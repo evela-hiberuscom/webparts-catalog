@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "objetivos-del-area",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "AreaGoals",
+    "componentDescription": "Muestra objetivos, OKRs o metas del área con progreso resumido, estado y vínculo a detalle cuando exista.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "objetivos-del-area",
+    "libraryId": "87a3c0a2-94b5-43d2-a5a7-6024ec02b7c5",
+    "solutionShortDescription": "objetivos-del-area description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}
