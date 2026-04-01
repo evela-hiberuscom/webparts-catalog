@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "noticias-por-area-client-side-solution",
+    "id": "9fba17d2-164f-4f2b-a6df-cb91fb67cc87",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "noticias-por-area description"
+      },
+      "longDescription": {
+        "default": "noticias-por-area description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "noticias-por-area Feature",
+        "description": "The feature that activates elements of the noticias-por-area solution.",
+        "id": "e5cc7b98-1fc6-4327-9c2a-72bce627d229",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/noticias-por-area.sppkg"
+  }
+}

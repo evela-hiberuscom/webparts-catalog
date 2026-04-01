@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "resumen-de-noticias",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "NewsSummary",
+    "componentDescription": "Presenta un resumen compacto de noticias relevantes en formato tarjetas o lista ligera.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "resumen-de-noticias",
+    "libraryId": "7ef25242-4b2c-46b6-91a1-97cbc8c5980c",
+    "solutionShortDescription": "resumen-de-noticias description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

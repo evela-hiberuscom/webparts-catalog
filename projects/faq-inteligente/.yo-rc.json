@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "faq-inteligente",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SmartFaq",
+    "componentDescription": "Presenta preguntas frecuentes por tema, categoría o audiencia, con buscador ligero y respuestas accionables.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "faq-inteligente",
+    "libraryId": "0499d926-e499-458d-a017-d8f468b01b29",
+    "solutionShortDescription": "faq-inteligente description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

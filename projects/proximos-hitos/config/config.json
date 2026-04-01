@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "upcoming-milestones-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/upcomingMilestones/UpcomingMilestonesWebPart.js",
+          "manifest": "./src/webparts/upcomingMilestones/UpcomingMilestonesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "UpcomingMilestonesWebPartStrings": "lib/webparts/upcomingMilestones/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "resumen-de-noticias-client-side-solution",
+    "id": "7ef25242-4b2c-46b6-91a1-97cbc8c5980c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "resumen-de-noticias description"
+      },
+      "longDescription": {
+        "default": "resumen-de-noticias description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "resumen-de-noticias Feature",
+        "description": "The feature that activates elements of the resumen-de-noticias solution.",
+        "id": "10c03450-2460-4533-b49b-917bec5a419e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/resumen-de-noticias.sppkg"
+  }
+}

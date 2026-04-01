@@ -32,7 +32,7 @@ export function useMyApprovals(args: IUseMyApprovalsArgs): IUseMyApprovalsResult
   const service = args.service ?? context.service;
   const [state, setState] = React.useState<IApprovalsServiceState>({
     isLoading: true,
-    error: null,
+    error: undefined,
     snapshot: emptySnapshot
   });
 
@@ -49,14 +49,14 @@ export function useMyApprovals(args: IUseMyApprovalsArgs): IUseMyApprovalsResult
     setState((current) => ({
       ...current,
       isLoading: true,
-      error: null
+      error: undefined
     }));
 
     try {
       const snapshot = await service.loadSnapshot(args.config);
       setState({
         isLoading: false,
-        error: null,
+        error: undefined,
         snapshot
       });
     } catch (error) {

@@ -6,6 +6,6 @@ export function useFeaturedQuestion(options: { service: FeaturedQuestionService;
   const { service, configuration } = options;
   const [state, setState] = useState<AsyncState<IFeaturedQuestion[]>>({ status: 'loading' });
   const loadData = useCallback(async (): Promise<void> => { setState(await service.loadQuestion(configuration)); }, [service, configuration]);
-  useEffect(() => { void loadData(); }, [loadData]);
+  useEffect(() => { loadData().catch(() => undefined); }, [loadData]);
   return state;
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Spinner, MessageBar, Stack, Link } from '@fluentui/react';
+import { Text, Spinner, MessageBar, Link } from '@fluentui/react';
 import type { IRouteStep } from '../models/guidedRouteModels';
 
 export interface IGuidedRouteProps {

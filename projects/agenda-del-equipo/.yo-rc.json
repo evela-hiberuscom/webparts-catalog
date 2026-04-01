@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "agenda-del-equipo",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "TeamAgenda",
+    "componentDescription": "Muestra reuniones, demos, eventos o hitos próximos del equipo en una vista compacta y contextual.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "agenda-del-equipo",
+    "libraryId": "cdaa303b-7a37-4ae4-8f1f-60ba0cd816e7",
+    "solutionShortDescription": "agenda-del-equipo description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

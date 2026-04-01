@@ -6,14 +6,14 @@ export type ApprovalSortKey = 'dueDate' | 'createdDate' | 'source';
 export interface IApprovalRecord {
   id: string;
   title: string;
-  requester: string | null;
+  requester: string | undefined;
   source: string;
   status: ApprovalStatus;
-  dueDate: string | null;
-  createdDate: string | null;
-  openUrl: string | null;
-  category?: string | null;
-  details?: string | null;
+  dueDate: string | undefined;
+  createdDate: string | undefined;
+  openUrl: string | undefined;
+  category?: string | undefined;
+  details?: string | undefined;
 }
 
 export interface IApprovalItem extends IApprovalRecord {
@@ -68,6 +68,6 @@ export interface IApprovalsAggregationService {
 
 export interface IApprovalsServiceState {
   isLoading: boolean;
-  error: string | null;
-  snapshot: IApprovalSnapshot | null;
+  error: string | undefined;
+  snapshot: IApprovalSnapshot | undefined;
 }

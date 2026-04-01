@@ -18,11 +18,11 @@ export function useNewJoiners(options: IUseNewJoinersOptions): AsyncState<IJoine
   }, [service, configuration]);
 
   useEffect(() => {
-    void loadData();
+    loadData().catch(() => undefined);
 
     if (autoRefreshSeconds && autoRefreshSeconds > 0) {
       const intervalId = setInterval(() => {
-        void loadData();
+        loadData().catch(() => undefined);
       }, autoRefreshSeconds * 1000);
       return () => clearInterval(intervalId);
     }

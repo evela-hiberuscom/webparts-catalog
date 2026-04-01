@@ -4,7 +4,6 @@ import { Version } from '@microsoft/sp-core-library';
 import { PropertyPaneDropdown, PropertyPaneTextField, PropertyPaneSlider, type IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { type IReadonlyTheme } from '@microsoft/sp-component-base';
-import { SPHttpClient } from '@microsoft/sp-http';
 import * as strings from 'ShiftsGuardsAvailabilityWebPartStrings';
 import ShiftsGuardsAvailability from './components/ShiftsGuardsAvailability';
 import type { IShiftsGuardsConfiguration } from './models/shiftsGuardsModels';

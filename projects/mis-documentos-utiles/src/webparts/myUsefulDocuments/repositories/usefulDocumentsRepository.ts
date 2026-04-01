@@ -99,7 +99,7 @@ export class UsefulDocumentsRepository {
     const isUrl = normalizedUrl.startsWith('/');
 
     let listUrl: string;
-    let selectFields = buildSelectFields();
+    const selectFields = buildSelectFields();
 
     if (isUrl) {
       listUrl = `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`;

@@ -5,6 +5,6 @@ export function useSitesPresence(options: { service: SitesPresenceService; confi
   const { service, configuration } = options;
   const [state, setState] = useState<AsyncState<ISitePresence[]>>({ status: 'loading' });
   const loadData = useCallback(async (): Promise<void> => { setState(await service.loadSites(configuration)); }, [service, configuration]);
-  useEffect(() => { void loadData(); }, [loadData]);
+  useEffect(() => { loadData().catch(() => undefined); }, [loadData]);
   return state;
 }

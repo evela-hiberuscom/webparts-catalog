@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "agenda-del-equipo-client-side-solution",
+    "id": "cdaa303b-7a37-4ae4-8f1f-60ba0cd816e7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "agenda-del-equipo description"
+      },
+      "longDescription": {
+        "default": "agenda-del-equipo description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "agenda-del-equipo Feature",
+        "description": "The feature that activates elements of the agenda-del-equipo solution.",
+        "id": "3e8f1d42-1f05-4b6b-8e77-db2914969708",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/agenda-del-equipo.sppkg"
+  }
+}

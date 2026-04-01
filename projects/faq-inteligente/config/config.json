@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "smart-faq-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/smartFaq/SmartFaqWebPart.js",
+          "manifest": "./src/webparts/smartFaq/SmartFaqWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SmartFaqWebPartStrings": "lib/webparts/smartFaq/loc/{locale}.js"
+  }
+}

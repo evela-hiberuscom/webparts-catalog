@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "glosario-corporativo",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "CorporateGlossary",
+    "componentDescription": "Explica términos internos, siglas y nombres de sistemas para reducir fricción de lenguaje dentro de la organización.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "glosario-corporativo",
+    "libraryId": "a3dc380e-d34b-41f7-9282-3f9f5c09b43c",
+    "solutionShortDescription": "glosario-corporativo description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "que-ha-cambiado-client-side-solution",
+    "id": "8390654c-bfee-42dc-b65c-5b33057916af",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "que-ha-cambiado description"
+      },
+      "longDescription": {
+        "default": "que-ha-cambiado description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "que-ha-cambiado Feature",
+        "description": "The feature that activates elements of the que-ha-cambiado solution.",
+        "id": "ee6601c9-3b06-47ba-aac7-25825ae45f09",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/que-ha-cambiado.sppkg"
+  }
+}

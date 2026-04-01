@@ -6,6 +6,6 @@ export function useQuickDecision(options: { service: QuickDecisionService; confi
   const { service, configuration } = options;
   const [state, setState] = useState<AsyncState<IQuickDecision[]>>({ status: 'loading' });
   const loadData = useCallback(async (): Promise<void> => { setState(await service.loadDecision(configuration)); }, [service, configuration]);
-  useEffect(() => { void loadData(); }, [loadData]);
+  useEffect(() => { loadData().catch(() => undefined); }, [loadData]);
   return state;
 }

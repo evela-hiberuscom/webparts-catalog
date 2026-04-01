@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "glosario-corporativo-client-side-solution",
+    "id": "a3dc380e-d34b-41f7-9282-3f9f5c09b43c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "glosario-corporativo description"
+      },
+      "longDescription": {
+        "default": "glosario-corporativo description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "glosario-corporativo Feature",
+        "description": "The feature that activates elements of the glosario-corporativo solution.",
+        "id": "60fec2b7-905b-4ff5-b8c1-663776317bba",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/glosario-corporativo.sppkg"
+  }
+}

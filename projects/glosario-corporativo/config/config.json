@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "corporate-glossary-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/corporateGlossary/CorporateGlossaryWebPart.js",
+          "manifest": "./src/webparts/corporateGlossary/CorporateGlossaryWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "CorporateGlossaryWebPartStrings": "lib/webparts/corporateGlossary/loc/{locale}.js"
+  }
+}

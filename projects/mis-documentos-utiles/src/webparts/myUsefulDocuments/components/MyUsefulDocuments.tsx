@@ -44,11 +44,11 @@ function ErrorState(props: { message: string }): React.ReactElement {
   );
 }
 
-function getPriorityBadge(priority: IUsefulDocument['priority']): string | null {
+function getPriorityBadge(priority: IUsefulDocument['priority']): string | undefined {
   switch (priority) {
     case 'featured': return '⭐ Destacado';
     case 'frequent': return '🔄 Frecuente';
-    default: return null;
+    default: return undefined;
   }
 }
 

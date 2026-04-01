@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "proximos-hitos-client-side-solution",
+    "id": "bf2c7cd3-fa88-4049-a63e-6b72cc4a0b63",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "proximos-hitos description"
+      },
+      "longDescription": {
+        "default": "proximos-hitos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "proximos-hitos Feature",
+        "description": "The feature that activates elements of the proximos-hitos solution.",
+        "id": "32a4d294-6f77-4cec-8d11-ed7db387a36e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/proximos-hitos.sppkg"
+  }
+}

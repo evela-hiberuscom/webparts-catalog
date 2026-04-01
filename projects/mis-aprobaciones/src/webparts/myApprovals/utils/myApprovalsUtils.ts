@@ -20,14 +20,14 @@ export function normalizeText(value: unknown): string {
   return String(value).trim();
 }
 
-export function normalizeDate(value: unknown): string | null {
+export function normalizeDate(value: unknown): string | undefined {
   const text = normalizeText(value);
   if (!text) {
-    return null;
+    return undefined;
   }
 
   const date = new Date(text);
-  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+  return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 }
 
 export function normalizeStatus(value: unknown): IApprovalRecord['status'] {
@@ -57,14 +57,14 @@ export function normalizeApprovalRecord(raw: Record<string, unknown>, index: num
   return {
     id: normalizeText(raw.Id ?? raw.id) || buildApprovalId(source, title || 'Approval', index),
     title: title || `Approval ${index + 1}`,
-    requester: normalizeText(raw.Requester ?? raw.requester ?? raw.author ?? raw.assignedTo) || null,
+    requester: normalizeText(raw.Requester ?? raw.requester ?? raw.author ?? raw.assignedTo) || undefined,
     source,
     status: normalizeStatus(raw.Status ?? raw.status ?? raw.state ?? raw.approvalStatus),
     dueDate: normalizeDate(raw.DueDate ?? raw.dueDate ?? raw.deadline),
     createdDate: normalizeDate(raw.Created ?? raw.created ?? raw.createdDate),
-    openUrl: normalizeText(raw.OpenUrl ?? raw.openUrl ?? raw.url ?? raw.detailUrl) || null,
-    category: normalizeText(raw.Category ?? raw.category) || null,
-    details: normalizeText(raw.Details ?? raw.details ?? raw.description) || null
+    openUrl: normalizeText(raw.OpenUrl ?? raw.openUrl ?? raw.url ?? raw.detailUrl) || undefined,
+    category: normalizeText(raw.Category ?? raw.category) || undefined,
+    details: normalizeText(raw.Details ?? raw.details ?? raw.description) || undefined
   };
 }
 
@@ -207,7 +207,7 @@ export function decorateApprovalRecord(item: IApprovalRecord, now: Date = new Da
   };
 }
 
-export function normalizeListTitleOrUrl(value: string | undefined | null, siteUrl: string = typeof window !== 'undefined' ? window.location.origin : ''): INormalizedListTarget | undefined {
+export function normalizeListTitleOrUrl(value: string | undefined, siteUrl: string = typeof window !== 'undefined' ? window.location.origin : ''): INormalizedListTarget | undefined {
   const text = normalizeText(value);
   if (!text) {
     return undefined;
@@ -285,10 +285,10 @@ export function createFallbackApprovals(): IApprovalRecord[] {
     {
       id: 'approval-003',
       title: 'Confirmar solicitud de acceso',
-      requester: null,
+      requester: undefined,
       source: 'JsonUrl',
       status: 'pending',
-      dueDate: null,
+      dueDate: undefined,
       createdDate: '2026-03-26T08:20:00.000Z',
       openUrl: '/sites/portal/access-requests/confirm'
     },

@@ -44,22 +44,12 @@ function ErrorState(props: { message: string }): React.ReactElement {
   );
 }
 
-function getGroupLabel(group: ITaskItem['group']): string {
-  switch (group) {
-    case 'overdue': return '⚠️ Vencidas';
-    case 'today': return '📅 Hoy';
-    case 'soon': return '⏳ Próximas';
-    case 'someday': return '📆 Próximo';
-    case 'noDate': return '📋 Sin fecha';
-  }
-}
-
-function getPriorityBadge(priority: ITaskItem['priority']): string | null {
+function getPriorityBadge(priority: ITaskItem['priority']): string | undefined {
   switch (priority) {
     case 'high': return '🔴 Alta';
     case 'medium': return '🟡 Media';
     case 'low': return '🟢 Baja';
-    default: return null;
+    default: return undefined;
   }
 }
 

@@ -6,6 +6,6 @@ export function useShiftsGuards(options: { service: ShiftsGuardsService; configu
   const { service, configuration } = options;
   const [state, setState] = useState<AsyncState<IShiftEntry[]>>({ status: 'loading' });
   const loadData = useCallback(async (): Promise<void> => { setState(await service.loadEntries(configuration)); }, [service, configuration]);
-  useEffect(() => { void loadData(); }, [loadData]);
+  useEffect(() => { loadData().catch(() => undefined); }, [loadData]);
   return state;
 }

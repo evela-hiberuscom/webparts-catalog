@@ -4,7 +4,6 @@ import {
   Spinner,
   MessageBar,
   Link,
-  Stack,
   Persona,
   PersonaSize
 } from '@fluentui/react';
@@ -52,13 +51,6 @@ function JoinerCard(props: { joiner: IJoiner }): React.ReactElement {
     }
   };
 
-  const initials = props.joiner.displayName
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .substring(0, 2)
-    .toUpperCase();
-
   return (
     <div
       style={{
@@ -86,7 +78,7 @@ function JoinerCard(props: { joiner: IJoiner }): React.ReactElement {
 
       {props.joiner.welcomeMessage && (
         <Text styles={{ root: { fontSize: '13px', fontStyle: 'italic', display: 'block', marginBottom: '12px' } }}>
-          "{props.joiner.welcomeMessage}"
+          &ldquo;{props.joiner.welcomeMessage}&rdquo;
         </Text>
       )}
 

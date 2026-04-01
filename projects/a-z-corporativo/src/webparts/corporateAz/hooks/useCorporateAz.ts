@@ -6,6 +6,6 @@ export function useCorporateAz(options: { service: CorporateAzService; configura
   const { service, configuration } = options;
   const [state, setState] = useState<AsyncState<IAzEntry[]>>({ status: 'loading' });
   const loadData = useCallback(async (): Promise<void> => { setState(await service.loadEntries(configuration)); }, [service, configuration]);
-  useEffect(() => { void loadData(); }, [loadData]);
+  useEffect(() => { loadData().catch(() => undefined); }, [loadData]);
   return state;
 }

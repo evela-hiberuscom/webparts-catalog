@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "biblioteca-de-plantillas",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "TemplatesLibrary",
+    "componentDescription": "Facilita el acceso a plantillas corporativas de documentos, presentaciones y recursos reutilizables.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "biblioteca-de-plantillas",
+    "libraryId": "ca855a71-5db0-4393-8ff4-dd1849b5932d",
+    "solutionShortDescription": "biblioteca-de-plantillas description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

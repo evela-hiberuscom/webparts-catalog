@@ -10,15 +10,15 @@ describe('myApprovalsUtils', () => {
   });
 
   it('classifies overdue, today and noDate groups', () => {
-    expect(classifyApprovalGroup({ status: 'pending', dueDate: '2026-03-29T12:00:00.000Z', createdDate: null }, new Date('2026-03-30T10:00:00.000Z'))).toBe('overdue');
-    expect(classifyApprovalGroup({ status: 'pending', dueDate: '2026-03-30T12:00:00.000Z', createdDate: null }, new Date('2026-03-30T10:00:00.000Z'))).toBe('today');
-    expect(classifyApprovalGroup({ status: 'pending', dueDate: null, createdDate: null }, new Date('2026-03-30T10:00:00.000Z'))).toBe('noDate');
+    expect(classifyApprovalGroup({ status: 'pending', dueDate: '2026-03-29T12:00:00.000Z', createdDate: undefined }, new Date('2026-03-30T10:00:00.000Z'))).toBe('overdue');
+    expect(classifyApprovalGroup({ status: 'pending', dueDate: '2026-03-30T12:00:00.000Z', createdDate: undefined }, new Date('2026-03-30T10:00:00.000Z'))).toBe('today');
+    expect(classifyApprovalGroup({ status: 'pending', dueDate: undefined, createdDate: undefined }, new Date('2026-03-30T10:00:00.000Z'))).toBe('noDate');
   });
 
   it('sorts by group and date while preserving partial data', () => {
     const items = createFallbackApprovals().map((item, index) => normalizeApprovalRecord(item as never, index));
     const sorted = sortApprovalItems(items, 'dueDate', new Date('2026-03-30T10:00:00.000Z'));
     expect(sorted[0].title).toContain('vacaciones');
-    expect(sorted.some((item) => item.requester === null)).toBe(true);
+    expect(sorted.some((item) => item.requester === undefined)).toBe(true);
   });
 });

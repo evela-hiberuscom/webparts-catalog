@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "proximos-hitos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "UpcomingMilestones",
+    "componentDescription": "Muestra próximos hitos o entregables relevantes en una timeline ligera y clara.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "proximos-hitos",
+    "libraryId": "bf2c7cd3-fa88-4049-a63e-6b72cc4a0b63",
+    "solutionShortDescription": "proximos-hitos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "faq-inteligente-client-side-solution",
+    "id": "0499d926-e499-458d-a017-d8f468b01b29",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "faq-inteligente description"
+      },
+      "longDescription": {
+        "default": "faq-inteligente description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "faq-inteligente Feature",
+        "description": "The feature that activates elements of the faq-inteligente solution.",
+        "id": "9a7d6f4d-d367-4f97-898d-346f3a98f4b4",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/faq-inteligente.sppkg"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "que-ha-cambiado",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "WhatChangedFeed",
+    "componentDescription": "Muestra cambios recientes en páginas, documentos o políticas clave para mantener visible lo actualizado.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "que-ha-cambiado",
+    "libraryId": "8390654c-bfee-42dc-b65c-5b33057916af",
+    "solutionShortDescription": "que-ha-cambiado description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

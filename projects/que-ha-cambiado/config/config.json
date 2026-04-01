@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "what-changed-feed-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/whatChangedFeed/WhatChangedFeedWebPart.js",
+          "manifest": "./src/webparts/whatChangedFeed/WhatChangedFeedWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "WhatChangedFeedWebPartStrings": "lib/webparts/whatChangedFeed/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "noticias-por-area",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "NewsByArea",
+    "componentDescription": "Filtra y presenta noticias de un área o etiqueta concreta para páginas temáticas o departamentales.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "noticias-por-area",
+    "libraryId": "9fba17d2-164f-4f2b-a6df-cb91fb67cc87",
+    "solutionShortDescription": "noticias-por-area description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

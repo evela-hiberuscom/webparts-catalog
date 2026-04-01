@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "biblioteca-de-plantillas-client-side-solution",
+    "id": "ca855a71-5db0-4393-8ff4-dd1849b5932d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "biblioteca-de-plantillas description"
+      },
+      "longDescription": {
+        "default": "biblioteca-de-plantillas description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "biblioteca-de-plantillas Feature",
+        "description": "The feature that activates elements of the biblioteca-de-plantillas solution.",
+        "id": "7ad85c70-4cb5-462d-8637-80479a535b87",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/biblioteca-de-plantillas.sppkg"
+  }
+}

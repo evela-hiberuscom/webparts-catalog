@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, Spinner, MessageBar, Stack, Label } from '@fluentui/react';
+import { Text, Spinner, MessageBar, Label } from '@fluentui/react';
 import type { IShiftEntry } from '../models/shiftsGuardsModels';
 
 export interface IShiftsGuardsAvailabilityProps {
@@ -20,18 +20,19 @@ function getTypeLabel(type: string): string { return type === 'turno' ? 'Turno' 
 function getTypeColor(type: string): string { return type === 'turno' ? '#0078d4' : type === 'guardia' ? '#d13438' : '#107c10'; }
 
 function ShiftCard(props: { entry: IShiftEntry }): React.ReactElement {
+  const startTime = new Date(props.entry.startTime).toLocaleTimeString();
+  const endTime = new Date(props.entry.endTime).toLocaleTimeString();
+
   return (
     <div style={{ border: '1px solid var(--neutralLight)', borderRadius: 8, padding: 12, background: 'var(--white)' }}>
-      <Stack tokens={{ childrenGap: 8 }}>
-        <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
-          <Text styles={{ root: { fontWeight: 600, fontSize: 14 } }}>{props.entry.personName}</Text>
-          <Label styles={{ root: { background: getTypeColor(props.entry.type), color: 'white', fontSize: 10, padding: '2px 8px', borderRadius: 4 } }}>{getTypeLabel(props.entry.type)}</Label>
-        </Stack>
-        <Text styles={{ root: { fontSize: 12, color: 'var(--neutralSecondary)' }}>{props.entry.role}</Text>
-        <Text styles={{ root: { fontSize: 11 }}>🕐 {new Date(props.entry.startTime).toLocaleTimeString()} - {new Date(props.entry.endTime).toLocaleTimeString()}</Text>
-        {props.entry.location && <Text styles={{ root: { fontSize: 11 } }}>📍 {props.entry.location}</Text>}
-        {props.entry.contact && <Text styles={{ root: { fontSize: 11, color: 'var(--accentColor)' } }}>📧 {props.entry.contact}</Text>}
-      </Stack>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+        <Text styles={{ root: { fontWeight: 600, fontSize: 14 } }}>{props.entry.personName}</Text>
+        <Label styles={{ root: { background: getTypeColor(props.entry.type), color: 'white', fontSize: 10, padding: '2px 8px', borderRadius: 4 } }}>{getTypeLabel(props.entry.type)}</Label>
+      </div>
+      <Text styles={{ root: { fontSize: 12, color: 'var(--neutralSecondary)', display: 'block' } }}>{props.entry.role}</Text>
+      <Text styles={{ root: { fontSize: 11, display: 'block' } }}>{startTime} - {endTime}</Text>
+      {props.entry.location && <Text styles={{ root: { fontSize: 11, display: 'block' } }}>{props.entry.location}</Text>}
+      {props.entry.contact && <Text styles={{ root: { fontSize: 11, color: 'var(--accentColor)', display: 'block' } }}>{props.entry.contact}</Text>}
     </div>
   );
 }
