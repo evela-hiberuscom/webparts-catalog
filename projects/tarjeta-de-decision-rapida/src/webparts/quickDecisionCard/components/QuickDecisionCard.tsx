@@ -11,6 +11,8 @@ export interface IQuickDecisionCardProps {
 import type { IQuickDecisionConfiguration } from '../models/quickDecisionModels';
 import type { QuickDecisionService } from '../services/quickDecisionService';
 import { useQuickDecision } from '../hooks/useQuickDecision';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'QuickDecisionCardWebPartStrings';
 
 function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label="Cargando..." /></div>; }
 function EmptyState(): React.ReactElement { return <MessageBar>No hay decisión disponible.</MessageBar>; }
@@ -42,5 +44,12 @@ export default function QuickDecisionCard(props: IQuickDecisionCardProps): React
       default: return <LoadingState />;
     }
   };
-  return <div><h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>{renderContent()}</div>;
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
+  );
 }

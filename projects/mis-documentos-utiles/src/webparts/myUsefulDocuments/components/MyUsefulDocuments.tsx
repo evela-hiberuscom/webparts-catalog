@@ -19,6 +19,8 @@ export interface IMyUsefulDocumentsProps {
 import type { IUsefulDocumentsConfiguration } from '../models/usefulDocumentModels';
 import type { UsefulDocumentsService } from '../services/usefulDocumentsService';
 import { useUsefulDocuments } from '../hooks/useUsefulDocuments';
+import * as strings from 'MyUsefulDocumentsWebPartStrings';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -147,9 +149,11 @@ export default function MyUsefulDocuments(props: IMyUsefulDocumentsProps): React
   };
 
   return (
-    <div>
-      <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

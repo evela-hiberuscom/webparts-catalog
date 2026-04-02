@@ -19,6 +19,8 @@ export interface INewJoinersProps {
 import type { INewJoinersConfiguration } from '../models/joinerModels';
 import type { NewJoinersService } from '../services/newJoinersService';
 import { useNewJoiners } from '../hooks/useNewJoiners';
+import * as strings from 'NewJoinersWebPartStrings';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -127,9 +129,11 @@ export default function NewJoiners(props: INewJoinersProps): React.ReactElement 
   };
 
   return (
-    <div>
-      <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

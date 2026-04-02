@@ -11,6 +11,8 @@ export interface ICorporateAzProps {
 import type { ICorporateAzConfiguration } from '../models/corporateAzModels';
 import type { CorporateAzService } from '../services/corporateAzService';
 import { useCorporateAz } from '../hooks/useCorporateAz';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'CorporateAzWebPartStrings';
 
 function LoadingState(): React.ReactElement {
   return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label="Cargando..." /></div>;
@@ -68,9 +70,11 @@ export default function CorporateAz(props: ICorporateAzProps): React.ReactElemen
   };
 
   return (
-    <div>
-      <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

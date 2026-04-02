@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "how-do-i-do-this-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/howDoIDoThis/HowDoIDoThisWebPart.js",
+          "manifest": "./src/webparts/howDoIDoThis/HowDoIDoThisWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HowDoIDoThisWebPartStrings": "lib/webparts/howDoIDoThis/loc/{locale}.js"
+  }
+}

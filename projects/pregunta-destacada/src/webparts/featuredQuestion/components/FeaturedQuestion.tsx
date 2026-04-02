@@ -11,6 +11,8 @@ export interface IFeaturedQuestionProps {
 import type { IFeaturedQuestionConfiguration } from '../models/featuredQuestionModels';
 import type { FeaturedQuestionService } from '../services/featuredQuestionService';
 import { useFeaturedQuestion } from '../hooks/useFeaturedQuestion';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'FeaturedQuestionWebPartStrings';
 
 function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label="Cargando..." /></div>; }
 function EmptyState(): React.ReactElement { return <MessageBar>No hay pregunta destacada.</MessageBar>; }
@@ -43,5 +45,12 @@ export default function FeaturedQuestion(props: IFeaturedQuestionProps): React.R
       default: return <LoadingState />;
     }
   };
-  return <div><h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>{renderContent()}</div>;
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
+  );
 }

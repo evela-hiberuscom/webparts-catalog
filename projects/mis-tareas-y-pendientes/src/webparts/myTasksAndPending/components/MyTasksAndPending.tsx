@@ -19,6 +19,8 @@ export interface IMyTasksAndPendingProps {
 import type { ITasksConfiguration } from '../models/taskModels';
 import type { TasksService } from '../services/tasksService';
 import { useTasks } from '../hooks/useTasks';
+import * as strings from 'MyTasksAndPendingWebPartStrings';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -178,9 +180,11 @@ export default function MyTasksAndPending(props: IMyTasksAndPendingProps): React
   };
 
   return (
-    <div>
-      <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

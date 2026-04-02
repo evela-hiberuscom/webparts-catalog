@@ -20,6 +20,8 @@ export interface IAreaGoalsProps {
 import type { IAreaGoalsConfiguration } from '../models/goalModels';
 import type { AreaGoalsService } from '../services/areaGoalsService';
 import { useAreaGoals } from '../hooks/useAreaGoals';
+import * as strings from 'AreaGoalsWebPartStrings';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -175,9 +177,11 @@ export default function AreaGoals(props: IAreaGoalsProps): React.ReactElement {
   };
 
   return (
-    <div>
-      <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

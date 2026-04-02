@@ -11,6 +11,8 @@ export interface IGuidedRouteProps {
 import type { IGuidedRouteConfiguration } from '../models/guidedRouteModels';
 import type { GuidedRouteService } from '../services/guidedRouteService';
 import { useGuidedRoute } from '../hooks/useGuidedRoute';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'GuidedRouteWebPartStrings';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -71,9 +73,11 @@ export default function GuidedRoute(props: IGuidedRouteProps): React.ReactElemen
   };
 
   return (
-    <div>
-      <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

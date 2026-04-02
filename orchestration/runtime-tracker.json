@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-30T10:30:00+02:00",
+  "updatedAt": "2026-04-02T12:30:00+02:00",
   "projects": [
     {
       "slug": "conoce-al-equipo",
@@ -193,19 +193,20 @@
       "waveId": "B",
       "agentId": "019d3d64-6047-7822-bfe0-588f9899ab73",
       "agentNickname": "Avicenna",
-      "phase": "rework_required",
-      "lastTrackedAt": "2026-03-30T10:20:00+02:00",
-      "lastSignal": "main_validation_failed_standard_gate",
+      "phase": "audited_static_backlog",
+      "lastTrackedAt": "2026-04-02T12:30:00+02:00",
+      "lastSignal": "main_build_revalidated_and_static_gate_recovered",
       "gates": {
-        "implementation": "incomplete",
-        "build": "script_drift",
-        "test": "missing",
+        "implementation": "done",
+        "build": "done",
+        "test": "done",
         "package": "done",
-        "audit": "pending"
+        "audit": "done"
       },
       "notes": [
-        "Build script drifted from repo standard and skipped the expected build chain",
-        "Project still resembles scaffold and lacks real layered implementation and local tests"
+        "Main agent revalidated npm run build and .sppkg on 2026-04-02",
+        "Local Jest suite passed with 5 suites and 8 assertions",
+        "Residual Fluent icon warnings remain non-blocking in tests"
       ]
     }
   ]

@@ -3,5 +3,6 @@ declare interface IFeaturedQuestionWebPartStrings {
   DataSourceFieldLabel: string; DataSourceSharePointListLabel: string; DataSourceJsonUrlLabel: string; DataSourceStaticConfigLabel: string;
   ListTitleOrUrlFieldLabel: string; ShowVotesFieldLabel: string; ToggleOnLabel: string; ToggleOffLabel: string;
   AppLocalEnvironmentSharePoint: string; AppLocalEnvironmentTeams: string; AppSharePointEnvironment: string; UnknownEnvironment: string;
+  ErrorBoundaryTitle: string; ErrorBoundaryMessage: string;
 }
 declare module 'FeaturedQuestionWebPartStrings' { const strings: IFeaturedQuestionWebPartStrings; export = strings; }

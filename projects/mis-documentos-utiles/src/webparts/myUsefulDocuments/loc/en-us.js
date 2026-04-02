@@ -1,15 +1,15 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Configura los documentos útiles que se mostrarán",
-    "WebPartTitle": "Mis documentos útiles",
-    "PropertyPaneGeneralGroupName": "Configuración General",
-    "DataSourceFieldLabel": "Tipo de origen de datos",
-    "DataSourceSharePointListLabel": "Lista de SharePoint",
-    "DataSourceJsonUrlLabel": "URL JSON",
-    "DataSourceStaticConfigLabel": "Configuración estática",
-    "ListTitleOrUrlFieldLabel": "Título o URL de la lista",
-    "MaxItemsFieldLabel": "Número máximo de documentos",
-    "DefaultCategoryFieldLabel": "Categoría por defecto",
+    "PropertyPaneDescription": "Configure the useful documents to show",
+    "WebPartTitle": "My useful documents",
+    "PropertyPaneGeneralGroupName": "General settings",
+    "DataSourceFieldLabel": "Data source type",
+    "DataSourceSharePointListLabel": "SharePoint list",
+    "DataSourceJsonUrlLabel": "JSON URL",
+    "DataSourceStaticConfigLabel": "Static configuration",
+    "ListTitleOrUrlFieldLabel": "List title or URL",
+    "MaxItemsFieldLabel": "Maximum number of documents",
+    "DefaultCategoryFieldLabel": "Default category",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",
@@ -18,6 +18,8 @@ define([], function() {
     "AppTeamsTabEnvironment": "The app is running in Microsoft Teams",
     "AppOfficeEnvironment": "The app is running in office.com",
     "AppOutlookEnvironment": "The app is running in Outlook",
-    "UnknownEnvironment": "The app is running in an unknown environment"
-  }
+    "UnknownEnvironment": "The app is running in an unknown environment",
+    "ErrorBoundaryTitle": "Something went wrong",
+    "ErrorBoundaryMessage": "This web part encountered an unexpected error. Please reload the page or contact your administrator."
+  };
 });

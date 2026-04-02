@@ -19,6 +19,8 @@ export interface IInternalCampaignPanelProps {
 import type { IInternalCampaignConfiguration } from '../models/campaignModels';
 import type { CampaignService } from '../services/campaignService';
 import { useCampaigns } from '../hooks/useCampaigns';
+import * as strings from 'InternalCampaignPanelWebPartStrings';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
 
 function LoadingState(): React.ReactElement {
   return (
@@ -156,9 +158,11 @@ export default function InternalCampaignPanel(props: IInternalCampaignPanelProps
   };
 
   return (
-    <div>
-      <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
-      {renderContent()}
-    </div>
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: '16px', fontSize: '20px', fontWeight: '600' }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
   );
 }

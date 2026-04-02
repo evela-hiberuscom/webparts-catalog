@@ -1,0 +1,225 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.howDoIDoThis {
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  padding: 24px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top right, rgba(0, 120, 212, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(243, 242, 241, 0.96));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.teams {
+  font-family: $ms-font-family-fallbacks;
+}
+
+.dark {
+  background:
+    radial-gradient(circle at top right, rgba(0, 120, 212, 0.2), transparent 35%),
+    linear-gradient(180deg, rgba(32, 31, 30, 0.96), rgba(24, 24, 24, 0.96));
+}
+
+.header {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.headerCopy {
+  max-width: 760px;
+}
+
+.eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #605e5c;
+}
+
+.title {
+  display: block;
+  margin-top: 4px;
+}
+
+.description {
+  display: block;
+  margin-top: 8px;
+  color: #605e5c;
+  line-height: 1.5;
+}
+
+.summaryPanel {
+  min-width: 160px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(0, 120, 212, 0.08);
+  border: 1px solid rgba(0, 120, 212, 0.14);
+}
+
+.summaryValue {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.summaryLabel {
+  display: block;
+  color: #605e5c;
+}
+
+.partialFlag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 185, 0, 0.16);
+}
+
+.environmentBar,
+.stateBar {
+  margin-bottom: 16px;
+}
+
+.loadingState {
+  padding: 32px 0;
+}
+
+.guidesGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filterButton {
+  border: 1px solid rgba(50, 49, 48, 0.16);
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.filterButton:hover {
+  background: rgba(0, 120, 212, 0.08);
+}
+
+.filterButtonSelected {
+  background: #0078d4;
+  color: #ffffff;
+  border-color: #0078d4;
+}
+
+.guideCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(50, 49, 48, 0.08);
+}
+
+.guideHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.guideTitle {
+  display: block;
+}
+
+.guideSummary {
+  color: #605e5c;
+  line-height: 1.5;
+}
+
+.guideBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.guideBadge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(0, 120, 212, 0.08);
+  color: #004578;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.guideMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.guideCategory {
+  color: #605e5c;
+}
+
+.stepsBlock {
+  border-top: 1px solid rgba(50, 49, 48, 0.08);
+  padding-top: 12px;
+}
+
+.stepsHeading {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stepsList {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.stepsList li {
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+.emptyState {
+  padding: 28px;
+  border: 1px dashed rgba(50, 49, 48, 0.18);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.emptyTitle {
+  display: block;
+}
+
+.emptyHint {
+  display: block;
+  margin-top: 8px;
+  color: #605e5c;
+}
+
+@media screen and (max-width: 640px) {
+  .howDoIDoThis {
+    padding: 18px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .summaryPanel {
+    width: 100%;
+  }
+}

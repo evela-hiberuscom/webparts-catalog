@@ -5,6 +5,8 @@ export interface ISitesPresenceProps { configuration: ISitesPresenceConfiguratio
 import type { ISitesPresenceConfiguration } from '../models/sitesPresenceModels';
 import type { SitesPresenceService } from '../services/sitesPresenceService';
 import { useSitesPresence } from '../hooks/useSitesPresence';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'SitesPresenceWebPartStrings';
 function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label="Cargando..." /></div>; }
 function EmptyState(): React.ReactElement { return <MessageBar>No hay información de sedes.</MessageBar>; }
 function ErrorState({ message }: { message: string }): React.ReactElement { return <MessageBar messageBarType={2}>Error: {message}</MessageBar>; }
@@ -30,5 +32,12 @@ export default function SitesPresence(props: ISitesPresenceProps): React.ReactEl
   const { configuration, service, title = 'Presencia de sedes' } = props;
   const state = useSitesPresence({ service, configuration });
   const renderContent = (): React.ReactElement => { switch (state.status) { case 'loading': return <LoadingState />; case 'empty': return <EmptyState />; case 'error': return <ErrorState message={state.message} />; case 'ready': case 'partialData': return <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16, padding: 16 }}>{state.data.map(s => <SiteCard key={s.id} site={s} />)}</div>; default: return <LoadingState />; } };
-  return <div><h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>{renderContent()}</div>;
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
+  );
 }

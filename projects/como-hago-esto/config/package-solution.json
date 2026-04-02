@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "como-hago-esto-client-side-solution",
+    "id": "7da2c524-195e-410b-85b9-bf052f1c1fc1",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "como-hago-esto description"
+      },
+      "longDescription": {
+        "default": "como-hago-esto description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "como-hago-esto Feature",
+        "description": "The feature that activates elements of the como-hago-esto solution.",
+        "id": "331cbb57-9fa2-4f4a-b63b-37e2c240df12",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/como-hago-esto.sppkg"
+  }
+}

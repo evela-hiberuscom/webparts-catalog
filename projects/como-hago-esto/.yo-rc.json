@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "como-hago-esto",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "HowDoIDoThis",
+    "componentDescription": "Ofrece guías breves y accionables para tareas internas habituales, con pasos claros y enlaces de apoyo.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "como-hago-esto",
+    "libraryId": "7da2c524-195e-410b-85b9-bf052f1c1fc1",
+    "solutionShortDescription": "como-hago-esto description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

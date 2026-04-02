@@ -11,6 +11,8 @@ export interface IShiftsGuardsAvailabilityProps {
 import type { IShiftsGuardsConfiguration } from '../models/shiftsGuardsModels';
 import type { ShiftsGuardsService } from '../services/shiftsGuardsService';
 import { useShiftsGuards } from '../hooks/useShiftsGuards';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import * as strings from 'ShiftsGuardsAvailabilityWebPartStrings';
 
 function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label="Cargando..." /></div>; }
 function EmptyState(): React.ReactElement { return <MessageBar>No hay turnos disponibles.</MessageBar>; }
@@ -54,5 +56,12 @@ export default function ShiftsGuardsAvailability(props: IShiftsGuardsAvailabilit
       default: return <LoadingState />;
     }
   };
-  return <div><h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>{renderContent()}</div>;
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <div>
+        <h2 style={{ margin: 16, fontSize: 20, fontWeight: 600 }}>{title}</h2>
+        {renderContent()}
+      </div>
+    </WebPartErrorBoundary>
+  );
 }

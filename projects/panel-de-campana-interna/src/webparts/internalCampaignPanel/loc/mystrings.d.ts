@@ -17,6 +17,8 @@ declare interface IInternalCampaignPanelWebPartStrings {
   AppOfficeEnvironment: string;
   AppOutlookEnvironment: string;
   UnknownEnvironment: string;
+  ErrorBoundaryTitle: string;
+  ErrorBoundaryMessage: string;
 }
 
 declare module 'InternalCampaignPanelWebPartStrings' {
