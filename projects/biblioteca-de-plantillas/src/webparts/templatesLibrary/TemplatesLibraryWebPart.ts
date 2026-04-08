@@ -3,68 +3,97 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
+  PropertyPaneDropdown,
+  PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import { SPHttpClient } from '@microsoft/sp-http';
 
 import * as strings from 'TemplatesLibraryWebPartStrings';
 import TemplatesLibrary from './components/TemplatesLibrary';
-import { ITemplatesLibraryProps } from './components/ITemplatesLibraryProps';
+import type { ITemplatesLibraryProps } from './components/ITemplatesLibraryProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
+import { TemplatesLibraryRepository } from './repositories/templatesLibraryRepository';
+import { TemplatesLibraryService } from './services/templatesLibraryService';
 
 export interface ITemplatesLibraryWebPartProps {
+  title: string;
   description: string;
+  sourceKind: 'library' | 'list';
+  listTitleOrUrl: string;
+  defaultCategory: string;
+  maxItems: number;
 }
 
 export default class TemplatesLibraryWebPart extends BaseClientSideWebPart<ITemplatesLibraryWebPartProps> {
-
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+  private _isDarkTheme = false;
+  private _environmentMessage = '';
 
   public render(): void {
-    const element: React.ReactElement<ITemplatesLibraryProps> = React.createElement(
-      TemplatesLibrary,
-      {
+    const service = new TemplatesLibraryService(new TemplatesLibraryRepository({
+      spHttpClient: this.context.spHttpClient,
+      spHttpClientConfiguration: SPHttpClient.configurations.v1,
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
+    }));
+
+    const element: React.ReactElement<ITemplatesLibraryProps> = React.createElement(TemplatesLibrary, {
+      configuration: {
+        title: this.properties.title,
         description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
-  }
-
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+        sourceKind: this.properties.sourceKind,
+        listTitleOrUrl: this.properties.listTitleOrUrl,
+        defaultCategory: this.properties.defaultCategory,
+        maxItems: this.properties.maxItems
+      },
+      service,
+      environmentMessage: this._environmentMessage,
+      hasTeamsContext: !!this.context.sdks.microsoftTeams,
+      isDarkTheme: this._isDarkTheme,
+      localeName: this.context.pageContext.cultureInfo.currentUICultureName || 'es-ES',
+      userDisplayName: this.context.pageContext.user.displayName
     });
+
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        {
+          title: strings.ErrorBoundaryTitle,
+          message: strings.ErrorBoundaryMessage
+        },
+        element
+      ),
+      this.domElement
+    );
   }
 
+  protected async onInit(): Promise<void> {
+    this.properties.title = this.properties.title || strings.DefaultTitle;
+    this.properties.description = this.properties.description || strings.DefaultDescription;
+    this.properties.sourceKind = this.properties.sourceKind || 'library';
+    this.properties.listTitleOrUrl = this.properties.listTitleOrUrl || 'Templates';
+    this.properties.defaultCategory = this.properties.defaultCategory || 'General';
+    this.properties.maxItems = this.properties.maxItems || 20;
 
+    this._environmentMessage = await this._getEnvironmentMessage();
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
+    if (!!this.context.sdks.microsoftTeams) {
       return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
+        .then((context) => {
           switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
+            case 'Office':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+            case 'Outlook':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+            case 'Teams':
             case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
             default:
-              environmentMessage = strings.UnknownEnvironment;
+              return strings.UnknownEnvironment;
           }
-
-          return environmentMessage;
         });
     }
 
@@ -77,16 +106,12 @@ export default class TemplatesLibraryWebPart extends BaseClientSideWebPart<ITemp
     }
 
     this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
+    const semanticColors = currentTheme.semanticColors;
     if (semanticColors) {
       this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
       this.domElement.style.setProperty('--link', semanticColors.link || null);
       this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
     }
-
   }
 
   protected onDispose(): void {
@@ -108,8 +133,31 @@ export default class TemplatesLibraryWebPart extends BaseClientSideWebPart<ITemp
             {
               groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel
+                }),
                 PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                  label: strings.DescriptionFieldLabel,
+                  multiline: true
+                }),
+                PropertyPaneDropdown('sourceKind', {
+                  label: strings.SourceKindFieldLabel,
+                  options: [
+                    { key: 'library', text: strings.SourceKindLibraryLabel },
+                    { key: 'list', text: strings.SourceKindListLabel }
+                  ]
+                }),
+                PropertyPaneTextField('listTitleOrUrl', {
+                  label: strings.ListTitleFieldLabel
+                }),
+                PropertyPaneTextField('defaultCategory', {
+                  label: strings.DefaultCategoryFieldLabel
+                }),
+                PropertyPaneSlider('maxItems', {
+                  label: strings.MaxItemsFieldLabel,
+                  min: 1,
+                  max: 100,
+                  step: 1
                 })
               ]
             }

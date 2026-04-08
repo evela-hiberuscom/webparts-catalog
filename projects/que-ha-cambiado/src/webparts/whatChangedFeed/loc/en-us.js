@@ -1,8 +1,30 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
+    "PropertyPaneDescription": "Configure the recent changes feed shown on the page.",
+    "BasicGroupName": "Feed configuration",
+    "TitleFieldLabel": "Web part title",
+    "DescriptionFieldLabel": "Supporting text",
+    "SourceKindFieldLabel": "Source type",
+    "SourceKindListLabel": "List",
+    "SourceKindLibraryLabel": "Library",
+    "ListTitleFieldLabel": "List or library name",
+    "DefaultTypeFilterFieldLabel": "Default type filter",
+    "MaxItemsFieldLabel": "Maximum number of items",
+    "DefaultTitle": "What changed",
+    "DefaultDescription": "Show recent changes without forcing users to check multiple spaces manually.",
+    "LoadingMessage": "Loading recent changes",
+    "ErrorMessage": "The recent changes could not be loaded.",
+    "EmptyMessage": "There are no visible recent changes.",
+    "PartialDataMessage": "Some items are shown with partial metadata. The feed remains usable.",
+    "RetryButtonLabel": "Retry",
+    "OpenItemButton": "Open item",
+    "UpdatedBadgeLabel": "Updated",
+    "PartialBadgeLabel": "Partial",
+    "ChangedAtLabel": "Date",
+    "ResultsCounterLabel": "items",
+    "MissingSummaryLabel": "This item does not include a summary.",
+    "MissingLinkLabel": "This item does not provide a link to open it.",
+    "AllTypesLabel": "All types",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",
@@ -14,5 +36,5 @@ define([], function() {
     "UnknownEnvironment": "The app is running in an unknown environment",
     "ErrorBoundaryTitle": "Something went wrong",
     "ErrorBoundaryMessage": "This web part encountered an unexpected error. Please reload the page or contact your administrator."
-  }
+  };
 });

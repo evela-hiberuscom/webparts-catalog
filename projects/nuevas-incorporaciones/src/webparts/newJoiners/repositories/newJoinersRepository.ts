@@ -1,4 +1,4 @@
-import { SPHttpClient, ISPHttpClientConfiguration } from '@microsoft/sp-http';
+import type { SPHttpClient, SPHttpClientConfiguration } from '@microsoft/sp-http';
 import type {
   FetchLike,
   IJoiner,
@@ -8,7 +8,7 @@ import type {
 export interface INewJoinersRepositoryOptions {
   fetchClient: FetchLike;
   spHttpClient: SPHttpClient;
-  spHttpClientConfiguration: ISPHttpClientConfiguration;
+  spHttpClientConfiguration: SPHttpClientConfiguration;
   webAbsoluteUrl: string;
 }
 
@@ -53,7 +53,7 @@ function normalizeListUrl(listTitleOrUrl: string, webAbsoluteUrl: string): strin
 export class NewJoinersRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
-  private _spHttpClientConfiguration: ISPHttpClientConfiguration;
+  private _spHttpClientConfiguration: SPHttpClientConfiguration;
   private _webAbsoluteUrl: string;
 
   constructor(options: INewJoinersRepositoryOptions) {
@@ -100,7 +100,7 @@ export class NewJoinersRepository {
     try {
       const response = await this._spHttpClient.get(
         itemsUrl,
-        SPHttpClient.configurations.v1
+        this._spHttpClientConfiguration
       );
 
       if (!response.ok) {
@@ -147,7 +147,11 @@ export class NewJoinersRepository {
       }
     }
 
-    const response = await this._fetchClient(jsonUrl, {
+    const resolvedUrl = jsonUrl.startsWith('/')
+      ? `${new URL(this._webAbsoluteUrl).origin}${jsonUrl}`
+      : jsonUrl;
+
+    const response = await this._fetchClient(resolvedUrl, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });

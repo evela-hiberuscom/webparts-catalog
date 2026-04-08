@@ -4,7 +4,6 @@ import { Version } from '@microsoft/sp-core-library';
 import { PropertyPaneDropdown, PropertyPaneTextField, PropertyPaneToggle, type IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { type IReadonlyTheme } from '@microsoft/sp-component-base';
-import { SPHttpClient } from '@microsoft/sp-http';
 import * as strings from 'FeaturedQuestionWebPartStrings';
 import FeaturedQuestion from './components/FeaturedQuestion';
 import type { IFeaturedQuestionConfiguration } from './models/featuredQuestionModels';
@@ -14,7 +13,10 @@ import { FeaturedQuestionService } from './services/featuredQuestionService';
 export default class FeaturedQuestionWebPart extends BaseClientSideWebPart<IFeaturedQuestionConfiguration> {
   private _service: FeaturedQuestionService | undefined;
   public render(): void {
-    const repository = new FeaturedQuestionRepository({ fetchClient: window.fetch.bind(window), spHttpClient: this.context.spHttpClient, spHttpClientConfiguration: SPHttpClient.configurations.v1, webAbsoluteUrl: this.context.pageContext.web.absoluteUrl });
+    const repository = new FeaturedQuestionRepository({
+      fetchClient: window.fetch.bind(window),
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
+    });
     this._service = new FeaturedQuestionService(repository);
     const element = React.createElement(FeaturedQuestion, { configuration: { dataSourceType: this.properties.dataSourceType || 'StaticConfig', listTitleOrUrl: this.properties.listTitleOrUrl || '', showVotes: this.properties.showVotes || false, allowMultipleVotes: this.properties.allowMultipleVotes || false }, service: this._service, title: strings.WebPartTitle });
     ReactDom.render(element, this.domElement);

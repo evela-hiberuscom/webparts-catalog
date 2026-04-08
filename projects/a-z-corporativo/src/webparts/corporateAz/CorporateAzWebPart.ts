@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
+import { SPHttpClient } from '@microsoft/sp-http';
 import { PropertyPaneDropdown, PropertyPaneTextField, PropertyPaneSlider, type IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { type IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -13,7 +14,12 @@ import { CorporateAzService } from './services/corporateAzService';
 export default class CorporateAzWebPart extends BaseClientSideWebPart<ICorporateAzConfiguration> {
   private _service: CorporateAzService | undefined;
   public render(): void {
-    const repository = new CorporateAzRepository({ fetchClient: window.fetch.bind(window), spHttpClient: this.context.spHttpClient, webAbsoluteUrl: this.context.pageContext.web.absoluteUrl });
+    const repository = new CorporateAzRepository({
+      fetchClient: window.fetch.bind(window),
+      spHttpClient: this.context.spHttpClient,
+      spHttpClientConfiguration: SPHttpClient.configurations.v1,
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
+    });
     this._service = new CorporateAzService(repository);
     const element = React.createElement(CorporateAz, { configuration: { dataSourceType: this.properties.dataSourceType || 'StaticConfig', listTitleOrUrl: this.properties.listTitleOrUrl || '', maxItems: this.properties.maxItems || 26 }, service: this._service, title: strings.WebPartTitle });
     ReactDom.render(element, this.domElement);

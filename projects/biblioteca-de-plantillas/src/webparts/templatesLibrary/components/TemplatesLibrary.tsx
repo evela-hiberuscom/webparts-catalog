@@ -1,43 +1,165 @@
 import * as React from 'react';
-import styles from './TemplatesLibrary.module.scss';
+import {
+  DefaultButton,
+  Dropdown,
+  IDropdownOption,
+  Link,
+  MessageBar,
+  MessageBarType,
+  SearchBox,
+  Spinner,
+  Text
+} from '@fluentui/react';
+import * as strings from 'TemplatesLibraryWebPartStrings';
+
+import { useTemplatesLibrary } from '../hooks/useTemplatesLibrary';
+import type { ITemplateItem } from '../models/templatesLibraryModels';
+import { formatDate } from '../utils/templatesLibraryUtils';
 import type { ITemplatesLibraryProps } from './ITemplatesLibraryProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import styles from './TemplatesLibrary.module.scss';
 
-export default class TemplatesLibrary extends React.Component<ITemplatesLibraryProps> {
-  public render(): React.ReactElement<ITemplatesLibraryProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+function renderTemplateCard(item: ITemplateItem, localeName: string): React.ReactElement {
+  const updatedAt = formatDate(item.updatedAt, localeName);
 
-    return (
-      <section className={`${styles.templatesLibrary} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+  return (
+    <article key={item.id} className={styles.card}>
+      <div className={styles.cardBody}>
+        <div className={styles.cardMeta}>
+          {item.featured ? <span className={styles.featuredBadge}>{strings.FeaturedBadgeLabel}</span> : null}
+          {(!item.openUrl && !item.downloadUrl) || !item.templateType || !item.category ? (
+            <span className={styles.partialBadge}>{strings.PartialBadgeLabel}</span>
+          ) : null}
+          <span className={styles.categoryPill}>{item.category}</span>
+          <span className={styles.typePill}>{item.templateType}</span>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
+
+        <Text as="h3" variant="mediumPlus" className={styles.cardTitle}>
+          {item.title}
+        </Text>
+        {updatedAt ? (
+          <p className={styles.cardSubtitle}>{strings.UpdatedAtLabel} {updatedAt}</p>
+        ) : null}
+
+        <div className={styles.actionsRow}>
+          {item.openUrl ? (
+            <Link href={item.openUrl} target="_blank" rel="noreferrer">
+              {strings.OpenTemplateButton}
+            </Link>
+          ) : null}
+          {item.downloadUrl ? (
+            <Link href={item.downloadUrl} target="_blank" rel="noreferrer">
+              {strings.DownloadTemplateButton}
+            </Link>
+          ) : null}
+          {!item.openUrl && !item.downloadUrl ? (
+            <Text variant="small" className={styles.cardMuted}>
+              {strings.MissingActionLabel}
+            </Text>
+          ) : null}
         </div>
+      </div>
+    </article>
+  );
+}
+
+export default function TemplatesLibrary(props: ITemplatesLibraryProps): React.ReactElement {
+  const {
+    state,
+    visibleItems,
+    selectedCategory,
+    selectedType,
+    query,
+    setSelectedCategory,
+    setSelectedType,
+    setQuery,
+    reload
+  } = useTemplatesLibrary(props.service, props.configuration);
+
+  const categoryOptions: IDropdownOption[] = [
+    { key: 'all', text: strings.AllCategoriesLabel },
+    ...state.categories.map((category) => ({ key: category, text: category }))
+  ];
+  const typeOptions: IDropdownOption[] = [
+    { key: 'all', text: strings.AllTypesLabel },
+    ...state.types.map((type) => ({ key: type, text: type }))
+  ];
+
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <section className={styles.templatesLibrary} aria-label={props.configuration.title}>
+        <header className={styles.header}>
+          <div>
+            <p className={styles.kicker}>{props.userDisplayName}</p>
+            <Text as="h2" variant="xLarge" className={styles.title}>
+              {props.configuration.title}
+            </Text>
+            <p className={styles.description}>{props.configuration.description}</p>
+          </div>
+          <div className={styles.headerMeta}>
+            <span className={styles.metaPill}>{props.configuration.sourceKind}</span>
+            <span className={styles.metaPillSecondary}>{state.items.length} {strings.ResultsCounterLabel}</span>
+          </div>
+        </header>
+
+        {props.environmentMessage ? (
+          <MessageBar messageBarType={MessageBarType.info} isMultiline={false}>
+            {props.environmentMessage}
+          </MessageBar>
+        ) : null}
+
+        <div className={styles.filtersRow}>
+          <SearchBox
+            value={query}
+            onChange={(_, value) => setQuery(value || '')}
+            placeholder={strings.SearchPlaceholder}
+            className={styles.searchBox}
+          />
+          <Dropdown
+            selectedKey={selectedCategory}
+            options={categoryOptions}
+            label={strings.CategoryFilterLabel}
+            onChange={(_, option) => setSelectedCategory(String(option?.key || 'all'))}
+            className={styles.dropdown}
+          />
+          <Dropdown
+            selectedKey={selectedType}
+            options={typeOptions}
+            label={strings.TypeFilterLabel}
+            onChange={(_, option) => setSelectedType(String(option?.key || 'all'))}
+            className={styles.dropdown}
+          />
+        </div>
+
+        {state.status === 'loading' ? (
+          <div className={styles.statePanel}>
+            <Spinner label={strings.LoadingMessage} />
+          </div>
+        ) : null}
+
+        {state.status === 'error' ? (
+          <div className={styles.statePanel}>
+            <MessageBar messageBarType={MessageBarType.error}>{strings.ErrorMessage}</MessageBar>
+            <DefaultButton text={strings.RetryButtonLabel} onClick={reload} />
+          </div>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && state.hasPartialData ? (
+          <MessageBar messageBarType={MessageBarType.warning}>{strings.PartialDataMessage}</MessageBar>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && visibleItems.length === 0 ? (
+          <div className={styles.statePanel}>
+            <Text variant="medium">{strings.EmptyMessage}</Text>
+          </div>
+        ) : null}
+
+        {visibleItems.length > 0 ? (
+          <div className={styles.cardsGrid}>
+            {visibleItems.map((item) => renderTemplateCard(item, props.localeName))}
+          </div>
+        ) : null}
       </section>
-    );
-  }
+    </WebPartErrorBoundary>
+  );
 }

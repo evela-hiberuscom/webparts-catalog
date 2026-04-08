@@ -1,43 +1,113 @@
 import * as React from 'react';
-import styles from './NewsSummary.module.scss';
+import { DefaultButton, Icon, Link, MessageBar, MessageBarType, Spinner, Text } from '@fluentui/react';
+import * as strings from 'NewsSummaryWebPartStrings';
+
+import { useNewsSummary } from '../hooks/useNewsSummary';
+import type { INewsSummaryItem } from '../models/newsSummaryModels';
+import { formatNewsDate } from '../utils/newsSummaryUtils';
 import type { INewsSummaryProps } from './INewsSummaryProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import styles from './NewsSummary.module.scss';
 
-export default class NewsSummary extends React.Component<INewsSummaryProps> {
-  public render(): React.ReactElement<INewsSummaryProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+function renderNewsCard(item: INewsSummaryItem, localeName: string): React.ReactElement {
+  const publishedLabel = formatNewsDate(item.publishedAt, localeName);
 
-    return (
-      <section className={`${styles.newsSummary} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+  return (
+    <article key={item.id} className={styles.card}>
+      {item.imageUrl ? (
+        <div className={styles.imageFrame}>
+          <img src={item.imageUrl} alt="" className={styles.image} />
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
+      ) : null}
+      <div className={styles.cardBody}>
+        <div className={styles.cardMeta}>
+          {item.isFeatured ? <span className={styles.featuredBadge}>{strings.FeaturedBadgeLabel}</span> : null}
+          {!item.summary || !item.openUrl || !item.imageUrl ? (
+            <span className={styles.partialBadge}>{strings.PartialBadgeLabel}</span>
+          ) : null}
+          {publishedLabel ? (
+            <span className={styles.dateBadge}>
+              <Icon iconName="News" aria-hidden="true" />
+              <span>{strings.PublishedOnLabel} {publishedLabel}</span>
+            </span>
+          ) : null}
         </div>
+        <Text as="h3" variant="mediumPlus" className={styles.cardTitle}>
+          {item.title}
+        </Text>
+        <p className={styles.summary}>{item.summary ?? strings.MissingSummaryLabel}</p>
+        {item.openUrl ? (
+          <Link href={item.openUrl} target="_blank" rel="noreferrer" className={styles.cardAction}>
+            {strings.OpenNewsButton}
+          </Link>
+        ) : (
+          <Text variant="small" className={styles.cardMuted}>
+            {strings.MissingLinkLabel}
+          </Text>
+        )}
+      </div>
+    </article>
+  );
+}
+
+export default function NewsSummary(props: INewsSummaryProps): React.ReactElement {
+  const { state, reload } = useNewsSummary(props.service, props.configuration);
+
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <section className={styles.newsSummary} aria-label={props.configuration.title}>
+        <header className={styles.header}>
+          <div>
+            <p className={styles.kicker}>{props.userDisplayName}</p>
+            <Text as="h2" variant="xLarge" className={styles.title}>
+              {props.configuration.title}
+            </Text>
+            <p className={styles.description}>{props.configuration.description}</p>
+          </div>
+          <div className={styles.headerMeta}>
+            <span className={styles.metaPill}>
+              <Icon iconName="News" aria-hidden="true" />
+              <span>{state.items.length} {strings.ResultsCounterLabel}</span>
+            </span>
+            <span className={styles.metaPillSecondary}>{props.configuration.sitePagesListTitle}</span>
+          </div>
+        </header>
+
+        {props.environmentMessage ? (
+          <MessageBar messageBarType={MessageBarType.info} isMultiline={false}>
+            {props.environmentMessage}
+          </MessageBar>
+        ) : null}
+
+        {state.status === 'loading' ? (
+          <div className={styles.statePanel}>
+            <Spinner label={strings.LoadingMessage} />
+          </div>
+        ) : null}
+
+        {state.status === 'error' ? (
+          <div className={styles.statePanel}>
+            <MessageBar messageBarType={MessageBarType.error}>{strings.ErrorMessage}</MessageBar>
+            <DefaultButton text={strings.RetryButtonLabel} onClick={reload} />
+          </div>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && state.hasPartialData ? (
+          <MessageBar messageBarType={MessageBarType.warning}>{strings.PartialDataMessage}</MessageBar>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && state.items.length === 0 ? (
+          <div className={styles.statePanel}>
+            <Text variant="medium">{strings.EmptyMessage}</Text>
+          </div>
+        ) : null}
+
+        {state.items.length > 0 ? (
+          <div className={styles.cardsGrid}>
+            {state.items.map((item) => renderNewsCard(item, props.localeName))}
+          </div>
+        ) : null}
       </section>
-    );
-  }
+    </WebPartErrorBoundary>
+  );
 }

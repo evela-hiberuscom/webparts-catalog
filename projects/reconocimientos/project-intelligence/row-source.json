@@ -1,0 +1,138 @@
+{
+  "rowId": "recIYX0vzKpB3ifxS",
+  "name": "Reconocimientos",
+  "slug": "reconocimientos",
+  "artifactType": "SPFxWebPart",
+  "archetype": "general",
+  "waveNumber": 9,
+  "enrichmentStatus": "sufficient",
+  "sourceJsons": {
+    "specsJson": {
+      "meta": {
+        "id": "recognitions",
+        "name": "Reconocimientos",
+        "version": "1.0.0",
+        "artifactType": "SPFxWebPart",
+        "domain": "SharePoint Online",
+        "status": "ready-for-implementation"
+      },
+      "summary": {
+        "oneLiner": "Visibiliza agradecimientos, logros o reconocimientos internos para reforzar cultura positiva y visibilidad de contribuciones.",
+        "productGoal": "Dar espacio a pequeños reconocimientos públicos dentro de la intranet de forma sencilla y reusable."
+      },
+      "functionalRequirements": [
+        {
+          "id": "RF-01",
+          "text": "Mostrar reconocimientos recientes ordenados por fecha."
+        },
+        {
+          "id": "RF-02",
+          "text": "Mostrar persona o equipo reconocido, mensaje breve y fecha cuando existan."
+        },
+        {
+          "id": "RF-03",
+          "text": "Permitir abrir detalle cuando exista enlace."
+        },
+        {
+          "id": "RF-04",
+          "text": "Gestionar loading, empty, partialData y error."
+        }
+      ],
+      "businessRules": [
+        "Los reconocimientos más recientes se muestran primero.",
+        "Si falta enlace, el reconocimiento sigue siendo informativo.",
+        "Si falta foto, usar avatar por defecto cuando aplique."
+      ],
+      "configuration": {
+        "dataSourceType": {
+          "type": "enum",
+          "values": [
+            "SharePointList",
+            "JsonUrl",
+            "StaticConfig"
+          ],
+          "default": "SharePointList"
+        },
+        "listTitleOrUrl": {
+          "type": "string",
+          "required": true
+        },
+        "maxItems": {
+          "type": "number",
+          "default": 5,
+          "min": 1,
+          "max": 20
+        },
+        "showPhotos": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "acceptanceCriteria": [
+        "Muestra reconocimientos recientes correctamente.",
+        "Ordena por fecha descendente.",
+        "Permite abrir detalle cuando existe.",
+        "Funciona con datos parciales sin romper la UI."
+      ]
+    },
+    "designJson": {
+      "uxGoal": "Hacer visibles pequeños logros o agradecimientos con un tono positivo y una lectura muy fácil.",
+      "copy": {
+        "title": "Reconocimientos",
+        "messages": {
+          "empty": "No hay reconocimientos recientes.",
+          "error": "No se han podido cargar los reconocimientos."
+        }
+      }
+    },
+    "technicalJson": {
+      "architecture": {
+        "webPart": "RecognitionsWebPart",
+        "pattern": "SPFx React + repository + recent sort",
+        "components": [
+          "Recognitions",
+          "RecognitionCard"
+        ],
+        "services": [
+          "RecognitionsService"
+        ],
+        "repositories": [
+          "RecognitionsRepository"
+        ]
+      },
+      "contracts": {
+        "IWebPartProps": {
+          "dataSourceType": "SharePointList|JsonUrl|StaticConfig",
+          "listTitleOrUrl": "string",
+          "maxItems": "number",
+          "showPhotos": "boolean"
+        },
+        "IRecognitionItem": {
+          "id": "string",
+          "targetName": "string",
+          "message": "string|null",
+          "date": "string|null",
+          "photoUrl": "string|null",
+          "detailUrl": "string|null"
+        },
+        "IViewModel": {
+          "items": "IRecognitionItem[]",
+          "hasPartialData": "boolean"
+        }
+      },
+      "testing": {
+        "unit": [
+          "recent sort",
+          "mapping"
+        ],
+        "component": [
+          "feed render",
+          "empty/error"
+        ]
+      }
+    }
+  },
+  "sourceFields": {
+    "notes": "Categoría: Personas/Cultura. Muro de agradecimientos, menciones o logros del equipo."
+  }
+}

@@ -2,91 +2,100 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
-  type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneDropdown,
+  PropertyPaneSlider,
+  PropertyPaneTextField,
+  PropertyPaneToggle,
+  type IPropertyPaneConfiguration
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
 import * as strings from 'TeamAgendaWebPartStrings';
 import TeamAgenda from './components/TeamAgenda';
-import { ITeamAgendaProps } from './components/ITeamAgendaProps';
-
-export interface ITeamAgendaWebPartProps {
-  description: string;
-}
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
+import type { ITeamAgendaProps } from './components/ITeamAgendaProps';
+import type { ITeamAgendaWebPartProps } from './models/teamAgendaModels';
+import { TeamAgendaService } from './services/teamAgendaService';
 
 export default class TeamAgendaWebPart extends BaseClientSideWebPart<ITeamAgendaWebPartProps> {
-
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+  private readonly _service: TeamAgendaService = new TeamAgendaService();
+  private _isDarkTheme = false;
+  private _environmentMessage = '';
 
   public render(): void {
-    const element: React.ReactElement<ITeamAgendaProps> = React.createElement(
-      TeamAgenda,
-      {
+    const element: React.ReactElement<ITeamAgendaProps> = React.createElement(TeamAgenda, {
+      configuration: {
+        title: this.properties.title,
         description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
-  }
-
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+        dataSourceType: this.properties.dataSourceType,
+        listTitleOrUrl: this.properties.listTitleOrUrl,
+        maxItems: this.properties.maxItems,
+        showPast: this.properties.showPast,
+        defaultTypeFilter: this.properties.defaultTypeFilter,
+        webUrl: this.context.pageContext.web.absoluteUrl,
+        localeName: this.context.pageContext.cultureInfo.currentUICultureName || 'es-ES'
+      },
+      service: this._service,
+      localeName: this.context.pageContext.cultureInfo.currentUICultureName || 'es-ES',
+      environmentMessage: this._environmentMessage,
+      hasTeamsContext: !!this.context.sdks.microsoftTeams,
+      isDarkTheme: this._isDarkTheme
     });
+
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        {
+          title: strings.ErrorBoundaryTitle,
+          message: strings.ErrorBoundaryMessage
+        },
+        element
+      ),
+      this.domElement
+    );
   }
 
-
+  protected async onInit(): Promise<void> {
+    this.properties.title ||= strings.DefaultWebPartTitle;
+    this.properties.description ||= strings.DefaultWebPartDescription;
+    this.properties.dataSourceType ||= 'StaticConfig';
+    this.properties.listTitleOrUrl ||= 'AgendaList';
+    this.properties.maxItems ||= 6;
+    this.properties.showPast ??= false;
+    this.properties.defaultTypeFilter ||= '';
+    this._environmentMessage = await this._getEnvironmentMessage();
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
-      return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
-          switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
-            case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
-            default:
-              environmentMessage = strings.UnknownEnvironment;
-          }
-
-          return environmentMessage;
-        });
+    if (!!this.context.sdks.microsoftTeams) {
+      return this.context.sdks.microsoftTeams.teamsJs.app.getContext().then((context) => {
+        switch (context.app.host.name) {
+          case 'Office':
+            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+          case 'Outlook':
+            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+          case 'Teams':
+          case 'TeamsModern':
+            return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
+          default:
+            return strings.UnknownEnvironment;
+        }
+      });
     }
 
     return Promise.resolve(this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment);
   }
 
   protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-    if (!currentTheme) {
+    if (!currentTheme?.semanticColors) {
       return;
     }
 
     this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
-    if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
-    }
-
+    this.domElement.style.setProperty('--bodyText', currentTheme.semanticColors.bodyText || null);
+    this.domElement.style.setProperty('--link', currentTheme.semanticColors.link || null);
+    this.domElement.style.setProperty('--linkHovered', currentTheme.semanticColors.linkHovered || null);
   }
 
   protected onDispose(): void {
@@ -108,8 +117,36 @@ export default class TeamAgendaWebPart extends BaseClientSideWebPart<ITeamAgenda
             {
               groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel
+                }),
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
+                }),
+                PropertyPaneDropdown('dataSourceType', {
+                  label: strings.DataSourceTypeFieldLabel,
+                  options: [
+                    { key: 'Calendar', text: strings.DataSourceCalendarLabel },
+                    { key: 'SharePointList', text: strings.DataSourceSharePointListLabel },
+                    { key: 'JsonUrl', text: strings.DataSourceJsonUrlLabel },
+                    { key: 'StaticConfig', text: strings.DataSourceStaticConfigLabel }
+                  ]
+                }),
+                PropertyPaneTextField('listTitleOrUrl', {
+                  label: strings.ListTitleOrUrlFieldLabel
+                }),
+                PropertyPaneSlider('maxItems', {
+                  label: strings.MaxItemsFieldLabel,
+                  min: 1,
+                  max: 12,
+                  showValue: true,
+                  value: this.properties.maxItems ?? 6
+                }),
+                PropertyPaneToggle('showPast', {
+                  label: strings.ShowPastFieldLabel
+                }),
+                PropertyPaneTextField('defaultTypeFilter', {
+                  label: strings.DefaultTypeFilterFieldLabel
                 })
               ]
             }

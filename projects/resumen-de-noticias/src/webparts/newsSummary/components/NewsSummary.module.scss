@@ -1,34 +1,154 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .newsSummary {
-  overflow: hidden;
-  padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid rgba(50, 49, 48, 0.08);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 185, 0, 0.18), transparent 35%),
+    var(--white, #ffffff);
 }
 
-.welcome {
-  text-align: center;
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-.welcomeImage {
+.kicker {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: "[theme:themePrimary, default: #0078d4]";
+}
+
+.title {
+  margin: 0;
+}
+
+.description {
+  margin: 8px 0 0;
+  max-width: 720px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.headerMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metaPill,
+.metaPillSecondary,
+.featuredBadge,
+.partialBadge,
+.dateBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metaPill,
+.featuredBadge {
+  background: rgba(0, 120, 212, 0.1);
+  color: "[theme:themePrimary, default: #0078d4]";
+}
+
+.metaPillSecondary,
+.dateBadge {
+  background: rgba(96, 94, 92, 0.08);
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.partialBadge {
+  background: rgba(255, 185, 0, 0.16);
+  color: "[theme:warningText, default: #8a6d3b]";
+}
+
+.cardsGrid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  display: grid;
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(50, 49, 48, 0.08);
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.imageFrame {
+  height: 140px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 120, 212, 0.15), rgba(255, 185, 0, 0.16));
+}
+
+.image {
+  display: block;
   width: 100%;
-  max-width: 420px;
+  height: 100%;
+  object-fit: cover;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+.cardBody {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
+.cardMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  margin: 0;
+}
+
+.summary {
+  margin: 0;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.cardAction {
+  font-weight: 600;
+}
+
+.cardMuted {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.statePanel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px dashed rgba(50, 49, 48, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 640px) {
+  .newsSummary {
+    padding: 16px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: 1fr;
   }
 }

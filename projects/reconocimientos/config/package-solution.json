@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "reconocimientos-client-side-solution",
+    "id": "f840f0cf-51df-4ebe-b12b-7bd34aed0988",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "reconocimientos description"
+      },
+      "longDescription": {
+        "default": "reconocimientos description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "reconocimientos Feature",
+        "description": "The feature that activates elements of the reconocimientos solution.",
+        "id": "1ae069a7-f19b-4edf-81f0-66eaeb872f46",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/reconocimientos.sppkg"
+  }
+}

@@ -1,14 +1,21 @@
-import { SPHttpClient } from '@microsoft/sp-http';
+import type { SPHttpClient, SPHttpClientConfiguration } from '@microsoft/sp-http';
 import type { FetchLike, IAzEntry, ICorporateAzConfiguration } from '../models/corporateAzModels';
 
 export class CorporateAzRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
+  private _spHttpClientConfiguration: SPHttpClientConfiguration;
   private _webAbsoluteUrl: string;
 
-  constructor(options: { fetchClient: FetchLike; spHttpClient: SPHttpClient; webAbsoluteUrl: string }) {
+  constructor(options: {
+    fetchClient: FetchLike;
+    spHttpClient: SPHttpClient;
+    spHttpClientConfiguration: SPHttpClientConfiguration;
+    webAbsoluteUrl: string;
+  }) {
     this._fetchClient = options.fetchClient;
     this._spHttpClient = options.spHttpClient;
+    this._spHttpClientConfiguration = options.spHttpClientConfiguration;
     this._webAbsoluteUrl = options.webAbsoluteUrl;
   }
 
@@ -19,15 +26,54 @@ export class CorporateAzRepository {
   }
 
   private async getEntriesFromSharePoint(listTitleOrUrl: string, maxItems: number): Promise<IAzEntry[]> {
-    const response = await this._spHttpClient.get(`${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(listTitleOrUrl)}')/items?$top=${maxItems}`, SPHttpClient.configurations.v1);
-    if (!response.ok) throw new Error(`Failed: ${response.status}`);
+    const response = await this._spHttpClient.get(
+      `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(listTitleOrUrl)}')/items?$top=${maxItems}`,
+      this._spHttpClientConfiguration
+    );
+    if (!response.ok) {
+      throw new Error(`Failed: ${response.status}`);
+    }
     const data = await response.json();
-    return (data.value || []).map((item: any) => ({ id: String(item.Id), letter: item.Letter || item.Title?.charAt(0).toUpperCase() || '#', title: item.Title || '', description: item.Description || undefined, linkUrl: item.LinkUrl || undefined }));
+    return (data.value || []).map((item: Record<string, unknown>) => ({
+      id: String(item.Id),
+      letter:
+        typeof item.Letter === 'string'
+          ? item.Letter
+          : typeof item.Title === 'string'
+            ? item.Title.charAt(0).toUpperCase()
+            : '#',
+      title: typeof item.Title === 'string' ? item.Title : '',
+      description: typeof item.Description === 'string' ? item.Description : undefined,
+      linkUrl: typeof item.LinkUrl === 'string' ? item.LinkUrl : undefined
+    }));
   }
 
   private async getEntriesFromJsonUrl(jsonUrl: string): Promise<IAzEntry[]> {
-    const response = await this._fetchClient(jsonUrl, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
-    if (!response.ok) throw new Error(`Failed: ${response.status}`);
+    if (!jsonUrl.trim()) {
+      throw new Error('JSON URL required');
+    }
+
+    let resolvedUrl = jsonUrl.trim();
+    if (resolvedUrl.startsWith('/')) {
+      resolvedUrl = `${new URL(this._webAbsoluteUrl).origin}${resolvedUrl}`;
+    } else {
+      try {
+        const url = new URL(resolvedUrl);
+        if (url.origin !== new URL(this._webAbsoluteUrl).origin) {
+          throw new Error('Invalid JSON URL format');
+        }
+      } catch {
+        throw new Error('Invalid JSON URL format');
+      }
+    }
+
+    const response = await this._fetchClient(resolvedUrl, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (!response.ok) {
+      throw new Error(`Failed: ${response.status}`);
+    }
     const data = await response.json();
     return (data.items || []).slice(0, 50);
   }

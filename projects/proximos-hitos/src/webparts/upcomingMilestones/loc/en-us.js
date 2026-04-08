@@ -1,8 +1,31 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
+    "PropertyPaneDescription": "Upcoming milestones configuration",
+    "BasicGroupName": "Content",
+    "TitleFieldLabel": "Title",
+    "DescriptionFieldLabel": "Description",
+    "ListTitleFieldLabel": "Milestones list",
+    "MaxItemsFieldLabel": "Maximum milestones",
+    "ViewModeFieldLabel": "View mode",
+    "ViewModeTimelineLabel": "Timeline",
+    "ViewModeListLabel": "List",
+    "ViewModePillLabel": "View:",
+    "DefaultTitle": "Upcoming milestones",
+    "DefaultDescription": "Important dates and deliverables that should stay visible this week.",
+    "LoadingMessage": "Loading milestones...",
+    "ErrorMessage": "Milestones could not be loaded.",
+    "EmptyMessage": "There are no upcoming milestones configured.",
+    "PartialDataMessage": "Some milestones were loaded with partial data. Review dates, types, or links.",
+    "RetryButtonLabel": "Retry",
+    "OpenMilestoneButton": "Open details",
+    "InformationalLabel": "Informational milestone without details",
+    "SoonBadgeLabel": "Soon",
+    "PartialBadgeLabel": "Partial",
+    "ResultsCounterLabel": "milestones",
+    "DateMissingLabel": "Pending date",
+    "TypeMissingLabel": "Undefined phase",
+    "TimelineAriaLabel": "Upcoming milestones timeline",
+    "ListAriaLabel": "Upcoming milestones list",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",
@@ -14,5 +37,5 @@ define([], function() {
     "UnknownEnvironment": "The app is running in an unknown environment",
     "ErrorBoundaryTitle": "Something went wrong",
     "ErrorBoundaryMessage": "This web part encountered an unexpected error. Please reload the page or contact your administrator."
-  }
+  };
 });

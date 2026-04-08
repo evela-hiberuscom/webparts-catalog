@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "reconocimientos",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "Recognitions",
+    "componentDescription": "Visibiliza agradecimientos, logros o reconocimientos internos para reforzar cultura positiva y visibilidad de contribuciones.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.22.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "reconocimientos",
+    "libraryId": "f840f0cf-51df-4ebe-b12b-7bd34aed0988",
+    "solutionShortDescription": "reconocimientos description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  }
+}

@@ -1,7 +1,14 @@
+import type {
+  INewsSummaryConfiguration,
+  INewsSummaryService
+} from '../models/newsSummaryModels';
+
 export interface INewsSummaryProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: INewsSummaryConfiguration;
+  service: INewsSummaryService;
   environmentMessage: string;
   hasTeamsContext: boolean;
+  isDarkTheme: boolean;
+  localeName: string;
   userDisplayName: string;
 }

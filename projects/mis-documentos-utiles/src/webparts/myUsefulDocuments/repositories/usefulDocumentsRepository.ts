@@ -1,4 +1,4 @@
-import { SPHttpClient, ISPHttpClientConfiguration } from '@microsoft/sp-http';
+import type { SPHttpClient } from '@microsoft/sp-http';
 import type {
   FetchLike,
   IUsefulDocument,
@@ -8,7 +8,7 @@ import type {
 export interface IUsefulDocumentsRepositoryOptions {
   fetchClient: FetchLike;
   spHttpClient: SPHttpClient;
-  spHttpClientConfiguration: ISPHttpClientConfiguration;
+  spHttpClientConfiguration: unknown;
   webAbsoluteUrl: string;
 }
 
@@ -70,7 +70,7 @@ function normalizePriority(priority: string | undefined): IUsefulDocument['prior
 export class UsefulDocumentsRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
-  private _spHttpClientConfiguration: ISPHttpClientConfiguration;
+  private _spHttpClientConfiguration: unknown;
   private _webAbsoluteUrl: string;
 
   constructor(options: IUsefulDocumentsRepositoryOptions) {
@@ -112,7 +112,7 @@ export class UsefulDocumentsRepository {
     try {
       const response = await this._spHttpClient.get(
         itemsUrl,
-        SPHttpClient.configurations.v1
+        this._spHttpClientConfiguration as never
       );
 
       if (!response.ok) {

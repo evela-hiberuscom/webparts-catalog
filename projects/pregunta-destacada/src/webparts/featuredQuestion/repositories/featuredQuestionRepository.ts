@@ -1,10 +1,7 @@
-import { SPHttpClient, ISPHttpClientConfiguration } from '@microsoft/sp-http';
 import type { FetchLike, IFeaturedQuestion, IFeaturedQuestionConfiguration } from '../models/featuredQuestionModels';
 
 export interface IFeaturedQuestionRepositoryOptions {
   fetchClient: FetchLike;
-  spHttpClient: SPHttpClient;
-  spHttpClientConfiguration: ISPHttpClientConfiguration;
   webAbsoluteUrl: string;
 }
 
@@ -38,12 +35,10 @@ function normalizeListUrl(listTitleOrUrl: string, webAbsoluteUrl: string): strin
 
 export class FeaturedQuestionRepository {
   private _fetchClient: FetchLike;
-  private _spHttpClient: SPHttpClient;
   private _webAbsoluteUrl: string;
 
   constructor(options: IFeaturedQuestionRepositoryOptions) {
     this._fetchClient = options.fetchClient;
-    this._spHttpClient = options.spHttpClient;
     this._webAbsoluteUrl = options.webAbsoluteUrl;
   }
 
@@ -56,12 +51,18 @@ export class FeaturedQuestionRepository {
   private async getQuestionsFromSharePointList(listTitleOrUrl: string): Promise<IFeaturedQuestion[]> {
     const normalizedUrl = normalizeListUrl(listTitleOrUrl, this._webAbsoluteUrl);
     const isUrl = normalizedUrl.startsWith('/');
-    const listUrl = isUrl 
+    const listUrl = isUrl
       ? `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`
       : `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
-    
+
     const itemsUrl = `${listUrl}/items?$top=1&$orderby=Created desc`;
-    const response = await this._spHttpClient.get(itemsUrl, SPHttpClient.configurations.v1);
+    const response = await this._fetchClient(itemsUrl, {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: {
+        Accept: 'application/json;odata=nometadata'
+      }
+    });
     if (!response.ok) throw new Error(`Failed: ${response.status}`);
     const data = await response.json();
     return (data.value || []).map((item: ISPListItem) => this.mapToQuestion(item));
@@ -85,8 +86,32 @@ export class FeaturedQuestionRepository {
   }
 
   private async getQuestionsFromJsonUrl(jsonUrl: string): Promise<IFeaturedQuestion[]> {
-    if (!jsonUrl?.trim()) throw new Error('JSON URL required');
-    const response = await this._fetchClient(jsonUrl, { method: 'GET', headers: { 'Content-Type': 'application/json' } });
+    if (!jsonUrl?.trim()) {
+      throw new Error('JSON URL required');
+    }
+
+    let resolvedUrl = jsonUrl.trim();
+
+    if (resolvedUrl.startsWith('http')) {
+      try {
+        const externalUrl = new URL(resolvedUrl);
+        if (externalUrl.origin !== new URL(this._webAbsoluteUrl).origin) {
+          throw new Error('Invalid JSON URL format');
+        }
+      } catch (error) {
+        if (error instanceof Error && error.message === 'Invalid JSON URL format') {
+          throw error;
+        }
+        throw new Error('Invalid JSON URL format');
+      }
+    } else if (resolvedUrl.startsWith('/')) {
+      resolvedUrl = `${new URL(this._webAbsoluteUrl).origin}${resolvedUrl}`;
+    }
+
+    const response = await this._fetchClient(resolvedUrl, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
     if (!response.ok) throw new Error(`Failed: ${response.status}`);
     const data = await response.json();
     return (data.items || [data]).slice(0, 1);

@@ -1,34 +1,181 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .upcomingMilestones {
-  overflow: hidden;
-  padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 252, 0.96) 100%);
+  border: 1px solid rgba(15, 60, 120, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.title {
+  margin: 0;
+}
+
+.description {
+  margin: 8px 0 0;
+  max-width: 720px;
+  color: #605e5c;
+}
+
+.headerMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.metaPill,
+.metaPillSecondary,
+.datePill,
+.typePill,
+.soonPill,
+.partialPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metaPill {
+  background: #e9f2ff;
+  color: #0f3c78;
+}
+
+.metaPillSecondary {
+  background: #f3f2f1;
+  color: #323130;
+}
+
+.datePill {
+  background: #f3f2f1;
+  color: #323130;
+}
+
+.typePill {
+  background: #eef6ec;
+  color: #22543d;
+}
+
+.soonPill {
+  background: #fff4ce;
+  color: #8a5d00;
+}
+
+.partialPill {
+  background: #fde7e9;
+  color: #a4262c;
+}
+
+.timelineList,
+.compactList {
+  display: grid;
+  gap: 14px;
+}
+
+.timelineItem,
+.listItem {
+  display: grid;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(96, 94, 92, 0.12);
+}
+
+.timelineItem:last-child,
+.listItem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.timelineItem {
+  grid-template-columns: 24px minmax(0, 1fr);
+}
+
+.listItem {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.timelineRail {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  min-height: 100%;
+}
+
+.timelineRail::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: -18px;
+  width: 2px;
+  background: rgba(15, 60, 120, 0.15);
+}
+
+.timelineItem:last-child .timelineRail::after {
+  display: none;
+}
+
+.timelineDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 4px;
+  background: #0f3c78;
+  box-shadow: 0 0 0 4px rgba(15, 60, 120, 0.12);
+}
+
+.itemContent {
+  display: grid;
+  gap: 8px;
+}
+
+.itemMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.itemTitle {
+  margin: 0;
+}
+
+.itemAction {
+  font-weight: 600;
+}
+
+.itemMuted {
+  color: #8a8886;
+}
+
+.statePanel {
+  padding: 16px 0;
+}
+
+@media (max-width: 640px) {
+  .upcomingMilestones {
+    padding: 16px;
   }
-}
 
-.welcome {
-  text-align: center;
-}
+  .timelineItem {
+    grid-template-columns: 18px minmax(0, 1fr);
+  }
 
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
-}
-
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
-
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
+  .description {
+    max-width: none;
   }
 }

@@ -4,17 +4,14 @@ import { MessageBar, MessageBarType } from '@fluentui/react';
 interface IWebPartErrorBoundaryProps {
   title: string;
   message: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface IWebPartErrorBoundaryState {
   hasError: boolean;
 }
 
-export class WebPartErrorBoundary extends React.Component<
-  IWebPartErrorBoundaryProps,
-  IWebPartErrorBoundaryState
-> {
+export class WebPartErrorBoundary extends React.Component<IWebPartErrorBoundaryProps, IWebPartErrorBoundaryState> {
   public constructor(props: IWebPartErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -31,7 +28,7 @@ export class WebPartErrorBoundary extends React.Component<
   public render(): React.ReactNode {
     if (this.state.hasError) {
       return (
-        <MessageBar messageBarType={MessageBarType.error} isMultiline={true}>
+        <MessageBar messageBarType={MessageBarType.error} isMultiline>
           <strong>{this.props.title}</strong>{' — '}{this.props.message}
         </MessageBar>
       );

@@ -1,8 +1,33 @@
 define([], function() {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
+    "PropertyPaneDescription": "Configure the area-specific news feed for a department, audience, or thematic page.",
+    "BasicGroupName": "Feed configuration",
+    "TitleFieldLabel": "Web part title",
+    "DescriptionFieldLabel": "Supporting text",
+    "AreaFilterFieldLabel": "Area or tag filter",
+    "SitePagesListFieldLabel": "Pages library or list",
+    "MaxItemsFieldLabel": "Maximum number of news items",
+    "ShowImageFieldLabel": "Show main image",
+    "FeaturedFirstFieldLabel": "Highlight the most recent story",
+    "ToggleOnLabel": "Yes",
+    "ToggleOffLabel": "No",
+    "DefaultTitle": "News by area",
+    "DefaultDescription": "Show only the news that matches the current area context and reduce information noise.",
+    "LoadingMessage": "Loading area news",
+    "ErrorMessage": "The area news could not be loaded.",
+    "EmptyMessage": "There is no news available for this area.",
+    "PartialDataMessage": "Some stories have incomplete metadata. They are rendered in a degraded mode without breaking the experience.",
+    "RetryButtonLabel": "Retry",
+    "OpenNewsButton": "Open news",
+    "FeaturedBadgeLabel": "Featured",
+    "PartialBadgeLabel": "Partial",
+    "PublishedOnLabel": "Published",
+    "ResultsCounterLabel": "news items",
+    "MissingSummaryLabel": "This story does not include an editorial summary.",
+    "MissingLinkLabel": "This story does not provide a safe link to open it.",
+    "AllAreasLabel": "All areas",
+    "TagsLabel": "News tags",
+    "FilterLabel": "Filter:",
     "AppLocalEnvironmentSharePoint": "The app is running on your local environment as SharePoint web part",
     "AppLocalEnvironmentTeams": "The app is running on your local environment as Microsoft Teams app",
     "AppLocalEnvironmentOffice": "The app is running on your local environment in office.com",
@@ -14,5 +39,5 @@ define([], function() {
     "UnknownEnvironment": "The app is running in an unknown environment",
     "ErrorBoundaryTitle": "Something went wrong",
     "ErrorBoundaryMessage": "This web part encountered an unexpected error. Please reload the page or contact your administrator."
-  }
+  };
 });

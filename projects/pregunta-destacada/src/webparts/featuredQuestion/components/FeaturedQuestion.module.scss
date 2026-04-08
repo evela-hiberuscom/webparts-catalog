@@ -1,34 +1,70 @@
 @import '~@fluentui/react/dist/sass/References.scss';
 
 .featuredQuestion {
-  overflow: hidden;
-  padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
 }
 
-.welcome {
-  text-align: center;
+.header {
+  margin-bottom: 16px;
 }
 
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
+.eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  color: #605e5c;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+.title {
+  margin: 0;
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
+.card {
+  border: 1px solid #edebe9;
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfa 100%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f3f2f1;
+  color: #323130;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.expiry {
+  color: #605e5c;
+}
+
+.question {
+  margin: 0;
+}
+
+.context {
+  color: #605e5c;
+}
+
+.author {
+  color: #605e5c;
+}
+
+.state {
+  padding: 24px 12px;
 }

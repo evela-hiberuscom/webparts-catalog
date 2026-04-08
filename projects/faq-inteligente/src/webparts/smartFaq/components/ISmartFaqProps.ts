@@ -1,7 +1,14 @@
+import type {
+  ISmartFaqConfiguration,
+  ISmartFaqService
+} from '../models/smartFaqModels';
+
 export interface ISmartFaqProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: ISmartFaqConfiguration;
+  service: ISmartFaqService;
   environmentMessage: string;
   hasTeamsContext: boolean;
+  isDarkTheme: boolean;
+  localeName: string;
   userDisplayName: string;
 }

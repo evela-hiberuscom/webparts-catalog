@@ -1,0 +1,156 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.recognitions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  padding: 16px;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  border: 1px solid "[theme:neutralLight, default: #edebe9]";
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(255, 244, 206, 0.75) 0%, rgba(255, 255, 255, 0.96) 48%),
+    "[theme:white, default: #ffffff]";
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  padding-bottom: 8px;
+  border-bottom: 1px solid "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+.headerCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: "[theme:themePrimary, default: #005a9c]";
+}
+
+.title {
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  max-width: 720px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.headerMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.metaPill,
+.metaPillSecondary,
+.dateChip,
+.partialBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.metaPill {
+  background: rgba(255, 214, 10, 0.16);
+  color: "[theme:neutralPrimary, default: #323130]";
+}
+
+.metaPillSecondary {
+  background: rgba(0, 90, 156, 0.08);
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.feed {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: "[theme:white, default: #ffffff]";
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.cardHeader {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.identity {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cardTitle {
+  margin: 0;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dateChip {
+  background: rgba(0, 90, 156, 0.08);
+}
+
+.partialBadge {
+  background: rgba(255, 185, 0, 0.18);
+}
+
+.message {
+  margin: 0;
+  line-height: 1.55;
+  color: "[theme:neutralPrimary, default: #323130]";
+}
+
+.actionLink {
+  align-self: flex-start;
+  font-weight: 600;
+  color: "[theme:themePrimary, default: #005a9c]";
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: "[theme:themeDarkAlt, default: #004578]";
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .headerMeta {
+    align-items: flex-start;
+  }
+}

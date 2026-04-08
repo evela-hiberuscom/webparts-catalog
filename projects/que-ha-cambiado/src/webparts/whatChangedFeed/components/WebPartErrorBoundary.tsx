@@ -4,7 +4,7 @@ import { MessageBar, MessageBarType } from '@fluentui/react';
 interface IWebPartErrorBoundaryProps {
   title: string;
   message: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 interface IWebPartErrorBoundaryState {
   hasError: boolean;

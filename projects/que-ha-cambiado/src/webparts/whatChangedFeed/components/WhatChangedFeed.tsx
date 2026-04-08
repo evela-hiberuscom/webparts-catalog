@@ -1,43 +1,113 @@
 import * as React from 'react';
-import styles from './WhatChangedFeed.module.scss';
+import { DefaultButton, Icon, Link, MessageBar, MessageBarType, Spinner, Text } from '@fluentui/react';
+import * as strings from 'WhatChangedFeedWebPartStrings';
+
+import { useWhatChangedFeed } from '../hooks/useWhatChangedFeed';
+import type { IWhatChangedFeedItem } from '../models/whatChangedFeedModels';
+import { formatDate } from '../utils/whatChangedFeedUtils';
 import type { IWhatChangedFeedProps } from './IWhatChangedFeedProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { WebPartErrorBoundary } from './WebPartErrorBoundary';
+import styles from './WhatChangedFeed.module.scss';
 
-export default class WhatChangedFeed extends React.Component<IWhatChangedFeedProps> {
-  public render(): React.ReactElement<IWhatChangedFeedProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+function renderChange(item: IWhatChangedFeedItem, localeName: string): React.ReactElement {
+  const changedLabel = formatDate(item.changedAt, localeName);
 
-    return (
-      <section className={`${styles.whatChangedFeed} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+  return (
+    <article key={item.id} className={styles.card}>
+      <div className={styles.cardBody}>
+        <div className={styles.cardMeta}>
+          <span className={styles.typeBadge}>{item.type}</span>
+          {item.featured ? <span className={styles.featuredBadge}>{strings.UpdatedBadgeLabel}</span> : null}
+          {!item.summary || !item.openUrl || !item.changedAt ? (
+            <span className={styles.partialBadge}>{strings.PartialBadgeLabel}</span>
+          ) : null}
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
+
+        <Text as="h3" variant="mediumPlus" className={styles.cardTitle}>
+          {item.title}
+        </Text>
+
+        {changedLabel ? (
+          <p className={styles.cardSubtitle}>
+            <Icon iconName="Calendar" aria-hidden="true" />
+            <span>{strings.ChangedAtLabel} {changedLabel}</span>
           </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+        ) : null}
+
+        <p className={styles.summary}>{item.summary ?? strings.MissingSummaryLabel}</p>
+
+        {item.openUrl ? (
+          <Link href={item.openUrl} target="_blank" rel="noreferrer" className={styles.cardAction}>
+            {strings.OpenItemButton}
+          </Link>
+        ) : (
+          <Text variant="small" className={styles.cardMuted}>
+            {strings.MissingLinkLabel}
+          </Text>
+        )}
+      </div>
+    </article>
+  );
+}
+
+export default function WhatChangedFeed(props: IWhatChangedFeedProps): React.ReactElement {
+  const { state, reload } = useWhatChangedFeed(props.service, props.configuration);
+
+  return (
+    <WebPartErrorBoundary title={strings.ErrorBoundaryTitle} message={strings.ErrorBoundaryMessage}>
+      <section className={styles.whatChangedFeed} aria-label={props.configuration.title}>
+        <header className={styles.header}>
+          <div>
+            <p className={styles.kicker}>{props.userDisplayName}</p>
+            <Text as="h2" variant="xLarge" className={styles.title}>
+              {props.configuration.title}
+            </Text>
+            <p className={styles.description}>{props.configuration.description}</p>
+          </div>
+          <div className={styles.headerMeta}>
+            <span className={styles.metaPill}>
+              <Icon iconName="Page" aria-hidden="true" />
+              <span>{strings.ResultsCounterLabel} {state.items.length}</span>
+            </span>
+            <span className={styles.metaPillSecondary}>{props.configuration.defaultTypeFilter || strings.AllTypesLabel}</span>
+          </div>
+        </header>
+
+        {props.environmentMessage ? (
+          <MessageBar messageBarType={MessageBarType.info} isMultiline={false}>
+            {props.environmentMessage}
+          </MessageBar>
+        ) : null}
+
+        {state.status === 'loading' ? (
+          <div className={styles.statePanel}>
+            <Spinner label={strings.LoadingMessage} />
+          </div>
+        ) : null}
+
+        {state.status === 'error' ? (
+          <div className={styles.statePanel}>
+            <MessageBar messageBarType={MessageBarType.error}>{strings.ErrorMessage}</MessageBar>
+            <DefaultButton text={strings.RetryButtonLabel} onClick={reload} />
+          </div>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && state.hasPartialData ? (
+          <MessageBar messageBarType={MessageBarType.warning}>{strings.PartialDataMessage}</MessageBar>
+        ) : null}
+
+        {state.status !== 'loading' && state.status !== 'error' && state.items.length === 0 ? (
+          <div className={styles.statePanel}>
+            <Text variant="medium">{strings.EmptyMessage}</Text>
+          </div>
+        ) : null}
+
+        {state.items.length > 0 ? (
+          <div className={styles.cardsGrid}>
+            {state.items.map((item) => renderChange(item, props.localeName))}
+          </div>
+        ) : null}
       </section>
-    );
-  }
+    </WebPartErrorBoundary>
+  );
 }

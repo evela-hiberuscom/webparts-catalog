@@ -3,68 +3,95 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
+  PropertyPaneDropdown,
+  PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import { SPHttpClient } from '@microsoft/sp-http';
 
 import * as strings from 'UpcomingMilestonesWebPartStrings';
 import UpcomingMilestones from './components/UpcomingMilestones';
-import { IUpcomingMilestonesProps } from './components/IUpcomingMilestonesProps';
+import type { IUpcomingMilestonesProps } from './components/IUpcomingMilestonesProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
+import { UpcomingMilestonesRepository } from './repositories/upcomingMilestonesRepository';
+import { UpcomingMilestonesService } from './services/upcomingMilestonesService';
+import type { UpcomingMilestonesViewMode } from './models/upcomingMilestonesModels';
 
 export interface IUpcomingMilestonesWebPartProps {
+  title: string;
   description: string;
+  listTitleOrUrl: string;
+  maxItems: number;
+  viewMode: UpcomingMilestonesViewMode;
 }
 
 export default class UpcomingMilestonesWebPart extends BaseClientSideWebPart<IUpcomingMilestonesWebPartProps> {
-
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+  private _isDarkTheme = false;
+  private _environmentMessage = '';
 
   public render(): void {
-    const element: React.ReactElement<IUpcomingMilestonesProps> = React.createElement(
-      UpcomingMilestones,
-      {
+    const service = new UpcomingMilestonesService(new UpcomingMilestonesRepository({
+      spHttpClient: this.context.spHttpClient,
+      spHttpClientConfiguration: SPHttpClient.configurations.v1,
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
+    }));
+
+    const element: React.ReactElement<IUpcomingMilestonesProps> = React.createElement(UpcomingMilestones, {
+      configuration: {
+        title: this.properties.title,
         description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
-  }
-
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+        listTitleOrUrl: this.properties.listTitleOrUrl,
+        maxItems: this.properties.maxItems,
+        viewMode: this.properties.viewMode
+      },
+      service,
+      environmentMessage: this._environmentMessage,
+      hasTeamsContext: !!this.context.sdks.microsoftTeams,
+      isDarkTheme: this._isDarkTheme,
+      localeName: this.context.pageContext.cultureInfo.currentUICultureName || 'es-ES',
+      userDisplayName: this.context.pageContext.user.displayName
     });
+
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        {
+          title: strings.ErrorBoundaryTitle,
+          message: strings.ErrorBoundaryMessage
+        },
+        element
+      ),
+      this.domElement
+    );
   }
 
+  protected async onInit(): Promise<void> {
+    this.properties.title = this.properties.title || strings.DefaultTitle;
+    this.properties.description = this.properties.description || strings.DefaultDescription;
+    this.properties.listTitleOrUrl = this.properties.listTitleOrUrl || 'MilestonesList';
+    this.properties.maxItems = this.properties.maxItems || 5;
+    this.properties.viewMode = this.properties.viewMode || 'timeline';
 
+    this._environmentMessage = await this._getEnvironmentMessage();
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
+    if (!!this.context.sdks.microsoftTeams) {
       return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
+        .then((context) => {
           switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
+            case 'Office':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+            case 'Outlook':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+            case 'Teams':
             case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
             default:
-              environmentMessage = strings.UnknownEnvironment;
+              return strings.UnknownEnvironment;
           }
-
-          return environmentMessage;
         });
     }
 
@@ -77,16 +104,12 @@ export default class UpcomingMilestonesWebPart extends BaseClientSideWebPart<IUp
     }
 
     this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
+    const semanticColors = currentTheme.semanticColors;
     if (semanticColors) {
       this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
       this.domElement.style.setProperty('--link', semanticColors.link || null);
       this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
     }
-
   }
 
   protected onDispose(): void {
@@ -108,8 +131,28 @@ export default class UpcomingMilestonesWebPart extends BaseClientSideWebPart<IUp
             {
               groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel
+                }),
                 PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                  label: strings.DescriptionFieldLabel,
+                  multiline: true
+                }),
+                PropertyPaneTextField('listTitleOrUrl', {
+                  label: strings.ListTitleFieldLabel
+                }),
+                PropertyPaneSlider('maxItems', {
+                  label: strings.MaxItemsFieldLabel,
+                  min: 1,
+                  max: 20,
+                  step: 1
+                }),
+                PropertyPaneDropdown('viewMode', {
+                  label: strings.ViewModeFieldLabel,
+                  options: [
+                    { key: 'timeline', text: strings.ViewModeTimelineLabel },
+                    { key: 'list', text: strings.ViewModeListLabel }
+                  ]
                 })
               ]
             }

@@ -1,7 +1,10 @@
+import type { ITeamAgendaConfiguration, ITeamAgendaService } from '../models/teamAgendaModels';
+
 export interface ITeamAgendaProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: ITeamAgendaConfiguration;
+  service: ITeamAgendaService;
+  localeName: string;
   environmentMessage: string;
   hasTeamsContext: boolean;
-  userDisplayName: string;
+  isDarkTheme: boolean;
 }

@@ -1,0 +1,30 @@
+{
+  "projectSlug": "reconocimientos",
+  "rowId": "recIYX0vzKpB3ifxS",
+  "references": [
+    "../../style-guide/brand-profile.json",
+    "../../style-guide/design-tokens.json",
+    "../../style-guide/component-inventory.json",
+    "../../style-guide/mockup-spec-spfx-portal.md"
+  ],
+  "projectDesignJson": {
+    "uxGoal": "Hacer visibles pequeños logros o agradecimientos con un tono positivo y una lectura muy fácil.",
+    "informationArchitecture": {
+      "zones": [
+        "cabecera",
+        "feed de reconocimientos"
+      ],
+      "priorityOrder": [
+        "más recientes",
+        "resto"
+      ]
+    },
+    "states": [
+      "loading",
+      "ready",
+      "empty",
+      "partialData",
+      "error"
+    ]
+  }
+}

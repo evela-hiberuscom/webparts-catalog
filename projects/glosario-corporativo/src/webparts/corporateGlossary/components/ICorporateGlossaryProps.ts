@@ -1,7 +1,14 @@
+import type {
+  ICorporateGlossaryConfiguration,
+  ICorporateGlossaryService
+} from '../models/corporateGlossaryModels';
+
 export interface ICorporateGlossaryProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: ICorporateGlossaryConfiguration;
+  service: ICorporateGlossaryService;
   environmentMessage: string;
   hasTeamsContext: boolean;
+  isDarkTheme: boolean;
+  localeName: string;
   userDisplayName: string;
 }

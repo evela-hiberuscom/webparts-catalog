@@ -3,68 +3,96 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneSlider,
+  PropertyPaneTextField,
+  PropertyPaneToggle
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import { SPHttpClient } from '@microsoft/sp-http';
 
 import * as strings from 'NewsSummaryWebPartStrings';
 import NewsSummary from './components/NewsSummary';
-import { INewsSummaryProps } from './components/INewsSummaryProps';
+import type { INewsSummaryProps } from './components/INewsSummaryProps';
+import { WebPartErrorBoundary } from './components/WebPartErrorBoundary';
+import { NewsSummaryRepository } from './repositories/newsSummaryRepository';
+import { NewsSummaryService } from './services/newsSummaryService';
 
 export interface INewsSummaryWebPartProps {
+  title: string;
   description: string;
+  sitePagesListTitle: string;
+  maxItems: number;
+  featuredFirst: boolean;
 }
 
 export default class NewsSummaryWebPart extends BaseClientSideWebPart<INewsSummaryWebPartProps> {
-
-  private _isDarkTheme: boolean = false;
-  private _environmentMessage: string = '';
+  private _isDarkTheme = false;
+  private _environmentMessage = '';
 
   public render(): void {
-    const element: React.ReactElement<INewsSummaryProps> = React.createElement(
-      NewsSummary,
-      {
+    const service = new NewsSummaryService(new NewsSummaryRepository({
+      spHttpClient: this.context.spHttpClient,
+      spHttpClientConfiguration: SPHttpClient.configurations.v1,
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
+    }));
+
+    const element: React.ReactElement<INewsSummaryProps> = React.createElement(NewsSummary, {
+      configuration: {
+        title: this.properties.title,
         description: this.properties.description,
-        isDarkTheme: this._isDarkTheme,
-        environmentMessage: this._environmentMessage,
-        hasTeamsContext: !!this.context.sdks.microsoftTeams,
-        userDisplayName: this.context.pageContext.user.displayName
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
-  }
-
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
+        sitePagesListTitle: this.properties.sitePagesListTitle,
+        maxItems: this.properties.maxItems,
+        featuredFirst: this.properties.featuredFirst
+      },
+      service,
+      environmentMessage: this._environmentMessage,
+      hasTeamsContext: !!this.context.sdks.microsoftTeams,
+      isDarkTheme: this._isDarkTheme,
+      localeName: this.context.pageContext.cultureInfo.currentUICultureName || 'es-ES',
+      userDisplayName: this.context.pageContext.user.displayName
     });
+
+    ReactDom.render(
+      React.createElement(
+        WebPartErrorBoundary,
+        {
+          title: strings.ErrorBoundaryTitle,
+          message: strings.ErrorBoundaryMessage
+        },
+        element
+      ),
+      this.domElement
+    );
   }
 
+  protected async onInit(): Promise<void> {
+    this.properties.title = this.properties.title || strings.DefaultTitle;
+    this.properties.description = this.properties.description || strings.DefaultDescription;
+    this.properties.sitePagesListTitle = this.properties.sitePagesListTitle || 'Site Pages';
+    this.properties.maxItems = this.properties.maxItems || 4;
+    if (typeof this.properties.featuredFirst !== 'boolean') {
+      this.properties.featuredFirst = true;
+    }
 
+    this._environmentMessage = await this._getEnvironmentMessage();
+  }
 
   private _getEnvironmentMessage(): Promise<string> {
-    if (!!this.context.sdks.microsoftTeams) { // running in Teams, office.com or Outlook
+    if (!!this.context.sdks.microsoftTeams) {
       return this.context.sdks.microsoftTeams.teamsJs.app.getContext()
-        .then(context => {
-          let environmentMessage: string = '';
+        .then((context) => {
           switch (context.app.host.name) {
-            case 'Office': // running in Office
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
-              break;
-            case 'Outlook': // running in Outlook
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
-              break;
-            case 'Teams': // running in Teams
+            case 'Office':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOffice : strings.AppOfficeEnvironment;
+            case 'Outlook':
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentOutlook : strings.AppOutlookEnvironment;
+            case 'Teams':
             case 'TeamsModern':
-              environmentMessage = this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-              break;
+              return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
             default:
-              environmentMessage = strings.UnknownEnvironment;
+              return strings.UnknownEnvironment;
           }
-
-          return environmentMessage;
         });
     }
 
@@ -77,16 +105,12 @@ export default class NewsSummaryWebPart extends BaseClientSideWebPart<INewsSumma
     }
 
     this._isDarkTheme = !!currentTheme.isInverted;
-    const {
-      semanticColors
-    } = currentTheme;
-
+    const semanticColors = currentTheme.semanticColors;
     if (semanticColors) {
       this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
       this.domElement.style.setProperty('--link', semanticColors.link || null);
       this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
     }
-
   }
 
   protected onDispose(): void {
@@ -108,8 +132,26 @@ export default class NewsSummaryWebPart extends BaseClientSideWebPart<INewsSumma
             {
               groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneTextField('title', {
+                  label: strings.TitleFieldLabel
+                }),
                 PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                  label: strings.DescriptionFieldLabel,
+                  multiline: true
+                }),
+                PropertyPaneTextField('sitePagesListTitle', {
+                  label: strings.SitePagesListFieldLabel
+                }),
+                PropertyPaneSlider('maxItems', {
+                  label: strings.MaxItemsFieldLabel,
+                  min: 1,
+                  max: 12,
+                  step: 1
+                }),
+                PropertyPaneToggle('featuredFirst', {
+                  label: strings.FeaturedFirstFieldLabel,
+                  onText: strings.ToggleOnLabel,
+                  offText: strings.ToggleOffLabel
                 })
               ]
             }

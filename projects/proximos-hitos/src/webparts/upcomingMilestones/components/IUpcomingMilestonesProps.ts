@@ -1,7 +1,11 @@
+import type {
+  IUpcomingMilestonesConfiguration,
+  IUpcomingMilestonesService
+} from '../models/upcomingMilestonesModels';
+
 export interface IUpcomingMilestonesProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: IUpcomingMilestonesConfiguration;
+  service: IUpcomingMilestonesService;
   environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+  localeName: string;
 }

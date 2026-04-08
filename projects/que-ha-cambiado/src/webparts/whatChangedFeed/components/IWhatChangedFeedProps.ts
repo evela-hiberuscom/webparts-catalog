@@ -1,7 +1,14 @@
+import type {
+  IWhatChangedFeedConfiguration,
+  IWhatChangedFeedService
+} from '../models/whatChangedFeedModels';
+
 export interface IWhatChangedFeedProps {
-  description: string;
-  isDarkTheme: boolean;
+  configuration: IWhatChangedFeedConfiguration;
+  service: IWhatChangedFeedService;
   environmentMessage: string;
   hasTeamsContext: boolean;
+  isDarkTheme: boolean;
+  localeName: string;
   userDisplayName: string;
 }

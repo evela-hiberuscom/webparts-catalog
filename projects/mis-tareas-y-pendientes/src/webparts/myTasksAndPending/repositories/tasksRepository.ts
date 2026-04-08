@@ -1,4 +1,4 @@
-import { SPHttpClient, ISPHttpClientConfiguration } from '@microsoft/sp-http';
+import type { SPHttpClient } from '@microsoft/sp-http';
 import type {
   FetchLike,
   ITaskItem,
@@ -8,7 +8,7 @@ import type {
 export interface ITasksRepositoryOptions {
   fetchClient: FetchLike;
   spHttpClient: SPHttpClient;
-  spHttpClientConfiguration: ISPHttpClientConfiguration;
+  spHttpClientConfiguration: unknown;
   webAbsoluteUrl: string;
 }
 
@@ -100,7 +100,7 @@ function normalizeStatus(status: string | undefined): ITaskItem['status'] {
 export class TasksRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
-  private _spHttpClientConfiguration: ISPHttpClientConfiguration;
+  private _spHttpClientConfiguration: unknown;
   private _webAbsoluteUrl: string;
 
   constructor(options: ITasksRepositoryOptions) {
@@ -142,7 +142,7 @@ export class TasksRepository {
     try {
       const response = await this._spHttpClient.get(
         itemsUrl,
-        SPHttpClient.configurations.v1
+        this._spHttpClientConfiguration as never
       );
 
       if (!response.ok) {
