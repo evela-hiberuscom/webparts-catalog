@@ -1,10 +1,27 @@
 import * as React from 'react';
-import { DetailsList, DetailsListLayoutMode, SelectionMode, IColumn, Text, Stack, Icon, Panel, PanelType, Label } from '@fluentui/react';
-import type { ISiteReport, HealthLevel } from '../models/siteReport';
+import {
+  DefaultButton,
+  DetailsList,
+  DetailsListLayoutMode,
+  Icon,
+  IconButton,
+  type IColumn,
+  SelectionMode,
+  Stack,
+  Text,
+  TooltipHost
+} from '@fluentui/react';
+import * as strings from 'SiteStorageDiagnosticsWebPartStrings';
+
+import type { IHttpClient } from '../models/httpClient';
+import type { HealthLevel, ISiteReport } from '../models/siteReport';
 import { formatBytes, formatDate } from '../utils/formatters';
+import { downloadReportCsv } from '../utils/reportCsv';
+import { SiteResultDetails } from './SiteResultDetails';
 
 export interface IReportDashboardProps {
   reports: ISiteReport[];
+  spHttpClient: IHttpClient;
 }
 
 const HEALTH_COLORS: Record<HealthLevel, string> = {
@@ -22,26 +39,30 @@ const HEALTH_ICONS: Record<HealthLevel, string> = {
 };
 
 const HEALTH_LABELS: Record<HealthLevel, string> = {
-  ok: 'Saludable',
-  warning: 'Advertencia',
-  critical: 'Crítico',
-  unknown: 'Desconocido'
+  ok: strings.HealthyLabel,
+  warning: strings.WarningLabel,
+  critical: strings.CriticalLabel,
+  unknown: strings.UnknownLabel
 };
 
 export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
-  const { reports } = props;
+  const { reports, spHttpClient } = props;
   const [sortKey, setSortKey] = React.useState<string>('health');
   const [sortAsc, setSortAsc] = React.useState<boolean>(true);
-  const [selectedSite, setSelectedSite] = React.useState<ISiteReport | undefined>(undefined);
+  const [expandedSiteUrl, setExpandedSiteUrl] = React.useState<string | undefined>(undefined);
 
   if (reports.length === 0) {
     return (
       <Stack tokens={{ childrenGap: 8 }} styles={{ root: { padding: 16 } }}>
-        <Text variant="large">Dashboard de almacenamiento</Text>
-        <Text>No hay informes disponibles. Inicia un escaneo desde la pestaña &ldquo;Escaneo&rdquo;.</Text>
+        <Text variant="large">{strings.DashboardTitle}</Text>
+        <Text>{strings.DashboardEmptyMessage}</Text>
       </Stack>
     );
   }
+
+  const toggleSite = (site: ISiteReport): void => {
+    setExpandedSiteUrl((current) => current === site.siteUrl ? undefined : site.siteUrl);
+  };
 
   const onColumnClick = (_ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
     if (column.key === sortKey) {
@@ -53,6 +74,28 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
   };
 
   const columns: IColumn[] = [
+    {
+      key: 'expand',
+      name: '',
+      minWidth: 36,
+      maxWidth: 36,
+      onRender: (item: ISiteReport) => {
+        const isExpanded = expandedSiteUrl === item.siteUrl;
+
+        return (
+          <IconButton
+            iconProps={{ iconName: isExpanded ? 'ChevronDown' : 'ChevronRight' }}
+            ariaLabel={isExpanded ? strings.CollapseRowAriaLabel : strings.ExpandRowAriaLabel}
+            title={isExpanded ? strings.CollapseRowAriaLabel : strings.ExpandRowAriaLabel}
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              toggleSite(item);
+            }}
+          />
+        );
+      }
+    },
     {
       key: 'health',
       name: '',
@@ -72,7 +115,7 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
     },
     {
       key: 'siteTitle',
-      name: 'Sitio',
+      name: strings.SiteColumnLabel,
       fieldName: 'siteTitle',
       minWidth: 150,
       maxWidth: 250,
@@ -84,7 +127,7 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
     },
     {
       key: 'libraryCount',
-      name: 'Bibliotecas',
+      name: strings.LibrariesColumnLabel,
       fieldName: 'libraryCount',
       minWidth: 80,
       maxWidth: 100,
@@ -95,7 +138,7 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
     },
     {
       key: 'totalLibraryItems',
-      name: 'Items',
+      name: strings.ItemsColumnLabel,
       fieldName: 'totalLibraryItems',
       minWidth: 80,
       maxWidth: 100,
@@ -106,55 +149,55 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
     },
     {
       key: 'recycleBinItemCount',
-      name: 'Papelera',
+      name: strings.RecycleBinColumnLabel,
       minWidth: 80,
       maxWidth: 100,
       isResizable: true,
       isSorted: sortKey === 'recycleBinItemCount',
       isSortedDescending: sortKey === 'recycleBinItemCount' && !sortAsc,
       onColumnClick,
-      onRender: (item: ISiteReport) => <Text>{item.recycleBinItemCount ?? '—'}</Text>
+      onRender: (item: ISiteReport) => renderRecycleBinCount(item)
     },
     {
       key: 'recycleBinSize',
-      name: 'Tamaño papelera',
+      name: strings.RecycleBinSizeColumnLabel,
       minWidth: 100,
       maxWidth: 130,
       isResizable: true,
       isSorted: sortKey === 'recycleBinSize',
       isSortedDescending: sortKey === 'recycleBinSize' && !sortAsc,
       onColumnClick,
-      onRender: (item: ISiteReport) => <Text>{formatBytes(item.recycleBinSizeBytes)}</Text>
+      onRender: (item: ISiteReport) => renderRecycleBinSize(item)
     },
     {
       key: 'storageUsed',
-      name: 'Almacenamiento',
+      name: strings.StorageColumnLabel,
       minWidth: 100,
       maxWidth: 130,
       isResizable: true,
       isSorted: sortKey === 'storageUsed',
       isSortedDescending: sortKey === 'storageUsed' && !sortAsc,
       onColumnClick,
-      onRender: (item: ISiteReport) => <Text>{formatBytes(item.storageUsedBytes)}</Text>
+      onRender: (item: ISiteReport) => renderStorageValue(item)
     },
     {
       key: 'flags',
-      name: 'Alertas',
+      name: strings.FlagsColumnLabel,
       minWidth: 120,
       maxWidth: 200,
       isResizable: true,
-      onRender: (item: ISiteReport) => <Text variant="small">{item.flags.join(', ') || '—'}</Text>
+      onRender: (item: ISiteReport) => <Text variant="small">{item.flags.join(', ') || strings.NoAlertsLabel}</Text>
     },
     {
       key: 'scanDate',
-      name: 'Último escaneo',
+      name: strings.ScanDateColumnLabel,
       minWidth: 130,
       maxWidth: 180,
       isResizable: true,
       isSorted: sortKey === 'scanDate',
       isSortedDescending: sortKey === 'scanDate' && !sortAsc,
       onColumnClick,
-      onRender: (item: ISiteReport) => <Text variant="small">{formatDate(item.scanDate)}</Text>
+      onRender: (item: ISiteReport) => <Text variant="small">{item.scanDate ? formatDate(item.scanDate) : strings.UnavailableLabel}</Text>
     }
   ];
 
@@ -178,7 +221,15 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
 
   return (
     <Stack tokens={{ childrenGap: 8 }} styles={{ root: { padding: 16 } }}>
-      <Text variant="large">Dashboard de almacenamiento ({reports.length} sitios)</Text>
+      <Stack horizontal horizontalAlign="space-between" verticalAlign="end" tokens={{ childrenGap: 12 }}>
+        <Stack tokens={{ childrenGap: 4 }}>
+          <Text variant="large">{strings.DashboardTitle}</Text>
+          <Text variant="small">{reports.length} {strings.SitesLabel}</Text>
+          <Text variant="small">{strings.DashboardHintMessage}</Text>
+        </Stack>
+        <DefaultButton text={strings.DownloadCsvButtonLabel} onClick={() => downloadReportCsv(sortedReports)} />
+      </Stack>
+
       <DetailsList
         items={sortedReports}
         columns={columns}
@@ -186,75 +237,64 @@ export const ReportDashboard: React.FC<IReportDashboardProps> = (props) => {
         layoutMode={DetailsListLayoutMode.justified}
         compact={true}
         ariaLabelForGrid="Tabla de informes de almacenamiento por sitio"
-        onItemInvoked={(item: ISiteReport) => setSelectedSite(item)}
+        onItemInvoked={(item: ISiteReport) => toggleSite(item)}
+        onRenderRow={(rowProps, defaultRender) => {
+          if (!rowProps) {
+            return null;
+          }
+
+          const report = rowProps.item as ISiteReport;
+          const isExpanded = expandedSiteUrl === report.siteUrl;
+
+          return (
+            <div>
+              {defaultRender?.(rowProps)}
+              {isExpanded && <SiteResultDetails report={report} spHttpClient={spHttpClient} />}
+            </div>
+          );
+        }}
       />
-      {selectedSite && (
-        <Panel
-          isOpen={true}
-          type={PanelType.medium}
-          headerText={selectedSite.siteTitle || selectedSite.siteUrl}
-          onDismiss={() => setSelectedSite(undefined)}
-          isLightDismiss={true}
-        >
-          <Stack tokens={{ childrenGap: 12 }} styles={{ root: { padding: 16 } }}>
-            <Label>URL</Label>
-            <Text>{selectedSite.siteUrl}</Text>
-
-            <Label>Estado de salud</Label>
-            <Stack horizontal tokens={{ childrenGap: 8 }} verticalAlign="center">
-              <Icon
-                iconName={HEALTH_ICONS[selectedSite.healthLevel]}
-                styles={{ root: { color: HEALTH_COLORS[selectedSite.healthLevel] } }}
-                aria-label={HEALTH_LABELS[selectedSite.healthLevel]}
-                role="img"
-              />
-              <Text>{HEALTH_LABELS[selectedSite.healthLevel]}</Text>
-            </Stack>
-
-            <Label>Almacenamiento</Label>
-            <Text>{formatBytes(selectedSite.storageUsedBytes)} / {formatBytes(selectedSite.storageQuotaBytes)}</Text>
-
-            <Label>Bibliotecas</Label>
-            <Text>{selectedSite.libraryCount} bibliotecas, {selectedSite.totalLibraryItems} elementos totales</Text>
-
-            <Label>Papelera de reciclaje</Label>
-            <Text>{selectedSite.recycleBinItemCount ?? '—'} elementos ({formatBytes(selectedSite.recycleBinSizeBytes)})</Text>
-
-            {selectedSite.flags.length > 0 && (
-              <>
-                <Label>Alertas</Label>
-                <Text>{selectedSite.flags.join(', ')}</Text>
-              </>
-            )}
-
-            {selectedSite.libraries && selectedSite.libraries.length > 0 && (
-              <>
-                <Label>Bibliotecas de documentos</Label>
-                <DetailsList
-                  items={selectedSite.libraries}
-                  columns={[
-                    { key: 'title', name: 'Nombre', fieldName: 'title', minWidth: 120, isResizable: true },
-                    { key: 'itemCount', name: 'Elementos', fieldName: 'itemCount', minWidth: 80 },
-                    { key: 'lastModified', name: 'Última modificación', minWidth: 130, onRender: (lib: { lastModified?: string }) => <Text variant="small">{formatDate(lib.lastModified)}</Text> }
-                  ]}
-                  selectionMode={SelectionMode.none}
-                  compact={true}
-                />
-              </>
-            )}
-
-            <Label>Último escaneo</Label>
-            <Text variant="small">{formatDate(selectedSite.scanDate)}</Text>
-
-            {selectedSite.errorMessage && (
-              <>
-                <Label>Error</Label>
-                <Text variant="small" styles={{ root: { color: '#a80000' } }}>{selectedSite.errorMessage}</Text>
-              </>
-            )}
-          </Stack>
-        </Panel>
-      )}
     </Stack>
   );
 };
+
+function renderRecycleBinCount(item: ISiteReport): React.ReactNode {
+  if (!item.recycleBin.isAccessible) {
+    return renderUnavailable(strings.RecycleBinUnavailableLabel, item.recycleBin.errorMessage);
+  }
+
+  if (item.recycleBinItemCount === undefined) {
+    return renderUnavailable(strings.UnavailableLabel);
+  }
+
+  return <Text>{item.recycleBinItemCount}</Text>;
+}
+
+function renderRecycleBinSize(item: ISiteReport): React.ReactNode {
+  if (!item.recycleBin.isAccessible) {
+    return renderUnavailable(strings.RecycleBinUnavailableLabel, item.recycleBin.errorMessage);
+  }
+
+  if (item.recycleBinSizeBytes === undefined) {
+    return renderUnavailable(strings.UnavailableLabel);
+  }
+
+  return <Text>{formatBytes(item.recycleBinSizeBytes)}</Text>;
+}
+
+function renderStorageValue(item: ISiteReport): React.ReactNode {
+  if (item.storageUsedBytes === undefined) {
+    return renderUnavailable(strings.UnavailableLabel, item.errorMessage);
+  }
+
+  return <Text>{formatBytes(item.storageUsedBytes)}</Text>;
+}
+
+function renderUnavailable(label: string, detail?: string): React.ReactElement {
+  const content = detail ? `${strings.UnavailableHintMessage} ${detail}` : strings.UnavailableHintMessage;
+  return (
+    <TooltipHost content={content}>
+      <span>{label}</span>
+    </TooltipHost>
+  );
+}

@@ -64,18 +64,26 @@ export class ScanEngine {
   public async start(): Promise<void> {
     this.cancelled = false;
     this.paused = false;
+    this.progress = createInitialProgress();
 
     try {
       await this.cache.open();
+      await this.cache.clearReports();
 
       this.updateProgress({ globalStatus: 'discovering', startedAt: new Date().toISOString() });
 
       const sites = await this.discoverSites();
       this.updateProgress({ globalStatus: 'scanning', totalSites: sites.length });
 
-      const savedState = await this.cache.getScanState('current');
-      const completedUrls = new Set(savedState?.completedUrls ?? []);
-      const pendingSites = sites.filter((s) => !completedUrls.has(s.url));
+      const completedUrls = new Set<string>();
+      const pendingSites = sites;
+
+      await this.cache.saveScanState({
+        id: 'current',
+        completedUrls: [],
+        pendingUrls: pendingSites.map((site) => site.url),
+        timestamp: new Date().toISOString()
+      });
 
       for (const site of pendingSites) {
         if (this.cancelled) {
@@ -251,11 +259,12 @@ export class ScanEngine {
   }
 
   private async flushToReportList(completedUrls: string[]): Promise<void> {
-    if (!this.configuration.reportListUrl) return;
+    const reportListUrl = this.resolveReportListUrl();
+    if (!reportListUrl) return;
 
     const reportRepo = new ReportListRepository({
       spHttpClient: this.spHttpClient,
-      reportListUrl: this.configuration.reportListUrl
+      reportListUrl
     });
 
     for (const url of completedUrls) {
@@ -271,6 +280,46 @@ export class ScanEngine {
         this.progress.errors.push({ siteUrl: url, message, timestamp: new Date().toISOString(), httpStatus: undefined });
       }
     }
+  }
+
+  private resolveReportListUrl(): string | undefined {
+    const candidate = this.configuration.reportListUrl.trim();
+    if (!candidate) {
+      return undefined;
+    }
+
+    try {
+      const reportListUrl = new URL(candidate);
+      const currentSiteUrl = new URL(this.currentSiteUrl);
+      const currentSitePath = currentSiteUrl.pathname.replace(/\/$/, '').toLowerCase();
+      const reportListPath = reportListUrl.pathname.replace(/\/$/, '').toLowerCase();
+      const isSameOrigin = reportListUrl.origin.toLowerCase() === currentSiteUrl.origin.toLowerCase();
+      const isCurrentSiteScoped = reportListPath === currentSitePath || reportListPath.startsWith(`${currentSitePath}/`);
+
+      if (!isSameOrigin || !isCurrentSiteScoped) {
+        this.pushProgressError(this.currentSiteUrl, 'El guardado de informes solo está permitido en el sitio actual. La descarga CSV seguirá disponible sin guardar.');
+        return undefined;
+      }
+
+      return candidate.replace(/\/$/, '');
+    } catch {
+      this.pushProgressError(this.currentSiteUrl, 'La URL de la lista de informes no es válida. La descarga CSV seguirá disponible sin guardar.');
+      return undefined;
+    }
+  }
+
+  private pushProgressError(siteUrl: string, message: string): void {
+    const alreadyExists = this.progress.errors.some((error) => error.siteUrl === siteUrl && error.message === message);
+    if (alreadyExists) {
+      return;
+    }
+
+    this.progress.errors.push({
+      siteUrl,
+      message,
+      timestamp: new Date().toISOString(),
+      httpStatus: undefined
+    });
   }
 
   private async waitForResume(): Promise<void> {

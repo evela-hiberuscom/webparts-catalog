@@ -1,5 +1,5 @@
 import type { IHttpClient, IHttpResponse } from '../models/httpClient';
-import type { ILibraryMetrics, IRecycleBinMetrics } from '../models/siteReport';
+import type { ILibraryItemMetrics, ILibraryMetrics, IRecycleBinMetrics } from '../models/siteReport';
 
 export class ThrottledError extends Error {
   public readonly retryAfterSeconds: number;
@@ -49,6 +49,66 @@ export class SiteMetricsRepository {
       itemCount: item.ItemCount,
       lastModified: item.LastItemModifiedDate || undefined
     }));
+  }
+
+  public async getLibraryItems(siteUrl: string, libraryId: string): Promise<ILibraryItemMetrics[]> {
+    let endpoint = `${this.normalize(siteUrl)}/_api/web/lists(guid'${libraryId}')/items?$select=Id,Modified,Editor/Title,FileSystemObjectType,File/Name,File/ServerRelativeUrl,File/Length,Folder/Name,Folder/ServerRelativeUrl&$expand=Editor,File,Folder&$orderby=Modified desc&$top=5000`;
+    const items: ILibraryItemMetrics[] = [];
+
+    while (endpoint) {
+      const response = await this.options.spHttpClient.get(endpoint, undefined, {
+        headers: { Accept: 'application/json;odata=nometadata' }
+      });
+
+      this.checkThrottled(response);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch library items from ${siteUrl}: HTTP ${response.status}`);
+      }
+
+      const payload = await response.json() as {
+        value?: Array<{
+          Id: number;
+          Modified?: string;
+          Editor?: { Title?: string };
+          FileSystemObjectType?: number;
+          File?: {
+            Name?: string;
+            ServerRelativeUrl?: string;
+            Length?: number | string;
+          };
+          Folder?: {
+            Name?: string;
+            ServerRelativeUrl?: string;
+          };
+        }>;
+        '@odata.nextLink'?: string;
+      };
+
+      for (const item of payload?.value ?? []) {
+        const isFolder = item.FileSystemObjectType === 1;
+        const rawSize = item.File?.Length;
+        const parsedSize = typeof rawSize === 'string'
+          ? parseInt(rawSize, 10)
+          : rawSize;
+        const relativeUrl = isFolder ? item.Folder?.ServerRelativeUrl : item.File?.ServerRelativeUrl;
+        const name = isFolder ? item.Folder?.Name : item.File?.Name;
+
+        items.push({
+          id: String(item.Id),
+          name: name || '(sin nombre)',
+          url: relativeUrl ? this.toAbsoluteUrl(siteUrl, relativeUrl) : this.normalize(siteUrl),
+          sizeBytes: isFolder ? undefined : Number.isFinite(parsedSize) ? Number(parsedSize) : undefined,
+          lastModified: item.Modified || undefined,
+          modifiedBy: item.Editor?.Title || undefined,
+          isFolder
+        });
+      }
+
+      endpoint = payload['@odata.nextLink'] || '';
+    }
+
+    return items;
   }
 
   public async getRecycleBinMetrics(siteUrl: string): Promise<IRecycleBinMetrics> {
@@ -122,6 +182,14 @@ export class SiteMetricsRepository {
 
   private normalize(url: string): string {
     return url.replace(/\/$/, '');
+  }
+
+  private toAbsoluteUrl(siteUrl: string, candidate: string): string {
+    try {
+      return new URL(candidate, this.normalize(siteUrl)).toString();
+    } catch {
+      return candidate;
+    }
   }
 
   private checkThrottled(response: IHttpResponse): void {

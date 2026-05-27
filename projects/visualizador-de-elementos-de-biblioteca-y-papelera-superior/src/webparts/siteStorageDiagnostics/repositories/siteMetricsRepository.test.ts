@@ -37,6 +37,94 @@ describe('SiteMetricsRepository', () => {
     });
   });
 
+  describe('getLibraryItems', () => {
+    it('returns paged library items with normalized fields', async () => {
+      const get = jest
+        .fn()
+        .mockResolvedValueOnce({
+          ok: true,
+          status: 200,
+          headers: { get: () => undefined },
+          json: async () => ({
+            value: [
+              {
+                Id: 1,
+                Modified: '2026-05-27T10:00:00Z',
+                Editor: { Title: 'Ada Lovelace' },
+                FileSystemObjectType: 0,
+                File: {
+                  Name: 'Doc-1.docx',
+                  ServerRelativeUrl: '/sites/test/Shared Documents/Doc-1.docx',
+                  Length: '2048'
+                }
+              }
+            ],
+            '@odata.nextLink': 'https://contoso.sharepoint.com/sites/test/_api/next-page'
+          })
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          status: 200,
+          headers: { get: () => undefined },
+          json: async () => ({
+            value: [
+              {
+                Id: 2,
+                Modified: '2026-05-26T08:00:00Z',
+                Editor: { Title: 'Grace Hopper' },
+                FileSystemObjectType: 1,
+                Folder: {
+                  Name: 'Folder A',
+                  ServerRelativeUrl: '/sites/test/Shared Documents/Folder A'
+                }
+              }
+            ]
+          })
+        });
+
+      const repo = new SiteMetricsRepository({ spHttpClient: { get, post: jest.fn() } });
+      const items = await repo.getLibraryItems('https://contoso.sharepoint.com/sites/test', 'lib-guid');
+
+      expect(get).toHaveBeenCalledTimes(2);
+      expect(get.mock.calls[0]?.[0]).toContain('FileSystemObjectType');
+      expect(get.mock.calls[0]?.[0]).toContain('File/Length');
+      expect(get.mock.calls[0]?.[0]).toContain('Folder/ServerRelativeUrl');
+      expect(items).toEqual([
+        {
+          id: '1',
+          name: 'Doc-1.docx',
+          url: 'https://contoso.sharepoint.com/sites/test/Shared%20Documents/Doc-1.docx',
+          sizeBytes: 2048,
+          lastModified: '2026-05-27T10:00:00Z',
+          modifiedBy: 'Ada Lovelace',
+          isFolder: false
+        },
+        {
+          id: '2',
+          name: 'Folder A',
+          url: 'https://contoso.sharepoint.com/sites/test/Shared%20Documents/Folder%20A',
+          sizeBytes: undefined,
+          lastModified: '2026-05-26T08:00:00Z',
+          modifiedBy: 'Grace Hopper',
+          isFolder: true
+        }
+      ]);
+    });
+
+    it('throws on library item HTTP error', async () => {
+      const get = jest.fn(async () => ({
+        ok: false,
+        status: 500,
+        headers: { get: () => undefined },
+        json: async () => ({})
+      }));
+
+      const repo = new SiteMetricsRepository({ spHttpClient: { get, post: jest.fn() } });
+
+      await expect(repo.getLibraryItems('https://contoso.sharepoint.com/sites/test', 'lib-guid')).rejects.toThrow('HTTP 500');
+    });
+  });
+
   describe('getRecycleBinMetrics', () => {
     it('aggregates recycle bin items', async () => {
       const get = jest.fn(async () => ({

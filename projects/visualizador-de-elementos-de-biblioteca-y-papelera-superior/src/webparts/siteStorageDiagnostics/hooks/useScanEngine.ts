@@ -43,6 +43,8 @@ export function useScanEngine(props: ISiteStorageDiagnosticsProps): IUseScanEngi
     // Cancel previous scan and dispose listener
     disposeRef.current?.();
     engineRef.current?.cancel();
+    setProgress(createInitialProgress());
+    setReports([]);
 
     const engine = new ScanEngine({
       spHttpClient: props.spHttpClient,

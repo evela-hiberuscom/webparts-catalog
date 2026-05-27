@@ -86,7 +86,7 @@ export default class SiteStorageDiagnosticsWebPart extends BaseClientSideWebPart
               groupFields: [
                 PropertyPaneTextField('reportListUrl', {
                   label: strings.ReportListUrlFieldLabel,
-                  description: 'URL completa de la lista SP donde se guardarán los informes.'
+                  description: strings.ReportListUrlFieldDescription
                 }),
                 PropertyPaneSlider('batchSize', {
                   label: strings.BatchSizeFieldLabel,
@@ -103,8 +103,8 @@ export default class SiteStorageDiagnosticsWebPart extends BaseClientSideWebPart
                 PropertyPaneDropdown('scope', {
                   label: strings.ScopeFieldLabel,
                   options: [
-                    { key: 'all', text: 'Todas las colecciones de sitios accesibles' },
-                    { key: 'manual', text: 'URLs manuales' }
+                    { key: 'all', text: strings.ScopeAllOptionText },
+                    { key: 'manual', text: strings.ScopeManualOptionText }
                   ]
                 }),
                 PropertyPaneTextField('manualSiteUrls', {

@@ -9,6 +9,16 @@ export interface ILibraryMetrics {
   lastModified: string | undefined;
 }
 
+export interface ILibraryItemMetrics {
+  id: string;
+  name: string;
+  url: string;
+  sizeBytes: number | undefined;
+  lastModified: string | undefined;
+  modifiedBy: string | undefined;
+  isFolder: boolean;
+}
+
 export interface IRecycleBinMetrics {
   itemCount: number | undefined;
   sizeBytes: number | undefined;
