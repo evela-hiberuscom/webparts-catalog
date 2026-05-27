@@ -2,28 +2,34 @@
   "projectSlug": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
   "archetype": "launcher",
   "rowId": "recH4dtMmWDWA8VzV",
+  "implementationStatus": {
+    "state": "diverged",
+    "summary": "La solución implementada hoy opera como calculadora de papelera de nivel 1 + nivel 2; no como comparador de biblioteca y papelera de primer nivel."
+  },
   "sources": [
+    {
+      "name": "SharePoint Library",
+      "type": "SharePointList",
+      "purpose": "metadatos de biblioteca e ItemCount"
+    },
     {
       "name": "Site Recycle Bin Stage 1",
       "type": "SharePointRecycleBin",
-      "purpose": "conteo y tamaño de primer nivel"
-    },
-    {
-      "name": "Site Recycle Bin Stage 2",
-      "type": "SharePointRecycleBin",
-      "purpose": "conteo y tamaño de segundo nivel"
+      "purpose": "conteo y tamaño agregado de primer nivel"
     }
   ],
   "acceptanceCriteria": [
-    "Muestra tamaño de papelera de primer nivel.",
-    "Muestra tamaño de papelera de segundo nivel cuando sea accesible.",
-    "Muestra total agregado cuando ambas etapas estén disponibles.",
-    "Informa partialData si falta el tamaño de una etapa.",
-    "Permite refresco y acceso a la papelera del sitio."
+    "Muestra ItemCount real de la biblioteca seleccionada.",
+    "Muestra conteo de elementos de la papelera de primer nivel.",
+    "Muestra tamaño agregado de papelera cuando sea viable.",
+    "Muestra ratio papelera/biblioteca cuando exista denominador válido.",
+    "Informa partialData si faltan tamaños o metadatos.",
+    "Permite refresco y acceso a biblioteca y papelera."
   ],
   "businessRules": [
-    "Si el tamaño de una etapa no está disponible, la UI debe seguir siendo operativa.",
-    "El objetivo no es comparar con biblioteca activa.",
-    "Si el contexto no permite leer la segunda etapa, se registra una limitación técnica explícita."
+    "La biblioteca objetivo es obligatoria; si no existe, el estado debe ser error.",
+    "La primera etapa de papelera es el ámbito funcional prioritario del producto.",
+    "Si faltan tamaños pero hay conteos, la UI debe seguir operativa con partialData.",
+    "La relación biblioteca/papelera requiere filtrado por origen si se busca exactitud documental."
   ]
 }

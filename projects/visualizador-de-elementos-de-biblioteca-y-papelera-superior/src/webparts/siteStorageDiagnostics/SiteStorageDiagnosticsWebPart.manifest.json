@@ -1,0 +1,29 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+  "alias": "SiteStorageDiagnosticsWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "SharePointFullPage"],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": { "default": "Advanced" },
+      "title": { "default": "Site Storage Diagnostics" },
+      "description": {
+        "default": "Escanea bibliotecas, papeleras y almacenamiento de múltiples colecciones de sitios accesibles por el administrador."
+      },
+      "officeFabricIconFontName": "StackedBarChart",
+      "properties": {
+        "reportListUrl": "",
+        "batchSize": 10,
+        "maxRequestsPerSecond": 4,
+        "scope": "all",
+        "manualSiteUrls": ""
+      }
+    }
+  ]
+}

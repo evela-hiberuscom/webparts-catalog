@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/recycleBinSpaceCalculator/RecycleBinSpaceCalculatorWebPart.manifest.json"
         }
       ]
+    },
+    "site-storage-diagnostics-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/siteStorageDiagnostics/SiteStorageDiagnosticsWebPart.js",
+          "manifest": "./src/webparts/siteStorageDiagnostics/SiteStorageDiagnosticsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "RecycleBinSpaceCalculatorWebPartStrings": "lib/webparts/recycleBinSpaceCalculator/loc/{locale}.js"
+    "RecycleBinSpaceCalculatorWebPartStrings": "lib/webparts/recycleBinSpaceCalculator/loc/{locale}.js",
+    "SiteStorageDiagnosticsWebPartStrings": "lib/webparts/siteStorageDiagnostics/loc/{locale}.js"
   }
 }
