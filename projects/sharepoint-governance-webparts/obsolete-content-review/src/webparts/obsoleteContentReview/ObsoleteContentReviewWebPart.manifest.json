@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "9f8b4297-0b8e-4b5f-bc75-63a9e659f65f",
+  "alias": "ObsoleteContentReviewWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Obsolete Content Review"
+      },
+      "description": {
+        "default": "Review of obsolete pages, news and documents."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Obsolete Content Review",
+        "subtitle": "Review of obsolete pages, news and documents.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

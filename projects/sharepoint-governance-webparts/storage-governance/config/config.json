@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "storage-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/storageGovernance/StorageGovernanceWebPart.js",
+          "manifest": "./src/webparts/storageGovernance/StorageGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "StorageGovernanceWebPartStrings": "lib/webparts/storageGovernance/loc/{locale}.js"
+  }
+}

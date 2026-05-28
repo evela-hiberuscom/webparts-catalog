@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "6cc7bbb2-0198-4463-807c-fc177e73d11a",
+  "alias": "ContentOwnersGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Content Owners Governance"
+      },
+      "description": {
+        "default": "Ownership model for content by area or department."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Content Owners Governance",
+        "subtitle": "Ownership model for content by area or department.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

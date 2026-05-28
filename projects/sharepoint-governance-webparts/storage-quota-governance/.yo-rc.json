@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "storage-quota-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "StorageQuotaGovernance",
+    "componentDescription": "Quota and growth-control governance for SharePoint storage.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "storage-quota-governance",
+    "libraryId": "f56d4496-e533-49ec-977f-2fdfbe2ea794",
+    "solutionShortDescription": "Quota and growth-control governance for SharePoint storage.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

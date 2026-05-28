@@ -7,6 +7,8 @@ dist/
 coverage/
 temp/
 lib/
+!scripts/lib/
+!scripts/lib/*.mjs
 orchestration/generated/
 projects/*/node_modules/
 projects/*/dist/

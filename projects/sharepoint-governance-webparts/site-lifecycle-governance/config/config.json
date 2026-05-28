@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "site-lifecycle-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/siteLifecycleGovernance/SiteLifecycleGovernanceWebPart.js",
+          "manifest": "./src/webparts/siteLifecycleGovernance/SiteLifecycleGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SiteLifecycleGovernanceWebPartStrings": "lib/webparts/siteLifecycleGovernance/loc/{locale}.js"
+  }
+}

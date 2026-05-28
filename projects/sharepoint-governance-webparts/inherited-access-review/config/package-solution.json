@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "inherited-access-review-client-side-solution",
+    "id": "33a49e9e-b653-44e8-bce9-d00bf32589dc",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Periodic review of inherited and direct permissions."
+      },
+      "longDescription": {
+        "default": "Periodic review of inherited and direct permissions. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Inherited Access Review Feature",
+        "description": "Activates the Inherited Access Review webpart.",
+        "id": "6fa17b1c-0a7a-4320-81dd-80d8b2ae1537",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/inherited-access-review.sppkg"
+  }
+}

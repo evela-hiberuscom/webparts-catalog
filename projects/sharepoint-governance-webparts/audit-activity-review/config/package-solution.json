@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "audit-activity-review-client-side-solution",
+    "id": "d4a6de26-e831-4245-88cc-d789e6d480a4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Review of access, download, deletion, sharing and permission-change audit activity."
+      },
+      "longDescription": {
+        "default": "Review of access, download, deletion, sharing and permission-change audit activity. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Audit Activity Review Feature",
+        "description": "Activates the Audit Activity Review webpart.",
+        "id": "5b444a3d-8f71-4564-b097-cbc12840c829",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/audit-activity-review.sppkg"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "retention-compliance-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/retentionComplianceGovernance/RetentionComplianceGovernanceWebPart.js",
+          "manifest": "./src/webparts/retentionComplianceGovernance/RetentionComplianceGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "RetentionComplianceGovernanceWebPartStrings": "lib/webparts/retentionComplianceGovernance/loc/{locale}.js"
+  }
+}

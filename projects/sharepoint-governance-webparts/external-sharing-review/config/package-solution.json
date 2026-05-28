@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "external-sharing-review-client-side-solution",
+    "id": "8bb2fcfe-094e-49b7-9052-692e5d764314",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Review of externally shared documents and exposure risks."
+      },
+      "longDescription": {
+        "default": "Review of externally shared documents and exposure risks. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "External Sharing Review Feature",
+        "description": "Activates the External Sharing Review webpart.",
+        "id": "8cdfd76d-07cc-4976-90d7-a5c9aa6e8f4e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/external-sharing-review.sppkg"
+  }
+}

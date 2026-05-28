@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5c597ef1-8ac2-4d9c-920e-c8cb4c99a637",
+  "alias": "TenantSiteInventoryWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Tenant Site Inventory"
+      },
+      "description": {
+        "default": "Master inventory of sites, owners, purpose, criticality and status."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Tenant Site Inventory",
+        "subtitle": "Master inventory of sites, owners, purpose, criticality and status.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

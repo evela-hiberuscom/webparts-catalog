@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "version-control-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/versionControlGovernance/VersionControlGovernanceWebPart.js",
+          "manifest": "./src/webparts/versionControlGovernance/VersionControlGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "VersionControlGovernanceWebPartStrings": "lib/webparts/versionControlGovernance/loc/{locale}.js"
+  }
+}

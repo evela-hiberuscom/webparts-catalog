@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "approval-flows-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ApprovalFlowsGovernance",
+    "componentDescription": "Governance of approval flows for publishing and content changes.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "approval-flows-governance",
+    "libraryId": "ce8cc2dd-4062-4538-a30e-f25f86981010",
+    "solutionShortDescription": "Governance of approval flows for publishing and content changes.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

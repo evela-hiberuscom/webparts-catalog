@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "site-owner-training",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SiteOwnerTraining",
+    "componentDescription": "Training and enablement for site owners and key users.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "site-owner-training",
+    "libraryId": "a99603ec-e363-4d61-9f4a-ad41b806cc7e",
+    "solutionShortDescription": "Training and enablement for site owners and key users.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

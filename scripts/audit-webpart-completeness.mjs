@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { discoverSpfxProjects } from "./lib/discover-projects.mjs";
 
 const repoRoot = process.cwd();
 const projectsDir = path.join(repoRoot, "projects");
@@ -59,8 +60,8 @@ function detectScaffoldResidual(componentFiles) {
   });
 }
 
-function classifyWebPart(projectName) {
-  const webpartsRoot = path.join(projectsDir, projectName, "src", "webparts");
+function classifyWebPart(project) {
+  const webpartsRoot = path.join(project.absolutePath, "src", "webparts");
   if (!fs.existsSync(webpartsRoot)) {
     return [];
   }
@@ -96,7 +97,7 @@ function classifyWebPart(projectName) {
       }
 
       return {
-        project: projectName,
+        project: project.relativePath,
         webpart: entry.name,
         status,
         scaffoldResidual,
@@ -110,15 +111,10 @@ function classifyWebPart(projectName) {
     });
 }
 
-const projectNames = fs
-  .readdirSync(projectsDir, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => entry.name)
-  .sort((left, right) => left.localeCompare(right));
-
-const findings = projectNames.flatMap(classifyWebPart).map((finding) => {
-  const tracker = trackerBySlug.get(finding.project);
-  const progressItem = progressBySlug.get(finding.project);
+const findings = discoverSpfxProjects(projectsDir).flatMap(classifyWebPart).map((finding) => {
+  const projectSlug = finding.project.split("/").pop();
+  const tracker = trackerBySlug.get(finding.project) ?? trackerBySlug.get(projectSlug);
+  const progressItem = progressBySlug.get(finding.project) ?? progressBySlug.get(projectSlug);
   return {
     ...finding,
     progressStatus: progressItem?.progressStatus ?? "unknown",

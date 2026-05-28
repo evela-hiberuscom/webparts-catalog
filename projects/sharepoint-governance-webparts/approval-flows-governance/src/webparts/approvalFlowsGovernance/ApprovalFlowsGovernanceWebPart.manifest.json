@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "ea3ae2f1-00f8-4a5a-8f8d-79ab73d0deb8",
+  "alias": "ApprovalFlowsGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Approval Flows Governance"
+      },
+      "description": {
+        "default": "Governance of approval flows for publishing and content changes."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Approval Flows Governance",
+        "subtitle": "Governance of approval flows for publishing and content changes.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

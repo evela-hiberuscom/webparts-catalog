@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "f2254198-c015-48c2-b102-6ade56008726",
+  "alias": "InheritedAccessReviewWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Inherited Access Review"
+      },
+      "description": {
+        "default": "Periodic review of inherited and direct permissions."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Inherited Access Review",
+        "subtitle": "Periodic review of inherited and direct permissions.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

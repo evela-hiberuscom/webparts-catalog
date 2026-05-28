@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sensitivity-labels-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sensitivityLabelsGovernance/SensitivityLabelsGovernanceWebPart.js",
+          "manifest": "./src/webparts/sensitivityLabelsGovernance/SensitivityLabelsGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SensitivityLabelsGovernanceWebPartStrings": "lib/webparts/sensitivityLabelsGovernance/loc/{locale}.js"
+  }
+}

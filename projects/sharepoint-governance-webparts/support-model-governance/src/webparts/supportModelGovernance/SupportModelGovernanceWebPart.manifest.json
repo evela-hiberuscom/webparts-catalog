@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "545e2a1e-c497-4343-b201-dbed84925410",
+  "alias": "SupportModelGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Support Model Governance"
+      },
+      "description": {
+        "default": "Support model for incidents, requests, permissions and user questions."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Support Model Governance",
+        "subtitle": "Support model for incidents, requests, permissions and user questions.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

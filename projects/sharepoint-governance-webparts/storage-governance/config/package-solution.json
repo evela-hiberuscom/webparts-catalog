@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "storage-governance-client-side-solution",
+    "id": "56d4d104-d65e-4d0e-8d5b-82f3e7366fdd",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Monitoring of storage consumption across sites and libraries."
+      },
+      "longDescription": {
+        "default": "Monitoring of storage consumption across sites and libraries. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Storage Governance Feature",
+        "description": "Activates the Storage Governance webpart.",
+        "id": "edd71988-c976-4e0e-bfe4-b21053e79428",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/storage-governance.sppkg"
+  }
+}

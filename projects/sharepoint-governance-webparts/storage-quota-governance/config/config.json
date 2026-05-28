@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "storage-quota-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/storageQuotaGovernance/StorageQuotaGovernanceWebPart.js",
+          "manifest": "./src/webparts/storageQuotaGovernance/StorageQuotaGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "StorageQuotaGovernanceWebPartStrings": "lib/webparts/storageQuotaGovernance/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "audit-activity-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/auditActivityReview/AuditActivityReviewWebPart.js",
+          "manifest": "./src/webparts/auditActivityReview/AuditActivityReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AuditActivityReviewWebPartStrings": "lib/webparts/auditActivityReview/loc/{locale}.js"
+  }
+}

@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { discoverSpfxProjects, selectChangedProjects } from "./lib/discover-projects.mjs";
 
 const repoRoot = process.cwd();
 const projectsDir = path.join(repoRoot, "projects");
@@ -15,11 +16,7 @@ const getArgValue = (name) => {
   return matched ? matched.slice(prefix.length) : undefined;
 };
 
-const allProjects = fs
-  .readdirSync(projectsDir, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory())
-  .map((entry) => entry.name)
-  .sort((left, right) => left.localeCompare(right));
+const allProjects = discoverSpfxProjects(projectsDir);
 
 function run(command, commandArgs, cwd = repoRoot) {
   const result = spawnSync(command, commandArgs, {
@@ -79,22 +76,16 @@ function selectProjects(changedFiles) {
     return allProjects;
   }
 
-  const selected = new Set();
-  for (const file of changedFiles) {
-    const match = /^projects\/([^/]+)\//.exec(file.replace(/\\/g, "/"));
-    if (match && allProjects.includes(match[1])) {
-      selected.add(match[1]);
-    }
-  }
-
-  return Array.from(selected).sort((left, right) => left.localeCompare(right));
+  return selectChangedProjects(changedFiles, allProjects);
 }
 
 const changedFiles = getChangedFiles();
 const selectedProjects = selectProjects(changedFiles);
 
 console.log(`Changed files: ${changedFiles.length}`);
-console.log(`Selected projects: ${selectedProjects.length ? selectedProjects.join(", ") : "(none)"}`);
+console.log(
+  `Selected projects: ${selectedProjects.length ? selectedProjects.map((project) => project.relativePath).join(", ") : "(none)"}`
+);
 
 if (args.has("--dry-run") || selectedProjects.length === 0) {
   process.exit(0);
@@ -111,8 +102,8 @@ if (runSbom) {
 }
 
 for (const projectName of selectedProjects) {
-  const projectDir = path.join(projectsDir, projectName);
-  console.log(`\n== ${projectName} ==`);
+  const projectDir = projectName.absolutePath;
+  console.log(`\n== ${projectName.relativePath} ==`);
 
   if (!skipInstall) {
     run("npm", ["ci", "--ignore-scripts"], projectDir);
@@ -129,7 +120,7 @@ for (const projectName of selectedProjects) {
         "--yes",
         "@cyclonedx/cyclonedx-npm@1.19.3",
         "--output-file",
-        path.join(sbomDir, `${projectName}.cdx.json`)
+        path.join(sbomDir, `${projectName.relativePath.replace(/\//g, "__")}.cdx.json`)
       ],
       projectDir
     );

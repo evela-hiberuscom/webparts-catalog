@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "security-compliance-review-client-side-solution",
+    "id": "fb3b46c7-8199-4bb5-a410-f2e881cdf5bc",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Periodic security and compliance review governance."
+      },
+      "longDescription": {
+        "default": "Periodic security and compliance review governance. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Security Compliance Review Feature",
+        "description": "Activates the Security Compliance Review webpart.",
+        "id": "b0cbd0e6-4c7b-454f-b315-a12611a36f3b",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/security-compliance-review.sppkg"
+  }
+}

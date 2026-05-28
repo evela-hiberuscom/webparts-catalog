@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a5fb1ca0-479b-481e-9a2c-23c432466299",
+  "alias": "SiteOwnerTrainingWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Site Owner Training"
+      },
+      "description": {
+        "default": "Training and enablement for site owners and key users."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Site Owner Training",
+        "subtitle": "Training and enablement for site owners and key users.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

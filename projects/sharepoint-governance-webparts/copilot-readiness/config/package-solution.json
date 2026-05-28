@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "copilot-readiness-client-side-solution",
+    "id": "9df339e4-fa4f-47e2-9e35-3a5a3246dfcb",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Readiness review for Microsoft 365 Copilot and oversharing risks."
+      },
+      "longDescription": {
+        "default": "Readiness review for Microsoft 365 Copilot and oversharing risks. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Copilot Readiness Feature",
+        "description": "Activates the Copilot Readiness webpart.",
+        "id": "28ec684e-163c-4a87-b600-43f2aca1aa8e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/copilot-readiness.sppkg"
+  }
+}

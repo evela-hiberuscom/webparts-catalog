@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "duplicate-sites-control",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "DuplicateSitesControl",
+    "componentDescription": "Detection and review of duplicate or uncontrolled SharePoint sites.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "duplicate-sites-control",
+    "libraryId": "826edb64-c8ee-4784-a690-be59ea90d3f1",
+    "solutionShortDescription": "Detection and review of duplicate or uncontrolled SharePoint sites.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "external-sharing-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/externalSharingReview/ExternalSharingReviewWebPart.js",
+          "manifest": "./src/webparts/externalSharingReview/ExternalSharingReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ExternalSharingReviewWebPartStrings": "lib/webparts/externalSharingReview/loc/{locale}.js"
+  }
+}

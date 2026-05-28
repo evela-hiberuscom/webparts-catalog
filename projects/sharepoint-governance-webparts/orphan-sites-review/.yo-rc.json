@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "orphan-sites-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "OrphanSitesReview",
+    "componentDescription": "Review of sites without owners or with inactive owners.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "orphan-sites-review",
+    "libraryId": "22e901bc-b837-4206-9a77-0851cda145ed",
+    "solutionShortDescription": "Review of sites without owners or with inactive owners.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

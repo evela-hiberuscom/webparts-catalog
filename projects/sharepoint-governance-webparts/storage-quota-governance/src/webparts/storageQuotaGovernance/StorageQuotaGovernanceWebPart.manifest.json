@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "4bcd539b-3d03-43e3-a367-ee868b368c07",
+  "alias": "StorageQuotaGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Storage Quota Governance"
+      },
+      "description": {
+        "default": "Quota and growth-control governance for SharePoint storage."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Storage Quota Governance",
+        "subtitle": "Quota and growth-control governance for SharePoint storage.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

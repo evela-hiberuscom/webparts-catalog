@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "sensitivity-labels-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SensitivityLabelsGovernance",
+    "componentDescription": "Governance recommendations for sensitivity labels across sites, Teams and content.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "sensitivity-labels-governance",
+    "libraryId": "b75f20b4-78f4-47af-aa20-cf7387549fdc",
+    "solutionShortDescription": "Governance recommendations for sensitivity labels across sites, Teams and content.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

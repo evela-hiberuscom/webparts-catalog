@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "site-owner-training-client-side-solution",
+    "id": "86f30e7d-f3de-405a-bef6-3eed052aa9c1",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Training and enablement for site owners and key users."
+      },
+      "longDescription": {
+        "default": "Training and enablement for site owners and key users. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Site Owner Training Feature",
+        "description": "Activates the Site Owner Training webpart.",
+        "id": "174ca2fd-fd93-4206-8aaa-c03cadcda83c",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/site-owner-training.sppkg"
+  }
+}

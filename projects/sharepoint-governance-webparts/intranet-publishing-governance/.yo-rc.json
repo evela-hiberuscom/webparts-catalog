@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "intranet-publishing-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "IntranetPublishingGovernance",
+    "componentDescription": "Governance of intranet page publishing policies.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "intranet-publishing-governance",
+    "libraryId": "34805ff3-e868-4c14-8d76-f044c38cc171",
+    "solutionShortDescription": "Governance of intranet page publishing policies.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

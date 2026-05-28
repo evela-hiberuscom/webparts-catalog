@@ -1,0 +1,31 @@
+define([], function() {
+  return {
+    "PropertyPaneDescription": "Configuración de Medir uso, adopción, sitios activos, documentos compartidos y riesgos",
+    "BasicGroupName": "Contenido",
+    "TitleFieldLabel": "Título",
+    "SubtitleFieldLabel": "Subtítulo",
+    "MaxItemsFieldLabel": "Máximo de hallazgos visibles",
+    "ShowDetailsFieldLabel": "Mostrar evidencia y recomendaciones",
+    "WebPartTitle": "Medir uso, adopción, sitios activos, documentos compartidos y riesgos",
+    "WebPartDescription": "Panel de gobierno para GOV-26 con datos mock y contrato backend pendiente.",
+    "LoadingLabel": "Cargando panel de gobierno",
+    "EmptyTitle": "No hay hallazgos disponibles",
+    "EmptyMessage": "Conecta un backend o revisa los filtros para mostrar datos de gobierno.",
+    "ErrorTitle": "No se ha podido cargar el panel",
+    "ErrorMessage": "Revisa la configuración o vuelve a intentarlo.",
+    "RetryButtonLabel": "Reintentar",
+    "SourceLabel": "Origen",
+    "MockModeLabel": "Datos de demostración: este webpart aún no está conectado a evidencias reales del tenant.",
+    "BackendRequiredLabel": "Integración backend requerida para consultar Graph, CSOM, Purview o SAM de forma segura.",
+    "RiskLabel": "Riesgos y hallazgos",
+    "RecommendationsLabel": "Recomendaciones",
+    "EvidenceLabel": "Evidencia",
+    "StatusLabel": "Estado",
+    "SeverityLabel": "Severidad",
+    "ConfidenceLabel": "Confianza",
+    "LastUpdatedLabel": "Fecha objetivo",
+    "LimitationsLabel": "Limitaciones",
+    "ErrorBoundaryTitle": "Se ha producido un error inesperado",
+    "ErrorBoundaryMessage": "Este web part ha encontrado un error no esperado. Recarga la página o contacta con el administrador."
+  };
+});

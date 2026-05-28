@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "version-control-governance-client-side-solution",
+    "id": "4aecf278-1f75-4e15-a20a-c87f1784bc27",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governance of document versioning to avoid excessive storage growth."
+      },
+      "longDescription": {
+        "default": "Governance of document versioning to avoid excessive storage growth. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Version Control Governance Feature",
+        "description": "Activates the Version Control Governance webpart.",
+        "id": "6a007f08-6179-4ee6-a8c2-588b4697a8d0",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/version-control-governance.sppkg"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "retention-compliance-governance-client-side-solution",
+    "id": "eb11d355-16fc-4464-a77b-14485a394cb4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governance of documents that require legal or regulatory retention."
+      },
+      "longDescription": {
+        "default": "Governance of documents that require legal or regulatory retention. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Retention Compliance Governance Feature",
+        "description": "Activates the Retention Compliance Governance webpart.",
+        "id": "adc3af35-408f-42b5-8137-034db1fb6521",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/retention-compliance-governance.sppkg"
+  }
+}

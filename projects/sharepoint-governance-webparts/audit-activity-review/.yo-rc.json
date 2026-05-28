@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "audit-activity-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "AuditActivityReview",
+    "componentDescription": "Review of access, download, deletion, sharing and permission-change audit activity.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "audit-activity-review",
+    "libraryId": "4f12c4a8-b05d-4252-8b17-9c710a8b4381",
+    "solutionShortDescription": "Review of access, download, deletion, sharing and permission-change audit activity.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

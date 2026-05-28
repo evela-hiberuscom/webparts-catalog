@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "security-compliance-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/securityComplianceReview/SecurityComplianceReviewWebPart.js",
+          "manifest": "./src/webparts/securityComplianceReview/SecurityComplianceReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SecurityComplianceReviewWebPartStrings": "lib/webparts/securityComplianceReview/loc/{locale}.js"
+  }
+}

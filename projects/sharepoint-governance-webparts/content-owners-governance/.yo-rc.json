@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "content-owners-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ContentOwnersGovernance",
+    "componentDescription": "Ownership model for content by area or department.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "content-owners-governance",
+    "libraryId": "cffe27fe-7a65-4855-8d45-60a13e72e0e2",
+    "solutionShortDescription": "Ownership model for content by area or department.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

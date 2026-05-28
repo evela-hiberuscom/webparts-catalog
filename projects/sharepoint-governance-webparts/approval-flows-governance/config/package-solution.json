@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "approval-flows-governance-client-side-solution",
+    "id": "f17ce71e-fbb9-48a9-a002-d68d161db0e4",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governance of approval flows for publishing and content changes."
+      },
+      "longDescription": {
+        "default": "Governance of approval flows for publishing and content changes. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Approval Flows Governance Feature",
+        "description": "Activates the Approval Flows Governance webpart.",
+        "id": "3dc66c81-e87f-4755-9e79-f4a9615ed653",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/approval-flows-governance.sppkg"
+  }
+}

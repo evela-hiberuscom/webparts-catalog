@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "inactive-sites-validation-client-side-solution",
+    "id": "c3675bfa-f85e-4003-8539-2bf4cb2c86b0",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Validation campaigns for inactive sites and their owners."
+      },
+      "longDescription": {
+        "default": "Validation campaigns for inactive sites and their owners. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Inactive Sites Validation Feature",
+        "description": "Activates the Inactive Sites Validation webpart.",
+        "id": "fcb5d944-9974-4e2f-a69a-1700ff3b51f6",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/inactive-sites-validation.sppkg"
+  }
+}

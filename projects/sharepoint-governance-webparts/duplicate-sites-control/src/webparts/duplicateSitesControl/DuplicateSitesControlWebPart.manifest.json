@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a6a4e5df-8baa-4204-bd95-84d52bc9a550",
+  "alias": "DuplicateSitesControlWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Duplicate Sites Control"
+      },
+      "description": {
+        "default": "Detection and review of duplicate or uncontrolled SharePoint sites."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Duplicate Sites Control",
+        "subtitle": "Detection and review of duplicate or uncontrolled SharePoint sites.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

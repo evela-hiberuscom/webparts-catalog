@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "b7a8cc00-e982-4ff7-a710-c3a56b61e770",
+  "alias": "StorageGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Storage Governance"
+      },
+      "description": {
+        "default": "Monitoring of storage consumption across sites and libraries."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Storage Governance",
+        "subtitle": "Monitoring of storage consumption across sites and libraries.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

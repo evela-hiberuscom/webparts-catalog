@@ -1,0 +1,166 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.root {
+  background: #ffffff;
+  border: 1px solid #e1e5f2;
+  border-radius: 16px;
+  color: #111111;
+  padding: 24px;
+}
+
+.header,
+.sectionHeader,
+.findingTopLine {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.title,
+.sectionTitle,
+.metricTitle,
+.findingTitle {
+  color: #111111;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle,
+.metricDescription,
+.sourceLine {
+  color: #3a3a3a;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.metaPill,
+.severityBadge {
+  border-radius: 9999px;
+  display: inline-flex;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 6px 10px;
+  text-transform: uppercase;
+}
+
+.metaPill {
+  background: #eef2ff;
+  color: #24348f;
+}
+
+.notice {
+  border-radius: 12px;
+}
+
+.metricsGrid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.metricCard,
+.findingCard,
+.recommendations,
+.limitations,
+.statePanel {
+  background: #f8f9fd;
+  border: 1px solid #e1e5f2;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.metricValue {
+  align-items: baseline;
+  color: #1032cf;
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.metricValue span {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.findingsList {
+  display: grid;
+  gap: 12px;
+}
+
+.findingMeta {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin: 12px 0 0;
+}
+
+.findingMeta dt {
+  color: #555555;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+}
+
+.findingMeta dd {
+  color: #111111;
+  margin: 0;
+}
+
+.detailsBlock {
+  border-top: 1px solid #e1e5f2;
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.severityCritical {
+  background: #fde7e9;
+  color: #a4262c;
+}
+
+.severityHigh {
+  background: #fff4ce;
+  color: #8a6a00;
+}
+
+.severityMedium {
+  background: #e5f1fb;
+  color: #004578;
+}
+
+.severityLow {
+  background: #dff6dd;
+  color: #107c10;
+}
+
+.statePanel {
+  text-align: center;
+}
+
+.stateIcon {
+  color: #1032cf;
+  font-size: 32px;
+}
+
+.stateTitle {
+  margin: 12px 0 0;
+}
+
+.stateMessage {
+  color: #3a3a3a;
+  margin-top: 8px;
+}
+
+.stateButton {
+  margin-top: 16px;
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "7e31a7d6-9819-4cb7-9d2d-399619e4c094",
+  "alias": "SiteArchiveRetentionGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Site Archive and Retention Governance"
+      },
+      "description": {
+        "default": "Governed decisions for archiving, retaining or removing old sites."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Site Archive and Retention Governance",
+        "subtitle": "Governed decisions for archiving, retaining or removing old sites.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "obsolete-content-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/obsoleteContentReview/ObsoleteContentReviewWebPart.js",
+          "manifest": "./src/webparts/obsoleteContentReview/ObsoleteContentReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ObsoleteContentReviewWebPartStrings": "lib/webparts/obsoleteContentReview/loc/{locale}.js"
+  }
+}

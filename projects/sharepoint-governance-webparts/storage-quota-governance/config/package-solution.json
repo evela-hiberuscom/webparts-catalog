@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "storage-quota-governance-client-side-solution",
+    "id": "ef4e0692-5a7b-423b-9526-cc00ad1993d3",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Quota and growth-control governance for SharePoint storage."
+      },
+      "longDescription": {
+        "default": "Quota and growth-control governance for SharePoint storage. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Storage Quota Governance Feature",
+        "description": "Activates the Storage Quota Governance webpart.",
+        "id": "d412f21e-eab8-43d6-a011-e15344cead1a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/storage-quota-governance.sppkg"
+  }
+}

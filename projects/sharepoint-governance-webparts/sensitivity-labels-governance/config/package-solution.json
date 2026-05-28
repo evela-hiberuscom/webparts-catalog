@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sensitivity-labels-governance-client-side-solution",
+    "id": "38044ee2-6b51-4bce-8595-d38c05a69efd",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governance recommendations for sensitivity labels across sites, Teams and content."
+      },
+      "longDescription": {
+        "default": "Governance recommendations for sensitivity labels across sites, Teams and content. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Sensitivity Labels Governance Feature",
+        "description": "Activates the Sensitivity Labels Governance webpart.",
+        "id": "38c188b6-f7fb-4aab-9c54-19d836acfc9a",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sensitivity-labels-governance.sppkg"
+  }
+}

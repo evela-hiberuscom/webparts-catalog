@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "c2c211b4-f8e9-4927-a122-289695afdbb4",
+  "alias": "OnedriveSyncLimitsWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "OneDrive Sync Limits"
+      },
+      "description": {
+        "default": "Visibility and recommendations for OneDrive sync limits and policies."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "OneDrive Sync Limits",
+        "subtitle": "Visibility and recommendations for OneDrive sync limits and policies.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

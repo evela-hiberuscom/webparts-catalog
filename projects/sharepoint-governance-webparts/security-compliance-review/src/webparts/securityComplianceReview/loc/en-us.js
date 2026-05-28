@@ -1,0 +1,31 @@
+define([], function() {
+  return {
+    "PropertyPaneDescription": "Security Compliance Review settings",
+    "BasicGroupName": "Content",
+    "TitleFieldLabel": "Title",
+    "SubtitleFieldLabel": "Subtitle",
+    "MaxItemsFieldLabel": "Maximum visible findings",
+    "ShowDetailsFieldLabel": "Show evidence and recommendations",
+    "WebPartTitle": "Security Compliance Review",
+    "WebPartDescription": "Periodic security and compliance review governance.",
+    "LoadingLabel": "Loading governance dashboard",
+    "EmptyTitle": "No findings available",
+    "EmptyMessage": "Connect a backend or review filters to show governance data.",
+    "ErrorTitle": "The dashboard could not be loaded",
+    "ErrorMessage": "Review the configuration or try again.",
+    "RetryButtonLabel": "Retry",
+    "SourceLabel": "Source",
+    "MockModeLabel": "Demo data: this webpart is not connected to real tenant evidence yet.",
+    "BackendRequiredLabel": "Backend integration is required to query Graph, CSOM, Purview or SAM securely.",
+    "RiskLabel": "Risks and findings",
+    "RecommendationsLabel": "Recommendations",
+    "EvidenceLabel": "Evidence",
+    "StatusLabel": "Status",
+    "SeverityLabel": "Severity",
+    "ConfidenceLabel": "Confidence",
+    "LastUpdatedLabel": "Target date",
+    "LimitationsLabel": "Limitations",
+    "ErrorBoundaryTitle": "Something went wrong",
+    "ErrorBoundaryMessage": "This web part encountered an unexpected error. Please reload the page or contact your administrator."
+  };
+});

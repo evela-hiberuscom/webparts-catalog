@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "obsolete-content-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ObsoleteContentReview",
+    "componentDescription": "Review of obsolete pages, news and documents.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "obsolete-content-review",
+    "libraryId": "09302d5b-f3a1-4be4-992e-9d6311cba0fa",
+    "solutionShortDescription": "Review of obsolete pages, news and documents.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

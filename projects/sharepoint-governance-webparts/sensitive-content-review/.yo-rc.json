@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "sensitive-content-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SensitiveContentReview",
+    "componentDescription": "Review of sensitive content before enabling Copilot scenarios.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "sensitive-content-review",
+    "libraryId": "2add4e0a-8e2d-4603-81cc-fdd9dfd15587",
+    "solutionShortDescription": "Review of sensitive content before enabling Copilot scenarios.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

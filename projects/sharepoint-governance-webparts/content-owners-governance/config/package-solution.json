@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "content-owners-governance-client-side-solution",
+    "id": "ee46477f-d205-4a30-866f-e24471a58ede",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Ownership model for content by area or department."
+      },
+      "longDescription": {
+        "default": "Ownership model for content by area or department. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Content Owners Governance Feature",
+        "description": "Activates the Content Owners Governance webpart.",
+        "id": "883d227e-c7c7-48ca-9e47-10962f24cf55",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/content-owners-governance.sppkg"
+  }
+}

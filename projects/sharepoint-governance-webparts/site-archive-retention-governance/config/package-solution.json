@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "site-archive-retention-governance-client-side-solution",
+    "id": "d43a1566-7267-488e-ae35-3123e28d5c9b",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governed decisions for archiving, retaining or removing old sites."
+      },
+      "longDescription": {
+        "default": "Governed decisions for archiving, retaining or removing old sites. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Site Archive and Retention Governance Feature",
+        "description": "Activates the Site Archive and Retention Governance webpart.",
+        "id": "aa422bbf-2bfe-4412-b2d6-4a188802c2ff",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/site-archive-retention-governance.sppkg"
+  }
+}

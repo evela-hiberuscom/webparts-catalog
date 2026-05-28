@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "tenant-site-inventory",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "TenantSiteInventory",
+    "componentDescription": "Master inventory of sites, owners, purpose, criticality and status.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "tenant-site-inventory",
+    "libraryId": "c8121bce-2b14-4f42-8ec9-7eb701888f3b",
+    "solutionShortDescription": "Master inventory of sites, owners, purpose, criticality and status.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

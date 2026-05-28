@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "version-control-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "VersionControlGovernance",
+    "componentDescription": "Governance of document versioning to avoid excessive storage growth.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "version-control-governance",
+    "libraryId": "449aef9f-dfdb-4bd7-a5f1-5e994cd7586e",
+    "solutionShortDescription": "Governance of document versioning to avoid excessive storage growth.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

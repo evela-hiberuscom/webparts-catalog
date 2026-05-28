@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "external-sharing-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "ExternalSharingReview",
+    "componentDescription": "Review of externally shared documents and exposure risks.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "external-sharing-review",
+    "libraryId": "b969f1f4-efb2-4022-9d44-2855fe0e01b6",
+    "solutionShortDescription": "Review of externally shared documents and exposure risks.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

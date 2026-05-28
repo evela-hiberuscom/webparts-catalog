@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "c20d1fe2-bc09-4f25-a588-4f31511ec340",
+  "alias": "SiteCreationGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Site Creation Governance"
+      },
+      "description": {
+        "default": "Governance of SharePoint site creation permissions and exceptions."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Site Creation Governance",
+        "subtitle": "Governance of SharePoint site creation permissions and exceptions.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

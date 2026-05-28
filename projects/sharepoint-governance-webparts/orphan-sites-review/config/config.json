@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "orphan-sites-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/orphanSitesReview/OrphanSitesReviewWebPart.js",
+          "manifest": "./src/webparts/orphanSitesReview/OrphanSitesReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "OrphanSitesReviewWebPartStrings": "lib/webparts/orphanSitesReview/loc/{locale}.js"
+  }
+}

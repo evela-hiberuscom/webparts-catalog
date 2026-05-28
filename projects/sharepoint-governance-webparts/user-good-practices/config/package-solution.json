@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "user-good-practices-client-side-solution",
+    "id": "4f84976d-2497-43e0-ae7d-b72370d15225",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Internal good-practice guidance for SharePoint users."
+      },
+      "longDescription": {
+        "default": "Internal good-practice guidance for SharePoint users. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "User Good Practices Feature",
+        "description": "Activates the User Good Practices webpart.",
+        "id": "853fdeeb-e3a0-4010-8173-e74fec834080",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/user-good-practices.sppkg"
+  }
+}

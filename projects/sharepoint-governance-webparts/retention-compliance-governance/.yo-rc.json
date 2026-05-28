@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "retention-compliance-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "RetentionComplianceGovernance",
+    "componentDescription": "Governance of documents that require legal or regulatory retention.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "retention-compliance-governance",
+    "libraryId": "559a7d0a-8394-4bad-a95e-e96c494e37aa",
+    "solutionShortDescription": "Governance of documents that require legal or regulatory retention.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sensitive-content-review-client-side-solution",
+    "id": "f3246e53-199a-447e-b73b-4710c7941006",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Review of sensitive content before enabling Copilot scenarios."
+      },
+      "longDescription": {
+        "default": "Review of sensitive content before enabling Copilot scenarios. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Sensitive Content Review Feature",
+        "description": "Activates the Sensitive Content Review webpart.",
+        "id": "46541fb5-5fda-42c3-8208-29f227b633db",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sensitive-content-review.sppkg"
+  }
+}

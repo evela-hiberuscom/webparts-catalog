@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "onedrive-sync-limits",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "OnedriveSyncLimits",
+    "componentDescription": "Visibility and recommendations for OneDrive sync limits and policies.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "onedrive-sync-limits",
+    "libraryId": "123fcef0-35be-4362-bdb3-2954785e44ff",
+    "solutionShortDescription": "Visibility and recommendations for OneDrive sync limits and policies.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

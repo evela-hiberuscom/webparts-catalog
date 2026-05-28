@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sensitive-content-review-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/sensitiveContentReview/SensitiveContentReviewWebPart.js",
+          "manifest": "./src/webparts/sensitiveContentReview/SensitiveContentReviewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SensitiveContentReviewWebPartStrings": "lib/webparts/sensitiveContentReview/loc/{locale}.js"
+  }
+}

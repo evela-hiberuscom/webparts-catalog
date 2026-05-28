@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "user-good-practices",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "UserGoodPractices",
+    "componentDescription": "Internal good-practice guidance for SharePoint users.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "user-good-practices",
+    "libraryId": "649c75a3-147f-44af-a297-852e9844dc4d",
+    "solutionShortDescription": "Internal good-practice guidance for SharePoint users.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

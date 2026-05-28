@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "duplicate-sites-control-client-side-solution",
+    "id": "b2852ca9-b0d4-4d6d-a4a5-8a51c7e15475",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Detection and review of duplicate or uncontrolled SharePoint sites."
+      },
+      "longDescription": {
+        "default": "Detection and review of duplicate or uncontrolled SharePoint sites. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Duplicate Sites Control Feature",
+        "description": "Activates the Duplicate Sites Control webpart.",
+        "id": "5bb80de3-b325-43b6-a660-6e66270ed5a3",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/duplicate-sites-control.sppkg"
+  }
+}

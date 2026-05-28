@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "support-model-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SupportModelGovernance",
+    "componentDescription": "Support model for incidents, requests, permissions and user questions.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "support-model-governance",
+    "libraryId": "3d65fc31-d5cb-4654-bfbc-66b54c940384",
+    "solutionShortDescription": "Support model for incidents, requests, permissions and user questions.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

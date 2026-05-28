@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "tenant-site-inventory-client-side-solution",
+    "id": "e366914b-9e9d-4289-99fe-92d506a5d00d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Master inventory of sites, owners, purpose, criticality and status."
+      },
+      "longDescription": {
+        "default": "Master inventory of sites, owners, purpose, criticality and status. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Tenant Site Inventory Feature",
+        "description": "Activates the Tenant Site Inventory webpart.",
+        "id": "792546b3-1e7e-44de-bb8f-9ce52fb84307",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/tenant-site-inventory.sppkg"
+  }
+}

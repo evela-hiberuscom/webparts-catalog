@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5665b4ec-515f-41ef-ae0f-d865eae37bf9",
+  "alias": "AdoptionRiskMetricsWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Adoption Risk Metrics"
+      },
+      "description": {
+        "default": "Usage, adoption, active-site and risk metrics."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Adoption Risk Metrics",
+        "subtitle": "Usage, adoption, active-site and risk metrics.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "adoption-risk-metrics",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "AdoptionRiskMetrics",
+    "componentDescription": "Usage, adoption, active-site and risk metrics.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "adoption-risk-metrics",
+    "libraryId": "e1f4444e-8b99-4307-94e7-b0145aba28c9",
+    "solutionShortDescription": "Usage, adoption, active-site and risk metrics.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

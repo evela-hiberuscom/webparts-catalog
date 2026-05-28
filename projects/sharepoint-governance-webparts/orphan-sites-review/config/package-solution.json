@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "orphan-sites-review-client-side-solution",
+    "id": "63220823-0b00-4bd5-b916-988c66f44133",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Review of sites without owners or with inactive owners."
+      },
+      "longDescription": {
+        "default": "Review of sites without owners or with inactive owners. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Orphan Sites Review Feature",
+        "description": "Activates the Orphan Sites Review webpart.",
+        "id": "35fb84c4-6fed-40dd-b8d9-2f3a4a48490c",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/orphan-sites-review.sppkg"
+  }
+}

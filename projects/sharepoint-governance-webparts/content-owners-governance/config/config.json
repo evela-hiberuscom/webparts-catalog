@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "content-owners-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/contentOwnersGovernance/ContentOwnersGovernanceWebPart.js",
+          "manifest": "./src/webparts/contentOwnersGovernance/ContentOwnersGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ContentOwnersGovernanceWebPartStrings": "lib/webparts/contentOwnersGovernance/loc/{locale}.js"
+  }
+}

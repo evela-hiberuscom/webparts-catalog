@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "onedrive-sync-limits-client-side-solution",
+    "id": "04d6d861-e70e-4541-aff0-50f5105063bc",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Visibility and recommendations for OneDrive sync limits and policies."
+      },
+      "longDescription": {
+        "default": "Visibility and recommendations for OneDrive sync limits and policies. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "OneDrive Sync Limits Feature",
+        "description": "Activates the OneDrive Sync Limits webpart.",
+        "id": "716b94c5-bc2a-42b9-96ca-98ef4779e191",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/onedrive-sync-limits.sppkg"
+  }
+}

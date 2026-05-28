@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "support-model-governance-client-side-solution",
+    "id": "32bdcf12-9421-4f89-b7fb-725f1ce09213",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Support model for incidents, requests, permissions and user questions."
+      },
+      "longDescription": {
+        "default": "Support model for incidents, requests, permissions and user questions. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Support Model Governance Feature",
+        "description": "Activates the Support Model Governance webpart.",
+        "id": "abc42e27-3327-471f-8640-c2cf7485beb8",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/support-model-governance.sppkg"
+  }
+}

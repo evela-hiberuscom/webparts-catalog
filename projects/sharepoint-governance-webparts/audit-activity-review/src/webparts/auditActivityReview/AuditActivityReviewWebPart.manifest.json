@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "53e9614e-5197-4038-9db0-a100dc87f6d9",
+  "alias": "AuditActivityReviewWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Audit Activity Review"
+      },
+      "description": {
+        "default": "Review of access, download, deletion, sharing and permission-change audit activity."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Audit Activity Review",
+        "subtitle": "Review of access, download, deletion, sharing and permission-change audit activity.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

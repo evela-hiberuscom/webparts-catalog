@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { discoverSpfxProjects } from "./lib/discover-projects.mjs";
 
 const repoRoot = process.cwd();
 const projectsDir = path.join(repoRoot, "projects");
@@ -14,20 +15,13 @@ function writeJson(filePath, value) {
   fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
-function listProjects() {
-  return fs
-    .readdirSync(projectsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
-    .sort((left, right) => left.localeCompare(right));
-}
-
 function lockNodeKey(packageName) {
   return `node_modules/${packageName}`;
 }
 
-function pinProject(projectName) {
-  const projectDir = path.join(projectsDir, projectName);
+function pinProject(project) {
+  const projectName = project.relativePath;
+  const projectDir = project.absolutePath;
   const packagePath = path.join(projectDir, "package.json");
   const lockfilePath = path.join(projectDir, "package-lock.json");
   if (!fs.existsSync(packagePath) || !fs.existsSync(lockfilePath)) {
@@ -77,7 +71,7 @@ function pinProject(projectName) {
   return findings;
 }
 
-const findings = listProjects().flatMap(pinProject);
+const findings = discoverSpfxProjects(projectsDir).flatMap(pinProject);
 
 if (findings.length > 0) {
   const action = shouldFix ? "Pinned" : "Found";

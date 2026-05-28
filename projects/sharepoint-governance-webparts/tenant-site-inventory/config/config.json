@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "tenant-site-inventory-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/tenantSiteInventory/TenantSiteInventoryWebPart.js",
+          "manifest": "./src/webparts/tenantSiteInventory/TenantSiteInventoryWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "TenantSiteInventoryWebPartStrings": "lib/webparts/tenantSiteInventory/loc/{locale}.js"
+  }
+}

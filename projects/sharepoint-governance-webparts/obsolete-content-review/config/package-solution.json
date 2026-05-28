@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "obsolete-content-review-client-side-solution",
+    "id": "7a6e76a9-600f-4144-97fc-3950d231105d",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Review of obsolete pages, news and documents."
+      },
+      "longDescription": {
+        "default": "Review of obsolete pages, news and documents. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Obsolete Content Review Feature",
+        "description": "Activates the Obsolete Content Review webpart.",
+        "id": "ef0ed274-8b9d-40d5-8704-26c0ecae48e4",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/obsolete-content-review.sppkg"
+  }
+}

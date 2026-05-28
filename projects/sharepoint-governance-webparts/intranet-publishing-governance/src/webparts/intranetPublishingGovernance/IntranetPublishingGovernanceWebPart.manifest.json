@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "b3bfaed3-4532-4c09-8aee-0826fff6e42c",
+  "alias": "IntranetPublishingGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Intranet Publishing Governance"
+      },
+      "description": {
+        "default": "Governance of intranet page publishing policies."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Intranet Publishing Governance",
+        "subtitle": "Governance of intranet page publishing policies.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

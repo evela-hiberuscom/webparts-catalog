@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "site-archive-retention-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SiteArchiveRetentionGovernance",
+    "componentDescription": "Governed decisions for archiving, retaining or removing old sites.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "site-archive-retention-governance",
+    "libraryId": "240dc645-e53e-43be-af55-0bd5b7c605cf",
+    "solutionShortDescription": "Governed decisions for archiving, retaining or removing old sites.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

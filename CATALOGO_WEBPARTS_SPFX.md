@@ -2,54 +2,58 @@
 
 | Campo | Valor |
 |-------|-------|
-| **Versión del catálogo** | 1.0.0 |
+| **Versión del catálogo** | 1.1.0 |
 | **Fecha de última actualización** | 2026-05-28 |
 | **Repositorio** | `paquete-webparts` |
 | **Stack** | SPFx 1.22.2, React 17.0.1, Fluent UI ^8.106.4, TypeScript ~5.8.0 |
-| **Total de web parts** | 52 |
-| **Total de proyectos (carpetas)** | 51 (una carpeta contiene 2 web parts) |
+| **Total de web parts físicos** | 80 |
+| **Entradas numeradas del catálogo** | 79 (`WP-001`–`WP-079`; `WP-035` contiene 2 webparts físicos) |
+| **Total de proyectos SPFx independientes** | 78 (51 legacy directos + 27 bajo `projects/sharepoint-governance-webparts/`) |
 | **Build system** | Heft (`heft build --clean --production`) |
 | **Node** | >=22.14.0 < 23.0.0 |
-| **Paquete compartido** | `@paquete/spfx-common` |
+| **Paquete compartido** | `@paquete/spfx-common` en proyectos legacy; los nuevos webparts de gobernanza usan contratos documentales compartidos en `_governance/` |
 
 ---
 
 ## 1. Resumen Ejecutivo
 
-El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 10 categorías funcionales. Todos comparten un baseline técnico uniforme:
+El repositorio `paquete-webparts` contiene **80 web parts SPFx físicos** organizados en 13 categorías funcionales. Hay **53 webparts legacy** y **27 nuevos webparts de gobernanza SharePoint/Teams** bajo `projects/sharepoint-governance-webparts/`. Todos comparten un baseline técnico uniforme:
 
 - **SPFx 1.22.2** con React 17.0.1 y Fluent UI v8
 - **Heft** como sistema de build (rushstack/heft 1.1.2)
 - **TypeScript ~5.8.0** con configuraciones de ESLint idénticas en todos los proyectos
-- **`@paquete/spfx-common`** como paquete de utilidades compartido
+- **`@paquete/spfx-common`** como paquete de utilidades compartido en el catálogo legacy
+- **`_governance/docs/shared-*`** como contratos conceptuales compartidos para los 27 webparts de gobernanza
 - **Workspaces npm** con 9 scripts de orquestación en el root (`package.json`)
 
 **Distribución por estado de madurez:**
 
 | Estado | Cantidad | Porcentaje |
 |--------|----------|------------|
-| Maduro | 28 | 54% |
-| Incompleto | 3 | 6% |
-| Experimental | 12 | 23% |
-| Reutilizable | 9 | 17% |
+| Maduro | 28 | 35% |
+| Reutilizable | 9 | 11% |
+| Experimental | 13 | 16% |
+| Incompleto | 3 | 4% |
+| Mock-backed auditado / backend pendiente | 27 | 34% |
 
-**Distribución por niveles de reutilización:**
+**Distribución orientativa por niveles de reutilización:**
 
 | Nivel | Cantidad | Porcentaje |
 |-------|----------|------------|
-| Alta | 22 | 42% |
-| Media | 23 | 44% |
-| Baja | 7 | 14% |
+| Alta | 22 | 28% |
+| Media | 48 | 60% |
+| Baja | 10 | 12% |
 
-**Adopción de patrones de calidad (sobre 52 web parts):**
+**Adopción de patrones de calidad (sobre 80 web parts físicos):**
 
 | Patrón | Presente | Ausente | Tasa |
 |--------|----------|---------|------|
-| ErrorBoundary | 40 | 12 | 77% |
-| onThemeChanged (dark mode) | 38 | 14 | 73% |
-| Teams context detection | 26 | 26 | 50% |
-| onDispose (cleanup React) | 24 | 28 | 46% |
-| Service/Repository layer | 36 | 16 | 69% |
+| ErrorBoundary | 67 | 13 | 84% |
+| onThemeChanged (dark mode explícito) | 38 | 42 | 48% |
+| Teams context detection explícito | 26 | 54 | 33% |
+| onDispose (cleanup React) | 51 | 29 | 64% |
+| Service/Repository layer | 63 | 17 | 79% |
+| Mock mode visible + contrato backend documentado | 27 | 53 | 34% |
 
 ---
 
@@ -85,7 +89,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 014 | `pulso-del-dia` | `DailyPulseWebPart` | Reutilizable | Media |
 | 015 | `buzon-de-ideas` | `IdeasMailboxWebPart` | Reutilizable | Media |
 
-### CAT-B: Productividad Personal (3 webs)
+### CAT-D: Productividad Personal (3 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -93,7 +97,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 017 | `mis-tareas-y-pendientes` | `MyTasksAndPendingWebPart` | Maduro | Alta |
 | 018 | `mis-accesos-recientes` | `MyRecentAccessesWebPart` | Maduro | Alta |
 
-### CAT-D: Dashboard / KPIs (5 webs)
+### CAT-E: Dashboard / KPIs (5 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -103,7 +107,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 022 | `estado-de-incidencias-destacadas` | `HighlightedIncidentsWebPart` | Reutilizable | Alta |
 | 023 | `proximos-hitos` | `UpcomingMilestonesWebPart` | Maduro | Media |
 
-### CAT-E: Catálogos / Portales / Launchers (6 webs)
+### CAT-F: Catálogos / Portales / Launchers (6 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -114,7 +118,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 028 | `a-z-corporativo` | `CorporateAzWebPart` | Experimental | Media |
 | 029 | `mapa-de-portales` | `PortalMapWebPart` | Reutilizable | Baja |
 
-### CAT-F: Checklists / Flujos (4 webs)
+### CAT-G: Checklists / Flujos (4 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -123,7 +127,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 032 | `inicia-una-solicitud` | `StartARequestWebPart` | Maduro | Media |
 | 033 | `ruta-guiada` | `GuidedRouteWebPart` | Experimental | Media |
 
-### CAT-G: Diagnostics / Monitorización (4 webs)
+### CAT-H: Diagnostics / Monitorización (4 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -132,7 +136,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 035 | `visualizador-de-elementos-de-biblioteca-y-papelera-superior` (35.2) | `RecycleBinSpaceCalculatorWebPart` | — | — |
 | 036 | `que-ha-cambiado` | `WhatChangedFeedWebPart` | Maduro | Alta |
 
-### CAT-H: Formación / Conocimiento (4 webs)
+### CAT-I: Formación / Conocimiento (4 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -141,7 +145,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 039 | `glosario-corporativo` | `CorporateGlossaryWebPart` | Maduro | Alta |
 | 040 | `pregunta-destacada` | `FeaturedQuestionWebPart` | Experimental | Baja |
 
-### CAT-I: Tiempo / Eventos (5 webs)
+### CAT-J: Tiempo / Eventos y Engagement (5 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -151,8 +155,6 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 044 | `presencia-de-sedes` | `SitesPresenceWebPart` | Experimental | Baja |
 | 045 | `microencuesta` | `MicroSurveyWebPart` | Maduro | Media |
 
-### CAT-J: Bienestar / Engagement (0 webs — merged into CAT-I above as microencuesta)
-
 ### CAT-K: Gobierno / Reporting (3 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
@@ -161,7 +163,7 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 047 | `resumen-semanal-automatico` | `AutomaticWeeklySummaryWebPart` | Maduro | Baja |
 | 048 | `mantenimientos-programados` | `PlannedMaintenanceWebPart` | Incompleto | Baja |
 
-### CAT-L: Navegación / Acceso (2 webs)
+### CAT-L: Navegación / Acceso (4 webs)
 
 | # | Folder | WebPart Class | Estado | Reutilización |
 |---|--------|--------------|--------|---------------|
@@ -169,6 +171,38 @@ El repositorio `paquete-webparts` contiene **52 web parts SPFx** organizados en 
 | 050 | `asistente-contextual-de-pagina` | `PageContextAssistantWebPart` | Reutilizable | Alta |
 | 051 | `centro-de-acciones-rapidas` | `QuickActionsCenterWebPart` | Reutilizable | Alta |
 | 052 | `tarjeta-de-decision-rapida` | `QuickDecisionCardWebPart` | Incompleto | Baja |
+
+### CAT-M: SharePoint Governance / Teams Governance (27 webs)
+
+| # | Folder | WebPart Class | Estado | Reutilización |
+|---|--------|--------------|--------|---------------|
+| 053 | `sharepoint-governance-webparts/site-creation-governance` | `SiteCreationGovernanceWebPart` | Mock-backed auditado | Media |
+| 054 | `sharepoint-governance-webparts/duplicate-sites-control` | `DuplicateSitesControlWebPart` | Mock-backed auditado | Media |
+| 055 | `sharepoint-governance-webparts/orphan-sites-review` | `OrphanSitesReviewWebPart` | Mock-backed auditado | Media |
+| 056 | `sharepoint-governance-webparts/site-lifecycle-governance` | `SiteLifecycleGovernanceWebPart` | Mock-backed auditado | Media |
+| 057 | `sharepoint-governance-webparts/inactive-sites-validation` | `InactiveSitesValidationWebPart` | Mock-backed auditado | Media |
+| 058 | `sharepoint-governance-webparts/site-archive-retention-governance` | `SiteArchiveRetentionGovernanceWebPart` | Mock-backed auditado | Media |
+| 059 | `sharepoint-governance-webparts/inherited-access-review` | `InheritedAccessReviewWebPart` | Mock-backed auditado | Media |
+| 060 | `sharepoint-governance-webparts/external-sharing-review` | `ExternalSharingReviewWebPart` | Mock-backed auditado | Media |
+| 061 | `sharepoint-governance-webparts/sensitivity-labels-governance` | `SensitivityLabelsGovernanceWebPart` | Mock-backed auditado | Media |
+| 062 | `sharepoint-governance-webparts/retention-compliance-governance` | `RetentionComplianceGovernanceWebPart` | Mock-backed auditado | Media |
+| 063 | `sharepoint-governance-webparts/audit-activity-review` | `AuditActivityReviewWebPart` | Mock-backed auditado | Media |
+| 064 | `sharepoint-governance-webparts/storage-governance` | `StorageGovernanceWebPart` | Mock-backed auditado | Media |
+| 065 | `sharepoint-governance-webparts/storage-quota-governance` | `StorageQuotaGovernanceWebPart` | Mock-backed auditado | Media |
+| 066 | `sharepoint-governance-webparts/version-control-governance` | `VersionControlGovernanceWebPart` | Mock-backed auditado | Media |
+| 067 | `sharepoint-governance-webparts/onedrive-sync-limits` | `OnedriveSyncLimitsWebPart` | Mock-backed auditado | Media |
+| 068 | `sharepoint-governance-webparts/intranet-publishing-governance` | `IntranetPublishingGovernanceWebPart` | Mock-backed auditado | Media |
+| 069 | `sharepoint-governance-webparts/content-owners-governance` | `ContentOwnersGovernanceWebPart` | Mock-backed auditado | Media |
+| 070 | `sharepoint-governance-webparts/obsolete-content-review` | `ObsoleteContentReviewWebPart` | Mock-backed auditado | Media |
+| 071 | `sharepoint-governance-webparts/approval-flows-governance` | `ApprovalFlowsGovernanceWebPart` | Mock-backed auditado | Media |
+| 072 | `sharepoint-governance-webparts/user-good-practices` | `UserGoodPracticesWebPart` | Mock-backed auditado | Media |
+| 073 | `sharepoint-governance-webparts/site-owner-training` | `SiteOwnerTrainingWebPart` | Mock-backed auditado | Media |
+| 074 | `sharepoint-governance-webparts/support-model-governance` | `SupportModelGovernanceWebPart` | Mock-backed auditado | Media |
+| 075 | `sharepoint-governance-webparts/security-compliance-review` | `SecurityComplianceReviewWebPart` | Mock-backed auditado | Media |
+| 076 | `sharepoint-governance-webparts/copilot-readiness` | `CopilotReadinessWebPart` | Mock-backed auditado | Media |
+| 077 | `sharepoint-governance-webparts/sensitive-content-review` | `SensitiveContentReviewWebPart` | Mock-backed auditado | Media |
+| 078 | `sharepoint-governance-webparts/adoption-risk-metrics` | `AdoptionRiskMetricsWebPart` | Mock-backed auditado | Media |
+| 079 | `sharepoint-governance-webparts/tenant-site-inventory` | `TenantSiteInventoryWebPart` | Mock-backed auditado | Media |
 
 ---
 
@@ -180,15 +214,16 @@ Categoría                | Web Parts | Dominio Principal
 CAT-A | Gestión Doc.   | 001-003 | Plantillas, documentos útiles, favoritos
 CAT-B | RRHH y Equipo  | 004-009 | Equipo, cumpleaños, incorporaciones, organigrama, perfil
 CAT-C | Comunicación   | 010-015 | Avisos, campañas, noticias, pulso, ideas
-CAT-B | Productividad  | 016-018 | Aprobaciones, tareas, accesos recientes (Graph)
-CAT-D | Dashboard/KPIs | 019-023 | KPI cards, proyectos, servicios, incidencias, hitos
-CAT-E | Catálogos      | 024-029 | Launchers, accesos por audiencia, directorio, buscador A-Z, portales
-CAT-F | Checklists     | 030-033 | Onboarding, offboarding, solicitudes, rutas guiadas
-CAT-G | Diagnostics    | 034-036 | Storage analyzer, site diagnostics, recycle bin, cambios
-CAT-H | Formación      | 037-040 | FAQ, guías, glosario, pregunta destacada
-CAT-I | Tiempo/Eventos | 041-045 | Agenda, cuenta atrás, turnos, presencias, encuestas
+CAT-D | Productividad  | 016-018 | Aprobaciones, tareas, accesos recientes (Graph)
+CAT-E | Dashboard/KPIs | 019-023 | KPI cards, proyectos, servicios, incidencias, hitos
+CAT-F | Catálogos      | 024-029 | Launchers, accesos por audiencia, directorio, buscador A-Z, portales
+CAT-G | Checklists     | 030-033 | Onboarding, offboarding, solicitudes, rutas guiadas
+CAT-H | Diagnostics    | 034-036 | Storage analyzer, site diagnostics, recycle bin, cambios
+CAT-I | Formación      | 037-040 | FAQ, guías, glosario, pregunta destacada
+CAT-J | Tiempo/Eventos | 041-045 | Agenda, cuenta atrás, turnos, presencias, encuestas
 CAT-K | Gobierno       | 046-048 | Objetivos, resumen semanal, mantenimiento
 CAT-L | Navegación     | 049-052 | Reserva, asistente contextual, acciones rápidas, tarjeta decisión
+CAT-M | SPO Governance | 053-079 | Creación, inventario, owners, lifecycle, permisos, external sharing, Purview, Copilot, soporte, adopción
 ```
 
 **Flujos principales de datos:**
@@ -203,6 +238,9 @@ SitePages List ────────────────────┤
 Graph API (Recent) ────────────────┘
 Search API ────────────────────────┐
 Outlook Calendar ──────────────────┘
+Mock Governance Repository ────────┐
+Backend Governance API (futura) ───┤──> Governance Service ──> Fluent UI Dashboard + ErrorBoundary
+Graph / CSOM / Purview / SAM ──────┘
 ```
 
 ---
@@ -1027,6 +1065,83 @@ Outlook Calendar ──────────────────┘
 
 ---
 
+### WP-053 a WP-079 | `sharepoint-governance-webparts/*` | Governance WebParts
+
+**Estado común:** Mock-backed auditado / integración backend pendiente
+**Reutilización común:** Media (plantilla técnica común; dominio funcional específico por iniciativa)
+**Arquitectura:** un proyecto SPFx independiente por iniciativa bajo `projects/sharepoint-governance-webparts/<project>/`
+**Coordinación global:** `projects/sharepoint-governance-webparts/_governance/`
+
+**Props comunes (4):**
+- `title` — TextField
+- `subtitle` — TextField
+- `maxItems` — Slider (1–10)
+- `showDetails` — Toggle
+
+**Capas comunes por proyecto:**
+- `components/<WebPartName>Dashboard.tsx`
+- `components/GovernanceStatePanel.tsx`
+- `components/WebPartErrorBoundary.tsx`
+- `hooks/useGovernanceDashboard.ts`
+- `models/governanceModels.ts`
+- `mocks/governanceMockData.ts`
+- `repositories/governanceDashboardRepository.ts`
+- `services/governanceDashboardService.ts`
+- `services/governanceDashboardService.test.ts`
+
+**Data Sources actuales:** `MockGovernanceDashboardRepository` con datos representativos explícitamente marcados en UI.
+**Data Sources previstos:** backend de gobierno seguro que encapsule Microsoft Graph, CSOM/SharePoint Admin, Purview y SharePoint Advanced Management según disponibilidad y licencia.
+**Service/Repo:** `GovernanceDashboardService`, `MockGovernanceDashboardRepository`.
+**Documentación por proyecto:** README, spec funcional, diseño funcional, diseño técnico y red-team individual.
+**Documentación global:** ADRs, project index, shared models, shared service contracts, shared UI guidelines, roadmap, backlog backend/frontend, auditoría global y summary final en `_governance/docs/`.
+
+**Calidad común:**
+- ✅ ErrorBoundary obligatorio
+- ✅ onDispose con `ReactDom.unmountComponentAtNode`
+- ✅ Localización `es-es.js`, `en-us.js`, `mystrings.d.ts`
+- ✅ Service/Repository/Hook separados
+- ✅ Tests unitarios de servicio
+- ✅ Build Heft + Jest + package-solution validado
+- ✅ Modo mock visible mediante `MessageBar`
+- ✅ Sin operaciones destructivas reales
+- ✅ Sin llamadas directas a Graph, CSOM, Purview o SAM desde componentes React
+- ⚠️ Sin `onThemeChanged` específico todavía; UI usa Fluent UI y superficies compatibles, pero no aplica adaptación avanzada de tema
+- ⚠️ Sin Teams context detection específica; manifiestos soportan Teams, pero no hay comportamiento condicional por host
+
+| WP | Proyecto | WebPart Class | Iniciativa | Objetivo funcional | Backend requerido |
+|---|---|---|---|---|---|
+| 053 | `site-creation-governance` | `SiteCreationGovernanceWebPart` | GOV-01 | Definir quién puede crear sitios de SharePoint y detectar desviaciones del proceso | SharePoint Admin/CSOM, Graph Sites, configuración tenant |
+| 054 | `duplicate-sites-control` | `DuplicateSitesControlWebPart` | GOV-02 | Detectar creación desordenada y candidatos duplicados | Inventario maestro, motor de similitud, Graph/CSOM |
+| 055 | `orphan-sites-review` | `OrphanSitesReviewWebPart` | GOV-03 | Revisar sitios sin propietario o con propietarios inactivos | Inventario owners, Entra/Graph users, señales de actividad |
+| 056 | `site-lifecycle-governance` | `SiteLifecycleGovernanceWebPart` | GOV-04 | Gobernar estados active/inactive/archived/removable | Inventario, reglas lifecycle, SAM si disponible |
+| 057 | `inactive-sites-validation` | `InactiveSitesValidationWebPart` | GOV-05 | Detectar sitios inactivos y pedir validación a owners | Graph usage reports, campañas owner, inventario owners |
+| 058 | `site-archive-retention-governance` | `SiteArchiveRetentionGovernanceWebPart` | GOV-06 | Decidir cuándo archivar, conservar o eliminar sitios antiguos | Backend dry-run, retención/Purview, aprobaciones |
+| 059 | `inherited-access-review` | `InheritedAccessReviewWebPart` | GOV-07 | Revisar accesos heredados y directos periódicamente | Graph permissions, CSOM permissions, Site Access Reviews |
+| 060 | `external-sharing-review` | `ExternalSharingReviewWebPart` | GOV-08 | Revisar documentos compartidos externamente | Sharing reports, Graph drive permissions, DAG/SAM |
+| 061 | `sensitivity-labels-governance` | `SensitivityLabelsGovernanceWebPart` | GOV-09 | Recomendar/apoyar etiquetas de sensibilidad | Purview labels, Graph groups/sites, backend de recomendación |
+| 062 | `retention-compliance-governance` | `RetentionComplianceGovernanceWebPart` | GOV-10 | Identificar documentos con obligación legal o normativa | Purview retention, records management, compliance input |
+| 063 | `audit-activity-review` | `AuditActivityReviewWebPart` | GOV-11 | Revisar accesos, descargas, borrados, compartición y permisos | Purview Audit, export API, normalización de eventos |
+| 064 | `storage-governance` | `StorageGovernanceWebPart` | GOV-12 | Monitorizar almacenamiento de sitios y bibliotecas | Graph reports, SharePoint Admin storage, snapshots |
+| 065 | `storage-quota-governance` | `StorageQuotaGovernanceWebPart` | GOV-13 | Definir cuotas y controles de crecimiento | SharePoint Admin storage quota, reglas de alerta |
+| 066 | `version-control-governance` | `VersionControlGovernanceWebPart` | GOV-14 | Controlar versiones para evitar crecimiento excesivo | SharePoint library version settings, dry-run de ahorro |
+| 067 | `onedrive-sync-limits` | `OnedriveSyncLimitsWebPart` | GOV-15 | Visibilizar límites de sincronización OneDrive | Intune/GPO/sync health reports, políticas OneDrive |
+| 068 | `intranet-publishing-governance` | `IntranetPublishingGovernanceWebPart` | GOV-16 | Gobernar políticas de publicación de páginas | SitePages, page approval, owners editoriales |
+| 069 | `content-owners-governance` | `ContentOwnersGovernanceWebPart` | GOV-17 | Mantener responsables de contenido por área/departamento | RACI, directorio, metadatos de áreas |
+| 070 | `obsolete-content-review` | `ObsoleteContentReviewWebPart` | GOV-18 | Revisar contenido obsoleto en páginas, noticias y documentos | SitePages, activity signals, content inventory |
+| 071 | `approval-flows-governance` | `ApprovalFlowsGovernanceWebPart` | GOV-19 | Definir y revisar flujos de aprobación | Power Automate/SharePoint approvals, SitePages |
+| 072 | `user-good-practices` | `UserGoodPracticesWebPart` | GOV-20 | Publicar buenas prácticas internas para usuarios | CMS interno o lista de contenido gobernado |
+| 073 | `site-owner-training` | `SiteOwnerTrainingWebPart` | GOV-21 | Formar owners y usuarios clave | LMS/SharePoint learning list, progreso de formación |
+| 074 | `support-model-governance` | `SupportModelGovernanceWebPart` | GOV-22 | Definir modelo de soporte y escalado | ITSM/SharePoint list, RACI, catálogo de solicitudes |
+| 075 | `security-compliance-review` | `SecurityComplianceReviewWebPart` | GOV-23 | Planificar revisiones periódicas de seguridad y cumplimiento | Calendario de campañas, findings, owner responses |
+| 076 | `copilot-readiness` | `CopilotReadinessWebPart` | GOV-24 | Preparar SharePoint para Copilot evitando sobreexposición | SAM/DAG, Graph permissions, sensitivity/exposure signals |
+| 077 | `sensitive-content-review` | `SensitiveContentReviewWebPart` | GOV-25 | Revisar contenido sensible antes de escenarios Copilot | Purview DLP/sensitivity, classification evidence |
+| 078 | `adoption-risk-metrics` | `AdoptionRiskMetricsWebPart` | GOV-26 | Medir uso, adopción, sitios activos, documentos compartidos y riesgos | Graph reports, inventory snapshots, risk aggregation |
+| 079 | `tenant-site-inventory` | `TenantSiteInventoryWebPart` | GOV-27 | Mantener inventario maestro de sitios, owners, propósito, criticidad y estado | Graph sites, SharePoint Admin/CSOM, Teams/group mapping |
+
+**Riesgo principal común:** todos los webparts de gobernanza son funcionales como frontend mock-backed, pero no deben presentarse como evidencia real del tenant hasta conectar backend seguro con permisos mínimos, trazabilidad, control de throttling, confianza por fuente y auditoría.
+
+---
+
 ## 5. Matriz de Reutilización de Componentes
 
 ### Por nivel de reutilización
@@ -1034,8 +1149,8 @@ Outlook Calendar ──────────────────┘
 | Nivel | Web Parts | Descripción típica |
 |-------|-----------|-------------------|
 | **Alta** | WP-002, 003, 004, 005, 006, 010, 017, 018, 021, 022, 025, 026, 027, 030, 031, 036, 037, 039, 041, 050, 051, 052* | Componentes genéricos, patrones reutilizables, baja dependencia de contexto |
-| **Media** | 001, 007, 008, 012, 013, 014, 015, 016, 019, 020, 023, 024, 028, 032, 033, 038, 041, 042, 045, 047, 049, 052* | Componentes con lógica específica pero reusable en contextos similares |
-| **Baja** | 009, 029, 034, 035, 040, 043, 044, 046, 048 | Componentes altamente acoplados, diagnósticos específicos, o mínimos |
+| **Media** | 001, 007, 008, 012, 013, 014, 015, 016, 019, 020, 023, 024, 028, 032, 033, 038, 041, 042, 045, 047, 049, 052*, WP-053–079 | Componentes con lógica específica pero reusable en contextos similares; los webparts de gobernanza comparten plantilla técnica y contratos |
+| **Baja** | 009, 029, 034, 035.1, 035.2, 040, 043, 044, 046, 048 | Componentes altamente acoplados, diagnósticos específicos, o mínimos |
 
 *WP-052 está marcado como Baja pero tiene alta reutilización potencial una vez expandido.
 
@@ -1043,10 +1158,12 @@ Outlook Calendar ──────────────────┘
 
 | Componente | Usado por | Propósito |
 |------------|-----------|-----------|
-| `WebPartErrorBoundary` | 40/52 web parts | Contención de errores React |
+| `WebPartErrorBoundary` | 67/80 web parts | Contención de errores React |
 | `@paquete/spfx-common` (hiberusThemeTokens) | WP-024, WP-025 | Tokens de tema CSS compartidos |
 | `normalizeDataSourceTypes` | WP-008, WP-004 | Normalización de data source CSV |
 | `PollRepository` (547 líneas) | WP-045 | Lógica de votación y tracking |
+| `GovernanceDashboardService` + `MockGovernanceDashboardRepository` | WP-053–079 | Patrón común para dashboards de gobernanza mock-backed |
+| `_governance/docs/shared-models` | WP-053–079 | Contratos conceptuales compartidos sin introducir paquete productivo adicional |
 
 ---
 
@@ -1060,6 +1177,7 @@ Outlook Calendar ──────────────────┘
 | 2 fuentes | WP-022, 048 | Menor flexibilidad |
 | 4 fuentes | WP-014, 024, 037, 041 | Máxima flexibilidad |
 | Source única | WP-047 | Restringido a StaticConfig |
+| Mock governance + backend contract | WP-053–079 | Mock visible y contrato backend documentado para Graph/CSOM/Purview/SAM |
 
 ### Agrupaciones por patrón de props
 
@@ -1068,6 +1186,7 @@ Outlook Calendar ──────────────────┘
 | `dataSourceType + listTitleOrUrl + maxItems` | WP-002, 006, 007, 011, 017–018, 020–022, 030, 033–034, 043–046, 048–049, 051 | Props base + extras específicos |
 | `title + description + source + filters` | WP-001, 004, 008, 012–014, 024, 027–028, 030, 037–039, 041–042, 047 | Web parts con metadata completa |
 | `dataSourceType solo` | WP-009, 010, 015, 023, 029, 035, 052 | Configuración mínima |
+| `title + subtitle + maxItems + showDetails` | WP-053–079 | Plantilla común de dashboard de gobernanza con límites y detalle configurable |
 
 ### Duplicidades detectadas
 
@@ -1077,6 +1196,7 @@ Outlook Calendar ──────────────────┘
 | Misma lógica de ErrorBoundary | 40 web parts | Repetición de código | Mover `WebPartErrorBoundary` a spfx-common con factory |
 | Misma detección de Teams + Dark Mode | ~26 web parts | Código duplicado | Mover a `ThemeTeamsHOC` o hook compartido |
 | WP-035.1 + WP-035.2 | Misma carpeta | Arquitectura híbrida | Separar en 2 proyectos independientes |
+| Plantilla de gobernanza repetida | WP-053–079 | Repetición intencional para independencia de build/deploy | Extraer a paquete común solo si los contratos backend se estabilizan |
 
 ### Componentes potencialmente candidatos a extracción en `spfx-common`
 
@@ -1086,6 +1206,7 @@ Outlook Calendar ──────────────────┘
 4. **`useTeamsContext()`** — Hook de detección de entorno Teams/Office/Outlook
 5. **`DataSourceMapper<T>`** — Adaptador unificado para SharePointList/JsonUrl/StaticConfig/ApiEndpoint
 6. **`ThemeCssVarsInjector`** — Inyección de CSS custom properties desde tema
+7. **`GovernanceDashboardBase<T>`** — Base futura para WP-053–079 cuando se decida extraer un paquete común
 
 ---
 
@@ -1119,25 +1240,27 @@ Outlook Calendar ──────────────────┘
 | CAT-A Gestion Doc. | WP-001 | WP-002, 003 |
 | CAT-B RRHH | WP-004, 006, 008 | WP-005, 007, 009 |
 | CAT-C Comunicación | WP-012, 013 | WP-010, 011, 014, 015 |
-| CAT-B Productividad | WP-017, 018 | WP-016, 019 |
-| CAT-D Dashboard | — | WP-019, 020, 021, 022 |
-| CAT-E Catalogos | WP-026 | WP-024, 025, 027–029 |
-| CAT-F Checklists | WP-032, 033 | WP-030, 031, 035 |
-| CAT-G Diagnostics | WP-036 | WP-034, 035 |
-| CAT-H Formacion | WP-037, 038, 039 | WP-040 |
-| CAT-I Tiempo | WP-041, 043, 045 | WP-042, 044 |
+| CAT-D Productividad | WP-017, 018 | WP-016 |
+| CAT-E Dashboard | — | WP-019, 020, 021, 022, 023 |
+| CAT-F Catalogos | WP-026 | WP-024, 025, 027–029 |
+| CAT-G Checklists | WP-032, 033 | WP-030, 031 |
+| CAT-H Diagnostics | WP-036 | WP-034, 035 |
+| CAT-I Formacion | WP-037, 038, 039 | WP-040 |
+| CAT-J Tiempo/Engagement | WP-041, 043, 045 | WP-042, 044 |
 | CAT-K Gobierno | WP-046, 047 | WP-048 |
 | CAT-L Navegacion | WP-050, 051 | WP-049, 052 |
+| CAT-M SPO Governance | WP-053–079 | — |
 
 ### Métricas de dependencias
 
 | Métrica | Valor |
 |---------|-------|
-| Total Service classes | ~28 |
-| Total Repository classes | ~30 |
-| WebParts sin Service/Repo layer | ~22 (42%) |
+| Total Service classes | ~55 |
+| Total Repository classes | ~57 |
+| WebParts sin Service/Repo layer | ~17 (21%) |
 | Mayor Repository | `PollRepository` (547 líneas) |
 | Mayor WebPart.ts | `QuickActionsCenterWebPart` (175 líneas) / `UniversalAppLauncherWebPart` (222 líneas) |
+| WebParts con mock repository explícito | 27 (`WP-053`–`WP-079`) |
 
 ---
 
@@ -1147,35 +1270,39 @@ Outlook Calendar ──────────────────┘
 
 | # | Riesgo | Severidad | Web Parts Afectados | Descripción |
 |---|--------|-----------|--------------------|-------------|
-| 1 | Sin ErrorBoundary en 12 proyectos | **Alta** | WP-002, 005, 009, 010, 011, 017, 021, 022, 028, 029, 040, 048–052 | Un error no controlado desmonta todo el subárbol React de SharePoint |
-| 2 | SPHttpClient directo al componente | **Media** | ~22 web parts | Viola la separación de capas (service/repo) definida en AGENTS.md |
-| 3 | onDispose ausente en 24 proyectos | **Media** | 26/52 web parts | Fugas de memoria React al desplazar múltiples web parts en la misma página |
-| 4 | Tema sin detectar en 14 proyectos | **Media** | 14 web parts | UI no se adapta al tema oscuro de SharePoint — problemas de legibilidad y accesibilidad |
-| 5 | Teams no detectado en 26 proyectos | **Baja** | 26 web parts | Sin adaptación al contexto Teams (mensajes de entorno, comportamiento específico) |
-| 6 | Dependencia de Node.js 22.x restringida | **Baja** | 52/52 | `>=22.14.0 < 23.0.0` — limita la flexibilidad de despliegue |
-| 7 | `@paquete/spfx-common` como dependencias `file:` | **Media** | 51/52 | Dependencia local que necesita build previo — riesgo en CI/CD |
+| 1 | Sin ErrorBoundary en webparts legacy pendientes | **Alta** | Legacy pendientes según ranking de madurez | Un error no controlado desmonta todo el subárbol React de SharePoint |
+| 2 | SPHttpClient directo al componente o capa incompleta | **Media** | ~17 web parts legacy | Viola la separación de capas (service/repo) definida en AGENTS.md |
+| 3 | onDispose ausente en ~29 webparts | **Media** | Legacy principalmente | Fugas de memoria React al desplazar múltiples web parts en la misma página |
+| 4 | Tema sin detectar explícitamente en 42 webparts | **Media** | 15 legacy + WP-053–079 | UI no se adapta al tema oscuro de SharePoint con lógica específica |
+| 5 | Teams no detectado explícitamente en 54 webparts | **Baja** | Legacy parcial + WP-053–079 | Sin adaptación al contexto Teams (mensajes de entorno, comportamiento específico) |
+| 6 | Dependencia de Node.js 22.x restringida | **Baja** | 80/80 | `>=22.14.0 < 23.0.0` — limita la flexibilidad de despliegue |
+| 7 | `@paquete/spfx-common` como dependencia `file:` | **Media** | Proyectos legacy que lo consumen | Dependencia local que necesita build previo — riesgo en CI/CD |
 | 8 | 2 web parts en misma carpeta | **Baja** | WP-035.1 y 035.2 | Arquitectura híbrida que confunde las expectativas de gestión |
-| 9 | Fluent UI v8 sin ruta de migración explícita | **Alta** | 52/52 | Migración futura a v9 requerirá adaptación significativa |
+| 9 | Fluent UI v8 sin ruta de migración explícita | **Alta** | 80/80 | Migración futura a v9 requerirá adaptación significativa |
 | 10 | 3 propiedades en modelo pero no expuestas | **Baja** | WP-033 (routeTitle), WP-046 (autoRefreshSeconds) | Desconexión entre modelo y property pane — confusión de mantenimiento |
+| 11 | Webparts de gobernanza con datos mock | **Alta si se presenta como producción** | WP-053–079 | Riesgo de confundir datos representativos con evidencia real del tenant; mitigado con `MessageBar` y documentación de backend requerido |
 
 ---
 
 ## 9. Recomendaciones Priorizadas
 
-### Prioridad 1 — Crítico (seguridad y estabilidade)
+### Prioridad 1 — Crítico (seguridad y estabilidad)
 
 | # | Acción | Web Parts | Esfuerzo | Beneficio |
 |---|--------|-----------|----------|-----------|
-| 1.1 | Añadir ErrorBoundary a los 12 proyectos ausentes | 002, 005, 009, 010, 011, 029, 040, 048, 052 y restantes | ⭐⭐ | Previene crashes totales de página |
-| 1.2 | Extraer WebPartErrorBoundary a spfx-common | 52/52 | ⭐ | Unificado, testable, consistente con AGENTS.md |
+| 1.1 | Añadir ErrorBoundary a los legacy ausentes | 002, 005, 009, 010, 011, 029, 035, 040, 048, 052 y restantes legacy | ⭐⭐ | Previene crashes totales de página |
+| 1.2 | Extraer WebPartErrorBoundary a spfx-common | 80/80 | ⭐ | Unificado, testable, consistente con AGENTS.md |
+| 1.3 | Mantener aviso visible de mock en gobernanza hasta conectar backend | WP-053–079 | ⭐ | Evita decisiones operativas basadas en datos simulados |
 
 ### Prioridad 2 — Alto (calidad de código)
 
 | # | Acción | Web Parts | Esfuerzo | Beneficio |
 |---|--------|-----------|----------|-----------|
-| 2.1 | Implementar onThemeChanged en 14 proyectos sin detectar tema | 003, 005, 007, 009, 011, 015, 021, 022, 028, 030, 040, 043, 044, 048, 052 | ⭐⭐ | Accesibilidad y experiencia de usuario |
+| 2.1 | Implementar onThemeChanged en legacy sin detectar tema | Legacy pendientes según ranking de madurez | ⭐⭐ | Accesibilidad y experiencia de usuario |
 | 2.2 | Extraer useDarkMode + useTeamsContext a spfx-common | Todos | ⭐⭐ | Elimina ~80 líneas duplicadas de detección de entorno |
-| 2.3 | Migrar SPHttpClient directo a pattern Service/Repository | ~22 web parts donde no existe | ⭐⭐⭐ | Consistencia con AGENTS.md, testabilidad |
+| 2.3 | Migrar SPHttpClient directo a pattern Service/Repository | Legacy con acceso directo o capa incompleta | ⭐⭐⭐ | Consistencia con AGENTS.md, testabilidad |
+| 2.4 | Añadir tema y host detection a la plantilla de gobernanza | WP-053–079 | ⭐⭐ | Completa integración visual en SharePoint/Teams |
+| 2.5 | Conectar backend read-only por fases | WP-053–079 | ⭐⭐⭐⭐ | Convierte dashboards mock-backed en evidencia real |
 
 ### Prioridad 3 — Medio (consolidación)
 
@@ -1183,7 +1310,8 @@ Outlook Calendar ──────────────────┘
 |---|--------|-----------|----------|-----------|
 | 3.1 | Crear BaseDataSourceWebPart<T> en spfx-common | 15+ web parts con mismo patrón de sources | ⭐⭐⭐ | Reducción de boilerplate ~30% |
 | 3.2 | Separar WP-035.1 y 035.2 en 2 proyectos independientes | WP-035 | ⭐ | Claridad de estructura |
-| 3.3 | Añadir onDispose a los 24 proyectos sin cleanup | 26/52 | ⭐ | Prevención de fugas de memoria |
+| 3.3 | Añadir onDispose a los legacy sin cleanup | Legacy pendientes | ⭐ | Prevención de fugas de memoria |
+| 3.4 | Evaluar `shared-governance-core` solo tras estabilizar backend | WP-053–079 | ⭐⭐ | Reduce duplicidad sin romper independencia de build |
 
 ### Prioridad 4 — Bajo (refinamiento)
 
@@ -1262,6 +1390,35 @@ Score basado en cuatro criterios ponderados:
 | 50 | 035.2 | RecycleBinCalc | ❌ | ❌ | ❌ | — | 6% | Experimental |
 | 51 | 048 | PlannedMaintenance | ❌ | ❌ | ❌ | ✅ | 13% | Incompleto |
 | 52 | 052 | QuickDecisionCard | ❌ | ✅ | ❌ | ✅✅ | 38% | Incompleto |
+| 53 | 053 | SiteCreationGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 54 | 054 | DuplicateSitesControl | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 55 | 055 | OrphanSitesReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 56 | 056 | SiteLifecycleGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 57 | 057 | InactiveSitesValidation | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 58 | 058 | SiteArchiveRetentionGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 59 | 059 | InheritedAccessReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 60 | 060 | ExternalSharingReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 61 | 061 | SensitivityLabelsGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 62 | 062 | RetentionComplianceGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 63 | 063 | AuditActivityReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 64 | 064 | StorageGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 65 | 065 | StorageQuotaGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 66 | 066 | VersionControlGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 67 | 067 | OnedriveSyncLimits | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 68 | 068 | IntranetPublishingGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 69 | 069 | ContentOwnersGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 70 | 070 | ObsoleteContentReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 71 | 071 | ApprovalFlowsGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 72 | 072 | UserGoodPractices | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 73 | 073 | SiteOwnerTraining | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 74 | 074 | SupportModelGovernance | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 75 | 075 | SecurityComplianceReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 76 | 076 | CopilotReadiness | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 77 | 077 | SensitiveContentReview | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 78 | 078 | AdoptionRiskMetrics | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+| 79 | 079 | TenantSiteInventory | ✅ | ⚠️ | ⚠️ | ✅✅ | 55% | Mock-backed |
+
+> Nota: WP-053–WP-079 puntúan 55% con la fórmula legacy porque aún no implementan `onThemeChanged` ni Teams context detection específica. En el alcance de gobernanza mock-backed sí tienen 100% de documentación, auditoría, tests unitarios, ErrorBoundary, service/repository/hook y build validado.
 
 ### Resumen por estado
 
@@ -1269,8 +1426,9 @@ Score basado en cuatro criterios ponderados:
 |--------|-------|-----------|
 | Maduro | 28 | 71% |
 | Reutilizable | 9 | 53% |
-| Experimental | 12 | 36% |
+| Experimental | 13 | 36% |
 | Incompleto | 3 | 14% |
+| Mock-backed auditado / backend pendiente | 27 | 55% legacy / 100% mock-backed |
 
 ---
 
@@ -1290,6 +1448,8 @@ Score basado en cuatro criterios ponderados:
 | **Graph API** | API RESTful de Microsoft Graph para acceso a recursos de Microsoft 365 |
 | **Teams context** | Contexto de Microsoft Teams detectable vía `context.sdks.microsoftTeams` |
 | **onDispose** | Ciclo de vida de web part SPFx para cleanup de componentes React |
+| **Purview** | Plataforma Microsoft para sensibilidad, retención, DLP, auditoría y cumplimiento |
+| **SAM** | SharePoint Advanced Management — capacidades avanzadas de lifecycle, Data Access Governance y access reviews |
 
 ### Términos de arquitectura
 
@@ -1303,6 +1463,8 @@ Score basado en cuatro criterios ponderados:
 | **DataSourceType** | Enum o string que indica el origen de datos actual del web part |
 | **CSS Custom Properties** | Variables CSS personalizadas (--varName) inyectadas desde el tema de SharePoint |
 | **spfx-common** | Paquete npm compartido (`@paquete/spfx-common`) con utilidades y componentes comunes |
+| **MockGovernanceDashboardRepository** | Repositorio local usado por WP-053–WP-079 para datos representativos no productivos |
+| **Governance backend contract** | Contrato esperado para sustituir mocks por evidencias reales desde Graph/CSOM/Purview/SAM |
 
 ### Términos de estado y calidad
 
@@ -1312,6 +1474,7 @@ Score basado en cuatro criterios ponderados:
 | **Reutilizable** | Web part funcional con buena estructura de datos pero con margen de mejora en patrones de calidad |
 | **Experimental** | Web part funcional pero con carencias significativas de calidad (sin error boundary, sin theme, etc.) |
 | **Incompleto** | Web part con implementación mínima que requiere trabajo significativo |
+| **Mock-backed auditado** | Web part completo como frontend, con mocks visibles, documentación y auditoría; requiere backend para datos reales |
 | **Reutilización Alta** | Componente con baja dependencia de contexto específico — fácil de reusar en otros proyectos |
 | **Reutilización Media** | Componente reutilizable con algún nivel de acoplamiento específico |
 | **Reutilización Baja** | Componente altamente especializado o minino — reusable principalmente como referencia |
@@ -1320,35 +1483,38 @@ Score basado en cuatro criterios ponderados:
 
 ## 12. Conclusión
 
-Este repositorio contiene **51 proyectos de carpetas, albergando un total de 52 web parts SPFx**, todos construidos sobre el mismo stack tecnológico:
+Este repositorio contiene **78 proyectos SPFx independientes**, albergando **80 web parts físicos**. El catálogo mantiene **79 entradas numeradas** porque `WP-035` contiene dos webparts físicos (`SiteStorageDiagnosticsWebPart` y `RecycleBinSpaceCalculatorWebPart`).
 
 - **SPFx 1.22.2** con React 17.0.1 y Fluent UI v8
 - **Heft** como sistema de build (rushstack 1.1.2)
 - **TypeScript ~5.8.0** con ESLint estricto idéntico en todos los proyectos
-- **`@paquete/spfx-common`** como capa compartida de utilidades y tokens de tema
+- **`@paquete/spfx-common`** como capa compartida de utilidades y tokens de tema en proyectos legacy
+- **`projects/sharepoint-governance-webparts/_governance/`** como fuente documental compartida para modelos, contratos y coordinación de los nuevos webparts de gobernanza
 - **Workspaces npm** con 9 scripts de orquestación en el root
 
 **Puntos fuertes:**
 1. Consistencia técnica admirable — todos los proyectos comparten build, lint, dependencias y estructura de carpetas.
-2. 28 de 52 web parts (54%) alcanzan estado "Maduro" con Score Promedio de 71%, demostrando una base de código funcional y estable.
-3. Patrones de Service/Repository bien establecidos en la mayoría de los proyectos maduros.
-4. Integración Teams y detección de tema oscuro presentes en la mayoría de los web parts maduros.
+2. 28 web parts legacy alcanzan estado "Maduro" con Score Promedio de 71%, demostrando una base de código funcional y estable.
+3. Los 27 nuevos webparts de gobernanza tienen ErrorBoundary, service/repository/hook, tests, documentación completa, auditoría individual y build validado.
+4. Patrones de Service/Repository bien establecidos en la mayoría de los proyectos maduros y en toda la nueva familia WP-053–WP-079.
+5. Integración Teams y detección de tema oscuro presentes en la mayoría de los web parts maduros legacy.
 
 **Áreas de mejora críticas:**
-1. **12 web parts sin ErrorBoundary** — riesgo de crashes totales de página en SharePoint. Alta prioridad.
-2. **~22 web parts con SPHttpClient directo** — violan la separación de capas definida en AGENTS.md.
-3. **26 web parts sin Teams detection** — sin adaptación al contexto de Microsoft Teams.
+1. **Webparts legacy sin ErrorBoundary** — riesgo de crashes totales de página en SharePoint. Alta prioridad.
+2. **Webparts legacy con acceso directo o capa incompleta** — deben alinearse con la separación de capas definida en AGENTS.md.
+3. **WP-053–WP-079 sin backend real** — son válidos como frontend mock-backed, pero no deben usarse como evidencia productiva.
+4. **WP-053–WP-079 sin onThemeChanged/Teams context detection específica** — conviene añadir adaptación avanzada al host antes de producción.
 4. **3 proyectos con propiedades en modelo pero no expuestas** — inconsistencia de mantenimiento (WP-033, WP-046).
 
 **Próximos pasos recomendados (en orden):**
-1. Extraer `WebPartErrorBoundary` a `spfx-common` y añadirlo a los 12 proyectos faltantes.
+1. Extraer `WebPartErrorBoundary` a `spfx-common` y añadirlo a los legacy faltantes.
 2. Extraer `useDarkMode()` y `useTeamsContext()` hooks a `spfx-common` para eliminar duplicación.
-3. Crear `BaseDataSourceWebPart<T>` para los 15+ web parts con el patrón de 3 data sources.
-4. Revisar y completar los 3 proyectos marcados como "Incompletos" (WP-011, WP-048, WP-052).
-5. Separar WP-035.1 y WP-035.2 en proyectos independientes.
+3. Conectar backend read-only por fases para WP-053–WP-079, empezando por `tenant-site-inventory`, `storage-governance`, `orphan-sites-review`, `support-model-governance` y `site-creation-governance`.
+4. Añadir `onThemeChanged` y detección de Teams/Office/Outlook a la plantilla de gobernanza.
+5. Crear `BaseDataSourceWebPart<T>` para los 15+ web parts con el patrón de 3 data sources.
+6. Revisar y completar los 3 proyectos marcados como "Incompletos" (WP-011, WP-048, WP-052).
+7. Separar WP-035.1 y WP-035.2 en proyectos independientes.
 
 ---
 
-*Documento generado el 2026-05-28 a partir del análisis directo de los 52 web parts en el repositorio `paquete-webparts`. Los datos reflejan el estado actual del código en `projects/*`.*
-
-
+*Documento actualizado el 2026-05-28 a partir del análisis directo de los 80 webparts físicos en el repositorio `paquete-webparts`, incluyendo proyectos legacy en `projects/*` y los nuevos proyectos anidados en `projects/sharepoint-governance-webparts/*`.*

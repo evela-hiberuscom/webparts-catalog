@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "site-creation-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SiteCreationGovernance",
+    "componentDescription": "Governance of SharePoint site creation permissions and exceptions.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "site-creation-governance",
+    "libraryId": "23dc32a7-f754-45ef-90dc-62252f0c6550",
+    "solutionShortDescription": "Governance of SharePoint site creation permissions and exceptions.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "copilot-readiness",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "CopilotReadiness",
+    "componentDescription": "Readiness review for Microsoft 365 Copilot and oversharing risks.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "copilot-readiness",
+    "libraryId": "a725cbd9-4409-45cf-8745-f4c1d3a9a8d7",
+    "solutionShortDescription": "Readiness review for Microsoft 365 Copilot and oversharing risks.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

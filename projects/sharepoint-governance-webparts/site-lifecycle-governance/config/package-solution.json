@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "site-lifecycle-governance-client-side-solution",
+    "id": "501f6b40-6989-4d81-9b20-ee170dd7b043",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Governance of lifecycle states for active, inactive, archived or removable sites."
+      },
+      "longDescription": {
+        "default": "Governance of lifecycle states for active, inactive, archived or removable sites. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Site Lifecycle Governance Feature",
+        "description": "Activates the Site Lifecycle Governance webpart.",
+        "id": "60e5c749-40e1-4afe-aaf8-21eaa316aecf",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/site-lifecycle-governance.sppkg"
+  }
+}

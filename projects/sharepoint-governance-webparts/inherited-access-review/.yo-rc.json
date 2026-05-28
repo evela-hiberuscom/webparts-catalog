@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "inherited-access-review",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "InheritedAccessReview",
+    "componentDescription": "Periodic review of inherited and direct permissions.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "inherited-access-review",
+    "libraryId": "2373aebb-695b-4f9a-8af6-0a4c493ee7c8",
+    "solutionShortDescription": "Periodic review of inherited and direct permissions.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

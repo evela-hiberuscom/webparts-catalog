@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "user-good-practices-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/userGoodPractices/UserGoodPracticesWebPart.js",
+          "manifest": "./src/webparts/userGoodPractices/UserGoodPracticesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "UserGoodPracticesWebPartStrings": "lib/webparts/userGoodPractices/loc/{locale}.js"
+  }
+}

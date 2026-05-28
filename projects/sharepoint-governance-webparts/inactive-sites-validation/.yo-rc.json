@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "inactive-sites-validation",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "InactiveSitesValidation",
+    "componentDescription": "Validation campaigns for inactive sites and their owners.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "inactive-sites-validation",
+    "libraryId": "e58fce0b-d182-48a1-b41a-aae412543f9f",
+    "solutionShortDescription": "Validation campaigns for inactive sites and their owners.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

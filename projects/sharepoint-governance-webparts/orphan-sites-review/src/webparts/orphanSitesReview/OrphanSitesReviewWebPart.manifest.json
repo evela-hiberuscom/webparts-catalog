@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "8abfaf42-5cb6-4cd7-a77c-6a41fb4fa449",
+  "alias": "OrphanSitesReviewWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Orphan Sites Review"
+      },
+      "description": {
+        "default": "Review of sites without owners or with inactive owners."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Orphan Sites Review",
+        "subtitle": "Review of sites without owners or with inactive owners.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

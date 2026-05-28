@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "site-creation-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/siteCreationGovernance/SiteCreationGovernanceWebPart.js",
+          "manifest": "./src/webparts/siteCreationGovernance/SiteCreationGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SiteCreationGovernanceWebPartStrings": "lib/webparts/siteCreationGovernance/loc/{locale}.js"
+  }
+}

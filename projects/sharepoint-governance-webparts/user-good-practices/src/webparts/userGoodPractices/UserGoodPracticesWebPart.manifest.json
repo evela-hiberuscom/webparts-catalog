@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "fffd19df-911a-4a80-b49b-fcbbacbc6915",
+  "alias": "UserGoodPracticesWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "User Good Practices"
+      },
+      "description": {
+        "default": "Internal good-practice guidance for SharePoint users."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "User Good Practices",
+        "subtitle": "Internal good-practice guidance for SharePoint users.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

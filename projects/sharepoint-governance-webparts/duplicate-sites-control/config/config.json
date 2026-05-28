@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "duplicate-sites-control-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/duplicateSitesControl/DuplicateSitesControlWebPart.js",
+          "manifest": "./src/webparts/duplicateSitesControl/DuplicateSitesControlWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DuplicateSitesControlWebPartStrings": "lib/webparts/duplicateSitesControl/loc/{locale}.js"
+  }
+}

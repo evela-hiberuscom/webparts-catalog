@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "support-model-governance-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/supportModelGovernance/SupportModelGovernanceWebPart.js",
+          "manifest": "./src/webparts/supportModelGovernance/SupportModelGovernanceWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SupportModelGovernanceWebPartStrings": "lib/webparts/supportModelGovernance/loc/{locale}.js"
+  }
+}

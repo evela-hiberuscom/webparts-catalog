@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "adoption-risk-metrics-client-side-solution",
+    "id": "3afe9b6b-f62f-4ce8-8bec-d6aa36275dea",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.22.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Usage, adoption, active-site and risk metrics."
+      },
+      "longDescription": {
+        "default": "Usage, adoption, active-site and risk metrics. Mock-backed until a secure governance backend is connected."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Adoption Risk Metrics Feature",
+        "description": "Activates the Adoption Risk Metrics webpart.",
+        "id": "5fa40d76-e8f0-45cc-a86f-23d4dd387c3d",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/adoption-risk-metrics.sppkg"
+  }
+}

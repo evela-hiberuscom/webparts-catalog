@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5aae1ae8-a77e-4061-b1fe-f9701b2db0a7",
+  "alias": "SiteLifecycleGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Site Lifecycle Governance"
+      },
+      "description": {
+        "default": "Governance of lifecycle states for active, inactive, archived or removable sites."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Site Lifecycle Governance",
+        "subtitle": "Governance of lifecycle states for active, inactive, archived or removable sites.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "site-lifecycle-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "SiteLifecycleGovernance",
+    "componentDescription": "Governance of lifecycle states for active, inactive, archived or removable sites.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "site-lifecycle-governance",
+    "libraryId": "c0ee223e-d9d2-43cb-8d81-f0e1996ddcdc",
+    "solutionShortDescription": "Governance of lifecycle states for active, inactive, archived or removable sites.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}

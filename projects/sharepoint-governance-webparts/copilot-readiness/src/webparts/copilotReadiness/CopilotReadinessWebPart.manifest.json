@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "a45e35e4-9e20-4f8d-a4d3-a3205f943f27",
+  "alias": "CopilotReadinessWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Copilot Readiness"
+      },
+      "description": {
+        "default": "Readiness review for Microsoft 365 Copilot and oversharing risks."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Copilot Readiness",
+        "subtitle": "Readiness review for Microsoft 365 Copilot and oversharing risks.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

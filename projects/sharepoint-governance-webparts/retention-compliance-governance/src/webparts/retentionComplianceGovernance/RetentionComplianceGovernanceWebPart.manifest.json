@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "1077ec7f-f685-4365-86b7-000285c2889e",
+  "alias": "RetentionComplianceGovernanceWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": [
+    "SharePointWebPart",
+    "TeamsPersonalApp",
+    "TeamsTab",
+    "SharePointFullPage"
+  ],
+  "supportsThemeVariants": true,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Advanced"
+      },
+      "title": {
+        "default": "Retention Compliance Governance"
+      },
+      "description": {
+        "default": "Governance of documents that require legal or regulatory retention."
+      },
+      "officeFabricIconFontName": "ComplianceAudit",
+      "properties": {
+        "title": "Retention Compliance Governance",
+        "subtitle": "Governance of documents that require legal or regulatory retention.",
+        "maxItems": 5,
+        "showDetails": true
+      }
+    }
+  ]
+}

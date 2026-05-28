@@ -1,0 +1,8 @@
+node_modules
+lib
+lib-commonjs
+dist
+temp
+release
+sharepoint
+*.log

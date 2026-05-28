@@ -1,0 +1,23 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "whichFolder": "subdir",
+    "solutionName": "storage-governance",
+    "environment": "spo",
+    "packageManager": "npm",
+    "useGulp": false,
+    "componentType": "webpart",
+    "template": "react",
+    "componentName": "StorageGovernance",
+    "componentDescription": "Monitoring of storage consumption across sites and libraries.",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.22.2",
+    "libraryName": "storage-governance",
+    "libraryId": "4046c3ac-9190-4a64-99b3-3ee129459224",
+    "solutionShortDescription": "Monitoring of storage consumption across sites and libraries.",
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false
+  }
+}
