@@ -76,7 +76,7 @@ class SharePointListBookingResourcesRepository implements IBookingResourcesRepos
 
   public async getResources(): Promise<IBookingResource[]> {
     try {
-      const listTitle = encodeURIComponent(escapeODataString(this.listTitle));
+      const listTitle = escapeODataString(this.listTitle);
       const select = 'Id,Title,Category,Site,BookingUrl,Availability,Rules,Featured,Priority';
       const endpoint = `${this.context.webUrl}/_api/web/lists/getbytitle('${listTitle}')/items?$select=${select}&$top=100`;
       const response = await fetch(endpoint, {

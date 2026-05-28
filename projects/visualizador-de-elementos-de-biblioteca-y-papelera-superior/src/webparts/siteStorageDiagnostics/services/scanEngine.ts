@@ -278,6 +278,7 @@ export class ScanEngine {
       } catch (error) {
         const message = error instanceof Error ? error.message : 'Unknown flush error';
         this.progress.errors.push({ siteUrl: url, message, timestamp: new Date().toISOString(), httpStatus: undefined });
+        console.warn(`[ScanEngine] Unable to flush report for ${url}.`, error);
       }
     }
   }
@@ -302,7 +303,8 @@ export class ScanEngine {
       }
 
       return candidate.replace(/\/$/, '');
-    } catch {
+    } catch (error) {
+      console.warn('[ScanEngine] Invalid report list URL was ignored.', error);
       this.pushProgressError(this.currentSiteUrl, 'La URL de la lista de informes no es válida. La descarga CSV seguirá disponible sin guardar.');
       return undefined;
     }
@@ -343,8 +345,8 @@ export class ScanEngine {
     for (const listener of this.listeners) {
       try {
         listener(event);
-      } catch {
-        // Listener errors should not break the scan
+      } catch (error) {
+        console.warn('[ScanEngine] Scan event listener failed and was ignored.', error);
       }
     }
   }

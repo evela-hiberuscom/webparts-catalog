@@ -71,10 +71,7 @@ describe('UpcomingMilestones', () => {
           configuration={configuration}
           service={service}
           environmentMessage=""
-          hasTeamsContext={false}
-          isDarkTheme={false}
           localeName="es-ES"
-          userDisplayName="Ada"
         />,
         container
       );

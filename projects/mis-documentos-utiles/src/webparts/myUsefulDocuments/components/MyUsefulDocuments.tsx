@@ -7,6 +7,7 @@ import {
   Stack,
   Label
 } from '@fluentui/react';
+import { openSafeExternalLink } from '@paquete/spfx-common';
 import type { IUsefulDocument } from '../models/usefulDocumentModels';
 
 export interface IMyUsefulDocumentsProps {
@@ -57,7 +58,7 @@ function getPriorityBadge(priority: IUsefulDocument['priority']): string | undef
 function DocumentCardView(props: { document: IUsefulDocument }): React.ReactElement {
   const handleOpen = (): void => {
     if (props.document.openUrl) {
-      window.open(props.document.openUrl, '_blank');
+      openSafeExternalLink(props.document.openUrl);
     }
   };
 

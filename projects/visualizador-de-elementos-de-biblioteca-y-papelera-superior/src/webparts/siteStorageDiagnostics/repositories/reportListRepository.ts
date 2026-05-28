@@ -1,5 +1,6 @@
 import type { IHttpClient } from '../models/httpClient';
 import type { ISiteReportListItem } from '../models/siteReport';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface IReportListRepositoryOptions {
   spHttpClient: IHttpClient;
@@ -65,11 +66,12 @@ export class ReportListRepository {
       if (pathParts.length === 2 && pathParts[1]) {
         const listTitle = decodeURIComponent(pathParts[1].split('/')[0]);
         const siteBase = `${parsed.origin}${pathParts[0]}`;
-        return `${siteBase}/_api/web/lists/getbytitle('${encodeURIComponent(listTitle)}')/`;
+        return `${siteBase}/_api/web/lists/getbytitle('${escapeODataListTitle(listTitle)}')/`;
       }
       return `${parsed.origin}${parsed.pathname}/_api/web/lists/getbytitle('SiteStorageReports')/`;
-    } catch {
-      throw new Error(`Invalid report list URL: ${url}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown URL parse error';
+      throw new Error(`Invalid report list URL: ${url}. ${message}`);
     }
   }
 }

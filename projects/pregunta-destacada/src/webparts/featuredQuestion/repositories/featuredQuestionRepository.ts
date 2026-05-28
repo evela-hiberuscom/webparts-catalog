@@ -1,4 +1,5 @@
 import type { FetchLike, IFeaturedQuestion, IFeaturedQuestionConfiguration } from '../models/featuredQuestionModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface IFeaturedQuestionRepositoryOptions {
   fetchClient: FetchLike;
@@ -53,7 +54,7 @@ export class FeaturedQuestionRepository {
     const isUrl = normalizedUrl.startsWith('/');
     const listUrl = isUrl
       ? `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`
-      : `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
+      : `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(normalizedUrl)}')`;
 
     const itemsUrl = `${listUrl}/items?$top=1&$orderby=Created desc`;
     const response = await this._fetchClient(itemsUrl, {

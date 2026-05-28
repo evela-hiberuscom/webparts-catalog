@@ -18,6 +18,12 @@
     "record:issue": "node ./scripts/record-issue.mjs",
     "progress:board": "node ./scripts/render-progress-board.mjs",
     "progress:trace": "node ./scripts/render-agent-trace.mjs",
-    "audit:redteam": "node ./scripts/generate-red-team-audit.mjs"
+    "audit:redteam": "node ./scripts/generate-red-team-audit.mjs",
+    "ci:projects": "node ./scripts/ci-validate-projects.mjs",
+    "ci:projects:dry-run": "node ./scripts/ci-validate-projects.mjs --dry-run",
+    "check:locks": "node ./scripts/check-lockfile-consistency.mjs",
+    "check:pinned-deps": "node ./scripts/check-pinned-project-deps.mjs",
+    "check:secrets": "node ./scripts/secret-scan.mjs",
+    "check:audit-remediation": "node ./scripts/audit-remediation-checks.mjs"
   }
 }

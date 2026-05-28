@@ -10,6 +10,7 @@ import {
   parseTextList,
   resolveAbsoluteUrl
 } from '../utils/smartFaqUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointFaqItem {
   Id: number;
@@ -39,7 +40,7 @@ export class SmartFaqRepository implements ISmartFaqRepository {
 
   public async getFaqs(configuration: ISmartFaqConfiguration): Promise<ISmartFaqItem[]> {
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.listTitleOrUrl)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.listTitleOrUrl)}')/items` +
       `?$select=Id,Title,Question,Answer,Response,Category,Topic,Tags,Aliases,Synonyms,RelatedLink,RelatedUrl,UpdatedAt,Modified,Featured,IsFeatured` +
       `&$orderby=Modified desc&$top=${Math.max(clampMaxItems(configuration.maxItems) * 2, 20)}`;
 

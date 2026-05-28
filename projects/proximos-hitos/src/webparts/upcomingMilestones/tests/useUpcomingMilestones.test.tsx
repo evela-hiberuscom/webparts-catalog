@@ -11,12 +11,9 @@ describe('useUpcomingMilestones', () => {
   const configuration: IUpcomingMilestonesConfiguration = {
     title: 'Próximos hitos',
     description: 'Timeline',
-    dataSourceType: 'StaticConfig',
     listTitleOrUrl: 'MilestonesList',
     maxItems: 5,
-    viewMode: 'timeline',
-    webUrl: 'https://contoso.sharepoint.com/sites/comms',
-    localeName: 'es-ES'
+    viewMode: 'timeline'
   };
 
   beforeEach(() => {

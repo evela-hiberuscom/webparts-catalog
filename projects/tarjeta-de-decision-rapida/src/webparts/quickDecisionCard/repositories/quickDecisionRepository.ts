@@ -1,5 +1,6 @@
 import { SPHttpClient } from '@microsoft/sp-http';
 import type { FetchLike, IQuickDecision, IQuickDecisionConfiguration } from '../models/quickDecisionModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export class QuickDecisionRepository {
   private _fetchClient: FetchLike;
@@ -19,7 +20,7 @@ export class QuickDecisionRepository {
   }
 
   private async getDecisionFromSharePoint(listTitleOrUrl: string): Promise<IQuickDecision[]> {
-    const response = await this._spHttpClient.get(`${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(listTitleOrUrl)}')/items?$top=1`, SPHttpClient.configurations.v1);
+    const response = await this._spHttpClient.get(`${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(listTitleOrUrl)}')/items?$top=1`, SPHttpClient.configurations.v1);
     if (!response.ok) throw new Error(`Failed: ${response.status}`);
     const data = await response.json();
     return (data.value || []).map((item: any) => ({ id: String(item.Id), question: item.Question || '¿Qué prefieres?', options: item.OptionsJson ? JSON.parse(item.OptionsJson) : [], context: item.Context || undefined, expiresAt: item.ExpiresAt || undefined }));

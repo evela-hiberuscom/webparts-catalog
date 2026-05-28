@@ -7,6 +7,7 @@ import type {
   PortalMapDataSourceType,
   PortalNodeType
 } from '../models/portalMapModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface IRecordLike {
   [key: string]: unknown;
@@ -198,7 +199,7 @@ export function buildPortalMapItemsEndpoint(webUrl: string, listTitleOrUrl: stri
   }
 
   return (
-    `${webUrl}/_api/web/lists/getByTitle('${encodeURIComponent(value)}')/items?` +
+    `${webUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(value)}')/items?` +
     `${select}&${orderBy}&${top}`
   );
 }

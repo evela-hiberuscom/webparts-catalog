@@ -11,6 +11,7 @@ import {
   normalizeTemplateType,
   resolveAbsoluteUrl
 } from '../utils/templatesLibraryUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ITemplateListItem {
   Id: number;
@@ -37,7 +38,7 @@ export class TemplatesLibraryRepository implements ITemplatesRepository {
     const maxItems = clampMaxItems(configuration.maxItems);
     const filter = configuration.sourceKind === 'library' ? '&$filter=FSObjType eq 0' : '';
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.listTitleOrUrl)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.listTitleOrUrl)}')/items` +
       `?$select=Id,Title,FileLeafRef,FileRef,EncodedAbsUrl,Modified,Category,TemplateType,File_x0020_Type,Featured,FeaturedTemplate,FSObjType` +
       `${filter}&$orderby=Modified desc&$top=${Math.max(maxItems * 2, 24)}`;
 

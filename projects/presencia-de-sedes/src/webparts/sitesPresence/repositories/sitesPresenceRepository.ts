@@ -1,5 +1,6 @@
 import { SPHttpClient } from '@microsoft/sp-http';
 import type { FetchLike, ISitePresence, ISitesPresenceConfiguration } from '../models/sitesPresenceModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 function normalizeUrl(listTitleOrUrl: string, webAbsoluteUrl: string): string {
   if (!listTitleOrUrl) {
@@ -51,7 +52,7 @@ export class SitesPresenceRepository {
     const isUrl = normalizedUrl.startsWith('/');
     const listUrl = isUrl
       ? `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`
-      : `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
+      : `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(normalizedUrl)}')`;
     const response = await this._spHttpClient.get(`${listUrl}/items?$top=${maxItems}`, SPHttpClient.configurations.v1);
     if (!response.ok) {
       throw new Error(`Failed: ${response.status}`);

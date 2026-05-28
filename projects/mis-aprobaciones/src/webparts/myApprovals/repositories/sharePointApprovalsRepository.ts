@@ -1,5 +1,6 @@
 import { IApprovalLoadResult, IApprovalRecord, IApprovalsSourceConfig } from '../models/myApprovalsModels';
 import { createFallbackApprovals, normalizeApprovalRecord, normalizeListTitleOrUrl } from '../utils/myApprovalsUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface ISharePointHttpClientLike {
   get(url: string, configuration: unknown, options?: Record<string, unknown>): Promise<{
@@ -25,7 +26,7 @@ export class SharePointApprovalsRepository {
       };
     }
 
-    const apiUrl = `${this.siteUrl.replace(/\/$/, '')}/_api/web/lists/getbytitle('${encodeURIComponent(target.listTitle)}')/items?$select=Id,Title,Requester,Source,Status,DueDate,Created,OpenUrl,Category,Details&$top=${Math.max(1, config.maxItems) * 2}`;
+    const apiUrl = `${this.siteUrl.replace(/\/$/, '')}/_api/web/lists/getbytitle('${escapeODataListTitle(target.listTitle)}')/items?$select=Id,Title,Requester,Source,Status,DueDate,Created,OpenUrl,Category,Details&$top=${Math.max(1, config.maxItems) * 2}`;
     const response = await this.spHttpClient.get(apiUrl, undefined, {
       headers: {
         Accept: 'application/json;odata=nometadata'

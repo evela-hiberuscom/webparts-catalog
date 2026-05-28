@@ -8,6 +8,7 @@ import {
   ProgressIndicator,
   Label
 } from '@fluentui/react';
+import { openSafeExternalLink } from '@paquete/spfx-common';
 import type { IGoalItem } from '../models/goalModels';
 
 export interface IAreaGoalsProps {
@@ -67,9 +68,7 @@ function getStatusLabel(status: IGoalItem['status']): string {
 
 function GoalCard(props: { goal: IGoalItem }): React.ReactElement {
   const handleOpenDetail = (): void => {
-    if (props.goal.detailUrl) {
-      window.open(props.goal.detailUrl, '_blank');
-    }
+    openSafeExternalLink(props.goal.detailUrl);
   };
 
   const statusColor = getStatusColor(props.goal.status);

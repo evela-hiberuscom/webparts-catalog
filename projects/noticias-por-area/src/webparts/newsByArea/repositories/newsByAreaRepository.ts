@@ -9,6 +9,7 @@ import {
   parseBannerImageUrl,
   resolveAbsoluteUrl
 } from '../utils/newsByAreaUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointTaxTerm {
   Term?: string;
@@ -34,7 +35,7 @@ export class NewsByAreaRepository implements INewsByAreaRepository {
 
   public async getNews(configuration: INewsByAreaConfiguration): Promise<INewsByAreaItem[]> {
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.sitePagesListTitle)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.sitePagesListTitle)}')/items` +
       `?$select=Id,Title,Description,FirstPublishedDate,FileRef,BannerImageUrl,PromotedState,Category,TaxCatchAll/Term` +
       `&$expand=TaxCatchAll&$filter=PromotedState eq 2&$orderby=FirstPublishedDate desc&$top=${Math.max(configuration.maxItems * 4, 12)}`;
 

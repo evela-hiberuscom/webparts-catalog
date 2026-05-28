@@ -4,6 +4,7 @@ import type {
   ITaskItem,
   ITasksConfiguration
 } from '../models/taskModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface ITasksRepositoryOptions {
   fetchClient: FetchLike;
@@ -41,7 +42,8 @@ function normalizeListUrl(listTitleOrUrl: string, webAbsoluteUrl: string): strin
         }
         return path;
       }
-    } catch {
+    } catch (error) {
+      console.warn('[TasksRepository] Invalid SharePoint list URL; falling back to title lookup.', error);
       return trimmed;
     }
   }
@@ -133,7 +135,7 @@ export class TasksRepository {
     if (isUrl) {
       listUrl = `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`;
     } else {
-      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
+      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(normalizedUrl)}')`;
     }
 
     const selectFields = 'Id,Title,Source,Status,DueDate,Priority,ItemLink';
@@ -185,9 +187,10 @@ export class TasksRepository {
       if (!sameOrigin && !jsonUrl.startsWith('/')) {
         throw new Error('JSON URL must be same-origin or relative path');
       }
-    } catch {
+    } catch (error) {
       if (!jsonUrl.startsWith('/')) {
-        throw new Error('Invalid JSON URL format');
+        const message = error instanceof Error ? error.message : 'Unknown URL parse error';
+        throw new Error(`Invalid JSON URL format: ${message}`);
       }
     }
 

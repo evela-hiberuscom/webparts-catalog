@@ -165,6 +165,7 @@ export class SiteMetricsRepository {
       this.checkThrottled(response);
 
       if (!response.ok) {
+        console.warn(`[SiteMetricsRepository] Site usage endpoint returned HTTP ${response.status} for ${siteUrl}.`);
         return { storageUsedBytes: undefined, storageQuotaBytes: undefined };
       }
 
@@ -175,7 +176,8 @@ export class SiteMetricsRepository {
         storageUsedBytes: typeof usage?.Storage === 'number' ? usage.Storage : undefined,
         storageQuotaBytes: undefined
       };
-    } catch {
+    } catch (error) {
+      console.warn('[SiteMetricsRepository] Unable to read site usage.', error);
       return { storageUsedBytes: undefined, storageQuotaBytes: undefined };
     }
   }
@@ -187,7 +189,8 @@ export class SiteMetricsRepository {
   private toAbsoluteUrl(siteUrl: string, candidate: string): string {
     try {
       return new URL(candidate, this.normalize(siteUrl)).toString();
-    } catch {
+    } catch (error) {
+      console.warn('[SiteMetricsRepository] Unable to convert server-relative URL to absolute URL.', error);
       return candidate;
     }
   }

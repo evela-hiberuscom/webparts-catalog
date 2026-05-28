@@ -1,0 +1,50 @@
+name: Supply chain
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '17 3 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supply-chain-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-and-sbom:
+    name: npm audit and SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: Run SCA and SBOM on affected SPFx projects
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            npm run ci:projects -- --all --audit --sbom --skip-build
+          else
+            npm run ci:projects -- --base "$BASE_SHA" --head "$HEAD_SHA" --audit --sbom --skip-build
+          fi
+
+      - name: Upload SBOM artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cyclonedx-sbom
+          path: artifacts/sbom/*.cdx.json
+          if-no-files-found: ignore

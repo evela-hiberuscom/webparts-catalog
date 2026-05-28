@@ -7,6 +7,7 @@ import {
   PrimaryButton,
   Label
 } from '@fluentui/react';
+import { openSafeExternalLink } from '@paquete/spfx-common';
 import type { ICampaignItem } from '../models/campaignModels';
 
 export interface IInternalCampaignPanelProps {
@@ -48,9 +49,7 @@ function ErrorState(props: { message: string }): React.ReactElement {
 
 function CampaignCard(props: { campaign: ICampaignItem }): React.ReactElement {
   const handleCtaClick = (): void => {
-    if (props.campaign.ctaUrl) {
-      window.open(props.campaign.ctaUrl, '_blank');
-    }
+    openSafeExternalLink(props.campaign.ctaUrl);
   };
 
   const backgroundColor = getCategoryColor(props.campaign.category);

@@ -1,5 +1,6 @@
 import type { SPHttpClient, SPHttpClientConfiguration } from '@microsoft/sp-http';
 import type { FetchLike, IAzEntry, ICorporateAzConfiguration } from '../models/corporateAzModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export class CorporateAzRepository {
   private _fetchClient: FetchLike;
@@ -27,7 +28,7 @@ export class CorporateAzRepository {
 
   private async getEntriesFromSharePoint(listTitleOrUrl: string, maxItems: number): Promise<IAzEntry[]> {
     const response = await this._spHttpClient.get(
-      `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(listTitleOrUrl)}')/items?$top=${maxItems}`,
+      `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(listTitleOrUrl)}')/items?$top=${maxItems}`,
       this._spHttpClientConfiguration
     );
     if (!response.ok) {

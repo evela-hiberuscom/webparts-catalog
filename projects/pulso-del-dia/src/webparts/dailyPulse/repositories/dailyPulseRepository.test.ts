@@ -103,6 +103,11 @@ describe('DailyPulseRepository', () => {
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
+        json: async () => ({ value: [] })
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
         json: async () => ({
           FormDigestValue: 'digest-token'
         })
@@ -134,13 +139,22 @@ describe('DailyPulseRepository', () => {
 
     expect(fetcher).toHaveBeenNthCalledWith(
       1,
+      expect.stringContaining("_api/web/lists/getbytitle('DailyPulse')/items?$top=1&$select=Id,DailyPulseSubmittedAt"),
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          Accept: 'application/json'
+        })
+      })
+    );
+    expect(fetcher).toHaveBeenNthCalledWith(
+      2,
       'https://contoso.sharepoint.com/sites/intranet/_api/contextinfo',
       expect.objectContaining({
         method: 'POST'
       })
     );
     expect(fetcher).toHaveBeenNthCalledWith(
-      2,
+      3,
       "https://contoso.sharepoint.com/sites/intranet/_api/web/lists/getbytitle('DailyPulse')/items",
       expect.objectContaining({
         method: 'POST',
@@ -151,7 +165,7 @@ describe('DailyPulseRepository', () => {
       })
     );
     expect(result.persistedLocally).toBe(false);
-    expect(result.notes[0]).toContain('lista SharePoint');
+    expect(result.notes[0]).toBe('La respuesta se registró en la lista SharePoint.');
   });
 
   it('fails when the configured API endpoint rejects the submission', async () => {
@@ -183,6 +197,11 @@ describe('DailyPulseRepository', () => {
   it('does not cache a remote response locally when the submission fails', async () => {
     const fetcher = jest
       .fn()
+      .mockResolvedValueOnce({
+        ok: true,
+        status: 200,
+        json: async () => ({ value: [] })
+      })
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
@@ -230,9 +249,12 @@ describe('DailyPulseRepository', () => {
     expect(first.submitted.optionId).toBe('good');
     expect(second.persistedLocally).toBe(false);
     expect(second.notes[0]).toContain('Ya existe una respuesta para hoy.');
+    const storedPayload = JSON.parse(window.localStorage.getItem(window.localStorage.key(0) || '') || '{}');
+    expect(storedPayload.expiresAt).toEqual(expect.any(String));
+    expect(storedPayload.answer.submittedBy).toBe('');
   });
 
-  it('writes SharePointList responses remotely and blocks same-day duplicates from the list', async () => {
+  it('writes SharePointList responses remotely without local cache and blocks same-day duplicates from the list', async () => {
     const fetcher = jest
       .fn()
       .mockResolvedValueOnce({
@@ -276,8 +298,9 @@ describe('DailyPulseRepository', () => {
     const first = await repository.submitAnswer(request, prompt, 'good');
     await expect(repository.submitAnswer(request, prompt, 'great')).rejects.toThrow('Ya existe una respuesta para hoy.');
 
-    expect(first.persistedLocally).toBe(true);
-    expect(first.notes[0]).toContain('lista SharePoint');
+    expect(first.persistedLocally).toBe(false);
+    expect(first.notes[0]).toBe('La respuesta se registró en la lista SharePoint.');
+    expect(repository.readStoredAnswer(prompt.id, request)).toBeUndefined();
     expect(fetcher).toHaveBeenCalledWith(
       expect.stringContaining("_api/web/lists/getbytitle('DailyPulse')/items"),
       expect.objectContaining({
@@ -287,5 +310,30 @@ describe('DailyPulseRepository', () => {
         })
       })
     );
+  });
+
+  it('treats legacy local answers without TTL as expired', async () => {
+    const repository = new DailyPulseRepository();
+    const request = buildRequest();
+    const prompt = {
+      id: 'daily-pulse',
+      prompt: '¿Cómo vas hoy?',
+      options: [{ id: 'good', label: 'Bien' }]
+    };
+    window.localStorage.setItem(
+      'daily-pulse|https://contoso.sharepoint.com/sites/intranet|daily-pulse|i:0#.f|membership|ada.lovelace@contoso.com',
+      JSON.stringify({
+        promptId: 'daily-pulse',
+        optionId: 'good',
+        optionLabel: 'Bien',
+        submittedBy: 'Ada Lovelace',
+        submittedAt: new Date().toISOString()
+      })
+    );
+
+    const result = await repository.submitAnswer(request, prompt, 'good');
+
+    expect(result.persistedLocally).toBe(true);
+    expect(result.submitted.optionId).toBe('good');
   });
 });

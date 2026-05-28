@@ -10,6 +10,7 @@ import {
   resolveAbsoluteUrl,
   splitAliases
 } from '../utils/corporateGlossaryUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointGlossaryItem {
   Id: number;
@@ -37,7 +38,7 @@ export class CorporateGlossaryRepository implements ICorporateGlossaryRepository
   public async getGlossary(configuration: ICorporateGlossaryConfiguration): Promise<ICorporateGlossaryItem[]> {
     const top = clampMaxItems(configuration.maxItems);
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.listTitle)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.listTitle)}')/items` +
       `?$select=Id,Title,Definition,Meaning,Category,Type,Aliases,Synonyms,RelatedUrl,RelatedLink,UpdatedAt,Modified,Featured&$top=${Math.max(top * 2, 50)}`;
 
     const response = await this.context.spHttpClient.get(endpoint, this.context.spHttpClientConfiguration);

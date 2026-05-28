@@ -41,6 +41,61 @@ interface ISharePointListItem {
   SubmittedByDisplayName?: string;
 }
 
+interface IStoredPollSubmissionEnvelope {
+  version: 1;
+  expiresAt: string;
+  submission: IPollExistingSubmission;
+}
+
+const STATIC_CONFIG_SUBMISSION_TTL_DAYS = 30;
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+
+function createStaticSubmissionEnvelope(submission: IPollExistingSubmission): IStoredPollSubmissionEnvelope {
+  return {
+    version: 1,
+    expiresAt: new Date(Date.now() + STATIC_CONFIG_SUBMISSION_TTL_DAYS * MILLISECONDS_PER_DAY).toISOString(),
+    submission
+  };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function parseStoredSubmission(rawValue: string, storageKey: string, storage: IKeyValueStorageLike): IPollExistingSubmission | undefined {
+  try {
+    const parsed = JSON.parse(rawValue) as unknown;
+    if (!isRecord(parsed) || parsed.version !== 1 || typeof parsed.expiresAt !== 'string' || !isRecord(parsed.submission)) {
+      storage.removeItem?.(storageKey);
+      return undefined;
+    }
+
+    if (Date.parse(parsed.expiresAt) <= Date.now()) {
+      storage.removeItem?.(storageKey);
+      return undefined;
+    }
+
+    const selectedOption = trimToUndefined(
+      typeof parsed.submission.selectedOption === 'string' ? parsed.submission.selectedOption : undefined
+    );
+    if (!selectedOption) {
+      storage.removeItem?.(storageKey);
+      return undefined;
+    }
+
+    return {
+      selectedOption,
+      submittedAt: trimToUndefined(
+        typeof parsed.submission.submittedAt === 'string' ? parsed.submission.submittedAt : undefined
+      )
+    };
+  } catch (error) {
+    console.warn('[PollRepository] Ignoring invalid static survey localStorage payload.', error);
+    storage.removeItem?.(storageKey);
+    return undefined;
+  }
+}
+
 export class PollRepository {
   private readonly fetchClient: FetchLike;
   private readonly spHttpClient: ISharePointHttpClientLike;
@@ -250,20 +305,12 @@ export class PollRepository {
       options,
       source: 'StaticConfig'
     };
-    const storedAnswer = this.storage.getItem(createStorageKey(question.id, user));
+    const storageKey = createStorageKey(question.id, user);
+    const storedAnswer = this.storage.getItem(storageKey);
     let existingSubmission: IPollExistingSubmission | undefined;
 
     if (storedAnswer) {
-      try {
-        const parsedAnswer = JSON.parse(storedAnswer) as IPollExistingSubmission;
-        existingSubmission = {
-          selectedOption: parsedAnswer.selectedOption,
-          submittedAt: parsedAnswer.submittedAt,
-          submittedBy: parsedAnswer.submittedBy
-        };
-      } catch {
-        existingSubmission = undefined;
-      }
+      existingSubmission = parseStoredSubmission(storedAnswer, storageKey, this.storage);
     }
 
     return {
@@ -283,13 +330,12 @@ export class PollRepository {
     const submittedAt = new Date().toISOString();
     const response: IPollExistingSubmission = {
       selectedOption: submission.selectedOption,
-      submittedAt,
-      submittedBy: trimToUndefined(user.displayName) || trimToUndefined(user.email)
+      submittedAt
     };
 
     this.storage.setItem(
       createStorageKey(question.id, user),
-      JSON.stringify(response)
+      JSON.stringify(createStaticSubmissionEnvelope(response))
     );
 
     return {

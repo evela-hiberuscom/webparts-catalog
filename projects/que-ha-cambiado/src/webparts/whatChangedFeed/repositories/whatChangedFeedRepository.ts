@@ -9,6 +9,7 @@ import {
   resolveAbsoluteUrl,
   sanitizeText
 } from '../utils/whatChangedFeedUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointChangeItem {
   Id: number;
@@ -36,7 +37,7 @@ export class WhatChangedFeedRepository implements IWhatChangedFeedRepository {
     const isLibrary = configuration.sourceKind === 'library';
     const filter = isLibrary ? '&$filter=FSObjType eq 0' : '';
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.listTitleOrUrl)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.listTitleOrUrl)}')/items` +
       `?$select=Id,Title,Description,Modified,FileRef,EncodedAbsUrl,ChangeType,ContentType,File_x0020_Type,FSObjType,PromotedState` +
       `${filter}&$orderby=Modified desc&$top=${Math.max(maxItems * 3, 12)}`;
 

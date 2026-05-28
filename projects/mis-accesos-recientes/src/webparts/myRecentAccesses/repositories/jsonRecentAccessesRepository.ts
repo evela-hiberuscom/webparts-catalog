@@ -1,11 +1,20 @@
 import type { IRecentAccessesRepository } from './IRecentAccessesRepository';
 import { normalizeRecentResources } from '../utils/recentAccesses.mappers';
 import type { IRecentResource } from '../models/recentAccesses.types';
+import { resolveSameOriginUrl } from '@paquete/spfx-common';
 
 type RecentItemsPayload = {
   items?: unknown[];
   value?: unknown[];
 };
+
+function getRuntimeBaseUrl(): string {
+  if (typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null') {
+    return `${window.location.origin}/`;
+  }
+
+  return 'https://contoso.sharepoint.com/';
+}
 
 export class JsonRecentAccessesRepository implements IRecentAccessesRepository {
   public readonly sourceLabel = 'JSON feed';
@@ -15,7 +24,7 @@ export class JsonRecentAccessesRepository implements IRecentAccessesRepository {
   private readonly _url: string;
 
   public constructor(url: string) {
-    this._url = url;
+    this._url = resolveSameOriginUrl(url, getRuntimeBaseUrl());
   }
 
   public async load(): Promise<IRecentResource[]> {

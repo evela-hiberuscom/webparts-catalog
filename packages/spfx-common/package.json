@@ -3,11 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
     "./theme": "./src/theme/index.js",
-    "./utils": "./src/utils/index.js",
+    "./utils": {
+      "types": "./src/utils/index.d.ts",
+      "default": "./src/utils/index.js"
+    },
     "./components": "./src/components/index.js",
     "./testing": "./src/testing/index.js"
+  },
+  "typesVersions": {
+    "*": {
+      "utils": [
+        "src/utils/index.d.ts"
+      ],
+      "*": [
+        "src/index.d.ts"
+      ]
+    }
   }
 }

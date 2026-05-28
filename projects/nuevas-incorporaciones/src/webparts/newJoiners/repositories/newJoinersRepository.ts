@@ -4,6 +4,7 @@ import type {
   IJoiner,
   INewJoinersConfiguration
 } from '../models/joinerModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface INewJoinersRepositoryOptions {
   fetchClient: FetchLike;
@@ -86,7 +87,7 @@ export class NewJoinersRepository {
     if (isUrl) {
       listUrl = `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`;
     } else {
-      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
+      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(normalizedUrl)}')`;
     }
 
     const selectFields = 'Id,Title,JobTitle,Department,PhotoUrl,StartDate,ProfileUrl,WelcomeMessage';

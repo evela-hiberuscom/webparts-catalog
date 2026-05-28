@@ -24,6 +24,15 @@ interface IFetchResponseLike {
 
 type Fetcher = (input: string, init?: RequestInit) => Promise<IFetchResponseLike>;
 
+interface IStoredDailyPulseAnswerEnvelope {
+  version: 1;
+  expiresAt: string;
+  answer: IDailyPulseAnswer;
+}
+
+const LOCAL_ANSWER_TTL_DAYS = 30;
+const MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
+
 function getCurrentDateKey(now: Date = new Date()): string {
   return now.toISOString().slice(0, 10);
 }
@@ -36,6 +45,38 @@ function createStoredAnswerKey(request: IDailyPulseRequest, promptId: string): s
   const webUrl = request.webUrl || (typeof window !== 'undefined' ? window.location.origin : 'https://contoso.sharepoint.com');
   const userKey = request.userLoginName?.trim() || request.userDisplayName || 'anonymous';
   return createStorageKey(webUrl, promptId, userKey);
+}
+
+function shouldPersistLocally(request: IDailyPulseRequest): boolean {
+  return request.sourceType === 'StaticConfig' || request.sourceType === 'JsonUrl';
+}
+
+function createStoredAnswerEnvelope(answer: IDailyPulseAnswer): IStoredDailyPulseAnswerEnvelope {
+  return {
+    version: 1,
+    expiresAt: new Date(Date.now() + LOCAL_ANSWER_TTL_DAYS * MILLISECONDS_PER_DAY).toISOString(),
+    answer: {
+      ...answer,
+      submittedBy: ''
+    }
+  };
+}
+
+function coerceStoredAnswer(rawAnswer: Record<string, unknown>, promptId: string, request: IDailyPulseRequest): IDailyPulseAnswer | undefined {
+  const optionId = typeof rawAnswer.optionId === 'string' ? rawAnswer.optionId : '';
+  const optionLabel = typeof rawAnswer.optionLabel === 'string' ? rawAnswer.optionLabel : '';
+  const submittedAt = typeof rawAnswer.submittedAt === 'string' ? rawAnswer.submittedAt : '';
+  if (!optionId || !submittedAt) {
+    return undefined;
+  }
+
+  return {
+    promptId: typeof rawAnswer.promptId === 'string' ? rawAnswer.promptId : promptId,
+    optionId,
+    optionLabel,
+    submittedBy: typeof rawAnswer.submittedBy === 'string' ? rawAnswer.submittedBy : request.userDisplayName,
+    submittedAt
+  };
 }
 
 function readStoredAnswer(promptId: string, request: IDailyPulseRequest): IDailyPulseAnswer | undefined {
@@ -51,18 +92,26 @@ function readStoredAnswer(promptId: string, request: IDailyPulseRequest): IDaily
 
   try {
     const parsed = JSON.parse(raw) as unknown;
-    if (!isRecord(parsed)) {
+    if (!isRecord(parsed) || parsed.version !== 1 || typeof parsed.expiresAt !== 'string' || !isRecord(parsed.answer)) {
+      window.localStorage.removeItem(key);
       return undefined;
     }
 
-    return {
-      promptId: typeof parsed.promptId === 'string' ? parsed.promptId : promptId,
-      optionId: typeof parsed.optionId === 'string' ? parsed.optionId : '',
-      optionLabel: typeof parsed.optionLabel === 'string' ? parsed.optionLabel : '',
-      submittedBy: typeof parsed.submittedBy === 'string' ? parsed.submittedBy : request.userDisplayName,
-      submittedAt: typeof parsed.submittedAt === 'string' ? parsed.submittedAt : new Date().toISOString()
-    };
-  } catch {
+    if (Date.parse(parsed.expiresAt) <= Date.now()) {
+      window.localStorage.removeItem(key);
+      return undefined;
+    }
+
+    const answer = coerceStoredAnswer(parsed.answer, promptId, request);
+    if (!answer) {
+      window.localStorage.removeItem(key);
+      return undefined;
+    }
+
+    return answer;
+  } catch (error) {
+    console.warn('[DailyPulseRepository] Ignoring invalid localStorage answer payload.', error);
+    window.localStorage.removeItem(key);
     return undefined;
   }
 }
@@ -73,7 +122,7 @@ function persistStoredAnswer(request: IDailyPulseRequest, answer: IDailyPulseAns
   }
 
   const key = createStoredAnswerKey(request, answer.promptId);
-  window.localStorage.setItem(key, JSON.stringify(answer));
+  window.localStorage.setItem(key, JSON.stringify(createStoredAnswerEnvelope(answer)));
 }
 
 function clearStoredAnswer(request: IDailyPulseRequest, promptId: string): void {
@@ -412,7 +461,7 @@ export class DailyPulseRepository {
       throw new Error('Selected option is not part of the current prompt');
     }
 
-    const storedAnswer = readStoredAnswer(prompt.id, request);
+    const storedAnswer = shouldPersistLocally(request) ? readStoredAnswer(prompt.id, request) : undefined;
     if (request.oneResponsePerDay && storedAnswer && storedAnswer.submittedAt.slice(0, 10) === getCurrentDateKey()) {
       return {
         submitted: storedAnswer,
@@ -437,7 +486,6 @@ export class DailyPulseRepository {
         }
 
         await submitToSharePointList(this.fetcher, request, prompt, submitted);
-        persistStoredAnswer(request, submitted);
       } catch (error) {
         clearStoredAnswer(request, submitted.promptId);
         throw error;
@@ -445,9 +493,9 @@ export class DailyPulseRepository {
 
       return {
         submitted,
-        persistedLocally: true,
+        persistedLocally: false,
         sourceLabel: buildSourceLabel(request),
-        notes: ['La respuesta se registró en la lista SharePoint y se cacheó localmente.']
+        notes: ['La respuesta se registró en la lista SharePoint.']
       };
     }
 
@@ -455,7 +503,6 @@ export class DailyPulseRepository {
       const endpoint = resolveSameOriginUrl(request.apiEndpointUrl, request.webUrl);
       try {
         await postRemoteAnswer(this.fetcher, endpoint, submitted);
-        persistStoredAnswer(request, submitted);
       } catch (error) {
         clearStoredAnswer(request, submitted.promptId);
         throw error;
@@ -463,9 +510,9 @@ export class DailyPulseRepository {
 
       return {
         submitted,
-        persistedLocally: true,
+        persistedLocally: false,
         sourceLabel: buildSourceLabel(request),
-        notes: ['La respuesta se registró en el endpoint configurado y se cacheó localmente.']
+        notes: ['La respuesta se registró en el endpoint configurado.']
       };
     }
 

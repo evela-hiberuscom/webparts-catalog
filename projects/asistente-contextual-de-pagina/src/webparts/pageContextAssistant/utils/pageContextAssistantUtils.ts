@@ -113,7 +113,8 @@ export function resolveCurrentContextKey(webUrl: string, pageTitle?: string, exp
     if (lastSegment) {
       return decodeURIComponent(lastSegment.replace(/\.aspx$/i, ""));
     }
-  } catch {
+  } catch (error) {
+    console.warn("[PageContextAssistant] Unable to derive context key from web URL.", error);
     return "generic";
   }
 
@@ -221,7 +222,8 @@ export function isSameOriginRelativeUrl(value: string, webUrl: string): boolean 
   try {
     const resolved = new URL(trimmed, webUrl);
     return resolved.origin === new URL(webUrl).origin;
-  } catch {
+  } catch (error) {
+    console.warn("[PageContextAssistant] Invalid related link URL was rejected.", error);
     return false;
   }
 }

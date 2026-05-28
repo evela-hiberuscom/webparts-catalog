@@ -7,6 +7,7 @@ import {
   Stack,
   Label
 } from '@fluentui/react';
+import { openSafeExternalLink } from '@paquete/spfx-common';
 import type { ITaskItem } from '../models/taskModels';
 
 export interface IMyTasksAndPendingProps {
@@ -66,7 +67,7 @@ function getGroupColor(group: ITaskItem['group']): string {
 function TaskItemView(props: { task: ITaskItem }): React.ReactElement {
   const handleOpen = (): void => {
     if (props.task.openUrl) {
-      window.open(props.task.openUrl, '_blank');
+      openSafeExternalLink(props.task.openUrl);
     }
   };
 
@@ -84,9 +85,9 @@ function TaskItemView(props: { task: ITaskItem }): React.ReactElement {
       }}
       onClick={handleOpen}
     >
-      <Stack tokens={{ childrenGap: 8 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         <Stack horizontal horizontalAlign="space-between" verticalAlign="center">
-          <Text styles={{ root: { fontWeight: '600', fontSize: '14px' } }}>
+          <Text style={{ fontWeight: 600, fontSize: '14px' }}>
             {props.task.title}
           </Text>
           <Label styles={{ root: { fontSize: '11px', color: 'var(--neutralSecondary)' } }}>
@@ -94,25 +95,25 @@ function TaskItemView(props: { task: ITaskItem }): React.ReactElement {
           </Label>
         </Stack>
 
-        <Stack horizontal tokens={{ childrenGap: 8 }}>
+        <div style={{ display: 'flex', gap: '8px' }}>
           {priorityBadge && (
-            <Text styles={{ root: { fontSize: '11px' } }}>
+            <Text style={{ fontSize: '11px' }}>
               {priorityBadge}
             </Text>
           )}
           {props.task.dueDate && (
-            <Text styles={{ root: { fontSize: '11px', color: groupColor } }}>
+            <Text style={{ fontSize: '11px', color: groupColor }}>
               📅 {new Date(props.task.dueDate).toLocaleDateString()}
             </Text>
           )}
-        </Stack>
+        </div>
 
         {props.task.openUrl && (
           <Link onClick={handleOpen} styles={{ root: { cursor: 'pointer' } }}>
             Abrir tarea
           </Link>
         )}
-      </Stack>
+      </div>
     </div>
   );
 }
@@ -139,14 +140,14 @@ function TasksList(props: { tasks: ITaskItem[] }): React.ReactElement {
         if (tasks.length === 0) return undefined;
         return (
           <div key={group.key} style={{ marginBottom: '16px' }}>
-            <Text styles={{ root: { fontWeight: '600', fontSize: '14px', marginBottom: '8px', display: 'block' } }}>
+            <Text style={{ fontWeight: 600, fontSize: '14px', marginBottom: '8px', display: 'block' }}>
               {group.label} ({tasks.length})
             </Text>
-            <Stack tokens={{ childrenGap: 8 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {tasks.map((task) => (
                 <TaskItemView key={task.id} task={task} />
               ))}
-            </Stack>
+            </div>
           </div>
         );
       })}

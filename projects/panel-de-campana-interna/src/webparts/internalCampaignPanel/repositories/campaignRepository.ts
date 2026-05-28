@@ -4,6 +4,7 @@ import type {
   ICampaignItem,
   IInternalCampaignConfiguration
 } from '../models/campaignModels';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 export interface ICampaignRepositoryOptions {
   fetchClient: FetchLike;
@@ -103,7 +104,7 @@ export class CampaignRepository {
     if (isUrl) {
       listUrl = `${this._webAbsoluteUrl}/_api/web/GetList(@listUrl)?@listUrl='${encodeURIComponent(normalizedUrl)}'`;
     } else {
-      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(normalizedUrl)}')`;
+      listUrl = `${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(normalizedUrl)}')`;
     }
 
     const selectFields = 'Id,Title,Claim,Description,ImageUrl,CtaText,CtaUrl,StartDate,EndDate,Priority,Category';

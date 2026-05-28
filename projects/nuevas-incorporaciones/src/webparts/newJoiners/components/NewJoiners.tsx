@@ -7,6 +7,7 @@ import {
   Persona,
   PersonaSize
 } from '@fluentui/react';
+import { openSafeExternalLink } from '@paquete/spfx-common';
 import type { IJoiner } from '../models/joinerModels';
 
 export interface INewJoinersProps {
@@ -48,9 +49,7 @@ function ErrorState(props: { message: string }): React.ReactElement {
 
 function JoinerCard(props: { joiner: IJoiner }): React.ReactElement {
   const handleOpenProfile = (): void => {
-    if (props.joiner.profileUrl) {
-      window.open(props.joiner.profileUrl, '_blank');
-    }
+    openSafeExternalLink(props.joiner.profileUrl);
   };
 
   return (

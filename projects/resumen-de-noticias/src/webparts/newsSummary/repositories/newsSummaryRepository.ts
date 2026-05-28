@@ -5,6 +5,7 @@ import type {
   INewsSummaryRepository
 } from '../models/newsSummaryModels';
 import { clampMaxItems, parseBannerImageUrl, resolveAbsoluteUrl } from '../utils/newsSummaryUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointNewsItem {
   Id: number;
@@ -25,7 +26,7 @@ export class NewsSummaryRepository implements INewsSummaryRepository {
   public async getNews(configuration: INewsSummaryConfiguration): Promise<INewsSummaryItem[]> {
     const maxItems = clampMaxItems(configuration.maxItems);
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.sitePagesListTitle)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.sitePagesListTitle)}')/items` +
       `?$select=Id,Title,Description,FirstPublishedDate,FileRef,BannerImageUrl,PromotedState` +
       `&$filter=PromotedState eq 2&$orderby=FirstPublishedDate desc&$top=${Math.max(maxItems * 2, 6)}`;
 

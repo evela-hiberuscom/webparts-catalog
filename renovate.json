@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "enabledManagers": [
+    "npm"
+  ],
+  "rangeStrategy": "pin",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "before 4am on monday"
+    ]
+  },
+  "packageRules": [
+    {
+      "description": "Keep the SPFx toolchain aligned across all generated webparts.",
+      "matchPackagePatterns": [
+        "^@microsoft/sp-",
+        "^@microsoft/eslint-",
+        "^@rushstack/heft$",
+        "^@rushstack/eslint-config$"
+      ],
+      "groupName": "SPFx toolchain",
+      "automerge": false
+    },
+    {
+      "description": "React and Fluent UI must remain compatible with the SPFx version.",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "@fluentui/react"
+      ],
+      "groupName": "SPFx React and Fluent UI surface",
+      "automerge": false
+    }
+  ],
+  "constraints": {
+    "node": ">=22.14.0 <23.0.0"
+  }
+}

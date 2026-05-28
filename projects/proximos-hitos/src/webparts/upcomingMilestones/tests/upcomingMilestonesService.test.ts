@@ -9,24 +9,18 @@ describe('upcomingMilestonesService', () => {
   const configuration: IUpcomingMilestonesConfiguration = {
     title: 'Próximos hitos',
     description: 'Timeline',
-    dataSourceType: 'StaticConfig',
     listTitleOrUrl: 'MilestonesList',
     maxItems: 2,
-    viewMode: 'timeline',
-    webUrl: 'https://contoso.sharepoint.com/sites/comms',
-    localeName: 'es-ES'
+    viewMode: 'timeline'
   };
 
   it('sorts milestones by date and leaves null dates last', async () => {
     const service = new UpcomingMilestonesService({
-      load: jest.fn(async () => ({
-        warnings: [],
-        items: [
-          { id: '3', title: 'Sin fecha', type: 'Ops' },
-          { id: '2', title: 'Segundo', date: '2026-04-11T09:00:00.000Z', type: 'Ops' },
-          { id: '1', title: 'Primero', date: '2026-04-09T09:00:00.000Z', type: 'Ops' }
-        ]
-      }))
+      getMilestones: jest.fn(async () => [
+        { id: '3', title: 'Sin fecha', type: 'Ops' },
+        { id: '2', title: 'Segundo', date: '2026-04-11T09:00:00.000Z', type: 'Ops', detailUrl: 'https://contoso.sharepoint.com/sites/comms/2' },
+        { id: '1', title: 'Primero', date: '2026-04-09T09:00:00.000Z', type: 'Ops', detailUrl: 'https://contoso.sharepoint.com/sites/comms/1' }
+      ])
     });
 
     const result = await service.load(configuration);
@@ -39,12 +33,9 @@ describe('upcomingMilestonesService', () => {
 
   it('returns partialData when a milestone misses its date', async () => {
     const service = new UpcomingMilestonesService({
-      load: jest.fn(async () => ({
-        warnings: [],
-        items: [
-          { id: '1', title: 'Sin fecha', type: 'Ops', detailUrl: 'https://contoso.sharepoint.com' }
-        ]
-      }))
+      getMilestones: jest.fn(async () => [
+        { id: '1', title: 'Sin fecha', type: 'Ops', detailUrl: 'https://contoso.sharepoint.com' }
+      ])
     });
 
     const result = await service.load(configuration);

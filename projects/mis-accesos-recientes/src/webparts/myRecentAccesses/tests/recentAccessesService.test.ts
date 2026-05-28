@@ -16,7 +16,7 @@ describe('loadRecentAccesses', () => {
     expect(result.availableTypes).toEqual(expect.arrayContaining(['document', 'page', 'app']));
   });
 
-  it('loads a JSON feed when configured', async () => {
+  it('loads a same-origin JSON feed when configured', async () => {
     const globalWithFetch = globalThis as typeof globalThis & {
       fetch?: jest.Mock;
     };
@@ -46,7 +46,7 @@ describe('loadRecentAccesses', () => {
       const result = await loadRecentAccesses({
         description: 'Mis accesos recientes',
         dataSourceMode: 'JsonUrl',
-        recentItemsJsonUrl: 'https://example.org/recent.json',
+        recentItemsJsonUrl: '/recent.json',
         maxItems: 10,
         resourceTypeFilter: ''
       });
@@ -67,5 +67,17 @@ describe('loadRecentAccesses', () => {
         });
       }
     }
+  });
+
+  it('rejects cross-origin JSON feeds', async () => {
+    await expect(
+      loadRecentAccesses({
+        description: 'Mis accesos recientes',
+        dataSourceMode: 'JsonUrl',
+        recentItemsJsonUrl: 'https://example.org/recent.json',
+        maxItems: 10,
+        resourceTypeFilter: ''
+      })
+    ).rejects.toThrow('url must be same-origin or relative');
   });
 });

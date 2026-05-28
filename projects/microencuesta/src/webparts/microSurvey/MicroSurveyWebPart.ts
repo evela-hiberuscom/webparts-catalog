@@ -28,7 +28,8 @@ export interface IMicroSurveyWebPartProps extends IMicroSurveyConfiguration {}
 export default class MicroSurveyWebPart extends BaseClientSideWebPart<IMicroSurveyWebPartProps> {
   private _storage: IKeyValueStorageLike = {
     getItem: (_key: string) => undefined,
-    setItem: (_key: string, _value: string) => undefined
+    setItem: (_key: string, _value: string) => undefined,
+    removeItem: (_key: string) => undefined
   };
 
   public async onInit(): Promise<void> {
@@ -41,6 +42,9 @@ export default class MicroSurveyWebPart extends BaseClientSideWebPart<IMicroSurv
         },
         setItem: (key: string, value: string) => {
           window.localStorage.setItem(key, value);
+        },
+        removeItem: (key: string) => {
+          window.localStorage.removeItem(key);
         }
       };
     }

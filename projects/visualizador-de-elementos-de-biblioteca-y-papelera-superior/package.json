@@ -12,10 +12,10 @@
     "eject-webpack": "heft eject-webpack"
   },
   "dependencies": {
-    "@fluentui/react": "^8.106.4",
+    "@fluentui/react": "8.125.5",
     "@microsoft/sp-component-base": "1.22.2",
     "@microsoft/sp-core-library": "1.22.2",
-    "@microsoft/sp-http": "^1.22.2",
+    "@microsoft/sp-http": "1.22.2",
     "@microsoft/sp-lodash-subset": "1.22.2",
     "@microsoft/sp-office-ui-fabric-core": "1.22.2",
     "@microsoft/sp-property-pane": "1.22.2",
@@ -36,12 +36,12 @@
     "@types/heft-jest": "1.0.2",
     "@types/react": "17.0.45",
     "@types/react-dom": "17.0.17",
-    "@types/webpack-env": "~1.15.2",
+    "@types/webpack-env": "1.15.3",
     "@typescript-eslint/parser": "8.46.2",
-    "css-loader": "~7.1.2",
+    "css-loader": "7.1.4",
     "eslint": "8.57.1",
     "eslint-plugin-react-hooks": "4.3.0",
-    "typescript": "~5.8.0"
+    "typescript": "5.8.3"
   },
   "overrides": {
     "@rushstack/heft": "1.1.2"

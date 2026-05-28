@@ -5,6 +5,7 @@ import type {
   IUpcomingMilestonesRepository
 } from '../models/upcomingMilestonesModels';
 import { mapSharePointMilestone } from '../utils/upcomingMilestonesUtils';
+import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
 interface ISharePointItemsResponse {
   value?: Record<string, unknown>[];
@@ -15,7 +16,7 @@ export class UpcomingMilestonesRepository implements IUpcomingMilestonesReposito
 
   public async getMilestones(configuration: IUpcomingMilestonesConfiguration): Promise<IUpcomingMilestoneItem[]> {
     const endpoint =
-      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${encodeURIComponent(configuration.listTitleOrUrl)}')/items` +
+      `${this.context.webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(configuration.listTitleOrUrl)}')/items` +
       `?$orderby=Modified desc&$top=${Math.max(configuration.maxItems * 3, 12)}`;
 
     const response = await this.context.spHttpClient.get(endpoint, this.context.spHttpClientConfiguration);
