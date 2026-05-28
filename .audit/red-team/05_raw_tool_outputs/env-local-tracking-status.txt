@@ -1,0 +1,4 @@
+Test-Path .env.local: True
+git ls-files .env.local: 
+SizeBytes: 214
+LastWriteTime: 2026-03-23T16:32:43.6431706+01:00

@@ -1,0 +1,2 @@
+ÔÇëWARNÔÇë The "workspaces" field in package.json is not supported by pnpm. Create a "pnpm-workspace.yaml" file instead.
+10.30.3

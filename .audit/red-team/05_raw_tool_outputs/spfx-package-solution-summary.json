@@ -1,0 +1,522 @@
+[
+  {
+    "file": "projects/a-z-corporativo/config/package-solution.json",
+    "name": "a-z-corporativo-client-side-solution",
+    "id": "f3234112-7d7b-4c95-83ff-662d46f49f1b",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/accesos-rapidos-por-audiencia/config/package-solution.json",
+    "name": "accesos-rapidos-por-audiencia-client-side-solution",
+    "id": "133ab025-dec0-42ee-b931-88f753cc9d0f",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/agenda-del-equipo/config/package-solution.json",
+    "name": "agenda-del-equipo-client-side-solution",
+    "id": "cdaa303b-7a37-4ae4-8f1f-60ba0cd816e7",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/config/package-solution.json",
+    "name": "analizador-de-tamano-y-volumen-de-documentos-historicos-client-side-solution",
+    "id": "ef5bfabc-88fb-45af-8fbd-b4bebc0a791e",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/asistente-contextual-de-pagina/config/package-solution.json",
+    "name": "asistente-contextual-de-pagina-client-side-solution",
+    "id": "c8589ec7-6607-41ad-b966-e8d82b6d5796",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/barra-de-avisos-urgentes/config/package-solution.json",
+    "name": "barra-de-avisos-urgentes-client-side-solution",
+    "id": "bc52208f-6b67-4067-aa67-39c01101420d",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/biblioteca-de-plantillas/config/package-solution.json",
+    "name": "biblioteca-de-plantillas-client-side-solution",
+    "id": "ca855a71-5db0-4393-8ff4-dd1849b5932d",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/buscador-de-recursos-corporativos/config/package-solution.json",
+    "name": "buscador-de-recursos-corporativos-client-side-solution",
+    "id": "4f54e387-492b-4bfc-92a1-8775c628576c",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/buzon-de-ideas/config/package-solution.json",
+    "name": "buzon-de-ideas-client-side-solution",
+    "id": "7483c2d2-4594-4f07-8998-0acd0f4694fb",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/centro-de-acciones-rapidas/config/package-solution.json",
+    "name": "centro-de-acciones-rapidas-client-side-solution",
+    "id": "a886aacd-d4e3-421a-9a09-c24b9cce2289",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/checklist-de-offboarding-o-cambios/config/package-solution.json",
+    "name": "checklist-de-offboarding-o-cambios-client-side-solution",
+    "id": "e696764c-e0a3-4f88-88c5-d30fc689503a",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/checklist-de-onboarding/config/package-solution.json",
+    "name": "checklist-de-onboarding-client-side-solution",
+    "id": "c8a5f483-cacf-476c-a9bc-150ee34b11df",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/como-hago-esto/config/package-solution.json",
+    "name": "como-hago-esto-client-side-solution",
+    "id": "7da2c524-195e-410b-85b9-bf052f1c1fc1",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/componente-segun-tu-perfil/config/package-solution.json",
+    "name": "componente-segun-tu-perfil-client-side-solution",
+    "id": "7583d7ef-69eb-420c-ba9b-5676d61cea30",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/conoce-al-equipo/config/package-solution.json",
+    "name": "conoce-al-equipo-client-side-solution",
+    "id": "6043aae8-34b6-4486-aacd-17d1f6893480",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/cuenta-atras-a-eventos/config/package-solution.json",
+    "name": "cuenta-atras-a-eventos-client-side-solution",
+    "id": "48ed0b43-98ee-41ed-a964-e57b78024eb8",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/cumpleanos-y-aniversarios/config/package-solution.json",
+    "name": "cumpleanos-y-aniversarios-client-side-solution",
+    "id": "6c42ca02-6379-468f-b329-6691ba63a93c",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/directorio-express/config/package-solution.json",
+    "name": "directorio-express-client-side-solution",
+    "id": "a221488c-b698-4ae2-9e9a-f226ac8efc32",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/estado-de-incidencias-destacadas/config/package-solution.json",
+    "name": "estado-de-incidencias-destacadas-client-side-solution",
+    "id": "c2f7e852-1a77-4761-add2-8c3a9a656fc4",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/estado-de-proyectos/config/package-solution.json",
+    "name": "estado-de-proyectos-client-side-solution",
+    "id": "97b70d09-6aa2-48a1-8b2f-3a2df117efa7",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/estado-de-servicios-internos/config/package-solution.json",
+    "name": "estado-de-servicios-internos-client-side-solution",
+    "id": "faa3bb45-7126-4cc2-8e62-8bbdd6521ea3",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/faq-inteligente/config/package-solution.json",
+    "name": "faq-inteligente-client-side-solution",
+    "id": "0499d926-e499-458d-a017-d8f468b01b29",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/favoritos-personales/config/package-solution.json",
+    "name": "favoritos-personales-client-side-solution",
+    "id": "a748fcc4-9b5e-4d0d-bb09-4da5f33ac444",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/glosario-corporativo/config/package-solution.json",
+    "name": "glosario-corporativo-client-side-solution",
+    "id": "a3dc380e-d34b-41f7-9282-3f9f5c09b43c",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/inicia-una-solicitud/config/package-solution.json",
+    "name": "inicia-una-solicitud-client-side-solution",
+    "id": "c95152a9-8807-4731-a2c6-8a019419cba3",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/kpi-mini-cards/config/package-solution.json",
+    "name": "kpi-mini-cards-client-side-solution",
+    "id": "aa18c115-dc57-4ccb-9012-63f790ac10ea",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/lanzador-universal-de-accesos/config/package-solution.json",
+    "name": "lanzador-universal-de-accesos-client-side-solution",
+    "id": "0810b12a-601e-4ad9-a507-819bcd0cc391",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mantenimientos-programados/config/package-solution.json",
+    "name": "mantenimientos-programados-client-side-solution",
+    "id": "629fbf8a-864a-475b-a8b2-d0cde9fc97e3",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mapa-de-portales/config/package-solution.json",
+    "name": "mapa-de-portales-client-side-solution",
+    "id": "57abe8f5-43f1-4fe3-85bc-9d5c5c575b6d",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/microencuesta/config/package-solution.json",
+    "name": "microencuesta-client-side-solution",
+    "id": "90d5db49-fef2-4e77-95b5-f23da4a762b1",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mini-organigrama/config/package-solution.json",
+    "name": "mini-organigrama-client-side-solution",
+    "id": "1d5180c4-e66c-454c-8776-f1b77dd0e832",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mis-accesos-recientes/config/package-solution.json",
+    "name": "mis-accesos-recientes-client-side-solution",
+    "id": "b7a2a334-f319-4540-abbb-559c576f85ba",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mis-aprobaciones/config/package-solution.json",
+    "name": "mis-aprobaciones-client-side-solution",
+    "id": "57292224-4b9f-41ba-a775-8513c1b8bb17",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mis-documentos-utiles/config/package-solution.json",
+    "name": "mis-documentos-utiles-client-side-solution",
+    "id": "95209a30-dcff-4570-9622-aff48c1b8905",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/mis-tareas-y-pendientes/config/package-solution.json",
+    "name": "mis-tareas-y-pendientes-client-side-solution",
+    "id": "8934f26c-8a92-40b5-bee9-d3d2490ef423",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/noticias-por-area/config/package-solution.json",
+    "name": "noticias-por-area-client-side-solution",
+    "id": "9fba17d2-164f-4f2b-a6df-cb91fb67cc87",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/nuevas-incorporaciones/config/package-solution.json",
+    "name": "nuevas-incorporaciones-client-side-solution",
+    "id": "6729112c-75ba-4f3b-a31c-e0985ecc706a",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/objetivos-del-area/config/package-solution.json",
+    "name": "objetivos-del-area-client-side-solution",
+    "id": "87a3c0a2-94b5-43d2-a5a7-6024ec02b7c5",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/panel-de-campana-interna/config/package-solution.json",
+    "name": "panel-de-campana-interna-client-side-solution",
+    "id": "66546cfe-2e3a-4188-8d38-3ad40d99d87e",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/pregunta-destacada/config/package-solution.json",
+    "name": "pregunta-destacada-client-side-solution",
+    "id": "b629998d-eaa7-421a-a10f-0c1543fe706d",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/presencia-de-sedes/config/package-solution.json",
+    "name": "presencia-de-sedes-client-side-solution",
+    "id": "1a5b7736-4369-40bc-8c95-6b9cc9c67445",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/proximos-hitos/config/package-solution.json",
+    "name": "proximos-hitos-client-side-solution",
+    "id": "bf2c7cd3-fa88-4049-a63e-6b72cc4a0b63",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/pulso-del-dia/config/package-solution.json",
+    "name": "pulso-del-dia-client-side-solution",
+    "id": "f28c2cbe-9ddd-412b-8400-fd60925d4995",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/que-ha-cambiado/config/package-solution.json",
+    "name": "que-ha-cambiado-client-side-solution",
+    "id": "8390654c-bfee-42dc-b65c-5b33057916af",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/reconocimientos/config/package-solution.json",
+    "name": "reconocimientos-client-side-solution",
+    "id": "f840f0cf-51df-4ebe-b12b-7bd34aed0988",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/reserva-rapida/config/package-solution.json",
+    "name": "reserva-rapida-client-side-solution",
+    "id": "a9d3dff1-fe98-4e05-aba0-dc01d0446d14",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/resumen-de-noticias/config/package-solution.json",
+    "name": "resumen-de-noticias-client-side-solution",
+    "id": "7ef25242-4b2c-46b6-91a1-97cbc8c5980c",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/resumen-semanal-automatico/config/package-solution.json",
+    "name": "resumen-semanal-automatico-client-side-solution",
+    "id": "9de09c35-9613-4774-82fc-ce6a7d44dff2",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/ruta-guiada/config/package-solution.json",
+    "name": "ruta-guiada-client-side-solution",
+    "id": "fbff871b-a3a4-424c-b5d0-7f1d3fcc00e8",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/tarjeta-de-decision-rapida/config/package-solution.json",
+    "name": "tarjeta-de-decision-rapida-client-side-solution",
+    "id": "c115c0eb-374f-4467-8992-8150a6e9b496",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/turnos-guardias-o-disponibilidad/config/package-solution.json",
+    "name": "turnos-guardias-o-disponibilidad-client-side-solution",
+    "id": "93474ca9-0533-4dd2-8522-cfe05ca9b896",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  },
+  {
+    "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/config/package-solution.json",
+    "name": "visualizador-de-elementos-de-biblioteca-y-papelera-superior-client-side-solution",
+    "id": "031bc783-fdfb-406e-b581-4738d44123f1",
+    "version": "1.0.0.0",
+    "skipFeatureDeployment": false,
+    "webApiPermissionRequests": [],
+    "includeClientSideAssets": true,
+    "featuresCount": 1
+  }
+]

@@ -1,0 +1,16 @@
+﻿node: available at C:\Users\EricVelaAbia\AppData\Local\Volta\tools\image\node\22.14.0\node.exe
+npm: available at C:\Users\EricVelaAbia\AppData\Local\Volta\tools\image\npm\9.6.7\bin\npm.cmd
+pnpm: available at C:\Program Files\Volta\pnpm.exe
+yarn: available at C:\Users\EricVelaAbia\AppData\Local\Volta\tools\image\yarn\4.14.1\bin\yarn.ps1
+gulp: available at C:\Users\EricVelaAbia\AppData\Local\Volta\bin\gulp.cmd
+npx: available at C:\Users\EricVelaAbia\AppData\Local\Volta\tools\image\npm\9.6.7\bin\npx.cmd
+semgrep: not available
+sonar-scanner: not available
+sourceanalyzer: not available
+gitleaks: not available
+trivy: not available
+cyclonedx-npm: not available
+cdxgen: not available
+dependency-check: not available
+git: available at C:\Program Files\Git\cmd\git.exe
+gh: available at C:\Program Files\GitHub CLI\gh.exe

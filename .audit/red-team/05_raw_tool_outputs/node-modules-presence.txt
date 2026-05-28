@@ -1,0 +1,3 @@
+root node_modules: False
+packages/spfx-common node_modules: False
+first project node_modules: True

@@ -1,0 +1,132 @@
+dir  .antigravity
+  file rules.md
+dir  .atl
+  file skill-registry.md
+dir  .audit
+  dir  red-team
+dir  .github
+  file copilot-instructions.md
+dir  .playwright-mcp
+  file console-2026-03-23T16-14-16-573Z.log
+  file console-2026-03-23T16-17-42-593Z.log
+  file console-2026-03-23T16-27-44-530Z.log
+  file console-2026-03-23T16-30-08-179Z.log
+  file console-2026-03-23T16-31-41-573Z.log
+  file console-2026-03-23T16-33-20-120Z.log
+  file console-2026-03-24T18-42-05-725Z.log
+  file page-2026-03-23T16-14-56-651Z.png
+  file page-2026-03-23T16-16-23-934Z.png
+  file page-2026-03-23T16-16-34-114Z.png
+  file page-2026-03-23T16-16-45-882Z.png
+  file page-2026-03-23T16-16-56-832Z.png
+  file page-2026-03-23T16-17-13-120Z.png
+  file page-2026-03-23T16-17-29-448Z.png
+  file page-2026-03-23T16-17-48-027Z.png
+  file page-2026-03-23T16-17-58-200Z.png
+  file page-2026-03-23T16-27-50-402Z.png
+  file page-2026-03-23T16-28-32-968Z.png
+  file page-2026-03-23T16-28-46-067Z.png
+  file page-2026-03-23T16-30-13-589Z.png
+  file page-2026-03-23T16-30-27-042Z.png
+  file page-2026-03-23T16-31-47-217Z.png
+  file page-2026-03-23T16-32-02-052Z.png
+  file page-2026-03-23T16-33-26-020Z.png
+  file page-2026-03-23T16-35-29-281Z.png
+  file page-2026-03-23T16-35-42-917Z.png
+  file page-2026-03-23T16-35-53-856Z.png
+  file page-2026-03-23T16-36-05-758Z.png
+  file page-2026-03-23T16-36-16-975Z.png
+  file page-2026-03-23T16-36-31-090Z.png
+  file page-2026-03-24T18-42-13-052Z.png
+  file page-2026-03-24T18-46-36-122Z.png
+dir  orchestration
+  dir  generated
+  dir  templates
+  file archetype-notes.md
+  file decision-log.json
+  file issue-registry.json
+  file project-work-items.json
+  file README.md
+  file runtime-tracker.json
+dir  packages
+  dir  spfx-common
+dir  projects
+  dir  a-z-corporativo
+  dir  accesos-rapidos-por-audiencia
+  dir  agenda-del-equipo
+  dir  analizador-de-tamano-y-volumen-de-documentos-historicos
+  dir  asistente-contextual-de-pagina
+  dir  barra-de-avisos-urgentes
+  dir  biblioteca-de-plantillas
+  dir  buscador-de-recursos-corporativos
+  dir  buzon-de-ideas
+  dir  centro-de-acciones-rapidas
+  dir  checklist-de-offboarding-o-cambios
+  dir  checklist-de-onboarding
+  dir  como-hago-esto
+  dir  componente-segun-tu-perfil
+  dir  conoce-al-equipo
+  dir  cuenta-atras-a-eventos
+  dir  cumpleanos-y-aniversarios
+  dir  directorio-express
+  dir  estado-de-incidencias-destacadas
+  dir  estado-de-proyectos
+  dir  estado-de-servicios-internos
+  dir  faq-inteligente
+  dir  favoritos-personales
+  dir  glosario-corporativo
+  dir  inicia-una-solicitud
+  dir  kpi-mini-cards
+  dir  lanzador-universal-de-accesos
+  dir  mantenimientos-programados
+  dir  mapa-de-portales
+  dir  microencuesta
+  dir  mini-organigrama
+  dir  mis-accesos-recientes
+  dir  mis-aprobaciones
+  dir  mis-documentos-utiles
+  dir  mis-tareas-y-pendientes
+  dir  noticias-por-area
+  dir  nuevas-incorporaciones
+  dir  objetivos-del-area
+  dir  panel-de-campana-interna
+  dir  pregunta-destacada
+  dir  presencia-de-sedes
+  dir  proximos-hitos
+  dir  pulso-del-dia
+  dir  que-ha-cambiado
+  dir  reconocimientos
+  dir  reserva-rapida
+  dir  resumen-de-noticias
+  dir  resumen-semanal-automatico
+  dir  ruta-guiada
+  dir  tarjeta-de-decision-rapida
+  dir  turnos-guardias-o-disponibilidad
+  dir  visualizador-de-elementos-de-biblioteca-y-papelera-superior
+dir  scripts
+  dir  lib
+  file audit-webpart-completeness.mjs
+  file bootstrap-project-contexts.mjs
+  file generate-red-team-audit.mjs
+  file prepare-spfx-project.mjs
+  file record-issue.mjs
+  file render-agent-trace.mjs
+  file render-progress-board.mjs
+  file scaffold-spfx-project.mjs
+  file sync-airtable-catalog.mjs
+dir  style-guide
+  file analysis-summary.md
+  file brand-profile.json
+  file component-inventory.json
+  file design-tokens.json
+  file mockup-spec-spfx-portal.md
+file .commit_msg.txt
+file .env.local
+file .gitignore
+file AGENTS.md
+file CATALOGO_WEBPARTS_SPFX.md
+file CLAUDE.md
+file DESIGN.md
+file package.json
+file README.md
+

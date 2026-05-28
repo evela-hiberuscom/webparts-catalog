@@ -1,0 +1,278 @@
+[
+  {
+    "file": "projects/a-z-corporativo/src/webparts/corporateAz/CorporateAzWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/AudienceQuickLinksWebPart.manifest.json",
+    "id": "725d1f2f-c9a8-4559-bbb3-f24bae6d733b",
+    "alias": "AudienceQuickLinksWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "TeamsPersonalApp",
+      "TeamsTab",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  },
+  {
+    "file": "projects/agenda-del-equipo/src/webparts/teamAgenda/TeamAgendaWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/HistoricalStorageAnalyzerWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/PageContextAssistantWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/UrgentAlertBarWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/biblioteca-de-plantillas/src/webparts/templatesLibrary/TemplatesLibraryWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/CorporateResourcesSearchWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/buzon-de-ideas/src/webparts/ideasMailbox/IdeasMailboxWebPart.manifest.json",
+    "id": "da2c1416-d310-4861-9265-440c61a40c10",
+    "alias": "IdeasMailboxWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "TeamsPersonalApp",
+      "TeamsTab",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  },
+  {
+    "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/QuickActionsCenterWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/OffboardingOrChangeChecklistWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/OnboardingChecklistWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/como-hago-esto/src/webparts/howDoIDoThis/HowDoIDoThisWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/ProfileBasedComponentWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/MeetTheTeamWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/EventCountdownWebPart.manifest.json",
+    "id": "3750263f-3257-421d-96b1-d1fe505edcd8",
+    "alias": "EventCountdownWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "TeamsPersonalApp",
+      "TeamsTab",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  },
+  {
+    "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/BirthdaysAndAnniversariesWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/directorio-express/src/webparts/expressDirectory/ExpressDirectoryWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/HighlightedIncidentsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/estado-de-proyectos/src/webparts/projectStatus/ProjectStatusWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/InternalServicesStatusWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/faq-inteligente/src/webparts/smartFaq/SmartFaqWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/favoritos-personales/src/webparts/personalFavorites/PersonalFavoritesWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/glosario-corporativo/src/webparts/corporateGlossary/CorporateGlossaryWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/inicia-una-solicitud/src/webparts/startARequest/StartARequestWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/KpiMiniCardsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/UniversalAppLauncherWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/PlannedMaintenanceWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mapa-de-portales/src/webparts/portalMap/PortalMapWebPart.manifest.json",
+    "id": "83650d6d-54b9-474e-878d-49e66e7c9e5e",
+    "alias": "PortalMapWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "TeamsPersonalApp",
+      "TeamsTab",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  },
+  {
+    "file": "projects/microencuesta/src/webparts/microSurvey/MicroSurveyWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mini-organigrama/src/webparts/miniOrgChart/MiniOrgChartWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/MyRecentAccessesWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mis-aprobaciones/src/webparts/myApprovals/MyApprovalsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/MyUsefulDocumentsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/mis-tareas-y-pendientes/src/webparts/myTasksAndPending/MyTasksAndPendingWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/noticias-por-area/src/webparts/newsByArea/NewsByAreaWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/nuevas-incorporaciones/src/webparts/newJoiners/NewJoinersWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/objetivos-del-area/src/webparts/areaGoals/AreaGoalsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/panel-de-campana-interna/src/webparts/internalCampaignPanel/InternalCampaignPanelWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/pregunta-destacada/src/webparts/featuredQuestion/FeaturedQuestionWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/presencia-de-sedes/src/webparts/sitesPresence/SitesPresenceWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/proximos-hitos/src/webparts/upcomingMilestones/UpcomingMilestonesWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/pulso-del-dia/src/webparts/dailyPulse/DailyPulseWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/que-ha-cambiado/src/webparts/whatChangedFeed/WhatChangedFeedWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/reconocimientos/src/webparts/recognitions/RecognitionsWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/reserva-rapida/src/webparts/quickBooking/QuickBookingWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/resumen-de-noticias/src/webparts/newsSummary/NewsSummaryWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/resumen-semanal-automatico/src/webparts/automaticWeeklySummary/AutomaticWeeklySummaryWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/ruta-guiada/src/webparts/guidedRoute/GuidedRouteWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/tarjeta-de-decision-rapida/src/webparts/quickDecisionCard/QuickDecisionCardWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/turnos-guardias-o-disponibilidad/src/webparts/shiftsGuardsAvailability/ShiftsGuardsAvailabilityWebPart.manifest.json",
+    "parseError": true
+  },
+  {
+    "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/recycleBinSpaceCalculator/RecycleBinSpaceCalculatorWebPart.manifest.json",
+    "id": "514f405c-4751-4285-bdb7-8f2049697e7e",
+    "alias": "RecycleBinSpaceCalculatorWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "TeamsPersonalApp",
+      "TeamsTab",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  },
+  {
+    "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/SiteStorageDiagnosticsWebPart.manifest.json",
+    "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "alias": "SiteStorageDiagnosticsWebPart",
+    "componentType": "WebPart",
+    "version": "*",
+    "supportedHosts": [
+      "SharePointWebPart",
+      "SharePointFullPage"
+    ],
+    "requiresCustomScript": false,
+    "supportsThemeVariants": true
+  }
+]

@@ -1,0 +1,10 @@
+files=2636
+packages=54
+projects=52
+solutions=52
+manifests=53
+sourceFiles=1057
+testFiles=212
+secretHeuristicHits=74
+workflows=0
+iacFiles=0

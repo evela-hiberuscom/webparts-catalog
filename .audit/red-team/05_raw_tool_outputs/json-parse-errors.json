@@ -1,0 +1,190 @@
+[
+  {
+    "file": "projects/a-z-corporativo/src/webparts/corporateAz/CorporateAzWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/agenda-del-equipo/src/webparts/teamAgenda/TeamAgendaWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 223 (line 7 column 3)"
+  },
+  {
+    "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/HistoricalStorageAnalyzerWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 238 (line 7 column 3)"
+  },
+  {
+    "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/PageContextAssistantWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 233 (line 7 column 3)"
+  },
+  {
+    "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/UrgentAlertBarWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 227 (line 7 column 3)"
+  },
+  {
+    "file": "projects/biblioteca-de-plantillas/src/webparts/templatesLibrary/TemplatesLibraryWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 229 (line 7 column 3)"
+  },
+  {
+    "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/CorporateResourcesSearchWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 237 (line 7 column 3)"
+  },
+  {
+    "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/QuickActionsCenterWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 231 (line 7 column 3)"
+  },
+  {
+    "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/OffboardingOrChangeChecklistWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 241 (line 7 column 3)"
+  },
+  {
+    "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/OnboardingChecklistWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 232 (line 7 column 3)"
+  },
+  {
+    "file": "projects/como-hago-esto/src/webparts/howDoIDoThis/HowDoIDoThisWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 225 (line 7 column 3)"
+  },
+  {
+    "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/ProfileBasedComponentWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 234 (line 7 column 3)"
+  },
+  {
+    "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/MeetTheTeamWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/BirthdaysAndAnniversariesWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 238 (line 7 column 3)"
+  },
+  {
+    "file": "projects/directorio-express/src/webparts/expressDirectory/ExpressDirectoryWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 229 (line 7 column 3)"
+  },
+  {
+    "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/HighlightedIncidentsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 233 (line 7 column 3)"
+  },
+  {
+    "file": "projects/estado-de-proyectos/src/webparts/projectStatus/ProjectStatusWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 226 (line 7 column 3)"
+  },
+  {
+    "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/InternalServicesStatusWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 235 (line 7 column 3)"
+  },
+  {
+    "file": "projects/faq-inteligente/src/webparts/smartFaq/SmartFaqWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 221 (line 7 column 3)"
+  },
+  {
+    "file": "projects/favoritos-personales/src/webparts/personalFavorites/PersonalFavoritesWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 230 (line 7 column 3)"
+  },
+  {
+    "file": "projects/glosario-corporativo/src/webparts/corporateGlossary/CorporateGlossaryWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 230 (line 7 column 3)"
+  },
+  {
+    "file": "projects/inicia-una-solicitud/src/webparts/startARequest/StartARequestWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 226 (line 7 column 3)"
+  },
+  {
+    "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/KpiMiniCardsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 225 (line 7 column 3)"
+  },
+  {
+    "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/UniversalAppLauncherWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 233 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/PlannedMaintenanceWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 231 (line 7 column 3)"
+  },
+  {
+    "file": "projects/microencuesta/src/webparts/microSurvey/MicroSurveyWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mini-organigrama/src/webparts/miniOrgChart/MiniOrgChartWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 225 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/MyRecentAccessesWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 229 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mis-aprobaciones/src/webparts/myApprovals/MyApprovalsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/MyUsefulDocumentsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 230 (line 7 column 3)"
+  },
+  {
+    "file": "projects/mis-tareas-y-pendientes/src/webparts/myTasksAndPending/MyTasksAndPendingWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 230 (line 7 column 3)"
+  },
+  {
+    "file": "projects/noticias-por-area/src/webparts/newsByArea/NewsByAreaWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 223 (line 7 column 3)"
+  },
+  {
+    "file": "projects/nuevas-incorporaciones/src/webparts/newJoiners/NewJoinersWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 223 (line 7 column 3)"
+  },
+  {
+    "file": "projects/objetivos-del-area/src/webparts/areaGoals/AreaGoalsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 222 (line 7 column 3)"
+  },
+  {
+    "file": "projects/panel-de-campana-interna/src/webparts/internalCampaignPanel/InternalCampaignPanelWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 234 (line 7 column 3)"
+  },
+  {
+    "file": "projects/pregunta-destacada/src/webparts/featuredQuestion/FeaturedQuestionWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 229 (line 7 column 3)"
+  },
+  {
+    "file": "projects/presencia-de-sedes/src/webparts/sitesPresence/SitesPresenceWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 226 (line 7 column 3)"
+  },
+  {
+    "file": "projects/proximos-hitos/src/webparts/upcomingMilestones/UpcomingMilestonesWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 231 (line 7 column 3)"
+  },
+  {
+    "file": "projects/pulso-del-dia/src/webparts/dailyPulse/DailyPulseWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 223 (line 7 column 3)"
+  },
+  {
+    "file": "projects/que-ha-cambiado/src/webparts/whatChangedFeed/WhatChangedFeedWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 228 (line 7 column 3)"
+  },
+  {
+    "file": "projects/reconocimientos/src/webparts/recognitions/RecognitionsWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 225 (line 7 column 3)"
+  },
+  {
+    "file": "projects/reserva-rapida/src/webparts/quickBooking/QuickBookingWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 225 (line 7 column 3)"
+  },
+  {
+    "file": "projects/resumen-de-noticias/src/webparts/newsSummary/NewsSummaryWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/resumen-semanal-automatico/src/webparts/automaticWeeklySummary/AutomaticWeeklySummaryWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 235 (line 7 column 3)"
+  },
+  {
+    "file": "projects/ruta-guiada/src/webparts/guidedRoute/GuidedRouteWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 224 (line 7 column 3)"
+  },
+  {
+    "file": "projects/tarjeta-de-decision-rapida/src/webparts/quickDecisionCard/QuickDecisionCardWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 230 (line 7 column 3)"
+  },
+  {
+    "file": "projects/turnos-guardias-o-disponibilidad/src/webparts/shiftsGuardsAvailability/ShiftsGuardsAvailabilityWebPart.manifest.json",
+    "error": "Expected double-quoted property name in JSON at position 237 (line 7 column 3)"
+  }
+]

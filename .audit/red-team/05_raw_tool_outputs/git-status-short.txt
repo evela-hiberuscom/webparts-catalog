@@ -1,0 +1,2 @@
+﻿?? .audit/
+?? CATALOGO_WEBPARTS_SPFX.md

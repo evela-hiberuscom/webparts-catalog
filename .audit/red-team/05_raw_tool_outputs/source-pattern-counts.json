@@ -1,0 +1,19 @@
+{
+  "dangerouslySetInnerHTML": 0,
+  "innerHTML": 7,
+  "iframe": 0,
+  "evalOrFunction": 0,
+  "documentWrite": 0,
+  "windowOpen": 7,
+  "targetBlank": 15,
+  "localOrSessionStorage": 30,
+  "fetchOrAxios": 19,
+  "spHttpClient": 162,
+  "getByTitleOrListUrl": 88,
+  "catchSwallow": 71,
+  "consoleErrorWarn": 61,
+  "anyUsage": 23,
+  "todoFixme": 29,
+  "propertyPaneText": 200,
+  "externalUrl": 200
+}

@@ -1,0 +1,1055 @@
+{
+  "packageCount": 54,
+  "lifecycleScripts": [],
+  "floatingDependencyOccurrenceCount": 207,
+  "floatingDependencySample": [
+    {
+      "file": "projects/a-z-corporativo/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/a-z-corporativo/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/a-z-corporativo/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/a-z-corporativo/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/agenda-del-equipo/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/agenda-del-equipo/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/agenda-del-equipo/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/agenda-del-equipo/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/buzon-de-ideas/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/buzon-de-ideas/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/buzon-de-ideas/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/buzon-de-ideas/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/como-hago-esto/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/como-hago-esto/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/como-hago-esto/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/como-hago-esto/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/conoce-al-equipo/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/conoce-al-equipo/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/conoce-al-equipo/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/conoce-al-equipo/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/directorio-express/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/directorio-express/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/directorio-express/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/directorio-express/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/estado-de-proyectos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/estado-de-proyectos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/estado-de-proyectos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/estado-de-proyectos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/faq-inteligente/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/faq-inteligente/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/faq-inteligente/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/faq-inteligente/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/favoritos-personales/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/favoritos-personales/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/favoritos-personales/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/favoritos-personales/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/glosario-corporativo/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/glosario-corporativo/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/glosario-corporativo/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/glosario-corporativo/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/kpi-mini-cards/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/kpi-mini-cards/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/kpi-mini-cards/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/kpi-mini-cards/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mantenimientos-programados/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mantenimientos-programados/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mantenimientos-programados/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mantenimientos-programados/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mapa-de-portales/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mapa-de-portales/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mapa-de-portales/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mapa-de-portales/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/microencuesta/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/microencuesta/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/microencuesta/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/microencuesta/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mini-organigrama/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mini-organigrama/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mini-organigrama/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mini-organigrama/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mis-aprobaciones/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mis-aprobaciones/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mis-aprobaciones/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mis-aprobaciones/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/noticias-por-area/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/noticias-por-area/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/noticias-por-area/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/noticias-por-area/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/objetivos-del-area/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/objetivos-del-area/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/objetivos-del-area/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/objetivos-del-area/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/pregunta-destacada/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/pregunta-destacada/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/pregunta-destacada/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/pregunta-destacada/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/presencia-de-sedes/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/presencia-de-sedes/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/presencia-de-sedes/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/presencia-de-sedes/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/proximos-hitos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/proximos-hitos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/proximos-hitos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/proximos-hitos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/pulso-del-dia/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/pulso-del-dia/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/pulso-del-dia/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/pulso-del-dia/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/que-ha-cambiado/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/que-ha-cambiado/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/que-ha-cambiado/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/que-ha-cambiado/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/reconocimientos/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/reconocimientos/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/reconocimientos/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/reconocimientos/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/reserva-rapida/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/reserva-rapida/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/reserva-rapida/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/reserva-rapida/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/resumen-de-noticias/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/resumen-de-noticias/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/resumen-de-noticias/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/resumen-de-noticias/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/ruta-guiada/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/ruta-guiada/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/ruta-guiada/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/ruta-guiada/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/package.json",
+      "name": "css-loader",
+      "version": "~7.1.2"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/package.json",
+      "name": "typescript",
+      "version": "~5.8.0"
+    },
+    {
+      "file": "projects/turnos-guardias-o-disponibilidad/package.json",
+      "name": "@fluentui/react",
+      "version": "^8.106.4"
+    },
+    {
+      "file": "projects/turnos-guardias-o-disponibilidad/package.json",
+      "name": "@types/webpack-env",
+      "version": "~1.15.2"
+    }
+  ],
+  "spfxVersionMatrix": {
+    "@microsoft/sp-core-library": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-component-base": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-property-pane": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-webpart-base": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-lodash-subset": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-office-ui-fabric-core": {
+      "1.22.2": 52
+    },
+    "@microsoft/spfx-heft-plugins": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-module-interfaces": {
+      "1.22.2": 52
+    },
+    "@microsoft/sp-http": {
+      "1.22.2": 3,
+      "^1.22.2": 1
+    },
+    "@microsoft/sp-loader": {
+      "1.22.2": 1
+    }
+  },
+  "scriptPatterns": {
+    "sync:airtable: node ./scripts/sync-airtable-catalog.mjs": 1,
+    "bootstrap:contexts: node ./scripts/bootstrap-project-contexts.mjs": 1,
+    "orchestrate:foundation: npm run sync:airtable && npm run bootstrap:contexts": 1,
+    "scaffold:spfx: node ./scripts/scaffold-spfx-project.mjs": 1,
+    "prepare:spfx: node ./scripts/prepare-spfx-project.mjs": 1,
+    "record:issue: node ./scripts/record-issue.mjs": 1,
+    "progress:board: node ./scripts/render-progress-board.mjs": 1,
+    "progress:trace: node ./scripts/render-agent-trace.mjs": 1,
+    "audit:redteam: node ./scripts/generate-red-team-audit.mjs": 1,
+    "build: heft build --clean --production && heft test --production && heft package-solution --production": 52,
+    "start: heft start --clean": 52,
+    "clean: heft clean": 52,
+    "eject-webpack: heft eject-webpack": 52
+  }
+}

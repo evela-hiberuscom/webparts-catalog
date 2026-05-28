@@ -1,0 +1,1841 @@
+{
+  "projectCount": 52,
+  "webpartFiles": 53,
+  "errorBoundaryFiles": 53,
+  "perProject": [
+    {
+      "project": "projects/a-z-corporativo",
+      "source": 29,
+      "tests": 4,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/accesos-rapidos-por-audiencia",
+      "source": 53,
+      "tests": 12,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/agenda-del-equipo",
+      "source": 40,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos",
+      "source": 38,
+      "tests": 4,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/asistente-contextual-de-pagina",
+      "source": 35,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/barra-de-avisos-urgentes",
+      "source": 45,
+      "tests": 14,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/biblioteca-de-plantillas",
+      "source": 37,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/buscador-de-recursos-corporativos",
+      "source": 41,
+      "tests": 8,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/buzon-de-ideas",
+      "source": 35,
+      "tests": 4,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/centro-de-acciones-rapidas",
+      "source": 39,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/checklist-de-offboarding-o-cambios",
+      "source": 40,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/checklist-de-onboarding",
+      "source": 37,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/como-hago-esto",
+      "source": 45,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/componente-segun-tu-perfil",
+      "source": 37,
+      "tests": 8,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/conoce-al-equipo",
+      "source": 40,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/cuenta-atras-a-eventos",
+      "source": 47,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/cumpleanos-y-aniversarios",
+      "source": 42,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/directorio-express",
+      "source": 48,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/estado-de-incidencias-destacadas",
+      "source": 45,
+      "tests": 18,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/estado-de-proyectos",
+      "source": 59,
+      "tests": 12,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/estado-de-servicios-internos",
+      "source": 43,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/faq-inteligente",
+      "source": 37,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/favoritos-personales",
+      "source": 41,
+      "tests": 12,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/glosario-corporativo",
+      "source": 37,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/inicia-una-solicitud",
+      "source": 46,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/kpi-mini-cards",
+      "source": 48,
+      "tests": 12,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/lanzador-universal-de-accesos",
+      "source": 39,
+      "tests": 6,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mantenimientos-programados",
+      "source": 42,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mapa-de-portales",
+      "source": 47,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/microencuesta",
+      "source": 42,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mini-organigrama",
+      "source": 50,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mis-accesos-recientes",
+      "source": 49,
+      "tests": 4,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mis-aprobaciones",
+      "source": 52,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mis-documentos-utiles",
+      "source": 29,
+      "tests": 4,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/mis-tareas-y-pendientes",
+      "source": 29,
+      "tests": 4,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/noticias-por-area",
+      "source": 37,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/nuevas-incorporaciones",
+      "source": 29,
+      "tests": 4,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/objetivos-del-area",
+      "source": 25,
+      "tests": 0,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/panel-de-campana-interna",
+      "source": 25,
+      "tests": 0,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/pregunta-destacada",
+      "source": 33,
+      "tests": 8,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/presencia-de-sedes",
+      "source": 25,
+      "tests": 0,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/proximos-hitos",
+      "source": 34,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/pulso-del-dia",
+      "source": 37,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/que-ha-cambiado",
+      "source": 37,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/reconocimientos",
+      "source": 41,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/reserva-rapida",
+      "source": 35,
+      "tests": 10,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/resumen-de-noticias",
+      "source": 38,
+      "tests": 10,
+      "loc": 5,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/resumen-semanal-automatico",
+      "source": 36,
+      "tests": 9,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/ruta-guiada",
+      "source": 22,
+      "tests": 0,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/tarjeta-de-decision-rapida",
+      "source": 22,
+      "tests": 0,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/turnos-guardias-o-disponibilidad",
+      "source": 22,
+      "tests": 0,
+      "loc": 4,
+      "webparts": 1,
+      "errorBoundary": 1,
+      "packageLock": true,
+      "readme": true
+    },
+    {
+      "project": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+      "source": 117,
+      "tests": 26,
+      "loc": 10,
+      "webparts": 2,
+      "errorBoundary": 2,
+      "packageLock": true,
+      "readme": true
+    }
+  ],
+  "largeFiles": [
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/repositories/pollRepository.ts",
+      "lines": 548
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/components/HistoricalStorageAnalyzer.tsx",
+      "lines": 507
+    },
+    {
+      "file": "projects/pulso-del-dia/src/webparts/dailyPulse/repositories/dailyPulseRepository.ts",
+      "lines": 492
+    },
+    {
+      "file": "projects/mapa-de-portales/src/webparts/portalMap/utils/portalMapUtils.ts",
+      "lines": 466
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/repositories/kpiCatalogRepository.ts",
+      "lines": 357
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/services/scanEngine.ts",
+      "lines": 352
+    },
+    {
+      "file": "projects/mini-organigrama/src/webparts/miniOrgChart/utils/miniOrgChartUtils.ts",
+      "lines": 345
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/repositories/SharePointHistoricalStorageAnalyzerRepository.ts",
+      "lines": 339
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/utils/offboardingOrChangeChecklistUtils.ts",
+      "lines": 339
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/utils/startARequestUtils.ts",
+      "lines": 334
+    },
+    {
+      "file": "projects/mis-aprobaciones/src/webparts/myApprovals/utils/myApprovalsUtils.ts",
+      "lines": 317
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/repositories/audienceLinksRepository.ts",
+      "lines": 315
+    },
+    {
+      "file": "projects/reserva-rapida/src/webparts/quickBooking/components/QuickBooking.tsx",
+      "lines": 314
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/utils/corporateResourcesSearchUtils.ts",
+      "lines": 304
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/components/ReportDashboard.tsx",
+      "lines": 301
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/repositories/corporateResourcesRepository.ts",
+      "lines": 300
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/components/SiteResultDetails.tsx",
+      "lines": 294
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/services/scanEngine.test.ts",
+      "lines": 294
+    },
+    {
+      "file": "projects/pulso-del-dia/src/webparts/dailyPulse/repositories/dailyPulseRepository.test.ts",
+      "lines": 292
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/repositories/peopleCelebrationsRepository.ts",
+      "lines": 286
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/repositories/TeamMembersRepository.ts",
+      "lines": 284
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/repositories/profileVariantRepository.ts",
+      "lines": 283
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/utils/highlightedIncidentsUtils.ts",
+      "lines": 272
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/src/webparts/myTasksAndPending/repositories/tasksRepository.ts",
+      "lines": 272
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/OnboardingChecklist.tsx",
+      "lines": 271
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/OffboardingOrChangeChecklist.tsx",
+      "lines": 262
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/utils/onboardingChecklistUtils.ts",
+      "lines": 258
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/repositories/siteMetricsRepository.test.ts",
+      "lines": 258
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/utils/countdownUtils.ts",
+      "lines": 257
+    },
+    {
+      "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/utils/plannedMaintenanceUtils.ts",
+      "lines": 256
+    }
+  ],
+  "hardcodedUiStringCandidates": [
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/CorporateAz.tsx",
+      "line": 18,
+      "snippet": "return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label=\"Cargando...\" /></div>;"
+    },
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/CorporateAz.tsx",
+      "line": 22,
+      "snippet": "return <MessageBar>No hay entradas disponibles.</MessageBar>;"
+    },
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/CorporateAz.tsx",
+      "line": 26,
+      "snippet": "return <MessageBar messageBarType={2}>Error: {props.message}</MessageBar>;"
+    },
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/WebPartErrorBoundary.tsx",
+      "line": 18,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/a-z-corporativo/src/webparts/corporateAz/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/hooks/useAudienceQuickLinks.ts",
+      "line": 15,
+      "snippet": "loadingCatalogLabel: 'Cargando catálogo...',"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/hooks/useAudienceQuickLinks.ts",
+      "line": 18,
+      "snippet": "couldNotResolveAudienceLabel: 'No se pudo resolver la audiencia',"
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/src/webparts/audienceQuickLinks/repositories/audienceLinksRepository.ts",
+      "line": 241,
+      "snippet": "'inferido: el feed debe devolver un array o un objeto con propiedad items.'"
+    },
+    {
+      "file": "projects/agenda-del-equipo/src/webparts/teamAgenda/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/agenda-del-equipo/src/webparts/teamAgenda/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/agenda-del-equipo/src/webparts/teamAgenda/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/components/HistoricalStorageAnalyzer.tsx",
+      "line": 196,
+      "snippet": "hasError: status === 'error',"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/hooks/useHistoricalStorageAnalysis.ts",
+      "line": 21,
+      "snippet": "loadLibrariesError: string;"
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/src/webparts/historicalStorageAnalyzer/hooks/useHistoricalStorageAnalysis.ts",
+      "line": 22,
+      "snippet": "analyzeLibraryError: string;"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/ContextHelpPanel.tsx",
+      "line": 71,
+      "snippet": "return \"No hay ayuda contextual disponible.\";"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/ContextHelpPanel.tsx",
+      "line": 87,
+      "snippet": "props.status === \"loading\" ? \"Cargando\" : props.status === \"error\" ? \"Error\" : props.status === \"empty\" ? \"Vacío\" : props.status === \"partialData\" ? \"Datos parciales\" : \"Listo\";"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/ContextHelpPanel.tsx",
+      "line": 155,
+      "snippet": "No hay enlaces relacionados, pero la ayuda contextual sigue siendo válida."
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/hooks/usePageContextAssistant.ts",
+      "line": 45,
+      "snippet": ".catch((loadError: unknown) => {"
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/utils/pageContextAssistantUtils.ts",
+      "line": 28,
+      "snippet": "message: \"Explica qué puede hacer el usuario en esta sección y qué recurso debería abrir después.\","
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/src/webparts/pageContextAssistant/utils/pageContextAssistantUtils.ts",
+      "line": 206,
+      "snippet": "message: message || \"No hay contenido contextual disponible.\","
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/UrgentAlertBar.tsx",
+      "line": 57,
+      "snippet": "<Spinner size={SpinnerSize.large} label=\"Cargando avisos urgentes...\" />"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/UrgentAlertBar.tsx",
+      "line": 67,
+      "snippet": "<h3 className={styles.stateTitle}>No se han podido cargar los avisos urgentes</h3>"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/UrgentAlertBar.tsx",
+      "line": 75,
+      "snippet": "<h3 className={styles.stateTitle}>No hay avisos urgentes activos</h3>"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/UrgentAlertBar.tsx",
+      "line": 96,
+      "snippet": "<h3 className={styles.stateTitle}>No hay avisos urgentes activos</h3>"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/src/webparts/urgentAlertBar/hooks/useAlertBar.ts",
+      "line": 61,
+      "snippet": "errorMessage: error.message || 'No se han podido cargar los avisos urgentes.'"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/src/webparts/templatesLibrary/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/src/webparts/templatesLibrary/components/WebPartErrorBoundary.tsx",
+      "line": 18,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/src/webparts/templatesLibrary/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/components/SearchResultCard.tsx",
+      "line": 23,
+      "snippet": "{props.item.isFeatured ? <span>Destacado</span> : null}"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/src/webparts/corporateResourcesSearch/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/buzon-de-ideas/src/webparts/ideasMailbox/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/buzon-de-ideas/src/webparts/ideasMailbox/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/buzon-de-ideas/src/webparts/ideasMailbox/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/components/QuickActionsCenter.tsx",
+      "line": 57,
+      "snippet": "{viewModel.errorMessage ?? 'No se han podido cargar las acciones rápidas.'}"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/components/QuickActionsCenter.tsx",
+      "line": 83,
+      "snippet": "<Text variant=\"large\">No hay acciones configuradas.</Text>"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/src/webparts/quickActionsCenter/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/OffboardingOrChangeChecklist.tsx",
+      "line": 181,
+      "snippet": "<Spinner size={SpinnerSize.large} label=\"Cargando checklist\" />"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/OffboardingOrChangeChecklist.tsx",
+      "line": 202,
+      "snippet": "title=\"No hay pasos configurados\""
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/OffboardingOrChangeChecklist.tsx",
+      "line": 238,
+      "snippet": "title=\"No hay coincidencias con los filtros\""
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/hooks/useOffboardingOrChangeChecklist.ts",
+      "line": 32,
+      "snippet": "hasError: snapshot.status === 'error',"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/services/offboardingOrChangeChecklistService.ts",
+      "line": 16,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/services/offboardingOrChangeChecklistService.ts",
+      "line": 22,
+      "snippet": "hasError: input.hasError,"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/services/offboardingOrChangeChecklistService.ts",
+      "line": 44,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/src/webparts/offboardingOrChangeChecklist/services/offboardingOrChangeChecklistService.ts",
+      "line": 75,
+      "snippet": "hasError: true,"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/OnboardingChecklist.tsx",
+      "line": 190,
+      "snippet": "<Spinner size={SpinnerSize.large} label=\"Cargando checklist de onboarding\" />"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/OnboardingChecklist.tsx",
+      "line": 211,
+      "snippet": "title=\"No hay pasos configurados\""
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/OnboardingChecklist.tsx",
+      "line": 247,
+      "snippet": "title=\"No hay coincidencias con los filtros\""
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/hooks/useOnboardingChecklist.ts",
+      "line": 32,
+      "snippet": "hasError: snapshot.status === 'error',"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/services/onboardingChecklistService.ts",
+      "line": 16,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/services/onboardingChecklistService.ts",
+      "line": 22,
+      "snippet": "hasError: input.hasError,"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/services/onboardingChecklistService.ts",
+      "line": 44,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/checklist-de-onboarding/src/webparts/onboardingChecklist/services/onboardingChecklistService.ts",
+      "line": 75,
+      "snippet": "hasError: true,"
+    },
+    {
+      "file": "projects/como-hago-esto/src/webparts/howDoIDoThis/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/como-hago-esto/src/webparts/howDoIDoThis/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/como-hago-esto/src/webparts/howDoIDoThis/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/src/webparts/profileBasedComponent/services/profileBasedComponentService.ts",
+      "line": 69,
+      "snippet": "message: 'No hay contenido específico para tu perfil.'"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/components/MeetTheTeamView.tsx",
+      "line": 90,
+      "snippet": "No hay miembros del equipo configurados."
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/hooks/useMeetTheTeam.ts",
+      "line": 41,
+      "snippet": "sourceLabel: 'No se han podido cargar los miembros.',"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/repositories/TeamMembersRepository.ts",
+      "line": 222,
+      "snippet": "throw new Error('Directory/API debe ser same-origin o relativa.');"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/services/MeetTheTeamService.ts",
+      "line": 24,
+      "snippet": "sourceLabel: 'Cargando miembros del equipo...',"
+    },
+    {
+      "file": "projects/conoce-al-equipo/src/webparts/meetTheTeam/services/MeetTheTeamService.ts",
+      "line": 47,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/repositories/countdownConfigRepository.ts",
+      "line": 63,
+      "snippet": "throw new Error(`No se pudo leer el origen (${response.status}).`);"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/repositories/countdownConfigRepository.ts",
+      "line": 137,
+      "snippet": "throw new Error('jsonUrl debe ser same-origin o relativa.');"
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/src/webparts/eventCountdown/services/countdownService.ts",
+      "line": 119,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/repositories/peopleCelebrationsRepository.ts",
+      "line": 186,
+      "snippet": "let lastError: Error | undefined;"
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/src/webparts/birthdaysAndAnniversaries/services/celebrationService.ts",
+      "line": 92,
+      "snippet": "hasError: Boolean(input.errorMessage),"
+    },
+    {
+      "file": "projects/directorio-express/src/webparts/expressDirectory/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/directorio-express/src/webparts/expressDirectory/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/directorio-express/src/webparts/expressDirectory/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/directorio-express/src/webparts/expressDirectory/services/ExpressDirectoryService.ts",
+      "line": 113,
+      "snippet": "hasError: hasFailures && !hasData,"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/HighlightedIncidents.tsx",
+      "line": 53,
+      "snippet": "title=\"Cargando incidencias destacadas\""
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/HighlightedIncidents.tsx",
+      "line": 71,
+      "snippet": "title=\"No hay incidencias destacadas\""
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/HighlightedIncidents.tsx",
+      "line": 88,
+      "snippet": "title=\"No hay incidencias destacadas\""
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/HighlightedIncidentsState.tsx",
+      "line": 15,
+      "snippet": "<div className={styles.shimmerList} aria-label=\"Cargando incidencias destacadas\">"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/repositories/jsonIncidentsRepository.ts",
+      "line": 58,
+      "snippet": "throw new Error(`No se pudo leer el JSON de incidencias (${response.status}).`);"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/repositories/sharePointIncidentsRepository.ts",
+      "line": 98,
+      "snippet": "throw new Error(`No se pudo leer la lista de incidencias (${response.status}).`);"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/utils/highlightedIncidentsUtils.ts",
+      "line": 26,
+      "snippet": "high: 'Alta',"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/utils/highlightedIncidentsUtils.ts",
+      "line": 27,
+      "snippet": "medium: 'Media',"
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/src/webparts/highlightedIncidents/utils/highlightedIncidentsUtils.ts",
+      "line": 28,
+      "snippet": "low: 'Baja',"
+    },
+    {
+      "file": "projects/estado-de-proyectos/src/webparts/projectStatus/components/ProjectStatus.tsx",
+      "line": 34,
+      "snippet": "title=\"Cargando proyectos\""
+    },
+    {
+      "file": "projects/estado-de-proyectos/src/webparts/projectStatus/components/ProjectStatus.tsx",
+      "line": 48,
+      "snippet": "title=\"No hay proyectos visibles\""
+    },
+    {
+      "file": "projects/estado-de-proyectos/src/webparts/projectStatus/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/estado-de-proyectos/src/webparts/projectStatus/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/estado-de-proyectos/src/webparts/projectStatus/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/InternalServicesStatus.tsx",
+      "line": 55,
+      "snippet": "hasError: status === \"error\","
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/InternalServicesStatus.tsx",
+      "line": 112,
+      "snippet": "title=\"Cargando servicios\""
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/InternalServicesStatus.tsx",
+      "line": 119,
+      "snippet": "title=\"No hay servicios para este filtro\""
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/InternalServicesStatus.tsx",
+      "line": 140,
+      "snippet": "{result?.lastUpdated ? `Actualizado: ${new Intl.DateTimeFormat(\"es-ES\", {"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/StatusToolbar.tsx",
+      "line": 28,
+      "snippet": "loading: \"Cargando\","
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/src/webparts/internalServicesStatus/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/faq-inteligente/src/webparts/smartFaq/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/faq-inteligente/src/webparts/smartFaq/components/WebPartErrorBoundary.tsx",
+      "line": 18,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/faq-inteligente/src/webparts/smartFaq/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/FavoriteCard.tsx",
+      "line": 22,
+      "snippet": "{item.featured ? <span className={styles.badge}>Destacado</span> : null}"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/FavoriteCard.tsx",
+      "line": 41,
+      "snippet": "{item.featured ? <span className={styles.badge}>Destacado</span> : null}"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/FavoriteCard.tsx",
+      "line": 59,
+      "snippet": "{item.featured ? <span className={styles.badge}>Destacado</span> : null}"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/FavoritesState.tsx",
+      "line": 20,
+      "snippet": "<Spinner size={SpinnerSize.medium} label=\"Cargando favoritos...\" />"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/FavoritesState.tsx",
+      "line": 37,
+      "snippet": "<h3 className={styles.emptyTitle}>No tienes favoritos visibles, {props.userDisplayName || 'usuario'}.</h3>"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/repositories/favoritesRepository.ts",
+      "line": 68,
+      "snippet": "warnings: ['No se pudo resolver el usuario actual para filtrar FavoritesList.'],"
+    },
+    {
+      "file": "projects/favoritos-personales/src/webparts/personalFavorites/repositories/favoritesRepository.ts",
+      "line": 88,
+      "snippet": "throw new Error(`No se pudo leer FavoritesList (${response.status}).`);"
+    },
+    {
+      "file": "projects/glosario-corporativo/src/webparts/corporateGlossary/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/glosario-corporativo/src/webparts/corporateGlossary/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/glosario-corporativo/src/webparts/corporateGlossary/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/hooks/useStartARequest.ts",
+      "line": 43,
+      "snippet": "hasError: boolean,"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/services/requestsCatalogService.ts",
+      "line": 17,
+      "snippet": "hasError: boolean,"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/utils/startARequestUtils.ts",
+      "line": 323,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/inicia-una-solicitud/src/webparts/startARequest/utils/startARequestUtils.ts",
+      "line": 329,
+      "snippet": "hasError: input.hasError,"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/components/KpiMiniCards.tsx",
+      "line": 50,
+      "snippet": "title=\"No se han podido cargar los KPIs\""
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/components/KpiMiniCards.tsx",
+      "line": 61,
+      "snippet": "title=\"No hay KPIs configurados\""
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/services/kpiCatalogService.ts",
+      "line": 154,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/services/kpiCatalogService.ts",
+      "line": 160,
+      "snippet": "hasError: input.hasError,"
+    },
+    {
+      "file": "projects/kpi-mini-cards/src/webparts/kpiMiniCards/utils/kpiLink.ts",
+      "line": 30,
+      "snippet": "return 'Baja';"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/LaunchCard.tsx",
+      "line": 38,
+      "snippet": "{item.featured ? <span className={styles.featuredChip}>Destacado</span> : <span className={styles.mutedChip}>Acceso</span>}"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/UniversalAppLauncher.tsx",
+      "line": 27,
+      "snippet": "return <Spinner size={SpinnerSize.medium} label=\"Cargando accesos\" />;"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/UniversalAppLauncher.tsx",
+      "line": 33,
+      "snippet": "title={status === 'error' ? 'No se han podido cargar los accesos' : 'No hay accesos para esta audiencia'}"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/hooks/useLaunchCatalog.ts",
+      "line": 89,
+      "snippet": "hasError: Boolean(loadError),"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/services/launchCatalogService.ts",
+      "line": 96,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/src/webparts/universalAppLauncher/services/launchCatalogService.ts",
+      "line": 102,
+      "snippet": "hasError: input.hasError,"
+    },
+    {
+      "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/mantenimientos-programados/src/webparts/plannedMaintenance/services/PlannedMaintenanceService.ts",
+      "line": 64,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/mapa-de-portales/src/webparts/portalMap/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mapa-de-portales/src/webparts/portalMap/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/mapa-de-portales/src/webparts/portalMap/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/repositories/pollRepository.ts",
+      "line": 173,
+      "snippet": "trimToUndefined(question.thankYouMessage) || 'Respuesta registrada.',"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/repositories/pollRepository.ts",
+      "line": 225,
+      "snippet": "'Respuesta registrada.',"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/repositories/pollRepository.ts",
+      "line": 297,
+      "snippet": "trimToUndefined(question.thankYouMessage) || 'Respuesta registrada.',"
+    },
+    {
+      "file": "projects/microencuesta/src/webparts/microSurvey/services/microSurveyService.ts",
+      "line": 40,
+      "snippet": "hasError: !!response.errorMessage,"
+    },
+    {
+      "file": "projects/mini-organigrama/src/webparts/miniOrgChart/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mini-organigrama/src/webparts/miniOrgChart/components/WebPartErrorBoundary.tsx",
+      "line": 17,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/mini-organigrama/src/webparts/miniOrgChart/components/WebPartErrorBoundary.tsx",
+      "line": 21,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/mini-organigrama/src/webparts/miniOrgChart/utils/miniOrgChartUtils.ts",
+      "line": 319,
+      "snippet": "hasError: loadResult.errors.length > 0 && !loadResult.people.length,"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/components/WebPartErrorBoundary.tsx",
+      "line": 20,
+      "snippet": "this.state = { hasError: false };"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "return { hasError: true };"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/models/recentAccesses.constants.ts",
+      "line": 20,
+      "snippet": "empty: 'No hay accesos recientes visibles.',"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/models/recentAccesses.constants.ts",
+      "line": 21,
+      "snippet": "error: 'No se han podido cargar tus accesos recientes.',"
+    },
+    {
+      "file": "projects/mis-accesos-recientes/src/webparts/myRecentAccesses/models/recentAccesses.constants.ts",
+      "line": 23,
+      "snippet": "loading: 'Cargando accesos recientes',"
+    },
+    {
+      "file": "projects/mis-aprobaciones/src/webparts/myApprovals/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mis-aprobaciones/src/webparts/myApprovals/components/WebPartErrorBoundary.tsx",
+      "line": 18,
+      "snippet": "hasError: false"
+    },
+    {
+      "file": "projects/mis-aprobaciones/src/webparts/myApprovals/components/WebPartErrorBoundary.tsx",
+      "line": 24,
+      "snippet": "hasError: true"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/components/MyUsefulDocuments.tsx",
+      "line": 28,
+      "snippet": "<Spinner label=\"Cargando documentos...\" />"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/components/MyUsefulDocuments.tsx",
+      "line": 36,
+      "snippet": "<MessageBar>No hay documentos útiles visibles.</MessageBar>"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/components/MyUsefulDocuments.tsx",
+      "line": 44,
+      "snippet": "<MessageBar messageBarType={2}>Error: {props.message}</MessageBar>"
+    },
+    {
+      "file": "projects/mis-documentos-utiles/src/webparts/myUsefulDocuments/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/src/webparts/myTasksAndPending/components/MyTasksAndPending.tsx",
+      "line": 28,
+      "snippet": "<Spinner label=\"Cargando tareas...\" />"
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/src/webparts/myTasksAndPending/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/noticias-por-area/src/webparts/newsByArea/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/src/webparts/newJoiners/components/NewJoiners.tsx",
+      "line": 28,
+      "snippet": "<Spinner label=\"Cargando incorporaciones...\" />"
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/src/webparts/newJoiners/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/objetivos-del-area/src/webparts/areaGoals/components/AreaGoals.tsx",
+      "line": 29,
+      "snippet": "<Spinner label=\"Cargando objetivos...\" />"
+    },
+    {
+      "file": "projects/objetivos-del-area/src/webparts/areaGoals/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/src/webparts/internalCampaignPanel/components/InternalCampaignPanel.tsx",
+      "line": 28,
+      "snippet": "<Spinner label=\"Cargando campañas...\" />"
+    },
+    {
+      "file": "projects/panel-de-campana-interna/src/webparts/internalCampaignPanel/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/pregunta-destacada/src/webparts/featuredQuestion/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/presencia-de-sedes/src/webparts/sitesPresence/components/SitesPresence.tsx",
+      "line": 10,
+      "snippet": "function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label=\"Cargando...\" /></div>; }"
+    },
+    {
+      "file": "projects/presencia-de-sedes/src/webparts/sitesPresence/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/proximos-hitos/src/webparts/upcomingMilestones/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/pulso-del-dia/src/webparts/dailyPulse/components/DailyPulse.tsx",
+      "line": 55,
+      "snippet": "<Spinner size={SpinnerSize.large} label=\"Cargando pulso del día\" />"
+    },
+    {
+      "file": "projects/pulso-del-dia/src/webparts/dailyPulse/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/pulso-del-dia/src/webparts/dailyPulse/services/dailyPulseService.ts",
+      "line": 19,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/que-ha-cambiado/src/webparts/whatChangedFeed/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/reconocimientos/src/webparts/recognitions/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/reserva-rapida/src/webparts/quickBooking/components/QuickBooking.tsx",
+      "line": 48,
+      "snippet": "Cargando recursos de reserva"
+    },
+    {
+      "file": "projects/reserva-rapida/src/webparts/quickBooking/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/reserva-rapida/src/webparts/quickBooking/hooks/useQuickBooking.ts",
+      "line": 51,
+      "snippet": "const message = error instanceof Error ? error.message : 'No se han podido cargar los recursos de reserva.';"
+    },
+    {
+      "file": "projects/reserva-rapida/src/webparts/quickBooking/repositories/bookingResourcesRepository.ts",
+      "line": 33,
+      "snippet": "throw new Error('JsonUrl debe ser relativa o mantener el mismo origen que el sitio actual.');"
+    },
+    {
+      "file": "projects/resumen-de-noticias/src/webparts/newsSummary/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/src/webparts/automaticWeeklySummary/components/AutomaticWeeklySummary.tsx",
+      "line": 38,
+      "snippet": "periodLabel={result?.periodLabel ?? 'Cargando periodo'}"
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/src/webparts/automaticWeeklySummary/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/ruta-guiada/src/webparts/guidedRoute/components/GuidedRoute.tsx",
+      "line": 20,
+      "snippet": "<Spinner label=\"Cargando...\" />"
+    },
+    {
+      "file": "projects/ruta-guiada/src/webparts/guidedRoute/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/src/webparts/quickDecisionCard/components/QuickDecisionCard.tsx",
+      "line": 17,
+      "snippet": "function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label=\"Cargando...\" /></div>; }"
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/src/webparts/quickDecisionCard/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/turnos-guardias-o-disponibilidad/src/webparts/shiftsGuardsAvailability/components/ShiftsGuardsAvailability.tsx",
+      "line": 17,
+      "snippet": "function LoadingState(): React.ReactElement { return <div style={{ padding: 20, textAlign: 'center' }}><Spinner label=\"Cargando...\" /></div>; }"
+    },
+    {
+      "file": "projects/turnos-guardias-o-disponibilidad/src/webparts/shiftsGuardsAvailability/components/WebPartErrorBoundary.tsx",
+      "line": 10,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/recycleBinSpaceCalculator/components/RecycleBinSpaceCalculator.tsx",
+      "line": 40,
+      "snippet": "{state.status === 'loading' ? <ProgressIndicator label=\"Cargando diagnóstico...\" /> : null}"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/recycleBinSpaceCalculator/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/recycleBinSpaceCalculator/hooks/useRecycleBinSpaceCalculator.ts",
+      "line": 35,
+      "snippet": "hasError: false,"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/components/SiteResultDetails.tsx",
+      "line": 186,
+      "snippet": "<Stack tokens={{ childrenGap: 12 }} styles={{ root: { padding: '12px 16px 16px 56px', background: '#faf9f8', borderBottom: '1px solid #edebe9' } }}>"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/components/WebPartErrorBoundary.tsx",
+      "line": 11,
+      "snippet": "hasError: boolean;"
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/src/webparts/siteStorageDiagnostics/services/scanEngine.ts",
+      "line": 216,
+      "snippet": "const scanError: IScanError = {"
+    }
+  ]
+}

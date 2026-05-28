@@ -1,0 +1,3589 @@
+[
+  {
+    "file": "package.json",
+    "name": "paquete-webparts",
+    "private": true,
+    "scripts": {
+      "sync:airtable": "node ./scripts/sync-airtable-catalog.mjs",
+      "bootstrap:contexts": "node ./scripts/bootstrap-project-contexts.mjs",
+      "orchestrate:foundation": "npm run sync:airtable && npm run bootstrap:contexts",
+      "scaffold:spfx": "node ./scripts/scaffold-spfx-project.mjs",
+      "prepare:spfx": "node ./scripts/prepare-spfx-project.mjs",
+      "record:issue": "node ./scripts/record-issue.mjs",
+      "progress:board": "node ./scripts/render-progress-board.mjs",
+      "progress:trace": "node ./scripts/render-agent-trace.mjs",
+      "audit:redteam": "node ./scripts/generate-red-team-audit.mjs"
+    },
+    "dependencyCount": 0,
+    "floatingDependencyCount": 0,
+    "floatingDependencies": [],
+    "lifecycleScripts": [],
+    "spfxDeps": [],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "packages/spfx-common/package.json",
+    "name": "@paquete/spfx-common",
+    "private": true,
+    "version": "0.1.0",
+    "scripts": {},
+    "dependencyCount": 0,
+    "floatingDependencyCount": 0,
+    "floatingDependencies": [],
+    "lifecycleScripts": [],
+    "spfxDeps": [],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/a-z-corporativo/package.json",
+    "name": "a-z-corporativo",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/accesos-rapidos-por-audiencia/package.json",
+    "name": "accesos-rapidos-por-audiencia",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/agenda-del-equipo/package.json",
+    "name": "agenda-del-equipo",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package.json",
+    "name": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 28,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-http",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/asistente-contextual-de-pagina/package.json",
+    "name": "asistente-contextual-de-pagina",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 26,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/barra-de-avisos-urgentes/package.json",
+    "name": "barra-de-avisos-urgentes",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 26,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/biblioteca-de-plantillas/package.json",
+    "name": "biblioteca-de-plantillas",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/buscador-de-recursos-corporativos/package.json",
+    "name": "buscador-de-recursos-corporativos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/buzon-de-ideas/package.json",
+    "name": "buzon-de-ideas",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/centro-de-acciones-rapidas/package.json",
+    "name": "centro-de-acciones-rapidas",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/checklist-de-offboarding-o-cambios/package.json",
+    "name": "checklist-de-offboarding-o-cambios",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 3,
+    "floatingDependencies": [
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/checklist-de-onboarding/package.json",
+    "name": "checklist-de-onboarding",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 3,
+    "floatingDependencies": [
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/como-hago-esto/package.json",
+    "name": "como-hago-esto",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/componente-segun-tu-perfil/package.json",
+    "name": "componente-segun-tu-perfil",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 28,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-loader",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/conoce-al-equipo/package.json",
+    "name": "conoce-al-equipo",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/cuenta-atras-a-eventos/package.json",
+    "name": "cuenta-atras-a-eventos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/cumpleanos-y-aniversarios/package.json",
+    "name": "cumpleanos-y-aniversarios",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/directorio-express/package.json",
+    "name": "directorio-express",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/estado-de-incidencias-destacadas/package.json",
+    "name": "estado-de-incidencias-destacadas",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/estado-de-proyectos/package.json",
+    "name": "estado-de-proyectos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/estado-de-servicios-internos/package.json",
+    "name": "estado-de-servicios-internos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/faq-inteligente/package.json",
+    "name": "faq-inteligente",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/favoritos-personales/package.json",
+    "name": "favoritos-personales",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/glosario-corporativo/package.json",
+    "name": "glosario-corporativo",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/inicia-una-solicitud/package.json",
+    "name": "inicia-una-solicitud",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 28,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-http",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/kpi-mini-cards/package.json",
+    "name": "kpi-mini-cards",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/lanzador-universal-de-accesos/package.json",
+    "name": "lanzador-universal-de-accesos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mantenimientos-programados/package.json",
+    "name": "mantenimientos-programados",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mapa-de-portales/package.json",
+    "name": "mapa-de-portales",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/microencuesta/package.json",
+    "name": "microencuesta",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mini-organigrama/package.json",
+    "name": "mini-organigrama",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mis-accesos-recientes/package.json",
+    "name": "mis-accesos-recientes",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mis-aprobaciones/package.json",
+    "name": "mis-aprobaciones",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 28,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-http",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mis-documentos-utiles/package.json",
+    "name": "mis-documentos-utiles",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/mis-tareas-y-pendientes/package.json",
+    "name": "mis-tareas-y-pendientes",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/noticias-por-area/package.json",
+    "name": "noticias-por-area",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/nuevas-incorporaciones/package.json",
+    "name": "nuevas-incorporaciones",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/objetivos-del-area/package.json",
+    "name": "objetivos-del-area",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/panel-de-campana-interna/package.json",
+    "name": "panel-de-campana-interna",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/pregunta-destacada/package.json",
+    "name": "pregunta-destacada",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/presencia-de-sedes/package.json",
+    "name": "presencia-de-sedes",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/proximos-hitos/package.json",
+    "name": "proximos-hitos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/pulso-del-dia/package.json",
+    "name": "pulso-del-dia",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/que-ha-cambiado/package.json",
+    "name": "que-ha-cambiado",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/reconocimientos/package.json",
+    "name": "reconocimientos",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/reserva-rapida/package.json",
+    "name": "reserva-rapida",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/resumen-de-noticias/package.json",
+    "name": "resumen-de-noticias",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/resumen-semanal-automatico/package.json",
+    "name": "resumen-semanal-automatico",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/ruta-guiada/package.json",
+    "name": "ruta-guiada",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/tarjeta-de-decision-rapida/package.json",
+    "name": "tarjeta-de-decision-rapida",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/turnos-guardias-o-disponibilidad/package.json",
+    "name": "turnos-guardias-o-disponibilidad",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 27,
+    "floatingDependencyCount": 4,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  },
+  {
+    "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/package.json",
+    "name": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+      "build": "heft build --clean --production && heft test --production && heft package-solution --production",
+      "start": "heft start --clean",
+      "clean": "heft clean",
+      "eject-webpack": "heft eject-webpack"
+    },
+    "dependencyCount": 28,
+    "floatingDependencyCount": 5,
+    "floatingDependencies": [
+      {
+        "name": "@fluentui/react",
+        "version": "^8.106.4"
+      },
+      {
+        "name": "@microsoft/sp-http",
+        "version": "^1.22.2"
+      },
+      {
+        "name": "@types/webpack-env",
+        "version": "~1.15.2"
+      },
+      {
+        "name": "css-loader",
+        "version": "~7.1.2"
+      },
+      {
+        "name": "typescript",
+        "version": "~5.8.0"
+      }
+    ],
+    "lifecycleScripts": [],
+    "spfxDeps": [
+      {
+        "name": "@microsoft/sp-component-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-core-library",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-http",
+        "version": "^1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-lodash-subset",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-office-ui-fabric-core",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-property-pane",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-webpart-base",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/sp-module-interfaces",
+        "version": "1.22.2"
+      },
+      {
+        "name": "@microsoft/spfx-heft-plugins",
+        "version": "1.22.2"
+      }
+    ],
+    "hasFilesProperty": false
+  }
+]

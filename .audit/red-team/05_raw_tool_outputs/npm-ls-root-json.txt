@@ -1,0 +1,24 @@
+npm ERR! code ELSPROBLEMS
+npm ERR! missing: @paquete/spfx-common@file:C:\dev\paquete-webparts\packages\spfx-common, required by paquete-webparts@
+{
+  "name": "paquete-webparts",
+  "problems": [
+    "missing: @paquete/spfx-common@file:C:\\dev\\paquete-webparts\\packages\\spfx-common, required by paquete-webparts@"
+  ],
+  "dependencies": {
+    "@paquete/spfx-common": {
+      "required": "file:C:\\dev\\paquete-webparts\\packages\\spfx-common",
+      "missing": true,
+      "problems": [
+        "missing: @paquete/spfx-common@file:C:\\dev\\paquete-webparts\\packages\\spfx-common, required by paquete-webparts@"
+      ]
+    }
+  },
+  "error": {
+    "code": "ELSPROBLEMS",
+    "summary": "missing: @paquete/spfx-common@file:C:\\dev\\paquete-webparts\\packages\\spfx-common, required by paquete-webparts@",
+    "detail": ""
+  }
+}
+
+npm ERR! A complete log of this run can be found in: C:\Users\EricVelaAbia\AppData\Local\npm-cache\_logs\2026-05-28T08_46_31_590Z-debug-0.log

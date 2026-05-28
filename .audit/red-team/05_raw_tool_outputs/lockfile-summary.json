@@ -1,0 +1,1120 @@
+{
+  "lockfileCount": 52,
+  "summaries": [
+    {
+      "file": "projects/a-z-corporativo/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "a-z-corporativo",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/accesos-rapidos-por-audiencia/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "accesos-rapidos-por-audiencia",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/agenda-del-equipo/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "agenda-del-equipo",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/analizador-de-tamano-y-volumen-de-documentos-historicos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "analizador-de-tamano-y-volumen-de-documentos-historicos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/asistente-contextual-de-pagina/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "asistente-contextual-de-pagina",
+      "packageCount": 1413,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/barra-de-avisos-urgentes/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "barra-de-avisos-urgentes",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/biblioteca-de-plantillas/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "biblioteca-de-plantillas",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/buscador-de-recursos-corporativos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "buscador-de-recursos-corporativos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/buzon-de-ideas/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "buzon-de-ideas",
+      "packageCount": 1391,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/centro-de-acciones-rapidas/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "centro-de-acciones-rapidas",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/checklist-de-offboarding-o-cambios/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "checklist-de-offboarding-o-cambios",
+      "packageCount": 1365,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/checklist-de-onboarding/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "checklist-de-onboarding",
+      "packageCount": 1365,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/como-hago-esto/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "como-hago-esto",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/componente-segun-tu-perfil/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "componente-segun-tu-perfil",
+      "packageCount": 1415,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/conoce-al-equipo/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "conoce-al-equipo",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/cuenta-atras-a-eventos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "cuenta-atras-a-eventos",
+      "packageCount": 1415,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/cumpleanos-y-aniversarios/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "cumpleanos-y-aniversarios",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/directorio-express/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "directorio-express",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/estado-de-incidencias-destacadas/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "estado-de-incidencias-destacadas",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/estado-de-proyectos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "estado-de-proyectos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/estado-de-servicios-internos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "estado-de-servicios-internos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/faq-inteligente/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "faq-inteligente",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/favoritos-personales/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "favoritos-personales",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/glosario-corporativo/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "glosario-corporativo",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/inicia-una-solicitud/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "inicia-una-solicitud",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/kpi-mini-cards/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "kpi-mini-cards",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/lanzador-universal-de-accesos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "lanzador-universal-de-accesos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mantenimientos-programados/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mantenimientos-programados",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mapa-de-portales/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mapa-de-portales",
+      "packageCount": 1415,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/microencuesta/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "microencuesta",
+      "packageCount": 1415,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mini-organigrama/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mini-organigrama",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mis-accesos-recientes/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mis-accesos-recientes",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mis-aprobaciones/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mis-aprobaciones",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mis-documentos-utiles/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mis-documentos-utiles",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/mis-tareas-y-pendientes/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "mis-tareas-y-pendientes",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/noticias-por-area/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "noticias-por-area",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/nuevas-incorporaciones/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "nuevas-incorporaciones",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/objetivos-del-area/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "objetivos-del-area",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/panel-de-campana-interna/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "panel-de-campana-interna",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/pregunta-destacada/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "pregunta-destacada",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/presencia-de-sedes/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "presencia-de-sedes",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/proximos-hitos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "proximos-hitos",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/pulso-del-dia/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "pulso-del-dia",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/que-ha-cambiado/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "que-ha-cambiado",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/reconocimientos/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "reconocimientos",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/reserva-rapida/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "reserva-rapida",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/resumen-de-noticias/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "resumen-de-noticias",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/resumen-semanal-automatico/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "resumen-semanal-automatico",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/ruta-guiada/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "ruta-guiada",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/tarjeta-de-decision-rapida/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "tarjeta-de-decision-rapida",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/turnos-guardias-o-disponibilidad/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "turnos-guardias-o-disponibilidad",
+      "packageCount": 1359,
+      "dependencyRootCount": 0
+    },
+    {
+      "file": "projects/visualizador-de-elementos-de-biblioteca-y-papelera-superior/package-lock.json",
+      "lockfileVersion": 3,
+      "name": "visualizador-de-elementos-de-biblioteca-y-papelera-superior",
+      "packageCount": 1361,
+      "dependencyRootCount": 0
+    }
+  ],
+  "versionSkewSample": [
+    {
+      "name": "electron-to-chromium",
+      "versions": {
+        "1.5.329": 11,
+        "1.5.321": 24,
+        "1.5.330": 8,
+        "1.5.331": 1,
+        "1.5.328": 7,
+        "1.5.332": 1
+      }
+    },
+    {
+      "name": "@fluentui/react-alert",
+      "versions": {
+        "9.0.0-beta.137": 19,
+        "9.0.0-beta.135": 24,
+        "9.0.0-beta.138": 2,
+        "9.0.0-beta.136": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-avatar",
+      "versions": {
+        "9.10.4": 19,
+        "9.10.2": 24,
+        "9.11.0": 2,
+        "9.10.3": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-components",
+      "versions": {
+        "9.73.6": 19,
+        "9.73.4": 24,
+        "9.73.7": 2,
+        "9.73.5": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-nav",
+      "versions": {
+        "9.3.22": 19,
+        "9.3.20": 24,
+        "9.3.23": 2,
+        "9.3.21": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-persona",
+      "versions": {
+        "9.7.1": 19,
+        "9.6.2": 24,
+        "9.7.2": 2,
+        "9.7.0": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-table",
+      "versions": {
+        "9.19.13": 19,
+        "9.19.11": 24,
+        "9.19.14": 2,
+        "9.19.12": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-tag-picker",
+      "versions": {
+        "9.8.4": 19,
+        "9.8.2": 24,
+        "9.8.5": 2,
+        "9.8.3": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-tags",
+      "versions": {
+        "9.7.19": 19,
+        "9.7.17": 24,
+        "9.8.0": 2,
+        "9.7.18": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-toolbar",
+      "versions": {
+        "9.7.6": 19,
+        "9.7.4": 24,
+        "9.7.7": 2,
+        "9.7.5": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-tree",
+      "versions": {
+        "9.15.15": 19,
+        "9.15.13": 24,
+        "9.15.16": 2,
+        "9.15.14": 7
+      }
+    },
+    {
+      "name": "baseline-browser-mapping",
+      "versions": {
+        "2.10.13": 20,
+        "2.10.10": 24,
+        "2.10.12": 7,
+        "2.10.16": 1
+      }
+    },
+    {
+      "name": "caniuse-lite",
+      "versions": {
+        "1.0.30001782": 16,
+        "1.0.30001781": 21,
+        "1.0.30001784": 9,
+        "1.0.30001786": 1
+      }
+    },
+    {
+      "name": "@fluentui/react-badge",
+      "versions": {
+        "9.5.1": 21,
+        "9.4.15": 24,
+        "9.5.0": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-carousel",
+      "versions": {
+        "9.9.5": 26,
+        "9.9.4": 24,
+        "9.9.6": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-checkbox",
+      "versions": {
+        "9.5.17": 26,
+        "9.5.16": 24,
+        "9.6.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-infobutton",
+      "versions": {
+        "9.0.0-beta.113": 19,
+        "9.0.0-beta.112": 31,
+        "9.0.0-beta.114": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-infolabel",
+      "versions": {
+        "9.4.18": 19,
+        "9.4.17": 31,
+        "9.4.19": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-input",
+      "versions": {
+        "9.8.0": 26,
+        "9.7.16": 24,
+        "9.8.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-list",
+      "versions": {
+        "9.6.12": 26,
+        "9.6.11": 24,
+        "9.6.13": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-menu",
+      "versions": {
+        "9.23.1": 19,
+        "9.23.0": 31,
+        "9.24.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-message-bar",
+      "versions": {
+        "9.6.23": 21,
+        "9.6.21": 24,
+        "9.6.22": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-progress",
+      "versions": {
+        "9.4.17": 19,
+        "9.4.16": 31,
+        "9.5.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-radio",
+      "versions": {
+        "9.6.0": 19,
+        "9.5.16": 31,
+        "9.6.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-search",
+      "versions": {
+        "9.4.0": 26,
+        "9.3.16": 24,
+        "9.4.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-skeleton",
+      "versions": {
+        "9.7.0": 26,
+        "9.6.0": 24,
+        "9.7.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-slider",
+      "versions": {
+        "9.6.0": 26,
+        "9.5.16": 24,
+        "9.6.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-spinbutton",
+      "versions": {
+        "9.6.0": 19,
+        "9.5.16": 31,
+        "9.6.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-spinner",
+      "versions": {
+        "9.8.0": 26,
+        "9.7.15": 24,
+        "9.8.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-switch",
+      "versions": {
+        "9.7.0": 26,
+        "9.6.1": 24,
+        "9.7.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-teaching-popover",
+      "versions": {
+        "9.6.20": 21,
+        "9.6.18": 24,
+        "9.6.19": 7
+      }
+    },
+    {
+      "name": "@fluentui/react-textarea",
+      "versions": {
+        "9.7.0": 26,
+        "9.6.16": 24,
+        "9.7.1": 2
+      }
+    },
+    {
+      "name": "@swc/helpers",
+      "versions": {
+        "0.5.20": 27,
+        "0.5.19": 24,
+        "0.5.21": 1
+      }
+    },
+    {
+      "name": "@typescript-eslint/project-service/node_modules/@typescript-eslint/types",
+      "versions": {
+        "8.58.0": 21,
+        "8.57.2": 30,
+        "8.57.1": 1
+      }
+    },
+    {
+      "name": "@fluentui/react",
+      "versions": {
+        "8.125.5": 50,
+        "8.106.4": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-accordion",
+      "versions": {
+        "9.10.0": 21,
+        "9.9.2": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-accordion/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-alert/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-avatar/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-badge/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-breadcrumb",
+      "versions": {
+        "9.4.0": 28,
+        "9.3.17": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-breadcrumb/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-button",
+      "versions": {
+        "9.9.0": 28,
+        "9.8.2": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-button/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-card",
+      "versions": {
+        "9.6.0": 28,
+        "9.5.11": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-carousel/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-checkbox/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-combobox",
+      "versions": {
+        "9.16.18": 50,
+        "9.17.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-combobox/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-dialog",
+      "versions": {
+        "9.17.3": 21,
+        "9.17.2": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-dialog/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-divider",
+      "versions": {
+        "9.7.0": 28,
+        "9.6.2": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-drawer",
+      "versions": {
+        "9.11.6": 21,
+        "9.11.5": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-field",
+      "versions": {
+        "9.4.16": 50,
+        "9.5.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-field/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-icons",
+      "versions": {
+        "2.0.323": 26,
+        "2.0.321": 20
+      }
+    },
+    {
+      "name": "@fluentui/react-image",
+      "versions": {
+        "9.4.0": 28,
+        "9.3.15": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-infobutton/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-infolabel/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-label",
+      "versions": {
+        "9.3.15": 50,
+        "9.4.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-link",
+      "versions": {
+        "9.8.0": 28,
+        "9.7.4": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-menu/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-message-bar/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-motion",
+      "versions": {
+        "9.14.0": 21,
+        "9.13.0": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-motion-components-preview",
+      "versions": {
+        "0.15.3": 21,
+        "0.15.2": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-nav/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-popover",
+      "versions": {
+        "9.14.1": 21,
+        "9.14.0": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-provider/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-rating",
+      "versions": {
+        "9.4.0": 28,
+        "9.3.15": 24
+      }
+    },
+    {
+      "name": "@fluentui/react-rating/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-search/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-select",
+      "versions": {
+        "9.4.16": 50,
+        "9.5.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-select/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-spinbutton/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-swatch-picker",
+      "versions": {
+        "9.5.0": 50,
+        "9.5.1": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-swatch-picker/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-switch/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-table/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-tabs",
+      "versions": {
+        "9.11.2": 50,
+        "9.12.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-tag-picker/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-tags/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-teaching-popover/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-toast",
+      "versions": {
+        "9.7.16": 21,
+        "9.7.15": 31
+      }
+    },
+    {
+      "name": "@fluentui/react-toast/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@fluentui/react-tooltip",
+      "versions": {
+        "9.9.3": 50,
+        "9.10.0": 2
+      }
+    },
+    {
+      "name": "@fluentui/react-tree/node_modules/@fluentui/react-icons",
+      "versions": {
+        "2.0.321": 3,
+        "2.0.323": 3
+      }
+    },
+    {
+      "name": "@microsoft/sp-loader",
+      "versions": {
+        "1.22.2": 48,
+        "unknown": 4
+      }
+    },
+    {
+      "name": "@microsoft/spfx-heft-plugins/node_modules/webpack/node_modules/tapable",
+      "versions": {
+        "2.3.1": 2,
+        "2.3.2": 3
+      }
+    },
+    {
+      "name": "@microsoft/spfx-web-build-rig/node_modules/tapable",
+      "versions": {
+        "2.3.1": 2,
+        "2.3.2": 3
+      }
+    },
+    {
+      "name": "@rushstack/ts-command-line",
+      "versions": {
+        "5.0.0": 51,
+        "5.1.2": 1
+      }
+    },
+    {
+      "name": "@sinclair/typebox",
+      "versions": {
+        "0.27.10": 51,
+        "0.34.48": 1
+      }
+    },
+    {
+      "name": "@types/jest/node_modules/@sinclair/typebox",
+      "versions": {
+        "0.34.49": 28,
+        "0.34.48": 23
+      }
+    },
+    {
+      "name": "@types/node",
+      "versions": {
+        "25.5.0": 51,
+        "25.5.2": 1
+      }
+    },
+    {
+      "name": "@typescript-eslint/parser/node_modules/brace-expansion",
+      "versions": {
+        "2.0.3": 28,
+        "2.0.2": 24
+      }
+    },
+    {
+      "name": "@typescript-eslint/type-utils/node_modules/brace-expansion",
+      "versions": {
+        "2.0.3": 28,
+        "2.0.2": 24
+      }
+    },
+    {
+      "name": "@typescript-eslint/typescript-estree/node_modules/brace-expansion",
+      "versions": {
+        "2.0.3": 28,
+        "2.0.2": 24
+      }
+    },
+    {
+      "name": "@typescript-eslint/utils/node_modules/brace-expansion",
+      "versions": {
+        "2.0.3": 28,
+        "2.0.2": 24
+      }
+    },
+    {
+      "name": "agent-base",
+      "versions": {
+        "7.1.4": 51,
+        "6.0.2": 1
+      }
+    },
+    {
+      "name": "autoprefixer/node_modules/caniuse-lite",
+      "versions": {
+        "1.0.30001781": 2,
+        "1.0.30001782": 3
+      }
+    },
+    {
+      "name": "brace-expansion",
+      "versions": {
+        "1.1.13": 28,
+        "1.1.12": 24
+      }
+    }
+  ]
+}

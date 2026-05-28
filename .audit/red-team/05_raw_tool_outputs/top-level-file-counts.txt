@@ -1,0 +1,15 @@
+﻿.antigravity: 1
+.atl: 1
+.github: 1
+.gitignore: 1
+.playwright-mcp: 29
+AGENTS.md: 1
+CLAUDE.md: 1
+DESIGN.md: 1
+orchestration: 7
+package.json: 1
+packages: 7
+projects: 2541
+README.md: 1
+scripts: 9
+style-guide: 5
