@@ -2,6 +2,10 @@
   "name": "paquete-webparts",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evela-hiberuscom/webparts-catalog.git"
+  },
   "workspaces": [
     "packages/*"
   ],
