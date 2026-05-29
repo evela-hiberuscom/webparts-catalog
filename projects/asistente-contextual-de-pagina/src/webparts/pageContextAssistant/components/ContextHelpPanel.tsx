@@ -41,7 +41,11 @@ function renderRelatedLinks(result?: IPageContextAssistantResult): React.ReactEl
     .filter((link): link is { label: string; href: string; rel: string; target: string } => Boolean(link));
 
   if (!safeLinks.length) {
-    return undefined;
+    return (
+      <div role="status" className={styles.compactMessage}>
+        No hay enlaces relacionados, pero la ayuda contextual sigue siendo válida.
+      </div>
+    );
   }
 
   return (

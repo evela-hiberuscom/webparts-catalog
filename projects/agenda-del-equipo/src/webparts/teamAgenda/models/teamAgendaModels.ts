@@ -19,16 +19,17 @@ export interface ITeamAgendaConfiguration extends ITeamAgendaWebPartProps {
 
 export interface IAgendaRawItem {
   id: string;
-  title: string | null;
-  startsAt: string | null;
-  endsAt: string | null;
-  eventType: string | null;
-  location: string | null;
-  joinUrl: string | null;
-  openUrl: string | null;
+  title?: string;
+  startsAt?: string;
+  endsAt?: string;
+  eventType?: string;
+  location?: string;
+  joinUrl?: string;
+  openUrl?: string;
 }
 
-export interface IAgendaItem extends IAgendaRawItem {
+export interface IAgendaItem extends Omit<IAgendaRawItem, 'title'> {
+  title: string;
   group: AgendaGroup;
   isPartial: boolean;
 }

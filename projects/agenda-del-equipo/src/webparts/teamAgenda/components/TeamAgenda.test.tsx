@@ -19,6 +19,7 @@ jest.mock('TeamAgendaWebPartStrings', () => ({
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { registerIcons } from '@fluentui/react';
 import { act } from 'react-dom/test-utils';
 
 import TeamAgenda from './TeamAgenda';
@@ -40,6 +41,13 @@ describe('TeamAgenda', () => {
   };
 
   beforeEach(() => {
+    registerIcons({
+      icons: {
+        calendar: <span />,
+        chevrondown: <span />,
+        poi: <span />
+      }
+    });
     container = document.createElement('div');
     document.body.appendChild(container);
   });
@@ -60,11 +68,11 @@ describe('TeamAgenda', () => {
             id: '1',
             title: 'Daily',
             startsAt: '2026-04-09T09:00:00.000Z',
-            endsAt: null,
+            endsAt: undefined,
             eventType: 'Seguimiento',
             location: 'Teams',
             joinUrl: 'https://teams.microsoft.com/l/meetup-join/example',
-            openUrl: null,
+            openUrl: undefined,
             group: 'today',
             isPartial: false
           }

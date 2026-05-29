@@ -1,0 +1,12 @@
+$ npm run check:locks
+Started: 2026-05-28T20:34:27.324Z
+
+
+> check:locks
+> node ./scripts/check-lockfile-consistency.mjs
+
+@paquete/spfx-common lockfile entries are consistent.
+
+Ended: 2026-05-28T20:34:28.580Z
+Exit code: 0
+Signal: 

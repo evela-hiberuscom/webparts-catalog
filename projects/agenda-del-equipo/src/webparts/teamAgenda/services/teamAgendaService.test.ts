@@ -22,12 +22,12 @@ describe('teamAgendaService', () => {
           {
             id: '1',
             title: 'Daily',
-            startsAt: '2026-04-09T09:00:00.000Z',
-            endsAt: null,
+            startsAt: '2099-04-09T09:00:00.000Z',
+            endsAt: undefined,
             eventType: 'Seguimiento',
             location: 'Teams',
             joinUrl: 'https://teams.microsoft.com/l/meetup-join/example',
-            openUrl: null
+            openUrl: undefined
           }
         ],
         warnings: [],
@@ -48,12 +48,12 @@ describe('teamAgendaService', () => {
           {
             id: '1',
             title: 'Demo',
-            startsAt: '2026-04-09T09:00:00.000Z',
-            endsAt: null,
+            startsAt: '2099-04-09T09:00:00.000Z',
+            endsAt: undefined,
             eventType: 'Demo',
-            location: null,
-            joinUrl: null,
-            openUrl: null
+            location: undefined,
+            joinUrl: undefined,
+            openUrl: undefined
           }
         ],
         warnings: [],

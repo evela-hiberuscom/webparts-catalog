@@ -76,7 +76,7 @@ export function buildSharePointListEndpoint(listTitleOrUrl?: string, webAbsolute
   return `/_api/web/GetList(@listUrl)/items?@listUrl='${encodedPath}'&$select=Id,Title,JobTitle,PhotoUrl,ProfileUrl,ManagerId,ReportIds,Department,EMail&$top=500`;
 }
 
-function splitValues(value?: string | string[] | number[] | null): string[] {
+function splitValues(value?: string | string[] | number[]): string[] {
   if (!value) {
     return [];
   }
@@ -88,7 +88,7 @@ function splitValues(value?: string | string[] | number[] | null): string[] {
   return String(value).split(/[;,|]/).map((item) => item.trim()).filter(Boolean);
 }
 
-function firstText(...values: Array<string | null | undefined>): string | undefined {
+function firstText(...values: Array<string | undefined>): string | undefined {
   for (const value of values) {
     const normalized = normalizeText(value ?? undefined);
     if (normalized) {
@@ -99,7 +99,7 @@ function firstText(...values: Array<string | null | undefined>): string | undefi
   return undefined;
 }
 
-export function normalizeOrgPerson(raw: Record<string, unknown>, sourceLabel: MiniOrgChartDataSourceType | 'Unknown'): IOrgPerson | null {
+export function normalizeOrgPerson(raw: Record<string, unknown>, sourceLabel: MiniOrgChartDataSourceType | 'Unknown'): IOrgPerson | undefined {
   const displayName = firstText(
     typeof raw.displayName === 'string' ? raw.displayName : undefined,
     typeof raw.DisplayName === 'string' ? raw.DisplayName : undefined,
@@ -108,7 +108,7 @@ export function normalizeOrgPerson(raw: Record<string, unknown>, sourceLabel: Mi
   );
 
   if (!displayName) {
-    return null;
+    return undefined;
   }
 
   const profileUrl = firstText(
@@ -257,10 +257,10 @@ function sortChildPeople(left: IOrgPerson, right: IOrgPerson): number {
   return sortPeople(left, right);
 }
 
-export function buildOrgTree(people: IOrgPerson[], rootPersonId?: string, maxDepth = 2): IOrgTreeNode | null {
+export function buildOrgTree(people: IOrgPerson[], rootPersonId?: string, maxDepth = 2): IOrgTreeNode | undefined {
   const root = pickRootPerson(people, rootPersonId);
   if (!root) {
-    return null;
+    return undefined;
   }
 
   const buildNode = (person: IOrgPerson, depth: number): IOrgTreeNode => ({
@@ -276,7 +276,7 @@ export function buildOrgTree(people: IOrgPerson[], rootPersonId?: string, maxDep
   return buildNode(root, 1);
 }
 
-export function flattenTree(node: IOrgTreeNode | null): IOrgPerson[] {
+export function flattenTree(node: IOrgTreeNode | undefined): IOrgPerson[] {
   if (!node) {
     return [];
   }
@@ -287,14 +287,14 @@ export function flattenTree(node: IOrgTreeNode | null): IOrgPerson[] {
   );
 }
 
-export function filterTree(node: IOrgTreeNode | null, query: string): IOrgTreeNode | null {
+export function filterTree(node: IOrgTreeNode | undefined, query: string): IOrgTreeNode | undefined {
   const normalizedQuery = normalizeSearchText(query);
   if (!normalizedQuery) {
     return node;
   }
 
   if (!node) {
-    return null;
+    return undefined;
   }
 
   const matches = [node.person.displayName, node.person.jobTitle, node.person.department, node.person.email]
@@ -303,7 +303,7 @@ export function filterTree(node: IOrgTreeNode | null, query: string): IOrgTreeNo
   const children = node.children.map((child) => filterTree(child, normalizedQuery)).filter((child): child is IOrgTreeNode => !!child);
 
   if (!matches && !children.length) {
-    return null;
+    return undefined;
   }
 
   return { ...node, children };
@@ -313,7 +313,7 @@ export function createProfileLink(person: IOrgPerson): { href: string; rel: stri
   return createSafeExternalLink(person.profileUrl ?? '');
 }
 
-export function buildViewState(loadResult: IOrgLoadResult, tree: IOrgTreeNode | null): MiniOrgChartState {
+export function buildViewState(loadResult: IOrgLoadResult, tree: IOrgTreeNode | undefined): MiniOrgChartState {
   return classifyAsyncState({
     hasData: !!tree,
     hasError: loadResult.errors.length > 0 && !loadResult.people.length,
@@ -322,7 +322,7 @@ export function buildViewState(loadResult: IOrgLoadResult, tree: IOrgTreeNode | 
   });
 }
 
-export function buildViewModel(loadResult: IOrgLoadResult, tree: IOrgTreeNode | null, query: string): IOrgViewModel {
+export function buildViewModel(loadResult: IOrgLoadResult, tree: IOrgTreeNode | undefined, query: string): IOrgViewModel {
   const filteredTree = filterTree(tree, query);
   const flatPeople = flattenTree(filteredTree);
 

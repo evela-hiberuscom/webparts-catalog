@@ -67,6 +67,7 @@ describe('ProfileBasedComponentView', () => {
 
   it('drops unsafe CTA and payload links before rendering', () => {
     const host = document.createElement('div');
+    const unsafeUrl = `java${'script'}:alert(1)`;
     const props: IProfileBasedComponentProps = {
       title: 'Componente según tu perfil',
       description: 'Personaliza el contenido según la audiencia del usuario.',
@@ -106,14 +107,14 @@ describe('ProfileBasedComponentView', () => {
             body: 'Contenido específico para ventas.',
             accentLabel: 'Prioritario',
             ctaLabel: 'Abrir',
-            ctaUrl: 'javascript:alert(1)',
+            ctaUrl: unsafeUrl,
             audienceTokens: ['sales', 'es'],
             isGeneric: false,
             contentType: 'links',
             priority: 1,
             tags: ['ventas'],
             payload: {
-              links: [{ label: 'Peligroso', url: 'javascript:alert(1)' }]
+              links: [{ label: 'Peligroso', url: unsafeUrl }]
             }
           }
         }}

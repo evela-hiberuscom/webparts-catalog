@@ -2,6 +2,15 @@ import { SPHttpClient } from '@microsoft/sp-http';
 import type { FetchLike, IRouteStep, IGuidedRouteConfiguration } from '../models/guidedRouteModels';
 import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
+interface IRouteStepListItem {
+  Id?: number | string;
+  Title?: string;
+  Description?: string;
+  LinkUrl?: string;
+  Icon?: string;
+  Order?: number;
+}
+
 export class GuidedRouteRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
@@ -22,8 +31,15 @@ export class GuidedRouteRepository {
   private async getRouteFromSharePoint(listTitleOrUrl: string, maxSteps: number): Promise<IRouteStep[]> {
     const response = await this._spHttpClient.get(`${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(listTitleOrUrl)}')/items?$top=${maxSteps}`, SPHttpClient.configurations.v1);
     if (!response.ok) throw new Error(`Failed: ${response.status}`);
-    const data = await response.json();
-    return (data.value || []).map((item: any) => ({ id: String(item.Id), title: item.Title || 'Paso', description: item.Description || '', linkUrl: item.LinkUrl || undefined, icon: item.Icon || 'Circle1', order: item.Order || 0 }));
+    const data = await response.json() as { value?: IRouteStepListItem[] };
+    return (data.value || []).map((item) => ({
+      id: String(item.Id),
+      title: item.Title || 'Paso',
+      description: item.Description || '',
+      linkUrl: item.LinkUrl || undefined,
+      icon: item.Icon || 'Circle1',
+      order: item.Order || 0
+    }));
   }
 
   private async getRouteFromJsonUrl(jsonUrl: string, maxSteps: number): Promise<IRouteStep[]> {

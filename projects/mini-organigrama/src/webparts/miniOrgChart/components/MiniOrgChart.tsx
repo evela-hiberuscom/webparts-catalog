@@ -10,7 +10,7 @@ import { PeopleSearchBar } from './PeopleSearchBar';
 import { OrgNodeCard } from './OrgNodeCard';
 import type { IOrgTreeNode } from '../models/miniOrgChartModels';
 
-function renderTree(node: IOrgTreeNode | null, mode: 'managerWithReports' | 'chain' | 'smallTree'): React.ReactNode {
+function renderTree(node: IOrgTreeNode | undefined, mode: 'managerWithReports' | 'chain' | 'smallTree'): React.ReactNode {
   if (!node) {
     return null;
   }
@@ -128,4 +128,3 @@ export default function MiniOrgChart(props: IMiniOrgChartProps): React.ReactElem
     </section>
   );
 }
-

@@ -4,7 +4,7 @@ interface ISharePointHyperlinkValue {
   Url?: string;
 }
 
-type SharePointFieldValue = string | ISharePointHyperlinkValue | null | undefined;
+type SharePointFieldValue = string | ISharePointHyperlinkValue | undefined;
 
 const DATE_FIELDS = ['MilestoneDate', 'TargetDate', 'EventDate', 'Date', 'DueDate', 'PlannedDate'];
 const TYPE_FIELDS = ['MilestoneType', 'Type', 'Category', 'Phase'];
@@ -18,8 +18,8 @@ function normalizeComparable(value: string): string {
     .toLowerCase();
 }
 
-function isHyperlinkValue(value: SharePointFieldValue): value is ISharePointHyperlinkValue {
-  return typeof value === 'object' && value !== null;
+function isHyperlinkValue(value: unknown): value is ISharePointHyperlinkValue {
+  return typeof value === 'object' && !!value;
 }
 
 export function formatMilestoneDate(value: string | undefined, localeName: string): string {

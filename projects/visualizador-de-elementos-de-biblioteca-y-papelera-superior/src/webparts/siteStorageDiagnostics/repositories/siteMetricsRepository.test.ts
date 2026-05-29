@@ -182,6 +182,7 @@ describe('SiteMetricsRepository', () => {
     });
 
     it('handles missing usage gracefully', async () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
       const get = jest.fn(async () => ({
         ok: false,
         status: 404,
@@ -193,6 +194,10 @@ describe('SiteMetricsRepository', () => {
       const usage = await repo.getSiteUsage('https://contoso.sharepoint.com/sites/test');
 
       expect(usage.storageUsedBytes).toBeUndefined();
+      expect(warnSpy).toHaveBeenCalledWith(
+        '[SiteMetricsRepository] Site usage endpoint returned HTTP 404 for https://contoso.sharepoint.com/sites/test.'
+      );
+      warnSpy.mockRestore();
     });
   });
 

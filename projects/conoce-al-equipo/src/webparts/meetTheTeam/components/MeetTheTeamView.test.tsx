@@ -1,5 +1,7 @@
+/* eslint-disable @rushstack/pair-react-dom-render-unmount */
 import * as React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import * as ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 import { initializeIcons } from '@fluentui/react/lib/Icons';
 
@@ -9,6 +11,20 @@ import type { ITeamMembersViewModel } from '../models/teamMemberModels';
 initializeIcons();
 
 describe('MeetTheTeamView', () => {
+  let container: HTMLDivElement;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+
+  afterEach(() => {
+    act(() => {
+      ReactDOM.unmountComponentAtNode(container);
+    });
+    container.remove();
+  });
+
   it('renders ready state cards', () => {
     const viewModel: ITeamMembersViewModel = {
       title: 'Conoce al equipo',
@@ -32,12 +48,15 @@ describe('MeetTheTeamView', () => {
       ]
     };
 
-    const markup = renderToStaticMarkup(
-      <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />
-    );
+    act(() => {
+      ReactDOM.render(
+        <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />,
+        container
+      );
+    });
 
-    expect(markup).toContain('Laura Perez');
-    expect(markup).toContain('Ver perfil');
+    expect(container.textContent).toContain('Laura Perez');
+    expect(container.textContent).toContain('Ver perfil');
   });
 
   it('renders the empty state message', () => {
@@ -51,11 +70,14 @@ describe('MeetTheTeamView', () => {
       items: []
     };
 
-    const markup = renderToStaticMarkup(
-      <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />
-    );
+    act(() => {
+      ReactDOM.render(
+        <MeetTheTeamView viewModel={viewModel} onRetry={() => undefined} isDarkTheme={false} userDisplayName="Ana" />,
+        container
+      );
+    });
 
-    expect(markup).toContain('Estado: empty');
-    expect(markup).toContain('Reintentar');
+    expect(container.textContent).toContain('Estado: empty');
+    expect(container.textContent).toContain('Reintentar');
   });
 });

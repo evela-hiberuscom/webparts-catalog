@@ -67,6 +67,7 @@ Cada proyecto tiene `docs/red-team/<project-name>.red-team.md` con puntuación 1
 - `npm ci --ignore-scripts && npm run build` en `site-creation-governance`.
 - `npm run build` en los 27 proyectos generados usando la misma matriz de dependencias instalada localmente.
 - `node ./scripts/audit-webpart-completeness.mjs`.
+- Validacion global posterior del catalogo completo: 79 proyectos SPFx, 80 webparts fisicos, 0 fallos finales.
 
 ## 9. Validaciones ejecutadas
 
@@ -77,6 +78,7 @@ Cada proyecto tiene `docs/red-team/<project-name>.red-team.md` con puntuación 1
 - `npm run check:audit-remediation`.
 - Comprobación de unicidad de GUIDs para solution, feature, library y component.
 - Conteo de entregables: 27 `package.json`, 27 `*WebPart.ts`, 27 specs, 27 auditorías red-team y 27 tests de servicio.
+- Guardrails finales del repositorio completo documentados en `docs/orchestrator/final-global-validation.md`.
 
 ## 10. Errores encontrados
 

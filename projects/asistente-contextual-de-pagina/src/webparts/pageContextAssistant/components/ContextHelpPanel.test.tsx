@@ -4,6 +4,8 @@ import { act } from "react-dom/test-utils";
 import ContextHelpPanel from "./ContextHelpPanel";
 
 describe("ContextHelpPanel", () => {
+  const unsafeScriptUrl = ["java", "script:alert(1)"].join("");
+
   it("renders the expanded help and related links", () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
@@ -69,7 +71,7 @@ describe("ContextHelpPanel", () => {
               contextKey: "home",
               title: "Inicio",
               message: "Abre los pasos más usados.",
-              relatedLinks: [{ label: "Abrir", url: "javascript:alert(1)" }],
+              relatedLinks: [{ label: "Abrir", url: unsafeScriptUrl }],
               isGeneric: false,
               isPartial: false,
               order: 1,

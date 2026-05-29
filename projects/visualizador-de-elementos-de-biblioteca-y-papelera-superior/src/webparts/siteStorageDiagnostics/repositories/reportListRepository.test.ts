@@ -1,22 +1,57 @@
 import { ReportListRepository } from './reportListRepository';
+import type { IHttpClient, IHttpResponse } from '../models/httpClient';
+import type { ISiteReportListItem } from '../models/siteReport';
 
 describe('ReportListRepository', () => {
-  function createMockHttpClient(getResponse = {}, postResponse = {}) {
+  function createMockHttpResponse(overrides: Partial<IHttpResponse> = {}): IHttpResponse {
     return {
-      get: jest.fn(async () => ({
-        ok: true,
-        status: 200,
-        headers: { get: () => undefined },
+      ok: true,
+      status: 200,
+      headers: { get: () => undefined },
+      json: async () => ({}),
+      ...overrides
+    };
+  }
+
+  function createMockHttpClient(
+    getResponse: Partial<IHttpResponse> = {},
+    postResponse: Partial<IHttpResponse> = {}
+  ): jest.Mocked<IHttpClient> {
+    const getMock: jest.MockedFunction<IHttpClient['get']> = jest.fn(
+      async (_url, _configuration, _options) => createMockHttpResponse({
         json: async () => ({ value: [] }),
         ...getResponse
-      })),
-      post: jest.fn(async () => ({
-        ok: true,
+      })
+    );
+    const postMock: jest.MockedFunction<IHttpClient['post']> = jest.fn(
+      async (_url, _configuration, _options) => createMockHttpResponse({
         status: 201,
-        headers: { get: () => undefined },
-        json: async () => ({}),
         ...postResponse
-      }))
+      })
+    );
+
+    return {
+      get: getMock,
+      post: postMock
+    };
+  }
+
+  function createReportListItem(overrides: Partial<ISiteReportListItem> = {}): ISiteReportListItem {
+    return {
+      SiteUrl: 'https://contoso.sharepoint.com/sites/test',
+      SiteTitle: 'Test',
+      ScanDate: '2026-01-01',
+      LibraryCount: 0,
+      TotalLibraryItems: 0,
+      RecycleBinItemCount: undefined,
+      RecycleBinSizeBytes: undefined,
+      StorageUsedBytes: undefined,
+      StorageQuotaBytes: undefined,
+      HealthLevel: 'ok',
+      Flags: '',
+      ScanStatus: 'completed',
+      ErrorMessage: undefined,
+      ...overrides
     };
   }
 
@@ -115,8 +150,8 @@ describe('ReportListRepository', () => {
         reportListUrl: 'https://contoso.sharepoint.com/sites/admin/Lists/Reports'
       });
 
-      const item = { SiteUrl: 'https://site.com', SiteTitle: 'Test', ScanDate: '2026-01-01' };
-      await repo.saveReport(item as any);
+      const item = createReportListItem({ SiteUrl: 'https://site.com' });
+      await repo.saveReport(item);
 
       expect(client.post).toHaveBeenCalledWith(
         expect.stringContaining('/items'),
@@ -132,7 +167,7 @@ describe('ReportListRepository', () => {
         reportListUrl: 'https://contoso.sharepoint.com/sites/admin/Lists/Reports'
       });
 
-      await expect(repo.saveReport({ SiteUrl: 'https://x.com' } as any)).rejects.toThrow('HTTP 500');
+      await expect(repo.saveReport(createReportListItem({ SiteUrl: 'https://x.com' }))).rejects.toThrow('HTTP 500');
     });
   });
 
@@ -145,8 +180,8 @@ describe('ReportListRepository', () => {
       });
 
       await repo.saveReportsBatch([
-        { SiteUrl: 'https://a.com' } as any,
-        { SiteUrl: 'https://b.com' } as any
+        createReportListItem({ SiteUrl: 'https://a.com' }),
+        createReportListItem({ SiteUrl: 'https://b.com' })
       ]);
 
       expect(client.post).toHaveBeenCalledTimes(2);

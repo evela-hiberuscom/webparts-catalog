@@ -18,6 +18,10 @@ Review of 27 independent SPFx projects under `projects/sharepoint-governance-web
 | Security risk | No destructive client operations or secrets are present | Keep operations backend-side with dry-run and approval |
 | Documentation | Required global and per-project docs generated | Maintain docs with backend integration changes |
 
+## Repo-wide follow-up
+
+The global repo validation also processed the legacy catalog: 79 SPFx projects and 80 physical webparts. The detailed evidence is tracked in `docs/orchestrator/run-manifest.json`, `docs/orchestrator/final-global-validation.md` and `docs/orchestrator/global-red-team-validation.md`.
+
 ## Final decision
 
-The suite is acceptable as a mock-backed frontend foundation. Production readiness depends on backend APIs, permissions, licensing and tenant validation.
+The governance suite is acceptable as a mock-backed frontend foundation. Production readiness depends on backend APIs, permissions, licensing and tenant validation. The complete catalog currently has no unresolved build/test/package blocker after the final validation pass.

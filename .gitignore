@@ -18,3 +18,10 @@ projects/*/lib/
 projects/*/sharepoint/solution/*.sppkg
 .playwright-mcp
 .commit_msg.txt
+
+# CI run transient outputs — evidencia compacta en validation-progress.md y logs/guardrail-final-*
+docs/orchestrator/run-manifest.json
+docs/orchestrator/logs/projects/
+
+# Test coverage HTML reports — artefactos de build, no fuente
+**/jest-output/

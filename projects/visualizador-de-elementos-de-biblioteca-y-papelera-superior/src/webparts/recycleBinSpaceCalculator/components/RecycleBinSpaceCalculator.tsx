@@ -66,8 +66,8 @@ export default function RecycleBinSpaceCalculator(props: IRecycleBinSpaceCalcula
           <div className={styles.metricsGrid}>
             <StageMetricCard
               title="Total papelera"
-              value={viewModel.totalSizeBytes === null ? 'No disponible' : formatBytes(viewModel.totalSizeBytes)}
-              caption={viewModel.totalSizeBytes === null ? 'Falta una etapa o tamaño parcial' : 'Suma exacta de niveles 1 y 2'}
+              value={viewModel.totalSizeBytes === undefined ? 'No disponible' : formatBytes(viewModel.totalSizeBytes)}
+              caption={viewModel.totalSizeBytes === undefined ? 'Falta una etapa o tamaño parcial' : 'Suma exacta de niveles 1 y 2'}
               iconName="Trash"
               variant={viewModel.hasPartialData ? 'warning' : 'ok'}
             />
@@ -76,14 +76,14 @@ export default function RecycleBinSpaceCalculator(props: IRecycleBinSpaceCalcula
                 <StageMetricCard
                   title={viewModel.stage1.label}
                   value={formatBytes(viewModel.stage1.sizeBytes)}
-                  caption={viewModel.stage1.itemCount === null ? 'No accesible' : `${viewModel.stage1.itemCount} elementos`}
+                  caption={viewModel.stage1.itemCount === undefined ? 'No accesible' : `${viewModel.stage1.itemCount} elementos`}
                   iconName="RecycleBin"
                   variant={viewModel.stage1.isAccessible ? 'ok' : 'neutral'}
                 />
                 <StageMetricCard
                   title={viewModel.stage2.label}
                   value={formatBytes(viewModel.stage2.sizeBytes)}
-                  caption={viewModel.stage2.itemCount === null
+                  caption={viewModel.stage2.itemCount === undefined
                     ? (viewModel.stage2PermissionLimited ? 'Solo administradores de colección' : 'No accesible')
                     : `${viewModel.stage2.itemCount} elementos`}
                   iconName="RecycleBin"

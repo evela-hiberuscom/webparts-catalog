@@ -1,18 +1,18 @@
 import type { AgendaGroup, IAgendaItem, IAgendaRawItem } from '../models/teamAgendaModels';
 
-export function sanitizeUrl(value: string | null | undefined, webUrl: string): string | null {
+export function sanitizeUrl(value: string | undefined, webUrl: string): string | undefined {
   if (!value?.trim()) {
-    return null;
+    return undefined;
   }
 
   try {
     return new URL(value, webUrl).toString();
   } catch {
-    return null;
+    return undefined;
   }
 }
 
-export function getAgendaGroup(startsAt: string | null, now: Date): AgendaGroup {
+export function getAgendaGroup(startsAt: string | undefined, now: Date): AgendaGroup {
   if (!startsAt) {
     return 'unknown';
   }
@@ -43,13 +43,13 @@ export function getAgendaGroup(startsAt: string | null, now: Date): AgendaGroup 
   return 'upcoming';
 }
 
-function normalizeDate(value: string | null): string | null {
+function normalizeDate(value: string | undefined): string | undefined {
   if (!value) {
-    return null;
+    return undefined;
   }
 
   const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString();
 }
 
 export function normalizeAgendaItem(
@@ -60,7 +60,7 @@ export function normalizeAgendaItem(
 ): IAgendaItem {
   const startsAt = normalizeDate(item.startsAt);
   const endsAt = normalizeDate(item.endsAt);
-  const location = item.location?.trim() || null;
+  const location = item.location?.trim() || undefined;
   const joinUrl = sanitizeUrl(item.joinUrl, webUrl);
   const openUrl = sanitizeUrl(item.openUrl, webUrl);
 
@@ -69,7 +69,7 @@ export function normalizeAgendaItem(
     title: item.title?.trim() || `Evento ${index + 1}`,
     startsAt,
     endsAt,
-    eventType: item.eventType?.trim() || null,
+    eventType: item.eventType?.trim() || undefined,
     location,
     joinUrl,
     openUrl,

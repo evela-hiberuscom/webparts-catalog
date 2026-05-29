@@ -93,9 +93,18 @@ export default class TeamAgendaWebPart extends BaseClientSideWebPart<ITeamAgenda
     }
 
     this._isDarkTheme = !!currentTheme.isInverted;
-    this.domElement.style.setProperty('--bodyText', currentTheme.semanticColors.bodyText || null);
-    this.domElement.style.setProperty('--link', currentTheme.semanticColors.link || null);
-    this.domElement.style.setProperty('--linkHovered', currentTheme.semanticColors.linkHovered || null);
+    this._setThemeProperty('--bodyText', currentTheme.semanticColors.bodyText);
+    this._setThemeProperty('--link', currentTheme.semanticColors.link);
+    this._setThemeProperty('--linkHovered', currentTheme.semanticColors.linkHovered);
+  }
+
+  private _setThemeProperty(name: string, value: string | undefined): void {
+    if (value) {
+      this.domElement.style.setProperty(name, value);
+      return;
+    }
+
+    this.domElement.style.removeProperty(name);
   }
 
   protected onDispose(): void {

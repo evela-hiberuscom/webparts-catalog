@@ -51,8 +51,8 @@ describe('recycleBinSpaceCalculatorUtils', () => {
           id: '1',
           stage: 1,
           title: 'A',
-          deletedDate: null,
-          path: null,
+          deletedDate: undefined,
+          path: undefined,
           sizeBytes: 1024 * 1024 * 600
         }
       ],
@@ -71,7 +71,7 @@ describe('recycleBinSpaceCalculatorUtils', () => {
 
   it('treats stage 2 inaccessibility as permission-limited, not unknown', () => {
     const stage1 = aggregateStage(
-      [{ id: '1', stage: 1, title: 'A', deletedDate: null, path: null, sizeBytes: 1024 }],
+      [{ id: '1', stage: 1, title: 'A', deletedDate: undefined, path: undefined, sizeBytes: 1024 }],
       1
     );
     const stage2 = createUnavailableStage(2, 'HTTP 403 al leer la papelera de nivel 2.');
@@ -88,7 +88,7 @@ describe('recycleBinSpaceCalculatorUtils', () => {
 
   it('sets stage2PermissionLimited and uses stage1 data for totals', () => {
     const stage1 = aggregateStage(
-      [{ id: '1', stage: 1, title: 'A', deletedDate: null, path: null, sizeBytes: 2048 }],
+      [{ id: '1', stage: 1, title: 'A', deletedDate: undefined, path: undefined, sizeBytes: 2048 }],
       1
     );
     const stage2 = createUnavailableStage(2, 'HTTP 403 al leer la papelera de nivel 2.');

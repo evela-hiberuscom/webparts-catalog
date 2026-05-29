@@ -101,11 +101,20 @@ export default class HistoricalStorageAnalyzerWebPart extends BaseClientSideWebP
     } = currentTheme;
 
     if (semanticColors) {
-      this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-      this.domElement.style.setProperty('--link', semanticColors.link || null);
-      this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
+      this._setThemeProperty('--bodyText', semanticColors.bodyText);
+      this._setThemeProperty('--link', semanticColors.link);
+      this._setThemeProperty('--linkHovered', semanticColors.linkHovered);
     }
 
+  }
+
+  private _setThemeProperty(name: string, value: string | undefined): void {
+    if (value) {
+      this.domElement.style.setProperty(name, value);
+      return;
+    }
+
+    this.domElement.style.removeProperty(name);
   }
 
   protected onDispose(): void {

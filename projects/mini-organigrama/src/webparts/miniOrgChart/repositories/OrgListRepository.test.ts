@@ -20,7 +20,7 @@ describe('OrgListRepository', () => {
             Title: 'Root Person',
             JobTitle: 'Director',
             ProfileUrl: 'https://contoso.sharepoint.com/sites/hr/person/1',
-            ManagerId: null,
+            ManagerId: undefined,
             ReportIds: '2'
           }
         ]
@@ -52,4 +52,3 @@ describe('OrgListRepository', () => {
     expect(people[0].displayName).toBe('Root Person');
   });
 });
-

@@ -10,17 +10,17 @@ export function normalizeText(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
 
-export function normalizeNumber(value: unknown): number | null {
+export function normalizeNumber(value: unknown): number | undefined {
   if (typeof value === 'number' && Number.isFinite(value)) {
     return value;
   }
 
   if (typeof value === 'string' && value.trim()) {
     const parsed = Number(value);
-    return Number.isFinite(parsed) ? parsed : null;
+    return Number.isFinite(parsed) ? parsed : undefined;
   }
 
-  return null;
+  return undefined;
 }
 
 export function extractArray(payload: unknown): unknown[] {
@@ -53,8 +53,8 @@ export function getStageLabel(stage: RecycleBinStage): string {
   return stage === 1 ? 'Papelera nivel 1' : 'Papelera nivel 2';
 }
 
-export function formatBytes(value: number | null): string {
-  if (value === null) {
+export function formatBytes(value: number | undefined): string {
+  if (value === undefined) {
     return 'No disponible';
   }
 
@@ -76,9 +76,9 @@ export function formatBytes(value: number | null): string {
   return `${Number.isInteger(formattedAmount) ? formattedAmount : formattedAmount.toFixed(precision)} ${units[unitIndex]}`;
 }
 
-export function sumBytes(values: Array<number | null>): number | null {
-  if (values.some((value) => value === null)) {
-    return null;
+export function sumBytes(values: Array<number | undefined>): number | undefined {
+  if (values.some((value) => value === undefined)) {
+    return undefined;
   }
 
   return values.reduce<number>((sum, value) => sum + (value ?? 0), 0);
@@ -99,19 +99,19 @@ export function coerceRecycleBinItem(item: Record<string, unknown>, stage: Recyc
     id: normalizeText(item.Id ?? item.ID ?? item.id ?? item.UniqueId ?? item.UniqueID) || `${stage}-${normalizeText(item.LeafName ?? item.leafName ?? item.Title ?? item.title)}`,
     stage,
     title: normalizeText(item.LeafName ?? item.leafName ?? item.Title ?? item.title) || 'Elemento eliminado',
-    deletedDate: normalizeText(item.DeletedDate ?? item.deletedDate ?? item.TimeDeleted ?? item.timeDeleted) || null,
-    path: normalizeText(item.DirName ?? item.dirName ?? item.Path ?? item.path ?? item.ServerRelativeUrl ?? item.serverRelativeUrl) || null,
+    deletedDate: normalizeText(item.DeletedDate ?? item.deletedDate ?? item.TimeDeleted ?? item.timeDeleted) || undefined,
+    path: normalizeText(item.DirName ?? item.dirName ?? item.Path ?? item.path ?? item.ServerRelativeUrl ?? item.serverRelativeUrl) || undefined,
     sizeBytes: normalizeNumber(item.Size ?? item.size ?? item.ItemSize ?? item.itemSize ?? item.File_x0020_Size ?? item.ContentLength)
   };
 }
 
 export function aggregateStage(items: IRecycleBinItem[], stage: RecycleBinStage): IRecycleBinStageDiagnostics {
   const count = items.length;
-  const sizeBytes = items.every((item) => item.sizeBytes !== null)
+  const sizeBytes = items.every((item) => item.sizeBytes !== undefined)
     ? items.reduce((sum, item) => sum + (item.sizeBytes ?? 0), 0)
-    : null;
+    : undefined;
 
-  const precision = sizeBytes === null ? 'partial' : 'exact';
+  const precision = sizeBytes === undefined ? 'partial' : 'exact';
 
   return {
     stage,
@@ -128,8 +128,8 @@ export function createUnavailableStage(stage: RecycleBinStage, errorMessage: str
   return {
     stage,
     label: getStageLabel(stage),
-    itemCount: null,
-    sizeBytes: null,
+    itemCount: undefined,
+    sizeBytes: undefined,
     precision: 'partial',
     items: [],
     isAccessible: false,
@@ -152,15 +152,15 @@ export function evaluateHealth(args: {
     : sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
   const effectiveItems = stage2PermissionLimited
     ? args.stage1.itemCount
-    : (args.stage1.itemCount !== null && args.stage2.itemCount !== null
+    : (args.stage1.itemCount !== undefined && args.stage2.itemCount !== undefined
         ? args.stage1.itemCount + args.stage2.itemCount
-        : null);
+        : undefined);
 
-  if (effectiveItems !== null && effectiveItems >= args.warningThresholdItems) {
+  if (effectiveItems !== undefined && effectiveItems >= args.warningThresholdItems) {
     reasons.push(`El número de elementos eliminados supera el umbral configurado (${args.warningThresholdItems}).`);
   }
 
-  if (effectiveSizeBytes !== null && effectiveSizeBytes >= args.warningThresholdSizeMb * 1024 * 1024) {
+  if (effectiveSizeBytes !== undefined && effectiveSizeBytes >= args.warningThresholdSizeMb * 1024 * 1024) {
     reasons.push(`El tamaño total supera el umbral configurado (${args.warningThresholdSizeMb} MB).`);
   }
 
@@ -207,17 +207,17 @@ export function buildViewModel(args: {
     : sumBytes([args.stage1.sizeBytes, args.stage2.sizeBytes]);
   const totalItemCount = stage2PermissionLimited
     ? args.stage1.itemCount
-    : (args.stage1.itemCount !== null && args.stage2.itemCount !== null
+    : (args.stage1.itemCount !== undefined && args.stage2.itemCount !== undefined
         ? args.stage1.itemCount + args.stage2.itemCount
-        : null);
+        : undefined);
 
   const hasPartialData = stage2PermissionLimited
-    ? args.stage1.precision === 'partial' || args.stage1.sizeBytes === null
+    ? args.stage1.precision === 'partial' || args.stage1.sizeBytes === undefined
     : (args.stage1.precision === 'partial' ||
        args.stage2.precision === 'partial' ||
        !args.stage1.isAccessible ||
-       totalSizeBytes === null ||
-       totalItemCount === null);
+       totalSizeBytes === undefined ||
+       totalItemCount === undefined);
 
   return {
     siteUrl: args.siteUrl,

@@ -16,16 +16,16 @@ export interface IRecycleBinItem {
   id: string;
   stage: RecycleBinStage;
   title: string;
-  deletedDate: string | null;
-  path: string | null;
-  sizeBytes: number | null;
+  deletedDate: string | undefined;
+  path: string | undefined;
+  sizeBytes: number | undefined;
 }
 
 export interface IRecycleBinStageDiagnostics {
   stage: RecycleBinStage;
   label: string;
-  itemCount: number | null;
-  sizeBytes: number | null;
+  itemCount: number | undefined;
+  sizeBytes: number | undefined;
   precision: RecycleBinPrecision;
   items: IRecycleBinItem[];
   isAccessible: boolean;
@@ -44,8 +44,8 @@ export interface IRecycleBinSpaceCalculatorViewModel {
   description: string;
   stage1: IRecycleBinStageDiagnostics;
   stage2: IRecycleBinStageDiagnostics;
-  totalItemCount: number | null;
-  totalSizeBytes: number | null;
+  totalItemCount: number | undefined;
+  totalSizeBytes: number | undefined;
   hasPartialData: boolean;
   /** Stage 2 is expected to be inaccessible — user is not a Site Collection Administrator. */
   stage2PermissionLimited: boolean;
@@ -86,6 +86,6 @@ export interface IRecycleBinSpaceCalculatorRuntimeContext {
 export interface IRecycleBinSpaceCalculatorState {
   status: 'loading' | 'ready' | 'empty' | 'partialData' | 'error';
   isRefreshing: boolean;
-  viewModel: IRecycleBinSpaceCalculatorViewModel | null;
+  viewModel: IRecycleBinSpaceCalculatorViewModel | undefined;
   errorMessage?: string;
 }

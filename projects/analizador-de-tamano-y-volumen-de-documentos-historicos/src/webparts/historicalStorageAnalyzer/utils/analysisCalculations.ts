@@ -21,7 +21,7 @@ export function normalizeBytes(value: unknown): number {
   return Math.round(parsed);
 }
 
-export function sumBytes(values: Array<number | null | undefined>): number {
+export function sumBytes(values: Array<number | undefined>): number {
   return values.reduce<number>((total, current) => total + normalizeBytes(current), 0);
 }
 
@@ -49,8 +49,8 @@ export function formatPercent(value: number): string {
   return `${safeValue.toFixed(safeValue % 1 === 0 ? 0 : 1)}%`;
 }
 
-export function formatRatio(ratio: number | null | undefined): string {
-  if (ratio === null || ratio === undefined || !Number.isFinite(ratio)) {
+export function formatRatio(ratio: number | undefined): string {
+  if (ratio === undefined || !Number.isFinite(ratio)) {
     return '—';
   }
 
@@ -60,9 +60,9 @@ export function formatRatio(ratio: number | null | undefined): string {
 export function calculateHistoricalRatio(
   historicalSizeBytes: number,
   currentSizeBytes: number
-): number | null {
+): number | undefined {
   if (currentSizeBytes <= 0 || !Number.isFinite(historicalSizeBytes) || historicalSizeBytes < 0) {
-    return null;
+    return undefined;
   }
 
   return historicalSizeBytes / currentSizeBytes;

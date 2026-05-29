@@ -37,8 +37,8 @@ describe('useTeamAgenda', () => {
         title: 'Agenda del equipo',
         description: 'Agenda compartida.',
         items: [
-          { id: '1', title: 'Demo', startsAt: '2026-04-09T09:00:00.000Z', endsAt: null, eventType: 'Demo', location: 'Teams', joinUrl: null, openUrl: null, group: 'today', isPartial: false },
-          { id: '2', title: 'Daily', startsAt: '2026-04-09T10:00:00.000Z', endsAt: null, eventType: 'Seguimiento', location: 'Teams', joinUrl: null, openUrl: null, group: 'today', isPartial: false }
+          { id: '1', title: 'Demo', startsAt: '2026-04-09T09:00:00.000Z', endsAt: undefined, eventType: 'Demo', location: 'Teams', joinUrl: undefined, openUrl: undefined, group: 'today', isPartial: false },
+          { id: '2', title: 'Daily', startsAt: '2026-04-09T10:00:00.000Z', endsAt: undefined, eventType: 'Seguimiento', location: 'Teams', joinUrl: undefined, openUrl: undefined, group: 'today', isPartial: false }
         ],
         availableTypes: ['Demo', 'Seguimiento'],
         hasPartialData: false,

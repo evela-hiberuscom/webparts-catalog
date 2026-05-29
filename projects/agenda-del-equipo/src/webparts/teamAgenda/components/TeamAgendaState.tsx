@@ -8,7 +8,7 @@ export interface ITeamAgendaStateProps {
   state: TeamAgendaLoadState;
 }
 
-export function TeamAgendaState({ state }: ITeamAgendaStateProps): React.ReactElement | null {
+export function TeamAgendaState({ state }: ITeamAgendaStateProps): React.ReactElement {
   switch (state) {
     case 'loading':
       return <Spinner label={strings.LoadingStateLabel} />;
@@ -20,6 +20,6 @@ export function TeamAgendaState({ state }: ITeamAgendaStateProps): React.ReactEl
       return <MessageBar messageBarType={MessageBarType.error}>{strings.ErrorStateMessage}</MessageBar>;
     case 'ready':
     default:
-      return null;
+      return <></>;
   }
 }

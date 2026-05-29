@@ -326,3 +326,9 @@ Este archivo está diseñado para funcionar bien con Codex:
 - `DESIGN.md` se trata como documento complementario especializado.
 - Mantén aquí las reglas duraderas del repositorio.
 - Mantén los archivos de entrada de otras herramientas como wrappers ligeros, no como copias completas.
+
+## Skills reutilizables locales
+
+| Skill | Descripcion | Archivo |
+| --- | --- | --- |
+| `spfx-catalog-orchestrator` | Orquesta inventario, validacion, remediacion, documentacion, red-team y compactacion/limpieza de evidencias para uno, varios o todos los proyectos SPFx del catalogo. | [SKILL.md](skills/spfx-catalog-orchestrator/SKILL.md) |

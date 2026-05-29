@@ -226,7 +226,6 @@ export default function HistoricalStorageAnalyzer(
         {
           label: strings.KpiHistoricalSizeLabel,
           value:
-            result.summary.historicalEstimatedSizeBytes !== null &&
             result.summary.historicalEstimatedSizeBytes !== undefined
               ? formatBytes(result.summary.historicalEstimatedSizeBytes)
               : '—'
@@ -457,7 +456,7 @@ export default function HistoricalStorageAnalyzer(
                     case 'historicalVersionCount':
                       return item.historicalVersionCount.toLocaleString('es-ES');
                     case 'historicalSizeBytes':
-                      return item.historicalSizeBytes === null || item.historicalSizeBytes === undefined
+                      return item.historicalSizeBytes === undefined
                         ? '—'
                         : formatBytes(item.historicalSizeBytes);
                     case 'ratio':

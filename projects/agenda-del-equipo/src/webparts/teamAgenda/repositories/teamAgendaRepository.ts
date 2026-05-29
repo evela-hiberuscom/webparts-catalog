@@ -53,13 +53,13 @@ function normalizeListPath(listTitleOrUrl: string, webUrl: string): string {
 function mapListItem(item: ISPListItem, webUrl: string): IAgendaRawItem {
   return {
     id: String(item.Id ?? `agenda-list-item-${item.Title ?? 'untitled'}`),
-    title: item.Title ?? null,
-    startsAt: item.EventDate ?? item.StartDate ?? null,
-    endsAt: item.EndDate ?? null,
-    eventType: item.Category ?? item.EventType ?? item.AgendaType ?? null,
-    location: item.Location ?? null,
-    joinUrl: item.TeamsMeetingLink ?? item.JoinUrl ?? null,
-    openUrl: item.EncodedAbsUrl ?? (item.FileRef ? `${webUrl}${item.FileRef}` : null)
+    title: item.Title,
+    startsAt: item.EventDate ?? item.StartDate,
+    endsAt: item.EndDate,
+    eventType: item.Category ?? item.EventType ?? item.AgendaType,
+    location: item.Location,
+    joinUrl: item.TeamsMeetingLink ?? item.JoinUrl,
+    openUrl: item.EncodedAbsUrl ?? (item.FileRef ? `${webUrl}${item.FileRef}` : undefined)
   };
 }
 
@@ -88,18 +88,14 @@ function createStaticAgendaItems(webUrl: string): IAgendaRawItem[] {
       endsAt: new Date(tomorrow.setHours(13, 0, 0, 0)).toISOString(),
       eventType: 'Demo',
       location: 'Sala Atlántico',
-      joinUrl: null,
       openUrl: `${webUrl}/SitePages/demo-de-sprint.aspx`
     },
     {
       id: 'agenda-static-3',
       title: 'Revisión de hitos',
       startsAt: new Date(nextWeek.setHours(16, 0, 0, 0)).toISOString(),
-      endsAt: null,
       eventType: 'Hito',
-      location: null,
       joinUrl: `${webUrl}/_layouts/15/teamslogon.aspx`,
-      openUrl: null
     }
   ];
 }

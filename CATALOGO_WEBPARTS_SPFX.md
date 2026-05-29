@@ -8,7 +8,7 @@
 | **Stack** | SPFx 1.22.2, React 17.0.1, Fluent UI ^8.106.4, TypeScript ~5.8.0 |
 | **Total de web parts físicos** | 80 |
 | **Entradas numeradas del catálogo** | 79 (`WP-001`–`WP-079`; `WP-035` contiene 2 webparts físicos) |
-| **Total de proyectos SPFx independientes** | 78 (51 legacy directos + 27 bajo `projects/sharepoint-governance-webparts/`) |
+| **Total de proyectos SPFx independientes** | 79 (52 legacy directos + 27 bajo `projects/sharepoint-governance-webparts/`) |
 | **Build system** | Heft (`heft build --clean --production`) |
 | **Node** | >=22.14.0 < 23.0.0 |
 | **Paquete compartido** | `@paquete/spfx-common` en proyectos legacy; los nuevos webparts de gobernanza usan contratos documentales compartidos en `_governance/` |
@@ -1483,7 +1483,7 @@ Score basado en cuatro criterios ponderados:
 
 ## 12. Conclusión
 
-Este repositorio contiene **78 proyectos SPFx independientes**, albergando **80 web parts físicos**. El catálogo mantiene **79 entradas numeradas** porque `WP-035` contiene dos webparts físicos (`SiteStorageDiagnosticsWebPart` y `RecycleBinSpaceCalculatorWebPart`).
+Este repositorio contiene **79 proyectos SPFx independientes**, albergando **80 web parts físicos**. El catálogo mantiene **79 entradas numeradas** porque `WP-035` contiene dos webparts físicos (`SiteStorageDiagnosticsWebPart` y `RecycleBinSpaceCalculatorWebPart`).
 
 - **SPFx 1.22.2** con React 17.0.1 y Fluent UI v8
 - **Heft** como sistema de build (rushstack 1.1.2)

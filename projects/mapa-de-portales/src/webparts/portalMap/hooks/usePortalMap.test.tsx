@@ -9,6 +9,7 @@ jest.mock(
 
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import { usePortalMap } from './usePortalMap';
 import type { IPortalMapRequest, IPortalMapSnapshot } from '../models/portalMapModels';
 
@@ -45,16 +46,17 @@ describe('usePortalMap', () => {
       return <div data-state={snapshot.state} data-source={snapshot.sourceLabel} />;
     }
 
-    await new Promise<void>((resolve) => {
-      ReactDom.render(<Harness />, container, () => {
-        setTimeout(resolve, 0);
-      });
+    await act(async () => {
+      ReactDom.render(<Harness />, container);
+      await new Promise<void>((resolve) => setTimeout(resolve, 0));
     });
 
     expect(container.firstChild).not.toBeNull();
     expect((container.firstChild as HTMLElement).getAttribute('data-state')).toBe('ready');
     expect(service.resolve).toHaveBeenCalledTimes(1);
 
-    ReactDom.unmountComponentAtNode(container);
+    act(() => {
+      ReactDom.unmountComponentAtNode(container);
+    });
   });
 });

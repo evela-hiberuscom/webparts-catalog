@@ -2,6 +2,17 @@ import { SPHttpClient } from '@microsoft/sp-http';
 import type { FetchLike, IShiftEntry, IShiftsGuardsConfiguration } from '../models/shiftsGuardsModels';
 import { escapeODataString as escapeODataListTitle } from '@paquete/spfx-common';
 
+interface IShiftEntryListItem {
+  Id?: number | string;
+  PersonName?: string;
+  Role?: string;
+  Type?: string;
+  StartTime?: string;
+  EndTime?: string;
+  Contact?: string;
+  Location?: string;
+}
+
 export class ShiftsGuardsRepository {
   private _fetchClient: FetchLike;
   private _spHttpClient: SPHttpClient;
@@ -22,8 +33,17 @@ export class ShiftsGuardsRepository {
   private async getEntriesFromSharePoint(listTitleOrUrl: string, maxItems: number): Promise<IShiftEntry[]> {
     const response = await this._spHttpClient.get(`${this._webAbsoluteUrl}/_api/web/lists/getByTitle('${escapeODataListTitle(listTitleOrUrl)}')/items?$top=${maxItems}`, SPHttpClient.configurations.v1);
     if (!response.ok) throw new Error(`Failed: ${response.status}`);
-    const data = await response.json();
-    return (data.value || []).map((item: any) => ({ id: String(item.Id), personName: item.PersonName || '', role: item.Role || '', type: item.Type === 'Guardia' ? 'guardia' : item.Type === 'Disponibilidad' ? 'disponibilidad' : 'turno', startTime: item.StartTime || '', endTime: item.EndTime || '', contact: item.Contact || undefined, location: item.Location || undefined }));
+    const data = await response.json() as { value?: IShiftEntryListItem[] };
+    return (data.value || []).map((item) => ({
+      id: String(item.Id),
+      personName: item.PersonName || '',
+      role: item.Role || '',
+      type: item.Type === 'Guardia' ? 'guardia' : item.Type === 'Disponibilidad' ? 'disponibilidad' : 'turno',
+      startTime: item.StartTime || '',
+      endTime: item.EndTime || '',
+      contact: item.Contact || undefined,
+      location: item.Location || undefined
+    }));
   }
 
   private async getEntriesFromJsonUrl(jsonUrl: string): Promise<IShiftEntry[]> {

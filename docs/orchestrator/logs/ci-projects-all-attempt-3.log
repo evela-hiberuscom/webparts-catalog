@@ -1,0 +1,1884 @@
+$ npm run ci:projects -- --all
+Started: 2026-05-28T21:54:25.266Z
+
+
+> ci:projects
+> node ./scripts/ci-validate-projects.mjs --all
+
+Changed files: 1
+Selected projects: a-z-corporativo, accesos-rapidos-por-audiencia, agenda-del-equipo, analizador-de-tamano-y-volumen-de-documentos-historicos, asistente-contextual-de-pagina, barra-de-avisos-urgentes, biblioteca-de-plantillas, buscador-de-recursos-corporativos, buzon-de-ideas, centro-de-acciones-rapidas, checklist-de-offboarding-o-cambios, checklist-de-onboarding, como-hago-esto, componente-segun-tu-perfil, conoce-al-equipo, cuenta-atras-a-eventos, cumpleanos-y-aniversarios, directorio-express, estado-de-incidencias-destacadas, estado-de-proyectos, estado-de-servicios-internos, faq-inteligente, favoritos-personales, glosario-corporativo, inicia-una-solicitud, kpi-mini-cards, lanzador-universal-de-accesos, mantenimientos-programados, mapa-de-portales, microencuesta, mini-organigrama, mis-accesos-recientes, mis-aprobaciones, mis-documentos-utiles, mis-tareas-y-pendientes, noticias-por-area, nuevas-incorporaciones, objetivos-del-area, panel-de-campana-interna, pregunta-destacada, presencia-de-sedes, proximos-hitos, pulso-del-dia, que-ha-cambiado, reconocimientos, reserva-rapida, resumen-de-noticias, resumen-semanal-automatico, ruta-guiada, sharepoint-governance-webparts/adoption-risk-metrics, sharepoint-governance-webparts/approval-flows-governance, sharepoint-governance-webparts/audit-activity-review, sharepoint-governance-webparts/content-owners-governance, sharepoint-governance-webparts/copilot-readiness, sharepoint-governance-webparts/duplicate-sites-control, sharepoint-governance-webparts/external-sharing-review, sharepoint-governance-webparts/inactive-sites-validation, sharepoint-governance-webparts/inherited-access-review, sharepoint-governance-webparts/intranet-publishing-governance, sharepoint-governance-webparts/obsolete-content-review, sharepoint-governance-webparts/onedrive-sync-limits, sharepoint-governance-webparts/orphan-sites-review, sharepoint-governance-webparts/retention-compliance-governance, sharepoint-governance-webparts/security-compliance-review, sharepoint-governance-webparts/sensitive-content-review, sharepoint-governance-webparts/sensitivity-labels-governance, sharepoint-governance-webparts/site-archive-retention-governance, sharepoint-governance-webparts/site-creation-governance, sharepoint-governance-webparts/site-lifecycle-governance, sharepoint-governance-webparts/site-owner-training, sharepoint-governance-webparts/storage-governance, sharepoint-governance-webparts/storage-quota-governance, sharepoint-governance-webparts/support-model-governance, sharepoint-governance-webparts/tenant-site-inventory, sharepoint-governance-webparts/user-good-practices, sharepoint-governance-webparts/version-control-governance, tarjeta-de-decision-rapida, turnos-guardias-o-disponibilidad, visualizador-de-elementos-de-biblioteca-y-papelera-superior
+
+== a-z-corporativo ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+60 vulnerabilities (2 low, 45 moderate, 13 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> a-z-corporativo@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (13.176s) ---- 
+-------------------- Finished (13.181s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (12.341s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 2 test suites
+[test:jest] START lib-commonjs\webparts\corporateAz\repositories\corporateAzRepository.test.js
+[test:jest] START lib-commonjs\webparts\corporateAz\services\corporateAzService.test.js
+[test:jest] PASS lib-commonjs\webparts\corporateAz\services\corporateAzService.test.js (duration: 1.033s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\corporateAz\repositories\corporateAzRepository.test.js (duration: 1.085s, 3 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 6
+[test:jest]   Failures: 0
+[test:jest]   Total: 6
+ ---- test finished (10.634s) ---- 
+-------------------- Finished (22.987s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 935e679e-25e9-4173-9003-b3f2a4c0ec6c.manifest.json
+Found client-side build resource: corporate-az-web-part_a2d7868ca48148506e61.js
+Found client-side build resource: corporate-az-web-part_a2d7868ca48148506e61.js.LICENSE.txt
+Found client-side build resource: CorporateAzWebPartStrings_en-us_05349a7ffafca993bfa78041cedee3a3.js
+Found client-side build resource: CorporateAzWebPartStrings_es-es_aec9e62d150956b5435cf92d5b5797bf.js
+Found teams icons: 935e679e-25e9-4173-9003-b3f2a4c0ec6c_color.png
+Found teams icons: 935e679e-25e9-4173-9003-b3f2a4c0ec6c_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { a-z-corporativo Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\a-z-corporativo/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\a-z-corporativo/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\feature_512abfff-df8d-4d83-867f-e693e8446934.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\_rels\feature_512abfff-df8d-4d83-867f-e693e8446934.xml.rels
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\feature_512abfff-df8d-4d83-867f-e693e8446934.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\512abfff-df8d-4d83-867f-e693e8446934\WebPart_935e679e-25e9-4173-9003-b3f2a4c0ec6c.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\corporate-az-web-part_a2d7868ca48148506e61.js
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\corporate-az-web-part_a2d7868ca48148506e61.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\CorporateAzWebPartStrings_en-us_05349a7ffafca993bfa78041cedee3a3.js
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\CorporateAzWebPartStrings_es-es_aec9e62d150956b5435cf92d5b5797bf.js
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\935e679e-25e9-4173-9003-b3f2a4c0ec6c_color.png
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo\sharepoint\solution\debug\ClientSideAssets\935e679e-25e9-4173-9003-b3f2a4c0ec6c_outline.png
+Created file: C:\dev\paquete-webparts\projects\a-z-corporativo/sharepoint/solution/a-z-corporativo.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.533s) ---- 
+-------------------- Finished (0.539s) --------------------
+
+== accesos-rapidos-por-audiencia ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+63 vulnerabilities (2 low, 46 moderate, 15 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> accesos-rapidos-por-audiencia@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.893s) ---- 
+-------------------- Finished (16.898s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.165s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 6 test suites
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\components\AudienceQuickLinksView.test.js
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\hooks\useAudienceQuickLinks.test.js
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\utils\audienceLinkUtils.test.js
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\services\audienceQuickLinksService.test.js
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\repositories\audienceLinksRepository.test.js
+[test:jest] START lib-commonjs\webparts\audienceQuickLinks\utils\linkSafety.test.js
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\utils\linkSafety.test.js (duration: 1.980s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\utils\audienceLinkUtils.test.js (duration: 2.026s, 5 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\repositories\audienceLinksRepository.test.js (duration: 2.101s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\services\audienceQuickLinksService.test.js (duration: 2.110s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\hooks\useAudienceQuickLinks.test.js (duration: 2.217s, 2 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\audienceQuickLinks\components\AudienceQuickLinksView.test.js (duration: 4.318s, 3 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 20
+[test:jest]   Failures: 0
+[test:jest]   Total: 20
+ ---- test finished (14.526s) ---- 
+-------------------- Finished (28.705s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 725d1f2f-c9a8-4559-bbb3-f24bae6d733b.manifest.json
+Found client-side build resource: audience-quick-links-web-part_fea0b6e1bd9857ccdcaa.js
+Found client-side build resource: audience-quick-links-web-part_fea0b6e1bd9857ccdcaa.js.LICENSE.txt
+Found client-side build resource: AudienceQuickLinksWebPartStrings_en-us_5e1b5f85d7168ac50d267372c223e97b.js
+Found client-side build resource: AudienceQuickLinksWebPartStrings_es-es_c09c158f5eea84e0f9e7f305fd037c1d.js
+Found teams icons: 725d1f2f-c9a8-4559-bbb3-f24bae6d733b_color.png
+Found teams icons: 725d1f2f-c9a8-4559-bbb3-f24bae6d733b_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { accesos-rapidos-por-audiencia Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\feature_a91e5ae8-527b-46dd-94fa-e95ba727fa8e.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\_rels\feature_a91e5ae8-527b-46dd-94fa-e95ba727fa8e.xml.rels
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\feature_a91e5ae8-527b-46dd-94fa-e95ba727fa8e.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\a91e5ae8-527b-46dd-94fa-e95ba727fa8e\WebPart_725d1f2f-c9a8-4559-bbb3-f24bae6d733b.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\audience-quick-links-web-part_fea0b6e1bd9857ccdcaa.js
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\audience-quick-links-web-part_fea0b6e1bd9857ccdcaa.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\AudienceQuickLinksWebPartStrings_en-us_5e1b5f85d7168ac50d267372c223e97b.js
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\AudienceQuickLinksWebPartStrings_es-es_c09c158f5eea84e0f9e7f305fd037c1d.js
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\725d1f2f-c9a8-4559-bbb3-f24bae6d733b_color.png
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia\sharepoint\solution\debug\ClientSideAssets\725d1f2f-c9a8-4559-bbb3-f24bae6d733b_outline.png
+Created file: C:\dev\paquete-webparts\projects\accesos-rapidos-por-audiencia/sharepoint/solution/accesos-rapidos-por-audiencia.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.488s) ---- 
+-------------------- Finished (0.492s) --------------------
+
+== agenda-del-equipo ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+60 vulnerabilities (2 low, 45 moderate, 13 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> agenda-del-equipo@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.085s) ---- 
+-------------------- Finished (16.09s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.570s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\teamAgenda\components\TeamAgenda.test.js
+[test:jest] START lib-commonjs\webparts\teamAgenda\hooks\useTeamAgenda.test.js
+[test:jest] START lib-commonjs\webparts\teamAgenda\utils\teamAgendaUtils.test.js
+[test:jest] START lib-commonjs\webparts\teamAgenda\repositories\teamAgendaRepository.test.js
+[test:jest] START lib-commonjs\webparts\teamAgenda\services\teamAgendaService.test.js
+[test:jest] PASS lib-commonjs\webparts\teamAgenda\repositories\teamAgendaRepository.test.js (duration: 2.398s, 2 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\teamAgenda\utils\teamAgendaUtils.test.js (duration: 2.430s, 5 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\teamAgenda\services\teamAgendaService.test.js (duration: 2.443s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\teamAgenda\hooks\useTeamAgenda.test.js (duration: 2.602s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\teamAgenda\components\TeamAgenda.test.js (duration: 4.878s, 1 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 12
+[test:jest]   Failures: 0
+[test:jest]   Total: 12
+ ---- test finished (15.918s) ---- 
+-------------------- Finished (30.504s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 6a39d016-86b7-46df-b10b-849546e43e96.manifest.json
+Found client-side build resource: team-agenda-web-part_4e2435ac370d61bc08fe.js
+Found client-side build resource: team-agenda-web-part_4e2435ac370d61bc08fe.js.LICENSE.txt
+Found client-side build resource: TeamAgendaWebPartStrings_en-us_e55d98d4fe1826f099a652166ffc77ef.js
+Found client-side build resource: TeamAgendaWebPartStrings_es-es_afca4239caea0d2d8cea288a0d976e56.js
+Found teams icons: 6a39d016-86b7-46df-b10b-849546e43e96_color.png
+Found teams icons: 6a39d016-86b7-46df-b10b-849546e43e96_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { agenda-del-equipo Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\agenda-del-equipo/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\agenda-del-equipo/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\feature_3e8f1d42-1f05-4b6b-8e77-db2914969708.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\_rels\feature_3e8f1d42-1f05-4b6b-8e77-db2914969708.xml.rels
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\feature_3e8f1d42-1f05-4b6b-8e77-db2914969708.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\3e8f1d42-1f05-4b6b-8e77-db2914969708\WebPart_6a39d016-86b7-46df-b10b-849546e43e96.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\team-agenda-web-part_4e2435ac370d61bc08fe.js
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\team-agenda-web-part_4e2435ac370d61bc08fe.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\TeamAgendaWebPartStrings_en-us_e55d98d4fe1826f099a652166ffc77ef.js
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\TeamAgendaWebPartStrings_es-es_afca4239caea0d2d8cea288a0d976e56.js
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\6a39d016-86b7-46df-b10b-849546e43e96_color.png
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo\sharepoint\solution\debug\ClientSideAssets\6a39d016-86b7-46df-b10b-849546e43e96_outline.png
+Created file: C:\dev\paquete-webparts\projects\agenda-del-equipo/sharepoint/solution/agenda-del-equipo.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.612s) ---- 
+-------------------- Finished (0.618s) --------------------
+
+== analizador-de-tamano-y-volumen-de-documentos-historicos ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> analizador-de-tamano-y-volumen-de-documentos-historicos@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.390s) ---- 
+-------------------- Finished (16.394s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.371s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 2 test suites
+[test:jest] START lib-commonjs\webparts\historicalStorageAnalyzer\utils\librarySelection.test.js
+[test:jest] START lib-commonjs\webparts\historicalStorageAnalyzer\utils\analysisCalculations.test.js
+[test:jest] PASS lib-commonjs\webparts\historicalStorageAnalyzer\utils\analysisCalculations.test.js (duration: 1.103s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\historicalStorageAnalyzer\utils\librarySelection.test.js (duration: 1.133s, 2 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 5
+[test:jest]   Failures: 0
+[test:jest]   Total: 5
+ ---- test finished (10.526s) ---- 
+-------------------- Finished (25.908s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 7751cf70-a7b4-4590-b38a-2bacdf20a545.manifest.json
+Found client-side build resource: historical-storage-analyzer-web-part_95809e93e0fe0d3b2834.js
+Found client-side build resource: historical-storage-analyzer-web-part_95809e93e0fe0d3b2834.js.LICENSE.txt
+Found client-side build resource: HistoricalStorageAnalyzerWebPartStrings_en-us_c4d23f7dab7ba875f161afc867f3052b.js
+Found client-side build resource: HistoricalStorageAnalyzerWebPartStrings_es-es_e40e4064c9cdb8b82cd6a5409a0cfa21.js
+Found teams icons: 7751cf70-a7b4-4590-b38a-2bacdf20a545_color.png
+Found teams icons: 7751cf70-a7b4-4590-b38a-2bacdf20a545_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { analizador-de-tamano-y-volumen-de-documentos-historicos Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\feature_7fe4df3b-364a-4cf7-a6ce-a19828691ff0.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\_rels\feature_7fe4df3b-364a-4cf7-a6ce-a19828691ff0.xml.rels
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\feature_7fe4df3b-364a-4cf7-a6ce-a19828691ff0.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\7fe4df3b-364a-4cf7-a6ce-a19828691ff0\WebPart_7751cf70-a7b4-4590-b38a-2bacdf20a545.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\historical-storage-analyzer-web-part_95809e93e0fe0d3b2834.js
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\historical-storage-analyzer-web-part_95809e93e0fe0d3b2834.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\HistoricalStorageAnalyzerWebPartStrings_en-us_c4d23f7dab7ba875f161afc867f3052b.js
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\HistoricalStorageAnalyzerWebPartStrings_es-es_e40e4064c9cdb8b82cd6a5409a0cfa21.js
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\7751cf70-a7b4-4590-b38a-2bacdf20a545_color.png
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos\sharepoint\solution\debug\ClientSideAssets\7751cf70-a7b4-4590-b38a-2bacdf20a545_outline.png
+Created file: C:\dev\paquete-webparts\projects\analizador-de-tamano-y-volumen-de-documentos-historicos/sharepoint/solution/analizador-de-tamano-y-volumen-de-documentos-historicos.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.537s) ---- 
+-------------------- Finished (0.542s) --------------------
+
+== asistente-contextual-de-pagina ==
+
+added 1396 packages, and audited 1398 packages in 10m
+
+257 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> asistente-contextual-de-pagina@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (22.845s) ---- 
+-------------------- Finished (22.85s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (13.928s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\pageContextAssistant\components\ContextHelpPanel.test.js
+[test:jest] START lib-commonjs\webparts\pageContextAssistant\hooks\usePageContextAssistant.test.js
+[test:jest] START lib-commonjs\webparts\pageContextAssistant\repositories\pageContextAssistantRepository.test.js
+[test:jest] START lib-commonjs\webparts\pageContextAssistant\utils\pageContextAssistantUtils.test.js
+[test:jest] START lib-commonjs\webparts\pageContextAssistant\services\pageContextAssistantService.test.js
+[test:jest] PASS lib-commonjs\webparts\pageContextAssistant\utils\pageContextAssistantUtils.test.js (duration: 1.825s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\pageContextAssistant\services\pageContextAssistantService.test.js (duration: 1.840s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\pageContextAssistant\repositories\pageContextAssistantRepository.test.js (duration: 1.877s, 5 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\pageContextAssistant\hooks\usePageContextAssistant.test.js (duration: 2.017s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\pageContextAssistant\components\ContextHelpPanel.test.js (duration: 4.402s, 3 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 17
+[test:jest]   Failures: 0
+[test:jest]   Total: 17
+ ---- test finished (14.904s) ---- 
+-------------------- Finished (28.841s) --------------------
+ ---- package-solution started ---- 
+Found manifest: ea02998e-4c3a-4a61-87af-d0b3c9f36701.manifest.json
+Found client-side build resource: page-context-assistant-web-part_949a77ecb8976bd1cb71.js
+Found client-side build resource: page-context-assistant-web-part_949a77ecb8976bd1cb71.js.LICENSE.txt
+Found client-side build resource: PageContextAssistantWebPartStrings_en-us_b6e4b7ecf91e6e3e9a554184601612fa.js
+Found client-side build resource: PageContextAssistantWebPartStrings_es-es_0478446c04245e6b5bfaaac2ebc3918f.js
+Found teams icons: ea02998e-4c3a-4a61-87af-d0b3c9f36701_color.png
+Found teams icons: ea02998e-4c3a-4a61-87af-d0b3c9f36701_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { Asistente contextual de página Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\feature_6c0546a9-e19e-4b3c-96c2-c8492c13282c.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\_rels\feature_6c0546a9-e19e-4b3c-96c2-c8492c13282c.xml.rels
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\feature_6c0546a9-e19e-4b3c-96c2-c8492c13282c.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\6c0546a9-e19e-4b3c-96c2-c8492c13282c\WebPart_ea02998e-4c3a-4a61-87af-d0b3c9f36701.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\page-context-assistant-web-part_949a77ecb8976bd1cb71.js
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\page-context-assistant-web-part_949a77ecb8976bd1cb71.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\PageContextAssistantWebPartStrings_en-us_b6e4b7ecf91e6e3e9a554184601612fa.js
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\PageContextAssistantWebPartStrings_es-es_0478446c04245e6b5bfaaac2ebc3918f.js
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\ea02998e-4c3a-4a61-87af-d0b3c9f36701_color.png
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina\sharepoint\solution\debug\ClientSideAssets\ea02998e-4c3a-4a61-87af-d0b3c9f36701_outline.png
+Created file: C:\dev\paquete-webparts\projects\asistente-contextual-de-pagina/sharepoint/solution/asistente-contextual-de-pagina.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.545s) ---- 
+-------------------- Finished (0.549s) --------------------
+
+== barra-de-avisos-urgentes ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1340 packages, and audited 1341 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> barra-de-avisos-urgentes@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.386s) ---- 
+-------------------- Finished (16.392s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (13.194s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 7 test suites
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\components\UrgentAlertBar.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\hooks\useAlertBar.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\components\AlertBanner.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\repositories\alertsRepository.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\utils\alertRules.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\services\alertBarService.test.js
+[test:jest] START lib-commonjs\webparts\urgentAlertBar\models\alertModels.test.js
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\services\alertBarService.test.js (duration: 2.184s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\models\alertModels.test.js (duration: 2.247s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\repositories\alertsRepository.test.js (duration: 2.285s, 9 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\utils\alertRules.test.js (duration: 2.265s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\components\AlertBanner.test.js (duration: 2.415s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\hooks\useAlertBar.test.js (duration: 2.485s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\urgentAlertBar\components\UrgentAlertBar.test.js (duration: 4.475s, 3 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 20
+[test:jest]   Failures: 0
+[test:jest]   Total: 20
+ ---- test finished (14.652s) ---- 
+-------------------- Finished (27.855s) --------------------
+ ---- package-solution started ---- 
+Found manifest: d1f4da0b-7e63-460c-9be9-885b9354897d.manifest.json
+Found client-side build resource: urgent-alert-bar-web-part_f57003ce9c2200538196.js
+Found client-side build resource: urgent-alert-bar-web-part_f57003ce9c2200538196.js.LICENSE.txt
+Found client-side build resource: UrgentAlertBarWebPartStrings_en-us_ef7a12ef37dae24a5cd918203538080e.js
+Found client-side build resource: UrgentAlertBarWebPartStrings_es-es_59bc028b387bdf0d08bb3fa1350cfb25.js
+Found teams icons: d1f4da0b-7e63-460c-9be9-885b9354897d_color.png
+Found teams icons: d1f4da0b-7e63-460c-9be9-885b9354897d_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { barra-de-avisos-urgentes Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\feature_5dd89c4c-a4ae-4e51-b8e3-2118e4340ce1.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\_rels\feature_5dd89c4c-a4ae-4e51-b8e3-2118e4340ce1.xml.rels
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\feature_5dd89c4c-a4ae-4e51-b8e3-2118e4340ce1.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\5dd89c4c-a4ae-4e51-b8e3-2118e4340ce1\WebPart_d1f4da0b-7e63-460c-9be9-885b9354897d.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\urgent-alert-bar-web-part_f57003ce9c2200538196.js
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\urgent-alert-bar-web-part_f57003ce9c2200538196.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\UrgentAlertBarWebPartStrings_en-us_ef7a12ef37dae24a5cd918203538080e.js
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\UrgentAlertBarWebPartStrings_es-es_59bc028b387bdf0d08bb3fa1350cfb25.js
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\d1f4da0b-7e63-460c-9be9-885b9354897d_color.png
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes\sharepoint\solution\debug\ClientSideAssets\d1f4da0b-7e63-460c-9be9-885b9354897d_outline.png
+Created file: C:\dev\paquete-webparts\projects\barra-de-avisos-urgentes/sharepoint/solution/barra-de-avisos-urgentes.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.489s) ---- 
+-------------------- Finished (0.495s) --------------------
+
+== biblioteca-de-plantillas ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+60 vulnerabilities (2 low, 45 moderate, 13 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> biblioteca-de-plantillas@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.078s) ---- 
+-------------------- Finished (16.084s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.417s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\templatesLibrary\tests\TemplatesLibrary.test.js
+[test:jest] START lib-commonjs\webparts\templatesLibrary\tests\useTemplatesLibrary.test.js
+[test:jest] START lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryRepository.test.js
+[test:jest] START lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryService.test.js
+[test:jest] START lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryUtils.test.js
+[test:jest] PASS lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryUtils.test.js (duration: 1.727s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryService.test.js (duration: 1.751s, 2 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\templatesLibrary\tests\templatesLibraryRepository.test.js (duration: 1.799s, 1 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\templatesLibrary\tests\useTemplatesLibrary.test.js (duration: 1.949s, 1 passed, 0 failed)
+[test:jest] | console.warn| The icon "search" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "search" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] PASS lib-commonjs\webparts\templatesLibrary\tests\TemplatesLibrary.test.js (duration: 4.149s, 1 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 8
+[test:jest]   Failures: 0
+[test:jest]   Total: 8
+ ---- test finished (13.635s) ---- 
+-------------------- Finished (29.061s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 0042dae7-ff30-4125-975a-a3eb7f2732dc.manifest.json
+Found client-side build resource: templates-library-web-part_fbba4bdfd3a88115f505.js
+Found client-side build resource: templates-library-web-part_fbba4bdfd3a88115f505.js.LICENSE.txt
+Found client-side build resource: TemplatesLibraryWebPartStrings_en-us_26831380db1673c148f8fb852a1eaae0.js
+Found client-side build resource: TemplatesLibraryWebPartStrings_es-es_525bac0112f96c28ca637e543e2f0522.js
+Found teams icons: 0042dae7-ff30-4125-975a-a3eb7f2732dc_color.png
+Found teams icons: 0042dae7-ff30-4125-975a-a3eb7f2732dc_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { biblioteca-de-plantillas Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\biblioteca-de-plantillas/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\biblioteca-de-plantillas/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\feature_7ad85c70-4cb5-462d-8637-80479a535b87.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\_rels\feature_7ad85c70-4cb5-462d-8637-80479a535b87.xml.rels
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\feature_7ad85c70-4cb5-462d-8637-80479a535b87.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\7ad85c70-4cb5-462d-8637-80479a535b87\WebPart_0042dae7-ff30-4125-975a-a3eb7f2732dc.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\templates-library-web-part_fbba4bdfd3a88115f505.js
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\templates-library-web-part_fbba4bdfd3a88115f505.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\TemplatesLibraryWebPartStrings_en-us_26831380db1673c148f8fb852a1eaae0.js
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\TemplatesLibraryWebPartStrings_es-es_525bac0112f96c28ca637e543e2f0522.js
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\0042dae7-ff30-4125-975a-a3eb7f2732dc_color.png
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas\sharepoint\solution\debug\ClientSideAssets\0042dae7-ff30-4125-975a-a3eb7f2732dc_outline.png
+Created file: C:\dev\paquete-webparts\projects\biblioteca-de-plantillas/sharepoint/solution/biblioteca-de-plantillas.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.493s) ---- 
+-------------------- Finished (0.498s) --------------------
+
+== buscador-de-recursos-corporativos ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> buscador-de-recursos-corporativos@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.214s) ---- 
+-------------------- Finished (15.219s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (13.939s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 4 test suites
+[test:jest] START lib-commonjs\webparts\corporateResourcesSearch\components\CorporateResourcesSearch.test.js
+[test:jest] START lib-commonjs\webparts\corporateResourcesSearch\repositories\corporateResourcesRepository.test.js
+[test:jest] START lib-commonjs\webparts\corporateResourcesSearch\services\corporateResourcesSearchService.test.js
+[test:jest] START lib-commonjs\webparts\corporateResourcesSearch\utils\corporateResourcesSearchUtils.test.js
+[test:jest] PASS lib-commonjs\webparts\corporateResourcesSearch\utils\corporateResourcesSearchUtils.test.js (duration: 1.486s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\corporateResourcesSearch\services\corporateResourcesSearchService.test.js (duration: 1.495s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\corporateResourcesSearch\repositories\corporateResourcesRepository.test.js (duration: 1.550s, 3 passed, 0 failed)
+[test:jest] | console.warn| The icon "search" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "search" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] PASS lib-commonjs\webparts\corporateResourcesSearch\components\CorporateResourcesSearch.test.js (duration: 4.167s, 1 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 12
+[test:jest]   Failures: 0
+[test:jest]   Total: 12
+ ---- test finished (14.758s) ---- 
+-------------------- Finished (28.716s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 58b6d438-cf81-4503-9df7-50da126ddde0.manifest.json
+Found client-side build resource: corporate-resources-search-web-part_ea706400526071257371.js
+Found client-side build resource: corporate-resources-search-web-part_ea706400526071257371.js.LICENSE.txt
+Found client-side build resource: CorporateResourcesSearchWebPartStrings_en-us_d08620b06c130578e84571bcd58b5c9c.js
+Found client-side build resource: CorporateResourcesSearchWebPartStrings_es-es_b63628431991bc246854915d68a5f4d4.js
+Found teams icons: 58b6d438-cf81-4503-9df7-50da126ddde0_color.png
+Found teams icons: 58b6d438-cf81-4503-9df7-50da126ddde0_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { buscador-de-recursos-corporativos Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\feature_93fc18ae-8dbe-41d6-977d-a2884028384a.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\_rels\feature_93fc18ae-8dbe-41d6-977d-a2884028384a.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\feature_93fc18ae-8dbe-41d6-977d-a2884028384a.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\93fc18ae-8dbe-41d6-977d-a2884028384a\WebPart_58b6d438-cf81-4503-9df7-50da126ddde0.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\corporate-resources-search-web-part_ea706400526071257371.js
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\corporate-resources-search-web-part_ea706400526071257371.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\CorporateResourcesSearchWebPartStrings_en-us_d08620b06c130578e84571bcd58b5c9c.js
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\CorporateResourcesSearchWebPartStrings_es-es_b63628431991bc246854915d68a5f4d4.js
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\58b6d438-cf81-4503-9df7-50da126ddde0_color.png
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos\sharepoint\solution\debug\ClientSideAssets\58b6d438-cf81-4503-9df7-50da126ddde0_outline.png
+Created file: C:\dev\paquete-webparts\projects\buscador-de-recursos-corporativos/sharepoint/solution/buscador-de-recursos-corporativos.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.559s) ---- 
+-------------------- Finished (0.564s) --------------------
+
+== buzon-de-ideas ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1371 packages, and audited 1373 packages in 9m
+
+254 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> buzon-de-ideas@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (18.899s) ---- 
+-------------------- Finished (18.905s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.130s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 2 test suites
+[test:jest] START lib-commonjs\webparts\ideasMailbox\services\ideaSubmissionService.test.js
+[test:jest] PASS lib-commonjs\webparts\ideasMailbox\services\ideaSubmissionService.test.js (duration: 1.715s, 2 passed, 0 failed)
+[test:jest] START lib-commonjs\webparts\ideasMailbox\utils\ideaMailboxUtils.test.js
+[test:jest] PASS lib-commonjs\webparts\ideasMailbox\utils\ideaMailboxUtils.test.js (duration: 0.867s, 2 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 4
+[test:jest]   Failures: 0
+[test:jest]   Total: 4
+ ---- test finished (9.360s) ---- 
+-------------------- Finished (23.511s) --------------------
+ ---- package-solution started ---- 
+Found manifest: da2c1416-d310-4861-9265-440c61a40c10.manifest.json
+Found client-side build resource: ideas-mailbox-web-part_7b75ccb8fb7dded2115d.js
+Found client-side build resource: ideas-mailbox-web-part_7b75ccb8fb7dded2115d.js.LICENSE.txt
+Found client-side build resource: IdeasMailboxWebPartStrings_en-us_0f2a99531e43f4975932fc5fd8972bac.js
+Found client-side build resource: IdeasMailboxWebPartStrings_es-es_67c27108d6c219da6e6ef428bd321cae.js
+Found teams icons: da2c1416-d310-4861-9265-440c61a40c10_color.png
+Found teams icons: da2c1416-d310-4861-9265-440c61a40c10_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { buzon-de-ideas Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\buzon-de-ideas/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\buzon-de-ideas/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\feature_298077ec-9ad8-4946-a2ed-96beab103710.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\_rels\feature_298077ec-9ad8-4946-a2ed-96beab103710.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\feature_298077ec-9ad8-4946-a2ed-96beab103710.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\298077ec-9ad8-4946-a2ed-96beab103710\WebPart_da2c1416-d310-4861-9265-440c61a40c10.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\ideas-mailbox-web-part_7b75ccb8fb7dded2115d.js
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\ideas-mailbox-web-part_7b75ccb8fb7dded2115d.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\IdeasMailboxWebPartStrings_en-us_0f2a99531e43f4975932fc5fd8972bac.js
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\IdeasMailboxWebPartStrings_es-es_67c27108d6c219da6e6ef428bd321cae.js
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\da2c1416-d310-4861-9265-440c61a40c10_color.png
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas\sharepoint\solution\debug\ClientSideAssets\da2c1416-d310-4861-9265-440c61a40c10_outline.png
+Created file: C:\dev\paquete-webparts\projects\buzon-de-ideas/sharepoint/solution/buzon-de-ideas.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.503s) ---- 
+-------------------- Finished (0.509s) --------------------
+
+== centro-de-acciones-rapidas ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> centro-de-acciones-rapidas@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.082s) ---- 
+-------------------- Finished (15.088s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.921s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\quickActionsCenter\components\QuickActionsCenter.test.js
+[test:jest] START lib-commonjs\webparts\quickActionsCenter\hooks\useQuickActions.test.js
+[test:jest] START lib-commonjs\webparts\quickActionsCenter\services\quickActionsService.test.js
+[test:jest] START lib-commonjs\webparts\quickActionsCenter\repositories\quickActionsRepository.test.js
+[test:jest] START lib-commonjs\webparts\quickActionsCenter\utils\quickActionsUtils.test.js
+[test:jest] PASS lib-commonjs\webparts\quickActionsCenter\utils\quickActionsUtils.test.js (duration: 1.852s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\quickActionsCenter\services\quickActionsService.test.js (duration: 1.894s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\quickActionsCenter\repositories\quickActionsRepository.test.js (duration: 1.898s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\quickActionsCenter\hooks\useQuickActions.test.js (duration: 2.012s, 1 passed, 0 failed)
+[test:jest] | console.warn| The icon "info" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "info" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "info" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "headset" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "headset" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] PASS lib-commonjs\webparts\quickActionsCenter\components\QuickActionsCenter.test.js (duration: 4.214s, 1 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 12
+[test:jest]   Failures: 0
+[test:jest]   Total: 12
+ ---- test finished (14.236s) ---- 
+-------------------- Finished (29.167s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 54377ae5-6714-4331-9292-8ba18471ba24.manifest.json
+Found client-side build resource: quick-actions-center-web-part_d12358e2bafccfd79fde.js
+Found client-side build resource: quick-actions-center-web-part_d12358e2bafccfd79fde.js.LICENSE.txt
+Found client-side build resource: QuickActionsCenterWebPartStrings_en-us_c46d8bc0a28a810ec1b20980bb5ca5cb.js
+Found client-side build resource: QuickActionsCenterWebPartStrings_es-es_987f1ed0acf1be5f0d6ff19b2d6560eb.js
+Found teams icons: 54377ae5-6714-4331-9292-8ba18471ba24_color.png
+Found teams icons: 54377ae5-6714-4331-9292-8ba18471ba24_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { centro-de-acciones-rapidas Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\feature_17ea6d14-3451-480f-82dd-68b852a51c24.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\_rels\feature_17ea6d14-3451-480f-82dd-68b852a51c24.xml.rels
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\feature_17ea6d14-3451-480f-82dd-68b852a51c24.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\17ea6d14-3451-480f-82dd-68b852a51c24\WebPart_54377ae5-6714-4331-9292-8ba18471ba24.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\quick-actions-center-web-part_d12358e2bafccfd79fde.js
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\quick-actions-center-web-part_d12358e2bafccfd79fde.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\QuickActionsCenterWebPartStrings_en-us_c46d8bc0a28a810ec1b20980bb5ca5cb.js
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\QuickActionsCenterWebPartStrings_es-es_987f1ed0acf1be5f0d6ff19b2d6560eb.js
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\54377ae5-6714-4331-9292-8ba18471ba24_color.png
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas\sharepoint\solution\debug\ClientSideAssets\54377ae5-6714-4331-9292-8ba18471ba24_outline.png
+Created file: C:\dev\paquete-webparts\projects\centro-de-acciones-rapidas/sharepoint/solution/centro-de-acciones-rapidas.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.518s) ---- 
+-------------------- Finished (0.523s) --------------------
+
+== checklist-de-offboarding-o-cambios ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1345 packages, and audited 1347 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> checklist-de-offboarding-o-cambios@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.709s) ---- 
+-------------------- Finished (15.715s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (16.122s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\offboardingOrChangeChecklist\components\OffboardingOrChangeChecklist.test.js
+[test:jest] START lib-commonjs\webparts\offboardingOrChangeChecklist\hooks\useOffboardingOrChangeChecklist.test.js
+[test:jest] START lib-commonjs\webparts\offboardingOrChangeChecklist\repositories\offboardingOrChangeChecklistRepository.test.js
+[test:jest] START lib-commonjs\webparts\offboardingOrChangeChecklist\utils\offboardingOrChangeChecklistUtils.test.js
+[test:jest] START lib-commonjs\webparts\offboardingOrChangeChecklist\services\offboardingOrChangeChecklistService.test.js
+[test:jest] PASS lib-commonjs\webparts\offboardingOrChangeChecklist\utils\offboardingOrChangeChecklistUtils.test.js (duration: 1.743s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\offboardingOrChangeChecklist\services\offboardingOrChangeChecklistService.test.js (duration: 1.759s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\offboardingOrChangeChecklist\repositories\offboardingOrChangeChecklistRepository.test.js (duration: 1.762s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\offboardingOrChangeChecklist\hooks\useOffboardingOrChangeChecklist.test.js (duration: 1.937s, 1 passed, 0 failed)
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "errorbadge" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "errorbadge" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] PASS lib-commonjs\webparts\offboardingOrChangeChecklist\components\OffboardingOrChangeChecklist.test.js (duration: 3.991s, 2 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 13
+[test:jest]   Failures: 0
+[test:jest]   Total: 13
+ ---- test finished (13.719s) ---- 
+-------------------- Finished (29.856s) --------------------
+ ---- package-solution started ---- 
+Found manifest: 658c0dae-d92a-4de3-8ff9-e467b1c83b94.manifest.json
+Found client-side build resource: offboarding-or-change-checklist-web-part_dee448f351b80f835071.js
+Found client-side build resource: offboarding-or-change-checklist-web-part_dee448f351b80f835071.js.LICENSE.txt
+Found client-side build resource: OffboardingOrChangeChecklistWebPartStrings_en-us_7536f6eaf58c4ed0dc9a1bb7c7dea5d7.js
+Found client-side build resource: OffboardingOrChangeChecklistWebPartStrings_es-es_60ac7ef9fde3f827425fe72a733fdce9.js
+Found teams icons: 658c0dae-d92a-4de3-8ff9-e467b1c83b94_color.png
+Found teams icons: 658c0dae-d92a-4de3-8ff9-e467b1c83b94_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { checklist-de-offboarding-o-cambios Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\feature_5cc9b744-5bc3-4936-8baa-a575a30a1ddc.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\_rels\feature_5cc9b744-5bc3-4936-8baa-a575a30a1ddc.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\feature_5cc9b744-5bc3-4936-8baa-a575a30a1ddc.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\5cc9b744-5bc3-4936-8baa-a575a30a1ddc\WebPart_658c0dae-d92a-4de3-8ff9-e467b1c83b94.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\offboarding-or-change-checklist-web-part_dee448f351b80f835071.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\offboarding-or-change-checklist-web-part_dee448f351b80f835071.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\OffboardingOrChangeChecklistWebPartStrings_en-us_7536f6eaf58c4ed0dc9a1bb7c7dea5d7.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\OffboardingOrChangeChecklistWebPartStrings_es-es_60ac7ef9fde3f827425fe72a733fdce9.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\658c0dae-d92a-4de3-8ff9-e467b1c83b94_color.png
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios\sharepoint\solution\debug\ClientSideAssets\658c0dae-d92a-4de3-8ff9-e467b1c83b94_outline.png
+Created file: C:\dev\paquete-webparts\projects\checklist-de-offboarding-o-cambios/sharepoint/solution/checklist-de-offboarding-o-cambios.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.505s) ---- 
+-------------------- Finished (0.51s) --------------------
+
+== checklist-de-onboarding ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1345 packages, and audited 1347 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> checklist-de-onboarding@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.414s) ---- 
+-------------------- Finished (15.42s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.057s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 5 test suites
+[test:jest] START lib-commonjs\webparts\onboardingChecklist\components\OnboardingChecklist.test.js
+[test:jest] START lib-commonjs\webparts\onboardingChecklist\hooks\useOnboardingChecklist.test.js
+[test:jest] START lib-commonjs\webparts\onboardingChecklist\utils\onboardingChecklistUtils.test.js
+[test:jest] START lib-commonjs\webparts\onboardingChecklist\services\onboardingChecklistService.test.js
+[test:jest] START lib-commonjs\webparts\onboardingChecklist\repositories\onboardingChecklistRepository.test.js
+[test:jest] PASS lib-commonjs\webparts\onboardingChecklist\repositories\onboardingChecklistRepository.test.js (duration: 1.733s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\onboardingChecklist\services\onboardingChecklistService.test.js (duration: 1.714s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\onboardingChecklist\utils\onboardingChecklistUtils.test.js (duration: 1.708s, 4 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\onboardingChecklist\hooks\useOnboardingChecklist.test.js (duration: 1.886s, 1 passed, 0 failed)
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "info" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "info" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "chevrondown" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "errorbadge" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] | console.warn| The icon "errorbadge" was used but not registered. See https://github.com/microsoft/fluentui/wiki/Using-icons for more information.
+[test:jest] PASS lib-commonjs\webparts\onboardingChecklist\components\OnboardingChecklist.test.js (duration: 4.196s, 3 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 16
+[test:jest]   Failures: 0
+[test:jest]   Total: 16
+ ---- test finished (13.660s) ---- 
+-------------------- Finished (27.731s) --------------------
+ ---- package-solution started ---- 
+Found manifest: c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9.manifest.json
+Found client-side build resource: onboarding-checklist-web-part_da37e673e713bec631a7.js
+Found client-side build resource: onboarding-checklist-web-part_da37e673e713bec631a7.js.LICENSE.txt
+Found client-side build resource: OnboardingChecklistWebPartStrings_en-us_ce79e0db1be9a14ed575c22bcf7daf05.js
+Found client-side build resource: OnboardingChecklistWebPartStrings_es-es_139aa93cf748fe2fd25b502461324737.js
+Found teams icons: c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9_color.png
+Found teams icons: c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { checklist-de-onboarding Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\checklist-de-onboarding/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\checklist-de-onboarding/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\feature_cca8dd11-6fe7-4026-99c7-c47544c30e88.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\_rels\feature_cca8dd11-6fe7-4026-99c7-c47544c30e88.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\feature_cca8dd11-6fe7-4026-99c7-c47544c30e88.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\cca8dd11-6fe7-4026-99c7-c47544c30e88\WebPart_c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\onboarding-checklist-web-part_da37e673e713bec631a7.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\onboarding-checklist-web-part_da37e673e713bec631a7.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\OnboardingChecklistWebPartStrings_en-us_ce79e0db1be9a14ed575c22bcf7daf05.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\OnboardingChecklistWebPartStrings_es-es_139aa93cf748fe2fd25b502461324737.js
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9_color.png
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding\sharepoint\solution\debug\ClientSideAssets\c7a3babf-e1d7-42b2-9051-bc73a6c0b9d9_outline.png
+Created file: C:\dev\paquete-webparts\projects\checklist-de-onboarding/sharepoint/solution/checklist-de-onboarding.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.475s) ---- 
+-------------------- Finished (0.482s) --------------------
+
+== como-hago-esto ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk
+
+added 1341 packages, and audited 1343 packages in 2m
+
+255 packages are looking for funding
+  run `npm fund` for details
+
+60 vulnerabilities (2 low, 45 moderate, 13 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> como-hago-esto@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (14.519s) ---- 
+-------------------- Finished (14.524s) --------------------
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (12.914s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 4 test suites
+[test:jest] START lib-commonjs\webparts\howDoIDoThis\components\HowDoIDoThis.test.js
+[test:jest] START lib-commonjs\webparts\howDoIDoThis\repositories\guidesRepository.test.js
+[test:jest] START lib-commonjs\webparts\howDoIDoThis\utils\howDoIDoThisUtils.test.js
+[test:jest] START lib-commonjs\webparts\howDoIDoThis\services\guidesCatalogService.test.js
+[test:jest] PASS lib-commonjs\webparts\howDoIDoThis\utils\howDoIDoThisUtils.test.js (duration: 1.448s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\howDoIDoThis\services\guidesCatalogService.test.js (duration: 1.453s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\howDoIDoThis\repositories\guidesRepository.test.js (duration: 1.517s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\howDoIDoThis\components\HowDoIDoThis.test.js (duration: 3.830s, 1 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 10
+[test:jest]   Failures: 0
+[test:jest]   Total: 10
+ ---- test finished (13.262s) ---- 
+-------------------- Finished (26.19s) --------------------
+ ---- package-solution started ---- 
+Found manifest: ec66e05e-20b9-4bfa-8178-9db2af0c4972.manifest.json
+Found client-side build resource: how-do-i-do-this-web-part_54548a4af244311e5201.js
+Found client-side build resource: how-do-i-do-this-web-part_54548a4af244311e5201.js.LICENSE.txt
+Found client-side build resource: HowDoIDoThisWebPartStrings_en-us_4effb1216541be3a1cd9befc71a11067.js
+Found client-side build resource: HowDoIDoThisWebPartStrings_es-es_cbb4f35a9c6fb697697606c65fd6e46b.js
+Found teams icons: ec66e05e-20b9-4bfa-8178-9db2af0c4972_color.png
+Found teams icons: ec66e05e-20b9-4bfa-8178-9db2af0c4972_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { como-hago-esto Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\como-hago-esto/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\como-hago-esto/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\feature_331cbb57-9fa2-4f4a-b63b-37e2c240df12.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\_rels\feature_331cbb57-9fa2-4f4a-b63b-37e2c240df12.xml.rels
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\feature_331cbb57-9fa2-4f4a-b63b-37e2c240df12.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\331cbb57-9fa2-4f4a-b63b-37e2c240df12\WebPart_ec66e05e-20b9-4bfa-8178-9db2af0c4972.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\how-do-i-do-this-web-part_54548a4af244311e5201.js
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\how-do-i-do-this-web-part_54548a4af244311e5201.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\HowDoIDoThisWebPartStrings_en-us_4effb1216541be3a1cd9befc71a11067.js
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\HowDoIDoThisWebPartStrings_es-es_cbb4f35a9c6fb697697606c65fd6e46b.js
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\ec66e05e-20b9-4bfa-8178-9db2af0c4972_color.png
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto\sharepoint\solution\debug\ClientSideAssets\ec66e05e-20b9-4bfa-8178-9db2af0c4972_outline.png
+Created file: C:\dev\paquete-webparts\projects\como-hago-esto/sharepoint/solution/como-hago-esto.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.506s) ---- 
+-------------------- Finished (0.512s) --------------------
+
+== componente-segun-tu-perfil ==
+
+added 1394 packages, and audited 1396 packages in 10m
+
+256 packages are looking for funding
+  run `npm fund` for details
+
+62 vulnerabilities (2 low, 46 moderate, 14 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> componente-segun-tu-perfil@0.0.1 build
+> heft build --clean --production && heft test --production && heft package-solution --production
+
+ ---- build started ---- 
+[build:clean] Deleted 0 files and 5 folders
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:lint] Warning: src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:109:21 - (no-script-url) Script URL is a form of eval.
+[build:lint] Warning: src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:116:50 - (no-script-url) Script URL is a form of eval.
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (18.572s) ---- 
+-------------------- Finished (18.578s) --------------------
+Encountered 2 warnings
+  [build:lint] src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:109:21 - (no-script-url) Script URL is a form of eval.
+  [build:lint] src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:116:50 - (no-script-url) Script URL is a form of eval.
+ ---- build started ---- 
+[build:set-browserslist-ignore-old-data-env-var] Setting environment variable BROWSERSLIST_IGNORE_OLD_DATA=1
+[build:sass] Generating sass typings...
+[build:copy-javascript] Copied 4 files and linked 0 files
+[build:sass] Generated sass typings
+[build:typescript] Using TypeScript version 5.8.3
+[build:typescript] Copied 10 files and linked 0 files
+[build:lint] Using ESLint version 8.57.1
+[build:lint] Warning: src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:109:21 - (no-script-url) Script URL is a form of eval.
+[build:lint] Warning: src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:116:50 - (no-script-url) Script URL is a form of eval.
+[build:webpack] Using Webpack version 5.95.0
+[build:webpack] Running Webpack compilation
+ ---- build finished (15.713s) ---- 
+ ---- test started ---- 
+[test:jest] Using Jest version 29.5.0
+[test:jest] 
+[test:jest] Run start. 4 test suites
+[test:jest] START lib-commonjs\webparts\profileBasedComponent\components\ProfileBasedComponentView.test.js
+[test:jest] START lib-commonjs\webparts\profileBasedComponent\repositories\profileVariantRepository.test.js
+[test:jest] START lib-commonjs\webparts\profileBasedComponent\utils\profileVariantMatching.test.js
+[test:jest] START lib-commonjs\webparts\profileBasedComponent\services\profileBasedComponentService.test.js
+[test:jest] PASS lib-commonjs\webparts\profileBasedComponent\services\profileBasedComponentService.test.js (duration: 1.571s, 3 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\profileBasedComponent\utils\profileVariantMatching.test.js (duration: 1.575s, 7 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\profileBasedComponent\repositories\profileVariantRepository.test.js (duration: 1.617s, 5 passed, 0 failed)
+[test:jest] PASS lib-commonjs\webparts\profileBasedComponent\components\ProfileBasedComponentView.test.js (duration: 4.144s, 2 passed, 0 failed)
+[test:jest] 
+[test:jest] Tests finished:
+[test:jest]   Successes: 17
+[test:jest]   Failures: 0
+[test:jest]   Total: 17
+ ---- test finished (14.376s) ---- 
+-------------------- Finished (30.105s) --------------------
+Encountered 2 warnings
+  [build:lint] src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:109:21 - (no-script-url) Script URL is a form of eval.
+  [build:lint] src/webparts/profileBasedComponent/components/ProfileBasedComponentView.test.tsx:116:50 - (no-script-url) Script URL is a form of eval.
+ ---- package-solution started ---- 
+Found manifest: f3159d7a-9aee-4f35-9ac9-1f9b84869450.manifest.json
+Found client-side build resource: profile-based-component-web-part_910f196caf7d161404a8.js
+Found client-side build resource: profile-based-component-web-part_910f196caf7d161404a8.js.LICENSE.txt
+Found client-side build resource: ProfileBasedComponentWebPartStrings_en-us_7136c656303bd1e84bcf3831cec3c2ad.js
+Found client-side build resource: ProfileBasedComponentWebPartStrings_es-es_87864d08e0dc1ba3c93b0499462657e0.js
+Found teams icons: f3159d7a-9aee-4f35-9ac9-1f9b84869450_color.png
+Found teams icons: f3159d7a-9aee-4f35-9ac9-1f9b84869450_outline.png
+Verifying configuration...
+Done!
+
+Normalizing solution information...
+Attempting creating component definitions for {1} manifests
+Created component definitions for {1} manifests
+feature.componentIds not set! Adding 1 components to feature { componente-segun-tu-perfil Feature }.
+Done!
+
+Reading custom Feature XML...
+Done!
+
+Validating App Package...
+Done!
+
+Reading resources...
+Done!
+
+Reading Sharepoint Assets & Creating XML...
+Done!
+
+Writing solution XML to C:\dev\paquete-webparts\projects\componente-segun-tu-perfil/sharepoint/solution/debug...
+Cleaned C:\dev\paquete-webparts\projects\componente-segun-tu-perfil/sharepoint/solution/debug
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\AppManifest.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\_rels\AppManifest.xml.rels
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\_rels\.rels
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\[Content_Types].xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\feature_2bbbc0d9-d07d-4792-8118-733c6187137e.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\_rels\feature_2bbbc0d9-d07d-4792-8118-733c6187137e.xml.rels
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\feature_2bbbc0d9-d07d-4792-8118-733c6187137e.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\2bbbc0d9-d07d-4792-8118-733c6187137e\WebPart_f3159d7a-9aee-4f35-9ac9-1f9b84869450.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\_rels\ClientSideAssets.xml.rels
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets.xml.config.xml
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\profile-based-component-web-part_910f196caf7d161404a8.js
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\profile-based-component-web-part_910f196caf7d161404a8.js.LICENSE.txt
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\ProfileBasedComponentWebPartStrings_en-us_7136c656303bd1e84bcf3831cec3c2ad.js
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\ProfileBasedComponentWebPartStrings_es-es_87864d08e0dc1ba3c93b0499462657e0.js
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\f3159d7a-9aee-4f35-9ac9-1f9b84869450_color.png
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil\sharepoint\solution\debug\ClientSideAssets\f3159d7a-9aee-4f35-9ac9-1f9b84869450_outline.png
+Created file: C:\dev\paquete-webparts\projects\componente-segun-tu-perfil/sharepoint/solution/componente-segun-tu-perfil.sppkg
+Done!
+
+ALL DONE!
+
+ ---- package-solution finished (0.531s) ---- 
+-------------------- Finished (0.535s) --------------------
+
+== conoce-al-equipo ==
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated whatwg-encoding@2.0.0: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+npm WARN deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
+npm WARN deprecated adal-angular@1.0.16: This package is no longer supported. Please migrate to @azure/msal-angular.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+npm WARN deprecated @microsoft/teams-js@2.32.0: Package no longer supported. Use at your own risk

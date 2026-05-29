@@ -1,0 +1,12 @@
+$ npm run check:pinned-deps
+Started: 2026-05-29T03:54:29.652Z
+
+
+> check:pinned-deps
+> node ./scripts/check-pinned-project-deps.mjs
+
+Project dependency ranges are pinned.
+
+Ended: 2026-05-29T03:54:31.576Z
+Exit code: 0
+Signal: 

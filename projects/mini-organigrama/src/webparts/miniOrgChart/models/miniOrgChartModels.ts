@@ -63,7 +63,7 @@ export interface IOrgLoadResult {
 
 export interface IOrgViewModel {
   state: MiniOrgChartState;
-  root: IOrgTreeNode | null;
+  root: IOrgTreeNode | undefined;
   flatPeople: IOrgPerson[];
   partialReasons: string[];
   filteredCount: number;
@@ -80,4 +80,3 @@ export interface IMiniOrgChartProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
 }
-

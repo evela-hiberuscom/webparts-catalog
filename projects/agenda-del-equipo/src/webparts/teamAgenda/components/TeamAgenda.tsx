@@ -56,8 +56,8 @@ function renderAgendaItem(item: IAgendaItem, localeName: string): React.ReactEle
     <article key={item.id} className={styles.agendaCard}>
       <div className={styles.cardMeta}>
         <span className={styles.metaBadge}>{buildGroupLabel(item.group)}</span>
-        {item.eventType ? <span className={styles.metaBadgeSecondary}>{item.eventType}</span> : null}
-        {item.isPartial ? <span className={styles.metaBadgeSecondary}>{strings.PartialBadgeLabel}</span> : null}
+        {item.eventType ? <span className={styles.metaBadgeSecondary}>{item.eventType}</span> : undefined}
+        {item.isPartial ? <span className={styles.metaBadgeSecondary}>{strings.PartialBadgeLabel}</span> : undefined}
       </div>
 
       <Text as="h3" variant="mediumPlus" className={styles.cardTitle}>
@@ -74,7 +74,7 @@ function renderAgendaItem(item: IAgendaItem, localeName: string): React.ReactEle
           <Icon iconName="POI" aria-hidden="true" />
           <span>{item.location}</span>
         </p>
-      ) : null}
+      ) : undefined}
 
       {actionUrl ? (
         <div className={styles.cardActions}>
@@ -82,7 +82,7 @@ function renderAgendaItem(item: IAgendaItem, localeName: string): React.ReactEle
             {item.joinUrl ? strings.JoinActionLabel : strings.OpenActionLabel}
           </Link>
         </div>
-      ) : null}
+      ) : undefined}
     </article>
   );
 }
@@ -135,7 +135,7 @@ export default function TeamAgenda(props: ITeamAgendaProps): React.ReactElement 
         <MessageBar messageBarType={MessageBarType.info} isMultiline className={styles.environmentBar}>
           {props.environmentMessage}
         </MessageBar>
-      ) : null}
+      ) : undefined}
 
       {viewModel.availableTypes.length > 0 ? (
         <div className={styles.filters}>
@@ -146,13 +146,13 @@ export default function TeamAgenda(props: ITeamAgendaProps): React.ReactElement 
             onChange={(_, option) => viewModel.setSelectedType(String(option?.key ?? ''))}
           />
         </div>
-      ) : null}
+      ) : undefined}
 
       {viewModel.hasPartialData && viewModel.visibleItems.length > 0 ? (
         <MessageBar messageBarType={MessageBarType.warning} isMultiline className={styles.stateBar}>
           {strings.PartialStateMessage}
         </MessageBar>
-      ) : null}
+      ) : undefined}
 
       <TeamAgendaState state={viewModel.state} />
 
@@ -168,10 +168,10 @@ export default function TeamAgenda(props: ITeamAgendaProps): React.ReactElement 
                   {groupedItems[group].map((item) => renderAgendaItem(item, props.localeName))}
                 </div>
               </section>
-            ) : null
+            ) : undefined
           )}
         </div>
-      ) : null}
+      ) : undefined}
     </section>
   );
 }

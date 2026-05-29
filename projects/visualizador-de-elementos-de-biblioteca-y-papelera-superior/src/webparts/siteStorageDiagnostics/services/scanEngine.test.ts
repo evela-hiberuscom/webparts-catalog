@@ -1,5 +1,7 @@
 import type { IHttpClient, IHttpResponse } from '../models/httpClient';
 import { ScanEngine, type IScanEvent } from './scanEngine';
+import type { IndexedDbCacheService } from './indexedDbCacheService';
+import type { RateLimiter } from './rateLimiter';
 
 type IScanConfigurationOverrides = Partial<{
   reportListUrl: string;
@@ -8,6 +10,11 @@ type IScanConfigurationOverrides = Partial<{
   scope: 'all' | 'manual';
   manualSiteUrls: string[];
 }>;
+type MockCache = jest.Mocked<Pick<
+  IndexedDbCacheService,
+  'open' | 'saveReport' | 'getReport' | 'getAllReports' | 'saveScanState' | 'getScanState' | 'clearReports'
+>>;
+type MockRateLimiter = jest.Mocked<Pick<RateLimiter, 'waitForSlot' | 'applyRetryAfter' | 'reset'>>;
 
 function createJsonResponse(payload: unknown, status = 200): IHttpResponse {
   return {
@@ -70,7 +77,7 @@ function createMockHttpClient(): jest.Mocked<IHttpClient> {
   };
 }
 
-function createMockCache() {
+function createMockCache(): MockCache {
   return {
     open: jest.fn().mockResolvedValue(undefined),
     saveReport: jest.fn().mockResolvedValue(undefined),
@@ -82,7 +89,7 @@ function createMockCache() {
   };
 }
 
-function createMockRateLimiter() {
+function createMockRateLimiter(): MockRateLimiter {
   return {
     waitForSlot: jest.fn().mockResolvedValue(undefined),
     applyRetryAfter: jest.fn(),
@@ -110,8 +117,8 @@ describe('ScanEngine', () => {
         ...overrides
       },
       _dependencies: {
-        rateLimiter: (dependencies?.rateLimiter ?? createMockRateLimiter()) as never,
-        cache: (dependencies?.cache ?? createMockCache()) as never
+        rateLimiter: (dependencies?.rateLimiter ?? createMockRateLimiter()) as unknown as RateLimiter,
+        cache: (dependencies?.cache ?? createMockCache()) as unknown as IndexedDbCacheService
       }
     });
   }
@@ -219,6 +226,7 @@ describe('ScanEngine', () => {
   });
 
   it('skips persistence when report list URL is invalid and records a single scan error', async () => {
+    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
     const engine = createEngine({
       reportListUrl: 'ddd',
       scope: 'manual',
@@ -236,6 +244,9 @@ describe('ScanEngine', () => {
         message: 'La URL de la lista de informes no es válida. La descarga CSV seguirá disponible sin guardar.'
       })
     ]);
+    expect(warnSpy.mock.calls[0]?.[0]).toBe('[ScanEngine] Invalid report list URL was ignored.');
+    expect(String(warnSpy.mock.calls[0]?.[1])).toContain('Invalid URL: ddd');
+    warnSpy.mockRestore();
   });
 
   it('skips persistence outside the current site and records a single scan error', async () => {

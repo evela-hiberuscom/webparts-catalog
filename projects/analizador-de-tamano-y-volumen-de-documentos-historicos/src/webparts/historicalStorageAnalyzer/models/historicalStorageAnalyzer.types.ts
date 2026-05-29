@@ -27,8 +27,8 @@ export interface IHistoricalStorageDocumentSnapshot {
   serverRelativeUrl: string;
   currentSizeBytes: number;
   historicalVersionCount: number;
-  historicalSizeBytes: number | null;
-  ratio: number | null;
+  historicalSizeBytes?: number;
+  ratio?: number;
   precision: HistoricalStoragePrecision;
   warnings: string[];
   scanComplete?: boolean;
@@ -39,8 +39,8 @@ export interface IHistoricalStorageAnalysisSummary {
   documentsAnalyzed: number;
   visibleCurrentSizeBytes: number;
   historicalVersionCount: number;
-  historicalEstimatedSizeBytes: number | null;
-  historicalToCurrentRatio: number | null;
+  historicalEstimatedSizeBytes?: number;
+  historicalToCurrentRatio?: number;
   analysisCoveragePercent: number;
   exactness: HistoricalStoragePrecision;
   durationMs: number;

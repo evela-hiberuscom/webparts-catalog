@@ -45,5 +45,5 @@ export function isPartialStage(stage: IRecycleBinStageDiagnostics): boolean {
 }
 
 export function hasAnyItemSizes(items: IRecycleBinItem[]): boolean {
-  return items.some((item) => item.sizeBytes !== null);
+  return items.some((item) => item.sizeBytes !== undefined);
 }

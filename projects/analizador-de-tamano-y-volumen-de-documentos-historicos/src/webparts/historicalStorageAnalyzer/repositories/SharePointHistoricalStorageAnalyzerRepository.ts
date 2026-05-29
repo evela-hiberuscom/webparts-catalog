@@ -135,8 +135,8 @@ export class SharePointHistoricalStorageAnalyzerRepository
           documentsAnalyzed: 0,
           visibleCurrentSizeBytes: 0,
           historicalVersionCount: 0,
-          historicalEstimatedSizeBytes: null,
-          historicalToCurrentRatio: null,
+          historicalEstimatedSizeBytes: undefined,
+          historicalToCurrentRatio: undefined,
           analysisCoveragePercent: 0,
           exactness: 'estimated',
           durationMs: Date.now() - startedAt,
@@ -208,7 +208,7 @@ export class SharePointHistoricalStorageAnalyzerRepository
         documentsAnalyzed: analyzedDocuments.length,
         visibleCurrentSizeBytes,
         historicalVersionCount,
-        historicalEstimatedSizeBytes: historicalEstimatedSizeBytes > 0 ? historicalEstimatedSizeBytes : null,
+        historicalEstimatedSizeBytes: historicalEstimatedSizeBytes > 0 ? historicalEstimatedSizeBytes : undefined,
         historicalToCurrentRatio: calculateHistoricalRatio(
           historicalEstimatedSizeBytes,
           visibleCurrentSizeBytes
@@ -260,8 +260,8 @@ export class SharePointHistoricalStorageAnalyzerRepository
       serverRelativeUrl,
       currentSizeBytes: normalizeBytes(item.File?.Length),
       historicalVersionCount: 0,
-      historicalSizeBytes: null,
-      ratio: null,
+      historicalSizeBytes: undefined,
+      ratio: undefined,
       precision: 'estimated',
       warnings: [],
       scanComplete: false
@@ -296,8 +296,8 @@ export class SharePointHistoricalStorageAnalyzerRepository
       return {
         ...document,
         historicalVersionCount: 0,
-        historicalSizeBytes: null,
-        ratio: null,
+        historicalSizeBytes: undefined,
+        ratio: undefined,
         precision: 'partial',
         warnings: createWarnings(...document.warnings, throttled ? 'throttled' : 'version-fetch-failed'),
         scanComplete: false

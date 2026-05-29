@@ -34,10 +34,10 @@ describe('TeamAgendaRepository', () => {
             id: 'json-1',
             title: 'Hito trimestral',
             startsAt: '2026-04-11T12:00:00.000Z',
-            endsAt: null,
+            endsAt: undefined,
             eventType: 'Hito',
             location: 'Sala Norte',
-            joinUrl: null,
+            joinUrl: undefined,
             openUrl: '/sites/intranet/hito'
           }
         ]

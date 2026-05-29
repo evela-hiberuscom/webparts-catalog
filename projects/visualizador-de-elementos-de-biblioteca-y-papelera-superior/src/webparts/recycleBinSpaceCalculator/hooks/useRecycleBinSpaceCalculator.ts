@@ -11,7 +11,7 @@ function createInitialState(): IRecycleBinSpaceCalculatorState {
   return {
     status: 'loading',
     isRefreshing: false,
-    viewModel: null
+    viewModel: undefined
   };
 }
 
@@ -31,7 +31,7 @@ export function useRecycleBinSpaceCalculator(
     try {
       const viewModel = await service.load(requestRef.current);
       const baseStatus = classifyAsyncState({
-        hasData: viewModel.totalItemCount !== null || viewModel.totalSizeBytes !== null,
+        hasData: viewModel.totalItemCount !== undefined || viewModel.totalSizeBytes !== undefined,
         hasError: false,
         isLoading: false,
         isPartial: viewModel.hasPartialData
@@ -52,7 +52,7 @@ export function useRecycleBinSpaceCalculator(
       setState({
         status: 'error',
         isRefreshing: false,
-        viewModel: null,
+        viewModel: undefined,
         errorMessage: error instanceof Error ? error.message : 'No se ha podido cargar el diagnóstico.'
       });
     }

@@ -74,7 +74,7 @@ export function useHistoricalStorageAnalysis(
     setIsRefreshing(true);
     setStatus('loading');
 
-    void service
+    service
       .getLibraries(options.includeHiddenLibraries)
       .then((availableLibraries) => {
         if (cancelled) {
@@ -95,11 +95,18 @@ export function useHistoricalStorageAnalysis(
         setErrorMessage(message);
         setStatus('error');
       })
-      .then(() => {
-        if (!cancelled) {
-          setIsRefreshing(false);
+      .then(
+        () => {
+          if (!cancelled) {
+            setIsRefreshing(false);
+          }
+        },
+        () => {
+          if (!cancelled) {
+            setIsRefreshing(false);
+          }
         }
-      });
+      );
 
     return () => {
       cancelled = true;
@@ -118,7 +125,7 @@ export function useHistoricalStorageAnalysis(
     setErrorMessage(undefined);
     setProgress(undefined);
 
-    void service
+    service
       .analyzeLibrary(
         {
           selectedLibraryId,
@@ -161,11 +168,18 @@ export function useHistoricalStorageAnalysis(
         setResult(undefined);
         setProgress(undefined);
       })
-      .then(() => {
-        if (requestIdRef.current === requestId) {
-          setIsRefreshing(false);
+      .then(
+        () => {
+          if (requestIdRef.current === requestId) {
+            setIsRefreshing(false);
+          }
+        },
+        () => {
+          if (requestIdRef.current === requestId) {
+            setIsRefreshing(false);
+          }
         }
-      });
+      );
   }, [
     maxDocumentsToScan,
     options.includeHiddenLibraries,
@@ -214,7 +228,7 @@ export function useHistoricalStorageAnalysis(
             return next;
           });
         };
-        void service
+        service
           .retryDocument(document)
           .then(
             (retried) => {
